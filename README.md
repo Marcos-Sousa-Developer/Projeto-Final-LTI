@@ -3,5 +3,5 @@
 </p> 
 
 # <h1 align="center">Suportar a comunidade local</h1>
-<h4 align="center">Projeto para a cadeira de Aplicações Distribuídas (Parte1) (2021/2022)</h4>
+<h4 align="center">Projeto Final do curso de Tecnologias de Informação (2022/2023)</h4>
 
