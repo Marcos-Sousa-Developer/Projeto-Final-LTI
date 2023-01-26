@@ -74,8 +74,7 @@ Criar o ficheiro **package.json**
 ```bash
 npm init -y npm
 ```
-Dentro do ficheiro **package.json** trocar: <br>
-$\textcolor{red}{\text{(Atenção!!)}}$  
+$\textcolor{red}{\text{(Atenção!!)}}$ Dentro do ficheiro **package.json** trocar:
 ```diff 
 "main":"index.js" -> "main":"server.js"
 ```
