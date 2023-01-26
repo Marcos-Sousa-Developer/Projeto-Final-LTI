@@ -43,7 +43,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 
 # Instruções
-De seguida são apresentados 3 passos, que consiste em formas de rodar o código e interagir com o sistema.
+De seguida são apresentados 3 passos, que consiste em formas de rodar o código e interagir com o sistema. <br>
 O 1ºPasso consiste em como funciona o react.js e o express.js, também é apresentado o link de instalação para o nodejs. No fundo é uma primeira abordagem para os iniciantes, não há interação com o sistema. <br>
 No 2ºPasso e 3ºPasso apresentá-se duas formas diferentes de rodar o código e poder interagir com o sistema. O 2ºpasso é a convenção, ou melhor dizendo a abordagem normal, rodando comandos através do terminal e com chamadas ao **npm** e **npx**. O 3ºPasso consiste no uso do Docker de modo a automatizar a implementação da aplicação (ou de conjuntos de processos que constituem uma app) dentro de um ambiente de container. 
 
