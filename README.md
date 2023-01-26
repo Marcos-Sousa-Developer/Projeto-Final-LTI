@@ -75,10 +75,10 @@ Criar o ficheiro **package.json**
 npm init -y npm
 ```
 Dentro do ficheiro **package.json** trocar: 
+$\textcolor{red}{\text{(Atenção!!)}}$  
 ```diff 
 "main":"index.js" -> "main":"server.js"
 ```
-$\textcolor{red}{\text{(Atenção!!)}}$  
 $\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ <br>
 
 Criar o ficheiro **server.js**:
