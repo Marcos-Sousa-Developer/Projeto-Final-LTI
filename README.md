@@ -1,3 +1,3 @@
 <p align="center">
-    <img src="https://img.freepik.com/vetores-premium/conectando-pessoas-online-globalmente_3482-1836.jpg?w=2000" alt="Logo" width="250" height="250">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgC7DY-BT_2nG8szeWqMfVAkfoiIX0cet3SQi572hZsEuzFBWFbhHovjWCTdCpwF8KpMU&usqp=CAU" alt="Logo" width="250" height="250">
 </p>
