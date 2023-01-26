@@ -8,7 +8,7 @@
 <hr>
 
 # Objetivo
-O sistema deve informar os utilizadores de um mercado online sobre o impacto das suas encomendas na comunidade onde reside, devendo ajudar a escolher as opções que favoreçam fornecedores locais. <br>
+Mercado online sobre o impacto das suas encomendas na comunidade onde reside, devendo ajudar a escolher as opções que favoreçam fornecedores locais. <br>
 Para o mesmo produto, podem existir vários fornecedores, uns na mesma freguesia, outros no mesmo município, ou distrito, ou país, ou continente, até fornecedores noutro continente, logo com um impacto muito reduzido ou nulo na comunidade local.
 
 <hr> 
