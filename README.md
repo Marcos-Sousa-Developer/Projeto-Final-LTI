@@ -108,7 +108,33 @@ Iniciar o server, que irá correr no http://localhost:5000/api.
 ```bash
 node server.js
 ``` 
-## Inside the project: 2ºPasso <span id="passo2"> (Após clone do repositório) </span>
+## Inside the project: 2ºPasso <span id="passo2"> (Após clone do repositório) </span> 
+
+### 2.1 Instalar o npm 
+Dentro da pasta **server**
+```bash
+npm install
+``` 
+Automaticamente detetar alterações no servidor e aplicar sem ser preciso reset 
+```bash
+npm i nodemon -D
+```   
+Note que dentro do ficheiro package.json em scripts há: 
+```diff 
+   "dev": "nodemon server"
+```
+Assim é possivel fazer o comando 
+```bash
+npm run dev 
+``` 
+senão tiver, em alternativa
+```bash
+npx nodemon
+```  
+
+
+
+
 
 
 
