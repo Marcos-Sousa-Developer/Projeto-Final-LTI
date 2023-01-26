@@ -47,9 +47,10 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 **My Bold Text, in red color.**{: style="color: red; opacity: 0.80;" }
 
-```diff
-- text in red
-```
+<text font-size="16" x="10" y="20">
+    <tspan fill="red">Hello</tspan>,
+    <tspan fill="green">world</tspan>!
+  </text>
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
 
