@@ -75,7 +75,7 @@ Criar o ficheiro **package.json**
 npm init -y npm
 ```
 $\textcolor{red}{\text{(Atenção!!)}}$  
-$\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ 
+$\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ <br>
 Dentro do ficheiro **package.json** trocar: 
 ```diff 
 
