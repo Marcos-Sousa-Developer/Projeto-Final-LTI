@@ -153,3 +153,13 @@ Para correr o client
 ```bash
 npm start
 ```   
+<hr>
+
+# Ferramentas Úteis 
+
+## DBEAVER 
+Aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados
+
+## Postman 
+Plataforma de API para desenvolvedores projetar, construir, testar e iterar suas APIs
+
