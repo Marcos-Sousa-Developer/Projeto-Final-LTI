@@ -119,17 +119,17 @@ Para automaticamente detetar alterações no servidor e aplicar sem ser preciso 
 ```bash
 npm i nodemon -D
 ```   
+Para correr o server 
+```bash
+npx nodemon
+```  
 Note que dentro do ficheiro package.json em scripts há: 
 ```diff 
 "dev": "nodemon server"
 ```
-Assim é possivel fazer o comando 
+assim é possivel fazer o comando 
 ```bash
-npm run dev 
-``` 
-senão tiver, em alternativa
-```bash
-npx nodemon
+npm run dev || npx nodemon
 ```  
 
 
