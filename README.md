@@ -74,6 +74,15 @@ Criar o ficheiro **package.json**
 ```bash
 npm init -y npm
 ```
+$\textcolor{red}{\text{(Atenção!!)}}$  
+$\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ 
+Dentro do ficheiro **package.json** trocar: 
+```diff 
+
+"main":"index.js" -> "main":"server.js"
+
+```
+
 ```bash
 npx create-react-app client
 ```
