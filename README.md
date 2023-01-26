@@ -39,6 +39,11 @@ Para além destes atores, são habitualmente considerados administradores de sis
 * Salvaguarda de dados: Os dados são salvaguardados regularmente através de uma política adequada à importância dos dados e configurações.
 * Testes - carga e vulnerabilidade: O sistema é desenvolvido com uma política integrada de testes que permitem ir testando à medida que se adicionam novos componentes ou que se alteram componentes existentes.
 
+<hr> 
+
+Instruções
+
+
 
 
 
