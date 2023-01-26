@@ -59,7 +59,7 @@ Criar uma app React cujo o nome é cliente
 ```bash
 npx create-react-app client
 ```
-Trocar de diretório
+Trocar para o diretório client
 ```bash
 cd client
 ```
