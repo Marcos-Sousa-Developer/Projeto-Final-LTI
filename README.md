@@ -49,10 +49,6 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 ```diff
 - text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
 ```
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
