@@ -41,9 +41,9 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 <hr> 
 
-<p align="center">
-    <h2> Instruções </h2>
-</p> 
+
+<h1 align="center">Instruções</h1>
+
 
 
 
