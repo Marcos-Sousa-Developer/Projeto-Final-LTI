@@ -116,7 +116,8 @@ Dentro da pasta **server**, instalar as dependências do node.
 npm install
 ``` 
 Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon
-$\textcolor{red}{\text{INFO: este comando não é obrigatório, porque o comando anterior verifica as dependências no ficheiro package.json, contudo caso tenha algum erro, é importante saber algumas das dependêncicas importantes existentes!}}$.
+$\textcolor{red}{\text{INFO: este comando não é obrigatório, porque o comando anterior verifica as 
+dependências no ficheiro package.json, contudo caso tenha algum erro, é importante saber algumas das dependêncicas importantes existentes!}}$.
 ```bash
 npm i nodemon -D
 ```   
