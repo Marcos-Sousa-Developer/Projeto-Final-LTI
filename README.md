@@ -127,8 +127,8 @@ Note que dentro do ficheiro package.json em scripts há:
 ```diff 
 "dev": "nodemon server"
 ```
-* assim é possivel fazer o comando 
-* ```bash
+- assim é possivel fazer o comando 
+```bash
 npm run dev
 ```  
 
