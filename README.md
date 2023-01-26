@@ -17,7 +17,7 @@ Para o mesmo produto, podem existir vários fornecedores, uns na mesma freguesia
 
 Os atores que interagem com o sistema são, os seguintes:
 * Consumidor: encomenda produtos a fornecedores.
-* Fornecedor: informa sobre a gama de produtos e satisfaz as encomendas dos consumidores.
+* Fornecedor: informa sobre a gama de produtos e satisfaz as encomendas dos consumidores. <br>
 Para além destes atores, são habitualmente considerados administradores de sistema bem como sistemas externos que oferecem serviços de autenticação de utilizadores, pagamentos online, mapas digitais, entre outros.
 
 <hr> 
