@@ -126,6 +126,9 @@ npx nodemon
 Note que dentro do ficheiro package.json em scripts há: 
 ```diff 
 "dev": "nodemon server"
-assim é possivel fazer o comando 
-npm run dev
 ```
+assim é possivel fazer o comando 
+```bash
+npm run dev
+```  
+
