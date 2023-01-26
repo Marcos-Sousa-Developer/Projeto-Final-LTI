@@ -163,4 +163,58 @@ https://dbeaver.io/download/
 
 ## Postman 
 Plataforma de API para desenvolvedores projetar, construir, testar e iterar suas APIs <br>
-https://www.postman.com/downloads/
+https://www.postman.com/downloads/ 
+
+<hr> 
+
+# Visual Studio Tips 
+
+## JavaScript (ES6) code snippets
+This extension contains code snippets for JavaScript in ES6 syntax for Vs Code 
+
+## Babel ES6/ES7 
+Improves majorly on the grammar distributed by default with vscode. 
+
+## Docker 
+Extension makes it easy to build, manage, and deploy containerized applications  
+
+## ES7 React/Redux/GraphQL/React-Native snippets 
+This extension provides you JavaScript and React/Redux snippets in ES7 with Babel plugin features for VS Code. 
+
+## ES7+ React/Redux/React-Native snippets 
+JavaScript and React/Redux snippets in ES7+ with Babel plugin features
+
+## Simple React Snippets
+These snippets were selected carefully from my own day-to-day React use. 
+
+## React Native Tools 
+Provides a development environment for React Native projects. Using this extension, you can debug your code and quickly run react-native commands from the command palette
+
+## Search node_modules
+Simple plugin for VS Code that allows you to quickly navigate the file inside your project's node_modules directory.
+
+## ESLint 
+ESLint statically analyzes your code to quickly find problems. It is built into most text editors and you can run ESLint as part of your continuous integration pipeline.
+
+## Git History
+Git History, Search and More (including git log)
+
+## Git Project Manager
+Git Project Manager (GPM) is a Microsoft VSCode extension that allows you to open a new window targeting a git repository directly from VSCode window
+
+## GitLens — Git supercharged
+GitLens supercharges Git inside VS Code and unlocks untapped knowledge within each repository. It helps you to visualize code authorship. 
+
+## IntelliCode
+Insights based on understanding your code context combined with machine learning. 
+
+## Prettier - Code formatter
+It enforces a consistent style by parsing your code and re-printing it 
+
+
+
+
+
+
+
+
