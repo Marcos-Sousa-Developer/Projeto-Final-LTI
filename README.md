@@ -114,7 +114,7 @@ Iniciar o server, que irá correr no http://localhost:5000/api.
 ```bash
 node server.js
 ``` 
-## 2ºPasso: Inside the project $\textcolor{red}{\text{(Após clone do repositório)}}$
+## <h2 id="passo2"> 2ºPasso: </h2> Inside the project $\textcolor{red}{\text{(Após clone do repositório)}}$
 
 ### 2.1  Inicializar o server
 Dentro da pasta **server**, instalar as dependências do node.
