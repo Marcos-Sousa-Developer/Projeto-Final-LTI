@@ -116,7 +116,7 @@ Dentro da pasta **server**, instalar as dependências do node.
 npm install
 ``` 
 Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon
-$\textcolor{red}{\text{Não é obrigatório, porque o comando anterior verifica as dependências no ficheiro package.json!}}$ .
+$\textcolor{red}{\text{INFO: Não é obrigatório, porque o comando anterior verifica as dependências no ficheiro package.json!}}$ .
 ```bash
 npm i nodemon -D
 ```   
@@ -134,8 +134,12 @@ Dentro da pasta **client**, instalar as dependências do node.
 ```bash
 npm install
 ``` 
+Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon
+$\textcolor{red}{\text{INFO: Não é obrigatório, porque o comando anterior verifica as dependências no ficheiro package.json!}}$ .
+```bash
+npm install axios
+```  
 Note que dentro do ficheiro **package.json** há: ``` "proxy": "htpp://localhost:5000" ```, assim é possivel fazer os requests ao nosso server sem precisar do url completo.
-
 Para correr o client 
 ```bash
 npm start
