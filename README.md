@@ -43,7 +43,10 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 
 # Instruções
+São apresentados 3 passos, que são diferentes formas de rodar o código e interagir com o sistema.
+
 ## 1ºPasso: Get Started, how it works. $\textcolor{red}{\text{(Opcional se não tem o nodejs, ou não conhece o React.js e o Express.js)}}$  
+O 1ºPasso consiste em como funciona o react.js e o express.js, também é apresentado o link de instalação para o nodejs. No fundo é uma primeira abordagem para os iniciantes, não há interação com
 [Ir para o 2ºPasso ](#passo2)
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador. 
