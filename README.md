@@ -33,7 +33,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 * Tolerância a faltas: O sistema é tolerante a falha de qualquer dos seus componentes, através de principalmente oferecer redundância ativa. 
 * Disponibilidade: O sistema responde a qualquer pedido dentro de um tempo razoável pré-definido. 
 * Tempo de resposta e desempenho: O sistema tem um tempo de resposta e um desempenho adequados à expetativa dos utilizadores. 
-* Privacidade: O sistema deve estar de acordo com os regulamentos para a privacidade dos dados (RGPD).
+* Privacidade: O sistema está de acordo com os regulamentos para a privacidade dos dados (RGPD).
 * Segurança - Configuração de firewall: O sistema computacional e as redes estão cobertas por políticas de segurança que fazem uso dos mecanismos de proteção adequados de modo a impedir o acesso não-autorizado a recursos e dados e também impedir a disrupção do serviço. 
 * Elasticidade: Capaz de adaptar-se a carga de trabalho através de provisionamento e desprovisionamento de recursos automaticamente 
 * Salvaguarda de dados: Os dados são salvaguardados regularmente através de uma política adequada à importância dos dados e configurações.
