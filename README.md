@@ -68,6 +68,20 @@ Iniciar a aplicação, que irá correr no http://localhost:3000/ (por default ab
 npm start
 ``` 
 
+### 1.2 Criar uma app React (Dentro para o diretório principal)
+
+Criar o ficheiro **package.json**
+```bash
+npm init -y npm
+```
+```bash
+npx create-react-app client
+```
+```bash
+npx create-react-app client
+```
+
+
 
 
 
