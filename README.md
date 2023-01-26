@@ -157,9 +157,10 @@ npm start
 
 # Ferramentas Úteis 
 
-## <a href=""> DBeaver </a> 
-Aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados
+## DBeaver 
+Aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados <br>
+https://dbeaver.io/download/
 
 ## Postman 
-Plataforma de API para desenvolvedores projetar, construir, testar e iterar suas APIs
-
+Plataforma de API para desenvolvedores projetar, construir, testar e iterar suas APIs <br>
+https://www.postman.com/downloads/
