@@ -121,7 +121,7 @@ npm i nodemon -D
 ```   
 Note que dentro do ficheiro package.json em scripts há: 
 ```diff 
-   "dev": "nodemon server"
+"dev": "nodemon server"
 ```
 Assim é possivel fazer o comando 
 ```bash
