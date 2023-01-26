@@ -63,7 +63,7 @@ Trocar para o diretório client
 ```bash
 cd client
 ```
-Iniciar a aplicação
+Iniciar a aplicação, que irá correr no http://localhost:3000/ (por default abre sozinho).
 ```bash
 npm start
 ``` 
