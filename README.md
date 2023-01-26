@@ -43,7 +43,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 
 # Instruções
-## 1º Get Started $\textcolor{red}{\text{(Opcional se não tem o nodejs, ou não conhece o React.js e o Express.js)}}$  
+## Get Started: 1ºPasso $\textcolor{red}{\text{(Opcional se não tem o nodejs, ou não conhece o React.js e o Express.js)}}$  
 [Ir para o 2ºPasso ](#passo2)
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador. 
