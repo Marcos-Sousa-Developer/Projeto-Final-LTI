@@ -47,7 +47,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 Opcional, se não tem o nodejs ou não conhece o React.js & Express.js
 
-$`\textcolor{red}{\text{your text}}`$ 
+$\textcolor{red}{\text{your text}}$ 
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
 
