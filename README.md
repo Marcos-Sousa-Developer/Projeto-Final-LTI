@@ -143,7 +143,7 @@ $\textcolor{red}{\text{Caso tenha algum erro, sobre esta depedência é importan
 ```bash
 npm install axios
 ```  
-Note que dentro do ficheiro **package.json** há: ``` "proxy": "htpp://localhost:5000" ```, assim é possivel fazer os requests ao nosso server sem precisar do url completo.
+Note que dentro do ficheiro **package.json** há: ``` "proxy": "htpp://localhost:5000" ```, assim é possivel fazer os requests ao nosso server sem precisar do url completo.<br>
 Para correr o client 
 ```bash
 npm start
