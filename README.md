@@ -43,7 +43,9 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 # Instruções 
 
-## 1ºPasso 
+## 1ºPasso  
+
+### 1.1 Instalar o <a href=""> nodejs </a> no computador. (Se ja têm, pode passar para o passo seguinte).
 
 
 
