@@ -45,7 +45,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 # Instruções
 ## 1ºPasso 
 
-<span style="color:orange;">Word up</span>
+$${\color{red}Red}$$
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
 
