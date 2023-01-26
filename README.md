@@ -74,13 +74,13 @@ Criar o ficheiro **package.json**
 ```bash
 npm init -y npm
 ```
-$\textcolor{red}{\text{(Atenção!!)}}$  
-$\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ <br>
-
 Dentro do ficheiro **package.json** trocar: 
 ```diff 
 "main":"index.js" -> "main":"server.js"
 ```
+$\textcolor{red}{\text{(Atenção!!)}}$  
+$\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ <br>
+
 Criar o ficheiro **server.js**:
 ```bash
 touch server.js
