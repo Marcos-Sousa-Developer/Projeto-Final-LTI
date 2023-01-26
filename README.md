@@ -108,7 +108,7 @@ Iniciar o server, que irá correr no http://localhost:5000/api.
 ```bash
 node server.js
 ``` 
-## Inside of Real Project <span id="passo2"> (Após clone do repositório) </span>
+## Inside of a real project: 2ºPasso <span id="passo2"> (Após clone do repositório) </span>
 
 
 
