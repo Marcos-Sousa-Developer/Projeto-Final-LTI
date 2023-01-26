@@ -64,23 +64,24 @@ Trocar para o diretório client
 ```bash
 cd client
 ```
+### 1.4 Iniciar app React
 Iniciar a aplicação, que irá correr no http://localhost:3000/ (por default abre sozinho).
 ```bash
 npm start
 ``` 
 
-### 1.4 Criar o servidor (Dentro do diretório principal)
+### 1.5 Criar o servidor (Dentro do diretório principal)
 
 Criar o ficheiro **package.json**
 ```bash
 npm init -y npm
 ```
+### 1.6 Alteração do package.json $\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ <br>
 $\textcolor{red}{\text{(Atenção!!)}}$ Dentro do ficheiro **package.json** trocar:
 ```diff 
 "main":"index.js" to "main":"server.js"
 ```
-$\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ <br>
-
+### 1.7 Criar o server
 Criar o ficheiro **server.js**:
 ```bash
 touch server.js
@@ -89,7 +90,6 @@ Instalar o express:
 ```bash
 npm i express
 ``` 
-
 Adicionar o seguinte código no server.js 
 ```diff 
 const express = require('express');
@@ -104,6 +104,7 @@ app.get('/api', (req, res) => { //Line 9
 // This displays message that the server running and listening to specified port
 app.listen(port, () => console.log(`Listening on port ${port}`)); 
 ```
+### 1.8 Iniciar o server
 Iniciar o server, que irá correr no http://localhost:5000/api.
 ```bash
 node server.js
