@@ -1,3 +1,3 @@
 <p align="center">
-    <img src="http://bloomidea.com/sites/default/files/styles/og_image/public/blog/o_poder_das_comunidades.png?itok=kyp8AoEE" alt="Logo" width="250" height="250">
+    <img src="https://www.napratica.org.br/wp-content/uploads/2016/03/redes-comunidades-carreira.jpg" height="250">
 </p>
