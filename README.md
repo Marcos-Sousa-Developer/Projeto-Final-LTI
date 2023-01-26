@@ -111,11 +111,11 @@ node server.js
 ## Inside the project: 2ºPasso <span id="passo2"> (Após clone do repositório) </span> 
 
 ### 2.1 Instalar o npm 
-Dentro da pasta **server**
+Dentro da pasta **server**, instalar as dependências do node.
 ```bash
 npm install
 ``` 
-Automaticamente detetar alterações no servidor e aplicar sem ser preciso reset 
+Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon
 ```bash
 npm i nodemon -D
 ```   
