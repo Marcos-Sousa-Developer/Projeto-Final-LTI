@@ -47,7 +47,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 
 
-$\textcolor{red}{\text{Opcional, se não tem o nodejs ou não conhece o React.js e Express.js}}$ 
+$\textcolor{red}{\text{Opcional se não tem o nodejs, ou não conhece o React.js e o Express.js}}$ 
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
 
