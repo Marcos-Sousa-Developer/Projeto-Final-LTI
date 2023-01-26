@@ -29,7 +29,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 * Interoperabilidade: O sistema tem uma API (REST por exemplo) que lhe permite interagir com outras aplicações.
 * Segurança – Autenticação e autorização: O sistema e as redes estão cobertas por políticas de segurança que fazem uso de mecanismos de proteção de modo a impedir o acesso não autorizado a recursos e dados e também impedir a disrupção do serviço.
 * Lançamento para produção (deployment): O sistema tem um automatismo que permite lançá-lo em produção a partir de um repositório de código.
-* Escalabilidade: O sistema deve têm uma capacidade ajustável para atender pedidos. 
+* Escalabilidade: O sistema têm uma capacidade ajustável para atender pedidos. 
 * Tolerância a faltas: O sistema é tolerante a falha de qualquer dos seus componentes, através de principalmente oferecer redundância ativa. 
 * Disponibilidade: O sistema responde a qualquer pedido dentro de um tempo razoável pré-definido. 
 * Tempo de resposta e desempenho: O sistema tem um tempo de resposta e um desempenho adequados à expetativa dos utilizadores. 
