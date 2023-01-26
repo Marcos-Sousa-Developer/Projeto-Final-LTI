@@ -47,14 +47,14 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador. 
 
-### 1.2 Criar o diretório principal 
+### 1.3 Criar o diretório principal 
 ```bash
 mkdir Projeto_Final_LTI
 ```
 ```bash
 cd Projeto_Final_LTI
 ```
-### 1.2 Criar uma app React 
+### 1.4 Criar uma app React 
 Criar uma app React cujo o nome é cliente
 ```bash
 npx create-react-app client
@@ -68,7 +68,7 @@ Iniciar a aplicação, que irá correr no http://localhost:3000/ (por default ab
 npm start
 ``` 
 
-### 1.2 Criar uma app React (Dentro para o diretório principal)
+### 1.5 Criar o servidor (Dentro do diretório principal)
 
 Criar o ficheiro **package.json**
 ```bash
@@ -91,6 +91,22 @@ npm i express
 ``` 
 
 Adicionar o seguinte código no server.js 
+```diff 
+const express = require('express');
+const app = express(); 
+const port = process.env.PORT || 5000;  
+
+
+// create a GET route
+app.get('/api', (req, res) => { //Line 9
+    res.send({ express: 'HELLO WORLD, YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
+});
+
+
+
+// This displays message that the server running and listening to specified port
+app.listen(port, () => console.log(`Listening on port ${port}`)); 
+```
 
 
 
