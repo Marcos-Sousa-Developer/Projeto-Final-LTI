@@ -45,7 +45,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 # Instruções
 ## 1ºPasso 
 
-- ![#f03c15](okok) `#f03c15`
+<span style="color:orange;">Word up</span>
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
 
