@@ -45,7 +45,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 # Instruções
 ## 1ºPasso 
 
-<span style="color:red">some **This is Red Bold.** text</span> { color: green }
+**My Bold Text, in red color.**{: style="color: red; opacity: 0.80;" }
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
 
