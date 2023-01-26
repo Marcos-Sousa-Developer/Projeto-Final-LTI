@@ -45,12 +45,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 # Instruções
 ## 1ºPasso 
 
-**My Bold Text, in red color.**{: style="color: red; opacity: 0.80;" }
-
-<text font-size="16" x="10" y="20">
-    <tspan fill="red">Hello</tspan>,
-    <tspan fill="green">world</tspan>!
-  </text>
+- ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) `#f03c15`
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
 
