@@ -123,11 +123,10 @@ Para correr o server
 ```bash
 npx nodemon
 ```  
-Note que dentro do ficheiro package.json em scripts há: 
+Note que dentro do ficheiro **package.json** em scripts há: 
 ```diff 
 "dev": "nodemon server"
-```
-assim, em vez do comando **npx nodemon** possivel fazer o comando:
+``` assim, em vez do comando **npx nodemon** possivel fazer o comando:
 ```bash
 npm run dev
 ```  
