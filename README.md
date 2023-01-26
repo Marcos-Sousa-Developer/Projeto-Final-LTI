@@ -45,7 +45,31 @@ Para além destes atores, são habitualmente considerados administradores de sis
 # Instruções
 ## 1ºPasso $\textcolor{red}{\text{(Opcional se não tem o nodejs, ou não conhece o React.js e o Express.js)}}$ 
 
-### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
+### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador. 
+
+### 1.2 Criar o diretório principal 
+```bash
+mkdir Projeto_Final_LTI
+```
+```bash
+cd Projeto_Final_LTI
+```
+### 1.2 Criar uma app React 
+Criar uma app React cujo o nome é cliente
+```bash
+npx create-react-app client
+```
+Trocar de diretório
+```bash
+cd client
+```
+Iniciar a aplicação
+```bash
+npm start
+``` 
+
+
+
 
 
 
