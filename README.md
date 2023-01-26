@@ -110,7 +110,7 @@ node server.js
 ``` 
 ## Inside the project: 2ºPasso <span id="passo2"> (Após clone do repositório) </span> 
 
-### 2.1 Instalar o npm 
+### 2.1  Inicializar o server
 Dentro da pasta **server**, instalar as dependências do node.
 ```bash
 npm install
@@ -128,3 +128,14 @@ Note que dentro do ficheiro **package.json** em scripts há: ``` "dev": "nodemon
 npm run dev
 ```  
 
+### 2.2  Inicializar o client
+Dentro da pasta **client**, instalar as dependências do node.
+```bash
+npm install
+``` 
+Note que dentro do ficheiro **package.json** há: ``` "proxy": "htpp://localhost:5000" ```, assim é possivel fazer os requests ao nosso server sem precisar do url completo.
+
+Para correr o client 
+```bash
+npm start
+```   
