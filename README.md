@@ -77,7 +77,7 @@ npm init -y npm
 ```
 $\textcolor{red}{\text{(Atenção!!)}}$ Dentro do ficheiro **package.json** trocar:
 ```diff 
-"main":"index.js" -> "main":"server.js"
+"main":"index.js" to "main":"server.js"
 ```
 $\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ <br>
 
