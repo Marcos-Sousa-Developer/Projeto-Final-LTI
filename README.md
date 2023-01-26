@@ -44,7 +44,8 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 # Instruções
 ## 1ºPasso 
-Opcional, se não tem o nodejs ou não conhece o React.js & Express.js
+
+<span style="color: red"> Opcional, se não tem o nodejs ou não conhece o React.js & Express.js </span>
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador.
 
