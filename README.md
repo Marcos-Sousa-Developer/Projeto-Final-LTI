@@ -76,19 +76,22 @@ npm init -y npm
 ```
 $\textcolor{red}{\text{(Atenção!!)}}$  
 $\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ <br>
+
 Dentro do ficheiro **package.json** trocar: 
 ```diff 
-
 "main":"index.js" -> "main":"server.js"
-
 ```
-
+Criar o ficheiro **server.js**:
 ```bash
-npx create-react-app client
+touch server.js
 ```
+Instalar o express:
 ```bash
-npx create-react-app client
-```
+npm i express
+``` 
+
+Adicionar o seguinte código no server.js 
+
 
 
 
