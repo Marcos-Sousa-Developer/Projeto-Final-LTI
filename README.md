@@ -41,7 +41,11 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 <hr> 
 
-# Instruções 
+<p align="center">
+    # Instruções 
+</p> 
+
+
 
 ## 1ºPasso (Opcional, se não tem o nodejs ou não conhece o React.js & Express.js)
 
