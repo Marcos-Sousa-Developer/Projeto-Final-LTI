@@ -117,7 +117,7 @@ npm install
 ``` 
 Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon
 $\textcolor{red}{\text{INFO: este comando não é obrigatório, porque o comando anterior verifica as 
-dependências no ficheiro package.json, contudo caso tenha algum erro, é importante saber algumas das dependêncicas importantes existentes!}}$.
+dependências no ficheiro package.json, contudo caso tenha algum erro, é importante inserir manualmente!}}$.
 ```bash
 npm i nodemon -D
 ```   
