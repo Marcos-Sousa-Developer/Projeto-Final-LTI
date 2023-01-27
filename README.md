@@ -139,7 +139,7 @@ Para correr o server
 ```bash
 npx nodemon
 ```  
-Note que dentro do ficheiro **package.json** em scripts há: ``` "dev": "nodemon server" ```, assim em vez do comando ``` npx nodemon ``` possivel fazer o comando:
+Note que dentro do ficheiro **package.json** em scripts há: ``` "dev": "nodemon server" ```, assim em vez do comando ``` npx nodemon ``` é possivel fazer o comando:
 ```bash
 npm run dev
 ```  
