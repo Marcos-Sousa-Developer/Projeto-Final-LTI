@@ -158,14 +158,10 @@ npm start
 
 # How to install mysql local 
 
-Mac and Windows <br>
-```
-https://www.mysql.com/downloads/
-```
-Linux
-```bash 
-sudo apt-get install mysql-server
-```
+Mac and Windows: https://www.mysql.com/downloads/
+
+Linux ```bash sudo apt-get install mysql-server ```
+
 <hr>
 
 # Ferramentas Úteis 
