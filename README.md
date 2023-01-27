@@ -156,7 +156,7 @@ npm start
 
 <hr>
 
-### Utils
+# Utils
 
 ### DBeaver 
 Aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados <br>
@@ -220,11 +220,3 @@ Insights based on understanding your code context combined with machine learning
 
 #### Prettier - Code formatter
 It enforces a consistent style by parsing your code and re-printing it 
-
-
-
-
-
-
-
-
