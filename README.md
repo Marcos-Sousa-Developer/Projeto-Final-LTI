@@ -84,8 +84,9 @@ Criar o ficheiro **package.json**
 npm init -y npm
 ```
 
-### 1.6 Alteração do package.json <br>
+### 1.6 Alteração do package.json
 **```Atenção esta parte, não é obrigatória, é apenas conveção!!```** <br>
+
 Dentro do ficheiro **package.json** trocar:
 
 ```diff 
