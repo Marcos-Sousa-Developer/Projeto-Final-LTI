@@ -48,8 +48,8 @@ O **1ºpasso** consiste em como funciona o **react.js** e o **express.js**, tamb
 No **2ºpasso** onde há interação com o código disponível, é o "default", ou melhor dizendo é a abordagem normal, com comandos de nodejs executados através do terminal e com chamadas ao **npm** e **npx**. <br>
 O último passo que é o **3ºpasso**, consiste no uso do Docker de modo a automatizar a implementação da aplicação (ou de conjuntos de processos que constituem uma app) dentro de um ambiente de container, ou seja automatiza o 2ºpasso. 
 
-## 1ºPasso: Get Started, how it works. $\textcolor{red}{\text{(Opcional se não tem o nodejs, ou não conhece o React.js e o Express.js)}}$  
-[Ir para o 2ºPasso ](#passo2)
+## 1ºPasso: Get Started, how it works. 
+**Opcional se não tem o nodejs, ou não conhece o React.js e o Express.js**  [Ir para o 2ºPasso ](#passo2)
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador. 
 
