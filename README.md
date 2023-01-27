@@ -149,7 +149,7 @@ Dentro da pasta **client**, instalar as dependências do node.
 ```bash
 npm install
 ``` 
-Axios é um biblioteca que permite uma integração do seu projeto React para qualquer serviço de API disponível. <br>
+**Axios** é um biblioteca que permite uma integração do seu projeto React para qualquer serviço de API disponível. <br>
 
 **```Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json e instala.```** <br>
 **```Caso tenha algum erro, sobre esta depedência é importante executá-lo!.```**
