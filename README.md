@@ -173,14 +173,17 @@ npm install
 ```
 
 ### 3.3 Docker compose 
-$\textcolor{red}{\text{(Dentro do diretório principal)}}$
+$\textcolor{red}{\text{Dentro do diretório principal}}$
 
 ```bash
 docker-compose up -d
 ```
+### $\textcolor{red}{\text{Opção sem docker compose}}$ 
 
-
-
+Construir a imagem 
+```bash
+docker build -t {app-name} {path of docker file}
+```
 
 <hr>
 
