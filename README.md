@@ -156,8 +156,7 @@ npm start
 
 <hr>
 
-# How to install mysql local 
-
+### Ferramentas e softares Úteis 
 Mac and Windows: https://www.mysql.com/downloads/
 
 Linux 
@@ -165,9 +164,7 @@ Linux
 sudo apt-get install mysql-server 
 ```
 
-<hr>
-
-# Ferramentas Úteis 
+### How to install mysql local 
 
 #### DBeaver 
 Aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados <br>
@@ -176,6 +173,8 @@ https://dbeaver.io/download/
 ### Postman 
 Plataforma de API para desenvolvedores projetar, construir, testar e iterar suas APIs <br>
 https://www.postman.com/downloads/ 
+
+
 
 <hr> 
 
