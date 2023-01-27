@@ -193,8 +193,6 @@ docker-compose up -d
 
 **``` Outra opção mas mais demorada,opção sem docker compose ```** 
 
-Construir a imagem
-
 ```bash
 docker build -t {app-name} {path of docker file}
 ```
