@@ -178,7 +178,7 @@ $\textcolor{red}{\text{Dentro do diretório principal}}$
 ```bash
 docker-compose up -d
 ```
-### $\textcolor{red}{\text{Opção sem docker compose}}$ 
+### Outra opção, mas mais demorada, $\textcolor{red}{\text{(Opção sem docker compose)}}$ 
 
 Construir a imagem 
 ```bash
