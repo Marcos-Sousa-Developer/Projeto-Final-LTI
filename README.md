@@ -154,6 +154,34 @@ Para correr o client
 npm start
 ```
 
+## 3ºPasso: Implementação com o Docker 
+
+### 3.1  Instalar dependências necessárias do client
+```bash
+cd client
+```
+```bash
+npm install
+```
+
+### 3.2  Instalar dependências necessárias do server
+```bash
+cd ../server
+```
+```bash
+npm install
+```
+
+### 3.3 Docker compose 
+$\textcolor{red}{\text{(Dentro do diretório principal)}}$
+
+```bash
+docker-compose up -d
+```
+
+
+
+
 <hr>
 
 # Utils
