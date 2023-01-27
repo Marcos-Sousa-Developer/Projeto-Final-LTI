@@ -129,7 +129,7 @@ npm install
 ``` 
 Para automaticamente detetar alterações no servidor e aplicá-lo sem ter a necessidade de reiniciar o server, **instalar o nodemon**. <br>
 
-**```Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json.```** <br>
+**```Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json e instala.```** <br>
 **```Caso tenha algum erro, sobre esta depedência é importante executá-lo!.```** <br>
 
 ```bash
@@ -149,14 +149,16 @@ Dentro da pasta **client**, instalar as dependências do node.
 ```bash
 npm install
 ``` 
-Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon <br>
-**```Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json.```** <br>
+Axios é um biblioteca que permite uma integração do seu projeto React para qualquer serviço de API disponível. <br>
+
+**```Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json e instala.```** <br>
 **```Caso tenha algum erro, sobre esta depedência é importante executá-lo!.```**
 
 ```bash
 npm install axios
 ```  
-Note que dentro do ficheiro **package.json** há: ``` "proxy": "htpp://localhost:5000" ```, assim é possivel fazer os requests ao nosso server sem precisar do url completo.<br>
+Note que dentro do ficheiro **package.json** há: ``` "proxy": "htpp://server:5000" ``` (necessário por causa do docker), se que quiser usar este passo, é necessário trocá-lo para ``` "proxy": "htpp://localhost:5000" ```para o frontend comunicar com o backend sem problemas. <br>
+
 Para correr o client 
 ```bash
 npm start
