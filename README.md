@@ -49,7 +49,8 @@ No **2ºpasso** onde há interação com o código disponível, é o "default", 
 O último passo que é o **3ºpasso**, consiste no uso do Docker de modo a automatizar a implementação da aplicação (ou de conjuntos de processos que constituem uma app) dentro de um ambiente de container, ou seja automatiza o 2ºpasso. 
 
 ## 1ºPasso: Get Started, how it works. 
-**Opcional se não tem o nodejs, ou não conhece o React.js e o Express.js**  [Ir para o 2ºPasso ](#passo2)
+Este passo como dito anteriormente é opcional, serve para instalar o nodejs e para conhecer o React.js e o Express.js, libray e framework respetivamente, que são usados para a construção do sistema. <br>
+[Ir para o 2ºPasso ](#passo2)
 
 ### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador. 
 
