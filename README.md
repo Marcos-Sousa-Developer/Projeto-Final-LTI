@@ -160,7 +160,10 @@ npm start
 
 Mac and Windows: https://www.mysql.com/downloads/
 
-Linux ```bash sudo apt-get install mysql-server ```
+Linux 
+```bash 
+sudo apt-get install mysql-server 
+```
 
 <hr>
 
