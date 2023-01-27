@@ -219,6 +219,9 @@ Improves majorly on the grammar distributed by default with vscode.
 #### Docker 
 Extension makes it easy to build, manage, and deploy containerized applications  
 
+#### Dev Containers
+Extension lets you use a Docker container as a full-featured development environment.
+
 #### ES7 React/Redux/GraphQL/React-Native snippets 
 This extension provides you JavaScript and React/Redux snippets in ES7 with Babel plugin features for VS Code. 
 
