@@ -189,11 +189,12 @@ npm install
 docker-compose up -d
 ```
 
-### **```Docker notes```** 
+### Docker notes
 
-**```Outra opção mas mais demorada,opção sem docker compose ```** 
+**``` Outra opção mas mais demorada,opção sem docker compose ```** 
 
-Construir a imagem 
+Construir a imagem
+
 ```bash
 docker build -t {app-name} {path of docker file}
 ```
