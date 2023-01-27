@@ -198,7 +198,7 @@ docker build -t {app-name} {path of docker file}
 
 ```bash 
 docker compose down --rmi all -v
-``
+```
 
 <hr>
 
