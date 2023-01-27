@@ -85,7 +85,7 @@ npm init -y npm
 ```
 
 ### 1.6 Alteração do package.json <br>
-**```Atenção, não é obrigatório, é apenas conveção!!```**
+**```Atenção esta parte, não é obrigatória, é apenas conveção!!```** <br>
 Dentro do ficheiro **package.json** trocar:
 
 ```diff 
@@ -119,16 +119,16 @@ Iniciar o server, que irá correr no http://localhost:5000/api.
 ```bash
 node server.js
 ``` 
-## <span id="passo2"> 2ºPasso: </span> Inside the project $\textcolor{red}{\text{(Após clone do repositório)}}$
+## <span id="passo2"> 2ºPasso: </span> Inside the project **```Após clone do repositório```**
 
 ### 2.1  Inicializar o server
 Dentro da pasta **server**, instalar as dependências do node.
 ```bash
 npm install
 ``` 
-Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon
-$\textcolor{red}{\text{Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json.}}$ 
-$\textcolor{red}{\text{Caso tenha algum erro, sobre esta depedência é importante executá-lo!.}}$ 
+Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon.
+**```Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json.```** <br>
+**```Caso tenha algum erro, sobre esta depedência é importante executá-lo!.```** <br>
 
 ```bash
 npm i nodemon -D
@@ -147,9 +147,10 @@ Dentro da pasta **client**, instalar as dependências do node.
 ```bash
 npm install
 ``` 
-Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon
-$\textcolor{red}{\text{Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json.}}$ 
-$\textcolor{red}{\text{Caso tenha algum erro, sobre esta depedência é importante executá-lo!.}}$ 
+Para automaticamente detetar alterações no servidor e aplicar sem ser preciso reset, instalar o nodemon <br>
+**```Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json.```** <br>
+**```Caso tenha algum erro, sobre esta depedência é importante executá-lo!.```**
+
 ```bash
 npm install axios
 ```  
@@ -178,13 +179,12 @@ npm install
 ```
 
 ### 3.3 Docker compose 
-$\textcolor{red}{\text{Dentro do diretório principal}}$
+**```Dentro do diretório principal```**
 
 ```bash
 docker-compose up -d
 ```
-### Outra opção, mas mais demorada, $\textcolor{red}{\text{(Opção sem docker compose)}}$ 
-
+### Outra opção, mas mais demorada, **```Opção sem docker compose)```**
 Construir a imagem 
 ```bash
 docker build -t {app-name} {path of docker file}
