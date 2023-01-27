@@ -156,7 +156,15 @@ npm start
 
 <hr>
 
-### Ferramentas e softares Úteis 
+### Utils
+
+### DBeaver 
+Aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados <br>
+https://dbeaver.io/download/
+
+### Postman 
+Plataforma de API para desenvolvedores projetar, construir, testar e iterar suas APIs <br>
+https://www.postman.com/downloads/ 
 
 ### How to install mysql local 
 
@@ -166,17 +174,6 @@ Linux
 ```bash 
 sudo apt-get install mysql-server 
 ```
-
-
-#### DBeaver 
-Aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados <br>
-https://dbeaver.io/download/
-
-### Postman 
-Plataforma de API para desenvolvedores projetar, construir, testar e iterar suas APIs <br>
-https://www.postman.com/downloads/ 
-
-
 
 <hr> 
 
