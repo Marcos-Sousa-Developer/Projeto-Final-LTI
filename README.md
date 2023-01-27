@@ -156,11 +156,12 @@ npm start
 
 <hr>
 
-# How to install Mysql 
+# How to install mysql local 
 
 Mac and Windows <br>
+```
 https://www.mysql.com/downloads/
-
+``
 Linux
 ```bash 
 sudo apt-get install mysql-server
