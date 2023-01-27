@@ -157,6 +157,9 @@ npm start
 <hr>
 
 ### Ferramentas e softares Úteis 
+
+### How to install mysql local 
+
 Mac and Windows: https://www.mysql.com/downloads/
 
 Linux 
@@ -164,7 +167,6 @@ Linux
 sudo apt-get install mysql-server 
 ```
 
-### How to install mysql local 
 
 #### DBeaver 
 Aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados <br>
