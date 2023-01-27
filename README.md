@@ -194,6 +194,12 @@ Construir a imagem
 docker build -t {app-name} {path of docker file}
 ```
 
+**```Se quiser apagar os containers, imagens e volumens, ou seja limpar tudo```** 
+
+```bash 
+docker compose down --rmi all -v
+``
+
 <hr>
 
 # Utils
