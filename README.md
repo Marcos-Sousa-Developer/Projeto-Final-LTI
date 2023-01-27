@@ -267,7 +267,7 @@ Git Project Manager (GPM) is a Microsoft VSCode extension that allows you to ope
 #### GitLens — Git supercharged
 GitLens supercharges Git inside VS Code and unlocks untapped knowledge within each repository. It helps you to visualize code authorship. 
 
-#### IntelliCode
+**``` IntelliCode ```**
 Insights based on understanding your code context combined with machine learning. 
 
 #### Prettier - Code formatter
