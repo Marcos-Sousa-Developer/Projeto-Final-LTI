@@ -158,7 +158,7 @@ npm start
 
 # How to install Mysql 
 
-Mac and Windows
+Mac and Windows <br>
 https://www.mysql.com/downloads/
 
 Linux
