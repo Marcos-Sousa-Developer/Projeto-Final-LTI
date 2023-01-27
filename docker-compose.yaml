@@ -1,0 +1,60 @@
+#docker version
+version: "3.8"
+
+services: 
+
+  server:
+    #catch docker file in server directory
+    build: ./server/
+    #container name of server
+    container_name: GreaterGoods_server
+    #ports
+    ports:
+      - '5000:5000'
+    
+    volumes:
+      #mapping server folder with container server folder
+      - ./server:/app/server/
+
+
+  client:
+    #catch docker file in client directory
+    build: ./client/
+    #container name of client
+    container_name: GreaterGoods_client
+    #ports
+    ports:
+      - '3000:3000'
+    
+    volumes:
+      #mapping client folder with container client folder
+      - ./client:/app/client/
+      
+    #open in interactive mode
+    #when you need to work on a project outside the Docker container
+    stdin_open: true
+    #when you need to work on a project inside the Docker container
+    tty: true 
+  
+  db:
+    #image version
+    image: mysql:8.0.32
+    #container name of database
+    container_name: mysql-grupo-01
+    restart: always
+    environment:
+      #root user
+      MYSQL_ROOT_USER: grupo01
+      #root password
+      MYSQL_ROOT_PASSWORD: rootfcul*LTI*final!!
+      #host
+      MYSQL_DATABASE: db-01-mysql
+      #user
+      MYSQL_USER: greaterGoods01
+      #password
+      MYSQL_PASSWORD: fcul*LTI*final!!
+      #time zone
+      TZ: Europe/Lisbon
+    #ports
+    ports:
+      - "3307:3306"
