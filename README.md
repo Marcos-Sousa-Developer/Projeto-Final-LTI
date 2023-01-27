@@ -83,8 +83,11 @@ Criar o ficheiro **package.json**
 ```bash
 npm init -y npm
 ```
-### 1.6 Alteração do package.json $\textcolor{red}{\text{(Não é obrigatório, é apenas conveção!!)}}$ <br>
-$\textcolor{red}{\text{(Atenção!!)}}$ Dentro do ficheiro **package.json** trocar:
+
+### 1.6 Alteração do package.json <br>
+**```Atenção, não é obrigatório, é apenas conveção!!```**
+Dentro do ficheiro **package.json** trocar:
+
 ```diff 
 "main":"index.js" to "main":"server.js"
 ```
