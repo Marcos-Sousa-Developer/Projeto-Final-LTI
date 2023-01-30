@@ -1,31 +1,17 @@
-import logo from './logo.svg';
-import './App.css'; 
-import useFetch from './resquestFunctions/useFetch';
+import { Routes, Route, BrowserRouter  } from "react-router-dom" 
+import Home from './pages/HomeView/Home';
+import './assets/styles/App.css';
+import Dashboard from "./pages/Admin/Dashboard";
 
 function App() {   
 
-  const {state} = useFetch('/api')
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {state}  
-        </p> 
-        <p>
-          ?? Bem vindo ao GreaterGoods or ShopZone (For choose) ??
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Dashboard />} />
+        </Routes>
+    </BrowserRouter>
   );
 }
 
