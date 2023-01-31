@@ -9,6 +9,9 @@ RUN apt-get update
 #copy package.json file
 COPY package.json ./
 
+#copy package-lock.json file
+COPY package-lock.json ./
+
 # copy all to /projeto_final_lti/server 
 COPY . ./
 

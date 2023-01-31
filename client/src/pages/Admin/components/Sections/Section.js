@@ -2,10 +2,11 @@ import React from "react";
 import NewConsumers from "./Subsections/NewConsumers";
 import NewEncomendas from "./Subsections/NewEncomendas";
 import NewFornecedores from "./Subsections/NewFornecedores";
-import RecentActivity from "./Subsections/RecentActivity";
 import StatsConsumer from "./Subsections/StatsConsumer";
 import StatsFornecedor from "./Subsections/StatsFornecedor";
 import StatsProdutos from "./Subsections/StatsProdutos";
+import SupportActivity from "./Subsections/SupportsActivity";
+import MessagesActivity from "./Subsections/MessagesActivity";
 import TopVendas from "./Subsections/TopVendas";
 
 function Main() {
@@ -26,8 +27,10 @@ function Main() {
       <section className="section dashboard">
 
         <div className="col-lg-12">
-          <RecentActivity></RecentActivity> 
-          <div className="row"> 
+          
+          <div className="row">
+            <SupportActivity></SupportActivity>
+            <MessagesActivity></MessagesActivity>
             <StatsConsumer></StatsConsumer>
             <StatsFornecedor></StatsFornecedor>
             <StatsProdutos></StatsProdutos>

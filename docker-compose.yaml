@@ -11,10 +11,12 @@ services:
     #ports
     ports:
       - '5000:5000'
-    
     volumes:
       #mapping server folder with container server folder
       - ./server:/app/server/
+    #dependecy before deploy
+    depends_on:
+        - my_sql_db
 
 
   client:
@@ -25,18 +27,19 @@ services:
     #ports
     ports:
       - '3000:3000'
-    
+    #mapping client folder with container client folder
     volumes:
-      #mapping client folder with container client folder
       - ./client:/app/client/
-      
+    #dependecy before deploy
+    depends_on:
+        - server
     #open in interactive mode
     #when you need to work on a project outside the Docker container
     stdin_open: true
     #when you need to work on a project inside the Docker container
     tty: true 
   
-  db:
+  my_sql_db:
     #image version
     image: mysql:8.0.32
     #container name of database
