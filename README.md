@@ -90,10 +90,9 @@ npm init -y npm
 **```Atenção esta parte, não é obrigatória, é apenas convenção!!```** <br>
 
 Dentro do ficheiro **package.json** trocar:
+ 
+Change from **```"main":"index.js"```** to **```"main":"server.js"```**
 
-```diff 
-Change from **"main":"index.js"** to **"main":"server.js"**
-```
 ### 1.7 Criar o server
 Criar o ficheiro **server.js**:
 ```bash
