@@ -92,7 +92,7 @@ npm init -y npm
 Dentro do ficheiro **package.json** trocar:
 
 ```diff 
-Change from "main":"index.js" to "main":"server.js"
+Change from **"main":"index.js"** to **"main":"server.js"**
 ```
 ### 1.7 Criar o server
 Criar o ficheiro **server.js**:
