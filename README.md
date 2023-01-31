@@ -78,7 +78,8 @@ Iniciar a aplicação, que irá correr no http://localhost:3000/ (por default ab
 npm start
 ``` 
 
-### 1.5 Criar o servidor **```(Dentro do diretório principal)```** 
+### 1.5 Criar o servidor <br>
+**```(Dentro do diretório principal)```** 
 
 Criar o ficheiro **package.json**
 ```bash
