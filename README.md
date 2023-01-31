@@ -79,7 +79,7 @@ npm start
 ``` 
 
 ### 1.5 Criar o servidor <br>
-**```(Dentro do diretório principal)```** 
+**```Dentro do diretório principal```** 
 
 Criar o ficheiro **package.json**
 ```bash
