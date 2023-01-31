@@ -43,7 +43,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 
 # Instruções
-### (Feito para linux)
+### (Instruções feitas para linux ou windows wsl)
 De seguida são apresentados 3 passos, que consiste em formas de rodar o código e interagir com o sistema. <br>
 O **1ºpasso** consiste em como funciona o **react.js** e o **express.js**, também é apresentado um link de instalação para o nodejs. No fundo é uma primeira abordagem para os iniciantes, não há interação com o codigo disponível. <br>
 No **2ºpasso** onde há interação com o código disponível, é o "default", ou melhor dizendo é a abordagem normal, com comandos de nodejs executados através do terminal e com chamadas ao **npm** e **npx**. <br>
@@ -58,10 +58,10 @@ O último passo que é o **3ºpasso**, consiste no uso do Docker de modo a autom
 
 ### 1.2 Criar o diretório principal 
 ```bash
-mkdir Projeto_Final_LTI
+mkdir your_folder_name
 ```
 ```bash
-cd Projeto_Final_LTI
+cd your_folder_name
 ```
 ### 1.3 Criar uma app React 
 Criar uma app React cujo o nome é cliente
@@ -91,7 +91,7 @@ npm init -y npm
 Dentro do ficheiro **package.json** trocar:
 
 ```diff 
-"main":"index.js" to "main":"server.js"
+Change from "main":"index.js" to "main":"server.js"
 ```
 ### 1.7 Criar o server
 Criar o ficheiro **server.js**:
