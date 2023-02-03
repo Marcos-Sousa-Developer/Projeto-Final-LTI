@@ -208,6 +208,10 @@ docker compose down --rmi all -v
 
 # Utils
 
+### Docker 
+conjunto de produtos de plataforma como serviço que usam virtualização de nível de sistema operacional para entregar software em pacotes chamados contêineres <br>
+https://www.docker.com/
+
 ### DBeaver 
 Aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados <br>
 https://dbeaver.io/download/
