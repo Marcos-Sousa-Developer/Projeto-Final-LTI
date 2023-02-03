@@ -44,7 +44,7 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 
 # Instruções
-### (Instruções feitas para Ubuntu ou Windows Wsl)
+### (Instruções feitas para Linux ou Windows Wsl)
 De seguida são apresentados 3 passos, que consiste em formas de rodar o código e interagir com o sistema. <br>
 O **1ºpasso** consiste em como funciona o **react.js** e o **express.js**, também é apresentado um link de instalação para o nodejs. No fundo é uma primeira abordagem para os iniciantes, não há interação com o codigo disponível. <br>
 No **2ºpasso** onde há interação com o código disponível, é o "default", ou melhor dizendo é a abordagem normal, com comandos de nodejs executados através do terminal e com chamadas ao **npm** e **npx**. <br>
