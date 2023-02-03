@@ -209,7 +209,7 @@ docker compose down --rmi all -v
 # Utils
 
 ### Docker 
-conjunto de produtos de plataforma como serviço que usam virtualização de nível de sistema operacional para entregar software em pacotes chamados contêineres <br>
+Conjunto de produtos de plataforma como serviço que usam virtualização de nível de sistema operacional para entregar software em pacotes chamados contêineres <br>
 https://www.docker.com/
 
 ### DBeaver 
