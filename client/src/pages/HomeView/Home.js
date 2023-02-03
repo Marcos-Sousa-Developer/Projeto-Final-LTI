@@ -17,7 +17,7 @@ function Home() {
           {state}  
         </p> 
         <p>
-          ?? Bem vindo ao GreaterGoods or ShopZone (For choose) ??
+          Bem vindo ao GreaterGoods Shop.
         </p>
         <a
           className="App-link"
