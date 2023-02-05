@@ -13,12 +13,10 @@ COPY package.json ./
 COPY package-lock.json ./
 
 # install dependencies 
-RUN npm install
-
-RUN npm install react-scripts
+RUN yarn install
 
 # copy all to projeto_final_lti/client
 COPY . ./
  
 # install dependencies
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
