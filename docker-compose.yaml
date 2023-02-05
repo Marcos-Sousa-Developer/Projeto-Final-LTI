@@ -30,9 +30,7 @@ services:
     #mapping client folder with container client folder
     volumes:
       - ./client:/app/client/
-    #dependecy before deploy
-    depends_on:
-        - server
+      
     #open in interactive mode
     #when you need to work on a project outside the Docker container
     stdin_open: true
