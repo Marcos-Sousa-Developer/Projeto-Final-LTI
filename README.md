@@ -187,7 +187,7 @@ npm install
 **```Dentro do diretório principal```**
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Docker notes
