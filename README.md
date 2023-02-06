@@ -213,6 +213,7 @@ Conjunto de produtos de plataforma como serviço que usam virtualização de ní
 https://www.docker.com/ 
 
 ### Wsl Windows
+Instalar nodejs no windows wsl
 https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
 
 ### DBeaver 
