@@ -9,6 +9,9 @@ RUN apt-get update
 #copy package.json file
 COPY package.json ./
 
+#copy yarn.lock file
+COPY yarn.lock ./
+
 #copy package-lock.json file
 COPY package-lock.json ./
 
