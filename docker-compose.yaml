@@ -44,12 +44,12 @@ services:
     container_name: mysql-grupo-01
     restart: always
     environment:
+      #Database name
+      MYSQL_DATABASE: db-01-mysql
       #root user
       MYSQL_ROOT_USER: grupo01
       #root password
       MYSQL_ROOT_PASSWORD: rootfcul*LTI*final!!
-      #host
-      MYSQL_DATABASE: db-01-mysql
       #user
       MYSQL_USER: greaterGoods01
       #password
