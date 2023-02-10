@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfig')
+let pool = require('../../config/dbConfigLocal')
 
 const statement = "DELETE FROM users";
 

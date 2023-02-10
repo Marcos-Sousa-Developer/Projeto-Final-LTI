@@ -1,6 +1,7 @@
-let pool = require('../config/dbConfig');
+const pool = require('../config/dbConfigDocker')
 
-const getAllUsers = function (req, res) {
+const getAllUsers = function (req, res) { 
+
     const statement = "SELECT * FROM users";
 
     pool.query(statement, function(error, result){
@@ -9,10 +10,11 @@ const getAllUsers = function (req, res) {
     
             throw error + '\n' + 'Not possible'
         }
-    
-        res.json(result);
+        
+        res.send(result)
+        //res.json(result);
         //console.log(result);
     });
-}
+} 
 
 module.exports = {getAllUsers}
