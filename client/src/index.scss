@@ -1,0 +1,21 @@
+//fonts
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+$primary-font: 'Poppins', sans-serif;
+
+//colors
+
+$orange: #EB5C1F;
+$light_gray: #EEEEEE;
+$blue: #76CBFF;
+
+//animations
+
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    //scroll-behavior: smooth;
+}
