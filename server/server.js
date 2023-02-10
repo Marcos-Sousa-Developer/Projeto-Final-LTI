@@ -7,6 +7,7 @@ const cors = require("cors")
 
 app.use(cors())
 
+app.use('api/users' , require('./api/Users'))
 
 // create a GET route
 app.get('/api', (req, res) => { //Line 9
