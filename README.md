@@ -172,7 +172,7 @@ npm start
 cd client
 ```
 ```bash
-npm install
+yarn install
 ```
 
 ### 3.2  Instalar dependências necessárias do server
