@@ -1,9 +1,11 @@
 let pool = require('../../config/dbConfig')
 
 const statement = "CREATE TABLE users ( " +
-            "id int, " + 
-            "FirstName varchar(255), " + 
-            "LastName varchar(255) )";
+            "id int NOT NULL AUTO_INCREMENT, " + 
+            "name varchar(255) NOT NULL, " + 
+            "email varchar(255) NOT NULL, " +
+            "user_type varchar(255) NOT NULL, " +
+            "PRIMARY KEY (id))";
 
 pool.query(statement, function(error, result) {
 
