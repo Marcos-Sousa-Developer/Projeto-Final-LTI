@@ -18,11 +18,5 @@ COPY . ./
 # install dependencies 
 RUN npm install 
 
-
 # install dependencies
 CMD ["npm", "run", "dev"]
-
-
-
-
-

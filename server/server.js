@@ -8,6 +8,8 @@ const cors = require("cors")
 app.use(cors())
 
 app.use('/api/users' , require('./api/ApiUsers'))
+app.use('/api/consumers' , require('./api/ApiConsumers'))
+app.use('/api/suppliers' , require('./api/ApiSuppliers'))
 
 // create a GET route
 app.get('/api', (req, res) => { //Line 9
