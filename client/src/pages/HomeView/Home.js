@@ -8,9 +8,7 @@ function Home() {
   const {state} = UseFetch('/api')
 
   return (
-    <div> 
       <Navbar></Navbar>
-    </div>
   );
 }
 
