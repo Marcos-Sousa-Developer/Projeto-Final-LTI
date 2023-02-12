@@ -1,4 +1,45 @@
-.navbar {
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: black;
+  background-color: white;
+}
+
+.flex {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.app__navbar {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 1rem 0 0 0;
+  padding: 1rem;
+  border-bottom: 3px solid #EEEEEE;
+}
+.app__navbar > * > * {
+  margin: 0 1rem;
+}
+.app__navbar__searchBar div {
+  border: 3px solid #EEEEEE;
+  border-radius: 20rem;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  width: 30rem;
+}
+.app__navbar__searchBar input {
+  outline: none;
+  border: none;
+  margin-left: 0.75rem;
+}
+.app__navbar__profile p {
+  margin: 0;
 }/*# sourceMappingURL=Navbar.css.map */
