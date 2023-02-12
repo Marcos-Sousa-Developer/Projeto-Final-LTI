@@ -13,25 +13,64 @@
   align-items: center;
 }
 
-body {
+.app__container {
+  max-width: 1650px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.slide-right {
+  animation: slide-right 0.35s ease-in-out both;
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-30%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+body > * {
   font-family: "Poppins", sans-serif;
 }
 
 .app__navbar {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  margin: 1rem 0 0 0;
+  margin-top: 1rem;
   padding: 1rem;
   border-bottom: 3px solid #EEEEEE;
 }
 .app__navbar > * > * {
   margin: 0 1rem;
 }
+.app__navbar__menu_categories {
+  position: fixed;
+  top: 2rem;
+  left: 0;
+  margin: 0;
+  width: 25%;
+  height: 100vh;
+}
+.app__navbar__menu_categories div > * {
+  margin: 0 1rem;
+}
+.app__navbar__menu_categories ul {
+  margin-top: 3rem;
+  padding: 0;
+  flex-direction: column;
+}
+.app__navbar__menu_categories ul li {
+  list-style: none;
+  line-height: 2.25rem;
+  font-size: 1.125rem;
+}
 .app__navbar__searchBar div {
   border: 3px solid #EEEEEE;
   border-radius: 20rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   margin: 0;
   width: 30rem;
 }
