@@ -15,20 +15,20 @@ const statement = "CREATE TABLE suppliers ( " +
                   "PRIMARY KEY (id))";
 
 //AFTER INSERT NEW SUPPLIERS AUTOMATICALY INSERT ON USER TABLE
-const triggers = "CREATE TRIGGER add_supplier_to_userTable " + 
-                 "After INSERT ON suppliers " + 
-                 "FOR EACH ROW " + 
-                 "BEGIN " + 
-                 "Declare name  varchar(255); " +
-                 "Declare email  varchar(255); " +
-                 "Declare user_type  varchar(255); " +
-                 "Declare id_user_type  int; " +
-                 "Set name = NEW.name; " +
-                 "Set email = NEW.email; " +
-                 "Set user_type = 'supplier'; " +
-                 "Set id_user_type = NEW.id; " +
-                 "INSERT INTO users (name, email, user_type, id_user_type) VALUES (name, email, user_type, id_user_type); " +
-                 "END"                 
+const trigger_insert = "CREATE TRIGGER add_supplier_to_userTable " + 
+                       "After INSERT ON suppliers " + 
+                       "FOR EACH ROW " + 
+                       "BEGIN " + 
+                       "INSERT INTO users (name, email, user_type, id_user_type) VALUES (NEW.name, NEW.email, 'supplier', NEW.id); " +
+                       "END" 
+                 
+//AFTER INSERT NEW SUPPLIERS AUTOMATICALY INSERT ON USER TABLE
+const trigger_delete = "CREATE TRIGGER remove_supplier_to_userTable " + 
+                       "After DELETE ON suppliers " + 
+                       "FOR EACH ROW " + 
+                       "BEGIN " + 
+                       "DELETE FROM users WHERE email=OLD.email AND user_type='supplier' AND id_user_type=Old.id; " +
+                       "END"
 
 //CREATE SUPPLIERS TABLE
 const suppliersTable = () => {
@@ -43,14 +43,28 @@ const suppliersTable = () => {
     });
 }
 
-const suppliersTrigger = () => {
-    pool.query(triggers, function(error, result) {
+//CREATE INSERT TRIGGER SUPPLIERS
+const suppliersTriggerInsert = () => {
+    pool.query(trigger_insert, function(error, result) {
 
         if(error) {
             throw error + '\n' + 'Not possible create triggers for supplier_to_userTable'
         }
 
-        console.log("Triggers for supplier_to_userTable created"); 
+        console.log("Trigger insert for supplier_to_userTable created"); 
+        
+    });
+}
+
+//CREATE DELETE TRIGGER SUPPLIERS
+const suppliersTriggerDelete = () => {
+    pool.query(trigger_delete, function(error, result) {
+
+        if(error) {
+            throw error + '\n' + 'Not possible create triggers for supplier_to_userTable'
+        }
+
+        console.log("Trigger delete for supplier_to_userTable created"); 
         
         process.exit()
 
@@ -65,8 +79,11 @@ function createSupplierTable() {
     //CREATE SUPPLIERS TABLE
     suppliersTable()
 
-    //CREATE SUPPLIERS TRIGGER, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
-    setTimeout(suppliersTrigger,500)
+    //CREATE SUPPLIERS TRIGGER INSERT, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
+    setTimeout(suppliersTriggerInsert,250)
+
+    //CREATE SUPPLIERS TRIGGER DELETE, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
+    setTimeout(suppliersTriggerDelete,300)
 }
 
 createSupplierTable()
