@@ -1,6 +1,6 @@
 let exec = require('child_process').exec;
 
-exec('node CreateConsumerTable.js',
+exec('node ./models/migrations/CreateConsumerTable.js',
     function (error, stdout) {
         console.log(stdout);
         if (error !== null) {
@@ -8,7 +8,7 @@ exec('node CreateConsumerTable.js',
         }
 });
 
-exec('node CreateSupplierTable.js',
+exec('node ./models/migrations/CreateSupplierTable.js',
     function (error, stdout) {
         console.log(stdout);
         if (error !== null) {

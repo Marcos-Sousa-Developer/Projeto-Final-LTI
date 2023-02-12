@@ -65,8 +65,8 @@ function createSupplierTable() {
     //CREATE SUPPLIERS TABLE
     suppliersTable()
 
-    //CREATE SUPPLIERS TRIGGER
-    suppliersTrigger()
+    //CREATE SUPPLIERS TRIGGER, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
+    setTimeout(suppliersTrigger,500)
 }
 
 createSupplierTable()

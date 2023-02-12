@@ -4,7 +4,7 @@ const statement = "DROP TABLE IF EXISTS consumers";
 
 const trigger = "DROP TRIGGER IF EXISTS add_consumer_to_userTable;"
 
-const dropTableConsumer = function() {
+const dropTableConsumer = () => {
     pool.query(statement, function(error, result){
         if(error){
             throw error + '\n' + 'Not possible delete table consumers'
@@ -13,10 +13,10 @@ const dropTableConsumer = function() {
     });
 }
 
-const dropTriggerConsumer = function() {
+const dropTriggerConsumer = () => {
     pool.query(trigger, function(error, result){
         if(error){
-            throw error + '\n' + 'Not possible delete trigger supplier_to_userTable'
+            throw error + '\n' + 'Not possible delete trigger consumer_to_userTable'
         }
         console.log("Trigger consumer_to_userTable deleted");
         process.exit();
@@ -24,8 +24,13 @@ const dropTriggerConsumer = function() {
 }
 
 function deleteConsumerTable() {
+    
+    //DELETE CONSUMER TABLE
     dropTableConsumer()
-    dropTriggerConsumer() 
+
+    //DELETE CONSUMER TRIGGER, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
+    setTimeout(dropTriggerConsumer,500)
+    
 }
 
 deleteConsumerTable()

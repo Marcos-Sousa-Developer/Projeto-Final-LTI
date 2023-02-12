@@ -68,8 +68,9 @@ function createConsumerTable() {
     //CREATE CONSUMER TABLE
     consumerTable()
 
-    //CREATE CONSUMER TRIGGER
-    consumerTrigger()
+    //CREATE CONSUMER TRIGGER, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
+    setTimeout(consumerTrigger,500)
+    
 }
 
 createConsumerTable()
