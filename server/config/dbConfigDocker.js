@@ -4,7 +4,6 @@ const mysql = require('mysql2');
 
 const pool = mysql.createPool({
     connectionLimit: 100, //important
-
     host: process.env.DB_HOST,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
@@ -13,7 +12,6 @@ const pool = mysql.createPool({
 });
 
 pool.getConnection((error) => {
-
     if(error) { 
         throw error + '\n' + 'Database connected unsuccessfully'
     } 
