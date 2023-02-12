@@ -1,12 +1,12 @@
 let pool = require('../../config/dbConfigLocal')
 
-const fake_consumer_data = require('../factories/FAKE_SUPPLIER_DATA.json')
+const fake_supplier_data = require('../factories/FAKE_SUPPLIER_DATA.json')
 
 const statement = "INSERT INTO suppliers (name, email, nif, mobile_number, address, user_type, account_status) VALUES ? "
 
 let values = []
 
-fake_consumer_data.forEach(row => {
+fake_supplier_data.forEach(row => {
 
     values.push([row.name, row.email, row.nif, row.mobile_number, row.address, row.user_type, row.account_status])     
     

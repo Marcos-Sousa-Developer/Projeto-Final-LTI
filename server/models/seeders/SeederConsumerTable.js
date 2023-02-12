@@ -1,10 +1,11 @@
-let pool = require('../../config/dbConfigLocal')
+let pool = require('../../config/dbConfigLocal') 
+let userTable = require('../migrations/CreateUserTable')
 
 const fake_consumer_data = require('../factories/FAKE_CONSUMER_DATA.json')
 
 const statement = "INSERT INTO consumers (name, email, nif, mobile_number, address, user_type, account_status) VALUES ? "
 
-let values = []
+let values = [] 
 
 fake_consumer_data.forEach(row => {
 
@@ -19,7 +20,6 @@ pool.query(statement, [values], function(error, result){
         throw error + '\n' + 'Not possible insert data into table consumers'
     }
     console.log("Insert consumers completed");
-    
     process.exit();
 });
 

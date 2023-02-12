@@ -1,15 +1,31 @@
 let pool = require('../../config/dbConfigLocal')
 
-const statement = "DROP TABLE consumers";
+const statement = "DROP TABLE IF EXISTS consumers"; 
 
-pool.query(statement, function(error, result){
+const trigger = "DROP TRIGGER IF EXISTS add_consumer_to_userTable;"
 
-    if(error){
+const dropTableConsumer = function() {
+    pool.query(statement, function(error, result){
+        if(error){
+            throw error + '\n' + 'Not possible delete table consumers'
+        }
+        console.log("Table consumers deleted");
+    });
+}
 
-        throw error + '\n' + 'Not possible delete table consumers'
-    }
+const dropTriggerConsumer = function() {
+    pool.query(trigger, function(error, result){
+        if(error){
+            throw error + '\n' + 'Not possible delete trigger supplier_to_userTable'
+        }
+        console.log("Trigger consumer_to_userTable deleted");
+        process.exit();
+    });
+}
 
-    console.log("Table consumers deleted");
+function deleteConsumerTable() {
+    dropTableConsumer()
+    dropTriggerConsumer() 
+}
 
-    process.exit();
-});
+deleteConsumerTable()
