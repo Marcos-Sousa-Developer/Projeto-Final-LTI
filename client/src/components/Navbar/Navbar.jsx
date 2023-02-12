@@ -15,11 +15,11 @@ const Navbar = () => {
                 <RxHamburgerMenu fontSize={30} color="black" onClick={() => setToggleMenu(true)}></RxHamburgerMenu>
                 {toggleMenu && (
                     <div className="app__navbar__menu_categories slide-right">
-                        <div>
+                        <div className='flex'>
                             <MdOutlineClose fontSize={30} color="black" onClick={() => setToggleMenu(false)}></MdOutlineClose>
                             <img src={images.logo} alt="" style={{marginLeft:'1rem'}}/>
                         </div>
-                        <ul>
+                        <ul className='flex'>
                             <li>Categoria 1</li>
                             <li>Categoria 2</li>
                             <li>Categoria 3</li>
