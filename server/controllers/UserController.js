@@ -1,20 +1,21 @@
-const pool = require('../config/dbConfigDocker')
+let dbConnection = require('./DatabaseController')
 
-const getAllUsers = function (req, res) { 
+/**
+ * Async fucntion to get all users and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getAllUsers = async function (req, res) { 
 
-    const statement = "SELECT * FROM users";
-
-    pool.query(statement, function(error, result){
-
-        if(error){
+    const statement = "SELECT * FROM users";  
+    let result = await dbConnection(statement) 
     
-            throw error + '\n' + 'Not possible'
-        }
-        
-        res.send(result)
-        //res.json(result);
-        //console.log(result);
-    });
+    if(result.includes("error")) {
+        return res.status(500).json("Not Possible get all users");
+    } 
+    return res.send(result)
+    
 } 
 
 module.exports = {getAllUsers}
