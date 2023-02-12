@@ -12,7 +12,6 @@ const getAllConsumers = async function (req, res) {
 
     let result = await dbConnection(statement)  
 
-
     if(result.includes("error")) {
         return res.status(500).json("Not Possible get all consumers");
     } 
