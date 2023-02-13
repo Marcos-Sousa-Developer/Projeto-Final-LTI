@@ -14,7 +14,6 @@ function Dashboard() {
   let quill = require("./assets/vendor/quill/quill.min.js");
   let datatables = require("./assets/vendor/simple-datatables/simple-datatables.js");
   let tinymce = require("./assets/vendor/tinymce/tinymce.min.js");
-  let php = require("./assets/vendor/php-email-form/validate.js");
   let main = require("./assets/js/main.js");
   
   return (
@@ -37,7 +36,6 @@ function Dashboard() {
       <script src={quill.name}></script>
       <script src={datatables.name}></script>
       <script src={tinymce.name}></script>
-      <script src={php.name}></script>
       {/* Template Main JS File */}
       <script src={main.name}></script>
     </div>
