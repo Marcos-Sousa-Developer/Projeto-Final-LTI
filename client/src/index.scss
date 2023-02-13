@@ -23,6 +23,10 @@ $blue: #76CBFF;
     //scroll-behavior: smooth;
 }
 
+.primary-font{
+  font-family: $primary-font;
+}
+
 .flex{
     display: flex;
     justify-content: center;

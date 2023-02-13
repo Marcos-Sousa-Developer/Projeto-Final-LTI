@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className='app__footer flex'>
         <div className='app__support'>
-            <h5><strong>Support</strong></h5>
+            <h5 className='primary-font'><strong>Support</strong></h5>
             <div className='app__support2'>
               <p>FAQ</p>
               <p>Terms & Conditions</p>
@@ -17,7 +17,7 @@ const Footer = () => {
     
 
         <div className='app__support'>
-          <h5><strong>About us</strong></h5>
+          <h5 className='primary-font'><strong>About us</strong></h5>
           <div className='app__support2'>
               <p>Team</p>
               <p>Concept</p>
@@ -25,7 +25,7 @@ const Footer = () => {
         </div>   
 
         <div className='app__support'>
-          <h5><strong>We accept</strong></h5>
+          <h5 className='primary-font'><strong>We accept</strong></h5>
           <div className='app__support2'>
             <img src={images.mastercard} alt="" />
             <img src={images.visa} alt="" />

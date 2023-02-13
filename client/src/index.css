@@ -7,6 +7,10 @@
   background-color: white;
 }
 
+.primary-font {
+  font-family: "Poppins", sans-serif;
+}
+
 .flex {
   display: flex;
   justify-content: center;
