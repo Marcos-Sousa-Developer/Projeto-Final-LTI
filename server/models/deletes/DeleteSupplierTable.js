@@ -2,7 +2,9 @@ let pool = require('../../config/dbConfigLocal')
 
 const statement = "DROP TABLE IF EXISTS suppliers; ";
 
-const trigger = "DROP TRIGGER IF EXISTS add_supplier_to_userTable; " 
+const trigger_insert = "DROP TRIGGER IF EXISTS add_supplier_to_userTable; " 
+
+const trigger_delete = "DROP TRIGGER IF EXISTS remove_supplier_to_userTable; " 
 
 
 const dropTableSupplier = () => {
@@ -14,12 +16,21 @@ const dropTableSupplier = () => {
     });
 }
 
-const dropTriggerSupplier = () => {
-    pool.query(trigger, function(error, result){
+const dropInsertTriggerSupplier = () => {
+    pool.query(trigger_insert, function(error, result){
         if(error){
-            throw error + '\n' + 'Not possible delete trigger supplier_to_userTable'
+            throw error + '\n' + 'Not possible delete trigger insert supplier_to_userTable'
         }
-        console.log("Trigger supplier_to_userTable deleted");
+        console.log("Trigger insert supplier_to_userTable deleted");
+    });
+}
+
+const dropDeleteTriggerSupplier = () => {
+    pool.query(trigger_delete, function(error, result){
+        if(error){
+            throw error + '\n' + 'Not possible delete trigger delete supplier_to_userTable'
+        }
+        console.log("Trigger delete supplier_to_userTable deleted");
         process.exit();
     });
 }
@@ -30,8 +41,11 @@ function deleteSupplierTable() {
     //DELETE SUPPLIER TABLE
     dropTableSupplier()
     
-    //DELETE SUPPLIER TRIGGER, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
-    setTimeout(dropTriggerSupplier,500)
+    //DELETE SUPPLIER INSERT TRIGGER, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
+    setTimeout(dropInsertTriggerSupplier,250)
+
+    //DELETE SUPPLIER DELETE TRIGGER, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
+    setTimeout(dropDeleteTriggerSupplier,300)
 }
 
 deleteSupplierTable()

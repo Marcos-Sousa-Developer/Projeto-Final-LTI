@@ -1,3 +1,5 @@
+//General file for scss
+
 //fonts
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
@@ -9,10 +11,6 @@ $primary-font: 'Poppins', sans-serif;
 $orange: #EB5C1F;
 $light_gray: #EEEEEE;
 $blue: #76CBFF;
-
-//animations
-
-
 
 //main functions
 
@@ -29,4 +27,26 @@ $blue: #76CBFF;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.app__container{
+    max-width: 1650px;
+    width: 95%;
+    margin: 0 auto;
+}
+
+// animations
+
+.slide-right {
+    -webkit-animation: slide-right 0.35s ease-in-out both;
+      animation: slide-right 0.35s ease-in-out both;
+  }
+  
+@keyframes slide-right {
+  0% {
+    transform: translateX(-30%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
