@@ -3,12 +3,12 @@ import UseFetch from '../../hooks/UseFetch';
 import { Link  } from "react-router-dom";
 import { Navbar } from '../../components/';
 
-function Home() {   
+function Home() {
 
   const {state} = UseFetch('/api')
 
   return (
-      <Navbar></Navbar>
+    <Navbar></Navbar>
   );
 }
 
