@@ -9,13 +9,14 @@ let dbConnection = require('./DatabaseController')
 const getAllUsers = async function (req, res) { 
 
     const statement = "SELECT * FROM users";  
+    
     let result = await dbConnection(statement) 
     
-    if(result.includes("error")) {
-        return res.status(500).json("Not Possible get all users");
+    if (result.includes("error")) {
+        return res.status(500).json("Not possible to get all users");
     } 
-    return res.send(result)
     
+    return res.send(result) 
 } 
 
 module.exports = {getAllUsers}

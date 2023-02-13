@@ -34,12 +34,11 @@ const trigger_delete = "CREATE TRIGGER remove_supplier_to_userTable " +
 const suppliersTable = () => {
     pool.query(statement, function(error, result) {
 
-        if(error) {
+        if (error) {
             throw error + '\n' + 'Not possible create table suppliers'
         }
 
         console.log("Table suppliers created"); 
-
     });
 }
 
@@ -47,12 +46,11 @@ const suppliersTable = () => {
 const suppliersTriggerInsert = () => {
     pool.query(trigger_insert, function(error, result) {
 
-        if(error) {
+        if (error) {
             throw error + '\n' + 'Not possible create triggers for supplier_to_userTable'
         }
 
         console.log("Trigger insert for supplier_to_userTable created"); 
-        
     });
 }
 
@@ -60,14 +58,13 @@ const suppliersTriggerInsert = () => {
 const suppliersTriggerDelete = () => {
     pool.query(trigger_delete, function(error, result) {
 
-        if(error) {
+        if (error) {
             throw error + '\n' + 'Not possible create triggers for supplier_to_userTable'
         }
 
         console.log("Trigger delete for supplier_to_userTable created"); 
         
         process.exit()
-
     });
 }
 
