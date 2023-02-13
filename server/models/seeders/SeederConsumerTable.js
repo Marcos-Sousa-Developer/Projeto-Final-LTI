@@ -10,16 +10,15 @@ let values = []
 fake_consumer_data.forEach(row => {
 
     values.push([row.name, row.email, row.nif, row.mobile_number, row.address, row.user_type, row.account_status])     
-    
 });
 
 pool.query(statement, [values], function(error, result){
 
-    if(error){
-
+    if (error) {
         throw error + '\n' + 'Not possible insert data into table consumers'
-    }
+    } 
+
     console.log("Insert consumers completed");
+
     process.exit();
 });
-

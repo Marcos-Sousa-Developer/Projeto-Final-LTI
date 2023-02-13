@@ -1,15 +1,19 @@
-import logo from '../../assets/images/logo.svg';
 import UseFetch from '../../hooks/UseFetch';
 import { Link  } from "react-router-dom";
 import { Navbar } from '../../components/';
+import { Footer } from '../../components/';
 
-function Home() {   
+function Home() {
 
   const {state} = UseFetch('/api')
 
   return (
-    <Navbar></Navbar>
+    <>
+      <Navbar></Navbar>
+      <Footer></Footer>
+    </>
   );
+
 }
 
 export default Home;

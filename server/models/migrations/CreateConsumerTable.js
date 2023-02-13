@@ -36,12 +36,11 @@ const consumerTable = () => {
     
         pool.query(statement, function(error, result) {
 
-        if(error) {
+        if (error) {
             throw error + '\n' + 'Not possible create table consumers'
         }
 
         console.log("Table consumers created"); 
-
     });
 }
 
@@ -49,12 +48,11 @@ const consumerTable = () => {
 const consumerTriggerInsert = () => {
     pool.query(trigger_insert, function(error, result) {
 
-        if(error) {
+        if (error) {
             throw error + '\n' + 'Not possible create triggers insert for consumer_to_userTable'
         }
 
         console.log("Trigger insert for consumer_to_userTable created"); 
-
     });
 }
 
@@ -62,14 +60,13 @@ const consumerTriggerInsert = () => {
 const consumerTriggerDelete = () => {
     pool.query(trigger_delete, function(error, result) {
 
-        if(error) {
+        if (error) {
             throw error + '\n' + 'Not possible create triggers delete for consumer_to_userTable'
         }
 
         console.log("Trigger delete for consumer_to_userTable created"); 
         
         process.exit()
-
     });
 }
 
@@ -86,8 +83,6 @@ function createConsumerTable() {
 
     //CREATE CONSUMER TRIGGER DELETE, WEE NEED TIMEOUT BECAUSE THE ASYNC FUNCTIONS
     setTimeout(consumerTriggerDelete,300)
-    
 }
 
 createConsumerTable()
-

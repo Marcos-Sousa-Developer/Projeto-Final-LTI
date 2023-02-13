@@ -9,17 +9,15 @@ let values = []
 fake_user_data.forEach(row => {
 
     values.push([row.name, row.email, row.user_type])     
-    
 });
 
 pool.query(statement, [values], function(error, result){
 
-    if(error){
-
+    if (error) {
         throw error + '\n' + 'Not possible insert data into table users'
     }
+
     console.log("Insert users completed");
     
     process.exit();
 });
-

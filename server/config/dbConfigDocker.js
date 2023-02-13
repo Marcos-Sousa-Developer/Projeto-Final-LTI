@@ -12,9 +12,11 @@ const pool = mysql.createPool({
 });
 
 pool.getConnection((error) => {
-    if(error) { 
+
+    if (error) { 
         throw error + '\n' + 'Database connected unsuccessfully'
     } 
+    
     console.log('Database connected successfully')
 })
 

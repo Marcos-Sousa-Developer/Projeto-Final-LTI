@@ -1,6 +1,5 @@
 const pool = require('../config/dbConfigDocker') 
 
-
 /**
  * THIS FUNCTION MAKE A REQUEST TO DATABASE
  * This function is the type async because we need to wait for a database response.
@@ -13,9 +12,10 @@ const dbConnection = async (query) => {
         
     let promise = new Promise(function(resolve) {
 
-        pool.query(query, function(error, result){ 
-            if(error){ 
-                resolve("error : " + error.message)
+        pool.query(query, function(error, result) { 
+
+            if (error){ 
+                resolve("error")
             }
             else { 
                 resolve(result)

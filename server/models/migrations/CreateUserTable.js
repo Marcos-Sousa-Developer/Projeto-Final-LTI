@@ -15,7 +15,7 @@ let createUserTable = () => {
     //Verify if table user exists  
     pool.query(statement, function(error, result) {
 
-        if(error) {
+        if (error) {
             //IF table does not exists, create it
             pool.query(statement1, function(error, result) {
                 if(error) {
