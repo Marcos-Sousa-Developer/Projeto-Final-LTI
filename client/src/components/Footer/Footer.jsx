@@ -5,7 +5,7 @@ import images from '../../assets/images.js';
 
 const Footer = () => {
   return (
-    <div className='app__footer flex app__container'>
+    <div className='app__footer app__container'>
         <div className='app__support'>
             <h5 className='primary-font'><strong>Support</strong></h5>
             <div className='app__support2'>

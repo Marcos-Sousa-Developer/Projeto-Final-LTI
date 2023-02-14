@@ -10,21 +10,22 @@ const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
 
     return (
-        <nav className='app__navbar app__container' id='p2'>
+        <nav className='app__navbar app__container'>
             <div className='app__navbar__menu'>
                 <RxHamburgerMenu fontSize={30} color="black" className='app__pointer' onClick={() => setToggleMenu(true)}></RxHamburgerMenu>
                 {toggleMenu && (
                     <div className="app__navbar__menu_categories slide-right">
-                        <div className='flex'>
+                        <div className='teste'>
                             <MdOutlineClose fontSize={30} color="black" className='app__pointer' onClick={() => setToggleMenu(false)}></MdOutlineClose>
-                            <img src={images.logo} alt="" style={{marginLeft:'1rem'}}/>
+                            <img src={images.logo} alt=""/>
+                            <div></div>
+                            <ul className=''>
+                                <li>Categoria 1</li>
+                                <li>Categoria 2</li>
+                                <li>Categoria 3</li>
+                                <li>Categoria 4</li>
+                            </ul>
                         </div>
-                        <ul className='flex'>
-                            <li>Categoria 1</li>
-                            <li>Categoria 2</li>
-                            <li>Categoria 3</li>
-                            <li>Categoria 4</li>
-                        </ul>
                     </div>
                 )}
                 <img src={images.logo} alt="" />
@@ -40,7 +41,7 @@ const Navbar = () => {
             <div className='app__navbar__profile flex'>
 
                 <div className='flex'>
-                    <RxPerson fontSize={30} color="black" className='app__pointer'></RxPerson>
+                    <RxPerson fontSize={30} color="black"></RxPerson>
 
                     <div style={{margin: '0 .75rem'}}>
                         <p>Account</p>
@@ -49,7 +50,7 @@ const Navbar = () => {
 
                 </div>
 
-                <div className='flex'>
+                <div className='flex' style={{marginRight:'0'}}>
                     <FiShoppingCart fontSize={30} color="black" className='app__pointer'></FiShoppingCart>
 
                     <div style={{margin: '0 .75rem'}}>

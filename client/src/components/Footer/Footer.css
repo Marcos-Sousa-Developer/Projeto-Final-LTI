@@ -23,18 +23,10 @@
   margin: 0 auto;
 }
 
-.slide-right {
-  animation: slide-right 0.35s ease-in-out both;
+.app__pointer {
+  cursor: pointer;
 }
 
-@keyframes slide-right {
-  0% {
-    transform: translateX(-30%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
 body {
   font-family: "Poppins", sans-serif;
 }
