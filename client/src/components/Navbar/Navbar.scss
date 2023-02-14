@@ -4,6 +4,8 @@ body > *{
     font-family: $primary-font;
 }
 
+//font-size: clamp(3rem, 5vw, 6rem);
+
 .app__navbar{
     display: flex;
     justify-content: space-between;
@@ -21,21 +23,23 @@ body > *{
 
         &_categories{
             position: fixed;
-            top: 0rem;
+            top: 0;
             left: 0;
             margin: 0;
-            width: 25%;
+            width: 20%;
+            max-width: 500px;
+            padding: 1.5rem 2rem;
             height: 100vh;
+            //background-color: aliceblue;
 
             div > *{
                 margin: 0 1rem;
             }
 
             ul{
-                margin-top: 3rem;
+                margin-top: 2rem;
                 padding: 0;
                 flex-direction: column;
-
 
                 li{
                     list-style: none;
@@ -50,7 +54,7 @@ body > *{
         div{
             border: 3px solid $light_gray;
             border-radius: 20rem;
-            padding: .75rem 1rem;
+            padding: .5rem .75rem;
             margin: 0;
             width: 30rem;
         }
@@ -60,19 +64,11 @@ body > *{
             border: none;
             margin-left: .75rem;
         }
-
     }
 
     &__profile{
-
         p{
             margin: 0;
         }
     }
-
-
-
 }
-
-
-

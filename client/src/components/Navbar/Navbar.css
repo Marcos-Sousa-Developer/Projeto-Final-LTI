@@ -23,8 +23,12 @@
   margin: 0 auto;
 }
 
+.app__pointer {
+  cursor: pointer;
+}
+
 .slide-right {
-  animation: slide-right 0.35s ease-in-out both;
+  animation: slide-right 0.35s ease-in-out;
 }
 
 @keyframes slide-right {
@@ -52,17 +56,19 @@ body > * {
 }
 .app__navbar__menu_categories {
   position: fixed;
-  top: 0rem;
+  top: 0;
   left: 0;
   margin: 0;
-  width: 25%;
+  width: 20%;
+  max-width: 500px;
+  padding: 1.5rem 2rem;
   height: 100vh;
 }
 .app__navbar__menu_categories div > * {
   margin: 0 1rem;
 }
 .app__navbar__menu_categories ul {
-  margin-top: 3rem;
+  margin-top: 2rem;
   padding: 0;
   flex-direction: column;
 }
@@ -74,7 +80,7 @@ body > * {
 .app__navbar__searchBar div {
   border: 3px solid #EEEEEE;
   border-radius: 20rem;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   margin: 0;
   width: 30rem;
 }

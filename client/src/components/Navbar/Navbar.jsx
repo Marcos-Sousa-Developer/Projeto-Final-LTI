@@ -10,13 +10,13 @@ const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
 
     return (
-        <nav className='app__navbar app__container'>
+        <nav className='app__navbar app__container' id='p2'>
             <div className='app__navbar__menu'>
-                <RxHamburgerMenu fontSize={30} color="black" onClick={() => setToggleMenu(true)}></RxHamburgerMenu>
+                <RxHamburgerMenu fontSize={30} color="black" className='app__pointer' onClick={() => setToggleMenu(true)}></RxHamburgerMenu>
                 {toggleMenu && (
                     <div className="app__navbar__menu_categories slide-right">
                         <div className='flex'>
-                            <MdOutlineClose fontSize={30} color="black" onClick={() => setToggleMenu(false)}></MdOutlineClose>
+                            <MdOutlineClose fontSize={30} color="black" className='app__pointer' onClick={() => setToggleMenu(false)}></MdOutlineClose>
                             <img src={images.logo} alt="" style={{marginLeft:'1rem'}}/>
                         </div>
                         <ul className='flex'>
@@ -40,7 +40,7 @@ const Navbar = () => {
             <div className='app__navbar__profile flex'>
 
                 <div className='flex'>
-                    <RxPerson fontSize={30} color="black"></RxPerson>
+                    <RxPerson fontSize={30} color="black" className='app__pointer'></RxPerson>
 
                     <div style={{margin: '0 .75rem'}}>
                         <p>Account</p>
@@ -50,7 +50,7 @@ const Navbar = () => {
                 </div>
 
                 <div className='flex'>
-                    <FiShoppingCart fontSize={30} color="black"></FiShoppingCart>
+                    <FiShoppingCart fontSize={30} color="black" className='app__pointer'></FiShoppingCart>
 
                     <div style={{margin: '0 .75rem'}}>
                         <p>Total</p>
