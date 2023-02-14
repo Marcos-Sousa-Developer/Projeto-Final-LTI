@@ -7,6 +7,10 @@
   background-color: white;
 }
 
+.primary-font {
+  font-family: "Poppins", sans-serif;
+}
+
 .flex {
   display: flex;
   justify-content: center;
@@ -48,7 +52,7 @@ body > * {
 }
 .app__navbar__menu_categories {
   position: fixed;
-  top: 2rem;
+  top: 0rem;
   left: 0;
   margin: 0;
   width: 25%;
