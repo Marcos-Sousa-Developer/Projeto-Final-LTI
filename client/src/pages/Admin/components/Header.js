@@ -16,7 +16,7 @@ function Header() {
 
         {/* Search Bar */}
         <div className="search-bar">
-            <form className="search-form d-flex align-items-center" method="POST" action="#">
+            <form className="search-form d-flex align-items-center" action="#">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword" />
                 <button type="submit" title="Search"><i className="bi bi-search" /></button>
             </form>
