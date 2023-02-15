@@ -7,6 +7,10 @@
   background-color: white;
 }
 
+.primary-font {
+  font-family: "Poppins", sans-serif;
+}
+
 .flex {
   display: flex;
   justify-content: center;
@@ -19,13 +23,21 @@
   margin: 0 auto;
 }
 
+.app__pointer {
+  cursor: pointer;
+}
+
+.app__icon_hover:hover {
+  color: #EB5C1F;
+}
+
 .slide-right {
-  animation: slide-right 0.35s ease-in-out both;
+  animation: slide-right 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @keyframes slide-right {
   0% {
-    transform: translateX(-30%);
+    transform: translateX(-75%);
   }
   100% {
     transform: translateX(0);

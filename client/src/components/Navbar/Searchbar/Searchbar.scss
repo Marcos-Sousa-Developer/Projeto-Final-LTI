@@ -1,0 +1,18 @@
+@import "../../../index.css";
+
+.app__navbar__searchBar{
+    div{
+        border: 3px solid $light_gray;
+        border-radius: 20rem;
+        padding: .5rem .75rem;
+        margin: 0;
+        
+    }
+
+    input{
+        outline: none;
+        border: none;
+        margin-left: .75rem;
+        width: 30rem;
+    }
+}

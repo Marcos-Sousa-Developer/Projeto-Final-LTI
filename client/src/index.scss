@@ -15,12 +15,13 @@ $blue: #76CBFF;
 //main functions
 
 *{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    color: black;
-    background-color: white;
-    //scroll-behavior: smooth;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: black;
+  background-color: white;
+  font-family: $primary-font;
+  //scroll-behavior: smooth;
 }
 
 .primary-font{
@@ -28,27 +29,34 @@ $blue: #76CBFF;
 }
 
 .flex{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .app__container{
-    max-width: 1650px;
-    width: 95%;
-    margin: 0 auto;
+  max-width: 1650px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.app__pointer{
+  cursor: pointer;
+}
+
+.app__icon_effect:hover > *{
+  color: $orange;
 }
 
 // animations
 
 .slide-right {
-    -webkit-animation: slide-right 0.35s ease-in-out both;
-      animation: slide-right 0.35s ease-in-out both;
-  }
-  
+	animation: slide-right 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+
 @keyframes slide-right {
   0% {
-    transform: translateX(-30%);
+    transform: translateX(-75%);
   }
   100% {
     transform: translateX(0);

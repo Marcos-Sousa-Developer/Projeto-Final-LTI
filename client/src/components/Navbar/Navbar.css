@@ -5,6 +5,11 @@
   margin: 0;
   color: black;
   background-color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+.primary-font {
+  font-family: "Poppins", sans-serif;
 }
 
 .flex {
@@ -19,66 +24,89 @@
   margin: 0 auto;
 }
 
+.app__pointer {
+  cursor: pointer;
+}
+
+.app__icon_effect:hover > * {
+  color: #EB5C1F;
+}
+
 .slide-right {
-  animation: slide-right 0.35s ease-in-out both;
+  animation: slide-right 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @keyframes slide-right {
   0% {
-    transform: translateX(-30%);
+    transform: translateX(-75%);
   }
   100% {
     transform: translateX(0);
   }
 }
-body > * {
-  font-family: "Poppins", sans-serif;
-}
-
 .app__navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
-  padding: 1rem;
+  padding: 2rem 0 2rem 0;
   border-bottom: 3px solid #EEEEEE;
 }
 .app__navbar > * > * {
   margin: 0 1rem;
 }
-.app__navbar__menu_categories {
+.app__navbar > :first-child > :first-child {
+  margin: 0 1rem auto 0;
+}
+.app__navbar_menu_categories {
   position: fixed;
-  top: 2rem;
+  top: 0;
   left: 0;
   margin: 0;
-  width: 25%;
+  width: 20%;
+  max-width: 500px;
+  padding: 2rem;
   height: 100vh;
+  background-color: #EEEEEE;
+  box-shadow: 1px 0px 20px 0px rgba(0, 0, 0, 0.25);
 }
-.app__navbar__menu_categories div > * {
-  margin: 0 1rem;
+.app__navbar_menu_categories .teste {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  row-gap: 3rem;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  background-color: #EEEEEE;
 }
-.app__navbar__menu_categories ul {
-  margin-top: 3rem;
+.app__navbar_menu_categories .teste img {
+  margin: 0;
+}
+.app__navbar_menu_categories .teste > * {
+  background-color: #EEEEEE;
+}
+.app__navbar_menu_categories ul {
   padding: 0;
+  margin: 0;
   flex-direction: column;
 }
-.app__navbar__menu_categories ul li {
+.app__navbar_menu_categories ul li {
   list-style: none;
-  line-height: 2.25rem;
+  line-height: 2.5rem;
   font-size: 1.125rem;
+  background-color: #EEEEEE;
 }
-.app__navbar__searchBar div {
-  border: 3px solid #EEEEEE;
-  border-radius: 20rem;
-  padding: 0.75rem 1rem;
+.app__navbar_profile p {
   margin: 0;
-  width: 30rem;
 }
-.app__navbar__searchBar input {
-  outline: none;
-  border: none;
-  margin-left: 0.75rem;
+.app__navbar_profile_account, .app__navbar_profile_cart {
+  margin: 0.75rem;
 }
-.app__navbar__profile p {
-  margin: 0;
+
+@media screen and (max-width: 1250px) {
+  .app__navbar_profile p {
+    display: none;
+    margin: 0;
+  }
+  .app__navbar_profile > * {
+    margin: 0;
+  }
 }/*# sourceMappingURL=Navbar.css.map */
