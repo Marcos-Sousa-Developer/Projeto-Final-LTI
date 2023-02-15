@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Aside() {
   return (
@@ -46,10 +47,10 @@ function Aside() {
               </a>
             </li>
             <li>
-              <a href="#">
+              <Link to="gerir_consumidores">
                 <i className="bi bi-circle" />
                 <span>Gerir Consumidores</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#">
