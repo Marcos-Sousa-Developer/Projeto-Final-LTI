@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiShoppingCart, FiAlignLeft, FiUser, FiX } from 'react-icons/fi';
 
-import Searchbar from './Searchbar/Searchbar.jsx';
+import Searchbar from './Searchbar/Searchbar';
 import images from '../../assets/images.js';
 import './Navbar.css';
 
