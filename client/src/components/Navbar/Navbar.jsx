@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { RxPerson, RxHamburgerMenu } from 'react-icons/rx';
-import { FiShoppingCart, FiSearch } from 'react-icons/fi';
-import { MdOutlineClose } from 'react-icons/md';
+import { FiShoppingCart, FiAlignLeft, FiUser, FiX } from 'react-icons/fi';
 
+import Searchbar from './Searchbar/Searchbar.jsx';
 import images from '../../assets/images.js';
 import './Navbar.css';
 
@@ -11,12 +10,12 @@ const Navbar = () => {
 
     return (
         <nav className='app__navbar app__container'>
-            <div className='app__navbar__menu'>
-                <RxHamburgerMenu fontSize={30} color="black" className='app__pointer' onClick={() => setToggleMenu(true)}></RxHamburgerMenu>
+            <div className='app__navbar_menu'>
+                <FiAlignLeft fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={() => setToggleMenu(true)}></FiAlignLeft>
                 {toggleMenu && (
-                    <div className="app__navbar__menu_categories slide-right">
+                    <div className="app__navbar_menu_categories slide-right">
                         <div className='teste'>
-                            <MdOutlineClose fontSize={30} color="black" className='app__pointer' onClick={() => setToggleMenu(false)}></MdOutlineClose>
+                            <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={() => setToggleMenu(false)}></FiX>
                             <img src={images.logo} alt=""/>
                             <div></div>
                             <ul className=''>
@@ -31,19 +30,14 @@ const Navbar = () => {
                 <img src={images.logo} alt="" />
             </div>
 
-            <div className='app__navbar__searchBar'>
-                <div>
-                    <FiSearch fontSize={22} color='black'></FiSearch>
-                    <input type="text" placeholder='Pesquise...'/>
-                </div>
-            </div>
+            <Searchbar></Searchbar>
 
-            <div className='app__navbar__profile flex'>
+            <div className='app__navbar_profile flex'>
 
                 <div className='flex'>
-                    <RxPerson fontSize={30} color="black"></RxPerson>
+                    <FiUser fontSize={30} color="black" className='app__pointer app__icon_effect'></FiUser>
 
-                    <div style={{margin: '0 .75rem'}}>
+                    <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
                         <p>Account</p>
                         <p style={{fontSize: '12px', opacity: '80%'}}>Sign In</p>
                     </div>
@@ -51,9 +45,9 @@ const Navbar = () => {
                 </div>
 
                 <div className='flex' style={{marginRight:'0'}}>
-                    <FiShoppingCart fontSize={30} color="black" className='app__pointer'></FiShoppingCart>
+                    <FiShoppingCart fontSize={30} color="black" className='app__pointer app__icon_effect'></FiShoppingCart>
 
-                    <div style={{margin: '0 .75rem'}}>
+                    <div className='app__navbar_profile_cart' style={{margin: '0 .75rem'}}>
                         <p>Total</p>
                         <p style={{fontSize: '12px', opacity: '80%'}}>0.00€</p>
                     </div>

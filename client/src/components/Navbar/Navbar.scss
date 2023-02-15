@@ -1,9 +1,5 @@
 @import "../../index.scss";
 
-body > *{
-    font-family: $primary-font;
-}
-
 //font-size: clamp(3rem, 5vw, 6rem);
 
 .app__navbar{
@@ -11,8 +7,7 @@ body > *{
     justify-content: space-between;
     align-items: center;
 
-    margin-top: 1rem;
-    padding: 1rem 0 2rem 0;
+    padding: 2rem 0 2rem 0;
     border-bottom: 3px solid $light_gray;
 
     & > * > *{
@@ -23,7 +18,7 @@ body > *{
         margin: 0 1rem auto 0;
     }
 
-    &__menu{
+    &_menu{
 
         &_categories{
             position: fixed;
@@ -48,20 +43,19 @@ body > *{
                     margin: 0;
                 }
 
-                &>*{
+                & > *{
                     background-color: $light_gray;
                 }
             }
 
             ul{
-                //margin-top: 2rem;
                 padding: 0;
                 margin: 0;
                 flex-direction: column;
 
                 li{
                     list-style: none;
-                    line-height: 2.25rem;
+                    line-height: 2.5rem;
                     font-size: 1.125rem;
                     background-color: $light_gray;
                 }
@@ -69,25 +63,27 @@ body > *{
         }
     }
 
-    &__searchBar{
-        div{
-            border: 3px solid $light_gray;
-            border-radius: 20rem;
-            padding: .5rem .75rem;
+    &_profile{
+        p{
             margin: 0;
-            
         }
 
-        input{
-            outline: none;
-            border: none;
-            margin-left: .75rem;
-            width: 30rem;
+        &_account, &_cart{
+            margin: 0.75rem;
         }
     }
+}
 
-    &__profile{
+@media screen and (max-width: 1250px) {
+
+    .app__navbar_profile{
+
         p{
+            display: none;
+            margin: 0;
+        }
+
+        > *{
             margin: 0;
         }
     }

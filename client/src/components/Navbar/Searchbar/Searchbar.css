@@ -5,7 +5,6 @@
   margin: 0;
   color: black;
   background-color: white;
-  font-family: "Poppins", sans-serif;
 }
 
 .primary-font {
@@ -43,4 +42,16 @@
   100% {
     transform: translateX(0);
   }
-}/*# sourceMappingURL=index.css.map */
+}
+.app__navbar__searchBar div {
+  border: 3px solid #EEEEEE;
+  border-radius: 20rem;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+}
+.app__navbar__searchBar input {
+  outline: none;
+  border: none;
+  margin-left: 0.75rem;
+  width: 30rem;
+}/*# sourceMappingURL=Searchbar.css.map */
