@@ -5,6 +5,7 @@
   margin: 0;
   color: black;
   background-color: white;
+  font-family: "Poppins", sans-serif;
 }
 
 .primary-font {
@@ -54,4 +55,10 @@
   border: none;
   margin-left: 0.75rem;
   width: 30rem;
+}
+
+@media screen and (max-width: 1250px) {
+  .app__navbar__searchBar input {
+    width: 20rem;
+  }
 }/*# sourceMappingURL=Searchbar.css.map */

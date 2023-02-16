@@ -5,6 +5,7 @@
   margin: 0;
   color: black;
   background-color: white;
+  font-family: "Poppins", sans-serif;
 }
 
 .primary-font {
@@ -27,7 +28,7 @@
   cursor: pointer;
 }
 
-.app__icon_hover:hover {
+.app__icon_effect:hover > * {
   color: #EB5C1F;
 }
 

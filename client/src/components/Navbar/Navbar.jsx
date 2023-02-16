@@ -16,7 +16,7 @@ const Navbar = () => {
                     <div className="app__navbar_menu_categories slide-right">
                         <div className='teste'>
                             <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={() => setToggleMenu(false)}></FiX>
-                            <img src={images.logo} alt=""/>
+                            <img src={images.logo} alt="" className="app__logo"/>
                             <div></div>
                             <ul className=''>
                                 <li>Categoria 1</li>
@@ -27,12 +27,12 @@ const Navbar = () => {
                         </div>
                     </div>
                 )}
-                <img src={images.logo} alt="" />
+                <img src={images.logo} alt="" className="app__logo"/>
             </div>
 
             <Searchbar></Searchbar>
 
-            <div className='app__navbar_profile flex'>
+            <div className='app__navbar_profile'>
 
                 <div className='flex'>
                     <FiUser fontSize={30} color="black" className='app__pointer app__icon_effect'></FiUser>
