@@ -24,8 +24,7 @@
             top: 0;
             left: 0;
             margin: 0;
-            width: 20%;
-            max-width: 500px;
+            width: 400px;
             padding: 2rem;
             height: 100vh;
             background-color: $light_gray;
@@ -57,6 +56,10 @@
                     line-height: 2.5rem;
                     font-size: 1.125rem;
                     background-color: $light_gray;
+
+                    a{
+                        background-color: $light_gray;
+                    }
                 }
             }
         }
@@ -81,6 +84,10 @@
         grid-template-columns: 1.75fr auto 1fr;
     }
 
+    .app__navbar_menu_categories{
+        width: 350px;
+    }
+
     .app__navbar_profile{
         &_account, &_cart{
             display: none;
@@ -94,6 +101,10 @@
         grid-template-rows: 1fr;
         row-gap: .5rem;
         padding: 1rem 0 1rem 0;
+    }
+
+    .app__navbar_menu_categories{
+        width: 300px;
     }
 
     .app__navbar__searchBar{
@@ -111,8 +122,52 @@
         margin: 0;
     }
 
+    .app__navbar_menu_categories{
+        width: 100%;
+
+        .teste{
+            gap: 1.5rem;
+
+            .app__logo{
+                justify-self: end;
+            }
+
+            .app_categories{
+                grid-column: span 2;
+            }
+        }
+    }
+
     .app__logo{
         max-width: 128.8px;
         max-height: 39.2px;
     }
+
+    .app__navbar_profile >*{
+        margin: 0 .5rem;
+    }
+}
+
+//animations 
+
+.slide-right {
+	animation: slide-right 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-75%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes border-bottom-effect {
+  0%{
+    border-width: 0%;
+  }
+  100%{
+    border-width: 100%;
+  }
 }
