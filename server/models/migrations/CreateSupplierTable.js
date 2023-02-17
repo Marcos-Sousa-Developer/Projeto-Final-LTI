@@ -8,11 +8,10 @@ const statement = "CREATE TABLE suppliers ( " +
                   "nif varchar(255) NOT NULL, " +
                   "mobile_number varchar(255) NOT NULL, " +
                   "address varchar(255) NOT NULL, " +
-                  "user_type varchar(255) NOT NULL, " +
-                  "account_status BOOLEAN NOT NULL, " + //account_status type bool
-                  "products_list varchar(255), " +
-                  "orders varchar(255), " +
-                  "PRIMARY KEY (id))";
+                  "account_status BOOLEAN NOT NULL, " + 
+                  "products_list varchar(255), " +   //add NOT NULL
+                  "orders varchar(255), " +      //add NOT NULL
+                  "PRIMARY KEY (id))";    
 
 //AFTER INSERT NEW SUPPLIERS AUTOMATICALY INSERT ON USER TABLE
 const trigger_insert = "CREATE TRIGGER add_supplier_to_userTable " + 

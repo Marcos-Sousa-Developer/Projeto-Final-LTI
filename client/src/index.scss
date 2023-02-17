@@ -44,7 +44,12 @@ $blue: #76CBFF;
   cursor: pointer;
 }
 
-.app__icon_effect:hover{
+.app__icon_effect >*{
+  color: black;
+  transition: color .1s ease-in-out;
+}
+
+.app__icon_effect:hover >*{
   color: $orange;
 }
 
@@ -52,7 +57,7 @@ $blue: #76CBFF;
   color: black;
   position: relative;
   border-bottom-width: 0%;
-  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: color .3s cubic-bezier(0.25, 1, 0.5, 1);
 
   &:hover{
     color: $orange;

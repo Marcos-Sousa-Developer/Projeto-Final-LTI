@@ -1,8 +1,14 @@
 import React from 'react'
+import { Navbar } from '../../components/';
+import { Footer } from '../../components/';
 
 const Cart = () => {
   return (
-    <div>Cart</div>
+    <>
+      <Navbar></Navbar>
+      <div>Cart</div>
+      <Footer></Footer>
+    </>
   )
 }
 
