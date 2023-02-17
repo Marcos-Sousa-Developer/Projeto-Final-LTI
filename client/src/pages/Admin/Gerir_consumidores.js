@@ -29,12 +29,32 @@ function Gerir_consumidores() {
       setFirst(currentTab * 10 - 10);
       setSecond(currentTab * 10); 
       setCurrent(currentTab)
-      if(currentTab > 10 ) {
-        setNavigation(navArray.length)
-        setMaxNavigation(maxNavigation + 10)
+      
+      if((currentTab > current) && (currentTab % 10 == 0 || (currentTab % 5 == 0)) && currentTab > 5){
+        
+        if(users.length/10 == currentTab) {
+          setNavigation(currentTab-11)
+          setMaxNavigation(currentTab)
+        }
+        else{
+          setNavigation(currentTab-6)
+          setMaxNavigation(maxNavigation + 5)
+        }
+        
       }
+      else if((currentTab < current) && currentTab % 5 == 0) {
+        if(currentTab == 5) {
+          setNavigation(0)
+        }
+        else {
+          setNavigation(currentTab -6)
+        }
+        console.log(maxNavigation)
+        console.log(currentTab)
+        setMaxNavigation(maxNavigation-5)
+      } 
     }
-  }; 
+  };
 
   useEffect(() => {
     let array = []
