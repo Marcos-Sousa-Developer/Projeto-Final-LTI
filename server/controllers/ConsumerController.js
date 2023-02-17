@@ -48,9 +48,9 @@ const deleteConsumerByID = async function (req, res) {
  */
 const insertConsumer = async function (req, res) {
 
-    const data = [req.query.name, req.query.email, req.query.nif, req.query.mobile_number, req.query.address, req.query.user_type, JSON.parse(req.query.account_status)];
+    const data = [req.query.name, req.query.email, req.query.nif, req.query.mobile_number, req.query.address, JSON.parse(req.query.account_status)];
 
-    const statement = "INSERT INTO consumers (name, email, nif, mobile_number, address, user_type, account_status) VALUES ?";
+    const statement = "INSERT INTO consumers (name, email, nif, mobile_number, address, account_status) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
@@ -69,7 +69,7 @@ const insertConsumer = async function (req, res) {
  */
 const updateConsumerByID = async function (req, res) {
 
-    const statement = `UPDATE consumers SET name='${req.query.name}', email='${req.query.email}', nif='${req.query.nif}', mobile_number='${req.query.mobile_number}', address='${req.query.address}', user_type='${req.query.user_type}', account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    const statement = `UPDATE consumers SET name='${req.query.name}', email='${req.query.email}', nif='${req.query.nif}', mobile_number='${req.query.mobile_number}', address='${req.query.address}', account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
 
     let result = await dbConnection(statement);
 
