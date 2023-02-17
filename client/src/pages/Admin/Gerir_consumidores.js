@@ -19,23 +19,30 @@ function Gerir_consumidores() {
 
   const [navArray, setNavArray] = useState([])
 
+  const [navigation, setNavigation] = useState(0);
+
+  const [maxNavigation, setMaxNavigation] = useState(10);
+
   const increment = (currentTab) => {   
 
-    if(currentTab <= navArray.length && currentTab >= 1 && currentTab != current) {
+    if(currentTab <= users.length/10 && currentTab >= 1 && currentTab != current) {
       setFirst(currentTab * 10 - 10);
-      setSecond(currentTab * 10);
+      setSecond(currentTab * 10); 
       setCurrent(currentTab)
-
+      if(currentTab > 10 ) {
+        setNavigation(navArray.length)
+        setMaxNavigation(maxNavigation + 10)
+      }
     }
   }; 
 
   useEffect(() => {
     let array = []
-    for(let i=0; i< users.length/10; i++) {
+    for(let i=navigation; i< maxNavigation; i++) {
       array.push(i+1)
     }
     setNavArray(array)
-  },[users])
+  },[navigation])
 
   return (
     <div>
