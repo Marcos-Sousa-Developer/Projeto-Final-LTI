@@ -80,7 +80,6 @@ function Gerir_consumidores() {
                           <th scope="col">ID</th>
                           <th scope="col">Nome</th>
                           <th scope="col">Email</th>
-                          <th scope="col">Tipo</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -89,7 +88,6 @@ function Gerir_consumidores() {
                             <th scope="row">{user.id}</th>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td>{user.user_type}</td>
                           </tr>
                         ))}
                       </tbody>
