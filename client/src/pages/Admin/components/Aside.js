@@ -12,7 +12,7 @@ function Aside() {
             {" "}
             {/* index.html */}
             <i className="bi bi-grid" />
-            <span>Painel de Controle</span>
+            <span>Painel de Controlo</span>
           </a>
         </li>
         {/* End Dashboard Nav */}
@@ -53,10 +53,10 @@ function Aside() {
               </Link>
             </li>
             <li>
-              <a href="#">
+              <Link to="gerir_fornecedores">
                 <i className="bi bi-circle" />
                 <span>Gerir Fornecedores</span>
-              </a>
+              </Link> 
             </li>
           </ul>
         </li>

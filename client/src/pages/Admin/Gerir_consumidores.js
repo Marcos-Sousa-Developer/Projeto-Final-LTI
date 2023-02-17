@@ -48,7 +48,7 @@ function Gerir_consumidores() {
     <div>
       <HelmetProvider>
         <Helmet>
-          <title>Admin - Gerir-Consumidores</title>
+          <title>Admin - Gerir Consumidores</title>
         </Helmet>
       </HelmetProvider>
       <Head></Head>

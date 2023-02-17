@@ -1,7 +1,7 @@
 import {useEffect,useState} from 'react' 
 import axios from 'axios' 
 
-function getConsumers(url) { 
+function getSuppliers(url) { 
 
     const [users, setUsers]= useState([]);
     
@@ -20,4 +20,4 @@ function getConsumers(url) {
     return users
 }
 
-export default getConsumers
+export default getSuppliers
