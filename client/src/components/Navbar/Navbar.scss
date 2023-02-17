@@ -30,7 +30,7 @@
             background-color: $light_gray;
             box-shadow: 1px 0px 20px 0px rgba(0,0,0,0.25);
 
-            .teste{
+            .app_categories_wrapper{
                 display: grid;
                 grid-template-columns: 1fr 3fr;
                 row-gap: 3rem;
@@ -68,7 +68,7 @@
     &_profile{
         display: flex;
         justify-content: flex-end;
-        //align-items: flex-end;
+
         p{
             margin: 0;
         }
@@ -151,7 +151,7 @@
 //animations 
 
 .slide-right {
-	animation: slide-right 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	animation: slide-right 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) ;
 }
 
 @keyframes slide-right {
