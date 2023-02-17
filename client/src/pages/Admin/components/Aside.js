@@ -47,7 +47,7 @@ function Aside() {
               </a>
             </li>
             <li>
-              <Link to="gerir_consumidores">
+              <Link to="/admin/gerir_consumidores">
                 <i className="bi bi-circle" />
                 <span>Gerir Consumidores</span>
               </Link>
