@@ -53,10 +53,9 @@ const insertConsumer = async function (req, res) {
     const nif = req.body.nif
     const mobile_number = req.body.mobile_number
     const address = req.body.address
-    const user_type = req.body.user_type
     const account_status = req.body.account_status
 
-    const statement = "INSERT INTO consumers (name, email, nif, mobile_number, address, user_type, account_status) VALUES ('${name}', '${email}', '${nif}', '${mobile_number}', '${address}', '${user_type}', '${account_status}')"
+    const statement = "INSERT INTO consumers (name, email, nif, mobile_number, address, account_status) VALUES ('${name}', '${email}', '${nif}', '${mobile_number}', '${address}', '${account_status}')"
 
     let result = await dbConnection(statement)
 
