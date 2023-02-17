@@ -22,8 +22,6 @@ function Head() {
           <meta charset="utf-8"></meta>
           <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
           
-          <title>Admin - GreaterGoods</title>
-
           {/*Admin Logo*/}
           <link src={require("../assets/images/admin_logo.png")} rel="adminIcon"></link>
 

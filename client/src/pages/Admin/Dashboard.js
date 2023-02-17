@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Head from "./components/Head";
 import Header from "./components/Header";
 import Main from "./components/Sections/Section";
+import {Helmet, HelmetProvider} from 'react-helmet-async'; 
 
 function Dashboard() { 
 
@@ -18,6 +19,12 @@ function Dashboard() {
   
   return (
     <div>
+      <HelmetProvider>
+        <Helmet>
+          <title>Admin - Dashboard</title>
+        </Helmet>
+      </HelmetProvider>
+
       <Head></Head>
 
       <Header></Header>

@@ -3,18 +3,21 @@ import axios from 'axios'
 
 function getConsumers(url) { 
 
-    const [state, setState]= useState([]);
-
-    useEffect(() => { 
-
-        axios.get(url).then((response) => {
+    const [users, setUsers]= useState([]);
+    
+    useEffect(()=>{
+        
+        (
+           async function(){
+              await axios.get(url).then((response) => {
             
-            setState(response.data)
-        })
-      
-    }, [url]); //dependecy, we need to put the thing that change
+                setUsers(response.data)
+            })
+           }
+        )()
+     },[url]) //dependecy, we need to put the thing that change
 
-    return state
+    return users
 }
 
 export default getConsumers
