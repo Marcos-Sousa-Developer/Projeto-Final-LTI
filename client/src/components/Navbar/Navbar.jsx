@@ -16,30 +16,30 @@ const Navbar = () => {
                     <div className="app__navbar_menu_categories slide-right">
                         <div className='teste'>
                             <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={() => setToggleMenu(false)}></FiX>
-                            <img src={images.logo} alt=""/>
+                            <img src={images.logo} alt="" className="app__logo"/>
                             <div></div>
-                            <ul className=''>
-                                <li>Categoria 1</li>
-                                <li>Categoria 2</li>
-                                <li>Categoria 3</li>
-                                <li>Categoria 4</li>
+                            <ul className='app_categories'>
+                                <li><a href="" className="app__text_effect">Categoria 1</a></li>
+                                <li><a href="" className="app__text_effect">Categoria 2</a></li>
+                                <li><a href="" className="app__text_effect">Categoria 3</a></li>
+                                <li><a href="" className="app__text_effect">Categoria 4</a></li>
                             </ul>
                         </div>
                     </div>
                 )}
-                <img src={images.logo} alt="" />
+                <img src={images.logo} alt="" className="app__logo"/>
             </div>
 
             <Searchbar></Searchbar>
 
-            <div className='app__navbar_profile flex'>
+            <div className='app__navbar_profile'>
 
                 <div className='flex'>
                     <FiUser fontSize={30} color="black" className='app__pointer app__icon_effect'></FiUser>
 
                     <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
-                        <p>Account</p>
-                        <p style={{fontSize: '12px', opacity: '80%'}}>Sign In</p>
+                        <p>Conta</p>
+                        <p style={{fontSize: '12px', opacity: '80%'}}>Sign Up</p>
                     </div>
 
                 </div>
