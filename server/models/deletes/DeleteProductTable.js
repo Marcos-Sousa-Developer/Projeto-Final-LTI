@@ -1,6 +1,6 @@
 let pool = require('../../config/dbConfigLocal') 
 
-const statement = "DROP TABLE products";
+const statement = "DROP TABLE IF EXISTS products";
 
 pool.query(statement, function(error, result){
 

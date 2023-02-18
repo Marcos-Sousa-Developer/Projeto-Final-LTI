@@ -1,13 +1,12 @@
 let pool = require('../../config/dbConfigLocal') 
-let userTable = require('../migrations/CreateUserTable')
 
-const fake_consumer_data = require('../factories/FAKE_PRODUCT_DATA.json')
+const fake_product_data = require('../factories/FAKE_PRODUCT_DATA.json')
 
 const statement = "INSERT INTO products (EAN, name, data_producao, descricao) VALUES ? "
 
 let values = []
 
-fake_consumer_data.forEach(row => {
+fake_product_data.forEach(row => {
 
     values.push([row.EAN, row.name, row.data_producao, row.descricao])     
 });

@@ -39,3 +39,23 @@ exec('node ./models/deletes/DeleteProductTable.js',
              console.log('exec error: ' + error);
         }
 });
+
+exec('node ./models/deletes/DeleteCategoryTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+        
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/deletes/DeleteCharacteristicTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+        
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});

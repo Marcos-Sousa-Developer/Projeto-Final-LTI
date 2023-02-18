@@ -1,5 +1,4 @@
 let pool = require('../../config/dbConfigLocal') 
-let userTable = require('../migrations/CreateUserTable')
 
 const fake_consumer_data = require('../factories/FAKE_CONSUMER_DATA.json')
 
