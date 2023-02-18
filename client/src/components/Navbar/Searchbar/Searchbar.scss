@@ -23,3 +23,10 @@
         }
     }
 }
+@media screen and (max-width: 450px) {
+    .app__navbar__searchBar{
+        div{
+            padding: .3rem .6rem ;
+        }
+    }
+}

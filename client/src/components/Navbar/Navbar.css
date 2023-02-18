@@ -28,7 +28,12 @@
   cursor: pointer;
 }
 
-.app__icon_effect:hover {
+.app__icon_effect > * {
+  color: black;
+  transition: color 0.1s ease-in-out;
+}
+
+.app__icon_effect:hover > * {
   color: #EB5C1F;
 }
 
@@ -45,7 +50,7 @@
   content: "";
   position: absolute;
   border-radius: 100vmax;
-  bottom: -3px;
+  bottom: -2px;
   right: 0;
   width: 0;
   height: 3px;
@@ -102,7 +107,8 @@
 }
 .app__navbar_menu_categories ul li {
   list-style: none;
-  line-height: 2.5rem;
+  margin: 1rem 0;
+  line-height: 2rem;
   font-size: 1.125rem;
   background-color: #EEEEEE;
 }
@@ -118,6 +124,38 @@
 }
 .app__navbar_profile_account, .app__navbar_profile_cart {
   margin: 0.75rem;
+}
+.app__navbar_profile .profile_link {
+  color: black;
+  position: relative;
+  border-bottom-width: 0%;
+  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.app__navbar_profile .profile_link::before {
+  content: "";
+  position: absolute;
+  border-radius: 100vmax;
+  bottom: -1px;
+  right: 0;
+  width: 0;
+  height: 3px;
+  background-color: #EB5C1F;
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.app__navbar_profile .app__navbar_links:hover .profile_link {
+  color: #EB5C1F;
+}
+.app__navbar_profile .app__navbar_links:hover .profile_link::before {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
+.app__navbar_profile .profile_icon > * {
+  color: black;
+  transition: color 0.125s ease-in-out;
+}
+.app__navbar_profile .app__navbar_links:hover .profile_icon > * {
+  color: #EB5C1F;
 }
 
 @media screen and (max-width: 1000px) {
@@ -157,13 +195,13 @@
   .app__navbar_menu_categories {
     width: 100%;
   }
-  .app__navbar_menu_categories .teste {
+  .app__navbar_menu_categories .app_categories_wrapper {
     gap: 1.5rem;
   }
-  .app__navbar_menu_categories .teste .app__logo {
+  .app__navbar_menu_categories .app_categories_wrapper .app__logo {
     justify-self: end;
   }
-  .app__navbar_menu_categories .teste .app_categories {
+  .app__navbar_menu_categories .app_categories_wrapper .app_categories {
     grid-column: span 2;
   }
   .app__logo {

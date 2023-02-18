@@ -14,7 +14,7 @@ const Searchbar = () => {
                     name=""
                     autoComplete="off"
                     id=""
-                    className=""
+                    className="search_close_btn"
                     placeholder="Pesquise..."
                     type="search"
                 />
