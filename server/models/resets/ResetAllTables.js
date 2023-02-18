@@ -19,3 +19,13 @@ exec('node ./models/resets/ResetSupplierTable.js',
              console.log('exec error: ' + error); 
         }
 });
+
+exec('node ./models/resets/ResetProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error); 
+        }
+});
