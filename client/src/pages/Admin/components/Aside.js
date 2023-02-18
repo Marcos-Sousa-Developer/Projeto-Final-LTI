@@ -4,151 +4,146 @@ import { Link } from "react-router-dom";
 function Aside() {
   return (
     <aside id="sidebar" className="sidebar">
-      {/* ======= Sidebar ======= */}
+      
       <ul className="sidebar-nav" id="sidebar-nav">
-        {/* Dashboard Nav */}
         <li className="nav-item">
-          <a className="nav-link " href="#">
-            {" "}
-            {/* index.html */}
-            <i className="bi bi-grid" />
+          <span className="nav-link">
+            <i className="bi bi-grid"/>
             <span>Painel de Controlo</span>
-          </a>
+          </span>
         </li>
-        {/* End Dashboard Nav */}
+        
         <li className="nav-heading">Editar Perfil</li>
+
         <li className="nav-item">
-          <a className="nav-link collapsed" href="#">
-            <i className="bi bi-person" />
+          <a className="nav-link collapsed">
+            <i className="bi bi-person"/>
             <span>Meu Perfil</span>
           </a>
         </li>
+
         <li className="nav-heading">Gestão de utilizadores</li>
+
         <li className="nav-item">
-          <a
-            className="nav-link collapsed"
-            data-bs-target="#gerir-users"
-            data-bs-toggle="collapse"
-            href="#"
-          >
-            <i className="bi bi-people" />
+          <span className="nav-link collapsed" data-bs-target="#gerir-users" data-bs-toggle="collapse">
+            <i className="bi bi-people"/>
             <span>Gerir Utilizadores</span>
-            <i className="bi bi-chevron-down ms-auto" />
-          </a>
-          <ul
-            id="gerir-users"
-            className="nav-content collapse "
-            data-bs-parent="#sidebar-nav"
-          >
+            <i className="bi bi-chevron-down ms-auto"/>
+          </span>
+
+          <ul id="gerir-users" className="nav-content collapse " data-bs-parent="#sidebar-nav">
+            
             <li>
-              <a href="#">
-                <i className="bi bi-circle" />
+              <Link to="/admin">
+                <i className="bi bi-circle"/>
                 <span>Gerir Administradores</span>
-              </a>
+              </Link>
             </li>
+
             <li>
               <Link to="/admin/gerir_consumidores">
-                <i className="bi bi-circle" />
+                <i className="bi bi-circle"/>
                 <span>Gerir Consumidores</span>
               </Link>
             </li>
+
             <li>
-              <Link to="gerir_fornecedores">
-                <i className="bi bi-circle" />
+              <Link to="/admin/gerir_fornecedores">
+                <i className="bi bi-circle"/>
                 <span>Gerir Fornecedores</span>
               </Link> 
             </li>
           </ul>
         </li>
-        {/* End Forms Nav */}
+
         <li className="nav-heading">Gestão de Produtos</li>
+
         <li className="nav-item">
-          <a className="nav-link collapsed" href="#">
-            <i className="bi bi-cart" />
-            <span>Gerir Produtos </span>
+          <a className="nav-link collapsed">
+            <i className="bi bi-cart"/>
+            <span>Gerir Produtos</span>
           </a>
         </li>
-        {/* End Contact Page Nav */}
+
         <li className="nav-heading">Gestão de Transportes</li>
+
         <li className="nav-item">
-          <a className="nav-link collapsed" href="#">
-            <i className="bi bi-car-front" />
+          <Link to="/admin" className="nav-link collapsed">
+            <i className="bi bi-car-front"/>
             <span>Gerir Transportes</span>
-          </a>
+          </Link>
         </li>
-        {/* End Contact Page Nav */}
+
         <li className="nav-heading">Relatório de Atividades</li>
+
         <li className="nav-item">
-          <a
-            className="nav-link collapsed"
-            data-bs-target="#data-activity"
-            data-bs-toggle="collapse"
-            href="#"
-          >
-            <i className="bi bi-journal-text" />
+          <Link to="/admin" className="nav-link collapsed" data-bs-target="#data-activity" data-bs-toggle="collapse" >
+            <i className="bi bi-journal-text"/>
             <span>Obter relatórios</span>
-            <i className="bi bi-chevron-down ms-auto" />
-          </a>
-          <ul
-            id="data-activity"
-            className="nav-content collapse "
-            data-bs-parent="#sidebar-nav"
-          >
+            <i className="bi bi-chevron-down ms-auto"/>
+          </Link>
+
+          <ul id="data-activity" className="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
-              <a href="#">
-                <i className="bi bi-circle" />
+              <Link to="/admin">
+                <i className="bi bi-circle"/>
                 <span>Relatório de Consumidores</span>
-              </a>
+              </Link>
             </li>
+
             <li>
-              <a href="#">
-                <i className="bi bi-circle" />
+              <Link to="/admin">
+                <i className="bi bi-circle"/>
                 <span>Relatório de Encomendas</span>
-              </a>
+              </Link>
             </li>
+
             <li>
-              <a href="#">
-                <i className="bi bi-circle" />
+              <Link to="/admin">
+                <i className="bi bi-circle"/>
                 <span>Relatório de Fornecedores</span>
-              </a>
+              </Link>
             </li>
+
             <li>
-              <a href="#">
+              <Link to="/admin">
                 <i className="bi bi-circle" />
                 <span>Relatório de Veiculos</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </li>
-        {/* End Forms Nav */}
+
         <li className="nav-heading">Ferramentas</li>
+
         <li className="nav-item">
-          <a className="nav-link collapsed" href="#">
-            <i className="bi bi-envelope" />
+          <Link to="/admin" className="nav-link collapsed">
+            <i className="bi bi-envelope"/>
             <span>Enviar Email</span>
-          </a>
+          </Link>
         </li>
-        {/* End Contact Page Nav */}
+
         <li className="nav-item">
-          <a className="nav-link collapsed" href="#">
-            <i className="bi bi-chat-left-dots" />
+          <Link to="/admin" className="nav-link collapsed">
+            <i className="bi bi-chat-left-dots"/>
             <span>Mensagens</span>
-          </a>
+          </Link>
         </li>
+
         <li className="nav-item">
-          <a className="nav-link collapsed" href="#">
+          <Link to="/admin" className="nav-link collapsed" >
             <i className="bi bi-question-circle" />
             <span>Suporte</span>
-          </a>
+          </Link>
         </li>
-        {/* End F.A.Q Page Nav */}
+
         <li className="nav-item">
-          <a className="nav-link collapsed" href="#">
-            <i className="bi bi-gear" />
+          <Link to="/admin" className="nav-link collapsed">
+            <i className="bi bi-gear"/>
             <span>Definições</span>
-          </a>
+          </Link>
         </li>
-        {/* End Login Page Nav */}
+
       </ul>
     </aside>
   );
