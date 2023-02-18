@@ -48,16 +48,11 @@ const deleteSupplierByID = async function (req, res) {
  */
 const insertSupplier = async function (req, res) {
 
-    const name = req.body.name
-    const email = req.body.email
-    const nif = req.body.nif
-    const mobile_number = req.body.mobile_number
-    const address = req.body.address
-    const account_status = req.body.account_status
+    const data = [req.query.name, req.query.email, req.query.nif, req.query.mobile_number, req.query.address, JSON.parse(req.query.account_status)];
 
-    const statement = "INSERT INTO suppliers (name, email, nif, mobile_number, address, account_status) VALUES ('${name}', '${email}', '${nif}', '${mobile_number}', '${address}', '${account_status}')"
+    const statement = "INSERT INTO suppliers (name, email, nif, mobile_number, address, account_status) VALUES ?";
 
-    let result = await dbConnection(statement)
+    let result = await dbConnection(statement, [data]);
 
     if (result === "error") {
         return res.status(500).json("Not possible to insert this supplier");
@@ -74,20 +69,15 @@ const insertSupplier = async function (req, res) {
  */
 const updateSupplierByID = async function (req, res) {
 
-    const id = req.params.id
-    const updateData = req.body
+    const statement = `UPDATE suppliers SET name='${req.query.name}', email='${req.query.email}', nif='${req.query.nif}', mobile_number='${req.query.mobile_number}', address='${req.query.address}', account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
 
-    const statement = "UPDATE users SET ? WHERE id = ?"
-
-    let result = await dbConnection(statement, [updateData, id])
+    let result = await dbConnection(statement);
 
     if (result === "error") {
-        return res.status(500).json("Not possible to update the supplier with id " + req.params.id);
-    } else if (result.affectedRows == 0) {
-        return res.send("Supplier with id " + req.params.id + " does not exist in the database");
+        return res.status(500).json("Not possible to update this supplier");
     }
 
-    return res.send("Supplier with id " + req.params.id + " has been updated");
+    return res.send("Supplier has been updated");
 }
 
 module.exports = {getAllSuppliers, deleteSupplierByID, insertSupplier, updateSupplierByID}

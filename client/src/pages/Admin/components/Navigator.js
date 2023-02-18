@@ -41,7 +41,6 @@ function Navigator({users}) {
     let array = [];
     let max = maxNavigation
     if(max > Math.ceil(users.length/10)) {
-      console.log(users.length/10)
       max = Math.ceil(users.length/10)
     }
     for (let i = minNavigation; i < max; i++) {

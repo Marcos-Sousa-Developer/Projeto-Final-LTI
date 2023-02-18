@@ -8,11 +8,11 @@ const pool = require('../config/dbConfigDocker')
  * @param {*} query //the statement that we need
  * @returns promise
  */
-const dbConnection = async (query) => { 
+const dbConnection = async (query, array = []) => { 
         
     let promise = new Promise(function(resolve) {
 
-        pool.query(query, function(error, result) { 
+        pool.query(query, [array], function(error, result) { 
 
             if (error){ 
                 resolve("error")

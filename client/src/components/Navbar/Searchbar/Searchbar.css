@@ -28,7 +28,12 @@
   cursor: pointer;
 }
 
-.app__icon_effect:hover {
+.app__icon_effect > * {
+  color: black;
+  transition: color 0.1s ease-in-out;
+}
+
+.app__icon_effect:hover > * {
   color: #EB5C1F;
 }
 
@@ -45,7 +50,7 @@
   content: "";
   position: absolute;
   border-radius: 100vmax;
-  bottom: -3px;
+  bottom: -2px;
   right: 0;
   width: 0;
   height: 3px;
@@ -56,6 +61,14 @@
   left: 0;
   right: auto;
   width: 100%;
+}
+
+.search_close_btn::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
+  cursor: pointer;
 }
 
 .app__navbar__searchBar div {
@@ -74,5 +87,10 @@
 @media screen and (max-width: 1250px) {
   .app__navbar__searchBar input {
     width: 20rem;
+  }
+}
+@media screen and (max-width: 450px) {
+  .app__navbar__searchBar div {
+    padding: 0.3rem 0.6rem;
   }
 }/*# sourceMappingURL=Searchbar.css.map */

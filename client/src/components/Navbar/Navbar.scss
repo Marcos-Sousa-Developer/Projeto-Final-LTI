@@ -53,7 +53,8 @@
 
                 li{
                     list-style: none;
-                    line-height: 2.5rem;
+                    margin: 1rem 0;
+                    line-height: 2rem;
                     font-size: 1.125rem;
                     background-color: $light_gray;
 
@@ -75,6 +76,44 @@
 
         &_account, &_cart{
             margin: 0.75rem;
+        }
+
+        .profile_link{
+            color: black;
+            position: relative;
+            border-bottom-width: 0%;
+            transition: color .3s cubic-bezier(0.25, 1, 0.5, 1);
+
+            &::before{
+                content: '';
+                position: absolute;
+                border-radius: 100vmax;
+                bottom: -1px;
+                right: 0;
+                width: 0;
+                height: 3px;
+                background-color: $orange;
+                transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+        }
+
+        .app__navbar_links:hover .profile_link{
+            color: $orange;
+        }
+
+        .app__navbar_links:hover .profile_link::before{
+            left: 0;
+            right: auto;
+            width: 100%;
+        }
+
+        .profile_icon >*{
+            color: black;
+            transition: color .125s ease-in-out;
+        }
+
+        .app__navbar_links:hover .profile_icon >*{
+            color: $orange;
         }
     }
 }
@@ -125,7 +164,7 @@
     .app__navbar_menu_categories{
         width: 100%;
 
-        .teste{
+        .app_categories_wrapper{
             gap: 1.5rem;
 
             .app__logo{

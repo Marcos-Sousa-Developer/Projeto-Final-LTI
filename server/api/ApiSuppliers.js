@@ -9,7 +9,7 @@ router.get('/', supplierController.getAllSuppliers)
 router.delete('/:id', supplierController.deleteSupplierByID)
 
 //Add supplier
-router.post('/user_form', supplierController.insertSupplier)
+router.post('/supplier', supplierController.insertSupplier)
 
 //Update supplier by id
 router.put('/:id', supplierController.updateSupplierByID)

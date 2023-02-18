@@ -9,7 +9,7 @@ router.get('/', consumerController.getAllConsumers)
 router.delete('/:id', consumerController.deleteConsumerByID)
 
 //Add consumer
-router.post('/user_form', consumerController.insertConsumer)
+router.post('/consumer', consumerController.insertConsumer)
 
 //Update consumer by id
 router.put('/:id', consumerController.updateConsumerByID)

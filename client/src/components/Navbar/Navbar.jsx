@@ -31,9 +31,9 @@ const Navbar = () => {
                             <img src={images.logo} alt="" className="app__logo"/>
                             <div></div>
                             <ul className='app_categories'>
-                                {categories.map(categorie => {
+                                {categories.map(category => {
                                     return (
-                                        <li><Link key={categorie.id} to="/" className='app__text_effect'>{categorie.name}</Link></li>
+                                        <li key={category.id}><Link to="/" className='app__text_effect'>{category.name}</Link></li>
                                     );
                                 })}
                             </ul>
@@ -47,29 +47,26 @@ const Navbar = () => {
 
             <div className='app__navbar_profile'>
 
-                <div className='flex'>
-                    <Link to="/profile" className="">
-                       <FiUser fontSize={30} color="black" className='app__pointer app__icon_effect'></FiUser>
-                    </Link>
+                <Link to="/profile" className="flex app__pointer app__navbar_links">
+                    <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
 
                     <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
-                        <Link to="/profile" className="app__text_effect">Conta</Link>
+                        <Link to="/profile" className="profile_link">Conta</Link>
                         <p style={{fontSize: '12px', opacity: '80%'}}>Sign Up</p>
                     </div>
 
-                </div>
+                </Link>
 
-                <div className='flex' style={{marginRight:'0'}}>
-                    <Link to="/cart" className="">
-                        <FiShoppingCart fontSize={30} color="black" className='app__pointer app__icon_effect'></FiShoppingCart>
-                    </Link>
+                <Link to="/cart" className="flex app__pointer app__navbar_links"  style={{marginRight:'0'}}>
+                    <FiShoppingCart fontSize={30} color="black" className='profile_icon'></FiShoppingCart>
 
                     <div className='app__navbar_profile_cart' style={{margin: '0 .75rem'}}>
                         <p>Total</p>
                         <p style={{fontSize: '12px', opacity: '80%'}}>0.00€</p>
                     </div>
 
-                </div>
+                </Link>
+                
             </div>
         </nav>
   )
