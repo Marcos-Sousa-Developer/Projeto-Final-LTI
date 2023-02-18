@@ -12,29 +12,49 @@ function Gerir_fornecedores() {
     const users = getSuppliers("/api/suppliers")
 
     const [first, setFirst] = useState(0);
-  
-    const [second, setSecond] = useState(10); 
-  
-    const [current, setCurrent] = useState(1);
-  
-    const [navArray, setNavArray] = useState([])
-  
-    const [navigation, setNavigation] = useState(0);
-  
-    const [maxNavigation, setMaxNavigation] = useState(10);
-  
-    const increment = (currentTab) => {   
 
-        if(currentTab <= users.length/10 && currentTab >= 1 && currentTab != current) {
-          setFirst(currentTab * 10 - 10);
-          setSecond(currentTab * 10); 
-          setCurrent(currentTab)
-          if(currentTab > 10 ) {
-            setNavigation(navArray.length)
-            setMaxNavigation(maxNavigation + 10)
-          }
+  const [second, setSecond] = useState(10); 
+
+  const [current, setCurrent] = useState(1);
+
+  const [navArray, setNavArray] = useState([])
+
+  const [navigation, setNavigation] = useState(0);
+
+  const [maxNavigation, setMaxNavigation] = useState(10);
+
+  const increment = (currentTab) => {   
+
+    if(currentTab <= users.length/10 && currentTab >= 1 && currentTab != current) {
+      setFirst(currentTab * 10 - 10);
+      setSecond(currentTab * 10); 
+      setCurrent(currentTab)
+      
+      if((currentTab > current) && (currentTab % 10 == 0 || (currentTab % 5 == 0)) && currentTab > 5){
+        
+        if(users.length/10 == currentTab) {
+          setNavigation(currentTab-11)
+          setMaxNavigation(currentTab)
         }
-      }; 
+        else{
+          setNavigation(currentTab-6)
+          setMaxNavigation(maxNavigation + 5)
+        }
+        
+      }
+      else if((currentTab < current) && currentTab % 5 == 0) {
+        if(currentTab == 5) {
+          setNavigation(0)
+        }
+        else {
+          setNavigation(currentTab -6)
+        }
+        console.log(maxNavigation)
+        console.log(currentTab)
+        setMaxNavigation(maxNavigation-5)
+      } 
+    }
+  };
 
     useEffect(() => {
     let array = []
@@ -74,12 +94,14 @@ function Gerir_fornecedores() {
                 <div className="card">
                     <div className="card-body">
                     <h5 className="card-title">Fornecedores</h5>
-                    <table className="table">
+                    <table className="table" id="suppliersTable">
                         <thead>
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -88,6 +110,8 @@ function Gerir_fornecedores() {
                             <th scope="row">{user.id}</th>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
+                            <td><button type="submit"><i className="bi bi-info-circle" /></button></td>
+                            <td><button type="submit"><i className="bi bi-check-square" /></button></td>                       
                             </tr>
                         ))}
                         </tbody>
