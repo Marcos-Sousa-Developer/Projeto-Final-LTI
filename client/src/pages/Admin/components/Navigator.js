@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from 'react'
-import DisplayModal from './Tables/DisplayModal';
+import DisplayModal from './Modals/DisplayModal';
 
 // user can be consumer, supplier or admin
 function Navigator({users}) {
