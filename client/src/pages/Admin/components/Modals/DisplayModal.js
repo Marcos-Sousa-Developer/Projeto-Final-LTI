@@ -1,6 +1,7 @@
 import React, {useState } from 'react'
 import Modal from './Modal'
 
+
 function DisplayModal({user, user_type}) {
 
   const [show, setShow] = useState(false) 
@@ -20,8 +21,9 @@ function DisplayModal({user, user_type}) {
             <i className="bi bi-pencil-square"></i>
             </button>
             {
-                show && (<Modal user={user} user_type={user_type} isShowingModal={isShowingModal}></Modal>)
-    
+                show && (<Modal user={user} user_type={user_type} isShowingModal={isShowingModal}>
+                </Modal>)
+
             }
         </td>
     </tr>

@@ -80,4 +80,42 @@ const updateSupplierByID = async function (req, res) {
     return res.send("Supplier has been updated");
 }
 
-module.exports = {getAllSuppliers, deleteSupplierByID, insertSupplier, updateSupplierByID}
+/**
+ * Async function to activate supplier by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const activateSupplierByID = async function (req, res) { 
+
+    const statement = `UPDATE suppliers SET account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+
+    let result = await dbConnection(statement); 
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to activate this supplier");
+    }
+
+    return res.send("Supplier has been activated");
+}
+
+/**
+ * Async function to deactivate supplier by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const deactivateSupplierByID = async function (req, res) { 
+
+    const statement = `UPDATE suppliers SET account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+
+    let result = await dbConnection(statement);
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to deactivate this supplier");
+    }
+
+    return res.send("Supplier has been deactivated");
+}
+
+module.exports = {getAllSuppliers, deleteSupplierByID, insertSupplier, updateSupplierByID, activateSupplierByID, deactivateSupplierByID}

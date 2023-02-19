@@ -1,8 +1,25 @@
-import React from 'react'
+import React, {useState} from 'react'
 import NavBar from './NavBar'
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header() {  
+
+    const [toggle, setToggle] = useState(false)
+
+    const toggleAside = () => {
+        
+        if(toggle == false) {
+            setToggle(true)
+            document.body.classList.add("toggle-sidebar")
+        }
+        else {
+            setToggle(false)
+            document.body.classList.remove("toggle-sidebar")
+
+        }   
+        
+    }
+
   return (
     <header id="header" className="header fixed-top d-flex align-items-center">
         
@@ -12,7 +29,7 @@ function Header() {
                 <img src={require("../assets/images/admin_logo.png")} alt="" />
                 <span className="d-none d-lg-block">GreaterGoods</span>
             </Link>
-            <i className="bi bi-list toggle-sidebar-btn" />
+            <button onClick={() => toggleAside()}><i className="bi bi-list toggle-sidebar-btn" /></button>
         </div>{/* End Logo */}
 
         {/* Search Bar */}

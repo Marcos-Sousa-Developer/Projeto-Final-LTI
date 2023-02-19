@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "../../assets/styles/style.css"
 import activateOrDeactivateUser from '../../../../hooks/activateOrDeactivateUser';
 
@@ -27,6 +27,7 @@ function Modal({user, isShowingModal, user_type}) {
 
   return (
     <>
+
       <div className="fade modal-backdrop show"></div>
 
       <div

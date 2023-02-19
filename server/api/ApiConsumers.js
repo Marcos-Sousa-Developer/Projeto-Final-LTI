@@ -12,6 +12,12 @@ router.delete('/:id', consumerController.deleteConsumerByID)
 router.post('/consumer', consumerController.insertConsumer)
 
 //Update consumer by id
-router.put('/:id', consumerController.updateConsumerByID)
+router.put('/:id', consumerController.updateConsumerByID) 
+
+//activate consumer by id 
+router.put('/activate/:id', consumerController.activateConsumerByID)
+
+//Deactivate consumer by id 
+router.put('/deactivate/:id', consumerController.deactivateConsumerByID)
 
 module.exports = router

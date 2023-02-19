@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react' 
 import axios from 'axios'
-import API_URL from '../config/serverConnect'
+//import API_URL from '../config/serverConnect'
 
 function getUsersType(url) { 
 
@@ -11,9 +11,9 @@ function getUsersType(url) {
         (
            async function(){
                 
-            let url_endpoint = API_URL+url
+            //let url_endpoint = API_URL+url
 
-              await axios.get(url_endpoint).then((response) => {
+              await axios.get(url).then((response) => {
             
                 setUsers(response.data)
             })

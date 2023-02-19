@@ -67,7 +67,7 @@ const insertConsumer = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const updateConsumerByID = async function (req, res) {
+const updateConsumerByID = async function (req, res) { 
 
     const statement = `UPDATE consumers SET name='${req.query.name}', email='${req.query.email}', nif='${req.query.nif}', mobile_number='${req.query.mobile_number}', address='${req.query.address}', account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
 
@@ -80,4 +80,42 @@ const updateConsumerByID = async function (req, res) {
     return res.send("Consumer has been updated");
 }
 
-module.exports = {getAllConsumers, deleteConsumerByID, insertConsumer, updateConsumerByID}
+/**
+ * Async function to activate consumer by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const activateConsumerByID = async function (req, res) { 
+
+    const statement = `UPDATE consumers SET account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+
+    let result = await dbConnection(statement); 
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to activate this consumer");
+    }
+
+    return res.send("Consumer has been activated");
+}
+
+/**
+ * Async function to deactivate consumer by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const deactivateConsumerByID = async function (req, res) { 
+
+    const statement = `UPDATE consumers SET account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+
+    let result = await dbConnection(statement);
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to deactivate this consumer");
+    }
+
+    return res.send("Consumer has been deactivated");
+}
+
+module.exports = {getAllConsumers, deleteConsumerByID, insertConsumer, updateConsumerByID, deactivateConsumerByID, activateConsumerByID}
