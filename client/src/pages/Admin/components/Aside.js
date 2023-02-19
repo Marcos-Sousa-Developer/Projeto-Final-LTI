@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Aside() {
+
+  const [collapsedU, setCollapsedU] = useState("nav-link collapsed")
+  const [expandedU, setExpandedU] = useState("false")
+  const [showU, setShowU] = useState("nav-content collapse")
+  
+  const [collapsedR, setCollapsedR] = useState("nav-link collapsed")
+  const [expandedR, setExpandedR] = useState("false")
+  const [showR, setShowR] = useState("nav-content collapse")
+  
+
+  const collapseU = () => {
+    if(collapsedU === "nav-link collapsed") {
+      setCollapsedU("nav-link")
+      setExpandedU("true")
+      setShowU("nav-content collapse show")
+    }
+    else {
+      setCollapsedU("nav-link collapsed")
+      setExpandedU("false")
+      setShowU("nav-content collapse")
+    }
+  }
+  
+  const collapseR = () => {
+    if(collapsedR === "nav-link collapsed") {
+      setCollapsedR("nav-link")
+      setExpandedR("true")
+      setShowR("nav-content collapse show")
+    }
+    else {
+      setCollapsedR("nav-link collapsed")
+      setExpandedR("false")
+      setShowR("nav-content collapse")
+    }
+  } 
+
   return (
     <aside id="sidebar" className="sidebar">
       
@@ -25,13 +61,13 @@ function Aside() {
         <li className="nav-heading">Gestão de utilizadores</li>
 
         <li className="nav-item">
-          <button className="nav-link collapsed" data-bs-target="#gerir-users" data-bs-toggle="collapse">
+          <button onClick={() => collapseU()} className={collapsedU} data-bs-target="#gerir-users" data-bs-toggle="collapse" aria-expanded={expandedU}>
             <i className="bi bi-people"/>
             <span>Gerir Utilizadores&nbsp;&nbsp;</span>
             <i className="bi bi-chevron-down ms-auto"/>
           </button>
 
-          <ul id="gerir-users" className="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <ul id="gerir-users" className={showU} data-bs-parent="#sidebar-nav">
             
             <li>
               <Link to="/admin">
@@ -77,13 +113,13 @@ function Aside() {
         <li className="nav-heading">Relatório de Atividades</li>
 
         <li className="nav-item">
-          <button className="nav-link collapsed" data-bs-target="#data-activity" data-bs-toggle="collapse" >
+          <button onClick={() => collapseR()} className={collapsedR} data-bs-target="#data-activity" data-bs-toggle="collapse" aria-expanded={expandedR}>
             <i className="bi bi-journal-text"/>
             <span>Obter relatórios&nbsp;&nbsp;</span>
             <i className="bi bi-chevron-down ms-auto"/>
           </button>
 
-          <ul id="data-activity" className="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <ul id="data-activity" className={showR} data-bs-parent="#sidebar-nav">
             <li>
               <Link to="/admin">
                 <i className="bi bi-circle"/>

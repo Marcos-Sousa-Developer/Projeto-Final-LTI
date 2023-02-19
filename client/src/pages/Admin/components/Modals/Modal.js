@@ -1,7 +1,30 @@
 import React from 'react'
 import "../../assets/styles/style.css"
+import activateOrDeactivateUser from '../../../../hooks/activateOrDeactivateUser';
 
-function Modal({user, isShowingModal, user_type}) {
+function Modal({user, isShowingModal, user_type}) { 
+
+  const handleUser = () => {
+
+    const newStateAccount = user.account_status == 0 ? 1 : 0  
+
+    let url = ""
+    if(user_type == "consumer") {
+      url = "/api/consumers"
+    }
+    else {
+      url = "/api/suppliers"
+    }
+
+    if(user.account_status == 0) {
+      activateOrDeactivateUser(url+"/activate/"+user.id, newStateAccount)
+    }
+    else {
+      activateOrDeactivateUser(url+"/deactivate/"+user.id, newStateAccount)
+    }
+
+  }
+
   return (
     <>
       <div className="fade modal-backdrop show"></div>
@@ -97,7 +120,7 @@ function Modal({user, isShowingModal, user_type}) {
                 Close
               </button>
 
-              <button type="button" className="btn btn-primary">
+              <button type="button" onClick={() => handleUser()} className="btn btn-primary">
                 {user.account_status == 0 ? "Ativar" : "Desativar" }
               </button>
             </div>

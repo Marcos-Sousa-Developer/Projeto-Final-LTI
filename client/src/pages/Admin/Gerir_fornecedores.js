@@ -38,12 +38,8 @@ function Gerir_fornecedores() {
             <div className="col-lg-12">
             <div className="row">
                 <div className="col-12">
-                <div className="card">
-                    <div className="card-body">
                     <h5 className="card-title">Fornecedores</h5>
                     <Navigator users={suppliers} user_type={"supplier"}></Navigator>
-                    </div>
-                </div>
                 </div>
             </div>
             </div>
