@@ -51,7 +51,7 @@ const Navbar = () => {
                     <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
 
                     <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
-                        <Link to="/profile" className="profile_link">Conta</Link>
+                        <span className="profile_link">Conta</span>
                         <p style={{fontSize: '12px', opacity: '80%'}}>Sign Up</p>
                     </div>
 

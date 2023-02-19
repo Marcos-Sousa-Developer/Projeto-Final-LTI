@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Aside from "./components/Aside";
 import Head from "./components/Head";
 import Header from "./components/Header";
+import Navigator from "./components/Navigator";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import getUsersType from "../../hooks/getUsersType";
-import Navigator from "./components/Navigator";
 
 function Gerir_consumidores() { 
 
@@ -40,7 +40,7 @@ function Gerir_consumidores() {
               <div className="col-12">
                 <div className="card">
                   <div className="card-body">
-                    <h5 className="card-title">Consumidores</h5>
+                    <h5 className="card-title">Consumidores - Ativados</h5>
                     <Navigator users={consumers}></Navigator>
                   </div>
                 </div>

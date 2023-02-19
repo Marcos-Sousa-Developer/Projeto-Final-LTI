@@ -1,4 +1,5 @@
 import React, {useEffect, useState } from 'react'
+import DisplayModal from './Tables/DisplayModal';
 
 // user can be consumer, supplier or admin
 function Navigator({users}) {
@@ -57,15 +58,13 @@ function Navigator({users}) {
               <th scope="col">ID</th>
               <th scope="col">Nome</th>
               <th scope="col">Email</th>
+              <th scope="col">Estado</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             {users.slice(from, to).map((user) => (
-              <tr key={user.id}>
-                <th scope="row">{user.id}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-              </tr>
+              <DisplayModal user={user} key={user.id} />
             ))}
           </tbody>
         </table>

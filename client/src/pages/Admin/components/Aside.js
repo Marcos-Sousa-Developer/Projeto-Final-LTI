@@ -16,10 +16,10 @@ function Aside() {
         <li className="nav-heading">Editar Perfil</li>
 
         <li className="nav-item">
-          <a className="nav-link collapsed">
+          <Link to="/admin" className="nav-link collapsed">
             <i className="bi bi-person"/>
             <span>Meu Perfil</span>
-          </a>
+          </Link>
         </li>
 
         <li className="nav-heading">Gestão de utilizadores</li>
@@ -59,10 +59,10 @@ function Aside() {
         <li className="nav-heading">Gestão de Produtos</li>
 
         <li className="nav-item">
-          <a className="nav-link collapsed">
+          <Link to="/admin" className="nav-link collapsed">
             <i className="bi bi-cart"/>
             <span>Gerir Produtos</span>
-          </a>
+          </Link>
         </li>
 
         <li className="nav-heading">Gestão de Transportes</li>
