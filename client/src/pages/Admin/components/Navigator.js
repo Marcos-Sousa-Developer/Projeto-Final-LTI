@@ -2,7 +2,7 @@ import React, {useEffect, useState } from 'react'
 import DisplayModal from './Modals/DisplayModal';
 
 // user can be consumer, supplier or admin
-function Navigator({users}) {
+function Navigator({users, user_type}) {
 
   const [from, setFrom] = useState(0);
 
@@ -51,7 +51,7 @@ function Navigator({users}) {
   }, [users,minNavigation]);
     
     return (
-      <div>
+      <>
         <table className="table">
           <thead>
             <tr>
@@ -64,43 +64,45 @@ function Navigator({users}) {
           </thead>
           <tbody>
             {users.slice(from, to).map((user) => (
-              <DisplayModal user={user} key={user.id} />
+              <DisplayModal user={user} user_type={user_type}key={user.id} />
             ))}
           </tbody>
         </table>
-        <nav aria-label="Page navigation example">
-          <ul className="pagination justify-content-center">
-            <li className="page-item">
-              {currentStep !== 1 && (
-                <button onClick={() => increment(currentStep-1)} className="page-link" aria-label="Previous">
-                  <i className="bi bi-arrow-left"></i>
-                </button>
-              )}
-            </li>
-            {navigationArray.map((index) =>index == currentStep ? (
-                <li key={index} className="page-item active">
-                  <button  onClick={() => increment(index)} className="page-link">
-                    {index}
+        <div style={{display:"inline-block"}}>
+          <nav>
+            <ul className="pagination justify-content-center">
+              <li className="page-item">
+                {currentStep !== 1 && (
+                  <button onClick={() => increment(currentStep-1)} className="page-link" aria-label="Previous">
+                    <i className="bi bi-arrow-left"></i>
                   </button>
-                </li>
-              ) : (
-                <li key={index} className="page-item">
-                  <button onClick={() => increment(index)} className="page-link">
-                    {index}
-                  </button>
-                </li>
-              )
-            )}
-            <li className="page-item">
-              {currentStep !== Math.ceil(users.length/10) && (
-                <button onClick={() => increment(currentStep+1)} className="page-link" aria-label="Next">
-                  <i className="bi bi-arrow-right"></i>
-                </button>
+                )}
+              </li>
+              {navigationArray.map((index) =>index == currentStep ? (
+                  <li key={index} className="page-item active">
+                    <button  onClick={() => increment(index)} className="page-link">
+                      {index}
+                    </button>
+                  </li>
+                ) : (
+                  <li key={index} className="page-item">
+                    <button onClick={() => increment(index)} className="page-link">
+                      {index}
+                    </button>
+                  </li>
+                )
               )}
-            </li>
-          </ul>
-        </nav>
-      </div>
+              <li className="page-item">
+                {currentStep !== Math.ceil(users.length/10) && (
+                  <button onClick={() => increment(currentStep+1)} className="page-link" aria-label="Next">
+                    <i className="bi bi-arrow-right"></i>
+                  </button>
+                )}
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </>
     );
 }
 

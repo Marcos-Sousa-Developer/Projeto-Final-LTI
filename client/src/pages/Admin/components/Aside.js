@@ -25,11 +25,11 @@ function Aside() {
         <li className="nav-heading">Gestão de utilizadores</li>
 
         <li className="nav-item">
-          <span className="nav-link collapsed" data-bs-target="#gerir-users" data-bs-toggle="collapse">
+          <button className="nav-link collapsed" data-bs-target="#gerir-users" data-bs-toggle="collapse">
             <i className="bi bi-people"/>
-            <span>Gerir Utilizadores</span>
+            <span>Gerir Utilizadores&nbsp;&nbsp;</span>
             <i className="bi bi-chevron-down ms-auto"/>
-          </span>
+          </button>
 
           <ul id="gerir-users" className="nav-content collapse " data-bs-parent="#sidebar-nav">
             
@@ -77,11 +77,11 @@ function Aside() {
         <li className="nav-heading">Relatório de Atividades</li>
 
         <li className="nav-item">
-          <Link to="/admin" className="nav-link collapsed" data-bs-target="#data-activity" data-bs-toggle="collapse" >
+          <button className="nav-link collapsed" data-bs-target="#data-activity" data-bs-toggle="collapse" >
             <i className="bi bi-journal-text"/>
-            <span>Obter relatórios</span>
+            <span>Obter relatórios&nbsp;&nbsp;</span>
             <i className="bi bi-chevron-down ms-auto"/>
-          </Link>
+          </button>
 
           <ul id="data-activity" className="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>

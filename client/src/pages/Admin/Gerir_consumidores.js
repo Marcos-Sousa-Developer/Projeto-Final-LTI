@@ -4,6 +4,7 @@ import Head from "./components/Head";
 import Header from "./components/Header";
 import Navigator from "./components/Navigator";
 import Footer from "./components/Footer";
+import Scripts from "./components/Scripts"
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import getUsersType from "../../hooks/getUsersType";
 
@@ -36,16 +37,12 @@ function Gerir_consumidores() {
         </div>
         <section className="section dashboard">
           <div className="col-lg-12">
-            <div className="row">
+          <div className="row">
               <div className="col-12">
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">Consumidores - Ativados</h5>
-                    <Navigator users={consumers}></Navigator>
-                  </div>
-                </div>
+                <h5 className="card-title">Consumidores </h5>
+                <Navigator users={consumers} user_type={"consumer"}></Navigator>         
               </div>
-            </div>
+              </div>
           </div>
         </section>
       </main>
