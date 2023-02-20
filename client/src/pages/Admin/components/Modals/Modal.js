@@ -48,68 +48,61 @@ function Modal({user, isShowingModal, user_type}) {
         >
           <div className="modal-content" style={{ borderRadius: "15px" }}>
             <div className="modal-header">
-              <h5 className="modal-title">Nome: {user.name}</h5>
+              <h5 className="modal-title"><i className="bi bi-person-fill-gear"></i></h5>
 
               <button type="button" onClick={isShowingModal} className="close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
 
-            {user_type == "consumer" && (
               <div className="modal-body">
                 <div className="container">
                   <div className="row">
-                    <div className="col border border">NIF: {user.nif}</div>
-                    <div className="col border border">
-                      Telemóvel: {user.mobile_number}
+                    <div className="form-group col-md-4">
+                      <label htmlFor="name">Nome</label>
+                      <input className="form-control" id="name" placeholder={user.name} disabled readOnly></input>
                     </div>
-                    <div className="col border border">
-                      Endereço: {user.address}
+                    <div className="form-group col-md-4">
+                      <label htmlFor="nif">NIF</label>
+                      <input className="form-control" id="nif" placeholder={user.nif} disabled readOnly></input>
+                    </div>
+                    <div className="form-group col-md-4">
+                      <label htmlFor="mobile">Telemóvel</label>
+                      <input className="form-control" id="mobile" placeholder={user.mobile_number} disabled readOnly></input>
                     </div>
                   </div>
+                  <div className="form-group col-md-12">
+                    <label htmlFor="email">Email</label>
+                    <input className="form-control" id="email" placeholder={user.email} disabled readOnly></input>
+                  </div>
+                  <div className="form-group col-md-12">
+                    <label htmlFor="address">Endereço</label>
+                    <input type="text" className="form-control" id="address" placeholder={user.address} disabled readOnly></input>
+                  </div>
                   <div className="row">
-                    <div className="col border border">Email: {user.email}</div>
-                    <div className="col border border">
-                      Encomendas: {user.orders ?? 0}
+                    <div className="form-group col-md-4">
+                      <label htmlFor="order">Encomendas</label>
+                      <input className="form-control" id="order" placeholder={user.orders ?? 0} disabled readOnly></input>
                     </div>
-                    <div className="col border border">
-                      Estado Conta:{" "}
-                      {user.account_status == 0 ? "Desativada" : "Ativada"}
+                    {user_type == "consumer" ? (
+                      <div className="form-group col-md-4">
+                        <label htmlFor="interest">Interesses</label>
+                        <input className="form-control" id="interest" placeholder={user.shopping_cart ?? 0} disabled readOnly></input>
+                      </div>
+                    ): 
+                      <div className="form-group col-md-4">
+                        <label htmlFor="products">Lista de Produtos</label>
+                        <input className="form-control" id="products" placeholder={user.products_list ?? 0} disabled readOnly></input>
+                      </div>
+                    
+                    }
+                    <div className="form-group col-md-4">
+                      <label htmlFor="status">Estado da Conta</label>
+                      <input className="form-control" id="status" placeholder={user.account_status == 0 ? "Desativada" : "Ativada"} disabled readOnly></input>
                     </div>
                   </div>
                 </div>
               </div>
-            )}
-
-            {user_type == "supplier" && (
-              <div className="modal-body">
-                <div className="container">
-                  <div className="row">
-                    <div className="col border border">NIF: {user.nif}</div>
-                    <div className="col border border">
-                      Telemóvel: {user.mobile_number}
-                    </div>
-                    <div className="col border border">
-                      Endereço: {user.address}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col border border">Email: {user.email}</div>
-                    <div className="col border border">
-                      Encomendas: {user.orders ?? 0}
-                    </div>
-                    <div className="col border border">
-                     Produtos: {user.products_list ?? 0}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col border border">
-                      Estado Conta: {user.account_status == 0 ? "Desativada" : "Ativada"}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
 
             <div className="modal-footer">
               <button
