@@ -77,14 +77,14 @@ function Aside() {
             </li>
 
             <li>
-              <Link to="/admin/gerir_consumidores">
+              <Link onClick={() => window.location.reload()} to="/admin/gerir_consumidores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Consumidores</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/admin/gerir_fornecedores">
+              <Link onClick={() => window.location.reload()} to="/admin/gerir_fornecedores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Fornecedores</span>
               </Link> 

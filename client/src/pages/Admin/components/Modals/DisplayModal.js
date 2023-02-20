@@ -21,9 +21,7 @@ function DisplayModal({user, user_type}) {
             <i className="bi bi-pencil-square"></i>
             </button>
             {
-                show && (<Modal user={user} user_type={user_type} isShowingModal={isShowingModal}>
-                </Modal>)
-
+                show && (<Modal user={user} user_type={user_type} isShowingModal={isShowingModal}></Modal>)
             }
         </td>
     </tr>

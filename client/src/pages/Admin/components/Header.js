@@ -1,20 +1,20 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import NavBar from './NavBar'
 import { Link } from "react-router-dom";
 
 function Header() {  
 
-    const [toggle, setToggle] = useState(false)
+    const [toggle, setToggle] = useState(true)
 
     const toggleAside = () => {
         
-        if(toggle == false) {
-            setToggle(true)
-            document.body.classList.add("toggle-sidebar")
-        }
-        else {
+        if(toggle == true) {
             setToggle(false)
             document.body.classList.remove("toggle-sidebar")
+        }
+        else {
+            setToggle(true)
+            document.body.classList.add("toggle-sidebar")
 
         }   
         
