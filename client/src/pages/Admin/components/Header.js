@@ -4,20 +4,17 @@ import { Link } from "react-router-dom";
 
 function Header() {  
 
-    const [toggle, setToggle] = useState(true)
-
     const toggleAside = () => {
+
+        let bodyClassName = document.body.className 
         
-        if(toggle == true) {
-            setToggle(false)
-            document.body.classList.remove("toggle-sidebar")
+        if(bodyClassName == "") {
+            document.body.classList.add("toggle-sidebar")
         }
         else {
-            setToggle(true)
-            document.body.classList.add("toggle-sidebar")
+            document.body.classList.remove("toggle-sidebar")
 
-        }   
-        
+        } 
     }
 
   return (
