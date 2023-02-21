@@ -4,13 +4,12 @@ import Head from "./components/Head";
 import Header from "./components/Header";
 import Navigator from "./components/Navigator";
 import Footer from "./components/Footer";
-import Scripts from "./components/Scripts"
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import getUsersType from "../../hooks/getUsersType";
 
 function Gerir_consumidores() { 
 
-  const consumers = getUsersType("/api/consumers")
+  const consumers = getUsersType("/consumers")
 
   return (
     <div>

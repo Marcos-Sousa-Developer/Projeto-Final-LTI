@@ -9,7 +9,7 @@ import Navigator from "./components/Navigator";
 
 function Gerir_fornecedores() {
 
-    const suppliers = getUsersType("/api/suppliers")
+    const suppliers = getUsersType("/suppliers")
 
     return (
     <div>

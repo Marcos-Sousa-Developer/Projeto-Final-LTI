@@ -13,7 +13,7 @@ app.use('/api/suppliers' , require('./api/ApiSuppliers'))
 
 // create a GET route
 app.get('/api', (req, res) => { //Line 9
-    res.send({ express: 'HELLO WORLD, YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
+    res.send({ express: 'HELLO WORLD, YOU ARE CONNECTED TO THE API, PLEASE THE CHECK ENDPOINTS' });
 });
 
 // This displays message that the server running and listening to specified port

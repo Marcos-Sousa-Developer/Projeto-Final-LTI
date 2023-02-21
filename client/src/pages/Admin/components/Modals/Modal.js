@@ -10,10 +10,10 @@ function Modal({user, isShowingModal, user_type}) {
 
     let url = ""
     if(user_type == "consumer") {
-      url = "/api/consumers"
+      url = "/consumers"
     }
     else {
-      url = "/api/suppliers"
+      url = "/suppliers"
     }
 
     if(user.account_status == 0) {
@@ -27,9 +27,6 @@ function Modal({user, isShowingModal, user_type}) {
 
   return (
     <>
-
-      <div className="fade modal-backdrop show"></div>
-
       <div
         role="dialog"
         aria-modal="true"
@@ -37,16 +34,16 @@ function Modal({user, isShowingModal, user_type}) {
         tabIndex="-1"
         aria-labelledby="contained-modal-title-vcenter"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: "rgba(0,0,0,0.4)",
           display: "flex",
           alignItems: "center",
         }}
       >
         <div
           className="modal-dialog modal-xl"
-          style={{ width: "100%", backgroundColor: "transparent" }}
+          style={{ width: "100%", backgroundColor: "transparent"}}
         >
-          <div className="modal-content" style={{ borderRadius: "15px" }}>
+          <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title"><i className="bi bi-person-fill-gear"></i></h5>
 

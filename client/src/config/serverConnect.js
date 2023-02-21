@@ -1,4 +1,9 @@
+let API_URL = ""
 
-const API_URL = process.env.REACT_APP_SERVER_HOST + ":" + process.env.REACT_APP_SERVER_PORT 
+if (process.env.REACT_APP_ENV === "local") {
+
+    API_URL = process.env.REACT_APP_SERVER_HOST
+
+}
 
 export default API_URL 
