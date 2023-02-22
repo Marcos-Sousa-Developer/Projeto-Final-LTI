@@ -4,7 +4,7 @@ import Dashboard from "./pages/Admin/Dashboard";
 import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
 import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 
-import {Home, Login, Cart, Profile} from './pages/HomeView/index';
+import {Home, Login, Cart, Profile, SignIn, SignUp} from './pages/HomeView/index';
 import './index.css';
 
 function App() {   
@@ -17,6 +17,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="admin">
             <Route index element={<Dashboard />} />
             <Route exact path="gerir_consumidores" element={<Gerir_consumidores />} />

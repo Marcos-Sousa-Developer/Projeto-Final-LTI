@@ -1,19 +1,14 @@
-import UseFetch from '../../hooks/UseFetch';
-import { Link  } from "react-router-dom";
-import { SignIn } from '../../components/';
+import React from 'react'
 import { Footer } from '../../components/';
+import { SignInC } from '../../components/';
 
-function SignIn() {
-
-  const {state} = UseFetch('/api')
-
+const SignIn = () => {
   return (
     <>
-      <SignIn></SignIn>
+      <SignInC></SignInC>
       <Footer></Footer>
     </>
   );
-
 }
 
-export default SignIn;
+export default SignIn

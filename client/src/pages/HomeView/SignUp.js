@@ -1,20 +1,14 @@
-import UseFetch from '../../hooks/UseFetch';
-import { Link  } from "react-router-dom";
-import { SignUp } from '../../components/';
+import React from 'react'
 import { Footer } from '../../components/';
+import { SignUpC } from '../../components/';
 
-
-function SignUp() {
-
-  const {state} = UseFetch('/api')
-
+const SignUp = () => {
   return (
     <>
-      <SignUp></SignUp>
+      <SignUpC></SignUpC>
       <Footer></Footer>
     </>
   );
-
 }
 
-export default SignUp;
+export default SignUp
