@@ -47,7 +47,7 @@ const Navbar = () => {
 
             <div className='app__navbar_profile'>
 
-                <Link to="/profile" className="flex app__pointer app__navbar_links">
+                <Link to="/signin" className="flex app__pointer app__navbar_links">
                     <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
 
                     <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>

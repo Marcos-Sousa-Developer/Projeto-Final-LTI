@@ -5,10 +5,10 @@ import './SignIn.css';
 const SignInC = () => {
     return (
         <>
-        <div className='app_SignIn'>
         <h1>Sign In</h1>
-          <div className='app_SignIn__box flex'>
-              <div className='app_SignIn__box1'>
+        <div className='app__SignIn'>
+          <div className='app__SignIn_box'>
+              <div className='app__SignIn_box1'>
                   <form>
                       <div>
                           <p>E-mail</p>

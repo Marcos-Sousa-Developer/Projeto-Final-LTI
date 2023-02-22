@@ -4,11 +4,11 @@ import './SignUp.css';
 const SignUpC = () => {
   return (
     <>
-    <div>SignUpC</div>
-    <div>SignUpC</div>
-    <div>SignUpC</div>
-    <div>SignUpC</div>
-    <div>SignUpC</div>
+      <div>SignUpC</div>
+      <div>SignUpC</div>
+      <div>SignUpC</div>
+      <div>SignUpC</div>
+      <div>SignUpC</div>
     </>
   )
 }

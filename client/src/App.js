@@ -18,7 +18,6 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="admin">
             <Route index element={<Dashboard />} />
             <Route exact path="gerir_consumidores" element={<Gerir_consumidores />} />

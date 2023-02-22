@@ -84,12 +84,13 @@ body > * {
 
 .app__SignIn {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
 }
-
-.app__SignIn__box {
-  background-color: pink;
+.app__SignIn_box {
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   border-radius: 15px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
 }/*# sourceMappingURL=SignIn.css.map */
