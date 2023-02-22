@@ -1,0 +1,76 @@
+@import "../../index.scss";
+
+body > *{
+    font-family: $primary-font;
+}
+
+.app__SignIn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 1rem;
+    padding: 1rem;
+    border-bottom: 3px solid $light_gray;
+
+    & > * > *{  //vai selecionar a child da child do parent app__navbar
+        margin: 0 1rem;
+    }
+
+    &__menu{
+
+        &_categories{
+            position: fixed;
+            top: 2rem;
+            left: 0;
+            margin: 0;
+            width: 25%;
+            height: 100vh;
+
+            div > *{
+                margin: 0 1rem;
+            }
+
+            ul{
+                margin-top: 3rem;
+                padding: 0;
+                flex-direction: column;
+
+
+                li{
+                    list-style: none;
+                    line-height: 2.25rem;
+                    font-size: 1.125rem;
+                }
+            }
+        }
+    }
+
+    &__searchBar{
+        div{
+            border: 3px solid $light_gray;
+            border-radius: 20rem;
+            padding: .75rem 1rem;
+            margin: 0;
+            width: 30rem;
+        }
+
+        input{
+            outline: none;
+            border: none;
+            margin-left: .75rem;
+        }
+
+    }
+
+    &__profile{
+
+        p{
+            margin: 0;
+        }
+    }
+
+
+
+}
+
