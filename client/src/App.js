@@ -6,6 +6,7 @@ import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 
 import {Home, Login, Cart, Profile, SignIn, SignUp} from './pages/HomeView/index';
 import './index.css';
+import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 
 function App() {   
 
@@ -22,6 +23,7 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route exact path="gerir_consumidores" element={<Gerir_consumidores />} />
             <Route exact path="gerir_fornecedores" element={<Gerir_fornecedores />} />
+            <Route exact path="perfil" element={<Admin_Perfil />} />
           </Route> 
         </Routes>
     </BrowserRouter>

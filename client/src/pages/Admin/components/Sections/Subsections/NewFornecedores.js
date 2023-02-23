@@ -17,7 +17,6 @@ function NewFornecedores() {
       </div>
       <div className="card-body">
         <h5 className="card-title">Novos Fornecedores <span>/Hoje</span></h5>
-        <div id="reportsChart" />
         <table className="table">
           <thead>
             <tr>

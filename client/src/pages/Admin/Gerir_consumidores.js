@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Aside from "./components/Aside";
 import Head from "./components/Head";
 import Header from "./components/Header";
@@ -37,9 +37,11 @@ function Gerir_consumidores() {
         <section className="section dashboard">
           <div className="col-lg-12">
           <div className="row">
-              <div className="col-12">
-                <h5 className="card-title">Consumidores </h5>
-                <Navigator users={consumers} user_type={"consumer"}></Navigator>         
+                <div className="col-12">
+                  <h5 className="card-title">Consumidores </h5>
+                  <div className="card-body">
+                  <Navigator users={consumers} user_type={"consumer"}></Navigator> 
+                </div>        
               </div>
               </div>
           </div>

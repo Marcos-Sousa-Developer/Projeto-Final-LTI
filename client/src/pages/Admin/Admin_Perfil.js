@@ -1,35 +1,26 @@
 import React from "react";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Aside from "./components/Aside";
-import Footer from "./components/Footer";
 import Head from "./components/Head";
 import Header from "./components/Header";
-import Main from "./components/Sections/Main";
-import {Helmet, HelmetProvider} from 'react-helmet-async'; 
-import Scripts from "./components/Scripts";
+import Footer from "./components/Footer";
+import UsersProfile from "./components/UsersProfile";
 
-function Dashboard() { 
-
+function Admin_Perfil() {
   return (
     <div>
       <HelmetProvider>
         <Helmet>
-          <title>Admin - Dashboard</title>
+          <title>Admin - Perfil</title>
         </Helmet>
       </HelmetProvider>
-
       <Head></Head>
-
       <Header></Header>
-
       <Aside></Aside>
-
-      <Main></Main> 
-
+      <UsersProfile></UsersProfile>
       <Footer></Footer>
-
-      <Scripts></Scripts>
     </div>
   );
 }
 
-export default Dashboard;
+export default Admin_Perfil;
