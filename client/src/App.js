@@ -26,7 +26,7 @@ function App() {
             <Route exact path="gerir_fornecedores" element={<Gerir_fornecedores />} />
             <Route exact path="perfil" element={<Admin_Perfil />} />
           </Route> 
-          <Route path="*" element={<NotFound />} /> 
+            <Route path="*" element={<NotFound />} /> 
          </Routes>
     </BrowserRouter>
   );

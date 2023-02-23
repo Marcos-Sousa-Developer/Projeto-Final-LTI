@@ -52,7 +52,7 @@ function Aside() {
         <li className="nav-heading">Editar Perfil</li>
 
         <li className="nav-item">
-          <Link to="/admin/perfil" className="nav-link collapsed">
+          <Link reloadDocument to="/admin/perfil" className="nav-link collapsed">
             <i className="bi bi-person"/>
             <span>Meu Perfil</span>
           </Link>
