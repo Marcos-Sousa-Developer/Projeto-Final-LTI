@@ -118,7 +118,7 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
     .app__navbar{
         grid-template-columns: 1.75fr auto 1fr;
     }
@@ -149,7 +149,7 @@
     .app__navbar__searchBar{
         grid-column: span 2;
         grid-row: second-line;
-        margin: 0 1rem;
+        //margin: 0 1rem;
         input{
             width: calc(100% - 40px);
         }

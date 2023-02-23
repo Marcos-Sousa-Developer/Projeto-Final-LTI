@@ -5,9 +5,9 @@ import images from '../../assets/images.js';
 
 const Footer = () => {
   return (
-    <div className='app__footer app__container'>
+    <div className='app__footer'>
         <div className='app__support'>
-            <h5 className='primary-font'><strong>Suporte</strong></h5>
+            <h5><strong>Suporte</strong></h5>
             <div className='app__support2'>
               <p>FAQ</p>
               <p>Termos e Condições</p>
@@ -15,9 +15,8 @@ const Footer = () => {
             </div>
         </div>   
     
-
         <div className='app__support'>
-          <h5 className='primary-font'><strong>Sobre nós</strong></h5>
+          <h5><strong>Sobre nós</strong></h5>
           <div className='app__support2'>
               <p>Equipa</p>
               <p>Conceito</p>
@@ -25,7 +24,7 @@ const Footer = () => {
         </div>   
 
         <div className='app__support'>
-          <h5 className='primary-font'><strong>Tipos de Pagamento</strong></h5>
+          <h5><strong>Tipos de Pagamento</strong></h5>
           <div className='app__support2'>
             <img src={images.mastercard} alt="" />
             <img src={images.visa} alt="" />

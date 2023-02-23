@@ -52,7 +52,7 @@ const Navbar = () => {
 
                     <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
                         <span className="profile_link">Conta</span>
-                        <p style={{fontSize: '12px', opacity: '80%'}}>Sign Up</p>
+                        <p style={{fontSize: '12px', opacity: '80%'}}>Iniciar sessão</p>
                     </div>
 
                 </Link>
@@ -61,7 +61,7 @@ const Navbar = () => {
                     <FiShoppingCart fontSize={30} color="black" className='profile_icon'></FiShoppingCart>
 
                     <div className='app__navbar_profile_cart' style={{margin: '0 .75rem'}}>
-                        <p>Total</p>
+                        <span className="profile_link">Carrinho</span>
                         <p style={{fontSize: '12px', opacity: '80%'}}>0.00€</p>
                     </div>
 
