@@ -24,9 +24,17 @@ $blue: #76CBFF;
   //scroll-behavior: smooth;
 }
 
+#root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+/*
 .primary-font{
   font-family: $primary-font;
 }
+*/
 
 .flex{
   display: flex;

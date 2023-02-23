@@ -4,7 +4,8 @@ import Dashboard from "./pages/Admin/Dashboard";
 import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
 import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 
-import {Home, Login, Cart, Profile, SignIn, SignUp} from './pages/HomeView/index';
+import {Home, Login, Cart, Profile, SignIn, SignUp, NotFound} from './pages/HomeView/index';
+import {Navbar, Footer} from './components/index';
 import './index.css';
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 
@@ -25,7 +26,8 @@ function App() {
             <Route exact path="gerir_fornecedores" element={<Gerir_fornecedores />} />
             <Route exact path="perfil" element={<Admin_Perfil />} />
           </Route> 
-        </Routes>
+          <Route path="*" element={<NotFound />} /> 
+         </Routes>
     </BrowserRouter>
   );
 }
