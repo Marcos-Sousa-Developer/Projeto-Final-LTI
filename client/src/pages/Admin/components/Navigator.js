@@ -52,8 +52,8 @@ function Navigator({users, user_type}) {
     
     return (
       <>
-        <table className="table table-hover">
-          <thead>
+        <table className="table table-hover" style={{width:"80%"}}>
+          <thead className="thead-dark">
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Nome</th>

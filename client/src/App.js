@@ -7,6 +7,7 @@ import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import {Home, Login, Cart, Profile, SignIn, SupplierProfile, SignUp, NotFound} from './pages/HomeView/index';
 import {Navbar, Footer} from './components/index';
 import './index.css';
+import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 
 function App() {   
 
@@ -23,9 +24,10 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route exact path="gerir_consumidores" element={<Gerir_consumidores />} />
             <Route exact path="gerir_fornecedores" element={<Gerir_fornecedores />} />
-          </Route>
-          <Route path="*" element={<NotFound />} /> 
-        </Routes>
+            <Route exact path="perfil" element={<Admin_Perfil />} />
+          </Route> 
+            <Route path="*" element={<NotFound />} /> 
+         </Routes>
     </BrowserRouter>
   );
 }

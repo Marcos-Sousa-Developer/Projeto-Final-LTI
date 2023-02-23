@@ -1,29 +1,24 @@
-import React, { useEffect } from 'react'
-import "../../assets/styles/style.css"
-import activateOrDeactivateUser from '../../../../hooks/activateOrDeactivateUser';
+import React, { useEffect } from "react";
+import "../../assets/styles/style.css";
+import activateOrDeactivateUser from "../../../../hooks/activateOrDeactivateUser";
 
-function Modal({user, isShowingModal, user_type}) { 
-
+function Modal({ user, isShowingModal, user_type }) {
   const handleUser = () => {
+    const newStateAccount = user.account_status == 0 ? 1 : 0;
 
-    const newStateAccount = user.account_status == 0 ? 1 : 0  
-
-    let url = ""
-    if(user_type == "consumer") {
-      url = "/consumers"
-    }
-    else {
-      url = "/suppliers"
+    let url = "";
+    if (user_type == "consumer") {
+      url = "/consumers";
+    } else {
+      url = "/suppliers";
     }
 
-    if(user.account_status == 0) {
-      activateOrDeactivateUser(url+"/activate/"+user.id, newStateAccount)
+    if (user.account_status == 0) {
+      activateOrDeactivateUser(url + "/activate/" + user.id, newStateAccount);
+    } else {
+      activateOrDeactivateUser(url + "/deactivate/" + user.id, newStateAccount);
     }
-    else {
-      activateOrDeactivateUser(url+"/deactivate/"+user.id, newStateAccount)
-    }
-
-  }
+  };
 
   return (
     <>
@@ -40,66 +35,44 @@ function Modal({user, isShowingModal, user_type}) {
         }}
       >
         <div
-          className="modal-dialog modal-xl"
-          style={{ width: "100%", backgroundColor: "transparent"}}
+          className="modal-dialog"
+          style={{ width: "100%", backgroundColor: "transparent" }}
         >
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title"><i className="bi bi-person-fill-gear"></i></h5>
+              <h5 className="modal-title">
+                <i className="bi bi-person-fill-gear"> {user_type == "consumer" ? "Consumidor" : "Fornecedor"} </i>
+              </h5>
 
               <button type="button" onClick={isShowingModal} className="close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
 
-              <div className="modal-body">
-                <div className="container">
-                  <div className="row">
-                    <div className="form-group col-md-4">
-                      <label htmlFor="name">Nome</label>
-                      <input className="form-control" id="name" placeholder={user.name} disabled readOnly></input>
+            <div className="modal-body">
+              <div className="container">
+                <div class="card" style={{ hover: "black", textAlign: "center" }}>
+                  <br></br>
+                  <img
+                    className="card-img-top rounded mx-auto d-block "
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN3F9lmYSZ4oJyKtZo6mELJYSXOmj3e9P4pw&usqp=CAU"
+                    alt="Card image cap"
+                    style={{ width: "50%" }}
+                  ></img>
+                  <div class="card-body">
+                    <label class="align-self-center">Nome</label>
+                    <input className="form-control" id="name" style={{textAlign:"center"}} placeholder={user.name} disabled readOnly></input> 
+                    <br></br>
+                    <label class="align-self-center">Email</label>
+                    <input className="form-control" id="email" style={{textAlign:"center"}} placeholder={user.email} disabled readOnly></input> 
+                    <br></br>
+                    <div class="d-flex align-items-center justify-content-center"></div>
+                      <label class="align-self-center" htmlFor="status">Estado da Conta</label>
+                      <input className="form-control" id="status" style={{textAlign:"center"}} placeholder={user.account_status == 0 ? "Desativada" : "Ativada"} disabled readOnly></input> 
                     </div>
-                    <div className="form-group col-md-4">
-                      <label htmlFor="nif">NIF</label>
-                      <input className="form-control" id="nif" placeholder={user.nif} disabled readOnly></input>
-                    </div>
-                    <div className="form-group col-md-4">
-                      <label htmlFor="mobile">Telemóvel</label>
-                      <input className="form-control" id="mobile" placeholder={user.mobile_number} disabled readOnly></input>
-                    </div>
-                  </div>
-                  <div className="form-group col-md-12">
-                    <label htmlFor="email">Email</label>
-                    <input className="form-control" id="email" placeholder={user.email} disabled readOnly></input>
-                  </div>
-                  <div className="form-group col-md-12">
-                    <label htmlFor="address">Endereço</label>
-                    <input type="text" className="form-control" id="address" placeholder={user.address} disabled readOnly></input>
-                  </div>
-                  <div className="row">
-                    <div className="form-group col-md-4">
-                      <label htmlFor="order">Encomendas</label>
-                      <input className="form-control" id="order" placeholder={user.orders ?? 0} disabled readOnly></input>
-                    </div>
-                    {user_type == "consumer" ? (
-                      <div className="form-group col-md-4">
-                        <label htmlFor="interest">Interesses</label>
-                        <input className="form-control" id="interest" placeholder={user.shopping_cart ?? 0} disabled readOnly></input>
-                      </div>
-                    ): 
-                      <div className="form-group col-md-4">
-                        <label htmlFor="products">Lista de Produtos</label>
-                        <input className="form-control" id="products" placeholder={user.products_list ?? 0} disabled readOnly></input>
-                      </div>
-                    
-                    }
-                    <div className="form-group col-md-4">
-                      <label htmlFor="status">Estado da Conta</label>
-                      <input className="form-control" id="status" placeholder={user.account_status == 0 ? "Desativada" : "Ativada"} disabled readOnly></input>
-                    </div>
-                  </div>
                 </div>
               </div>
+            </div>
 
             <div className="modal-footer">
               <button
@@ -111,8 +84,12 @@ function Modal({user, isShowingModal, user_type}) {
                 Close
               </button>
 
-              <button type="button" onClick={() => handleUser()} className="btn btn-primary">
-                {user.account_status == 0 ? "Ativar" : "Desativar" }
+              <button
+                type="button"
+                onClick={() => handleUser()}
+                className="btn btn-primary"
+              >
+                {user.account_status == 0 ? "Ativar" : "Desativar"}
               </button>
             </div>
           </div>
@@ -122,4 +99,4 @@ function Modal({user, isShowingModal, user_type}) {
   );
 }
 
-export default Modal
+export default Modal;
