@@ -5,6 +5,7 @@ import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
 import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 
 import {Home, Login, Cart, Profile, SignIn, SignUp, NotFound} from './pages/HomeView/index';
+import {Navbar, Footer} from './components/index';
 import './index.css';
 
 function App() {   
