@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Aside from "./components/Aside";
 import Head from "./components/Head";
@@ -8,6 +8,20 @@ import Profile from './components/UsersProfiles/Profile'
 import UserData from './components/UsersProfiles/UserData'
 
 function Admin_Perfil() {
+
+  const [isread_Only, setRead_Only] = useState(true);
+  const [isform_disable, setForm_disable] = useState(true);
+
+
+  const activeOrDeactivateForm = () => {
+
+    console.log("ok")
+
+    isread_Only ? setRead_Only(false) : setRead_Only(true);
+    isform_disable ? setForm_disable(false) : setForm_disable(true);
+
+  }
+
   return (
     <div>
       <HelmetProvider>
@@ -30,20 +44,44 @@ function Admin_Perfil() {
             </ol>
           </nav>
         </div>
-        <section className="section dashboard">
-          <div className="col-lg-12">
-            <div className="row">
-              <Profile></Profile>
-              <UserData></UserData>
+       
+          <section className="section dashboard">
+            <div className="col-lg-12">
+              <form>
+                <div className="row">
+                  <Profile></Profile>
+                  <UserData read_Only={isread_Only} form_disable={isform_disable}></UserData>
+                </div>
+              </form>
             </div>
-          </div>
-        </section>
+          </section>
         <div className="text-center">
-          <button className="btn">
-            <p style={{ fontSize: "20px" }}>
-              <i className="bi bi-pencil-square"></i> Editar
-            </p>
-          </button>
+
+          {
+            isread_Only ? 
+            (
+              <button className="btn" onClick={() => activeOrDeactivateForm()}>
+              <p style={{ fontSize: "20px" }}>
+                <i className="bi bi-pencil-square"></i> Editar
+              </p>
+              </button>
+            ) : 
+            (
+              <div>
+                <button className="btn" onClick={() => activeOrDeactivateForm()}>
+                <p style={{ fontSize: "40px" }}>
+                  <i className="bi bi-x-circle"></i>
+                </p>
+                </button>
+                <button className="btn">
+                <p style={{ fontSize: "40px" }}>
+                  <i className="bi bi-check-circle"></i>
+                </p>
+                </button>
+              </div>
+            )
+          }
+
         </div>
       </main>
       <Footer></Footer>

@@ -55,7 +55,7 @@ function Modal({ user, isShowingModal, user_type }) {
                   <br></br>
                   <img
                     className="card-img-top rounded mx-auto d-block "
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN3F9lmYSZ4oJyKtZo6mELJYSXOmj3e9P4pw&usqp=CAU"
+                    src="https://static.thenounproject.com/png/112372-200.png"
                     alt="Card image cap"
                     style={{ width: "50%" }}
                   ></img>
@@ -81,7 +81,7 @@ function Modal({ user, isShowingModal, user_type }) {
                 className="btn btn-secondary"
                 data-dismiss="modal"
               >
-                Close
+                Fechar
               </button>
 
               <button
