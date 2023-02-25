@@ -1,13 +1,12 @@
 import { Routes, Route, BrowserRouter  } from "react-router-dom"; 
-
+import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 import Dashboard from "./pages/Admin/Dashboard";
 import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
 import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
-
+import Settings from "./pages/Admin/Settings";
 import {Home, Login, Cart, Profile, SignIn, SignUp, NotFound} from './pages/HomeView/index';
-import {Navbar, Footer} from './components/index';
 import './index.css';
-import Admin_Perfil from "./pages/Admin/Admin_Perfil";
+
 
 function App() {   
 
@@ -25,6 +24,7 @@ function App() {
             <Route exact path="gerir_consumidores" element={<Gerir_consumidores />} />
             <Route exact path="gerir_fornecedores" element={<Gerir_fornecedores />} />
             <Route exact path="perfil" element={<Admin_Perfil />} />
+            <Route exact path="settings" element={<Settings />} ></Route>
           </Route> 
             <Route path="*" element={<NotFound />} /> 
          </Routes>
