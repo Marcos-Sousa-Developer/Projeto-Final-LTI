@@ -24,15 +24,7 @@ function Gerir_consumidores() {
 
       <main id="main" className="main">
         <div className="pagetitle">
-          <h1>Gerir Consumidores</h1>
-          <nav>
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <a href="index.html">Home</a>
-              </li>
-              <li className="breadcrumb-item active">Gerir Consumidores</li>
-            </ol>
-          </nav>
+          <h1><i class="bi bi-bag"></i> Gerir Consumidores</h1>
         </div>
         <section className="section dashboard">
           <div className="col-lg-12">

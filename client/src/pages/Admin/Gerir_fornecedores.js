@@ -24,15 +24,7 @@ function Gerir_fornecedores() {
 
         <main id="main" className="main">
         <div className="pagetitle">
-            <h1>Gerir Fornecedores</h1>
-            <nav>
-            <ol className="breadcrumb">
-                <li className="breadcrumb-item">
-                <a href="index.html">Home</a>
-                </li>
-                <li className="breadcrumb-item active">Gerir Fornecedores</li>
-            </ol>
-            </nav>
+            <h1><i class="bi bi-briefcase"></i> Gerir Fornecedores</h1>
         </div>
         <section className="section dashboard">
             <div className="col-lg-12">

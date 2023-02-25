@@ -34,49 +34,42 @@ function Admin_Perfil() {
       <Aside></Aside>
       <main id="main" className="main">
         <div className="pagetitle">
-          <h1>Meu Perfil</h1>
-          <nav>
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <a href="index.html">Home</a>
-              </li>
-              <li className="breadcrumb-item active">Meu Perfil</li>
-            </ol>
-          </nav>
+          <h1><i class="bi bi-person"></i> Meu Perfil</h1>
         </div>
-       
+        <br></br>
         <section className="section dashboard">
           <div className="col-lg-12">
-            <form>
-              <div className="row">
-                <Profile></Profile>
-                <UserData read_Only={isread_Only} form_disable={isform_disable}></UserData>
+            <div className="card">
+              <br></br>
+              <div className="card-body">
+                <div className="row">
+                  <Profile></Profile>
+                  <UserData read_Only={isread_Only} form_disable={isform_disable}></UserData>
+                </div>
+                <div className="text-center">
+                  {
+                    isread_Only ? 
+                    (
+                      <button className="btn btn-warning" style={{ fontSize: "20px" }} onClick={() => activeOrDeactivateForm()}>
+                      Editar
+                      </button>
+                    ) : 
+                    (
+                      <div>
+                        <button className="btn btn-secondary" style={{ fontSize: "20px" }} onClick={() => activeOrDeactivateForm()}>
+                        Fechar
+                        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button className="btn btn-success" style={{ fontSize: "20px" }}>
+                        Alterar
+                        </button>
+                      </div>
+                    )
+                  }
+                </div>
               </div>
-            </form>
+            </div>
           </div>
         </section>
-        <div className="text-center">
-
-          {
-            isread_Only ? 
-            (
-              <button class="btn btn-warning" style={{ fontSize: "20px" }} onClick={() => activeOrDeactivateForm()}>
-              Editar
-              </button>
-            ) : 
-            (
-              <div>
-                <button className="btn btn-secondary" style={{ fontSize: "20px" }} onClick={() => activeOrDeactivateForm()}>
-                Fechar
-                </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button className="btn btn-success" style={{ fontSize: "20px" }}>
-                Alterar
-                </button>
-              </div>
-            )
-          }
-
-        </div>
       </main>
       <Footer></Footer>
     </div>
