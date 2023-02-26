@@ -42,7 +42,6 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 <hr> 
 
-
 # Instruções
 ### (Instruções feitas para Linux ou Windows Wsl)
 
@@ -85,6 +84,32 @@ docker system prune
 
 ```bash 
 docker compose down --rmi all -v
+```
+
+## Base de dados 
+
+### Criar as tabelas necessárias
+
+```bash 
+npm run db-tables-migrate
+```
+
+### Criar dados fakes
+
+```bash 
+npm run db-tables-seed
+```
+
+### Limpar dados de todas as tabelas
+
+```bash 
+npm run db-tables-reset
+```
+
+### Apagar todas as tabelas
+
+```bash 
+npm run db-tables-delete
 ```
 
 <hr>
