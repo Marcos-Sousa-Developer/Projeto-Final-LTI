@@ -45,129 +45,8 @@ Para além destes atores, são habitualmente considerados administradores de sis
 
 # Instruções
 ### (Instruções feitas para Linux ou Windows Wsl)
-De seguida são apresentados 3 passos, que consiste em formas de rodar o código e interagir com o sistema. <br>
-O **1ºpasso** consiste em como funciona o **react.js** e o **express.js**, também é apresentado um link de instalação para o nodejs. No fundo é uma primeira abordagem para os iniciantes, não há interação com o codigo disponível. <br>
-No **2ºpasso** onde há interação com o código disponível, é o "default", ou melhor dizendo é a abordagem normal, com comandos de nodejs executados através do terminal e com chamadas ao **npm** e **npx**. <br>
-O último passo que é o **3ºpasso**, consiste no uso do Docker de modo a automatizar a implementação da aplicação (ou de conjuntos de processos que constituem uma app) dentro de um ambiente de container, ou seja automatiza o 2ºpasso.  
 
-## 1ºPasso: Get Started, how it works. 
-**```Este passo como dito anteriormente é opcional, serve para instalar o nodejs e para conhecer o React.js e o Express.js, libray e framework respetivamente, que são usados para a construção do sistema.```** <br>
-
-[Ir para o 2ºPasso ](#passo2)
-
-### 1.1 Instalar o <a href="https://nodejs.org/en/download/"> nodejs </a> no computador. 
-
-### 1.2 Criar o diretório principal 
-```bash
-mkdir your_folder_name
-```
-```bash
-cd your_folder_name
-```
-### 1.3 Criar uma app React 
-Criar uma app React cujo o nome é cliente
-```bash
-npx create-react-app client
-```
-Trocar para o diretório client
-```bash
-cd client
-```
-### 1.4 Iniciar app React
-Iniciar a aplicação, que irá correr no http://localhost:3000/ (por default abre sozinho).
-```bash
-npm start
-``` 
-
-### 1.5 Criar o servidor <br>
-**```Dentro do diretório principal```** 
-
-Criar o ficheiro **package.json**
-```bash
-npm init -y npm
-```
-
-### 1.6 Alteração do package.json
-**```Atenção esta parte, não é obrigatória, é apenas convenção!!```** <br>
-
-Dentro do ficheiro **package.json**:<br>
-Trocar a linha **```"main":"index.js"```** para **```"main":"server.js"```**
-
-### 1.7 Criar o server
-Criar o ficheiro **server.js**:
-```bash
-touch server.js
-```
-Instalar o express:
-```bash
-npm i express
-``` 
-Adicionar o seguinte código no **server.js** 
-```diff 
-const express = require('express');
-const app = express(); 
-const port = process.env.PORT || 5000;  
-
-// create a GET route
-app.get('/api', (req, res) => { //Line 9
-    res.send({ express: 'HELLO WORLD, YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
-});
-
-// This displays message that the server running and listening to specified port
-app.listen(port, () => console.log(`Listening on port ${port}`)); 
-```
-### 1.8 Iniciar o server
-Iniciar o server, que irá correr no http://localhost:5000/api.
-```bash
-node server.js
-``` 
-## <span id="passo2"> 2ºPasso: </span> Inside the project **```(após clone do repositório)```**
-
-### 2.1  Inicializar o server
-Dentro da pasta **server**, instalar as dependências do node.
-```bash
-npm install
-``` 
-Para automaticamente detetar alterações no servidor e aplicá-lo sem ter a necessidade de reiniciar o server, **instalar o nodemon**. <br>
-
-**```Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json e instala.```** <br>
-**```Caso tenha algum erro, sobre esta depedência é importante executá-lo!.```** <br>
-
-```bash
-npm i nodemon -D
-```   
-Para correr o server 
-```bash
-npx nodemon
-```  
-Note que dentro do ficheiro **package.json** em scripts há: ``` "dev": "nodemon server" ```, assim em vez do comando ``` npx nodemon ``` é possivel fazer o comando:
-```bash
-npm run dev
-```  
-
-### 2.2  Inicializar o client
-Dentro da pasta **client**, instalar as dependências do node.
-```bash
-npm install
-``` 
-**Axios** é um biblioteca que permite uma integração do seu projeto React para qualquer serviço de API disponível. <br>
-
-**```Este comando não é obrigatório, pois o comando anterior verifica as dependências no ficheiro package.json e instala.```** <br>
-**```Caso tenha algum erro, sobre esta depedência é importante executá-lo!.```**
-
-```bash
-npm install axios
-```  
-Note que dentro do ficheiro **package.json** há: ``` "proxy": "htpp://server:5000" ``` (necessário por causa do docker), se que quiser usar este passo, é necessário trocá-lo para ``` "proxy": "htpp://localhost:5000" ```para o frontend comunicar com o backend sem problemas. <br>
-
-Para correr o client 
-```bash
-npm start
-```
-
-## 3ºPasso: Implementação com o Docker 
-
-### 3.1  Instalar dependências necessárias do client
+### Instalar dependências necessárias do client
 ```bash
 cd client
 ```
@@ -175,15 +54,15 @@ cd client
 yarn install
 ```
 
-### 3.2  Instalar dependências necessárias do server
+### Instalar dependências necessárias do server
 ```bash
-cd ../server
+cd server
 ```
 ```bash
 npm install
 ```
 
-### 3.3 Docker compose 
+### Docker compose 
 **```Dentro do diretório principal```**
 
 ```bash
@@ -199,6 +78,10 @@ docker build -t {app-name} {path of docker file}
 ```
 
 **```Se quiser apagar os containers, imagens e volumens, ou seja limpar tudo```** 
+
+```bash 
+docker system prune
+```
 
 ```bash 
 docker compose down --rmi all -v
