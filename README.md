@@ -86,7 +86,11 @@ docker system prune
 docker compose down --rmi all -v
 ```
 
-## Base de dados 
+<hr>
+
+
+# Base de dados
+### (Instruções para construir e gerir a base de dados)
 
 ### Criar as tabelas necessárias
 
@@ -94,7 +98,7 @@ docker compose down --rmi all -v
 npm run db-tables-migrate
 ```
 
-### Criar dados fakes
+### Criar dados fake
 
 ```bash 
 npm run db-tables-seed
