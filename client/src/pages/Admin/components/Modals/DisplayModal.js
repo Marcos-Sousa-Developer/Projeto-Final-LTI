@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-import Modal from './Modal'
+import Modal from './AppearUserModal'
 
 
 function DisplayModal({user, user_type}) {

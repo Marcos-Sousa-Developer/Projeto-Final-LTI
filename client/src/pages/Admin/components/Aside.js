@@ -174,7 +174,7 @@ function Aside() {
         </li>
 
         <li className="nav-item">
-          <Link to="/admin" className="nav-link collapsed">
+          <Link reloadDocument to="/admin/settings" className="nav-link collapsed">
             <i className="bi bi-gear"/>
             <span>Definições</span>
           </Link>

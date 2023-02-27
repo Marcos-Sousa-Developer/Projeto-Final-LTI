@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import "../../assets/styles/style.css";
+import React from "react";
 import activateOrDeactivateUser from "../../../../hooks/activateOrDeactivateUser";
 
 function Modal({ user, isShowingModal, user_type }) {
@@ -51,11 +50,11 @@ function Modal({ user, isShowingModal, user_type }) {
 
             <div className="modal-body">
               <div className="container">
-                <div class="card" style={{ hover: "black", textAlign: "center" }}>
+                <div class="card" style={{textAlign: "center" }}>
                   <br></br>
                   <img
                     className="card-img-top rounded mx-auto d-block "
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN3F9lmYSZ4oJyKtZo6mELJYSXOmj3e9P4pw&usqp=CAU"
+                    src="https://static.thenounproject.com/png/112372-200.png"
                     alt="Card image cap"
                     style={{ width: "50%" }}
                   ></img>
@@ -81,13 +80,13 @@ function Modal({ user, isShowingModal, user_type }) {
                 className="btn btn-secondary"
                 data-dismiss="modal"
               >
-                Close
+                Fechar
               </button>
 
               <button
                 type="button"
                 onClick={() => handleUser()}
-                className="btn btn-primary"
+                className="btn btn-warning"
               >
                 {user.account_status == 0 ? "Ativar" : "Desativar"}
               </button>
