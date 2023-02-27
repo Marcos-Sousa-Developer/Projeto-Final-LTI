@@ -40,7 +40,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 )}
-                <img src={images.logo} alt="" className="app__logo"/>
+                <Link to='/'><img src={images.logo} alt="" className="app__logo"/></Link>
             </div>
 
             <Searchbar></Searchbar>

@@ -26,7 +26,7 @@ function App() {
             <Route exact path="perfil" element={<Admin_Perfil />} />
             <Route exact path="settings" element={<Settings />} ></Route>
           </Route> 
-            <Route path="*" element={<NotFound />} /> 
+          <Route path="*" element={<NotFound />} /> 
          </Routes>
     </BrowserRouter>
   );

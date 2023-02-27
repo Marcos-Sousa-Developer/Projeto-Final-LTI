@@ -8,6 +8,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+img, picture {
+  max-width: 100%;
+}
+
 #root {
   display: flex;
   flex-direction: column;

@@ -8,6 +8,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+img, picture {
+  max-width: 100%;
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -28,7 +32,7 @@
 .app__container {
   max-width: 1650px;
   width: 95%;
-  margin: 0 auto;
+  margin: 2rem auto;
 }
 
 .app__pointer {
