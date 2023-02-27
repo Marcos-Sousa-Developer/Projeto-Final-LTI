@@ -4,7 +4,7 @@ import Dashboard from "./pages/Admin/Dashboard";
 import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
 import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import Settings from "./pages/Admin/Settings";
-import {Home, Login, Cart, Profile, SignIn, SignUp, NotFound} from './pages/HomeView/index';
+import {Home, Login, Cart, SignIn, SignUp, SupplierProfile, NotFound} from './pages/HomeView/index';
 import './index.css';
 
 
