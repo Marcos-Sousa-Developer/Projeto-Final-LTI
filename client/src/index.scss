@@ -34,23 +34,15 @@ img, picture{
   min-height: 100svh;
 }
 
-/*
-.primary-font{
-  font-family: $primary-font;
-}
-*/
-
 .flex{
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.app__container{
+.main__container{
   max-width: 1650px;
   width: 95%;
-  margin: 0 auto;
-  //margin: 2rem auto;
 }
 
 .app__pointer{

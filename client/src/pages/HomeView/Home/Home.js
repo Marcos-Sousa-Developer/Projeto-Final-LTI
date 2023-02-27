@@ -9,7 +9,7 @@ function Home() {
   return (
     <>
       <Navbar></Navbar>
-      <div className='products app__container'>
+      <div className='products main__container'>
         {PRODUCTS.map((product) => (
           <Product data={product} />
         ))}

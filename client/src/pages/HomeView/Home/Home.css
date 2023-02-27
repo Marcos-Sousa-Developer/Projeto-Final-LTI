@@ -29,12 +29,19 @@ img, picture {
   align-items: center;
 }
 
-.app__container {
+.main__container {
   max-width: 1650px;
   width: 95%;
-  margin: 2rem auto;
 }
 
+/*
+.app__container{
+  max-width: 1650px;
+  width: 95%;
+  //margin: 0 auto;
+  //margin: 2rem auto;
+}
+*/
 .app__pointer {
   cursor: pointer;
 }
@@ -93,7 +100,7 @@ img, picture {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 3rem;
-  margin-top: 2rem;
+  margin: 2rem auto;
 }
 
 @media screen and (max-width: 1200px) {

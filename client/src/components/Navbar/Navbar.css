@@ -18,21 +18,15 @@ img, picture {
   min-height: 100svh;
 }
 
-/*
-.primary-font{
-  font-family: $primary-font;
-}
-*/
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.app__container {
+.main__container {
   max-width: 1650px;
   width: 95%;
-  margin: 2rem auto;
 }
 
 .app__pointer {
@@ -92,6 +86,7 @@ img, picture {
 .app__navbar {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
+  margin: 0 auto;
   padding: 2rem 0 2rem 0;
   border-bottom: 3px solid #EEEEEE;
 }
