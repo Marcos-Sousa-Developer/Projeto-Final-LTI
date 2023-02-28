@@ -2,6 +2,9 @@
 
 .product{
     padding: 1rem;
+    border: 3px solid $light_gray;
+    border-radius: 10px;
+    cursor: pointer;
 
     img{
         width: 100%;
@@ -9,12 +12,41 @@
         object-fit: cover;
     }
 
+    &_img{
+        transition: all 150ms ease-in-out;
+        
+        &:hover{
+            transform: scale(1.025);
+        }
+    }
+
     &_description{
         margin-top: 1rem;
+
+        p{
+            margin: 0;
+        }
     }
 
     &_price{
         color: $orange;
         font-weight: 600;
+        font-size: 1.125rem;
+    }
+
+    &_action_section{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        margin-top: .75rem;
+
+        button > *{
+            margin: 0 .25rem;
+        }
+
+        button span{
+            font-size: clamp(.75rem, 1vw, .75rem);
+        }
     }
 }

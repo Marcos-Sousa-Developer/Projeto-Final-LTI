@@ -30,6 +30,7 @@
             height: 100vh;
             background-color: $light_gray;
             box-shadow: 1px 0px 20px 0px rgba(0,0,0,0.25);
+            z-index: 1000;
 
             .app_categories_wrapper{
                 display: grid;
