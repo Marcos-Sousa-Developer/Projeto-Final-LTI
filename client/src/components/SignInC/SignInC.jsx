@@ -12,7 +12,7 @@ const SignInC = () => {
                   <form>
                       <div>
                           <p>E-mail</p>
-                          <div>
+                          <div className='app__SignIn_box11'>
                               <FiMail fontSize={22} color='black'  aria-hidden="true"/>
                               <input
                                   name=""
@@ -24,7 +24,7 @@ const SignInC = () => {
                       </div>
                       <div>
                           <p>Password</p>
-                          <div>
+                          <div className='app__SignIn_box12'>
                               <FiLock fontSize={22} color='black'  aria-hidden="true"/>
                               <input
                                   name=""
@@ -34,26 +34,29 @@ const SignInC = () => {
                               />
                           </div>
                       </div>
+                      <div className='app__SignIn_box13'>
                       <button type='submit'>
                           Login
                       </button>
+                      </div>
                   </form>
               </div>
 
-              <div className='app_SignIn__box2'>
+              <div className='app__SignIn_box2'>
                   <p>or</p>    
 
               </div>
-              <div className='app_SignIn__box3'>
-                  <button>
-                      Google
-                  </button>
-                  <button>
-                      Facebook
-                  </button>
-                  <button>
-                      Twitter
-                  </button>
+              <div className='app__SignIn_box3'>
+                    <button className='app__SignIn_box31'>
+                        Google
+                    </button>
+                    <button className='app__SignIn_box32'>
+                        Facebook
+                    </button>
+
+                    <button className='app__SignIn_box33'>
+                        Twitter
+                    </button>
               </div>
           </div>    
     </div>  

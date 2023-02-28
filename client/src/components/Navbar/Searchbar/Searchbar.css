@@ -8,10 +8,17 @@
   font-family: "Poppins", sans-serif;
 }
 
-.primary-font {
-  font-family: "Poppins", sans-serif;
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
 }
 
+/*
+.primary-font{
+  font-family: $primary-font;
+}
+*/
 .flex {
   display: flex;
   justify-content: center;
