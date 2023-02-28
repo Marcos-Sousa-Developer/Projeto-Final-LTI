@@ -38,6 +38,7 @@ const SignInC = () => {
                       <button type='submit'>
                           Login
                       </button>
+                      <p>Não tem conta? Sign Up.</p>
                       </div>
                   </form>
               </div>
