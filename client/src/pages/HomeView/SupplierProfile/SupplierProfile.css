@@ -8,27 +8,25 @@
   font-family: "Poppins", sans-serif;
 }
 
+img, picture {
+  max-width: 100%;
+}
+
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
 }
 
-/*
-.primary-font{
-  font-family: $primary-font;
-}
-*/
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.app__container {
+.main__container {
   max-width: 1650px;
   width: 95%;
-  margin: 0 auto;
 }
 
 .app__pointer {
@@ -91,13 +89,52 @@
   margin: 0 auto;
   padding-top: 3%;
 }
+.app__SupplierProfile_options ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.app__SupplierProfile_options li {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+.app__SupplierProfile_options li:last-child {
+  border-right: none;
+}
+.app__SupplierProfile_options li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: none;
+}
+.app__SupplierProfile_options li a:hover {
+  color: rgb(0, 0, 0);
+}
 .app__SupplierProfile_box {
   border: 3.5px solid #EEEEEE;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
-
-.leftBar {
-  border-left: 3px solid #76CBFF;
-  padding-left: 5px;
+.app__SupplierProfile_box input {
+  border: none;
+  outline: none;
+  width: 92%;
+  margin-left: 2%;
+}
+.app__SupplierProfile_box_div {
+  margin: 1rem 1.5rem;
+}
+.app__SupplierProfile_box_div_row {
+  margin: 1rem 0rem;
+}
+.app__SupplierProfile_box_div_row_input {
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  font-size: large;
 }
 
 a.option {
@@ -109,17 +146,6 @@ a.option {
   font-weight: bold;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-li a {
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-}
-
 .saveButton {
   background-color: #EB5C1F;
   color: white;
@@ -127,4 +153,14 @@ li a {
   border-radius: 15px;
   margin-top: 15px;
   margin-bottom: 25px;
+}
+
+@media screen and (max-width: 800px) {
+  .app__SupplierProfile_box {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .app__SupplierProfile_box_div {
+    margin: 0rem 1rem 0rem 1rem;
+  }
 }/*# sourceMappingURL=SupplierProfile.css.map */

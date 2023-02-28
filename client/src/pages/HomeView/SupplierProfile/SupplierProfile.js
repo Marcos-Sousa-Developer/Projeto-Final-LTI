@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {Navbar, Footer} from '../../../components/index';
-import { FiMail} from 'react-icons/fi';
+import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
 import './SupplierProfile.css';
 
 function SupplierProfile() {
@@ -9,103 +9,72 @@ function SupplierProfile() {
   return (
     <>
       <Navbar></Navbar>
-      <div className='app__SupplierProfile'>
-        <h3 className='leftBar active'>Conta</h3>    
-        <ul>
-          <li><a className='option active' href="#">Dados Pessoais</a></li>
-          <li><a className='option' href="#">Vendidos</a></li>
-          <li><a href="#">Anúncios</a></li>
-        </ul>
+      <div className='app__SupplierProfile'>   
+        <div className='app__SupplierProfile_options'>
+          <ul>
+            <li><span></span><a className='option active app__text_effect' href="#">Dados Pessoais</a></li>
+            <li><span></span><a className='option app__text_effect' href="#">Vendidos</a></li>
+            <li><a className='app__text_effect' href="#">Anúncios</a></li>
+          </ul>
+        </div>
         <div className='app__SupplierProfile_box'>
-          <div className="col-xxl-15">
-            <div className="container">
-              <div className="row">
-                <div className="form-group col-md form-input">
-                  <br></br>
-                  <label htmlFor="firstName">Primeiro Nome</label>
-                  <input
-                    className="form-control"
-                    id="firstName"
-                    type="firstName"
-                  ></input>
-                </div>
-                <div className="form-group col-md-1 form-input"></div>
-                <div className="form-group col-md">
-                  <br></br>
-                  <label htmlFor="lastName">Último Nome</label>
-                  <input
-                    className="form-control bi bi-bag"
-                    id="lastName"
-                    type="lastName"
-                  ></input>
-                </div>
+          <div className='app__SupplierProfile_box_div'>
+            <div className='app__SupplierProfile_box_div_row'>
+              Primeiro Nome
+              <div className='app__SupplierProfile_box_div_row_input'>
+                <FiUser></FiUser>
+                <input></input>
               </div>
-              <div className="row">
-                <div className="form-group col-md">
-                  <br></br>
-                  <label htmlFor="email">Email</label>
-                  <input
-                    className="form-control"
-                    id="email"
-                    type="email"
-                  ></input>
-                </div>
-                <div className="form-group col-md-1 form-input"></div>
-                <div className="form-group col-md">
-                  <br></br>
-                  <label htmlFor="address">Endereço</label>
-                  <input
-                    type="address"
-                    className="form-control"
-                    id="address"
-                  ></input>
-                </div>
+            </div>
+            <div className='app__SupplierProfile_box_div_row'>
+              Email
+              <div className='app__SupplierProfile_box_div_row_input'>
+                <FiMail></FiMail>
+                <input></input>
               </div>
-              <div className="row">
-                <div className="form-group col-md">
-                  <br></br>
-                  <label htmlFor="nif">NIF</label>
-                  <input
-                    className="form-control"
-                    id="nif"
-                    type="text"
-                  ></input>
-                </div>
-                <div className="form-group col-md-1 form-input"></div>
-                <div className="form-group col-md">
-                  <br></br>
-                  <label htmlFor="cellphone">Telemóvel</label>
-                  <input
-                    className="form-control"
-                    id="cellphone"
-                    type="text"
-                  ></input>
-                </div>
+            </div>
+            <div className='app__SupplierProfile_box_div_row'>
+              NIF
+              <div className='app__SupplierProfile_box_div_row_input'>
+                <input></input>
               </div>
-              <div className="row">
-                <div className="form-group col-md">
-                  <br></br>
-                  <label htmlFor="password">Palavra-passe</label>
-                  <input
-                    className="form-control"
-                    id="password"
-                    type="password" 
-                  ></input>
-                  
-                </div>
-                <div className="form-group col-md-1 form-input"></div>
-                <div className="form-group col-md">
-                  <br></br>
-                  <label htmlFor="password">Confirmar palavra-passe</label>
-                  <input
-                    className="form-control"
-                    id="confirmPassword"
-                    type="password" 
-                  ></input>
-                  <br></br>
-                </div>
+            </div>
+            <div className='app__SupplierProfile_box_div_row'>
+              Palavra-passe
+              <div className='app__SupplierProfile_box_div_row_input'>
+                <FiLock></FiLock>
+                <input></input>
               </div>
-              <br></br>
+            </div>
+          </div>
+          <div className='app__SupplierProfile_box_div'>
+            <div className='app__SupplierProfile_box_div_row'>
+              Último Nome
+              <div className='app__SupplierProfile_box_div_row_input'>
+                <FiUser></FiUser>
+                <input></input>
+              </div>
+            </div>
+            <div className='app__SupplierProfile_box_div_row'>
+              Morada
+              <div className='app__SupplierProfile_box_div_row_input'>
+                <FiMapPin></FiMapPin>
+                <input></input>
+              </div>
+            </div>
+            <div className='app__SupplierProfile_box_div_row'>
+              Telemóvel
+              <div className='app__SupplierProfile_box_div_row_input'>
+                <FiSmartphone></FiSmartphone>
+                <input></input>
+              </div>
+            </div>
+            <div className='app__SupplierProfile_box_div_row'>
+              Confirmar palavra-passe
+              <div className='app__SupplierProfile_box_div_row_input'>
+                <FiLock></FiLock>
+                <input></input>
+              </div>
             </div>
           </div>
         </div>
