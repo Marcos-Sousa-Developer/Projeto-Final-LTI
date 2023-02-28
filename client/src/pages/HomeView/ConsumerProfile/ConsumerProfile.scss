@@ -1,6 +1,6 @@
 @import "../../../index.scss";
 
-.app__SupplierProfile {
+.app__ConsumerProfile {
     max-width: 1650px;
     width: 95%;
     margin: 0 auto;
@@ -87,7 +87,7 @@ a.option{
 
 @media screen and (max-width: 800px) {
 
-    .app__SupplierProfile {
+    .app__ConsumerProfile {
 
         &_box{
 

@@ -83,44 +83,9 @@ img, picture {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="darkorange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
 }
 
-.product {
-  padding: 1rem;
-  border: 3px solid #EEEEEE;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.product img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.product_img {
-  transition: all 150ms ease-in-out;
-}
-.product_img:hover {
-  transform: scale(1.025);
-}
-.product_description {
-  margin-top: 1rem;
-}
-.product_description p {
+.page_title p {
+  font-size: 1.5rem;
+  border-left: 4px solid #76CBFF;
+  padding: 0rem 0.75rem;
   margin: 0;
-}
-.product_price {
-  color: #EB5C1F;
-  font-weight: 600;
-  font-size: 1.125rem;
-}
-.product_action_section {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 0.75rem;
-}
-.product_action_section button > * {
-  margin: 0 0.25rem;
-}
-.product_action_section button span {
-  font-size: clamp(0.75rem, 1vw, 0.75rem);
-}/*# sourceMappingURL=Product.css.map */
+}/*# sourceMappingURL=SubHeading.css.map */
