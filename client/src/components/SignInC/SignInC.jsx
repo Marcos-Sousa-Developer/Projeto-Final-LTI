@@ -24,7 +24,7 @@ const SignInC = () => {
                       </div>
                       <div>
                           <p>Password</p>
-                          <div className='app__SignIn_box12'>
+                          <div className='app__SignIn_box11'>
                               <FiLock fontSize={22} color='black'  aria-hidden="true"/>
                               <input
                                   name=""
@@ -47,14 +47,13 @@ const SignInC = () => {
 
               </div>
               <div className='app__SignIn_box3'>
-                    <button className='app__SignIn_box31'>
+                    <button className='app__SignIn_box30 ButtonGoogle'>
                         Google
                     </button>
-                    <button className='app__SignIn_box32'>
+                    <button className='app__SignIn_box30 ButtonFacebook'>
                         Facebook
                     </button>
-
-                    <button className='app__SignIn_box33'>
+                    <button className='app__SignIn_box30 ButtonTwitter'>
                         Twitter
                     </button>
               </div>

@@ -8,27 +8,25 @@
   font-family: "Poppins", sans-serif;
 }
 
+img, picture {
+  max-width: 100%;
+}
+
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
 }
 
-/*
-.primary-font{
-  font-family: $primary-font;
-}
-*/
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.app__container {
+.main__container {
   max-width: 1650px;
   width: 95%;
-  margin: 0 auto;
 }
 
 .app__pointer {
@@ -122,12 +120,6 @@ h1 {
   padding: 0.5rem 0.75rem;
   margin: 0;
 }
-.app__SignIn_box12 {
-  border: 3px solid #EEEEEE;
-  border-radius: 20rem;
-  padding: 0.5rem 0.75rem;
-  margin: 0;
-}
 .app__SignIn_box13 button {
   color: white;
   width: 100%;
@@ -144,29 +136,24 @@ h1 {
   align-items: flex-start;
 }
 
-.app__SignIn_box31 {
+.app__SignIn_box30 {
   color: white;
   width: 100%;
-  background-color: #DB4437;
   border-radius: 20rem;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 4rem;
   margin: 0;
 }
 
-.app__SignIn_box31 {
-  color: white;
-  width: 100%;
+.ButtonGoogle {
   background-color: #DB4437;
-  border-radius: 20rem;
-  padding: 0.5rem 0.75rem;
-  margin: 0;
 }
 
-.app__SignIn_box31 {
-  color: white;
-  width: 100%;
-  background-color: #DB4437;
-  border-radius: 20rem;
-  padding: 0.5rem 0.75rem;
-  margin: 0;
+.ButtonFacebook {
+  background-color: #4267B2;
+  margin-top: 1rem;
+}
+
+.ButtonTwitter {
+  background-color: #1DA1F2;
+  margin-top: 1rem;
 }/*# sourceMappingURL=SignIn.css.map */
