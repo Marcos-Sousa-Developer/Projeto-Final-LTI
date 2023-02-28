@@ -10,6 +10,9 @@ app.use(cors())
 app.use('/api/users' , require('./api/ApiUsers'))
 app.use('/api/consumers' , require('./api/ApiConsumers'))
 app.use('/api/suppliers' , require('./api/ApiSuppliers'))
+app.use('/api/products' , require('./api/ApiProducts'))
+app.use('/api/categories' , require('./api/ApiCategories'))
+app.use('/api/characteristics' , require('./api/ApiCharacteristics'))
 
 // create a GET route
 app.get('/api', (req, res) => { //Line 9
