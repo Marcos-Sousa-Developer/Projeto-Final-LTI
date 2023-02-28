@@ -3,6 +3,7 @@ import Footer from './Footer/Footer';
 import SignInC from './SignInC/SignInC';
 import SignUpC from './SignUpC/SignUpC';
 import Product from './Product/Product';
+import SubHeading from './SubHeading/SubHeading';
 
 export {
   Navbar,
@@ -10,4 +11,5 @@ export {
   SignInC,
   SignUpC,
   Product,
+  SubHeading,
 };

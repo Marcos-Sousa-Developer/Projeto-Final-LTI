@@ -1,0 +1,12 @@
+@import '../../index.scss';
+
+.page_title{
+    margin: 2rem auto 0 auto; 
+
+    p{
+        font-size: 1.5rem;
+        border-left: 4px solid $blue;
+        padding: 0rem .75rem;
+        margin: 0;
+    }
+}
