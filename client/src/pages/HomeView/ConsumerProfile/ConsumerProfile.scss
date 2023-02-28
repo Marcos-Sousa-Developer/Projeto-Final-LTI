@@ -1,0 +1,102 @@
+@import "../../../index.scss";
+
+.app__ConsumerProfile {
+    max-width: 1650px;
+    width: 95%;
+    margin: 0 auto;
+    padding-top: 3%;
+
+    &_options{
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        li {
+            float: left;
+            padding-right: 10px;
+            padding-bottom: 10px;
+        }
+        
+        li:last-child {
+            border-right: none;
+        }
+        
+        li a {
+            display: block;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        li a:hover{
+            color: rgb(0, 0, 0);
+        }
+    }
+
+    &_box{
+        border: 3.5px solid $light_gray; 
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+
+        input{
+            border: none;
+            outline: none;
+            width: 92%;
+            margin-left: 2%;
+        }
+
+        &_div {
+            margin: 1rem 1.5rem;
+
+            &_row {
+                margin: 1rem 0rem;
+    
+                &_input {
+                    border: 3px solid $light_gray;
+                    border-radius: 10px;
+                    padding: 0.25rem 0.5rem;
+                    font-size: large;
+                }
+            }
+        }
+    }
+}
+
+a.option{
+    border-right: 3px solid $light_gray; 
+    padding-right: 10px;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.saveButton{
+    background-color: $orange;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+@media screen and (max-width: 800px) {
+
+    .app__ConsumerProfile {
+
+        &_box{
+
+            grid-template-columns: 1fr;
+            gap: 0;
+
+            &_div{
+                    margin: 0rem 1rem 0rem 1rem;
+            }
+        }
+    }
+}

@@ -1,12 +1,13 @@
 @import '../../index.scss';
 
 .page_title{
-    margin: 2rem auto 0 auto; 
+    //margin: 2rem auto 0 auto;
 
     p{
         font-size: 1.5rem;
         border-left: 4px solid $blue;
         padding: 0rem .75rem;
         margin: 0;
+        //colocar a bold para as páginas "Consumer Profile" e "Supplier Profile"
     }
 }
