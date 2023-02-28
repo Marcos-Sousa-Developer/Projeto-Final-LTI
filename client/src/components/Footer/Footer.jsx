@@ -5,7 +5,7 @@ import images from '../../assets/images.js';
 
 const Footer = () => {
   return (
-    <div className='app__footer'>
+    <div className='app__footer main__container'>
         <div className='app__support'>
             <h5><strong>Suporte</strong></h5>
             <div className='app__support2'>

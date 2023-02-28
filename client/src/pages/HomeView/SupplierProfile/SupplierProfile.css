@@ -8,10 +8,6 @@
   font-family: "Poppins", sans-serif;
 }
 
-img, picture {
-  max-width: 100%;
-}
-
 #root {
   display: flex;
   flex-direction: column;
@@ -29,19 +25,12 @@ img, picture {
   align-items: center;
 }
 
-.main__container {
+.app__container {
   max-width: 1650px;
   width: 95%;
+  margin: 0 auto;
 }
 
-/*
-.app__container{
-  max-width: 1650px;
-  width: 95%;
-  //margin: 0 auto;
-  //margin: 2rem auto;
-}
-*/
 .app__pointer {
   cursor: pointer;
 }
@@ -96,27 +85,46 @@ img, picture {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="darkorange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
 }
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 3rem;
-  margin: 2rem auto;
+.app__SupplierProfile {
+  max-width: 1650px;
+  width: 95%;
+  margin: 0 auto;
+  padding-top: 3%;
+}
+.app__SupplierProfile_box {
+  border: 3.5px solid #EEEEEE;
 }
 
-@media screen and (max-width: 1200px) {
-  .products {
-    gap: 2rem;
-  }
+.leftBar {
+  border-left: 3px solid #76CBFF;
+  padding-left: 5px;
 }
-@media screen and (max-width: 800px) {
-  .products {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem;
-  }
+
+a.option {
+  border-right: 3px solid #EEEEEE;
+  padding-right: 10px;
 }
-@media screen and (max-width: 650px) {
-  .products {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-}/*# sourceMappingURL=Home.css.map */
+
+.active {
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.saveButton {
+  background-color: #EB5C1F;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 15px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}/*# sourceMappingURL=SupplierProfile.css.map */

@@ -8,27 +8,25 @@
   font-family: "Poppins", sans-serif;
 }
 
+img, picture {
+  max-width: 100%;
+}
+
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
 }
 
-/*
-.primary-font{
-  font-family: $primary-font;
-}
-*/
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.app__container {
+.main__container {
   max-width: 1650px;
   width: 95%;
-  margin: 0 auto;
 }
 
 .app__pointer {
@@ -95,8 +93,6 @@ body {
   align-items: start;
   margin: auto auto 0;
   padding: 1rem;
-  max-width: 1650px;
-  width: 95%;
   border-top: 3px solid #EEEEEE;
 }
 

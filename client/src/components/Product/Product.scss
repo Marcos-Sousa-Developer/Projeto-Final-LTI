@@ -1,0 +1,20 @@
+@import '../../index.scss';
+
+.product{
+    padding: 1rem;
+
+    img{
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+
+    &_description{
+        margin-top: 1rem;
+    }
+
+    &_price{
+        color: $orange;
+        font-weight: 600;
+    }
+}

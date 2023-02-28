@@ -1,0 +1,63 @@
+@import "../../../index.scss";
+
+.app__SupplierProfile {
+    max-width: 1650px;
+    width: 95%;
+    margin: 0 auto;
+    padding-top: 3%;
+
+    &_box{
+        border: 3.5px solid $light_gray; 
+    }
+}
+
+.leftBar{
+    border-left: 3px solid $blue; 
+    padding-left: 5px;
+}
+
+a.option{
+    border-right: 3px solid $light_gray; 
+    padding-right: 10px;
+}
+
+.active {
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    //overflow: hidden;
+}
+
+li {
+    //float: left;
+    //padding-right: 10px;
+    //padding-bottom: 10px;
+}
+
+li:last-child {
+    //border-right: none;
+}
+
+li a {
+    //display: block;
+    color: rgb(0, 0, 0);
+    //text-align: center;
+    text-decoration: none;
+}
+
+li a:hover{
+    //color: rgb(0, 0, 0);
+}
+
+.saveButton{
+    background-color: $orange;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}

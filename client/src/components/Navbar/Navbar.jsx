@@ -21,7 +21,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className='app__navbar app__container'>
+        <nav className='app__navbar main__container'>
             <div className='app__navbar_menu'>
                 <FiAlignLeft fontSize={30} className='app__pointer app__icon_effect' onClick={() => setToggleMenu(true)}></FiAlignLeft>
                 {toggleMenu && (
@@ -40,7 +40,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 )}
-                <img src={images.logo} alt="" className="app__logo"/>
+                <Link to='/'><img src={images.logo} alt="" className="app__logo"/></Link>
             </div>
 
             <Searchbar></Searchbar>

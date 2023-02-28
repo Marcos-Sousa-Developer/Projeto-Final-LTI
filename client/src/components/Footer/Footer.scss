@@ -8,12 +8,9 @@ body{
     display: flex;
     justify-content: space-evenly;
     align-items: start;
-    //margin-bottom: 0;
-    //margin-top: auto;
+    
     margin: auto auto 0;
     padding: 1rem;
-    max-width: 1650px;
-    width: 95%;
     border-top: 3px solid $light_gray;  
 }
 

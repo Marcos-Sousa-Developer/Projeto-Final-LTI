@@ -24,17 +24,15 @@ $blue: #76CBFF;
   //scroll-behavior: smooth;
 }
 
+img, picture{
+  max-width: 100%;
+}
+
 #root{
   display: flex;
   flex-direction: column;
   min-height: 100svh;
 }
-
-/*
-.primary-font{
-  font-family: $primary-font;
-}
-*/
 
 .flex{
   display: flex;
@@ -42,10 +40,9 @@ $blue: #76CBFF;
   align-items: center;
 }
 
-.app__container{
+.main__container{
   max-width: 1650px;
   width: 95%;
-  margin: 0 auto;
 }
 
 .app__pointer{
