@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Navbar, Footer, SubHeading} from '../../../components/index';
+import {Navbar, Footer, SubHeading, Button} from '../../../components/index';
 import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
 import './SupplierProfile.css';
 
@@ -79,7 +79,7 @@ function SupplierProfile() {
             </div>
           </div>
         </div>
-        <button className='saveButton' >Guardar</button>
+        <Button title="Guardar"/>
       </div>
     <Footer></Footer>
     </>

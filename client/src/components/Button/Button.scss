@@ -1,0 +1,15 @@
+@import '../../index.scss';
+
+.main__action_btn{
+    background-color: $orange;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    opacity: 0.8;
+
+    &:hover {
+        opacity: 1; 
+    }
+}
