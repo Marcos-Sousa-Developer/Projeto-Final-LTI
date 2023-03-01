@@ -14,6 +14,7 @@ function App() {
     <BrowserRouter forceRefresh={true}>
 
         <Routes>
+          <Navbar></Navbar>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/supplier" element={<SupplierProfile />} />
