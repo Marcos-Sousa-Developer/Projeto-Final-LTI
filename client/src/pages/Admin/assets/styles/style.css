@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 :root {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; 
 }
 
 body {
@@ -33,6 +33,7 @@ h6 {
   font-family: 'Poppins', sans-serif;
 }
 
+
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
@@ -56,6 +57,7 @@ h6 {
 }
 
 .pagetitle h1 {
+  margin: 0;
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
