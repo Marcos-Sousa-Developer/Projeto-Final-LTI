@@ -5,14 +5,15 @@ import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
 import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import Settings from "./pages/Admin/Settings";
 import {Home, Login, Cart, SignIn, SignUp, SupplierProfile, ConsumerProfile, NotFound} from './pages/HomeView/index';
+import { ShopContextProvider } from "./context/ShopContextProvider";
 import './index.css';
 
 
 function App() {   
 
   return (
-    <BrowserRouter forceRefresh={true}>
-
+    <ShopContextProvider>
+      <BrowserRouter forceRefresh={true}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -28,8 +29,9 @@ function App() {
             <Route exact path="settings" element={<Settings />} ></Route>
           </Route> 
           <Route path="*" element={<NotFound />} /> 
-         </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </ShopContextProvider>
   );
 }
 
