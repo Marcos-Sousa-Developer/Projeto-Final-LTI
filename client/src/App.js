@@ -12,7 +12,6 @@ function App() {
 
   return (
     <BrowserRouter forceRefresh={true}>
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
