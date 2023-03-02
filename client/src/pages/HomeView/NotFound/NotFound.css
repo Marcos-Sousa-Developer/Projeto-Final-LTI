@@ -88,11 +88,62 @@ img, picture {
   color: white;
   padding: 10px 30px;
   border-radius: 15px;
-  margin-top: 15px;
-  margin-bottom: 25px;
   opacity: 0.8;
   transition: all 200ms ease-in-out;
 }
 .main__action_btn:hover {
   opacity: 1;
+}
+
+.app__notfound {
+  margin: auto;
+  width: 50%;
+}
+.app__notfound .app__notfound_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+.app__notfound .app__notfound_content .app__notfound_bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.app__notfound .app__notfound_content .app__notfound_bottom p, .app__notfound .app__notfound_content .app__notfound_bottom button {
+  margin: 1rem;
+}
+.app__notfound .app__notfound_content .app__notfound_bottom p {
+  font-weight: 600;
+}
+.app__notfound_img {
+  width: 800px;
+  height: auto;
+}
+
+@media screen and (max-width: 1350px) {
+  .app__notfound {
+    width: 75%;
+  }
+  .app__notfound_img {
+    width: 600px;
+    height: auto;
+  }
+}
+@media screen and (max-width: 875px) {
+  .app__notfound {
+    width: 100%;
+  }
+  .app__notfound_bottom {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 400px) {
+  .app__notfound_bottom {
+    font-size: 10px;
+  }
 }/*# sourceMappingURL=NotFound.css.map */
