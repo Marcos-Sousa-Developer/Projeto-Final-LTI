@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import { Routes, Route, BrowserRouter  } from "react-router-dom"; 
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 import Dashboard from "./pages/Admin/Dashboard";
@@ -10,8 +9,6 @@ import './index.css';
 
 
 function App() {   
-
-  
 
   return (
     <BrowserRouter forceRefresh={true}>

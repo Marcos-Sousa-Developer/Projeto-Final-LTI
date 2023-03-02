@@ -1,7 +1,7 @@
 import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
 
 
-function auth() {
+function Authentication() {
 
     // pool configuration 
   const poolData = {
@@ -81,4 +81,4 @@ function auth() {
 }
 
 
-export default auth
+export default Authentication
