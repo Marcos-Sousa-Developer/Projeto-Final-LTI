@@ -1,5 +1,5 @@
 import Home from './Home/Home'
-import Cart from './Cart';
+import Cart from './Cart/Cart';
 import Login from './Login';
 import SupplierProfile from './SupplierProfile/SupplierProfile';
 import ConsumerProfile from './ConsumerProfile/ConsumerProfile';

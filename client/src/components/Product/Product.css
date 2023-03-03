@@ -88,8 +88,6 @@ img, picture {
   color: white;
   padding: 10px 30px;
   border-radius: 15px;
-  margin-top: 15px;
-  margin-bottom: 25px;
   opacity: 0.8;
   transition: all 200ms ease-in-out;
 }
@@ -130,7 +128,7 @@ img, picture {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 0.75rem;
+  margin: auto;
 }
 .product_action_section button > * {
   margin: 0 0.25rem;

@@ -11,7 +11,7 @@ function Home() {
       <Navbar></Navbar>
       <div className='products main__container'>
         {PRODUCTS.map((product) => (
-          <Product data={product} />
+          <Product key={product.id} data={product} />
         ))}
       </div>
       <Footer></Footer>
