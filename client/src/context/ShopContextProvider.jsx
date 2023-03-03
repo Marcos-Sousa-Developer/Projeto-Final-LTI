@@ -37,6 +37,16 @@ export const ShopContextProvider = (props) => {
     setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
   };
 
+  const deleteCartItem = (itemId) => {
+    setCartItems((prev) => ({ ...prev, [itemId]: 0 }));
+  }
+
+  //const numberOfItems = () => {
+
+  //}
+
+  //fazer noutro file função de formatação do numero price
+
   const checkout = () => {
     setCartItems(getDefaultCart());
   };
@@ -48,6 +58,7 @@ export const ShopContextProvider = (props) => {
     removeFromCart,
     getTotalCartAmount,
     checkout,
+    deleteCartItem,
   };
 
   //console.log(cartItems);
