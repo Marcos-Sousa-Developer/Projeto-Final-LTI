@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { FiArrowLeft, FiArrowRight, FiTrash2 } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 import { PRODUCTS } from '../../../assets/products';
 import { Navbar, Footer, SubHeading } from '../../../components/index';
@@ -12,6 +13,7 @@ const Cart = () => {
 
   const { cartItems, getTotalCartAmount } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
+  let totalCartItems = 0;
 
   return (
     <>
@@ -23,17 +25,14 @@ const Cart = () => {
           <>
             <div className='app__cart_before_content'>
               <div className='flex'>
-                <div className='flex app__cart_before_content_btn'>
+                <Link to='/' className='flex app__cart_before_content_btn'>
                   <FiArrowLeft></FiArrowLeft>
                   <p>Continuar a comprar</p>
-                </div>
-                <div className='flex app__cart_before_content_btn'>
+                </Link>
+                <button className='flex app__cart_before_content_btn'>
                   <FiTrash2></FiTrash2>
-                  <p>Limpar carrinho</p>
-                </div>
-              </div>
-              <div>
-                nr de items
+                  Limpar carrinho
+                </button>
               </div>
             </div>
 
@@ -41,23 +40,23 @@ const Cart = () => {
               <div className='app__cart_subcontent'>
                 {PRODUCTS.map((product) => {
                   if(cartItems[product.id] !== 0){
+                    totalCartItems++;
                     return <CartItem data={product}></CartItem>
                   }
                 })}
               </div>
 
-              <div className='app__cart_subcontent'>
-                <h3>Sumário</h3>
-                <p>SubTotal: {totalAmount}</p>
-                <button className='main__action_btn'>
-                  <FiArrowRight></FiArrowRight>
-                  <p>Checkout</p>
-                </button>
+              <div className='app__cart_checkout_area'>
+                <p style={{marginBottom: '1rem', fontSize: '1.5rem'}}>Sumário</p>
+                <p>Nº de Items: {totalCartItems}</p>
+                <p>SubTotal: </p>
+                <p>Total: {totalAmount}</p>
+                <button className='main__action_btn app__cart_checkout_btn'>Checkout</button>
               </div>
             </div>
           </>
         ) : (
-          <h1>O carrinho está vazio</h1>
+          <h5>O carrinho está vazio.</h5>
         )}
 
       </div>

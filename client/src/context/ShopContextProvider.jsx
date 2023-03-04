@@ -41,9 +41,9 @@ export const ShopContextProvider = (props) => {
     setCartItems((prev) => ({ ...prev, [itemId]: 0 }));
   }
 
-  //const numberOfItems = () => {
-
-  //}
+  const deleteAllCartItems = () => {
+    setCartItems();
+  }
 
   //fazer noutro file função de formatação do numero price
 

@@ -15,15 +15,16 @@ export const CartItem = (props) => {
             <div>
                 <p>{productName}</p>
             </div>
-            <div className='app__cartItem_actions flex'>
-                <div className='app__cartItem_actions_1'>
+            <div className='app__cartItem_actions_1'>
+                <div className='app__cartItem_actions_1_content'>
                     <button onClick={() => removeFromCart(id)}><FiMinus></FiMinus></button>
                     <input value={cartItems[id]} onChange={ (e) => updateCartItemCount(Number(e.target.value),id)}/>
                     <button onClick={() => addToCart(id)}><FiPlus></FiPlus></button>
                 </div>
-                <p className='app__cartItem_actions_2'>{price}</p>
-                <button className='app__cartItem_actions_3' onClick={() => deleteCartItem(id)}><FiX></FiX></button>
             </div>
+            <p className='app__cartItem_actions_2'>{price}</p>
+            <button className='app__cartItem_actions_3' onClick={() => deleteCartItem(id)}><FiX fontSize={24}></FiX></button>
         </div>
+        
     )
 }
