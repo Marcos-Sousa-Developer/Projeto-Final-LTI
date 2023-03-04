@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server",
     "db-tables-migrate": "node ./models/migrations/CreateAllTables.js",
-    "db-tables-delete": "node ./models/deletes/DeleteAllTables.js", 
+    "db-tables-delete": "node ./models/deletes/DeleteAllTables.js",
     "db-tables-reset": "node ./models/resets/ResetAllTables.js",
     "db-tables-seed": "node ./models/seeders/SeedAllTables.js"
   },
@@ -15,6 +15,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amazon-cognito-identity-js": "^6.1.2",
+    "cognito-express": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
