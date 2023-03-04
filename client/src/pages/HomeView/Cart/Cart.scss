@@ -36,7 +36,7 @@
         gap: 1rem;
 
         & > *{
-            padding: 2rem;
+            padding: 1rem 2rem;
         }
     }
 
@@ -61,7 +61,10 @@
     display: grid;
     grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    margin-bottom: 1.5rem;
+    margin: 0 0 1rem 0;
+    padding: 0 0 1rem 0;
+    gap: 1rem;
+    border-bottom: 3px solid $light_gray;
 
     img{
         width: 200px;
@@ -91,7 +94,7 @@
             grid-row-start: 2;
 
             margin: 0;
-            text-align: center;
+            text-align: right;
         }
 
         &_3{
@@ -123,15 +126,19 @@
 }
 
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1200px){
 
     .app__cartItem{
         grid-template-columns: 2fr 3fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
 
+        margin: 0 0 1rem 0;
+        padding: 0;
+
         img{
             grid-column-start: 1;
-            grid-row-start: span 2;
+            grid-row-start: 1;
+            grid-row: span 2;
         }
     }
     
@@ -151,13 +158,55 @@
         grid-row-start: 1;
         justify-self: end;
         align-self: self-start;
+    }
 
+    .app__cartItem_actions_1_content{
+        width: 65%;
+        margin: 0 auto;
     }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 800px) {
     .app__cart_content{
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 2fr 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .app__cartItem{
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 1fr;
+        gap: .25rem;
+
+        margin: 0 0 1rem 0;
+        padding: 0 0 1rem 0;
+
+        &_actions_1_content{
+            width: 100%;
+            padding: .125rem .5rem;
+        }
+
+        &_actions_2 span{
+            font-size: 1rem;
+        }
+
+        img{
+            grid-column-start: 1;
+            grid-row-start: 1;
+        }
+    }
+    
+    .app__cartItem:last-child{
+        margin-bottom: .25rem;
+    }
+
+    .app__cart_subcontent{
+        align-self: center;
+        padding: 1rem;
+    }
+
+    .app__cart_checkout_area{
+        padding: 0 1rem;
     }
 }

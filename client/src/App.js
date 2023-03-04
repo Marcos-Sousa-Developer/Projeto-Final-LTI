@@ -8,7 +8,6 @@ import {Home, Login, Cart, SignIn, SignUp, SupplierProfile, ConsumerProfile, Not
 import { ShopContextProvider } from "./context/ShopContextProvider";
 import './index.css';
 
-
 function App() {   
 
   return (

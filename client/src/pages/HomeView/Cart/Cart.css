@@ -125,7 +125,7 @@ img, picture {
   gap: 1rem;
 }
 .app__cart_content > * {
-  padding: 2rem;
+  padding: 1rem 2rem;
 }
 .app__cart_subcontent {
   border: 3px solid #EEEEEE;
@@ -141,7 +141,10 @@ img, picture {
   display: grid;
   grid-template-columns: 2fr 3fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1rem 0;
+  padding: 0 0 1rem 0;
+  gap: 1rem;
+  border-bottom: 3px solid #EEEEEE;
 }
 .app__cartItem img {
   width: 200px;
@@ -168,7 +171,7 @@ img, picture {
   grid-column-start: 4;
   grid-row-start: 2;
   margin: 0;
-  text-align: center;
+  text-align: right;
 }
 .app__cartItem_actions_3 {
   grid-column-start: 5;
@@ -191,14 +194,17 @@ img, picture {
   text-align: center;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
   .app__cartItem {
     grid-template-columns: 2fr 3fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    margin: 0 0 1rem 0;
+    padding: 0;
   }
   .app__cartItem img {
     grid-column-start: 1;
-    grid-row-start: span 2;
+    grid-row-start: 1;
+    grid-row: span 2;
   }
   .app__cartItem_actions_1 {
     grid-column-start: 1;
@@ -215,10 +221,44 @@ img, picture {
     justify-self: end;
     align-self: self-start;
   }
+  .app__cartItem_actions_1_content {
+    width: 65%;
+    margin: 0 auto;
+  }
 }
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 800px) {
   .app__cart_content {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
+  }
+}
+@media screen and (max-width: 600px) {
+  .app__cartItem {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0.25rem;
+    margin: 0 0 1rem 0;
+    padding: 0 0 1rem 0;
+  }
+  .app__cartItem_actions_1_content {
+    width: 100%;
+    padding: 0.125rem 0.5rem;
+  }
+  .app__cartItem_actions_2 span {
+    font-size: 1rem;
+  }
+  .app__cartItem img {
+    grid-column-start: 1;
+    grid-row-start: 1;
+  }
+  .app__cartItem:last-child {
+    margin-bottom: 0.25rem;
+  }
+  .app__cart_subcontent {
+    align-self: center;
+    padding: 1rem;
+  }
+  .app__cart_checkout_area {
+    padding: 0 1rem;
   }
 }/*# sourceMappingURL=Cart.css.map */

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { FiShoppingCart, FiRepeat} from 'react-icons/fi';
 
 import { ShopContext } from '../../context/ShopContextProvider';
+import { PriceDisplay } from '../../utilities/formatCurrency';
 import './Product.css';
 
 const Product = (props) => {
@@ -13,10 +14,12 @@ const Product = (props) => {
 
     return (
         <div className='product'>
-            <img className='product_img' src={productImage} />
+            <div><img className='product_img' src={productImage} /></div>
             <div className='product_description'>
-                <p>{productName}</p>
-                <p className='product_price'>{price} €</p>
+                <div>
+                    <p>{productName}</p>
+                    <PriceDisplay className='product_price' price={price} />
+                </div>
                 <div className='product_action_section'>
                     <button 
                         style={{marginRight: "0.25rem"}} 
@@ -25,7 +28,7 @@ const Product = (props) => {
                         <FiShoppingCart></FiShoppingCart>
                         <span>Adicionar {cartItemAmount > 0 && <>({cartItemAmount})</>}</span>
                     </button>
-                    <button><FiRepeat></FiRepeat><span>Comparar</span></button>
+                    <button><FiRepeat></FiRepeat></button>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { FiX, FiPlus, FiMinus } from 'react-icons/fi';
 
 import { ShopContext } from '../../../context/ShopContextProvider';
+import { PriceDisplay } from '../../../utilities/formatCurrency';
 import './Cart.css';
 
 export const CartItem = (props) => {
@@ -22,7 +23,7 @@ export const CartItem = (props) => {
                     <button onClick={() => addToCart(id)}><FiPlus></FiPlus></button>
                 </div>
             </div>
-            <p className='app__cartItem_actions_2'>{price}</p>
+            <p className='app__cartItem_actions_2'><PriceDisplay price={price} /></p>
             <button className='app__cartItem_actions_3' onClick={() => deleteCartItem(id)}><FiX fontSize={24}></FiX></button>
         </div>
         

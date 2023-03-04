@@ -1,4 +1,6 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react';
+
+import { SnackBar } from '../components/SnackBarNotification/SnackBar';
 import { PRODUCTS } from '../assets/products';
 
 export const ShopContext = createContext(null);
@@ -31,6 +33,7 @@ export const ShopContextProvider = (props) => {
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    //SnackBar("Removed");
   };
 
   const updateCartItemCount = (newAmount, itemId) => {

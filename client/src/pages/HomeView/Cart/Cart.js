@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { PRODUCTS } from '../../../assets/products';
 import { Navbar, Footer, SubHeading } from '../../../components/index';
+import { PriceDisplay } from '../../../utilities/formatCurrency';
 import { ShopContext } from '../../../context/ShopContextProvider';
 import { CartItem } from './CartItem';
 
@@ -50,7 +51,7 @@ const Cart = () => {
                 <p style={{marginBottom: '1rem', fontSize: '1.5rem'}}>Sumário</p>
                 <p>Nº de Items: {totalCartItems}</p>
                 <p>SubTotal: </p>
-                <p>Total: {totalAmount}</p>
+                <p>Total: <PriceDisplay className='product_price' price={totalAmount} /></p>
                 <button className='main__action_btn app__cart_checkout_btn'>Checkout</button>
               </div>
             </div>

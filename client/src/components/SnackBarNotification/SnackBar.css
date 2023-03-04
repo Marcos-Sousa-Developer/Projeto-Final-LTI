@@ -1,0 +1,12 @@
+.snackbar {
+  position: fixed;
+  left: 50%;
+  top: 5%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 60px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}/*# sourceMappingURL=SnackBar.css.map */
