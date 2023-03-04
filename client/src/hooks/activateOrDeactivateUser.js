@@ -11,10 +11,10 @@ const activateOrDeactivateUser = async (url, status) => {
     }
     
   await axios.put(url_endpoint, null, {params: params})
-  .then((response) => {
-    if (response.status == 200) {
-      window.location.reload();
-    }
+    .then((response) => {
+      if (response.status == 200) {
+        window.location.reload();
+      }
   });
 }
 

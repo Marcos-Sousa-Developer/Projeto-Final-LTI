@@ -1,9 +1,7 @@
 import React, {useState} from 'react'
-import Cookies from 'js-cookie';
-import Authentication from '../../config/auth';
+import userLogin from '../../hooks/userLogin'
 
-const Login = () => { 
-
+function Login() { 
 
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null) 
@@ -11,23 +9,19 @@ const Login = () => {
 
   const handleSetEmail = (event) => {
     setEmail(event.target.value)
-    console.log(event.target.value)
+    
   }
 
   const handleSetPassword = (event) => {
     setPassword(event.target.value)
-    console.log(event.target.value)
+    
   }
 
-  const handlerLogin = () => {
+  const handlerLogin = async () => {
 
-    const authentication = Authentication() 
+     console.log(await userLogin("test@outlook.com", "Grupo01PTRPTI!"))
 
-    const user = authentication.signIn("ok","ok") 
-
-    console.log(user)
-
-  }
+  } 
 
   return (
     <div>
@@ -35,7 +29,7 @@ const Login = () => {
       <input type="text" placeholder="email" value = {email ?? ""} name="uname" onChange={handleSetEmail} required></input>
       <input type="password" placeholder="password" value = {password ?? ""} name="psw" onChange={handleSetPassword} required></input>
       </form>
-      <button type="submit" onClick={handlerLogin}>Login</button>
+      <button type="submit" onClick={() => handlerLogin()}>Login</button>
     </div>
   );
 }
