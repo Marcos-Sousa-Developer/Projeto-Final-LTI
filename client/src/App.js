@@ -1,4 +1,5 @@
 import { Routes, Route, BrowserRouter  } from "react-router-dom"; 
+import RequireAuth from "./components/RequireAuth"
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 import Dashboard from "./pages/Admin/Dashboard";
 import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
@@ -6,29 +7,50 @@ import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import Settings from "./pages/Admin/Settings";
 import {Home, Login, Cart, SignIn, SignUp, SupplierProfile, ConsumerProfile, NotFound} from './pages/HomeView/index';
 import './index.css';
+import getClientType from "./hooks/getClientType";
 
+function App() {  
 
-function App() {   
+  const userType = getClientType("/userType")
 
   return (
-    <BrowserRouter forceRefresh={true}>
+
+    <BrowserRouter forceRefresh={true}> 
         <Routes>
-          <Route path="admin">
-            <Route index element={<Dashboard />} />
-            <Route exact path="gerir_consumidores" element={<Gerir_consumidores />} />
-            <Route exact path="gerir_fornecedores" element={<Gerir_fornecedores />} />
-            <Route exact path="perfil" element={<Admin_Perfil />} />
-            <Route exact path="settings" element={<Settings />} ></Route>
-          </Route> 
-          <Route path="/" element={<Home />} />
+          {
+            userType == "admin" && (
+              <Route path="admin">
+                <Route index element={<RequireAuth><Dashboard /></RequireAuth>} />
+                <Route exact path="gerir_consumidores" element={<RequireAuth><Gerir_consumidores /></RequireAuth>} />
+                <Route exact path="gerir_fornecedores" element={<RequireAuth><Gerir_fornecedores /></RequireAuth>} />
+                <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
+                <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
+              </Route>
+            )
+          }
+
+          {
+            userType == "supplier" && (
+              <Route path="/supplier" element={<RequireAuth><SupplierProfile /></RequireAuth>} />
+            )
+          }
+
+          {
+            userType == "consumer" && (
+              <Route path="/consumer" element={<RequireAuth><ConsumerProfile /></RequireAuth>} />
+            )
+          }
+          
           <Route path="/login" element={<Login />} />
-          <Route path="/supplier" element={<SupplierProfile />} />
-          <Route path="/consumer" element={<ConsumerProfile />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="*" element={<NotFound />} /> 
-         </Routes>
+
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+
+        </Routes>
     </BrowserRouter>
+
   );
 }
 

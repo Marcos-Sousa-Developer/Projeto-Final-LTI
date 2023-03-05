@@ -1,26 +1,27 @@
-import React, {useState} from 'react'
-import userLogin from '../../hooks/userLogin'
+import React, {useContext, useState} from 'react'
+import { useNavigate } from 'react-router-dom'
+import { authentication as auth}  from '../../authentication'
 
 function Login() { 
 
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null) 
-
+  const navigate = useNavigate()
 
   const handleSetEmail = (event) => {
     setEmail(event.target.value)
-    
   }
 
   const handleSetPassword = (event) => {
     setPassword(event.target.value)
-    
   }
 
   const handlerLogin = async () => {
-
-     console.log(await userLogin("test@outlook.com", "Grupo01PTRPTI!"))
-
+     let isActive = await auth.signIn("test@outlook.com","Grupo01PTRPTI!")
+     if(isActive) {
+      
+      navigate('/')
+     }
   } 
 
   return (

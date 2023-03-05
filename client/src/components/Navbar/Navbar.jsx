@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart, FiAlignLeft, FiUser, FiX } from 'react-icons/fi';
-
 import Searchbar from './Searchbar/Searchbar';
 import images from '../../assets/images.js';
 import './Navbar.css';
+
+
 
 const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
@@ -47,6 +48,7 @@ const Navbar = () => {
 
             <div className='app__navbar_profile'>
 
+
                 <Link to="/signin" className="flex app__pointer app__navbar_links">
                     <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
 
@@ -54,8 +56,9 @@ const Navbar = () => {
                         <span className="profile_link">Conta</span>
                         <p style={{fontSize: '12px', opacity: '80%'}}>Iniciar sessão</p>
                     </div>
-
                 </Link>
+                    
+                
 
                 <Link to="/cart" className="flex app__pointer app__navbar_links"  style={{marginRight:'0'}}>
                     <FiShoppingCart fontSize={30} color="black" className='profile_icon'></FiShoppingCart>
