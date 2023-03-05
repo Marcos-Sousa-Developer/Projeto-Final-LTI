@@ -2,11 +2,13 @@ require("dotenv").config();
 const authenticateUser = require('./auth')
 const express = require('express');
 const app = express(); 
+const cookieParser = require('cookie-parser');
 const port = process.env.DEVELOPMENT_PORT || 5000;  
 
 const cors = require("cors")
 
 app.use(cors())
+app.use(cookieParser());
 
 /**
  * Api configuration, only for server

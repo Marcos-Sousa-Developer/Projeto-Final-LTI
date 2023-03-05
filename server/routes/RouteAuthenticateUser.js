@@ -8,4 +8,7 @@ router.post('/signIn', authenticate.signIn)
 //Sign up user
 router.post('/signUp', authenticate.signUp) 
 
+//Verify user type
+router.post('/userType', authenticate.userType) 
+
 module.exports = router
