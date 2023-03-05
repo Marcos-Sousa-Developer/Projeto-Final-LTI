@@ -12,7 +12,7 @@ import './Cart.css';
 
 const Cart = () => {
 
-  const { cartItems, getTotalCartAmount } = useContext(ShopContext);
+  const { cartItems, getTotalCartAmount, removeAllFromCart, checkout } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
   let totalCartItems = 0;
 
@@ -30,7 +30,7 @@ const Cart = () => {
                   <FiArrowLeft></FiArrowLeft>
                   <p>Continuar a comprar</p>
                 </Link>
-                <button className='flex app__cart_before_content_btn'>
+                <button className='flex app__cart_before_content_btn' onClick={() => removeAllFromCart()}>
                   <FiTrash2></FiTrash2>
                   Limpar carrinho
                 </button>
@@ -52,7 +52,7 @@ const Cart = () => {
                 <p>Nº de Items: {totalCartItems}</p>
                 <p>SubTotal: </p>
                 <p>Total: <PriceDisplay className='product_price' price={totalAmount} /></p>
-                <button className='main__action_btn app__cart_checkout_btn'>Checkout</button>
+                <button className='main__action_btn app__cart_checkout_btn' onClick={() => checkout() }>Checkout</button>
               </div>
             </div>
           </>

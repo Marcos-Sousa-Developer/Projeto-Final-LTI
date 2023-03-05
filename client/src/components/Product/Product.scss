@@ -12,14 +12,14 @@
         width: 100%;
         aspect-ratio: 1 / 1;
         object-fit: cover;
+
+        &:hover{
+            transform: scale(1.025);
+        }
     }
 
     &_img{
         transition: all 150ms ease-in-out;
-    }
-
-    &:hover .product_img{
-        transform: scale(1.025);
     }
 
     &_description{

@@ -73,6 +73,10 @@
         grid-row-start: span 3;
     }
 
+    &_description{
+        grid-row: span 2;
+    }
+
     &_actions{
         display: flex;
         justify-content: center;

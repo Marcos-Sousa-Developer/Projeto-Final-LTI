@@ -13,8 +13,9 @@ export const CartItem = (props) => {
     return (
         <div className='app__cartItem'>
             <img src={productImage} alt="" />
-            <div>
+            <div className='app__cartItem_description'>
                 <p>{productName}</p>
+                
             </div>
             <div className='app__cartItem_actions_1'>
                 <div className='app__cartItem_actions_1_content'>
@@ -26,6 +27,5 @@ export const CartItem = (props) => {
             <p className='app__cartItem_actions_2'><PriceDisplay price={price} /></p>
             <button className='app__cartItem_actions_3' onClick={() => deleteCartItem(id)}><FiX fontSize={24}></FiX></button>
         </div>
-        
     )
 }

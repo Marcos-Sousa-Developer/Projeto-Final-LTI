@@ -159,6 +159,9 @@ img, picture {
 .app__navbar_profile_account, .app__navbar_profile_cart {
   margin: 0.75rem;
 }
+.app__navbar_profile_icon {
+  position: relative;
+}
 .app__navbar_profile .profile_link {
   color: black;
   position: relative;
@@ -190,6 +193,19 @@ img, picture {
 }
 .app__navbar_profile .app__navbar_links:hover .profile_icon > * {
   color: #EB5C1F;
+}
+.app__navbar_cartItems {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.4rem;
+  padding: 0.125rem;
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.75rem;
+  text-align: center;
+  background-color: #EB5C1F;
+  color: white;
 }
 
 @media screen and (max-width: 1100px) {

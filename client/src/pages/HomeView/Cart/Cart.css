@@ -153,6 +153,9 @@ img, picture {
      object-fit: cover;
   grid-row-start: span 3;
 }
+.app__cartItem_description {
+  grid-row: span 2;
+}
 .app__cartItem_actions {
   display: flex;
   justify-content: center;
