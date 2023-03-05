@@ -86,13 +86,40 @@ img, picture {
 .main__action_btn {
   background-color: #EB5C1F;
   color: white;
-  padding: 10px 30px;
+  padding: 8px 40px;
   border-radius: 15px;
   opacity: 0.8;
   transition: all 200ms ease-in-out;
 }
 .main__action_btn:hover {
   opacity: 1;
+}
+
+.app__home {
+  margin: 2rem auto;
+  border: 3px solid #EEEEEE;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+.app__home img {
+  height: 225px;
+}
+.app__home .rectangle1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100px;
+}
+.app__home .rectangle2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 75px;
+}
+.app__home_text h2, .app__home p {
+  width: 80%;
 }
 
 .products {
@@ -102,7 +129,21 @@ img, picture {
   margin: 2rem auto;
 }
 
+@media screen and (max-width: 1200px) {
+  .app__home img {
+    height: 200px;
+  }
+  .app__home_text h2 {
+    font-size: 1.5rem;
+  }
+  .app__home .rectangle2 {
+    height: 50px;
+  }
+}
 @media screen and (max-width: 800px) {
+  .app__home img {
+    height: 170px;
+  }
   .products {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
@@ -110,6 +151,12 @@ img, picture {
   }
 }
 @media screen and (max-width: 650px) {
+  .app__home img {
+    display: none;
+  }
+  .app__home_text h2, .app__home p {
+    width: 95%;
+  }
   .products {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;

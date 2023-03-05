@@ -1,7 +1,7 @@
 import React from 'react';
-import images from '../../../assets/images';
 
 import {Navbar, Footer} from '../../../components/index';
+import images from '../../../assets/images';
 import './NotFound.css';
 
 const NotFound = () => {
