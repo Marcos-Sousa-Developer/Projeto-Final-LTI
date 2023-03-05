@@ -88,8 +88,6 @@ img, picture {
   color: white;
   padding: 10px 30px;
   border-radius: 15px;
-  margin-top: 15px;
-  margin-bottom: 25px;
   opacity: 0.8;
   transition: all 200ms ease-in-out;
 }
@@ -102,6 +100,8 @@ img, picture {
   border: 3px solid #EEEEEE;
   border-radius: 10px;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 .product img {
   width: 100%;
@@ -112,11 +112,15 @@ img, picture {
 .product_img {
   transition: all 150ms ease-in-out;
 }
-.product_img:hover {
+.product:hover .product_img {
   transform: scale(1.025);
 }
 .product_description {
   margin-top: 1rem;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  align-self: stretch;
 }
 .product_description p {
   margin: 0;
@@ -127,14 +131,27 @@ img, picture {
   font-size: 1.125rem;
 }
 .product_action_section {
+  align-self: end;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 0.75rem;
+  align-items: flex-start;
+  margin-top: 0.25rem;
 }
-.product_action_section button > * {
-  margin: 0 0.25rem;
+.product_action_section button {
+  display: flex;
 }
 .product_action_section button span {
-  font-size: clamp(0.75rem, 1vw, 0.75rem);
+  font-size: 0.85rem;
+  margin: 0 1rem 0 0.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .product_action_section button span {
+    font-size: 0.75rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .product_action_section button span {
+    font-size: 0.7rem;
+    margin: 0 0.5rem;
+  }
 }/*# sourceMappingURL=Product.css.map */

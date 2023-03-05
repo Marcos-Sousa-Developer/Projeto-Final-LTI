@@ -6,16 +6,18 @@ import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
 import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import Settings from "./pages/Admin/Settings";
 import {Home, Login, Cart, SignIn, SignUp, SupplierProfile, ConsumerProfile, NotFound} from './pages/HomeView/index';
+import { ShopContextProvider } from "./context/ShopContextProvider";
 import './index.css';
 import getClientType from "./hooks/getClientType";
 
+
 function App() {  
 
-  const userType = getClientType("/userType")
+  const userType = getClientType("/userType") 
 
   return (
-
-    <BrowserRouter forceRefresh={true}> 
+    <ShopContextProvider>
+      <BrowserRouter forceRefresh={true}>
         <Routes>
           {
             userType == "admin" && (
@@ -41,7 +43,10 @@ function App() {
             )
           }
           
+          {/*----- Only for testing ----- */}
           <Route path="/login" element={<Login />} />
+          {/* ------------- */}
+          
           <Route path="/signin" element={<SignIn />} />
 
           <Route path="/" element={<Home />} />
@@ -49,7 +54,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
 
         </Routes>
-    </BrowserRouter>
+
+      </BrowserRouter>
+    </ShopContextProvider>
 
   );
 }

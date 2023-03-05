@@ -1,0 +1,92 @@
+@import "../../index.scss";
+
+
+
+h1{
+    margin-top: 6rem;
+    margin-left: 10%;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+}
+
+.app__SignUp{
+    //background-color: aqua;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+
+    &_box{
+        padding:4rem 0rem;
+        width: 80%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-radius: 15px;
+        box-shadow: 0px 4px 4px 0px #00000040;
+
+        input{
+            outline: none;
+            border: none;
+        }
+
+        form p{
+            margin-top: 1rem;
+            margin-bottom: 0.05rem;
+        }
+    }
+    &_box11{
+         border: 3px solid $light_gray;
+        border-radius: 20rem;
+        padding: .5rem .75rem;
+        margin: 0;
+    }
+
+   &_box13{
+    button{
+        color:white;
+        width: 100%;
+        background-color: rgba(235, 92, 31, 0.8);
+        border-radius: 20rem;
+        padding: .5rem .75rem;
+        margin: 0;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+    }
+   }
+}
+
+.app__SignUp_box3{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    }
+
+
+.app__SignUp_box30{
+            color:white;
+            width: 100%;
+            border-radius: 20rem;
+            padding: .5rem 4rem;
+            margin: 0; 
+}
+
+.ButtonGoogle{
+    background-color: #DB4437;
+}
+
+.ButtonFacebook{
+    background-color: #4267B2;
+    margin-top:1rem;
+
+}
+
+.ButtonTwitter{
+    background-color: #1DA1F2;
+    margin-top:1rem;
+
+}
+
+
+
