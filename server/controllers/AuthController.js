@@ -5,8 +5,12 @@ const jwt = require('../config/jwtConfig')
 //pass our user pool data to identify cognito user pool 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
+/**
+ * Verify token from client
+ * @param  client_result 
+ * @returns boolean (verify integrity)
+ */
 const verifyTokens = async (client_result) => {
-
   let isAccessTokenValid =  await jwt.verifyUserAutentecity(client_result.accessToken, client_result.client_id)
   let isIdTokenValid =  await jwt.verifyUserAutentecity(client_result.idToken, client_result.client_id)
   return isAccessTokenValid === isIdTokenValid
@@ -95,8 +99,8 @@ const handlerSignIn = (authenticationData, userData, client_result, res) => {
 
 /**
 * Sign in user
-* @param {*} req //request from client
-* @param {*} res //response from server
+* @param req //request from client
+* @param res //response from server
 * @returns: a user data and token
 * */
 const signIn = async (req, res) => { 
@@ -128,39 +132,7 @@ const signIn = async (req, res) => {
 };
 
 /**
-* Sign up user
-* @param {*} req //request from client
-* @param {*} res //response from server
-* @returns: boolean (is user created)
-* */
-const signUp = (req, res) => { 
-
-    const attributeList = [];
-  
-    const dataEmail = {
-      Name: 'email',
-      Value: email
-    };
-    
-    //AmazonCognitoIdentity.CognitoUserAttribute
-    const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
-  
-    attributeList.push(attributeEmail);
-  
-    return new Promise((resolve, reject) => {
-
-      //register a new user in an Amazon Cognito user pool.
-      userPool.signUp(email, password, attributeList, null, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result.user);
-        }
-      });
-    });
-};
-
-/**
+ * Verify user type 
  * @params request from client
  * @return userType
  */
@@ -170,7 +142,5 @@ const userType = (req, res) => {
   
   return res.send("consumer");
 }
-
-
 
 module.exports = {signIn, signUp,userType}

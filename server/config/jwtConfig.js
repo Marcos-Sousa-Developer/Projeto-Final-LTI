@@ -5,18 +5,28 @@ const jwksClient = require('jwks-rsa');
 const CryptoJS = require("crypto-js");
 
 
-
+/**
+ * EncryptID uid
+ * @param id (uid)
+ * @returns encrypted ui
+ */
 const encryptID = (id) => {
     return CryptoJS.AES.encrypt(id, process.env.CLIENT_ID_TO_UID).toString();
 }
 
+/**
+ * Decrypt uid
+ * @param hashedUid (hashed uid)
+ * @returns decrypt uid
+ */
 const decryptID = (hashedUid) => {
     return CryptoJS.AES.decrypt(hashedUid, process.env.CLIENT_ID_TO_UID).toString(CryptoJS.enc.Utf8);
 }
 
 /**
- * Hash data with jwt 
- * return data hashed
+ * sign token id 
+ * @param object to hashed
+ * @returns token signed
  */
 const generateAccessToken = (params) =>{
 
@@ -26,8 +36,8 @@ const generateAccessToken = (params) =>{
 }
 
 /**
- * Verify is token is validate
- * return type of code
+ * Verify if token is valid
+ * @returns decoded token
  */ 
 const verifyAccessTokenFromClient = (token) => {
 
@@ -43,6 +53,13 @@ const verifyAccessTokenFromClient = (token) => {
         })
     })
 }
+
+/**
+ * Get Public key of token
+ * @param kid type used to hashed 
+ * @param jwks method to use
+ * @returns public key
+ */
 
 const getPubKey = (kid,jwks) => {
     
