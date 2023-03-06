@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart, FiAlignLeft, FiUser, FiX } from 'react-icons/fi';
 import Searchbar from './Searchbar/Searchbar';
 import images from '../../assets/images.js';
 import './Navbar.css';
 
-
+import { PRODUCTS } from '../../assets/products';
+import { ShopContext } from '../../context/ShopContextProvider';
+import { PriceDisplay } from '../../utilities/formatCurrency';
 
 const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
+
+    //--------------------------------------------------------
+    const { cartItems } = useContext(ShopContext);
+    let totalCartItems = 0;
+
+    {PRODUCTS.map((product) => {
+        if(cartItems[product.id] !== 0){
+            totalCartItems++;
+        }
+    })};
+    //--------------------------------------------------------
 
     const categories = [
         {id: 1, name: 'Carros, Motores, Barcos'},
@@ -61,7 +74,14 @@ const Navbar = () => {
                 
 
                 <Link to="/cart" className="flex app__pointer app__navbar_links"  style={{marginRight:'0'}}>
-                    <FiShoppingCart fontSize={30} color="black" className='profile_icon'></FiShoppingCart>
+                    <div className='app__navbar_profile_icon'>
+                        <FiShoppingCart fontSize={30} color="black" className='profile_icon'></FiShoppingCart>
+                        {totalCartItems > 0 ? (
+                            <p className='app__navbar_cartItems'>{totalCartItems}</p>
+                        ) : (
+                            <p style={{display: 'none'}}>{totalCartItems}</p>
+                        )}
+                    </div>
 
                     <div className='app__navbar_profile_cart' style={{margin: '0 .75rem'}}>
                         <span className="profile_link">Carrinho</span>

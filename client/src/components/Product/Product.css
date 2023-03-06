@@ -86,7 +86,7 @@ img, picture {
 .main__action_btn {
   background-color: #EB5C1F;
   color: white;
-  padding: 10px 30px;
+  padding: 0.75rem 2.5rem;
   border-radius: 15px;
   opacity: 0.8;
   transition: all 200ms ease-in-out;
@@ -109,11 +109,11 @@ img, picture {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.product img:hover {
+  transform: scale(1.025);
+}
 .product_img {
   transition: all 150ms ease-in-out;
-}
-.product:hover .product_img {
-  transform: scale(1.025);
 }
 .product_description {
   margin-top: 1rem;

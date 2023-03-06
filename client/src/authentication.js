@@ -20,7 +20,7 @@ const serverVerifyLogin = async(email, password, result) => {
         result: result,
     }
             
-    return new Promise((resolve,reject) => {
+    return await new Promise((resolve,reject) => {
         
         axios.post('/signIn', null, {params: params})
     
@@ -70,7 +70,7 @@ const signIn = async (email, password) => {
                 idToken: result.getIdToken().getJwtToken(), 
                 client_id: cognitoUser.pool.clientId
             }
-            resolve(serverVerifyLogin(email, password, params))
+            resolve( serverVerifyLogin(email, password, params))
 
           },
   

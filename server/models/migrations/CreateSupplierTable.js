@@ -3,6 +3,7 @@ const createUserTable = require('./CreateUserTable')
 
 const statement = "CREATE TABLE suppliers ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
+                  "uid varchar(100), " +  // não tem NOT NULL
                   "name varchar(255) NOT NULL, " +
                   "email varchar(255) NOT NULL, " +
                   "nif varchar(255) NOT NULL, " +

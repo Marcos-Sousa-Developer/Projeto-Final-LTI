@@ -81,6 +81,10 @@
             margin: 0.75rem;
         }
 
+        &_icon{
+            position: relative;
+        }
+
         .profile_link{
             color: black;
             position: relative;
@@ -118,6 +122,20 @@
         .app__navbar_links:hover .profile_icon >*{
             color: $orange;
         }
+    }
+
+    &_cartItems{
+        position: absolute;
+        top: -.35rem;
+        right: -.4rem;
+        padding: .125rem;
+        border-radius: 50%;
+        width: 1.25rem;
+        height: 1.25rem;
+        font-size: .75rem;
+        text-align: center;
+        background-color: $orange;
+        color: white;
     }
 }
 
