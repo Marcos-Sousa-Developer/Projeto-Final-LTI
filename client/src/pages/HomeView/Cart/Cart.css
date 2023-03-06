@@ -86,7 +86,7 @@ img, picture {
 .main__action_btn {
   background-color: #EB5C1F;
   color: white;
-  padding: 10px 30px;
+  padding: 8px 40px;
   border-radius: 15px;
   opacity: 0.8;
   transition: all 200ms ease-in-out;
@@ -232,10 +232,15 @@ img, picture {
 @media screen and (max-width: 800px) {
   .app__cart_content {
     grid-template-columns: 1fr;
-    grid-template-rows: 2fr 1fr;
   }
 }
 @media screen and (max-width: 600px) {
+  .app__cart {
+    margin: 1.5rem auto;
+  }
+  .app__cart_before_content_btn p {
+    font-size: 0.8rem;
+  }
   .app__cartItem {
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr;
@@ -258,7 +263,6 @@ img, picture {
     margin-bottom: 0.25rem;
   }
   .app__cart_subcontent {
-    align-self: center;
     padding: 1rem;
   }
   .app__cart_checkout_area {

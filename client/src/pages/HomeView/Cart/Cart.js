@@ -32,7 +32,7 @@ const Cart = () => {
                 </Link>
                 <button className='flex app__cart_before_content_btn' onClick={() => removeAllFromCart()}>
                   <FiTrash2></FiTrash2>
-                  Limpar carrinho
+                  <p>Limpar carrinho</p>
                 </button>
               </div>
             </div>

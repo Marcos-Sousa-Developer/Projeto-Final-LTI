@@ -75,6 +75,8 @@
 
 @media screen and (max-width: 650px) {
     .app__home{
+        margin: 1rem auto;
+
         img{
             display: none;
         }
@@ -90,3 +92,8 @@
     }
 }
 
+@media screen and (max-width: 450px) {
+    .app__home{
+        padding: 1rem;
+    }
+}

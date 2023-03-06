@@ -173,11 +173,19 @@
 @media screen and (max-width: 800px) {
     .app__cart_content{
         grid-template-columns: 1fr;
-        grid-template-rows: 2fr 1fr;
+        //grid-template-rows: 2fr 1fr;
     }
 }
 
 @media screen and (max-width: 600px) {
+    .app__cart{
+        margin: 1.5rem auto;
+
+        &_before_content_btn p{
+            font-size: .8rem;
+        }
+    }
+
     .app__cartItem{
         grid-template-columns: 1fr 2fr 1fr;
         grid-template-rows: 1fr;
@@ -206,7 +214,7 @@
     }
 
     .app__cart_subcontent{
-        align-self: center;
+        //align-self: center;
         padding: 1rem;
     }
 
