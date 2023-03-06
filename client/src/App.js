@@ -5,7 +5,7 @@ import Dashboard from "./pages/Admin/Dashboard";
 import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
 import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import Settings from "./pages/Admin/Settings";
-import {Home, Login, Cart, SignIn, SignUp, SupplierProfile, ConsumerProfile, NotFound} from './pages/HomeView/index';
+import {Home, LoginTest, Cart, SignIn, SignUp, SupplierProfile, ConsumerProfile, NotFound, RegisterTest} from './pages/HomeView/index';
 import { ShopContextProvider } from "./context/ShopContextProvider";
 import './index.css';
 import getClientType from "./hooks/getClientType";
@@ -44,7 +44,8 @@ function App() {
           }
           
           {/*----- Only for testing ----- */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<LoginTest />} />
+          <Route path="/register" element={<RegisterTest />} />
           {/* ------------- */}
           
           <Route path="/signin" element={<SignIn />} />

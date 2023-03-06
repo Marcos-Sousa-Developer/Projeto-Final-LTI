@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { authentication as auth}  from '../../authentication'
 
-function Login() { 
+function LoginTest() { 
 
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null) 
@@ -35,4 +35,4 @@ function Login() {
   );
 }
 
-export default Login
+export default LoginTest
