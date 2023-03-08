@@ -1,6 +1,6 @@
 let pool = require('../../config/dbConfigLocal')
 
-const statement = "DROP TABLE IF EXISTS suppliers; ";
+const statement = "DROP TABLE IF EXISTS suppliers";
 
 const trigger_insert = "DROP TRIGGER IF EXISTS add_supplier_to_userTable; " 
 

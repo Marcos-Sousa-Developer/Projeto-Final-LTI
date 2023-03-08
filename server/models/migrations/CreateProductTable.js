@@ -1,12 +1,17 @@
 let pool = require('../../config/dbConfigLocal')
 
 const statement = "CREATE TABLE products ( " +
-                  "EAN int NOT NULL, " +  //char(13) não seria melhor?
+                  "EAN int NOT NULL, " +
                   "name varchar(255) NOT NULL, " + 
-                  "data_producao varchar(255) NOT NULL, " + //passar para Date
-                  "descricao varchar(255) NOT NULL, " + //verificar o numero de carateres possiveis
-                  //falta idcategoria fk?
-                  "PRIMARY KEY (EAN))"; 
+                  "production_date DATE NOT NULL, " +
+                  "description varchar(500) NOT NULL, " +
+                  "id_category int, " + //ADD NOT NULL
+                  "id_production_unit int, " + 
+                  "PRIMARY KEY (EAN))";
+                  //"PRIMARY KEY (EAN), " +
+                  //"FOREIGN KEY (id_category) REFERENCES categories(id), "; 
+                  //"FOREIGN KEY (id_production_unit) REFERENCES productionUnits(id))";
+
 
 pool.query(statement, function(error, result) {
 

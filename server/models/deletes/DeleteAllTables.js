@@ -59,3 +59,43 @@ exec('node ./models/deletes/DeleteCharacteristicTable.js',
              console.log('exec error: ' + error);
         }
 });
+
+exec('node ./models/deletes/DeleteSupplierProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/deletes/DeleteOrderTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/deletes/DeleteVehicleTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/deletes/DeleteProductionUnitTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});

@@ -3,15 +3,15 @@ const createUserTable = require('./CreateUserTable')
 
 const statement = "CREATE TABLE suppliers ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
-                  "uid varchar(100), " +  // não tem NOT NULL
+                  "uid varchar(100), " +
                   "name varchar(255) NOT NULL, " +
                   "email varchar(255) NOT NULL, " +
                   "nif varchar(255) NOT NULL, " +
                   "mobile_number varchar(255) NOT NULL, " +
                   "address varchar(255) NOT NULL, " +
                   "account_status BOOLEAN NOT NULL, " + 
-                  "products_list varchar(255), " +   //add NOT NULL
-                  "orders varchar(255), " +      //add NOT NULL
+                  "products_list varchar(255), " + //add NOT NULL
+                  "orders varchar(255), " + //add NOT NULL
                   "PRIMARY KEY (id))";    
 
 //AFTER INSERT NEW SUPPLIERS AUTOMATICALY INSERT ON USER TABLE

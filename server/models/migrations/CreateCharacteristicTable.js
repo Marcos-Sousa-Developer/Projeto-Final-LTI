@@ -3,9 +3,10 @@ let pool = require('../../config/dbConfigLocal')
 const statement = "CREATE TABLE characteristics ( " +
                   "id int NOT NULL AUTO_INCREMENT, " + 
                   "name varchar(255) NOT NULL, " + 
-                  "id_category int, " +  //não está no fake data porque se faz update posteriormente
-                  "PRIMARY KEY (id), " +
-                  "FOREIGN KEY (id_category) REFERENCES categories(id) ON DELETE CASCADE)"; 
+                  "id_category int, " + //ADD NOT NULL
+                  "PRIMARY KEY (id))";
+                  //"PRIMARY KEY (id), " +
+                  //"FOREIGN KEY (id_category) REFERENCES categories(id))"; 
 
 pool.query(statement, function(error, result) {
 

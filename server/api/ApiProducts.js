@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router(); 
 const productController = require('../controllers/ProductController');
 
-//Get all consumers
+//Get all products
 router.get('/', productController.getAllProducts)
 
-//Delete consumer by id
-router.delete('/:ean', productController.deleteProductByID)
+//Delete product by id
+router.delete('/:EAN', productController.deleteProductByEAN)
 
-//Add consumer
+//Add product
 router.post('/product', productController.insertProduct)
 
-//Update consumer by id
-router.put('/:ean', productController.updateProductByID) 
+//Update product by id
+router.put('/:EAN', productController.updateProductByEAN) 
 
 module.exports = router

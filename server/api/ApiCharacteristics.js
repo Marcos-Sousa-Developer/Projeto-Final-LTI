@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router(); 
 const characteristicController = require('../controllers/CharacteristicController');
 
-//Get all consumers
+//Get all characteristics
 router.get('/', characteristicController.getAllCharacteristics)
 
-//Delete consumer by id
+//Delete characteristic by id
 router.delete('/:id', characteristicController.deleteCharacteristicByID)
 
-//Add consumer
+//Add characteristic
 router.post('/characteristic', characteristicController.insertCharacteristic)
 
-//Update consumer by id
+//Update characteristic by id
 router.put('/:id', characteristicController.updateCharacteristicByID) 
 
 module.exports = router

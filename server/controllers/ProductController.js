@@ -25,19 +25,19 @@ const getAllProducts = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const deleteProductByID = async function (req, res) {
+const deleteProductByEAN = async function (req, res) {
 
-    const statement = "DELETE FROM products WHERE EAN = " + req.params.ean
+    const statement = "DELETE FROM products WHERE EAN = " + req.params.EAN
 
     let result = await dbConnection(statement)
 
     if (result === "error") {
-        return res.status(500).json("Not possible to delete the product with ean " + req.params.ean);
+        return res.status(500).json("Not possible to delete the product with EAN " + req.params.EAN);
     } else if (result.affectedRows == 0) {
-        return res.send("Product with EAN " + req.params.ean + " does not exist in the database");
+        return res.send("Product with EAN " + req.params.EAN + " does not exist in the database");
     }
 
-    return res.send("Product with EAN " + req.params.ean + " has been deleted");
+    return res.send("Product with EAN " + req.params.EAN + " has been deleted");
 }
 
 /**
@@ -48,9 +48,9 @@ const deleteProductByID = async function (req, res) {
  */
 const insertProduct = async function (req, res) {
 
-    const data = [req.query.ean, req.query.name, req.query.data_producao, req.query.descricao];
+    const data = [req.query.EAN, req.query.name, req.query.production_date, req.query.description];
 
-    const statement = "INSERT INTO products (EAN, name, data_producao, descricao) VALUES ?";
+    const statement = "INSERT INTO products (EAN, name, production_date, description) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
@@ -67,9 +67,9 @@ const insertProduct = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const updateProductByID = async function (req, res) { 
+const updateProductByEAN = async function (req, res) { 
 
-    const statement = `UPDATE products SET name='${req.query.name}', data_producao='${req.query.data_producao}', descricao='${req.query.descricao}' WHERE EAN='${parseInt(req.params.ean)}'`;
+    const statement = `UPDATE products SET name='${req.query.name}', production_date='${req.query.production_date}', description='${req.query.description}' WHERE EAN='${parseInt(req.params.EAN)}'`;
 
     let result = await dbConnection(statement);
 
@@ -80,4 +80,4 @@ const updateProductByID = async function (req, res) {
     return res.send("Product has been updated");
 }
 
-module.exports = {getAllProducts, deleteProductByID, insertProduct, updateProductByID}
+module.exports = {getAllProducts, deleteProductByEAN, insertProduct, updateProductByEAN}

@@ -49,3 +49,43 @@ exec('node ./models/resets/ResetCharacteristicTable.js',
              console.log('exec error: ' + error); 
         }
 });
+
+exec('node ./models/resets/ResetSupplierProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/resets/ResetOrderTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/resets/ResetVehicleTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/resets/ResetProductionUnitTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});

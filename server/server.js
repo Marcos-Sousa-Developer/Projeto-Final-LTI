@@ -13,6 +13,9 @@ app.use('/api/suppliers' , require('./api/ApiSuppliers'))
 app.use('/api/products' , require('./api/ApiProducts'))
 app.use('/api/categories' , require('./api/ApiCategories'))
 app.use('/api/characteristics' , require('./api/ApiCharacteristics'))
+app.use('/api/orders' , require('./api/ApiOrders'))
+app.use('/api/vehicles' , require('./api/ApiVehicles'))
+app.use('/api/productionUnits' , require('./api/ApiProductionUnits'))
 
 // create a GET route
 app.get('/api', (req, res) => { //Line 9

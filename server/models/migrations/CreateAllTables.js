@@ -49,3 +49,43 @@ exec('node ./models/migrations/CreateCharacteristicTable.js',
              console.log('exec error: ' + error);
         }
 });
+
+exec('node ./models/migrations/CreateSupplierProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/migrations/CreateOrderTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/migrations/CreateVehicleTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/migrations/CreateProductionUnitTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});

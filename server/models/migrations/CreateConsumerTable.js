@@ -1,21 +1,20 @@
 let pool = require('../../config/dbConfigLocal')
-
 const createUserTable = require('./CreateUserTable')
 
 const statement = "CREATE TABLE consumers ( " +
                   "id int NOT NULL AUTO_INCREMENT, " + 
-                  "uid varchar(100), " + // não tem NOT NULL
+                  "uid varchar(100), " +
                   "name varchar(255) NOT NULL, " + 
                   "email varchar(255) NOT NULL, " +
-                  "nif varchar(255) NOT NULL, " + //verificar o numero de carateres possiveis
-                  "mobile_number varchar(255) NOT NULL, " + //verificar o numero de carateres possiveis
+                  "nif varchar(255) NOT NULL, " +
+                  "mobile_number varchar(255) NOT NULL, " +
                   "address varchar(255) NOT NULL, " + 
                   "account_status BOOLEAN NOT NULL, " + 
-                  "shopping_cart varchar(255), " +   //add NOT NULL
-                  "orders varchar(255), " +   //add NOT NULL     Coloquei assim, em vez de encomendas recebidas e por receber, porque depois podemos ir ver ao status da encomenda
+                  "shopping_cart varchar(255), " + //add NOT NULL
+                  "orders varchar(255), " + //add NOT NULL     Coloquei assim, em vez de encomendas recebidas e por receber, porque depois podemos ir ver ao status da encomenda
                   "PRIMARY KEY (id))"; 
 
-//AFTER INSERT NEW CONSUMER AUTOMATICALY INSERT ON USER TABLE
+//AFTER INSERT NEW CONSUMERS AUTOMATICALY INSERT ON USER TABLE
 const trigger_insert = "CREATE TRIGGER add_consumer_to_userTable " + 
                        "After INSERT ON consumers " + 
                        "FOR EACH ROW " + 

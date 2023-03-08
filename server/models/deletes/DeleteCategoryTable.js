@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfigLocal') 
+let pool = require('../../config/dbConfigLocal')
 
 const statement = "DROP TABLE IF EXISTS categories";
 
