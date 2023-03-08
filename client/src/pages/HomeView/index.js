@@ -1,6 +1,7 @@
 import Home from './Home/Home'
 import Cart from './Cart/Cart';
-import Login from './Login';
+import LoginTest from './LoginTest';
+import RegisterTest from './RegisterTest';
 import SupplierProfile from './SupplierProfile/SupplierProfile';
 import ConsumerProfile from './ConsumerProfile/ConsumerProfile';
 import SignIn from './SignIn';
@@ -10,7 +11,8 @@ import NotFound from './NotFound/NotFound';
 export {
     Home,
     Cart,
-    Login,
+    LoginTest,
+    RegisterTest,
     SupplierProfile,
     ConsumerProfile,
     SignIn,

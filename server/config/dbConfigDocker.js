@@ -2,6 +2,7 @@ const path = require('path');
 require("dotenv").config({ path: path.resolve(__dirname, '..', '.env') });
 const mysql = require('mysql2');
 
+//pool config
 const pool = mysql.createPool({
     connectionLimit: 100, //important
     host: process.env.DB_HOST,
@@ -11,13 +12,14 @@ const pool = mysql.createPool({
     port: process.env.DB_PORT,
 });
 
+/**
+ * Get connection with pool db
+ */
 pool.getConnection((error) => {
 
     if (error) { 
         throw error + '\n' + 'Database connected unsuccessfully'
     } 
-    
-    console.log('Database connected successfully')
 })
 
 module.exports = pool;
