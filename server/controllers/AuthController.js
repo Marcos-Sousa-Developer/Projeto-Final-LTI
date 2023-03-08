@@ -140,7 +140,7 @@ const userType = (req, res) => {
 
   console.log(req.cookies)
   
-  return res.send("consumer");
+  return res.send("supplier"); //Trocar para consumer se quiser ir 
 }
 
-module.exports = {signIn, signUp,userType}
+module.exports = {signIn, userType}
