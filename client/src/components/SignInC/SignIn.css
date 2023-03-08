@@ -95,28 +95,34 @@ img, picture {
   opacity: 1;
 }
 
-h1 {
-  margin-top: 6rem;
-  margin-left: 10%;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 40px;
-  line-height: 60px;
-}
-
 .app__SignIn {
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
+  margin: 1rem auto;
+}
+.app__SignIn_rectangle1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: inherit;
+}
+.app__SignIn_rectangle2 {
+  position: absolute;
+  display: none;
+  bottom: 0;
+  left: 0;
 }
 .app__SignIn_box {
-  padding: 4rem 0rem;
-  width: 80%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  border-radius: 15px;
+  padding: 3rem 1.5rem;
+  width: 90%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+}
+.app__SignIn_box > * {
+  padding: 2rem;
+  align-self: center;
 }
 .app__SignIn_box input {
   outline: none;
@@ -126,9 +132,17 @@ h1 {
   margin-top: 1rem;
   margin-bottom: 0.05rem;
 }
+.app__SignIn_box2 p {
+  text-align: center;
+}
+.app__SignIn_box3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .app__SignIn_box11 {
   border: 3px solid #EEEEEE;
-  border-radius: 20rem;
+  border-radius: 10px;
   padding: 0.5rem 0.75rem;
   margin: 0;
 }
@@ -136,23 +150,17 @@ h1 {
   color: white;
   width: 100%;
   background-color: #EB5C1F;
-  border-radius: 20rem;
+  border-radius: 10px;
   padding: 0.5rem 0.75rem;
   margin: 0;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
 }
 
-.app__SignIn_box3 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 .app__SignIn_box30 {
   color: white;
   width: 100%;
-  border-radius: 20rem;
+  border-radius: 10px;
   padding: 0.5rem 4rem;
   margin: 0;
 }
@@ -169,4 +177,24 @@ h1 {
 .ButtonTwitter {
   background-color: #1DA1F2;
   margin-top: 1rem;
+}
+
+@media screen and (min-width: 1450px) {
+  .app__SignIn_box {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .app__SignIn_box {
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr auto 1fr;
+  }
+}
+@media screen and (max-width: 500px) {
+  .app__SignIn_box {
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: 0px 0px 0px 0px #fff;
+  }
 }/*# sourceMappingURL=SignIn.css.map */
