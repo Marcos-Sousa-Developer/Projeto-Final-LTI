@@ -43,7 +43,7 @@ const SignInC = () => {
                             </div>
                             <div className='app__SignIn_box13'>
                             <button className='main__action_btn' type='submit'>Login</button>
-                            <p>Não tem conta? Sign Up.</p>
+                            <p>Não tem conta? Registe-se <span>aqui</span>.</p>
                             </div>
                         </form>
                     </div>
