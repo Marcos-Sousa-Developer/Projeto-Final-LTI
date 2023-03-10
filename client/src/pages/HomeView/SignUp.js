@@ -1,6 +1,6 @@
 import React from 'react'
-import { Footer } from '../../components/';
-import { SignUpC } from '../../components/';
+import { Footer } from '../../components';
+import { SignUpC } from '../../components';
 
 const SignUp = () => {
   return (
