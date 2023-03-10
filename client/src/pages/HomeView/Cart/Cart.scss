@@ -5,7 +5,14 @@
 
     h5{
         text-align: center;
-        margin: 3rem 0 0 0;
+        margin: .5rem 0 0 0;
+    }
+
+    .empty_cart_img{
+        margin: 1rem auto 0;
+        display: flex;
+        width: 300px;
+        height: inherit;
     }
 
     &_before_content{
@@ -178,6 +185,11 @@
 }
 
 @media screen and (max-width: 600px) {
+    .app__cart .empty_cart_img {
+        width: 200px;
+        height: inherit;
+    }
+
     .app__cart{
         margin: 1.5rem auto;
 

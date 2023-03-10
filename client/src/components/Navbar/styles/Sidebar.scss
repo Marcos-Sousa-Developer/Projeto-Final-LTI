@@ -1,0 +1,74 @@
+// Variables
+
+$transition-sidebar:        all .3s ease-in-out 0s;
+$overlay-bg:                hsla(0, 0%, 9%, 0.863);
+$sidebar-bg:                white;
+
+// Button
+
+#sidebar-toggler{
+  display: inline-block;
+  cursor: pointer;
+}
+
+// Overlay
+
+.overlay{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: $overlay-bg;
+  display: none;
+  opacity: 0;
+
+  &.active{
+    display: block;
+    opacity: 1;
+    margin: 0;
+  }
+}
+
+// Sidebar
+
+.app__sidebar_content{
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.app__sidebar{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  min-width: 15rem;
+  max-width: 25rem;
+  padding: 2rem;
+  z-index: 1000;
+  background: $sidebar-bg;
+  transform: translateX(-100%);
+  //overflow: auto;
+
+  &.active{
+    transform: translateX(0%);
+    margin: 0;
+  }
+
+  &_navs{
+    grid-column: span 2;
+
+    ul{
+      margin: 0;
+      padding: 0;
+      font-weight: lighter;
+    
+      & > *{
+        line-height: 2.5rem;
+      }
+    }
+  }
+}

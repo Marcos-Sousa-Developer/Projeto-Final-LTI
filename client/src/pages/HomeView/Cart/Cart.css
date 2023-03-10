@@ -6,6 +6,7 @@
   color: black;
   background-color: white;
   font-family: "Poppins", sans-serif;
+  list-style: none;
 }
 
 img, picture {
@@ -100,7 +101,13 @@ img, picture {
 }
 .app__cart h5 {
   text-align: center;
-  margin: 3rem 0 0 0;
+  margin: 0.5rem 0 0 0;
+}
+.app__cart .empty_cart_img {
+  margin: 1rem auto 0;
+  display: flex;
+  width: 300px;
+  height: inherit;
 }
 .app__cart_before_content {
   display: flex;
@@ -235,6 +242,10 @@ img, picture {
   }
 }
 @media screen and (max-width: 600px) {
+  .app__cart .empty_cart_img {
+    width: 200px;
+    height: inherit;
+  }
   .app__cart {
     margin: 1.5rem auto;
   }

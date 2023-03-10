@@ -1,27 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart, FiAlignLeft, FiUser, FiX } from 'react-icons/fi';
-import Searchbar from './Searchbar/Searchbar';
-import images from '../../assets/images.js';
-import './Navbar.css';
 
+import images from '../../assets/images.js';
 import { PRODUCTS } from '../../assets/products';
 import { ShopContext } from '../../context/ShopContextProvider';
-import { PriceDisplay } from '../../utilities/formatCurrency';
+import Searchbar from './Searchbar/Searchbar';
+import './styles/Sidebar.css';
+import './styles/Navbar.css';
+//import { PriceDisplay } from '../../utilities/formatCurrency';
 
 const Navbar = () => {
-    const [toggleMenu, setToggleMenu] = useState(false);
 
-    //--------------------------------------------------------
-    const { cartItems } = useContext(ShopContext);
-    let totalCartItems = 0;
-
-    {PRODUCTS.map((product) => {
-        if(cartItems[product.id] !== 0){
-            totalCartItems++;
-        }
-    })};
-    //--------------------------------------------------------
+    //---------------------------SideBar--------------------------
 
     const categories = [
         {id: 1, name: 'Carros, Motores, Barcos'},
@@ -34,26 +25,70 @@ const Navbar = () => {
         {id: 8, name: 'Outros'},
     ];
 
+    const Sidebar = ({ className }) => {
+        return(
+          <div className={ `app__sidebar ${className}` }>
+            <div className="app__sidebar_content">
+                <img src={images.logo} alt="" />
+                <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggle}></FiX>
+                <div className="app__sidebar_navs">
+                    <ul>
+                        {categories.map(category => {
+                            return (
+                                <li key={category.id}><Link to="/cart" className='app__text_effect'>{category.name}</Link></li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            </div>
+          </div>
+        )
+    }
+
+    const ButtonToggle = (props) => {
+        return(
+            <FiAlignLeft  
+            fontSize={30} 
+            color="black" 
+            className='app__pointer app__icon_effect' 
+            id="sidebar-toggler" 
+            onClick={ props.onClick } 
+            style={{marginBottom: '.75rem'}}>
+            </FiAlignLeft>
+        )
+    }
+
+    const Overlay = ({ className, onClick}) => {
+        return(
+          <div className={ className } onClick={ onClick }></div>
+        )
+    }
+      
+    //const {useState} = React;
+
+    const [active, setActive] = useState(false);
+    const toggle = () => setActive(!active);
+
+    //--------------------------Cart-----------------------------
+
+    const { cartItems } = useContext(ShopContext);
+    let totalCartItems = 0;
+
+    {PRODUCTS.map((product) => {
+        if(cartItems[product.id] !== 0){
+            totalCartItems++;
+        }
+    })};
+
+    //----------------------------------------------------------
+    
     return (
+        <>
         <nav className='app__navbar main__container'>
             <div className='app__navbar_menu'>
-                <FiAlignLeft fontSize={30} className='app__pointer app__icon_effect' onClick={() => setToggleMenu(true)}></FiAlignLeft>
-                {toggleMenu && (
-                    <div className="app__navbar_menu_categories slide-right">
-                        <div className='app_categories_wrapper'>
-                            <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={() => setToggleMenu(false)}></FiX>
-                            <img src={images.logo} alt="" className="app__logo"/>
-                            <div></div>
-                            <ul className='app_categories'>
-                                {categories.map(category => {
-                                    return (
-                                        <li key={category.id}><Link to="/" className='app__text_effect'>{category.name}</Link></li>
-                                    );
-                                })}
-                            </ul>
-                        </div>
-                    </div>
-                )}
+                <ButtonToggle onClick={toggle}/>
+                <Overlay className={ active ? 'overlay active' : 'overlay'} onClick={toggle}/>
+                <Sidebar className={ active ? 'slide-right active' : null}/>
                 <Link to='/'><img src={images.logo} alt="" className="app__logo"/></Link>
             </div>
 
@@ -92,7 +127,8 @@ const Navbar = () => {
                 
             </div>
         </nav>
-  )
+        </>
+    )
 }
 
 export default Navbar
