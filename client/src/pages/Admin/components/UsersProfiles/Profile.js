@@ -3,7 +3,7 @@ import React from 'react'
 function Profile() {
   return (
     <div className="col-xxl-4">
-      <h5 className="card-title">Perfil </h5>
+      <h5 className="card-title"><i class="bi bi-person-circle"></i> Perfil Público </h5>
       <div className="card" style={{ textAlign: "center" }}>
           <br></br>
           <img
@@ -13,11 +13,11 @@ function Profile() {
           style={{ width: "55%" }}
           ></img>
           <div className="card-body">
-          <h5 className="card-title">Anderson Bandera</h5>
-          <p className="card-text">GreaterGoods Admin</p>
-          <p className="card-text">fcXXXXX, Faculdade de Ciências da UL</p>
+          <h5 className="card-title"><strong>Anderson Bandera</strong></h5>
+          <p className="card-text"><strong>GreaterGoods Admin</strong></p>
+          <p className="card-text">Faculdade de Ciências da UL</p>
           <label><strong>Email Público:</strong></label>
-          <p className="card-text"> anderson_support@greatergoods.fcul</p>
+          <p className="card-text"> supportXXXXX@greatergoods.fcul</p>
           </div>
       </div>
     </div>

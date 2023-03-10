@@ -2040,8 +2040,8 @@ progress {
     --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
     --bs-table-active-color: var(--bs-body-color);
     --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-    --bs-table-hover-color: var(--bs-body-color);
-    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    --bs-table-hover-color: #EB5C1F;
+    --bs-table-hover-bg: rgba(247, 155, 93, 0.075);
     width: 100%;
     margin-bottom: 1rem;
     color: var(--bs-table-color);
@@ -2349,8 +2349,8 @@ progress {
 }
 
 .form-control:disabled {
-    background-color: #e9ecef;
-    opacity: 1
+    background-color: #fad2c0;
+    opacity: 1;
 }
 
 .form-control::-webkit-file-upload-button {

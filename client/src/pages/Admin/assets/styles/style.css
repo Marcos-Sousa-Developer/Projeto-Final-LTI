@@ -745,6 +745,12 @@ button {
 .sidebar-nav .nav-link:hover i {
   color: #EB5C1F;
 }
+/* MY CUSTOM */
+.bi {
+  color: #EB5C1F;
+}
+
+/*------*/
 
 .sidebar-nav .nav-link .bi-chevron-down {
   margin-right: 0;

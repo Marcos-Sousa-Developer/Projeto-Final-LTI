@@ -44,8 +44,10 @@ function Aside() {
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-item">
           <span className="nav-link">
-            <i className="bi bi-grid"/>
-            <span>Painel de Controlo</span>
+            <Link reloadDocument to="/admin">
+              <i className="bi bi-grid"/>
+              <span>Painel de Controlo</span>
+              </Link>
           </span>
         </li>
         

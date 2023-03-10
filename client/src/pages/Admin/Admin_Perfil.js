@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Profile from './components/UsersProfiles/Profile'
 import UserData from './components/UsersProfiles/UserData' 
+import { Link } from "react-router-dom";
 
 function Admin_Perfil() {
 
@@ -34,9 +35,17 @@ function Admin_Perfil() {
       <Aside></Aside>
       <main id="main" className="main">
         <div className="pagetitle">
-          <h1><i class="bi bi-person"></i> Meu Perfil</h1>
+          <h1>Meu Perfil</h1>
+          <nav>
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link to="/admin" reloadDocument >Home</Link>
+              </li>
+              <li className="breadcrumb-item active">Meu Perfil</li>
+            </ol>
+          </nav>
         </div>
-        <br></br>
+        
         <section className="section dashboard">
           <div className="col-lg-12">
             <div className="card">

@@ -13,7 +13,7 @@ function getClientType(url) {
         (
            async function(){
             
-            if(cookies.userSession !== null) { 
+            if(cookies.userSession) { 
                 
                 await axios.post(url).then((response) => {
             
