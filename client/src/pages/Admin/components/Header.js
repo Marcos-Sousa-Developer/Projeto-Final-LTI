@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
+import images from '../../../assets/images.js';
 import NavBar from './NavBar'
 import { Link } from "react-router-dom";
 
@@ -23,8 +24,8 @@ function Header() {
         {/* Logo */}
         <div className="d-flex align-items-center justify-content-between">
             <Link to="/admin" className="logo d-flex align-items-center">
-                <img src={require("../assets/images/admin_logo.png")} alt="" />
-                <span className="d-none d-lg-block">GreaterGoods</span>
+                <span className="d-none d-lg-block"><img src={require("../assets/images/admin_logo.png")} alt="" /></span>
+                <span><img src={images.logo} alt="app_logo"/></span>
             </Link>
             <button onClick={() => toggleAside()}><i className="bi bi-list toggle-sidebar-btn" /></button>
         </div>{/* End Logo */}

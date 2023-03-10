@@ -14,7 +14,7 @@ function Navigator({users, user_type}) {
 
   const [minNavigation, setMinNavigation] = useState(0);
 
-  const [maxNavigation, setMaxNavigation] = useState(10);
+  const [maxNavigation, setMaxNavigation] = useState(5);
 
   const increment = (newCurrentStep) => {
     if ((newCurrentStep) => 1 && newCurrentStep <= Math.ceil(users.length / 10)) {
@@ -23,17 +23,21 @@ function Navigator({users, user_type}) {
       setCurrentStep(newCurrentStep);
 
       if (newCurrentStep == navigationArray[navigationArray.length - 1] && newCurrentStep !== Math.ceil(users.length / 10)) {
-        setMinNavigation(newCurrentStep - 6);
-        setMaxNavigation(maxNavigation + 5);
+        setMinNavigation(newCurrentStep - 3);
+        setMaxNavigation(maxNavigation + 2);
 
       } else if (newCurrentStep == navigationArray[0] && newCurrentStep !== 1) {
-        let newMinNavigation = newCurrentStep - 6;
+        let newMinNavigation = newCurrentStep - 3;
 
-        if (newCurrentStep == 5) {
-          setMinNavigation((newMinNavigation += 1));
+        if(newCurrentStep <= 5){
+          newMinNavigation = 0
         }
+       /* if (newCurrentStep == 5) {
+          setMinNavigation((newMinNavigation += 1));
+        }*/
+
         setMinNavigation(newMinNavigation);
-        setMaxNavigation(maxNavigation - 5);
+        setMaxNavigation(maxNavigation - 2);
       }
     }
   };
@@ -52,24 +56,28 @@ function Navigator({users, user_type}) {
     
     return (
       <>
-        <table className="table table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nome</th>
-              <th scope="col">Email</th>
-              <th scope="col">Estado</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.slice(from, to).map((user) => (
-              <DisplayModal user={user} user_type={user_type}key={user.id} />
-            ))}
-          </tbody>
-        </table>
-        <div style={{display:"inline-block"}}>
-          <nav>
+        <div className="card top-selling overflow-auto">
+          <div className="card-body">
+            <table className="table table-hover">
+              <thead className="thead-dark">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.slice(from, to).map((user) => (
+                  <DisplayModal user={user} user_type={user_type}key={user.id} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div style={{textAlign: "center"}}>
+          <nav className='navigationBar'>
             <ul className="pagination justify-content-center">
               <li className="page-item">
                 {currentStep !== 1 && (

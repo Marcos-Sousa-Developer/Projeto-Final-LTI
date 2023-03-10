@@ -33,7 +33,7 @@ function TopVendas() {
           <h5 className="card-title">
             Top 5 de Produtos vendidos <span>| Today</span>
           </h5>
-          <table className="table table-borderless">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">Preview</th>
@@ -51,12 +51,12 @@ function TopVendas() {
                   </a>
                 </th>
                 <td>
-                  <a href="#" className="text-primary fw-bold">
+                  <a href="#">
                     Air jordan fake
                   </a>
                 </td>
                 <td>$64</td>
-                <td className="fw-bold">124</td>
+                <td >124</td>
                 <td>$5,828</td>
               </tr>
               <tr>
@@ -66,12 +66,12 @@ function TopVendas() {
                   </a>
                 </th>
                 <td>
-                  <a href="#" className="text-primary fw-bold">
+                  <a href="#">
                     Apple Watch
                   </a>
                 </td>
                 <td>$46</td>
-                <td className="fw-bold">98</td>
+                <td >98</td>
                 <td>$4,508</td>
               </tr>
               <tr>
@@ -81,12 +81,12 @@ function TopVendas() {
                   </a>
                 </th>
                 <td>
-                  <a href="#" className="text-primary fw-bold">
+                  <a href="#">
                     Tira Odor
                   </a>
                 </td>
                 <td>$59</td>
-                <td className="fw-bold">74</td>
+                <td >74</td>
                 <td>$4,366</td>
               </tr>
               <tr>
@@ -96,12 +96,12 @@ function TopVendas() {
                   </a>
                 </th>
                 <td>
-                  <a href="#" className="text-primary fw-bold">
+                  <a href="#">
                     Oculos gucci
                   </a>
                 </td>
                 <td>$32</td>
-                <td className="fw-bold">63</td>
+                <td >63</td>
                 <td>$2,016</td>
               </tr>
               <tr>
@@ -111,12 +111,12 @@ function TopVendas() {
                   </a>
                 </th>
                 <td>
-                  <a href="#" className="text-primary fw-bold">
+                  <a href="#">
                     JBL V2.6
                   </a>
                 </td>
                 <td>$79</td>
-                <td className="fw-bold">41</td>
+                <td >41</td>
                 <td>$3,239</td>
               </tr>
             </tbody>

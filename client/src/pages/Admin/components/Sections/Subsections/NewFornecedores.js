@@ -3,7 +3,7 @@ import React from 'react'
 function NewFornecedores() {
   return (
     <div className="col-12">
-    <div className="card">
+    <div className="card recent-sales overflow-auto">
       <div className="filter">
         <a className="icon" href="#" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -17,7 +17,8 @@ function NewFornecedores() {
       </div>
       <div className="card-body">
         <h5 className="card-title">Novos Fornecedores <span>/Hoje</span></h5>
-        <table className="table">
+        <div id="reportsChart"></div>
+        <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>

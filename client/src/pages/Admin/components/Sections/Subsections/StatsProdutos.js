@@ -39,7 +39,7 @@ function StatsProdutos() {
             </div>
             <div className="ps-3">
               <h6>1244</h6>
-              <span className="text-danger small pt-1 fw-bold">12%</span>{" "}
+              <span className="text-success small pt-1 fw-bold">12%</span>{" "}
               <span className="text-muted small pt-2 ps-1">decrease</span>
             </div>
           </div>

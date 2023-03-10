@@ -33,7 +33,7 @@ function NewEncomendas() {
           <h5 className="card-title">
             Encomendas <span>| Hoje</span>
           </h5>
-          <table className="table table-borderless datatable">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -50,7 +50,7 @@ function NewEncomendas() {
                 </th>
                 <td>Brandon Jacob</td>
                 <td>
-                  <a href="#" className="text-primary">
+                  <a href="#">
                     At praesentium minu
                   </a>
                 </td>
@@ -65,7 +65,7 @@ function NewEncomendas() {
                 </th>
                 <td>Bridie Kessler</td>
                 <td>
-                  <a href="#" className="text-primary">
+                  <a href="#">
                     Blanditiis dolor omnis similique
                   </a>
                 </td>
@@ -76,11 +76,11 @@ function NewEncomendas() {
               </tr>
               <tr>
                 <th scope="row">
-                  <a href="#">#2049</a>
+                  <a href="#">2049</a>
                 </th>
                 <td>Ashleigh Langosh</td>
                 <td>
-                  <a href="#" className="text-primary">
+                  <a href="#">
                     At recusandae consectetur
                   </a>
                 </td>
@@ -91,11 +91,11 @@ function NewEncomendas() {
               </tr>
               <tr>
                 <th scope="row">
-                  <a href="#">#2644</a>
+                  <a href="#">2644</a>
                 </th>
                 <td>Angus Grady</td>
                 <td>
-                  <a href="#" className="text-primar">
+                  <a href="#">
                     Ut voluptatem id earum et
                   </a>
                 </td>
@@ -106,11 +106,11 @@ function NewEncomendas() {
               </tr>
               <tr>
                 <th scope="row">
-                  <a href="#">#2644</a>
+                  <a href="#">2644</a>
                 </th>
                 <td>Raheem Lehner</td>
                 <td>
-                  <a href="#" className="text-primary">
+                  <a href="#" >
                     Sunt similique distinctio
                   </a>
                 </td>

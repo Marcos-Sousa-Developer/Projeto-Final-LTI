@@ -6,7 +6,7 @@ function Footer() {
       <div className="copyright">
         © Copyright{" "}
         <strong>
-          <span>Fcul Grupo 1</span>
+          <span>Fcul Grupo01</span>
         </strong>
         . All Rights Reserved
       </div>

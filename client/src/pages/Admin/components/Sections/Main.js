@@ -8,6 +8,7 @@ import StatsProdutos from "./Subsections/StatsProdutos";
 import SupportActivity from "./Subsections/SupportsActivity";
 import MessagesActivity from "./Subsections/MessagesActivity";
 import TopVendas from "./Subsections/TopVendas";
+import { Link } from "react-router-dom";
 
 function Main() {
   return (
@@ -17,7 +18,7 @@ function Main() {
         <nav>
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a href="index.html">Home</a>
+              <Link to="/admin" reloadDocument >Home</Link>
             </li>
             <li className="breadcrumb-item active">Painel de Controlo</li>
           </ol>

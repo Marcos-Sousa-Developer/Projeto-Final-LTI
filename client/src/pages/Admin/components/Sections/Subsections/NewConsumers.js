@@ -3,7 +3,7 @@ import React from "react";
 function NewConsumers() {
   return (
     <div className="col-12">
-      <div className="card">
+      <div className="card recent-sales overflow-auto">
         <div className="filter">
           <a className="icon" href="#" data-bs-toggle="dropdown">
             <i className="bi bi-three-dots" />
