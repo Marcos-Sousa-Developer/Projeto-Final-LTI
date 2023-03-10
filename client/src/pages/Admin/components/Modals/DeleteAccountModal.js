@@ -36,8 +36,8 @@ function DeleteAccountModal({isShowingModal}) {
                 <div className="card" style={{textAlign: "center" }}>
                     <br></br>
                     <div className="card-body">
-                        <h2 style={{color:"red"}}>Apagar conta?</h2>
-                        <p className="card-text"><strong>Apagar a tua conta é um ato permanente e não pode ser revertido.</strong></p>
+                        <h2 style={{color:"black"}}>Apagar conta?</h2>
+                        <p className="card-text">Apagar a tua conta é um ato permanente e não pode ser revertido.</p>
                         <p className="card-text" style={{color:"red", fontWeight: "bold"}}>Tens mesmo a certeza?</p>
                     </div>
                 </div>

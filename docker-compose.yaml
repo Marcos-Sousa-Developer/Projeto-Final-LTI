@@ -35,7 +35,10 @@ services:
     #when you need to work on a project outside the Docker container
     stdin_open: true
     #when you need to work on a project inside the Docker container
-    tty: true 
+    tty: true
+    #dependecy before deploy
+    depends_on:
+        - server
   
   my_sql_db:
     #image version

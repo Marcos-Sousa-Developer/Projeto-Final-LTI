@@ -16,8 +16,6 @@ function Admin_Perfil() {
 
   const activeOrDeactivateForm = () => {
 
-    console.log("ok")
-
     isread_Only ? setRead_Only(false) : setRead_Only(true);
     isform_disable ? setForm_disable(false) : setForm_disable(true);
 
@@ -59,16 +57,16 @@ function Admin_Perfil() {
                   {
                     isread_Only ? 
                     (
-                      <button className="btn btn-warning" style={{ fontSize: "20px" }} onClick={() => activeOrDeactivateForm()}>
+                      <button className="btn btn-warning" style={{ fontSize: "15px" }} onClick={() => activeOrDeactivateForm()}>
                       Editar
                       </button>
                     ) : 
                     (
                       <div>
-                        <button className="btn btn-secondary" style={{ fontSize: "20px" }} onClick={() => activeOrDeactivateForm()}>
+                        <button className="btn btn-secondary" style={{ fontSize: "15px" }} onClick={() => activeOrDeactivateForm()}>
                         Fechar
                         </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button className="btn btn-success" style={{ fontSize: "20px" }}>
+                        <button className="btn btn-success" style={{ fontSize: "15px" }}>
                         Alterar
                         </button>
                       </div>

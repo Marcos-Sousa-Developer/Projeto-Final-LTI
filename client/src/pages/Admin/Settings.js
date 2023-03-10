@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import {Helmet, HelmetProvider} from 'react-helmet-async'; 
+import { Link } from "react-router-dom";
 import Aside from "./components/Aside";
 import Footer from "./components/Footer";
 import Head from "./components/Head";
 import Header from "./components/Header";
 import DeleteAccountModal from './components/Modals/DeleteAccountModal';
+
 
 function Settings() {
 
@@ -39,7 +41,15 @@ function Settings() {
       <main id="main" className="main">
 
         <div className="pagetitle">
-          <h1><i className="bi bi-gear-fill"></i> Definições</h1>
+            <h1>Definições</h1>
+            <nav>
+                <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                    <Link to="/admin" reloadDocument >Home</Link>
+                </li>
+                <li className="breadcrumb-item active">Definições</li>
+                </ol>
+            </nav>
         </div>
 
         <section className="section dashboard">
@@ -53,8 +63,8 @@ function Settings() {
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="card-body">
-                                            <h5 className="card-title">Definições de Conta</h5>
-                                            <label htmlFor="username"><strong>Nome de Utilizador</strong></label>
+                                            <h5 className="card-title"><i class="bi bi-gear"></i> Definições de Conta</h5>
+                                            <label htmlFor="username">Nome de Utilizador</label>
                                             <input
                                                 className="form-control"
                                                 id="username"
@@ -63,7 +73,7 @@ function Settings() {
                                                 readOnly={isread_Only}
                                             ></input>
                                             <br></br>
-                                            <label htmlFor="password"><strong>Palavra Passe</strong></label>
+                                            <label htmlFor="password">Palavra Passe</label>
                                             <input
                                                 className="form-control"
                                                 id="password"
@@ -96,7 +106,7 @@ function Settings() {
                                         <br></br>
                                         <div className="card">
                                             <div className="card-body">
-                                                <h5 className="card-title">Requesitos da palavra Passe</h5>
+                                                <h5 className="card-title"><i class="bi bi-list-check"></i> Requesitos da palavra Passe</h5>
                                                 <p className="card-text">1. Pelo menos 8 caracteres</p>
                                                 <p className="card-text">2. Pelo menos 1 letra maiscula</p>
                                                 <p className="card-text">3. Pelo menos 1 número</p>
@@ -110,7 +120,7 @@ function Settings() {
                         <div className="col-sm-6">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title">Apagar Conta</h5>
+                                    <h5 className="card-title"><i class="bi bi-trash3"></i> Apagar Conta</h5>
                                     <p className="card-text">Apagar a tua conta é um ato permanente e não pode ser revertido.</p>
                                     <button type="button" className="btn btn-danger" onClick={() => deleteAccountModal()}>Apagar conta</button>
                                 </div>

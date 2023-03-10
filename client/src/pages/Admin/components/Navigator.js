@@ -3,6 +3,7 @@ import DisplayModal from './Modals/DisplayModal';
 
 // user can be consumer, supplier or admin
 function Navigator({users, user_type}) {
+  
 
   const [from, setFrom] = useState(0);
 

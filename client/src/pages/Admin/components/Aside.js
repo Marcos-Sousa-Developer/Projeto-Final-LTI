@@ -72,7 +72,7 @@ function Aside() {
           <ul id="gerir-users" className={showU} data-bs-parent="#sidebar-nav">
             
             <li>
-              <Link to="/admin">
+              <Link reloadDocument to="/admin/gerir_adminstradores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Administradores</span>
               </Link>
@@ -97,7 +97,7 @@ function Aside() {
         <li className="nav-heading">Gestão de Produtos</li>
 
         <li className="nav-item">
-          <Link to="/admin" className="nav-link collapsed">
+          <Link reloadDocument to="/admin/gerir_produtos" className="nav-link collapsed">
             <i className="bi bi-cart"/>
             <span>Gerir Produtos</span>
           </Link>

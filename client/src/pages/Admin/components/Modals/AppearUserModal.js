@@ -40,7 +40,7 @@ function Modal({ user, isShowingModal, user_type }) {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">
-                <i className="bi bi-person-fill-gear"> {user_type == "consumer" ? "Consumidor" : "Fornecedor"} </i>
+                <i className="bi bi-person-fill-gear"></i> <span>{user_type == "consumer" ? "Consumidor" : "Fornecedor"}</span>
               </h5>
 
               <button type="button" onClick={isShowingModal} className="close">

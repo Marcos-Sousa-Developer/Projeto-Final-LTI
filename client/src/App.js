@@ -1,14 +1,17 @@
 import { Routes, Route, BrowserRouter  } from "react-router-dom"; 
 import RequireAuth from "./components/RequireAuth"
-import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 import Dashboard from "./pages/Admin/Dashboard";
+import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
 import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
+import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
+import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Settings from "./pages/Admin/Settings";
 import {Home, LoginTest, Cart, SignIn, SignUp, SupplierProfile, ConsumerProfile, NotFound, RegisterTest} from './pages/HomeView/index';
 import { ShopContextProvider } from "./context/ShopContextProvider";
 import './index.css';
 import getClientType from "./hooks/getClientType";
+
 
 
 function App() {  
@@ -23,9 +26,11 @@ function App() {
             userType == "admin" && (
               <Route path="admin">
                 <Route index element={<RequireAuth><Dashboard /></RequireAuth>} />
+                <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
+                <Route exact path="gerir_adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
                 <Route exact path="gerir_consumidores" element={<RequireAuth><Gerir_consumidores /></RequireAuth>} />
                 <Route exact path="gerir_fornecedores" element={<RequireAuth><Gerir_fornecedores /></RequireAuth>} />
-                <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
+                <Route exact path="gerir_produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
                 <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
               </Route>
             )

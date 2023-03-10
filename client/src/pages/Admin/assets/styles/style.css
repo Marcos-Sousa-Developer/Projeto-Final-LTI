@@ -745,9 +745,14 @@ button {
 .sidebar-nav .nav-link:hover i {
   color: #EB5C1F;
 }
+
 /* MY CUSTOM */
 .bi {
   color: #EB5C1F;
+}
+
+.card-img-top{
+  text-align: center;
 }
 
 /*------*/

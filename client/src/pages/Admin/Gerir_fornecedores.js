@@ -4,14 +4,14 @@ import Head from "./components/Head";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import getUsersType from "../../hooks/getUsersType";
+import getAllFromDB from "../../hooks/getAllFromDB";
 import Navigator from "./components/Navigator";
 import { Link } from "react-router-dom";
 
 
 function Gerir_fornecedores() {
 
-    const suppliers = getUsersType("/suppliers")
+    const suppliers = getAllFromDB("/suppliers")
 
     return (
     <div>
