@@ -6,6 +6,7 @@ import notfound from './images/not_found.svg';
 import shopping_app from './images/shopping_app.svg';
 import Rectangle1 from './images/Rectangle1.svg';
 import Rectangle2 from './images/Rectangle2.svg';
+import empty_cart from './images/empty_cart.svg';
 
 export default{
     logo,
@@ -16,4 +17,5 @@ export default{
     shopping_app,
     Rectangle1,
     Rectangle2,
+    empty_cart,
 }

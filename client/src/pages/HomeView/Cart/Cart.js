@@ -7,6 +7,7 @@ import { Navbar, Footer, SubHeading } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import { ShopContext } from '../../../context/ShopContextProvider';
 import { CartItem } from './CartItem';
+import images from '../../../assets/images.js';
 
 import './Cart.css';
 
@@ -57,7 +58,10 @@ const Cart = () => {
             </div>
           </>
         ) : (
-          <h5>O carrinho está vazio.</h5>
+          <>
+            <img className='empty_cart_img' src={images.empty_cart}></img>
+            <h5>O carrinho está vazio.</h5>
+          </>
         )}
 
       </div>

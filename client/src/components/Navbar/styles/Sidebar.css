@@ -1,0 +1,56 @@
+#sidebar-toggler {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: hsla(0, 0%, 9%, 0.863);
+  display: none;
+  opacity: 0;
+}
+.overlay.active {
+  display: block;
+  opacity: 1;
+  margin: 0;
+}
+
+.app__sidebar_content {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.app__sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  min-width: 15rem;
+  max-width: 25rem;
+  padding: 2rem;
+  z-index: 1000;
+  background: white;
+  transform: translateX(-100%);
+}
+.app__sidebar.active {
+  transform: translateX(0%);
+  margin: 0;
+}
+.app__sidebar_navs {
+  grid-column: span 2;
+}
+.app__sidebar_navs ul {
+  margin: 0;
+  padding: 0;
+  font-weight: lighter;
+}
+.app__sidebar_navs ul > * {
+  line-height: 2.5rem;
+}/*# sourceMappingURL=Sidebar.css.map */
