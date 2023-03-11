@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import getAllFromDB from '../../hooks/getAllFromDB';
+import SearchBar from './components/ProfilesComponents/SearchBar';
 
 // user can be consumer, supplier or admin
 function Gerir_Produtos() { 
@@ -91,7 +92,8 @@ function Gerir_Produtos() {
             <div className="col-xl-12">
               <div className="row ">
                 <h5 className="card-title">
-                  <i className="bi bi-cart"></i> Produtos{" "}
+                  <i className="bi bi-cart"></i> Produtos
+                  <SearchBar></SearchBar>
                 </h5>
 
                 {products.slice(from, to).map((product) => (

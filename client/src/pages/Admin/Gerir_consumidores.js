@@ -4,6 +4,7 @@ import Head from "./components/Head";
 import Header from "./components/Header";
 import Navigator from "./components/Navigator";
 import Footer from "./components/Footer";
+import SearchBar from './components/ProfilesComponents/SearchBar';
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import getAllFromDB from "../../hooks/getAllFromDB";
 import { Link } from "react-router-dom";
@@ -38,8 +39,10 @@ function Gerir_consumidores() {
         <section className="section dashboard">
           <div className="col-lg-12">
             <div className="row">
+              <h5 className="card-title"><i class="bi bi-bag"></i> Consumidores 
+                <SearchBar></SearchBar>
+              </h5>
               <div className="col-12">
-                <h5 className="card-title"><i class="bi bi-bag"></i> Consumidores </h5>
                 <Navigator users={consumers} user_type={"consumer"}></Navigator>    
               </div>
             </div>
