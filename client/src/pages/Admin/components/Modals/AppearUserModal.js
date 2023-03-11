@@ -1,7 +1,7 @@
 import React from "react";
 import activateOrDeactivateUser from "../../../../hooks/activateOrDeactivateUser";
 
-function Modal({ user, isShowingModal, user_type }) {
+function AppearUserModal({ user, isShowingModal, user_type }) {
   const handleUser = () => {
     const newStateAccount = user.account_status == 0 ? 1 : 0;
 
@@ -68,8 +68,10 @@ function Modal({ user, isShowingModal, user_type }) {
                     <div class="d-flex align-items-center justify-content-center"></div>
                       <label class="align-self-center" htmlFor="status">Estado da Conta</label>
                       <input className="form-control" id="status" style={{textAlign:"center"}} placeholder={user.account_status == 0 ? "Desativada" : "Ativada"} disabled readOnly></input> 
+                      <br></br>
+                      <a href="#" className="btn btn-primary">Ver Detalhes</a>
                     </div>
-                </div>
+                  </div>
               </div>
             </div>
 
@@ -98,4 +100,4 @@ function Modal({ user, isShowingModal, user_type }) {
   );
 }
 
-export default Modal;
+export default AppearUserModal;

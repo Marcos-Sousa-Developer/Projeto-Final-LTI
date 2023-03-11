@@ -40,7 +40,7 @@ function Gerir_Adminstradores() {
                 <div className="col-xxl-3">
                   <div className="card" style={{ textAlign: "center" }}>
                     <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap"  style={{ width: "70%" }}></img>
+                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap"  style={{ width: "60%" }}></img>
                     <div className="card-body">
                       <h5 className="card-title">Gabriel Fonseca</h5>
                       <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>
@@ -53,7 +53,7 @@ function Gerir_Adminstradores() {
                 <div className="col-xxl-3">
                   <div className="card" style={{ textAlign: "center" }}>
                     <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap"  style={{ width: "70%" }}></img>
+                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap"  style={{ width: "60%" }}></img>
                     <div className="card-body">
                       <h5 className="card-title">Marcos Leitão</h5>
                       <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>
@@ -66,7 +66,7 @@ function Gerir_Adminstradores() {
                 <div className="col-xxl-3">
                   <div className="card" style={{ textAlign: "center" }}>
                     <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap"  style={{ width: "70%" }}></img>
+                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap"  style={{ width: "60%" }}></img>
                     <div className="card-body">
                       <h5 className="card-title">Miguel Fernandes</h5>
                       <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>
@@ -79,7 +79,7 @@ function Gerir_Adminstradores() {
                 <div className="col-xxl-3">
                   <div className="card" style={{ textAlign: "center" }}>
                     <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap" style={{ width: "70%" }}></img>
+                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap" style={{ width: "60%" }}></img>
                     <div className="card-body">
                       <h5 className="card-title">Pedro Moita</h5>
                       <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>
@@ -92,7 +92,7 @@ function Gerir_Adminstradores() {
                 <div className="col-xxl-3">
                   <div className="card" style={{ textAlign: "center" }}>
                     <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap" style={{ width: "70%" }}></img>
+                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap" style={{ width: "60%" }}></img>
                     <div className="card-body">
                       <h5 className="card-title">Rafel Ribeiro</h5>
                       <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>

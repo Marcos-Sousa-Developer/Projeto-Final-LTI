@@ -102,11 +102,11 @@ function Gerir_Produtos() {
                         className="card-img-top rounded mx-auto d-block"
                         src="https://i.pinimg.com/originals/b3/f1/da/b3f1da70927cc796e51f5a9066dde860.png"
                         alt="Card image cap"
-                        style={{ width: "70%" }}
+                        style={{ width: "45%" }}
                       ></img>
                       <div className="card-body">
                         <h5 className="card-title">EAN: {product.EAN}</h5>
-                        <p className="card-text">Data de Produção: EAN: {product.data_producao}</p>
+                        <p className="card-text">Data de Produção: {product.data_producao}</p>
                         <a href="#" className="btn btn-primary">
                           Ver Detalhes
                         </a>

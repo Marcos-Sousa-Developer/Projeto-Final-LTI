@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-import Modal from './AppearUserModal'
+import AppearUserModal from './AppearUserModal'
 
 
 function DisplayModal({user, user_type}) {
@@ -21,7 +21,7 @@ function DisplayModal({user, user_type}) {
             <i className="bi bi-pencil-square"></i>
             </button>
             {
-                show && (<Modal user={user} user_type={user_type} isShowingModal={isShowingModal}></Modal>)
+                show && (<AppearUserModal user={user} user_type={user_type} isShowingModal={isShowingModal}></AppearUserModal>)
             }
         </td>
     </tr>
