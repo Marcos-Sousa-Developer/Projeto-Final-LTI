@@ -44,7 +44,7 @@ function Aside() {
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-item">
           <span className="nav-link">
-            <Link reloadDocument to="/admin">
+            <Link  to="/admin">
               <i className="bi bi-grid"/>
               <span>Painel de Controlo</span>
               </Link>
@@ -54,7 +54,7 @@ function Aside() {
         <li className="nav-heading">Editar Perfil</li>
 
         <li className="nav-item">
-          <Link reloadDocument to="/admin/perfil" className="nav-link collapsed">
+          <Link  to="/admin/perfil" className="nav-link collapsed">
             <i className="bi bi-person"/>
             <span>Meu Perfil</span>
           </Link>
@@ -72,21 +72,21 @@ function Aside() {
           <ul id="gerir-users" className={showU} data-bs-parent="#sidebar-nav">
             
             <li>
-              <Link reloadDocument to="/admin/gerir_adminstradores">
+              <Link  to="/admin/gerir_adminstradores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Administradores</span>
               </Link>
             </li>
 
             <li>
-              <Link reloadDocument to="/admin/gerir_consumidores">
+              <Link  to="/admin/gerir_consumidores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Consumidores</span>
               </Link>
             </li>
 
             <li>
-              <Link reloadDocument to="/admin/gerir_fornecedores">
+              <Link  to="/admin/gerir_fornecedores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Fornecedores</span>
               </Link> 
@@ -97,7 +97,7 @@ function Aside() {
         <li className="nav-heading">Gestão de Produtos</li>
 
         <li className="nav-item">
-          <Link reloadDocument to="/admin/gerir_produtos" className="nav-link collapsed">
+          <Link  to="/admin/gerir_produtos" className="nav-link collapsed">
             <i className="bi bi-cart"/>
             <span>Gerir Produtos</span>
           </Link>
@@ -176,7 +176,7 @@ function Aside() {
         </li>
 
         <li className="nav-item">
-          <Link reloadDocument to="/admin/settings" className="nav-link collapsed">
+          <Link  to="/admin/settings" className="nav-link collapsed">
             <i className="bi bi-gear"/>
             <span>Definições</span>
           </Link>

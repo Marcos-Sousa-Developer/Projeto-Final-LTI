@@ -31,7 +31,7 @@ function Gerir_fornecedores() {
             <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <Link to="/admin" reloadDocument >Home</Link>
+                <Link to="/admin"  >Home</Link>
               </li>
               <li className="breadcrumb-item active">Gerir Fornecedores</li>
             </ol>

@@ -25,7 +25,7 @@ function Header() {
         <div className="d-flex align-items-center justify-content-between">
             <div className="logo d-flex align-items-center">
                 <span className="d-none d-lg-block"><img src={require("../assets/images/admin_logo.png")} alt="" /></span>
-                <Link reloadDocument to="/admin" >  
+                <Link  to="/admin" >  
                     <span><img src={images.logo} alt="app_logo"/></span>
                 </Link>
                 <button style={{margin:0}} onClick={() => toggleAside()}><i className="bi bi-list toggle-sidebar-btn" /></button>

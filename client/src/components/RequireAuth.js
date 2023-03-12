@@ -1,15 +1,13 @@
 import { Navigate } from "react-router-dom"
 import { authContext } from "../hooks/authContext";
 
-
-function requireAuthContext({children}) {
-
+function RequireAuth({children}) {
 
     if(!authContext()){
         return <Navigate to='/login' />
     }
- 
+
   return children
 }
 
-export default requireAuthContext
+export default RequireAuth

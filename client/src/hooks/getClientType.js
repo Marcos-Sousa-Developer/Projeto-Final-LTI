@@ -1,31 +1,21 @@
 import axios from 'axios'
-import { useEffect, useState } from "react";
-import { useCookies } from 'react-cookie';
 
 function getClientType(url) { 
 
-    const [cookies] = useCookies(['userSession']);
-
-    const [userType, setUserType] = useState(null)
-
-    useEffect(()=>{
+    return new Promise((resolve, reject) => {
         
-        (
-           async function(){
-            
-            if(cookies.userSession) { 
-                
-                await axios.post(url).then((response) => {
-            
-                    setUserType(response.data)
-                })
-            }
-            
-           }
-        )()
-     },[url]) //dependecy, we need to put the thing that change
+        axios.get(url).then((response) => {
 
-    return userType
+            resolve(response.data)
+
+        })
+
+        .catch((error) => {
+            reject("")
+        })
+
+    })
+    
 }
 
 export default getClientType

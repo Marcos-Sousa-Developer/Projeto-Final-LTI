@@ -80,7 +80,7 @@ function Gerir_Produtos() {
             <nav>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
-                  <Link to="/admin" reloadDocument>
+                  <Link to="/admin" >
                     Home
                   </Link>
                 </li>
