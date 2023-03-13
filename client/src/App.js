@@ -7,7 +7,7 @@ import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
 import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Settings from "./pages/Admin/Settings";
-import {Home, LoginTest, Cart, SignIn, SignUp, SupplierProfile, ConsumerProfile, NotFound, RegisterTest} from './pages/HomeView/index';
+import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest} from './pages/HomeView/index';
 import { ShopContextProvider } from "./context/ShopContextProvider";
 import './index.css';
 import getClientType from "./hooks/getClientType";
@@ -49,8 +49,15 @@ function App() {
             )
           }
 
-          {userType == "supplier" && 
-            (<Route path="/supplier" element={<RequireAuth><SupplierProfile /></RequireAuth>} />)
+          
+          {/*----- Verificar, são ambos do supplier ----- */
+            userType == "supplier" && 
+            (<Route path="/supplier" element={<RequireAuth><SupplierPage /></RequireAuth>} />)
+          }
+
+          {/*----- Verificar, são ambos do supplier ----- */
+            userType == "supplier" && 
+            (<Route path="/supplier_profile" element={<RequireAuth><SupplierProfile /></RequireAuth>} />)
           }
 
           {userType == "consumer" && 
