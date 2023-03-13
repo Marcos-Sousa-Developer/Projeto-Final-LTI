@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter, useLocation  } from "react-router-dom"; 
+import { Routes, Route, useLocation  } from "react-router-dom"; 
 import RequireAuth from "./components/RequireAuth"
 import Dashboard from "./pages/Admin/Dashboard";
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
