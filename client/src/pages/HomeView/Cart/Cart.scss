@@ -60,6 +60,10 @@
     &_checkout_btn{
         margin-top: 1rem;
     }
+
+    @media (min-height: 400px) {
+        min-height: 400px; // apply minimum height of 400px when viewport height is less than 400px
+    }
 }
 
 //--------------------------------
@@ -186,8 +190,9 @@
 
 @media screen and (max-width: 600px) {
     .app__cart .empty_cart_img {
-        width: 200px;
+        width: 175px;
         height: inherit;
+        margin-top: 4rem;
     }
 
     .app__cart{

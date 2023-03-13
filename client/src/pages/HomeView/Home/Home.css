@@ -6,6 +6,7 @@
   color: black;
   background-color: white;
   font-family: "Poppins", sans-serif;
+  list-style: none;
 }
 
 img, picture {
@@ -126,7 +127,7 @@ img, picture {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  margin: 2rem auto;
+  margin: 2rem auto 3rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -147,7 +148,7 @@ img, picture {
   .products {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
-    margin: 1rem auto;
+    margin: 1rem auto 2rem;
   }
 }
 @media screen and (max-width: 650px) {

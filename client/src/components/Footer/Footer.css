@@ -6,6 +6,7 @@
   color: black;
   background-color: white;
   font-family: "Poppins", sans-serif;
+  list-style: none;
 }
 
 img, picture {
@@ -103,8 +104,8 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: start;
+  padding: 1.25rem;
   margin: auto auto 0;
-  padding: 1rem;
   border-top: 3px solid #EEEEEE;
 }
 
@@ -113,5 +114,23 @@ body {
 }
 .app__support2 p {
   line-height: 1rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .app__footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    padding: 1rem 4rem;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .app__footer {
+    padding: 1rem;
+  }
+  .app__footer h5 {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
 }/*# sourceMappingURL=Footer.css.map */
