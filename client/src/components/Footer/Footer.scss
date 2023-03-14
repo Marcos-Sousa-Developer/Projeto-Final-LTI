@@ -7,22 +7,42 @@ body{
 .app__footer{
     display: flex;
     justify-content: space-evenly;
-    align-items: start;
+    align-items: start; 
     
+    padding: 1.25rem;
     margin: auto auto 0;
-    padding: 1rem;
     border-top: 3px solid $light_gray;  
 }
 
 .app__support{
+    //justify-self: center;
 
     h5 {
         margin-bottom: 1.5rem;
-
     }
 
     &2 p{
         line-height: 1rem;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .app__footer{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+        padding: 1rem 4rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .app__footer{
+        padding: 1rem;
+
+        h5 {
+            font-size: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
     }
 }

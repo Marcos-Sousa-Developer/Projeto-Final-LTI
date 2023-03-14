@@ -1,8 +1,9 @@
+@import "../../../index.scss";
+
 // Variables
 
-$transition-sidebar:        all .3s ease-in-out 0s;
-$overlay-bg:                hsla(0, 0%, 9%, 0.863);
-$sidebar-bg:                white;
+$transition-sidebar:  all .3s ease-in-out 0s;
+$overlay-bg:          hsla(0, 0%, 9%, 0.863);
 
 // Button
 
@@ -49,15 +50,15 @@ $sidebar-bg:                white;
   max-width: 25rem;
   padding: 2rem;
   z-index: 1000;
-  background: $sidebar-bg;
+  background: white;
   transform: translateX(-100%);
-  //overflow: auto;
+  overflow: auto;
 
   &.active{
     transform: translateX(0%);
     margin: 0;
   }
-
+  
   &_navs{
     grid-column: span 2;
 

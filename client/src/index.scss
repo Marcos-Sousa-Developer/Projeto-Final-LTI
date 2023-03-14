@@ -6,13 +6,24 @@
 
 $primary-font: 'Poppins', sans-serif;
 
-//colors
+//colors and setup
 
-$orange: #EB5C1F;
+$orange:     #EB5C1F;
 $light_gray: #EEEEEE;
-$blue: #76CBFF;
+$blue:       #76CBFF;
 
-//main functions
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #EEEEEE;
+}
+::-webkit-scrollbar-thumb {
+  background: #8888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #EB5C1F;
+}
 
 *{
   box-sizing: border-box;
@@ -22,7 +33,7 @@ $blue: #76CBFF;
   background-color: white;
   font-family: $primary-font;
   list-style: none;
-  //scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 img, picture{
@@ -34,6 +45,8 @@ img, picture{
   flex-direction: column;
   min-height: 100svh;
 }
+
+//main functions
 
 .flex{
   display: flex;

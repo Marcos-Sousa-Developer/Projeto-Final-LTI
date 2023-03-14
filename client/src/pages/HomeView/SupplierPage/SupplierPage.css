@@ -111,28 +111,4 @@ img, picture {
 }
 .main__action_btn:hover {
   opacity: 1;
-}
-
-.app__navbar__searchBar div {
-  border: 3px solid #EEEEEE;
-  border-radius: 20rem;
-  padding: 0.5rem 0.75rem;
-  margin: 0;
-}
-.app__navbar__searchBar input {
-  outline: none;
-  border: none;
-  margin-left: 0.75rem;
-  width: 30rem;
-}
-
-@media screen and (max-width: 1250px) {
-  .app__navbar__searchBar input {
-    width: 22.5rem;
-  }
-}
-@media screen and (max-width: 450px) {
-  .app__navbar__searchBar div {
-    padding: 0.3rem 0.6rem;
-  }
-}/*# sourceMappingURL=Searchbar.css.map */
+}/*# sourceMappingURL=SupplierPage.css.map */
