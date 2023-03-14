@@ -8,6 +8,8 @@ import ConsumerProfile from './ConsumerProfile/ConsumerProfile';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import NotFound from './NotFound/NotFound';
+import FAQ from './FAQ/FAQ';
+import CriarAnuncio from './CriarAnuncio/CriarAnuncio';
 
 export {
     Home,
@@ -20,4 +22,6 @@ export {
     SignIn,
     SignUp,
     NotFound,
+    FAQ,
+    CriarAnuncio,
 };
