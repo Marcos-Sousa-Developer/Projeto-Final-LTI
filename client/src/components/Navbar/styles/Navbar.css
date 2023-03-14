@@ -256,4 +256,12 @@ img, picture {
   margin: 1rem auto;
   display: flex;
   justify-content: space-between;
+}
+.app__navbarSupplier .app__navbarSupplier_btn {
+  background-color: #EB5C1F;
+  padding: 1rem;
+  border-radius: 4rem;
+  color: white;
+  height: 80%;
+  margin-left: 0.5rem;
 }/*# sourceMappingURL=Navbar.css.map */

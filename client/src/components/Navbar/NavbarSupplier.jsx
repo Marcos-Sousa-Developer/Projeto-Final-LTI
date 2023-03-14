@@ -22,7 +22,7 @@ const NavbarSupplier = () => {
                     </div>
                 </Link>
 
-                <Link to="/" className="flex app__pointer app__navbar_links"  style={{marginRight:'0'}}>
+                <Link to="/" className="flex app__pointer app__navbar_links app__navbarSupplier_btn"  style={{marginRight:'0'}}>
                     Anunciar
                 </Link>
 

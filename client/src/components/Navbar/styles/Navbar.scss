@@ -178,6 +178,16 @@
     margin: 1rem auto;
     display: flex;
     justify-content: space-between;
+
+    .app__navbarSupplier_btn{
+        background-color: $orange;
+        padding: 1rem;
+        border-radius: 4rem;
+        color: white;
+        height: 80%;
+        margin-left: .5rem;
+    }
+
 }
 
 

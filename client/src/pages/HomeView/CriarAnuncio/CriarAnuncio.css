@@ -1,0 +1,14 @@
+.app__anuncio {
+  margin: 1rem auto;
+}
+.app__anuncio_content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin-top: 1rem;
+}
+.app__anuncio_content > * {
+  border: 1px solid black;
+}
+.app__anuncio_content > * div {
+  border: 1px solid black;
+}/*# sourceMappingURL=CriarAnuncio.css.map */
