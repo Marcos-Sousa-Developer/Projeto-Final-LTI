@@ -63,7 +63,7 @@ const handlerSignIn = (authenticationData, userData, client_result, res) => {
           httpOnly: true})
         
         res.cookie("refreshToken", refreshToken, {
-          expires: dateExpire, 
+          expires: dateExpire,
           httpOnly: true})
         
         res.cookie("userSession", uid, {expires: dateExpire})
@@ -132,7 +132,7 @@ const signIn = async (req, res) => {
 };
 
 /**
- * Verify user type 
+ * Verify user type
  * @params request from client
  * @return userType
  */
