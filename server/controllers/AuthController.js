@@ -52,7 +52,7 @@ const handlerSignIn = (authenticationData, userData, client_result, res) => {
 
         const uid = jwt.encryptID(client_result.client_id)  
 
-        let dateExpire = new Date(Date.now() + 1800000) //date now and more 30 minutes
+        let dateExpire = new Date(Date.now() + 7200000) //date now and more 30 minutes
 
         res.cookie("accessToken", accessToken, {
           expires: dateExpire, 
@@ -63,7 +63,7 @@ const handlerSignIn = (authenticationData, userData, client_result, res) => {
           httpOnly: true})
         
         res.cookie("refreshToken", refreshToken, {
-          expires: dateExpire, 
+          expires: dateExpire,
           httpOnly: true})
         
         res.cookie("userSession", uid, {expires: dateExpire})
@@ -132,7 +132,7 @@ const signIn = async (req, res) => {
 };
 
 /**
- * Verify user type 
+ * Verify user type
  * @params request from client
  * @return userType
  */

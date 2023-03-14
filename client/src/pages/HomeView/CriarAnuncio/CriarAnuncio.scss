@@ -1,0 +1,19 @@
+.app__anuncio{
+    margin: 1rem auto;
+
+
+    &_content{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        
+        margin-top: 1rem;
+
+        &>*{
+            border: 1px solid black;
+
+            div{
+                border: 1px solid black;
+            }
+        }
+    }
+}

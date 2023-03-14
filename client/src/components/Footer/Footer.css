@@ -1,4 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EEEEEE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.5333333333);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #EB5C1F;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -6,6 +22,8 @@
   color: black;
   background-color: white;
   font-family: "Poppins", sans-serif;
+  list-style: none;
+  scroll-behavior: smooth;
 }
 
 img, picture {
@@ -103,8 +121,8 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: start;
+  padding: 1.25rem;
   margin: auto auto 0;
-  padding: 1rem;
   border-top: 3px solid #EEEEEE;
 }
 
@@ -113,5 +131,23 @@ body {
 }
 .app__support2 p {
   line-height: 1rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .app__footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    padding: 1rem 4rem;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .app__footer {
+    padding: 1rem;
+  }
+  .app__footer h5 {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
 }/*# sourceMappingURL=Footer.css.map */

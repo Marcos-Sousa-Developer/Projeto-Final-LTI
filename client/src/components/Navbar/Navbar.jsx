@@ -64,8 +64,6 @@ const Navbar = () => {
         )
     }
       
-    //const {useState} = React;
-
     const [active, setActive] = useState(false);
     const toggle = () => setActive(!active);
 
@@ -96,18 +94,14 @@ const Navbar = () => {
 
             <div className='app__navbar_profile'>
 
-
                 <Link to="/signin" className="flex app__pointer app__navbar_links">
                     <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
-
                     <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
                         <span className="profile_link">Conta</span>
                         <p style={{fontSize: '12px', opacity: '80%'}}>Iniciar sessão</p>
                     </div>
                 </Link>
                     
-                
-
                 <Link to="/cart" className="flex app__pointer app__navbar_links"  style={{marginRight:'0'}}>
                     <div className='app__navbar_profile_icon'>
                         <FiShoppingCart fontSize={30} color="black" className='profile_icon'></FiShoppingCart>
@@ -117,12 +111,10 @@ const Navbar = () => {
                             <p style={{display: 'none'}}>{totalCartItems}</p>
                         )}
                     </div>
-
                     <div className='app__navbar_profile_cart' style={{margin: '0 .75rem'}}>
                         <span className="profile_link">Carrinho</span>
                         <p style={{fontSize: '12px', opacity: '80%'}}>0.00€</p>
                     </div>
-
                 </Link>
                 
             </div>
