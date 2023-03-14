@@ -9143,7 +9143,7 @@ fieldset:disabled .btn {
 
 .bg-primary {
     --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important
+    background-color: #EB5C1F !important
 }
 
 .bg-secondary {
@@ -9153,7 +9153,7 @@ fieldset:disabled .btn {
 
 .bg-success {
     --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important
+    background-color: #EB5C1F !important
 }
 
 .bg-info {
