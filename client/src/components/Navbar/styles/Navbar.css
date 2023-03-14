@@ -251,4 +251,9 @@ img, picture {
   100% {
     border-width: 100%;
   }
+}
+.app__navbarSupplier {
+  margin: 1rem auto;
+  display: flex;
+  justify-content: space-between;
 }/*# sourceMappingURL=Navbar.css.map */

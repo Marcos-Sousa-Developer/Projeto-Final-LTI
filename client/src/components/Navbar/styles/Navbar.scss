@@ -1,6 +1,6 @@
 @import "../../../index.scss";
 
-//font-size: clamp(3rem, 5vw, 6rem);
+//Consumer
 
 .app__navbar{
     //position: fixed;
@@ -171,3 +171,13 @@
     border-width: 100%;
   }
 }
+
+//Supplier
+
+.app__navbarSupplier{
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+
