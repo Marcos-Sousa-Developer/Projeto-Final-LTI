@@ -49,16 +49,16 @@ function App() {
             )
           }
 
-          
-          {/*----- Verificar, são ambos do supplier ----- */
-            userType == "supplier" && 
-            (<Route path="/supplier" element={<RequireAuth><SupplierPage /></RequireAuth>} />)
-          }
 
-          {/*----- Verificar, são ambos do supplier ----- */
-            userType == "supplier" && 
-            (<Route path="/supplier_profile" element={<RequireAuth><SupplierProfile /></RequireAuth>} />)
-          }
+          {userType == "supplier" &&
+          (
+            <Route path="supplier">
+              <Route index element={ <RequireAuth><SupplierPage /></RequireAuth> }/>
+              <Route exact path="profile" element={<RequireAuth><SupplierProfile /></RequireAuth>} />
+            </Route>
+          )
+        }
+
 
           {userType == "consumer" && 
             (<Route path="/consumer" element={<RequireAuth><ConsumerProfile /></RequireAuth>} />)

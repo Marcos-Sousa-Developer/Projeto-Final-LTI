@@ -52,7 +52,7 @@ const handlerSignIn = (authenticationData, userData, client_result, res) => {
 
         const uid = jwt.encryptID(client_result.client_id)  
 
-        let dateExpire = new Date(Date.now() + 1800000) //date now and more 30 minutes
+        let dateExpire = new Date(Date.now() + 7200000) //date now and more 30 minutes
 
         res.cookie("accessToken", accessToken, {
           expires: dateExpire, 
@@ -139,7 +139,7 @@ const signIn = async (req, res) => {
 const userType = (req, res) => { 
 
   
-  return res.send("supplier"); //Trocar para consumer se quiser ir 
+  return res.send("admin"); //Trocar para consumer se quiser ir 
 }
 
 module.exports = {signIn, userType}
