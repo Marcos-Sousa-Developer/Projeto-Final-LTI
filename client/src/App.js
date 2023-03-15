@@ -74,6 +74,8 @@ function App() {
 
           {/* para dps meter dentro do supplier */}
           <Route path="/anuncio" element={<CriarAnuncio />} />
+
+          <Route path="/FAQ" element={<FAQ />} />
           
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />

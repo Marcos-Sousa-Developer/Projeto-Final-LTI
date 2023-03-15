@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FiShoppingCart, FiAlignLeft, FiUser, FiX } from 'react-icons/fi';
+import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight } from 'react-icons/fi';
 
 import images from '../../assets/images.js';
 import { PRODUCTS } from '../../assets/products';
@@ -15,27 +15,47 @@ const Navbar = () => {
     //---------------------------SideBar--------------------------
 
     const categories = [
-        {id: 1, name: 'Carros, Motores, Barcos'},
-        {id: 2, name: 'Lazer'},
-        {id: 3, name: 'Móveis, Casa, Jardim'},
-        {id: 4, name: 'Tecnologia'},
-        {id: 5, name: 'Equipamentos e Ferramentas'},
-        {id: 6, name: 'Comida'},
-        {id: 7, name: 'Desporto'},
-        {id: 8, name: 'Outros'},
+        {name: 'Carros, Motores, Barcos', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
+        {name: 'Lazer', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
+        {name: 'Móveis, Casa, Jardim', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
+        {name: 'Tecnologia', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
+        {name: 'Equipamentos e Ferramentas', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
+        {name: 'Comida', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
+        {name: 'Desporto', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
+        {name: 'Outros', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
     ];
 
     const Sidebar = ({ className }) => {
+        const [selected, setSelected] = useState(null);
+
+        const toggleAccordion = (i) =>{
+          if (selected === i){
+            return setSelected(null);
+          }
+          
+          setSelected(i);
+        }
+
         return(
           <div className={ `app__sidebar ${className}` }>
             <div className="app__sidebar_content">
                 <img src={images.logo} alt="" />
-                <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggle}></FiX>
+                <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleSidebar}></FiX>
                 <div className="app__sidebar_navs">
                     <ul>
-                        {categories.map(category => {
+                        {categories.map((category, i) => {
                             return (
-                                <li key={category.id}><Link to="/cart" className='app__text_effect'>{category.name}</Link></li>
+                                <div  className='app__sidebar_navs_category'>
+                                    <div className='app__sidebar_navs_category-title' onClick={()=>toggleAccordion(i)}>
+                                        <p key={category}>{category.name}</p>
+                                        <span>{selected === i ? <FiChevronUp className='app__sidebar_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__sidebar_navs_category-title_right'></FiChevronRight>}</span>
+                                    </div>
+                                    <div className={selected === i ? 'app__sidebar_navs_category-content show' : 'app__sidebar_navs_category-content'}>
+                                        {category.subcategory.map(subcategory => (
+                                            <li key={subcategory}><Link to="/cart" className='app__text_effect' style={{fontSize:'.9rem'}}>{subcategory}</Link></li>
+                                        ))}
+                                    </div>
+                                </div>
                             );
                         })}
                     </ul>
@@ -48,12 +68,12 @@ const Navbar = () => {
     const ButtonToggle = (props) => {
         return(
             <FiAlignLeft  
-            fontSize={30} 
-            color="black" 
-            className='app__pointer app__icon_effect' 
-            id="sidebar-toggler" 
-            onClick={ props.onClick } 
-            style={{marginBottom: '.75rem'}}>
+                fontSize={30} 
+                color="black" 
+                className='app__pointer app__icon_effect' 
+                id="sidebar-toggler" 
+                onClick={ props.onClick } 
+                style={{marginBottom: '.75rem'}}>
             </FiAlignLeft>
         )
     }
@@ -65,7 +85,7 @@ const Navbar = () => {
     }
       
     const [active, setActive] = useState(false);
-    const toggle = () => setActive(!active);
+    const toggleSidebar = () => setActive(!active);
 
     //--------------------------Cart-----------------------------
 
@@ -84,8 +104,8 @@ const Navbar = () => {
         <>
         <nav className='app__navbar main__container'>
             <div className='app__navbar_menu'>
-                <ButtonToggle onClick={toggle}/>
-                <Overlay className={ active ? 'overlay active' : 'overlay'} onClick={toggle}/>
+                <ButtonToggle onClick={toggleSidebar}/>
+                <Overlay className={ active ? 'overlay active' : 'overlay'} onClick={toggleSidebar}/>
                 <Sidebar className={ active ? 'slide-right active' : null}/>
                 <Link to='/'><img src={images.logo} alt="" className="app__logo"/></Link>
             </div>

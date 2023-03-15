@@ -2,7 +2,7 @@
 
 // Variables
 
-$transition-sidebar:  all .3s ease-in-out 0s;
+$transition-sidebar: all 350ms ease;
 $overlay-bg:          hsla(0, 0%, 9%, 0.863);
 
 // Button
@@ -69,6 +69,53 @@ $overlay-bg:          hsla(0, 0%, 9%, 0.863);
     
       & > *{
         line-height: 2.5rem;
+      }
+    }
+
+    &_category{
+      margin-bottom: .75rem;
+
+      &-title{
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: $transition-sidebar;
+
+        .app__sidebar_navs_category-title_right {
+          transform: rotate(0deg);
+          transition: $transition-sidebar;
+        }
+
+        &:hover{
+          & .app__sidebar_navs_category-title_right{
+            transform: rotate(90deg);
+          }
+
+          & .app__sidebar_navs_category-title_right > *, .app__sidebar_navs_category-title_up > *, p{
+            color: $orange;
+          }
+        }
+
+        p{
+          margin: 0;
+        }
+
+        span{
+          margin-left: 1rem;
+        }
+      }
+
+      &-content{
+        max-height: 0;
+        overflow: hidden;
+        transition: $transition-sidebar;
+      }
+
+      .show{
+        height: auto;
+        max-height: 400px;
+        margin-left: 1rem;
+        transition: $transition-sidebar;
       }
     }
   }

@@ -127,11 +127,21 @@ body {
 }
 
 .app__support h5 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
-.app__support2 p {
-  line-height: 1rem;
+.app__support2 > * {
+  display: block;
+  line-height: 2rem;
   font-size: 0.9rem;
+  transition: 150ms all ease-in-out;
+}
+.app__support2 > *:hover {
+  font-weight: 500;
+  color: #EB5C1F;
+}
+.app__support3 p {
+  margin: 1.5rem 0 0 0;
+  font-size: 0.75rem;
 }
 
 @media screen and (max-width: 1200px) {
