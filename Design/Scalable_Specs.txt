@@ -6,7 +6,6 @@ The main difference between vertical scaling and horizontal scaling is that vert
 
 Vertical scaling is typically more expensive than horizontal scaling because it requires more powerful hardware.  
 
-
 ------------------------------------------------
 
 SPECIFICATIONS
