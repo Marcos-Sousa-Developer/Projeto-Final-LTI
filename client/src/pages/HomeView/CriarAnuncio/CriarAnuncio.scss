@@ -1,20 +1,47 @@
+@import '../../../index.scss';
 
 
 .app__anuncio{
     margin: 1rem auto;
 
-
     &_content{
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
         
         margin-top: 1rem;
 
-        &>*{
-            border: 1px solid black;
+        .app__anuncio_inputArea{
+            border: 3px solid $light_gray;
+            //padding: 1rem 2rem 2rem 2rem;
 
-            div{
-                border: 1px solid black;
+            p{
+                margin: 1rem 0 .5rem;
+            }
+        }
+
+        &>*{
+
+        }
+
+        &-product{
+
+
+            &_area{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        &-contact{
+
+            &_area{
+                /*
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                */
+                padding: 1rem 4rem 3rem 4rem;
             }
         }
     }

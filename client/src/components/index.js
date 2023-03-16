@@ -5,6 +5,7 @@ import SignInC from './SignInC/SignInC';
 import SignUpC from './SignUpC/SignUpC';
 import Product from './Product/Product';
 import SubHeading from './SubHeading/SubHeading';
+import InputField from './InputField/InputField';
 
 export {
   Navbar,
@@ -14,4 +15,5 @@ export {
   SignUpC,
   Product,
   SubHeading,
+  InputField,
 };

@@ -111,4 +111,15 @@ img, picture {
 }
 .main__action_btn:hover {
   opacity: 1;
-}/*# sourceMappingURL=index.css.map */
+}
+
+.inputField p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField input {
+  outline: none;
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+}/*# sourceMappingURL=InputField.css.map */
