@@ -36,15 +36,15 @@ function CriarAnuncio() {
                 <div className='app__anuncio_content-product'>
                     <p>Dados do Produto</p>
                     <div className='app__anuncio_inputArea app__anuncio_content-product_area'>
-                        <div>
+                        <div className='app__anuncio_content-product_area-g1'>
                             <InputField title='Título' inputype='text'></InputField>
                             <InputField title='Preço' inputype='number'></InputField>
                             <div>
                                 <p>Descrição</p>
                                 <textarea 
-                                    style={{width:'100%', maxHeight: '150px', minHeight:'75px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px'}} 
+                                    style={{width:'100%', maxHeight: '150px', minHeight:'75px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
                                     form='anuncio_form' 
-                                    maxlength="300" 
+                                    maxLength="300" 
                                     onInput={(e) => {
                                         if (e.target.value.length >= 300) {
                                             alert(' Atingiu o limite máximo de caracteres');
@@ -55,8 +55,7 @@ function CriarAnuncio() {
                                 <span style={{fontSize: '.75rem'}}>{text.length > 0 ? text.length : ''}</span>
                             </div>
                         </div>
-                        <div>
-                            <InputField title='Nome' inputype='text'></InputField>
+                        <div className='app__anuncio_content-product_area-g2'>
                             <InputField title='Data de produção' inputype='date'></InputField>
                             <div>
                                 <p>Categoria</p>
@@ -64,12 +63,7 @@ function CriarAnuncio() {
                             </div>
                             <div>
                                 <p>Imagens</p>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    /*onChange={handleFileSelect}*/
-                                />
+                                {/*<input type="file" accept="image/*" multiple onChange={handleFileSelect}/>*/}
                             </div>
                         </div>
                     </div>
@@ -77,12 +71,16 @@ function CriarAnuncio() {
                 <div className='app__anuncio_content-contact'>
                     <p>Dados de Contacto</p>
                     <div className='app__anuncio_inputArea app__anuncio_content-contact_area'>
-                        <InputField title='Nome do anunciante' inputype='text'></InputField>
-                        <InputField title='Telemóvel' inputype='tel'></InputField>
-                        <InputField title='Email' inputype='email'></InputField>
-                        <InputField title='Localização' inputype='text'></InputField>
+                        <div>
+                            <InputField title='Nome do anunciante' inputype='text'></InputField>
+                            <InputField title='Telemóvel' inputype='tel'></InputField>
+                        </div>
+                        <div>
+                            <InputField title='Email' inputype='email'></InputField>
+                            <InputField title='Localização' inputype='text'></InputField>
+                        </div>
                     </div>
-                    <button type='submit' className='main__action_btn flex' style={{margin: '1rem auto'}}>Publicar</button>
+                    <button type='submit' className='main__action_btn flex'>Publicar</button>
                 </div>
             </form>
         </div>

@@ -45,9 +45,9 @@ const Navbar = () => {
                     <ul>
                         {categories.map((category, i) => {
                             return (
-                                <div  className='app__sidebar_navs_category'>
+                                <div key={category.name} className='app__sidebar_navs_category'>
                                     <div className='app__sidebar_navs_category-title' onClick={()=>toggleAccordion(i)}>
-                                        <p key={category}>{category.name}</p>
+                                        <p>{category.name}</p>
                                         <span>{selected === i ? <FiChevronUp className='app__sidebar_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__sidebar_navs_category-title_right'></FiChevronRight>}</span>
                                     </div>
                                     <div className={selected === i ? 'app__sidebar_navs_category-content show' : 'app__sidebar_navs_category-content'}>
