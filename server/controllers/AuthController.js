@@ -44,7 +44,7 @@ const handlerSignIn = (authenticationData, userData, client_result, res) => {
 
         let idt = {idToken: result.getAccessToken().getJwtToken()}
 
-        let rft = {refreshToken: result.getRefreshToken().getJwtToken()}
+        let rft = {refreshToken: result.getRefreshToken().getJwtToken}
 
         const accessToken = jwt.generateAccessToken(act)
         const idToken = jwt.generateAccessToken(idt)
@@ -137,8 +137,6 @@ const signIn = async (req, res) => {
  * @return userType
  */
 const userType = (req, res) => { 
-
-  
   return res.send("admin"); //Trocar para consumer se quiser ir 
 }
 
