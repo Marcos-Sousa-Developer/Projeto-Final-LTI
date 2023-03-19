@@ -33,7 +33,7 @@ apiRouter.use('/consumers' , require('./api/ApiConsumers'))
 apiRouter.use('/suppliers' , require('./api/ApiSuppliers'))
 apiRouter.use('/products' , require('./api/ApiProducts'))
 apiRouter.use('/categories' , require('./api/ApiCategories'))
-apiRouter.use('/characteristics' , require('./api/ApiCharacteristics'))
+apiRouter.use('/subcategories' , require('./api/ApiSubcategories'))
 apiRouter.get('/', (req, res) => {
     res.send({ express: 'HELLO WORLD, YOU ARE CONNECTED TO THE API, PLEASE THE CHECK ENDPOINTS' });
 }); 
