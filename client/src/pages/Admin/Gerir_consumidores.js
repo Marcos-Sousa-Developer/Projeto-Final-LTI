@@ -39,7 +39,7 @@ function Gerir_consumidores() {
         <section className="section dashboard">
           <div className="col-lg-12">
             <div className="row">
-              <h5 className="card-title"><i class="bi bi-bag"></i> Consumidores 
+              <h5 className="card-title"><i className="bi bi-bag"></i> Consumidores 
                 <SearchBar></SearchBar>
               </h5>
               <div className="col-12">
