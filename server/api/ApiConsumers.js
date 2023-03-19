@@ -6,7 +6,7 @@ const consumerController = require('../controllers/ConsumerController');
 router.get('/', consumerController.getAllConsumers)
 
 //Get consumer by id
-router.get('/:id', consumerController.getConsumer)
+router.get('/:id', consumerController.getConsumerByID)
 
 //Delete consumer by id
 router.delete('/:id', consumerController.deleteConsumerByID)

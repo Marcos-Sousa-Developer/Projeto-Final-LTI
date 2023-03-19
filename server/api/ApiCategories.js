@@ -6,7 +6,7 @@ const categoryController = require('../controllers/CategoryController');
 router.get('/', categoryController.getAllCategories)
 
 //Get category by id
-router.get('/:id', categoryController.getCategory)
+router.get('/:id', categoryController.getCategoryByID)
 
 //Delete category by id
 router.delete('/:id', categoryController.deleteCategoryByID)

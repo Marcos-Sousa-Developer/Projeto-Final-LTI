@@ -6,7 +6,7 @@ const vehicleController = require('../controllers/VehicleController');
 router.get('/', vehicleController.getAllVehicles)
 
 //Get vehicle by license_plate
-router.get('/:license_plate', vehicleController.getVehicle)
+router.get('/:license_plate', vehicleController.getVehicleByID)
 
 //Delete vehicle by license_plate
 router.delete('/:license_plate', vehicleController.deleteVehicleByLicensePlate)

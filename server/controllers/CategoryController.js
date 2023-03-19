@@ -25,7 +25,7 @@ const getAllCategories = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const getCategory = async function (req, res) { 
+const getCategoryByID = async function (req, res) { 
 
     const statement = "SELECT * FROM categories WHERE id = " + req.params.id
 
@@ -99,4 +99,4 @@ const updateCategoryByID = async function (req, res) {
     return res.send("Category has been updated");
 }
 
-module.exports = {getAllCategories, getCategory, deleteCategoryByID, insertCategory, updateCategoryByID}
+module.exports = {getAllCategories, getCategoryByID, deleteCategoryByID, insertCategory, updateCategoryByID}

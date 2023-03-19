@@ -6,7 +6,7 @@ const supplierController = require('../controllers/SupplierController');
 router.get('/', supplierController.getAllSuppliers)
 
 //Get supplier by id
-router.get('/:id', supplierController.getSupplier)
+router.get('/:id', supplierController.getSupplierByID)
 
 //Delete supplier by id
 router.delete('/:id', supplierController.deleteSupplierByID)

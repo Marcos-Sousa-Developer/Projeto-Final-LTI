@@ -25,7 +25,7 @@ const getAllVehicles = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const getVehicle = async function (req, res) { 
+const getVehicleByID = async function (req, res) { 
 
     const statement = "SELECT * FROM vehicles WHERE license_plate = " + req.params.license_plate
 
@@ -99,4 +99,4 @@ const updateVehicleByLicensePlate = async function (req, res) {
     return res.send("Vehicle has been updated");
 }
 
-module.exports = {getAllVehicles, getVehicle, deleteVehicleByLicensePlate, insertVehicle, updateVehicleByLicensePlate}
+module.exports = {getAllVehicles, getVehicleByID, deleteVehicleByLicensePlate, insertVehicle, updateVehicleByLicensePlate}

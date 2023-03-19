@@ -25,7 +25,7 @@ const getAllProductionUnits = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const getProductionUnit = async function (req, res) { 
+const getProductionUnitByID = async function (req, res) { 
 
     const statement = "SELECT * FROM productionUnits WHERE id = " + req.params.id
 
@@ -99,4 +99,4 @@ const updateProductionUnitByID = async function (req, res) {
     return res.send("Production unit has been updated");
 }
 
-module.exports = {getAllProductionUnits, getProductionUnit, deleteProductionUnitByID, insertProductionUnit, updateProductionUnitByID}
+module.exports = {getAllProductionUnits, getProductionUnitByID, deleteProductionUnitByID, insertProductionUnit, updateProductionUnitByID}

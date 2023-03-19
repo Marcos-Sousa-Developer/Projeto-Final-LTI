@@ -25,7 +25,7 @@ const getAllOrders = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const getOrder = async function (req, res) { 
+const getOrderByID = async function (req, res) { 
 
     const statement = "SELECT * FROM orders WHERE id = " + req.params.id
 
@@ -99,4 +99,4 @@ const updateOrderByID = async function (req, res) {
     return res.send("Order has been updated");
 }
 
-module.exports = {getAllOrders, getOrder, deleteOrderByID, insertOrder, updateOrderByID}
+module.exports = {getAllOrders, getOrderByID, deleteOrderByID, insertOrder, updateOrderByID}

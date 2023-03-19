@@ -25,7 +25,7 @@ const getAllConsumers = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const getConsumer = async function (req, res) { 
+const getConsumerByID = async function (req, res) { 
 
     const statement = "SELECT * FROM consumers WHERE id = " + req.params.id
 
@@ -137,4 +137,4 @@ const deactivateConsumerByID = async function (req, res) {
     return res.send("Consumer has been deactivated");
 }
 
-module.exports = {getAllConsumers, getConsumer, deleteConsumerByID, insertConsumer, updateConsumerByID, deactivateConsumerByID, activateConsumerByID}
+module.exports = {getAllConsumers, getConsumerByID, deleteConsumerByID, insertConsumer, updateConsumerByID, deactivateConsumerByID, activateConsumerByID}

@@ -40,7 +40,17 @@ exec('node ./models/seeders/SeederCategoryTable.js',
         }
 });
 
-exec('node ./models/seeders/SeederCharacteristicTable.js',
+exec('node ./models/seeders/SeederSubCategoryTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/seeders/SeederSubSubCategoryTable.js',
     function (error, stdout) {
 
         console.log(stdout);

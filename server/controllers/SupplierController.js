@@ -25,7 +25,7 @@ const getAllSuppliers = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const getSupplier = async function (req, res) { 
+const getSupplierByID = async function (req, res) { 
 
     const statement = "SELECT * FROM suppliers WHERE id = " + req.params.id
 
@@ -137,4 +137,4 @@ const deactivateSupplierByID = async function (req, res) {
     return res.send("Supplier has been deactivated");
 }
 
-module.exports = {getAllSuppliers, getSupplier, deleteSupplierByID, insertSupplier, updateSupplierByID, activateSupplierByID, deactivateSupplierByID}
+module.exports = {getAllSuppliers, getSupplierByID, deleteSupplierByID, insertSupplier, updateSupplierByID, activateSupplierByID, deactivateSupplierByID}

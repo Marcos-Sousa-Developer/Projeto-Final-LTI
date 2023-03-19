@@ -6,7 +6,7 @@ const productionUnitController = require('../controllers/ProductionUnitControlle
 router.get('/', productionUnitController.getAllProductionUnits)
 
 //Get production unit by id
-router.get('/:id', productionUnitController.getProductionUnit)
+router.get('/:id', productionUnitController.getProductionUnitByID)
 
 //Delete production unit by id
 router.delete('/:id', productionUnitController.deleteProductionUnitByID)

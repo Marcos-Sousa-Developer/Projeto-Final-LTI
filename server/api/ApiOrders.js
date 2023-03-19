@@ -6,7 +6,7 @@ const orderController = require('../controllers/OrderController');
 router.get('/', orderController.getAllOrders)
 
 //Get order
-router.get('/:id', orderController.getOrder)
+router.get('/:id', orderController.getOrderByID)
 
 //Delete order by id
 router.delete('/:id', orderController.deleteOrderByID)

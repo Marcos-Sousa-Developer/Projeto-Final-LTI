@@ -6,7 +6,7 @@ const productController = require('../controllers/ProductController');
 router.get('/', productController.getAllProducts)
 
 //Get product by ean
-router.get('/:EAN', productController.getProduct)
+router.get('/:EAN', productController.getProductByID)
 
 //Delete product by ean
 router.delete('/:EAN', productController.deleteProductByEAN)
