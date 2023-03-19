@@ -5,11 +5,14 @@ const productionUnitController = require('../controllers/ProductionUnitControlle
 //Get all production units
 router.get('/', productionUnitController.getAllProductionUnits)
 
+//Get production unit by id
+router.get('/:id', productionUnitController.getProductionUnit)
+
 //Delete production unit by id
 router.delete('/:id', productionUnitController.deleteProductionUnitByID)
 
 //Add production unit
-router.post('/productionUnit', productionUnitController.insertProductionUnit)
+router.post('/', productionUnitController.insertProductionUnit)
 
 //Update production unit by id
 router.put('/:id', productionUnitController.updateProductionUnitByID) 

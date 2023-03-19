@@ -5,11 +5,14 @@ const consumerController = require('../controllers/ConsumerController');
 //Get all consumers
 router.get('/', consumerController.getAllConsumers)
 
+//Get consumer by id
+router.get('/:id', consumerController.getConsumer)
+
 //Delete consumer by id
 router.delete('/:id', consumerController.deleteConsumerByID)
 
 //Add consumer
-router.post('/consumer', consumerController.insertConsumer)
+router.post('/', consumerController.insertConsumer)
 
 //Update consumer by id
 router.put('/:id', consumerController.updateConsumerByID) 

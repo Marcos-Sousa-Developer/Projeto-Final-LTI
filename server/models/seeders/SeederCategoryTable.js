@@ -2,7 +2,7 @@ let pool = require('../../config/dbConfigLocal')
 
 const fake_category_data = require('../factories/FAKE_CATEGORY_DATA.json')
 
-const statement = "INSERT INTO categories (id, name, id_subcategory) VALUES ? "
+const statement = "INSERT INTO categories (id, name) VALUES ? "
 
 let values = []
 

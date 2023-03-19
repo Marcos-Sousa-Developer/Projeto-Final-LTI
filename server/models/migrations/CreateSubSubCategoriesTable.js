@@ -1,9 +1,9 @@
 let pool = require('../../config/dbConfigLocal')
 
-const statement = "CREATE TABLE characteristics ( " +
+const statement = "CREATE TABLE subsubcategories ( " +
                   "id int NOT NULL AUTO_INCREMENT, " + 
                   "name varchar(255) NOT NULL, " + 
-                  "id_category int, " + //ADD NOT NULL
+                  "id_subcategory int, " + //ADD NOT NULL
                   "PRIMARY KEY (id))";
                   //"PRIMARY KEY (id), " +
                   //"FOREIGN KEY (id_category) REFERENCES categories(id))"; 
@@ -11,10 +11,10 @@ const statement = "CREATE TABLE characteristics ( " +
 pool.query(statement, function(error, result) {
 
     if (error) {
-        throw error + '\n' + 'Not possible create table characteristics'
+        throw error + '\n' + 'Not possible create table subsubcategories'
     }
 
-    console.log("Table characteristics created"); 
+    console.log("Table subsubcategories created"); 
 
     process.exit()
 });

@@ -20,6 +20,25 @@ const getAllCharacteristics = async function (req, res) {
 }
 
 /**
+ * Async function to get characteristic by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getCharacteristic = async function (req, res) { 
+
+    const statement = "SELECT * FROM characteristics WHERE id = " + req.params.id
+
+    let result = await dbConnection(statement)  
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to get characteristic with id " + req.params.id);
+    } 
+    
+    return res.send(result)
+}
+
+/**
  * Async function to delete characteristic by id and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
@@ -80,4 +99,4 @@ const updateCharacteristicByID = async function (req, res) {
     return res.send("Characteristic has been updated");
 }
 
-module.exports = {getAllCharacteristics, deleteCharacteristicByID, insertCharacteristic, updateCharacteristicByID}
+module.exports = {getAllCharacteristics, getCharacteristic, deleteCharacteristicByID, insertCharacteristic, updateCharacteristicByID}

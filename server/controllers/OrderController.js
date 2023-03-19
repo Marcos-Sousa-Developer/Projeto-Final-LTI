@@ -20,6 +20,25 @@ const getAllOrders = async function (req, res) {
 }
 
 /**
+ * Async function to get order by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getOrder = async function (req, res) { 
+
+    const statement = "SELECT * FROM orders WHERE id = " + req.params.id
+
+    let result = await dbConnection(statement)  
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to get order with id " + req.params.id);
+    } 
+    
+    return res.send(result)
+}
+
+/**
  * Async function to delete order by id and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
@@ -80,4 +99,4 @@ const updateOrderByID = async function (req, res) {
     return res.send("Order has been updated");
 }
 
-module.exports = {getAllOrders, deleteOrderByID, insertOrder, updateOrderByID}
+module.exports = {getAllOrders, getOrder, deleteOrderByID, insertOrder, updateOrderByID}

@@ -20,6 +20,25 @@ const getAllConsumers = async function (req, res) {
 }
 
 /**
+ * Async function to get consumer by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getConsumer = async function (req, res) { 
+
+    const statement = "SELECT * FROM consumers WHERE id = " + req.params.id
+
+    let result = await dbConnection(statement)  
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to get consumer with id " + req.params.id);
+    } 
+    
+    return res.send(result)
+}
+
+/**
  * Async function to delete consumer by id and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
@@ -118,4 +137,4 @@ const deactivateConsumerByID = async function (req, res) {
     return res.send("Consumer has been deactivated");
 }
 
-module.exports = {getAllConsumers, deleteConsumerByID, insertConsumer, updateConsumerByID, deactivateConsumerByID, activateConsumerByID}
+module.exports = {getAllConsumers, getConsumer, deleteConsumerByID, insertConsumer, updateConsumerByID, deactivateConsumerByID, activateConsumerByID}
