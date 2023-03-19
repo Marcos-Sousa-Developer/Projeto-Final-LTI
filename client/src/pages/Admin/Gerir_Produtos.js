@@ -5,8 +5,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import getAllFromDB from '../../hooks/getAllFromDB';
 import SearchBar from './components/ProfilesComponents/SearchBar';
+import getAllFromDB from  '../../hooks/getAllFromDB'
 
 // user can be consumer, supplier or admin
 function Gerir_Produtos() { 

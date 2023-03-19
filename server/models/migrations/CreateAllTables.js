@@ -40,7 +40,17 @@ exec('node ./models/migrations/CreateCategoryTable.js',
         }
 });
 
-exec('node ./models/migrations/CreateCharacteristicTable.js',
+exec('node ./models/migrations/CreateSubCategoryTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/migrations/CreateSubSubCategoryTable.js',
     function (error, stdout) {
 
         console.log(stdout);

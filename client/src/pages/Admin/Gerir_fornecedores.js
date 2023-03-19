@@ -41,7 +41,7 @@ function Gerir_fornecedores() {
             <div className="col-lg-12">
               <div className="row">
                 <h5 className="card-title">
-                  <i class="bi bi-briefcase"></i> Fornecedores
+                  <i className="bi bi-briefcase"></i> Fornecedores
                   <SearchBar></SearchBar>
                 </h5>
                 <Navigator users={suppliers} user_type={"supplier"}></Navigator>

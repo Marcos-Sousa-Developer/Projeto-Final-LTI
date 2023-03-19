@@ -104,7 +104,7 @@ img, picture {
 .main__action_btn {
   background-color: #EB5C1F;
   color: white;
-  padding: 8px 40px;
+  padding: 8px 50px;
   border-radius: 15px;
   opacity: 0.8;
   transition: all 200ms ease-in-out;
@@ -169,4 +169,40 @@ img, picture {
 }
 .app__sidebar_navs ul > * {
   line-height: 2.5rem;
+}
+.app__sidebar_navs_category {
+  margin-bottom: 0.75rem;
+}
+.app__sidebar_navs_category-title {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 350ms ease;
+}
+.app__sidebar_navs_category-title .app__sidebar_navs_category-title_right {
+  transform: rotate(0deg);
+  transition: all 350ms ease;
+}
+.app__sidebar_navs_category-title:hover .app__sidebar_navs_category-title_right {
+  transform: rotate(90deg);
+}
+.app__sidebar_navs_category-title:hover .app__sidebar_navs_category-title_right > *, .app__sidebar_navs_category-title:hover .app__sidebar_navs_category-title_up > *, .app__sidebar_navs_category-title:hover p {
+  color: #EB5C1F;
+}
+.app__sidebar_navs_category-title p {
+  margin: 0;
+}
+.app__sidebar_navs_category-title span {
+  margin-left: 1rem;
+}
+.app__sidebar_navs_category-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 350ms ease;
+}
+.app__sidebar_navs_category .show {
+  height: auto;
+  max-height: 400px;
+  margin-left: 1rem;
+  transition: all 350ms ease;
 }/*# sourceMappingURL=Sidebar.css.map */

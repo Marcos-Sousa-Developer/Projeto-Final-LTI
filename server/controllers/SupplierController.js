@@ -17,6 +17,25 @@ const getAllSuppliers = async function (req, res) {
     } 
 
     return res.send(result)
+}
+
+/**
+ * Async function to get supplier by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getSupplierByID = async function (req, res) { 
+
+    const statement = "SELECT * FROM suppliers WHERE id = " + req.params.id
+
+    let result = await dbConnection(statement)  
+
+    if (result.includes("error")) {
+        return res.status(500).json("Not possible to get supplier with id " + req.params.id);
+    } 
+
+    return res.send(result)
 } 
 
 /**
@@ -118,4 +137,4 @@ const deactivateSupplierByID = async function (req, res) {
     return res.send("Supplier has been deactivated");
 }
 
-module.exports = {getAllSuppliers, deleteSupplierByID, insertSupplier, updateSupplierByID, activateSupplierByID, deactivateSupplierByID}
+module.exports = {getAllSuppliers, getSupplierByID, deleteSupplierByID, insertSupplier, updateSupplierByID, activateSupplierByID, deactivateSupplierByID}

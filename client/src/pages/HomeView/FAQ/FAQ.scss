@@ -1,0 +1,43 @@
+@import '../../../index.scss';
+
+
+.app__faq{
+    margin: 1rem auto;
+
+    &_accordion{
+
+        p{
+            margin: 0;
+        }
+
+        &-item{
+            background-color: $light_gray;
+            padding: 1rem 2rem;
+            margin: 1rem 0;
+    
+            &_title, &_title>*, &_content, &_content>*{
+                background-color: $light_gray;
+            }
+    
+            &_title{
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+            }
+    
+            &_content{
+                max-height: 0;
+                overflow: hidden;
+                //transition: all 250ms ease-in-out;
+            }
+    
+        }
+
+        .show{
+            height: auto;
+            max-height: 400px;
+            margin-top: 1rem;
+            transition: all 250ms ease-in-out;
+        }
+    }
+}

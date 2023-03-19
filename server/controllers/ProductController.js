@@ -20,6 +20,25 @@ const getAllProducts = async function (req, res) {
 }
 
 /**
+ * Async function to get product by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getProductByID = async function (req, res) { 
+
+    const statement = "SELECT * FROM products WHERE EAN = " + req.params.EAN;
+
+    let result = await dbConnection(statement)  
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to get product with EAN " + req.params.EAN);
+    } 
+    
+    return res.send(result)
+}
+
+/**
  * Async function to delete product by id and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
@@ -80,4 +99,4 @@ const updateProductByEAN = async function (req, res) {
     return res.send("Product has been updated");
 }
 
-module.exports = {getAllProducts, deleteProductByEAN, insertProduct, updateProductByEAN}
+module.exports = {getAllProducts, getProductByID, deleteProductByEAN, insertProduct, updateProductByEAN}

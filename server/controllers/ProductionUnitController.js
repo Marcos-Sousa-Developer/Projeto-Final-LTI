@@ -20,6 +20,25 @@ const getAllProductionUnits = async function (req, res) {
 }
 
 /**
+ * Async function to get production unit with id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getProductionUnitByID = async function (req, res) { 
+
+    const statement = "SELECT * FROM productionUnits WHERE id = " + req.params.id
+
+    let result = await dbConnection(statement)  
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to get production unit with id " + req.params.id);
+    } 
+    
+    return res.send(result)
+}
+
+/**
  * Async function to delete production unit by id and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
@@ -80,4 +99,4 @@ const updateProductionUnitByID = async function (req, res) {
     return res.send("Production unit has been updated");
 }
 
-module.exports = {getAllProductionUnits, deleteProductionUnitByID, insertProductionUnit, updateProductionUnitByID}
+module.exports = {getAllProductionUnits, getProductionUnitByID, deleteProductionUnitByID, insertProductionUnit, updateProductionUnitByID}

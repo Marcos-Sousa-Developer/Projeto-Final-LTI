@@ -40,7 +40,17 @@ exec('node ./models/resets/ResetCategoryTable.js',
         }
 });
 
-exec('node ./models/resets/ResetCharacteristicTable.js',
+exec('node ./models/resets/ResetSubCategoryTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error); 
+        }
+});
+
+exec('node ./models/resets/ResetSubSubCategoryTable.js',
     function (error, stdout) {
 
         console.log(stdout);

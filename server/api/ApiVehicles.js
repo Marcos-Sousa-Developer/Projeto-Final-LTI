@@ -5,13 +5,16 @@ const vehicleController = require('../controllers/VehicleController');
 //Get all vehicles
 router.get('/', vehicleController.getAllVehicles)
 
-//Delete vehicle by id
+//Get vehicle by license_plate
+router.get('/:license_plate', vehicleController.getVehicleByID)
+
+//Delete vehicle by license_plate
 router.delete('/:license_plate', vehicleController.deleteVehicleByLicensePlate)
 
 //Add vehicle
-router.post('/vehicle', vehicleController.insertVehicle)
+router.post('/', vehicleController.insertVehicle)
 
-//Update vehicle by id
+//Update vehicle by license_plate
 router.put('/:license_plate', vehicleController.updateVehicleByLicensePlate) 
 
 module.exports = router

@@ -1,19 +1,102 @@
+@import '../../../index.scss';
+
 .app__anuncio{
     margin: 1rem auto;
 
+    &_inputArea{
+        border: 3px solid $light_gray;
+        padding: 1rem 4rem 3rem 4rem;
+
+        p{
+            margin: 1rem 0 .5rem;
+        }
+    }
 
     &_content{
         display: grid;
-        grid-template-columns: 1fr 3fr;
-        
+        grid-template-columns: 2fr 1fr;
+        gap: 4rem;
         margin-top: 1rem;
 
-        &>*{
-            border: 1px solid black;
+        &-product{
+            &_area{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
 
-            div{
-                border: 1px solid black;
+                &>*{
+                    width: 80%;
+                }
             }
+        }
+
+        &-contact{
+            button{
+                margin: 1rem auto;
+            }
+
+            &_area{
+                &>*{
+                    width: 80%;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .app__anuncio_content{
+        & .app__anuncio_inputArea{
+            padding: 1rem 2rem 3rem 2rem;
+        }
+
+        &-product_area{
+            gap: 0rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .app__anuncio_content{
+        gap: 2rem;
+
+        & .app__anuncio_inputArea{
+            padding: 1rem 0rem 3rem 0rem;
+        }
+
+        &-product_area > *{
+            margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .app__anuncio_content{
+        grid-template-columns: 1fr;
+
+        &-contact_area{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        &-contact button{
+            margin: 1rem 0 2rem 0;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .app__anuncio_content{
+        grid-template-columns: 1fr;
+
+        &-contact_area{
+            display: block;
+        }
+
+        &-product_area{
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
         }
     }
 }

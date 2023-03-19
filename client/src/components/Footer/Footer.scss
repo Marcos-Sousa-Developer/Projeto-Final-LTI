@@ -18,12 +18,24 @@ body{
     //justify-self: center;
 
     h5 {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
     }
 
-    &2 p{
-        line-height: 1rem;
+    &2 >*{
+        display: block;
+        line-height: 2rem;
         font-size: 0.9rem;
+        transition: 150ms all ease-in-out;
+
+        &:hover{
+            font-weight: 500;
+            color: $orange;
+        }
+    }
+
+    &3 p{
+        margin: 1.5rem 0 0 0;
+        font-size: 0.75rem;
     }
 }
 

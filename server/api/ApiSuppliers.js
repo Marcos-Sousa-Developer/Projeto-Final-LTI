@@ -5,11 +5,14 @@ const supplierController = require('../controllers/SupplierController');
 //Get all suppliers
 router.get('/', supplierController.getAllSuppliers)
 
+//Get supplier by id
+router.get('/:id', supplierController.getSupplierByID)
+
 //Delete supplier by id
 router.delete('/:id', supplierController.deleteSupplierByID)
 
 //Add supplier
-router.post('/supplier', supplierController.insertSupplier)
+router.post('/', supplierController.insertSupplier)
 
 //Update supplier by id
 router.put('/:id', supplierController.updateSupplierByID)

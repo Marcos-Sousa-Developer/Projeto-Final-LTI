@@ -20,6 +20,25 @@ const getAllVehicles = async function (req, res) {
 }
 
 /**
+ * Async function to get vehicle by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getVehicleByID = async function (req, res) { 
+
+    const statement = "SELECT * FROM vehicles WHERE license_plate = " + req.params.license_plate
+
+    let result = await dbConnection(statement)  
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to get vehicle with license plate " + req.params.license_plate);
+    }
+    
+    return res.send(result)
+}
+
+/**
  * Async function to delete vehicle by license_plate and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
@@ -80,4 +99,4 @@ const updateVehicleByLicensePlate = async function (req, res) {
     return res.send("Vehicle has been updated");
 }
 
-module.exports = {getAllVehicles, deleteVehicleByLicensePlate, insertVehicle, updateVehicleByLicensePlate}
+module.exports = {getAllVehicles, getVehicleByID, deleteVehicleByLicensePlate, insertVehicle, updateVehicleByLicensePlate}

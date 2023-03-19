@@ -20,6 +20,25 @@ const getAllCategories = async function (req, res) {
 }
 
 /**
+ * Async function to get category by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getCategoryByID = async function (req, res) { 
+
+    const statement = "SELECT * FROM categories WHERE id = " + req.params.id
+
+    let result = await dbConnection(statement)  
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to get category with id " + req.params.id);
+    } 
+    
+    return res.send(result)
+}
+
+/**
  * Async function to delete category by id and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
@@ -80,4 +99,4 @@ const updateCategoryByID = async function (req, res) {
     return res.send("Category has been updated");
 }
 
-module.exports = {getAllCategories, deleteCategoryByID, insertCategory, updateCategoryByID}
+module.exports = {getAllCategories, getCategoryByID, deleteCategoryByID, insertCategory, updateCategoryByID}

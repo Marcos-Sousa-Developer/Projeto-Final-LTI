@@ -50,7 +50,17 @@ exec('node ./models/deletes/DeleteCategoryTable.js',
         }
 });
 
-exec('node ./models/deletes/DeleteCharacteristicTable.js',
+exec('node ./models/deletes/DeleteSubCategoryTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+        
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/deletes/DeleteSubSubCategoryTable.js',
     function (error, stdout) {
 
         console.log(stdout);
