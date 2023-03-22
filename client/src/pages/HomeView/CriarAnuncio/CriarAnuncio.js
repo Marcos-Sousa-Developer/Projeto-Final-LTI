@@ -5,29 +5,44 @@ import "./CriarAnuncio.css";
 
 function handleSubmit(event) {
     event.preventDefault();
-  
     // Get input values
     const inputValues = [];
     const inputs = event.target.querySelectorAll('input');
     inputs.forEach((input) => {
       inputValues.push(input.value);
     });
-  
     // Get values from InputField components
     const inputFields = event.target.querySelectorAll('InputField');
     inputFields.forEach((inputField) => {
       inputValues.push(inputField.props.value);
     });
-  
     // Print input values to console
     console.log(inputValues);
 }
 
 function CriarAnuncio() {
 
+    const [selectedImages, setSelectedImages] = useState([]);
+
+    const onSelectFile = (event) => {
+
+        const selectedFiles = event.target.files;
+        const selectedFilesArray = Array.from(selectedFiles);
+
+        const imagesArray = selectedFilesArray.map((file) => {
+            return URL.createObjectURL(file);
+        });
+
+        if (selectedImages.length + imagesArray.length <= 10) {
+            setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+        }
+
+        event.target.value = ""; // FOR BUG IN CHROME
+    }
+
     const [text, setText] = useState('');
 
-  return (
+    return (
     <>
         <NavbarSupplier></NavbarSupplier>
         <div className='app__anuncio main__container'>
@@ -59,11 +74,34 @@ function CriarAnuncio() {
                             <InputField title='Data de produção' inputype='date'></InputField>
                             <div>
                                 <p>Categoria</p>
-                                <button>Escolher categoria</button>
+                                <button className='main__action_btn'>Escolher</button>
                             </div>
                             <div>
                                 <p>Imagens</p>
-                                {/*<input type="file" accept="image/*" multiple onChange={handleFileSelect}/>*/}
+                                {selectedImages.length === 10 &&
+                                    <p>Atingiu o limite de imagens!</p>
+                                }
+                                <label className='app__anuncio_image_input'>
+                                    <p>+ Adicionar</p>
+                                    <span>até 10 imagens</span>
+                                    <input type="file" accept="image/*" multiple onChange={onSelectFile}/>
+                                </label>
+                                <div>
+                                    {selectedImages.length > 0 &&
+                                        <button onClick={() => setSelectedImages([])}>delete all</button>
+                                    }
+                                    {selectedImages &&
+                                        selectedImages.map((image, index)=>{
+                                            return(
+                                                <div key={image}>
+                                                    <img src={image} alt=''/>
+                                                    <button onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}>delete</button>
+                                                    <p>{index + 1}</p>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

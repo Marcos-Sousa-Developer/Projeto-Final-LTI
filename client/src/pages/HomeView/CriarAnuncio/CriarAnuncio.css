@@ -137,6 +137,21 @@ img, picture {
 .app__anuncio_content-product_area > * {
   width: 80%;
 }
+.app__anuncio_content-product_area .app__anuncio_image_input {
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 2rem 1rem;
+  cursor: pointer;
+}
+.app__anuncio_content-product_area .app__anuncio_image_input input {
+  display: none;
+}
+.app__anuncio_content-product_area .app__anuncio_image_input p {
+  margin: 0;
+}
+.app__anuncio_content-product_area .app__anuncio_image_input span {
+  font-size: 0.8rem;
+}
 .app__anuncio_content-contact button {
   margin: 1rem auto;
 }
