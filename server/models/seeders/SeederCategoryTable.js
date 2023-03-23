@@ -8,7 +8,7 @@ let values = []
 
 fake_category_data.forEach(row => {
 
-    values.push([row.id, row.name, row.id_subcategory])     
+    values.push([row.id, row.name])     
 });
 
 pool.query(statement, [values], function(error, result){
