@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { FiPlus, FiX } from 'react-icons/fi';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
 import "./CriarAnuncio.css";
@@ -77,30 +78,35 @@ function CriarAnuncio() {
                                 <button className='main__action_btn'>Escolher</button>
                             </div>
                             <div>
-                                <p>Imagens</p>
-                                {selectedImages.length === 10 &&
-                                    <p>Atingiu o limite de imagens!</p>
+                                <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 10)</span></p>
+                                {selectedImages.length > 0 &&
+                                    <button onClick={() => setSelectedImages([])}>limpar tudo</button>
                                 }
-                                <label className='app__anuncio_image_input'>
-                                    <p>+ Adicionar</p>
-                                    <span>até 10 imagens</span>
-                                    <input type="file" accept="image/*" multiple onChange={onSelectFile}/>
-                                </label>
-                                <div>
-                                    {selectedImages.length > 0 &&
-                                        <button onClick={() => setSelectedImages([])}>delete all</button>
+                                <div className='teste'>
+                                    {selectedImages.length === 10 &&
+                                        <p>Atingiu o limite de imagens!</p>
                                     }
-                                    {selectedImages &&
-                                        selectedImages.map((image, index)=>{
-                                            return(
-                                                <div key={image}>
-                                                    <img src={image} alt=''/>
-                                                    <button onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}>delete</button>
-                                                    <p>{index + 1}</p>
-                                                </div>
-                                            )
-                                        })
+                                    {selectedImages.length < 10 &&
+                                        <label className='app__anuncio_image_input'>
+                                            <div>
+                                                <FiPlus style={{textAlign: 'center'}}></FiPlus>
+                                            </div>
+                                            <input type="file" accept="image/*" multiple onChange={onSelectFile}/>
+                                        </label>
                                     }
+                                    <div className='app__anuncio_images_selected'>
+                                        {selectedImages &&
+                                            selectedImages.map((image, index)=>{
+                                                return(
+                                                    <div key={image} className='app__anuncio_image_selected'>
+                                                        <img src={image} alt='' className='app__anuncio_image_selected_img'/>
+                                                        <FiX className='trash' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}></FiX>
+                                                        {/*<p>{index + 1}</p>*/}
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
