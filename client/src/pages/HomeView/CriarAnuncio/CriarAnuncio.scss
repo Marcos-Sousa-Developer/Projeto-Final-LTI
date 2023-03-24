@@ -5,7 +5,7 @@
 
     &_inputArea{
         border: 3px solid $light_gray;
-        padding: 1rem 4rem 3rem 4rem;
+        padding: 1rem 4rem 2rem 4rem;
 
         p{
             margin: 1rem 0 .5rem;
@@ -14,11 +14,76 @@
 
     &_content{
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 3fr 1fr;
         gap: 4rem;
         margin-top: 1rem;
 
         &-product{
+            .app__anuncio_image_section{
+                button{
+                    border: 3px solid black;
+                }
+            }
+
+            .app__anuncio_image_section-content{
+                display: flex;
+                margin: 1rem 0;
+            }
+
+            .app__anuncio_image_input{
+                border: 3px solid $light_gray;
+                padding: 29px 39px;
+                border-radius: 10px;
+                cursor: pointer;
+                align-self: flex-start;
+                margin-right: 1rem;
+
+                input{
+                    display: none;
+                }
+
+                p{
+                    margin: 0;
+                    font-size: .75rem;
+                }
+
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+
+            .app__anuncio_images_selected{
+                display: grid;
+                grid-template-columns: repeat(4, minmax(100px, 1fr));
+                gap: 1rem;
+            }
+
+            .app__anuncio_image_selected{
+                position: relative;
+                border-radius: 10px;
+
+                &_img{
+                    border-radius: 10px;
+                    object-fit: cover;
+                    width: 100px;
+                    height: 80px;
+                }
+
+                .trash{
+                    position: absolute;
+                    right: 0rem;
+                    top: 0rem;
+                    background-color: $orange;
+                    cursor: pointer;
+
+                    &>*{
+                        color: white;
+                    }
+                }
+            }
+
             &_area{
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -26,78 +91,6 @@
 
                 &>*{
                     width: 85%;
-                }
-
-                .teste{
-                    display: grid;
-                    grid-template-columns: 1fr 3fr;
-                }
-
-                .app__anuncio_image_input{
-                    border: 3px solid $light_gray;
-                    border-radius: 10px;
-                    padding: 1.5rem .5rem;
-                    cursor: pointer;
-                    align-self: flex-start;
-
-                    input{
-                        display: none;
-                    }
-                    p{
-                        margin: 0;
-                        font-size: .75rem;
-                    }
-
-                    div{
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                    }
-                }
-
-                .app__anuncio_images_selected{
-                    display: grid;
-                    grid-template-columns:  repeat(2, minmax(100px, 1fr));
-                    gap: 1rem;
-                    margin-left: 1rem;
-
-                    &>*{
-                        max-height: 100px;
-                    }
-                }
-
-                .app__anuncio_image_selected{
-                    position: relative;
-                    border-radius: 10px;
-
-                    &_img{
-                        border-radius: 10px;
-                        object-fit: cover;
-                        max-width: 100%;
-                        max-height: 100%;
-                    }
-
-                    /*
-                    p{
-                        position: absolute;
-                        left: 0rem;
-                        bottom: 0rem;
-                        margin: 0;
-                        padding-right: .25rem;
-                        font-size: .7rem;
-                        text-align: center;
-                    }*/
-
-                    .trash{
-                        position: absolute;
-                        right: 0rem;
-                        top: 0rem;
-                        background-color: $orange;
-
-                        &>*{
-                            color: white;
-                        }
-                    }
                 }
             }
         }
@@ -109,7 +102,7 @@
 
             &_area{
                 &>*{
-                    width: 80%;
+                    width: 85%;
                     margin: 0 auto;
                 }
             }
@@ -143,7 +136,7 @@
     }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
     .app__anuncio_content{
         grid-template-columns: 1fr;
 
