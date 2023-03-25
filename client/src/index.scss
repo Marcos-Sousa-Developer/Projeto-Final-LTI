@@ -12,6 +12,14 @@ $orange:     #EB5C1F;
 $light_gray: #EEEEEE;
 $blue:       #76CBFF;
 
+$bigger_font-size: 1.5rem;
+$normal_font-size: 1rem;
+$smaller_font-size: .75rem;
+
+$border: 3px solid $light_gray;
+
+//scrollbar
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -24,6 +32,8 @@ $blue:       #76CBFF;
 ::-webkit-scrollbar-thumb:hover {
   background: #EB5C1F;
 }
+
+//basic stuff
 
 *{
   box-sizing: border-box;
