@@ -21,6 +21,96 @@ function handleSubmit(event) {
     console.log(inputValues);
 }
 
+/*
+const Category = ({ categoryType, onClick }) => {
+    return (
+      <div onClick={onClick}>
+        {categoryType}
+      </div>
+    );
+};
+  
+const CategoryPage = ({ categoryType, onClick }) => {
+    return (
+      <div>
+        <div>{categoryType}</div>
+        <p>Subcaterogias</p>
+        <p onClick={onClick}>Back</p>
+      </div>
+    );
+};
+
+const Teste = ({categoryType}) => {
+    const [showCategoryPage, setShowCategoryPage] = useState(false);
+    return (
+        <>
+        {showCategoryPage ? (
+            <CategoryPage categoryType={categoryType} onClick={() => setShowCategoryPage(false)}/>
+          ) : (
+            <Category categoryType={categoryType} onClick={() => setShowCategoryPage(true)}/>
+          )}
+        </>
+    )
+}
+*/
+
+const categories = [
+    {name: 'Category 1', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3'] },
+    {name: 'Category 2', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3'] },
+    {name: 'Category 3', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3'] },
+];
+  
+
+const Category = ({ category, onSelect }) => {
+    return (
+      <div onClick={() => onSelect(category)}>
+        {category.name}
+      </div>
+    );
+};
+
+const CategoryDetails = ({ category, onBack }) => {
+  return (
+    <div>
+        <h2>{category.name}</h2>
+        <ul>
+            {category.subcategory.map(subcategory => (
+                <li key={subcategory}>{subcategory}</li>
+            ))}
+        </ul>
+        <button onClick={onBack}>Back</button>
+    </div>
+  );
+};
+  
+const Modal = ({ closeModal }) => {
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const handleCategorySelect = (category) => {
+      setSelectedCategory(category);
+    };
+  
+    const handleBackClick = () => {
+      setSelectedCategory(null);
+    };
+  
+    return (
+      <>
+        <p>Categorias</p>
+        <span onClick={() => closeModal(false)}>X</span>
+            <div>
+                {selectedCategory ? (
+                    <CategoryDetails category={selectedCategory} onBack={handleBackClick}/>
+                ) : (
+                    categories.map((category, index) => (
+                        <Category key={index} category={category} onSelect={handleCategorySelect}/>
+                    ))
+                )}
+            </div>
+      </>
+    );
+};
+
 function CriarAnuncio() {
 
     const [selectedImages, setSelectedImages] = useState([]);
@@ -43,6 +133,8 @@ function CriarAnuncio() {
 
     const [text, setText] = useState('');
 
+    const [openModal, setOpenModal] = useState(false);
+
     return (
     <>
         <NavbarSupplier></NavbarSupplier>
@@ -61,7 +153,10 @@ function CriarAnuncio() {
                                 <InputField title='Data de produção' inputype='date'></InputField>
                                 <div>
                                     <p>Categoria</p>
-                                    <button className='main__action_btn'>Escolher</button>
+                                    <a className='main__action_btn' onClick={() => {setOpenModal(true)}}>Escolher</a>
+                                    {openModal &&
+                                        <Modal closeModal={setOpenModal}></Modal>
+                                    }
                                 </div>
                             </div>
                         </div>
