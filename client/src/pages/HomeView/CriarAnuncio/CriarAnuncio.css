@@ -204,6 +204,37 @@ img, picture {
   align-items: center;
 }
 
+.app__anuncio_modal {
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+.app__anuncio_modal_content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+  padding: 2rem 4rem;
+}
+.app__anuncio_modal_content_head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.app__anuncio_modal_content_head p {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.app__anuncio_modal_content_main {
+  display: grid;
+  gap: 1rem;
+}
 @media screen and (max-width: 1500px) {
   .app__anuncio_content .app__anuncio_inputArea {
     padding: 1rem 2rem 2rem 2rem;

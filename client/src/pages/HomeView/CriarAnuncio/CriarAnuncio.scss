@@ -116,6 +116,47 @@
     }
 }
 
+//
+
+.app__anuncio_modal{
+    background-color: rgba($color: #000000, $alpha: .75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+
+    &_content{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 50%;
+        height: 50%;
+        padding: 2rem 4rem;
+
+        &_head{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+
+            p{margin: 0; font-size: $bigger_font-size;}
+        }
+
+        &_main{
+            display: grid;
+            //grid-template-columns: repeat(auto-fit, 250px);
+            gap: 1rem;
+
+            & > *{
+                
+            }
+        }
+    }
+}
+
 @media screen and (max-width: 1500px) {
     .app__anuncio_content{
         & .app__anuncio_inputArea{

@@ -1,4 +1,4 @@
-const categories = [
+export const categories = [
     {name: 'Carros, Motores, Barcos', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
     {name: 'Lazer', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
     {name: 'Móveis, Casa, Jardim', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},

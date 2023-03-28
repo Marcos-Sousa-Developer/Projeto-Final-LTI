@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { FiPlus, FiX, FiTrash2 } from 'react-icons/fi';
+import { FiPlus, FiX, FiTrash2, FiArrowLeft } from 'react-icons/fi';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
+import { categories } from '../../../utilities/categories';
 import "./CriarAnuncio.css";
 
 function handleSubmit(event) {
@@ -20,50 +21,10 @@ function handleSubmit(event) {
     // Print input values to console
     console.log(inputValues);
 }
-
-/*
-const Category = ({ categoryType, onClick }) => {
-    return (
-      <div onClick={onClick}>
-        {categoryType}
-      </div>
-    );
-};
   
-const CategoryPage = ({ categoryType, onClick }) => {
-    return (
-      <div>
-        <div>{categoryType}</div>
-        <p>Subcaterogias</p>
-        <p onClick={onClick}>Back</p>
-      </div>
-    );
-};
-
-const Teste = ({categoryType}) => {
-    const [showCategoryPage, setShowCategoryPage] = useState(false);
-    return (
-        <>
-        {showCategoryPage ? (
-            <CategoryPage categoryType={categoryType} onClick={() => setShowCategoryPage(false)}/>
-          ) : (
-            <Category categoryType={categoryType} onClick={() => setShowCategoryPage(true)}/>
-          )}
-        </>
-    )
-}
-*/
-
-const categories = [
-    {name: 'Category 1', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3'] },
-    {name: 'Category 2', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3'] },
-    {name: 'Category 3', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3'] },
-];
-  
-
 const Category = ({ category, onSelect }) => {
     return (
-      <div onClick={() => onSelect(category)}>
+      <div className='app__pointer' onClick={() => onSelect(category)}>
         {category.name}
       </div>
     );
@@ -72,17 +33,19 @@ const Category = ({ category, onSelect }) => {
 const CategoryDetails = ({ category, onBack }) => {
   return (
     <div>
-        <h2>{category.name}</h2>
+        <div style={{display:'flex', alignItems:'center'}}>
+            <FiArrowLeft fontSize={20} color="black" className='app__pointer' onClick={onBack}></FiArrowLeft>
+            <p style={{margin:'0 0 0 1rem'}}>{category.name}</p>
+        </div>
         <ul>
             {category.subcategory.map(subcategory => (
                 <li key={subcategory}>{subcategory}</li>
             ))}
         </ul>
-        <button onClick={onBack}>Back</button>
     </div>
   );
 };
-  
+
 const Modal = ({ closeModal }) => {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -96,17 +59,23 @@ const Modal = ({ closeModal }) => {
   
     return (
       <>
-        <p>Categorias</p>
-        <span onClick={() => closeModal(false)}>X</span>
-            <div>
-                {selectedCategory ? (
-                    <CategoryDetails category={selectedCategory} onBack={handleBackClick}/>
-                ) : (
-                    categories.map((category, index) => (
-                        <Category key={index} category={category} onSelect={handleCategorySelect}/>
-                    ))
-                )}
+        <div className='app__anuncio_modal'>
+            <div className='app__anuncio_modal_content'>
+                <div className='app__anuncio_modal_content_head'>
+                    <p>Categorias</p>
+                    <FiX fontSize={30} color="black" className='app__pointer' onClick={() => closeModal(false)}></FiX>
+                </div>
+                <div className='app__anuncio_modal_content_main'>
+                    {selectedCategory ? (
+                        <CategoryDetails category={selectedCategory} onBack={handleBackClick}/>
+                    ) : (
+                        categories.map((category, index) => (
+                            <Category key={index} category={category} onSelect={handleCategorySelect}/>
+                        ))
+                    )}
+                </div>
             </div>
+        </div>
       </>
     );
 };
