@@ -204,6 +204,100 @@ img, picture {
   align-items: center;
 }
 
+#sidebar-toggler {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: hsla(0, 0%, 9%, 0.863);
+  display: none;
+  opacity: 0;
+}
+.overlay.active {
+  display: block;
+  opacity: 1;
+  margin: 0;
+}
+
+.app__sidebar_content {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.app__sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  min-width: 15rem;
+  max-width: 25rem;
+  padding: 2rem;
+  z-index: 1000;
+  background: white;
+  transform: translateX(-100%);
+  overflow: auto;
+}
+.app__sidebar.active {
+  transform: translateX(0%);
+  margin: 0;
+}
+.app__sidebar_navs {
+  grid-column: span 2;
+}
+.app__sidebar_navs ul {
+  margin: 0;
+  padding: 0;
+  font-weight: lighter;
+}
+.app__sidebar_navs ul > * {
+  line-height: 2.5rem;
+}
+.app__sidebar_navs_category {
+  margin-bottom: 0.75rem;
+}
+.app__sidebar_navs_category-title {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 350ms ease;
+}
+.app__sidebar_navs_category-title .app__sidebar_navs_category-title_right {
+  transform: rotate(0deg);
+  transition: all 350ms ease;
+}
+.app__sidebar_navs_category-title:hover .app__sidebar_navs_category-title_right {
+  transform: rotate(90deg);
+}
+.app__sidebar_navs_category-title:hover .app__sidebar_navs_category-title_right > *, .app__sidebar_navs_category-title:hover .app__sidebar_navs_category-title_up > *, .app__sidebar_navs_category-title:hover p {
+  color: #EB5C1F;
+}
+.app__sidebar_navs_category-title p {
+  margin: 0;
+}
+.app__sidebar_navs_category-title span {
+  margin-left: 1rem;
+}
+.app__sidebar_navs_category-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 350ms ease;
+}
+.app__sidebar_navs_category .show {
+  height: auto;
+  max-height: 400px;
+  margin-left: 1rem;
+  transition: all 350ms ease;
+}
+
 @media screen and (max-width: 1500px) {
   .app__anuncio_content .app__anuncio_inputArea {
     padding: 1rem 2rem 2rem 2rem;

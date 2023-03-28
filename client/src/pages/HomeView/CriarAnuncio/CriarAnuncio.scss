@@ -116,6 +116,132 @@
     }
 }
 
+//
+
+
+// Variables
+
+$transition-sidebar: all 350ms ease;
+$overlay-bg:          hsla(0, 0%, 9%, 0.863);
+
+// Button
+
+#sidebar-toggler{
+  display: inline-block;
+  cursor: pointer;
+}
+
+// Overlay
+
+.overlay{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: $overlay-bg;
+  display: none;
+  opacity: 0;
+
+  &.active{
+    display: block;
+    opacity: 1;
+    margin: 0;
+  }
+}
+
+// Sidebar
+
+.app__sidebar_content{
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.app__sidebar{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  min-width: 15rem;
+  max-width: 25rem;
+  padding: 2rem;
+  z-index: 1000;
+  background: white;
+  transform: translateX(-100%);
+  overflow: auto;
+
+  &.active{
+    transform: translateX(0%);
+    margin: 0;
+  }
+  
+  &_navs{
+    grid-column: span 2;
+
+    ul{
+      margin: 0;
+      padding: 0;
+      font-weight: lighter;
+    
+      & > *{
+        line-height: 2.5rem;
+      }
+    }
+
+    &_category{
+      margin-bottom: .75rem;
+
+      &-title{
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: $transition-sidebar;
+
+        .app__sidebar_navs_category-title_right {
+          transform: rotate(0deg);
+          transition: $transition-sidebar;
+        }
+
+        &:hover{
+          & .app__sidebar_navs_category-title_right{
+            transform: rotate(90deg);
+          }
+
+          & .app__sidebar_navs_category-title_right > *, .app__sidebar_navs_category-title_up > *, p{
+            color: $orange;
+          }
+        }
+
+        p{
+          margin: 0;
+        }
+
+        span{
+          margin-left: 1rem;
+        }
+      }
+
+      &-content{
+        max-height: 0;
+        overflow: hidden;
+        transition: $transition-sidebar;
+      }
+
+      .show{
+        height: auto;
+        max-height: 400px;
+        margin-left: 1rem;
+        transition: $transition-sidebar;
+      }
+    }
+  }
+}
+
+//
+
 @media screen and (max-width: 1500px) {
     .app__anuncio_content{
         & .app__anuncio_inputArea{

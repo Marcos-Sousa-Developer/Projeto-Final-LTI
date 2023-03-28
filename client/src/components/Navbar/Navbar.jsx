@@ -5,6 +5,7 @@ import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight }
 import images from '../../assets/images.js';
 import { PRODUCTS } from '../../assets/products';
 import { ShopContext } from '../../context/ShopContextProvider';
+import { categories } from '../../utilities/categories'
 import Searchbar from './Searchbar/Searchbar';
 import './styles/Sidebar.css';
 import './styles/Navbar.css';
@@ -13,18 +14,7 @@ import './styles/Navbar.css';
 const Navbar = () => {
 
     //---------------------------SideBar--------------------------
-
-    const categories = [
-        {name: 'Carros, Motores, Barcos', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
-        {name: 'Lazer', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
-        {name: 'Móveis, Casa, Jardim', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
-        {name: 'Tecnologia', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
-        {name: 'Equipamentos e Ferramentas', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
-        {name: 'Comida', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
-        {name: 'Desporto', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
-        {name: 'Outros', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3']},
-    ];
-
+   
     const Sidebar = ({ className }) => {
         const [selected, setSelected] = useState(null);
 
