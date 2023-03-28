@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { FiPlus, FiX, FiTrash2, FiArrowLeft } from 'react-icons/fi';
+import { FiPlus, FiX, FiTrash2, FiArrowLeft, FiChevronUp, FiChevronRight } from 'react-icons/fi';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
 import { categories } from '../../../utilities/categories';
@@ -21,66 +21,63 @@ function handleSubmit(event) {
     // Print input values to console
     console.log(inputValues);
 }
-  
-const Category = ({ category, onSelect }) => {
-    return (
-      <div className='app__pointer' onClick={() => onSelect(category)}>
-        {category.name}
-      </div>
-    );
-};
-
-const CategoryDetails = ({ category, onBack }) => {
-  return (
-    <div>
-        <div style={{display:'flex', alignItems:'center'}}>
-            <FiArrowLeft fontSize={20} color="black" className='app__pointer' onClick={onBack}></FiArrowLeft>
-            <p style={{margin:'0 0 0 1rem'}}>{category.name}</p>
-        </div>
-        <ul>
-            {category.subcategory.map(subcategory => (
-                <li key={subcategory}>{subcategory}</li>
-            ))}
-        </ul>
-    </div>
-  );
-};
-
-const Modal = ({ closeModal }) => {
-    const [selectedCategory, setSelectedCategory] = useState(null);
-
-    const handleCategorySelect = (category) => {
-      setSelectedCategory(category);
-    };
-  
-    const handleBackClick = () => {
-      setSelectedCategory(null);
-    };
-  
-    return (
-      <>
-        <div className='app__anuncio_modal'>
-            <div className='app__anuncio_modal_content'>
-                <div className='app__anuncio_modal_content_head'>
-                    <p>Categorias</p>
-                    <FiX fontSize={30} color="black" className='app__pointer' onClick={() => closeModal(false)}></FiX>
-                </div>
-                <div className='app__anuncio_modal_content_main'>
-                    {selectedCategory ? (
-                        <CategoryDetails category={selectedCategory} onBack={handleBackClick}/>
-                    ) : (
-                        categories.map((category, index) => (
-                            <Category key={index} category={category} onSelect={handleCategorySelect}/>
-                        ))
-                    )}
-                </div>
-            </div>
-        </div>
-      </>
-    );
-};
 
 function CriarAnuncio() {
+    //teste
+    const Sidebar = ({ className }) => {
+        const [selected, setSelected] = useState(null);
+    
+        const toggleAccordion = (i) =>{
+          if (selected === i){
+            return setSelected(null);
+          }
+          
+          setSelected(i);
+        }
+    
+        return(
+          <div className={ `app__sidebar ${className}` }>
+            <div className="app__sidebar_content">
+                <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleSidebar}></FiX>
+                <div className="app__sidebar_navs">
+                    <ul>
+                        {categories.map((category, i) => {
+                            return (
+                                <div key={category.name} className='app__sidebar_navs_category'>
+                                    <div className='app__sidebar_navs_category-title' onClick={()=>toggleAccordion(i)}>
+                                        <p>{category.name}</p>
+                                        <span>{selected === i ? <FiChevronUp className='app__sidebar_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__sidebar_navs_category-title_right'></FiChevronRight>}</span>
+                                    </div>
+                                    <div className={selected === i ? 'app__sidebar_navs_category-content show' : 'app__sidebar_navs_category-content'}>
+                                        {category.subcategory.map(subcategory => (
+                                            <li key={subcategory}><p className='app__text_effect' style={{fontSize:'.9rem'}}>{subcategory}</p></li>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </ul>
+                </div>
+            </div>
+          </div>
+        )
+    }
+    
+    const ButtonToggle = (props) => {
+        return(
+            <p className='app__pointer app__icon_effect' id="sidebar-toggler" onClick={ props.onClick }>Categorias</p>
+        )
+    }
+    
+    const Overlay = ({ className, onClick}) => {
+        return(
+          <div className={ className } onClick={ onClick }></div>
+        )
+    }
+      
+    const [active, setActive] = useState(false);
+    const toggleSidebar = () => setActive(!active);
+    //
 
     const [selectedImages, setSelectedImages] = useState([]);
 
@@ -122,10 +119,9 @@ function CriarAnuncio() {
                                 <InputField title='Data de produção' inputype='date'></InputField>
                                 <div>
                                     <p>Categoria</p>
-                                    <a className='main__action_btn' onClick={() => {setOpenModal(true)}}>Escolher</a>
-                                    {openModal &&
-                                        <Modal closeModal={setOpenModal}></Modal>
-                                    }
+                                    <ButtonToggle onClick={toggleSidebar}/>
+                                    <Overlay className={ active ? 'overlay active' : 'overlay'} onClick={toggleSidebar}/>
+                                    <Sidebar className={ active ? 'slide-right active' : null}/>
                                 </div>
                             </div>
                         </div>
