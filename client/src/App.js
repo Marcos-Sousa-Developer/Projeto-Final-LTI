@@ -7,7 +7,7 @@ import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
 import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Settings from "./pages/Admin/Settings";
-import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio} from './pages/HomeView/index';
+import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Category, ProductTest} from './pages/HomeView/index';
 import { ShopContextProvider } from "./context/ShopContextProvider";
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
@@ -63,13 +63,16 @@ function App() {
           }   
           
           {/*----- Only for testing ----- */}
-            <Route path="/login" element={<LoginTest />} />
-            <Route path="/register" element={<RegisterTest />} />
+            <Route path="/loginTest" element={<LoginTest />} />
+            <Route path="/productTest" element={<ProductTest />} />
+            <Route path="/registerTest" element={<RegisterTest />} />
           {/* ------------- */}
 
 
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/category" element={<Category />} />
+
 
           {/* para dps meter dentro do supplier */}
           <Route path="/anuncio" element={<CriarAnuncio />} />

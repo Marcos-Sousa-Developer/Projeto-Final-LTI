@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { FiPlus, FiX } from 'react-icons/fi';
+import { FiPlus, FiX, FiTrash2, FiArrowLeft, FiChevronUp, FiChevronRight } from 'react-icons/fi';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
+import { categories } from '../../../utilities/categories';
 import "./CriarAnuncio.css";
 
 function handleSubmit(event) {
@@ -22,6 +23,61 @@ function handleSubmit(event) {
 }
 
 function CriarAnuncio() {
+    //teste
+    const Sidebar = ({ className }) => {
+        const [selected, setSelected] = useState(null);
+    
+        const toggleAccordion = (i) =>{
+          if (selected === i){
+            return setSelected(null);
+          }
+          
+          setSelected(i);
+        }
+    
+        return(
+          <div className={ `app__sidebar ${className}` }>
+            <div className="app__sidebar_content">
+                <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleSidebar}></FiX>
+                <div className="app__sidebar_navs">
+                    <ul>
+                        {categories.map((category, i) => {
+                            return (
+                                <div key={category.name} className='app__sidebar_navs_category'>
+                                    <div className='app__sidebar_navs_category-title' onClick={()=>toggleAccordion(i)}>
+                                        <p>{category.name}</p>
+                                        <span>{selected === i ? <FiChevronUp className='app__sidebar_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__sidebar_navs_category-title_right'></FiChevronRight>}</span>
+                                    </div>
+                                    <div className={selected === i ? 'app__sidebar_navs_category-content show' : 'app__sidebar_navs_category-content'}>
+                                        {category.subcategory.map(subcategory => (
+                                            <li key={subcategory}><p className='app__text_effect' style={{fontSize:'.9rem'}}>{subcategory}</p></li>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </ul>
+                </div>
+            </div>
+          </div>
+        )
+    }
+    
+    const ButtonToggle = (props) => {
+        return(
+            <p className='app__pointer app__icon_effect' id="sidebar-toggler" onClick={ props.onClick }>Categorias</p>
+        )
+    }
+    
+    const Overlay = ({ className, onClick}) => {
+        return(
+          <div className={ className } onClick={ onClick }></div>
+        )
+    }
+      
+    const [active, setActive] = useState(false);
+    const toggleSidebar = () => setActive(!active);
+    //
 
     const [selectedImages, setSelectedImages] = useState([]);
 
@@ -34,7 +90,7 @@ function CriarAnuncio() {
             return URL.createObjectURL(file);
         });
 
-        if (selectedImages.length + imagesArray.length <= 10) {
+        if (selectedImages.length + imagesArray.length <= 8) {
             setSelectedImages((previousImages) => previousImages.concat(imagesArray));
         }
 
@@ -43,72 +99,74 @@ function CriarAnuncio() {
 
     const [text, setText] = useState('');
 
+    const [openModal, setOpenModal] = useState(false);
+
     return (
     <>
         <NavbarSupplier></NavbarSupplier>
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
-            <form onSubmit={handleSubmit} className='app__anuncio_content' id='anuncio_form'>
+            <form onSubmit={handleSubmit} className='app__anuncio_content' id='anuncio_form' style={{marginTop:'1rem'}}>
                 <div className='app__anuncio_content-product'>
                     <p>Dados do Produto</p>
-                    <div className='app__anuncio_inputArea app__anuncio_content-product_area'>
-                        <div className='app__anuncio_content-product_area-g1'>
-                            <InputField title='Título' inputype='text'></InputField>
-                            <InputField title='Preço' inputype='number'></InputField>
-                            <div>
-                                <p>Descrição</p>
-                                <textarea 
-                                    style={{width:'100%', maxHeight: '150px', minHeight:'75px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
-                                    form='anuncio_form' 
-                                    maxLength="300" 
-                                    onInput={(e) => {
-                                        if (e.target.value.length >= 300) {
-                                            alert(' Atingiu o limite máximo de caracteres');
-                                        }
-                                        setText(e.target.value);
-                                    }}>
-                                </textarea>
-                                <span style={{fontSize: '.75rem'}}>{text.length > 0 ? text.length : ''}</span>
+                    <div className='app__anuncio_inputArea'>
+                        <div className='app__anuncio_content-product_area'>
+                            <div className='app__anuncio_content-product_area-g1'>
+                                <InputField title='Título' inputype='text'></InputField>
+                                <InputField title='Preço' inputype='number'></InputField>
+                            </div>
+                            <div className='app__anuncio_content-product_area-g2'>
+                                <InputField title='Data de produção' inputype='date'></InputField>
+                                <div>
+                                    <p>Categoria</p>
+                                    <ButtonToggle onClick={toggleSidebar}/>
+                                    <Overlay className={ active ? 'overlay active' : 'overlay'} onClick={toggleSidebar}/>
+                                    <Sidebar className={ active ? 'slide-right active' : null}/>
+                                </div>
                             </div>
                         </div>
-                        <div className='app__anuncio_content-product_area-g2'>
-                            <InputField title='Data de produção' inputype='date'></InputField>
-                            <div>
-                                <p>Categoria</p>
-                                <button className='main__action_btn'>Escolher</button>
-                            </div>
-                            <div>
-                                <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 10)</span></p>
-                                {selectedImages.length > 0 &&
-                                    <button onClick={() => setSelectedImages([])}>limpar tudo</button>
-                                }
-                                <div className='teste'>
-                                    {selectedImages.length === 10 &&
-                                        <p>Atingiu o limite de imagens!</p>
-                                    }
-                                    {selectedImages.length < 10 &&
-                                        <label className='app__anuncio_image_input'>
+                        <div className='app__anuncio_description_section'>
+                            <p>Descrição</p>
+                            <textarea 
+                                style={{width:'100%', maxHeight: '150px', minHeight:'85px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
+                                form='anuncio_form' 
+                                maxLength="600" 
+                                onInput={(e) => {
+                                    setText(e.target.value);
+                                }}>
+                            </textarea>
+                            <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
+                        </div>
+                        <div className='app__anuncio_image_section'>
+                            <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span></p>
+                            <div className='app__anuncio_image_section-content'>
+                                <div className='app__anuncio_images_selected'>
+                                    {selectedImages.length < 8 &&
+                                        <label className='app__anuncio_image_input app__pointer'>
                                             <div>
                                                 <FiPlus style={{textAlign: 'center'}}></FiPlus>
                                             </div>
                                             <input type="file" accept="image/*" multiple onChange={onSelectFile}/>
                                         </label>
                                     }
-                                    <div className='app__anuncio_images_selected'>
-                                        {selectedImages &&
-                                            selectedImages.map((image, index)=>{
-                                                return(
-                                                    <div key={image} className='app__anuncio_image_selected'>
-                                                        <img src={image} alt='' className='app__anuncio_image_selected_img'/>
-                                                        <FiX className='trash' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}></FiX>
-                                                        {/*<p>{index + 1}</p>*/}
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
+                                    {selectedImages &&
+                                        selectedImages.map((image, index)=>{
+                                            return(
+                                                <div key={image} className='app__anuncio_image_selected'>
+                                                    <img src={image} alt='' className='app__anuncio_image_selected_img'/>
+                                                    <FiX className='app__anuncio_image_selected_deleteBtn app__pointer' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}></FiX>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
+                                {selectedImages.length > 0 &&
+                                    <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => setSelectedImages([])}>limpar tudo <FiTrash2></FiTrash2></span>
+                                }
                             </div>
+                            {selectedImages.length === 8 &&
+                                <p style={{margin: '0', color: '#EB5C1F'}}>Atingiu o limite de imagens!</p>
+                            }
                         </div>
                     </div>
                 </div>
@@ -124,7 +182,10 @@ function CriarAnuncio() {
                             <InputField title='Localização' inputype='text'></InputField>
                         </div>
                     </div>
-                    <button type='submit' className='main__action_btn flex'>Publicar</button>
+                    <div className='app__anuncio_content-contact_actions'>
+                        <a className='app__text_effect'>Pré-visualizar</a>
+                        <button type='submit' className='main__action_btn flex'>Publicar</button>
+                    </div>
                 </div>
             </form>
         </div>
