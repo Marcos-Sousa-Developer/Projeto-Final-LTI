@@ -1,14 +1,14 @@
-let pool = require('../../config/dbConfigLocal') 
+let pool = require('../../config/dbConfigLocal')
 
 const fake_category_data = require('../factories/FAKE_CATEGORY_DATA.json')
 
-const statement = "INSERT INTO categories (id, name) VALUES ? "
+const statement = "INSERT INTO categories (name) VALUES ? "
 
 let values = []
 
 fake_category_data.forEach(row => {
 
-    values.push([row.id, row.name, row.id_subcategory])     
+    values.push([row.name])     
 });
 
 pool.query(statement, [values], function(error, result){
