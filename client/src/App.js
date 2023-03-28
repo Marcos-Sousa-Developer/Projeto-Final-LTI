@@ -7,7 +7,7 @@ import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
 import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Settings from "./pages/Admin/Settings";
-import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio} from './pages/HomeView/index';
+import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Category} from './pages/HomeView/index';
 import { ShopContextProvider } from "./context/ShopContextProvider";
 import './index.css';
 import getClientType from "./hooks/getClientType";
@@ -71,6 +71,8 @@ function App() {
 
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/category" element={<Category />} />
+
 
           {/* para dps meter dentro do supplier */}
           <Route path="/anuncio" element={<CriarAnuncio />} />
