@@ -1,3 +1,4 @@
+import '../../index.css';
 import Home from './Home/Home'
 import Cart from './Cart/Cart';
 import LoginTest from './LoginTest';

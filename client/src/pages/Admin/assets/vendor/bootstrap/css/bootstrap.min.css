@@ -2349,7 +2349,7 @@ progress {
 }
 
 .form-control:disabled {
-    background-color: #fad2c0;
+    background-color: #cacaca;
     opacity: 1;
 }
 

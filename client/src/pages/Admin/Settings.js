@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Aside from "./components/Aside";
 import Footer from "./components/Footer";
 import Head from "./components/Head";
-import Header from "./components/Header";
+import TopBar from "./components/TopBar";
 import DeleteAccountModal from './components/Modals/DeleteAccountModal';
 
 
@@ -36,7 +36,7 @@ function Settings() {
         </Helmet>
       </HelmetProvider>
       <Head></Head>
-      <Header></Header>
+      <TopBar></TopBar>
       <Aside></Aside> 
       <main id="main" className="main">
 
