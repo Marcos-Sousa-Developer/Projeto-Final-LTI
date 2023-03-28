@@ -67,6 +67,12 @@ function ProductTest() {
     function verifyName(name){
       //retornar OK se estiver tudo bem e se não, o erro 
       //não é null
+
+      if(name == "" || name == null) {
+        // O EAN não pode ser nulo
+        return "Deve de inserir um nome válido";
+      }
+      return "OK"
     }
 
     function verifyProductionDate(dateString){
@@ -97,19 +103,25 @@ function ProductTest() {
     function verifyDescription(description){
       //retornar OK se estiver tudo bem e se não, o erro
       //não é null
+
+      if(description == "" || description == null) {
+        // O EAN não pode ser nulo
+        return "Deve de inserir uma descrição válida";
+      }
+      return "OK"
     }
 
     const submit = async () => {
 
       let validEAN = verifyEAN(EAN);
-      //let validName = verifyName(name)
+      let validName = verifyName(name)
       let validProductionDate = verifyProductionDate(data_producao)
-      //let validDescription = verifyDescription(descricao)
+      let validDescription = verifyDescription(descricao)
 
       let product;
       
       // Se todos os verifys forem OK, entra 
-      if(validEAN == "OK" && validProductionDate == "OK"){
+      if(validEAN == "OK" && validName == "OK" && validProductionDate == "OK"  && validDescription == "OK"){
         product = await postToDB("/products",{
           EAN: EAN,
           name: name,
@@ -118,22 +130,25 @@ function ProductTest() {
         })
       }
 
+      let text = "Não foi possivel criar o produto\n";
       //No futuro é suposto mostrar o erro por baixo de cada input no form
       if(product == true){
-        alert("Produto criado")
-      } else if(validEAN == "OK" && validProductionDate != "OK") { //consoante os OK, dá as diferentes mensagens de erro
-        alert("Não foi possivel criar o produto")
-        alert(validProductionDate)
-      } else if(validEAN != "OK" && validProductionDate == "OK") { //consoante os OK, dá as diferentes mensagens de erro
-        alert("Não foi possivel criar o produto")
-        alert(validEAN)
-      } else if(validEAN != "OK" && validProductionDate != "OK") { //consoante os OK, dá as diferentes mensagens de erro
-        alert("Não foi possivel criar o produto")
-        alert(validEAN)
-        alert(validProductionDate)
-      }  else{
-        alert("Não foi possivel criar o produto, tente novamente")
+        text = "Produto criado"
+      } else if(validEAN != "OK" || validName != "OK" || validProductionDate != "OK" || validDescription != "OK"){
+        if(validEAN != "OK" ){
+          text += validEAN + "\n"
+        }
+        if(validName != "OK" ){
+          text += validName + "\n"
+        }
+        if (validProductionDate != "OK"){
+          text += validProductionDate + "\n"
+        }
+        if(validDescription != "OK" ){
+          text += validDescription + "\n"
+        }
       }
+      alert(text)
     }
 
   return (
