@@ -88,8 +88,6 @@ const insertConsumer = async function (req, res) {
  */
 const updateConsumerByID = async function (req, res) { 
 
-    console.log(req.query)
-
     let statement = `UPDATE consumers SET `
 
     for(let i = 0 ; i < Object.keys(req.query).length; i++) {
@@ -104,7 +102,6 @@ const updateConsumerByID = async function (req, res) {
             statement += `='`;
             statement += value; 
             statement += `'` ;
-            //statement += `name='${req.query.name}' `;
         }
 
         if(nextKey != undefined && nextValue != ""){
@@ -113,32 +110,6 @@ const updateConsumerByID = async function (req, res) {
     }
 
     statement += ` WHERE id='${parseInt(req.params.id)}';`;
-
-    console.log(statement)
-
-    
-    /*
-    if(req.query.name != ""){
-        statement += `name='${req.query.name}' `;
-    }
-
-    if(req.query.email != ""){
-        statement += `email='${req.query.email}' `;
-    }
-
-    if(req.query.nif != ""){
-        statement += `nif='${req.query.nif}' `;
-    }
-
-    if(req.query.mobile_number != ""){
-        statement += `mobile_number='${req.query.mobile_number}' `;
-    }
-
-    if(req.query.address != ""){
-        statement += `address='${req.query.address}' `;
-    }*/
-    
-    
 
     let result = await dbConnection(statement);
 

@@ -38,38 +38,110 @@ function ConsumerTest() {
         setAddress(event.target.value)
     }
 
+    async function verifyName(name){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //podem ser null
+        return "OK"
+    }
+
+    async function verifyEmail(email){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //podem ser null
+        //tem de ter um @
+        return "OK"
+    }
+
+    async function verifyNif(nif){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //podem ser null
+        //9 algarismos
+
+        if(nif != null && nif != ""){
+            if(nif.length != 9){
+                // O EAN deve ter 9 dígitos
+                return "O EAN deve ter 9 dígitos";
+            }
+            for (var i = 0; i < nif.length; i++) {
+                var digit = parseInt(nif[i], 10);
+                if (isNaN(digit)) {
+                  // O NIF deve conter apenas dígitos numéricos
+                return "O NIF deve conter apenas dígitos numéricos";
+                }
+              }
+            return "OK"
+        }
+    }
+
+    async function verifyMobileNumber(mobile_number){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //podem ser null
+        //9 algarismos ?? 
+        return "OK"
+    }
+
+    async function verifyAddress(address){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //podem ser null
+        return "OK"
+    }
+
+
     const submit = async () => {
 
-        //Verificar dados antes de inseri-los
-        //podem ser null
         //pelo menos um tem de estar inserido ou então nem envia o update
 
+        console.log(name)
+        console.log(email)
+        console.log(nif)
+        console.log(mobile_number)
+        console.log(address)
 
-
-
-        /*let validEAN = await verifyEAN(EAN);
         let validName = await verifyName(name);
-        let validProductionDate = await verifyProductionDate(data_producao);
-        let validDescription = await verifyDescription(descricao);*/
+        let validEmail = await verifyEmail(email);
+        let validNif = await verifyNif(nif);
+        let validMobileNumber = await verifyMobileNumber(mobile_number);
+        let validAddress = await verifyAddress(address);
 
-        //get the id consumer
+        //Get the id consumer
         let id = 2;
-  
-        let consumerUpdated = await putToDB("/consumers/" + id,{
-            name: name,
-            email: email,
-            nif: nif,
-            mobile_number: mobile_number,
-            address: address,
-          })
+        
+        let consumerUpdated;
+
+        if(validName == "OK" && validEmail == "OK" && validNif == "OK"  && validMobileNumber == "OK" && validAddress == "OK"){
+            consumerUpdated = await putToDB("/consumers/" + id,{
+                name: name,
+                email: email,
+                nif: nif,
+                mobile_number: mobile_number,
+                address: address,
+            })
+        }    
 
         console.log(consumerUpdated)
+
+
 
         let text = "Não foi possivel alterar os dados\n";
         if(consumerUpdated == true){
             text = "Dados alterados"
+        } else if(validName != "OK" || validEmail != "OK" || validNif != "OK" || validMobileNumber != "OK" || validAddress != "OK"){
+            if(validName != "OK" ){
+              text += validName + "\n"
+            }
+            if(validEmail != "OK" ){
+              text += validEmail + "\n"
+            }
+            if (validNif != "OK"){
+              text += validNif + "\n"
+            }
+            if(validMobileNumber != "OK" ){
+              text += validMobileNumber + "\n"
+            }
+            if(validAddress != "OK" ){
+                text += validAddress + "\n"
+            }
         } 
-        alert(text)
+        alert(text) 
     }
 
         /*
