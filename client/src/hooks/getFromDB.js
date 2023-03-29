@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-async function getProduct(url, params) {
+async function getFromDB(url, params) {
 
     return await axios.get("/api" + url, null, {params: params})
         .then((response) => {
@@ -13,4 +13,4 @@ async function getProduct(url, params) {
         })
 }
 
-export default getProduct
+export default getFromDB

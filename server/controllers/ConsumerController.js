@@ -88,7 +88,57 @@ const insertConsumer = async function (req, res) {
  */
 const updateConsumerByID = async function (req, res) { 
 
-    const statement = `UPDATE consumers SET name='${req.query.name}', email='${req.query.email}', nif='${req.query.nif}', mobile_number='${req.query.mobile_number}', address='${req.query.address}', account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    console.log(req.query)
+
+    let statement = `UPDATE consumers SET `
+
+    for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+        
+        let key = Object.keys(req.query)[i];
+        let value = Object.values(req.query)[i]
+        let nextKey = Object.keys(req.query)[i+1];
+        let nextValue = Object.values(req.query)[i+1]
+        
+        if(value != ""){
+            statement += key;
+            statement += `='`;
+            statement += value; 
+            statement += `'` ;
+            //statement += `name='${req.query.name}' `;
+        }
+
+        if(nextKey != undefined && nextValue != ""){
+            statement += `, ` ;
+        }
+    }
+
+    statement += ` WHERE id='${parseInt(req.params.id)}';`;
+
+    console.log(statement)
+
+    
+    /*
+    if(req.query.name != ""){
+        statement += `name='${req.query.name}' `;
+    }
+
+    if(req.query.email != ""){
+        statement += `email='${req.query.email}' `;
+    }
+
+    if(req.query.nif != ""){
+        statement += `nif='${req.query.nif}' `;
+    }
+
+    if(req.query.mobile_number != ""){
+        statement += `mobile_number='${req.query.mobile_number}' `;
+    }
+
+    if(req.query.address != ""){
+        statement += `address='${req.query.address}' `;
+    }*/
+    
+    
 
     let result = await dbConnection(statement);
 
