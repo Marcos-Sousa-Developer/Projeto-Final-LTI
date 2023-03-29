@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import getProduct from '../../hooks/getProduct';
 import postToDB from '../../hooks/postToDB';
 
 function ProductTest() {
@@ -24,15 +25,26 @@ function ProductTest() {
       setDescricao(event.target.value)
     }
 
-    function verifyEAN(EAN){
+    async function verifyEAN(EAN){
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
       //Não é null
+      //Não pode existir na bd ainda
       //Tem 8 ou 13 algarismos e são todos numéricos
 
       if(EAN == "" || EAN == null) {
         // O EAN não pode ser nulo
         return "Deve de inserir um EAN válido";
       }
+
+      let product = await getProduct("/products",{
+        EAN: EAN,
+      })
+
+      console.log(product)
+
+
+
+
 
       if (EAN.length !== 8 && EAN.length !== 13) {
         // O EAN deve ter 8 ou 13 dígitos

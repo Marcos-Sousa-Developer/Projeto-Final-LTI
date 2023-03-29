@@ -11,8 +11,8 @@ import getAllFromDB from "../../hooks/getAllFromDB";
 import { Link } from "react-router-dom";
 
 
-const $ = require('jquery')
-$.DataTable = require('datatables.net')
+//const $ = require('jquery')
+//$.DataTable = require('datatables.net')
 
 function Gerir_consumidores() { 
 
