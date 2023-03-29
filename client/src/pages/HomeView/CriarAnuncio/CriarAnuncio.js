@@ -24,33 +24,38 @@ function handleSubmit(event) {
 
 function CriarAnuncio() {
     //teste
-    const Sidebar = ({ className }) => {
-        const [selected, setSelected] = useState(null);
+    const Modal = ({ className }) => {
+        const [selectedModal, setSelectedModal] = useState(null);
     
-        const toggleAccordion = (i) =>{
-          if (selected === i){
-            return setSelected(null);
+        const toggleModal = (i) =>{
+          if (selectedModal === i){
+            return setSelectedModal(null);
           }
           
-          setSelected(i);
+          setSelectedModal(i);
         }
     
         return(
-          <div className={ `app__sidebar ${className}` }>
-            <div className="app__sidebar_content">
-                <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleSidebar}></FiX>
-                <div className="app__sidebar_navs">
+          <div className={ `app__anuncio_modal ${className}` }>
+            <div className="app__anuncio_modal_content">
+                <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
+                <div className="app__anuncio_modal_navs">
                     <ul>
                         {categories.map((category, i) => {
                             return (
-                                <div key={category.name} className='app__sidebar_navs_category'>
-                                    <div className='app__sidebar_navs_category-title' onClick={()=>toggleAccordion(i)}>
+                                <div key={category.name} className='app__anuncio_modal_navs_category'>
+                                    <div className='app__anuncio_modal_navs_category-title' onClick={()=>toggleModal(i)}>
                                         <p>{category.name}</p>
-                                        <span>{selected === i ? <FiChevronUp className='app__sidebar_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__sidebar_navs_category-title_right'></FiChevronRight>}</span>
+                                        <span>{selectedModal === i ? <FiChevronUp className='app__anuncio_modal_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__anuncio_modal_navs_category-title_right'></FiChevronRight>}</span>
                                     </div>
-                                    <div className={selected === i ? 'app__sidebar_navs_category-content show' : 'app__sidebar_navs_category-content'}>
+                                    <div className={selectedModal === i ? 'app__anuncio_modal_navs_category-content show' : 'app__anuncio_modal_navs_category-content'}>
                                         {category.subcategory.map(subcategory => (
-                                            <li key={subcategory}><p className='app__text_effect' style={{fontSize:'.9rem'}}>{subcategory}</p></li>
+                                            <>
+                                                <div key={subcategory}>
+                                                    <input type="radio" value="Male" name="gender" />
+                                                    <label>{subcategory}</label>
+                                                </div>
+                                            </>
                                         ))}
                                     </div>
                                 </div>
@@ -63,20 +68,21 @@ function CriarAnuncio() {
         )
     }
     
-    const ButtonToggle = (props) => {
+    const ButtonToggleModal = (props) => {
         return(
-            <p className='app__pointer app__icon_effect' id="sidebar-toggler" onClick={ props.onClick }>Categorias</p>
+            <p className='app__pointer app__icon_effect' id="modal-toggler" onClick={ props.onClick }>Categorias</p>
         )
     }
     
-    const Overlay = ({ className, onClick}) => {
+    const OverlayModal = ({ className, onClick}) => {
         return(
-          <div className={ className } onClick={ onClick }></div>
+            <div className={ className } onClick={ onClick }></div>
         )
     }
       
-    const [active, setActive] = useState(false);
-    const toggleSidebar = () => setActive(!active);
+    const [activeModal, setActiveModal] = useState(false);
+    const toggleActiveModal = () => setActiveModal(!activeModal);
+
     //
 
     const [selectedImages, setSelectedImages] = useState([]);
@@ -99,7 +105,7 @@ function CriarAnuncio() {
 
     const [text, setText] = useState('');
 
-    const [openModal, setOpenModal] = useState(false);
+    //const [openModal, setOpenModal] = useState(false);
 
     return (
     <>
@@ -119,9 +125,9 @@ function CriarAnuncio() {
                                 <InputField title='Data de produção' inputype='date'></InputField>
                                 <div>
                                     <p>Categoria</p>
-                                    <ButtonToggle onClick={toggleSidebar}/>
-                                    <Overlay className={ active ? 'overlay active' : 'overlay'} onClick={toggleSidebar}/>
-                                    <Sidebar className={ active ? 'slide-right active' : null}/>
+                                    <ButtonToggleModal onClick={toggleActiveModal}/>
+                                    <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
+                                    <Modal className={ activeModal ? 'slide-right activeModal' : null}/>
                                 </div>
                             </div>
                         </div>
