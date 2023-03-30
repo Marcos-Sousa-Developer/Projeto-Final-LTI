@@ -8,6 +8,11 @@
   scroll-behavior: smooth; 
 }
 
+.table-striped tbody tr:hover {
+  background-color: #eb5c1f55;
+  cursor: pointer;
+}
+
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;

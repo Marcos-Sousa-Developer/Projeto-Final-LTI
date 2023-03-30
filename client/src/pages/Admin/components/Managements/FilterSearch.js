@@ -1,23 +1,56 @@
 import React, { useState, useEffect } from 'react'
 import getAllFromDB from '../../../../hooks/getAllFromDB';
-import AppearResponseModal from '../Modals/AppearUserModal'
+import AppearUserModal from '../Modals/AppearUserModal'
+import LoadingModal from '../Modals/LoadingModal';
 
 const $ = require('jquery')
 $.DataTable = require('datatables.net')
 
+let datas = null
+
 function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filter5}) {
 
+  //show or not show modal
   const [show, setShow] = useState(false) 
 
+  //Loading content
+  const [isloading, setLoading] = useState(false) 
+
+
+  //data of componenent to show
   const [componentToShow, setComponentToShow] = useState({}) 
 
+  //type of input for prodcut text or date
   const [inputType, setInputType] = useState("text")
 
+  /**
+   * @param key get object by key intended
+   * @param value get object compared by value intended
+   * @description get object intended
+   */
+  const getObject = (key,value) => {
+   
+    datas.map((data) => {  
+      if(data[key] === value) {
+        setComponentToShow(data)
+        isShowingModal()
+      }
+    })
+  }
+
+  /**
+   * @description fetch data from server
+   */
   const getResponses = async () => {
+    setLoading(true)
     let resp = await getAllFromDB(url) 
+    setLoading(false)
     setRow(resp)
   }
 
+  /**
+   * @describe Show Modal of element selected
+   */
   const isShowingModal = () => {
       show == true ? setShow(false) : setShow(true)
   }
@@ -27,6 +60,8 @@ function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filt
    * @describe Set row to table after get data 
    */
   const setRow = (resp) => {
+
+    datas = resp
 
     let table = $('#app_table').DataTable() 
     table.clear().draw();
@@ -39,7 +74,7 @@ function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filt
           r.name, 
           r.uid, 
           r.email,
-          r.account_status == 1 ? "Ativado" : "Desativado"
+          r.status == 1 ? "Ativado" : "Desativado"
         ]).draw();    
       })
     }
@@ -72,6 +107,9 @@ function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filt
     
   }
 
+  /**
+   * @description when access create dataTables
+   */
   useEffect(() => {
 
     $('#app_table').DataTable({
@@ -97,42 +135,18 @@ function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filt
       },
       "rowCallback": function(row, data) {
         $(row).off('click').on('click', function() {
-          if(!["product","vehicle"].includes(type)) {
 
-            let u = {
-              id : data[0], 
-              name: data[1],
-              uid : data[2],
-              email : data[3],
-              account_status : data[4]
-            }
-            setComponentToShow(u)
-            
+          if(!["product","vehicle"].includes(type)) {
+            getObject("email",data[3])
           }
 
           else if(type == "product") {
-            let p = {
-              EAN: data[0], 
-              name: data[1],
-              category : data[2],
-              production_date : data[3],
-              status : data[4]
-            }
-            setComponentToShow(p) 
+            getObject("EAN",data[0])
           }
 
           else if(type == "vehicle") {
-            let v = {
-              licence_plate: data[0], 
-              name: data[1],
-              production_unit : data[2],
-              capacity : data[3],
-              status : data[4]
-            }
-            setComponentToShow(v)
-          }
-
-          isShowingModal()
+            getObject("licence_plate",data[0])
+          } 
         });
 
       },
@@ -206,9 +220,20 @@ function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filt
           </div>
 
           <div className="form-group col-xxl-12 mb-3 d-flex justify-content-center">
-            <button type="submit" className="btn btn-primary mb-2" onClick={getResponses}>
-              Procurar
-            </button>
+            {
+              (!isloading) ? 
+
+              (
+                <button type="submit" className="btn btn-primary mb-2" onClick={getResponses}>
+                  Procurar
+                </button>
+              )
+              :
+
+              <LoadingModal></LoadingModal>
+
+            }
+            
           </div>
         </div>
     
@@ -233,7 +258,12 @@ function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filt
       </div>
 
       {
-        (show === "ok") && (<AppearResponseModal user={componentToShow} response_type={type} isShowingModal={isShowingModal}></AppearResponseModal>)
+        (show) && 
+        (
+        <AppearUserModal url={url} element={componentToShow} isShowingModal={isShowingModal} element_type={type}>
+
+        </AppearUserModal>
+        )
       }
       
     </>

@@ -107,7 +107,7 @@ const updateSupplierByID = async function (req, res) {
  */
 const activateSupplierByID = async function (req, res) { 
 
-    const statement = `UPDATE suppliers SET account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    const statement = `UPDATE suppliers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
 
     let result = await dbConnection(statement); 
 
@@ -126,7 +126,7 @@ const activateSupplierByID = async function (req, res) {
  */
 const deactivateSupplierByID = async function (req, res) { 
 
-    const statement = `UPDATE suppliers SET account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    const statement = `UPDATE suppliers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
 
     let result = await dbConnection(statement);
 

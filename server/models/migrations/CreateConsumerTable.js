@@ -9,7 +9,7 @@ const statement = "CREATE TABLE consumers ( " +
                   "nif varchar(255) NOT NULL, " +
                   "mobile_number varchar(255) NOT NULL, " +
                   "address varchar(255) NOT NULL, " + 
-                  "account_status BOOLEAN NOT NULL, " + 
+                  "status BOOLEAN NOT NULL, " + 
                   "shopping_cart varchar(255), " + //add NOT NULL
                   "orders varchar(255), " + //add NOT NULL     Coloquei assim, em vez de encomendas recebidas e por receber, porque depois podemos ir ver ao status da encomenda
                   "PRIMARY KEY (id))"; 

@@ -2,7 +2,7 @@ let pool = require('../../config/dbConfigLocal')
 
 const fake_supplier_data = require('../factories/FAKE_SUPPLIER_DATA.json')
 
-const statement = "INSERT INTO suppliers (name, email, nif, mobile_number, address, account_status) VALUES ? "
+const statement = "INSERT INTO suppliers (name, email, nif, mobile_number, address, status) VALUES ? "
 
 let values = []
 
