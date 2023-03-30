@@ -1,5 +1,10 @@
 @import '../../../index.scss';
 
+
+$transition-sidebar: all 350ms ease;
+$overlay-bg:        hsla(0, 0%, 9%, 0.863);
+
+
 .app__anuncio{
     margin: 1rem auto 2rem;
 
@@ -116,22 +121,23 @@
     }
 }
 
-//
-
-
-// Variables
-
-$transition-sidebar: all 350ms ease;
-$overlay-bg:          hsla(0, 0%, 9%, 0.863);
-
-// Button
+//Category Modal
 
 #modal-toggler{
   display: inline-block;
   cursor: pointer;
-}
+  margin: 0;
+  padding: .5rem 1rem;
+  background-color: $orange;
+  color: white;
+  border-radius: 10px;
+  opacity: .8;
+  transition: all 200ms ease-in-out;
 
-// Overlay
+  &:hover{
+    opacity: 1;
+  }
+}
 
 .overlayModal{
   position: fixed;
@@ -151,8 +157,6 @@ $overlay-bg:          hsla(0, 0%, 9%, 0.863);
   }
 }
 
-// Sidebar
-
 .app__anuncio_modal_content{
   display: grid;
   grid-template-rows: 1fr auto;
@@ -161,86 +165,141 @@ $overlay-bg:          hsla(0, 0%, 9%, 0.863);
 }
 
 .app__anuncio_modal{
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  min-width: 15rem;
-  max-width: 25rem;
-  padding: 2rem;
-  z-index: 1000;
-  background: white;
-  transform: translateX(-100%);
-  overflow: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 20rem;
+    max-width: 25rem;
+    max-height: 100vh;
+    padding: 2rem;
+    z-index: 1000;
+    background: white;
+    overflow: auto;
+    visibility: hidden;
 
-  &.activeModal{
-    transform: translateX(0%);
-    margin: 0;
-  }
-  
-  &_navs{
-    grid-column: span 2;
-
-    ul{
-      margin: 0;
-      padding: 0;
-      font-weight: lighter;
+    &.activeModal{
+        margin: 0;
+        visibility: visible;
+    }
     
-      & > *{
-        line-height: 2.5rem;
-      }
+    &_navs{
+        grid-column: span 2;
+
+        ul{
+        margin: 0;
+        padding: 0;
+        font-weight: lighter;
+        
+        & > *{
+            line-height: 2.5rem;
+        }
+        }
+
+        &_category{
+        margin-bottom: .75rem;
+
+        &-title{
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: $transition-sidebar;
+
+            .app__anuncio_modal_navs_category-title_right {
+                transform: rotate(0deg);
+                transition: $transition-sidebar;
+            }
+
+            &:hover{
+                & .app__anuncio_modal_navs_category-title_right{
+                    transform: rotate(90deg);
+                }
+
+                & .app__anuncio_modal_navs_category-title_right > *, .app__anuncio_modal_navs_category-title_up > *, p{
+                    color: $orange;
+                }
+            }
+
+            p{
+                margin: 0;
+            }
+
+            span{
+                margin-left: 1rem;
+            }
+        }
+
+        &-content{
+            max-height: 0;
+            overflow: hidden;
+            transition: $transition-sidebar;
+
+                label {
+                    display: block;
+                    position: relative;
+                    padding-left: 35px;
+                    margin-bottom: 12px;
+                    cursor: pointer;
+                    user-select: none;
+
+                    input[type='radio'] {
+                        position: absolute;
+                        opacity: 0;
+                        cursor: pointer;
+                    }
+
+                    .checkmark {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 25px;
+                        width: 25px;
+                        background-color: #ffffff;
+                        border-radius: 50%;
+                        border: $border;
+                        margin-top: .5rem;
+                        transition: all 200ms ease-in-out;
+
+                        &:after {
+                            content: "";
+                            position: absolute;
+                            display: none;
+                        }
+                    }
+
+                    &:hover input ~ .checkmark {
+                        border: 3px solid $orange;
+                    }
+
+                    input:checked ~ .checkmark {
+                        border: 3px solid $orange;
+                        background-color: $orange;
+                    }
+
+                    input:checked ~ .checkmark:after {
+                        display: block;
+                    }
+
+                    .checkmark:after {
+                        top: 4px;
+                        left: 4px;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        background: white;
+                    }
+                }
+            }
+
+            .show{
+                height: auto;
+                max-height: 400px;
+                margin-left: 1rem;
+                transition: $transition-sidebar;
+            }
+        }
     }
-
-    &_category{
-      margin-bottom: .75rem;
-
-      &-title{
-        display: flex;
-        justify-content: space-between;
-        cursor: pointer;
-        transition: $transition-sidebar;
-
-        .app__anuncio_modal_navs_category-title_right {
-          transform: rotate(0deg);
-          transition: $transition-sidebar;
-        }
-
-        &:hover{
-          & .app__anuncio_modal_navs_category-title_right{
-            transform: rotate(90deg);
-          }
-
-          & .app__anuncio_modal_navs_category-title_right > *, .app__anuncio_modal_navs_category-title_up > *, p{
-            color: $orange;
-          }
-        }
-
-        p{
-          margin: 0;
-        }
-
-        span{
-          margin-left: 1rem;
-        }
-      }
-
-      &-content{
-        max-height: 0;
-        overflow: hidden;
-        transition: $transition-sidebar;
-      }
-
-      .show{
-        height: auto;
-        max-height: 400px;
-        margin-left: 1rem;
-        transition: $transition-sidebar;
-      }
-    }
-  }
 }
-
-//
 
 @media screen and (max-width: 1500px) {
     .app__anuncio_content{

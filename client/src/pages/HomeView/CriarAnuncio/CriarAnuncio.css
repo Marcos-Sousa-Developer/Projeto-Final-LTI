@@ -207,6 +207,16 @@ img, picture {
 #modal-toggler {
   display: inline-block;
   cursor: pointer;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background-color: #EB5C1F;
+  color: white;
+  border-radius: 10px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+#modal-toggler:hover {
+  opacity: 1;
 }
 
 .overlayModal {
@@ -235,20 +245,21 @@ img, picture {
 
 .app__anuncio_modal {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  min-width: 15rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 20rem;
   max-width: 25rem;
+  max-height: 100vh;
   padding: 2rem;
   z-index: 1000;
   background: white;
-  transform: translateX(-100%);
   overflow: auto;
+  visibility: hidden;
 }
 .app__anuncio_modal.activeModal {
-  transform: translateX(0%);
   margin: 0;
+  visibility: visible;
 }
 .app__anuncio_modal_navs {
   grid-column: span 2;
@@ -290,6 +301,56 @@ img, picture {
   max-height: 0;
   overflow: hidden;
   transition: all 350ms ease;
+}
+.app__anuncio_modal_navs_category-content label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.app__anuncio_modal_navs_category-content label input[type=radio] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.app__anuncio_modal_navs_category-content label .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 3px solid #EEEEEE;
+  margin-top: 0.5rem;
+  transition: all 200ms ease-in-out;
+}
+.app__anuncio_modal_navs_category-content label .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.app__anuncio_modal_navs_category-content label:hover input ~ .checkmark {
+  border: 3px solid #EB5C1F;
+}
+.app__anuncio_modal_navs_category-content label input:checked ~ .checkmark {
+  border: 3px solid #EB5C1F;
+  background-color: #EB5C1F;
+}
+.app__anuncio_modal_navs_category-content label input:checked ~ .checkmark:after {
+  display: block;
+}
+.app__anuncio_modal_navs_category-content label .checkmark:after {
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
 }
 .app__anuncio_modal_navs_category .show {
   height: auto;

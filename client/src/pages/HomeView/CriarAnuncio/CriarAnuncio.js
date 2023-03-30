@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { FiPlus, FiX, FiTrash2, FiArrowLeft, FiChevronUp, FiChevronRight } from 'react-icons/fi';
+import { FiPlus, FiX, FiTrash2, FiChevronUp, FiChevronRight } from 'react-icons/fi';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
 import { categories } from '../../../utilities/categories';
@@ -23,7 +23,9 @@ function handleSubmit(event) {
 }
 
 function CriarAnuncio() {
-    //teste
+
+
+    //Modal
     const Modal = ({ className }) => {
         const [selectedModal, setSelectedModal] = useState(null);
     
@@ -38,6 +40,7 @@ function CriarAnuncio() {
         return(
           <div className={ `app__anuncio_modal ${className}` }>
             <div className="app__anuncio_modal_content">
+                <p style={{margin: '0', fontWeight:'bold'}}>Escolha uma categoria</p>
                 <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
                 <div className="app__anuncio_modal_navs">
                     <ul>
@@ -50,12 +53,12 @@ function CriarAnuncio() {
                                     </div>
                                     <div className={selectedModal === i ? 'app__anuncio_modal_navs_category-content show' : 'app__anuncio_modal_navs_category-content'}>
                                         {category.subcategory.map(subcategory => (
-                                            <>
-                                                <div key={subcategory}>
-                                                    <input type="radio" value="Male" name="gender" />
-                                                    <label>{subcategory}</label>
-                                                </div>
-                                            </>
+                                            <div key={subcategory}>
+                                                <label>{subcategory}  
+                                                    <input type="radio" name="radio"></input>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
                                         ))}
                                     </div>
                                 </div>
@@ -68,23 +71,24 @@ function CriarAnuncio() {
         )
     }
     
+    //Modal tooggle
     const ButtonToggleModal = (props) => {
         return(
-            <p className='app__pointer app__icon_effect' id="modal-toggler" onClick={ props.onClick }>Categorias</p>
+            <p className='app__pointer' id="modal-toggler" onClick={ props.onClick }>Escolher</p>
         )
     }
     
+    //Modal overlay
     const OverlayModal = ({ className, onClick}) => {
         return(
             <div className={ className } onClick={ onClick }></div>
         )
     }
-      
+    
     const [activeModal, setActiveModal] = useState(false);
     const toggleActiveModal = () => setActiveModal(!activeModal);
 
-    //
-
+    //Images
     const [selectedImages, setSelectedImages] = useState([]);
 
     const onSelectFile = (event) => {
@@ -100,12 +104,11 @@ function CriarAnuncio() {
             setSelectedImages((previousImages) => previousImages.concat(imagesArray));
         }
 
-        event.target.value = ""; // FOR BUG IN CHROME
+        event.target.value = ""; // for bug in chrome
     }
 
+    //textarea character counter
     const [text, setText] = useState('');
-
-    //const [openModal, setOpenModal] = useState(false);
 
     return (
     <>
@@ -127,7 +130,7 @@ function CriarAnuncio() {
                                     <p>Categoria</p>
                                     <ButtonToggleModal onClick={toggleActiveModal}/>
                                     <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
-                                    <Modal className={ activeModal ? 'slide-right activeModal' : null}/>
+                                    <Modal className={ activeModal ? 'activeModal' : null}/>
                                 </div>
                             </div>
                         </div>
@@ -198,7 +201,6 @@ function CriarAnuncio() {
         <Footer></Footer>
     </>
   )
-
 }
 
 export default CriarAnuncio
