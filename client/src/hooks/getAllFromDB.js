@@ -19,7 +19,7 @@ function getAllFromDB(url) {
             })
            }
         )()
-     },[url]) //dependecy, we need to put the thing that change
+    },[url]) //dependecy, we need to put the thing that change
 
     return users
 }

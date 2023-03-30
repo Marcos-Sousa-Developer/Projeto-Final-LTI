@@ -1,7 +1,7 @@
 import React from "react";
 import Aside from "./components/Aside";
 import Head from "./components/Head";
-import Header from "./components/Header";
+import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import getAllFromDB from "../../hooks/getAllFromDB";
@@ -22,7 +22,7 @@ function Gerir_fornecedores() {
         </Helmet>
         </HelmetProvider>
         <Head></Head>
-        <Header></Header>
+        <TopBar></TopBar>
         <Aside></Aside>
 
         <main id="main" className="main">

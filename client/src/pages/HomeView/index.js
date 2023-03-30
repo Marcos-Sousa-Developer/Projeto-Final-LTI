@@ -1,8 +1,11 @@
+import '../../index.css';
 import Home from './Home/Home'
 import Cart from './Cart/Cart';
 import LoginTest from './LoginTest';
 import RegisterTest from './RegisterTest';
 import ProductTest from './ProductTest';
+import ConsumerTest from './ConsumerTest';
+import SupplierTest from './SupplierTest';
 import SupplierPage from './SupplierPage/SupplierPage';
 import SupplierProfile from './SupplierProfile/SupplierProfile';
 import ConsumerProfile from './ConsumerProfile/ConsumerProfile';
@@ -18,6 +21,8 @@ export {
     Cart,
     LoginTest,
     RegisterTest,
+    ConsumerTest,
+    SupplierTest,
     SupplierPage,
     SupplierProfile,
     ConsumerProfile,

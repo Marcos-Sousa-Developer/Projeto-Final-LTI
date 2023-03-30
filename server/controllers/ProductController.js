@@ -25,7 +25,7 @@ const getAllProducts = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const getProductByID = async function (req, res) { 
+const getProductByEAN = async function (req, res) { 
 
     const statement = "SELECT * FROM products WHERE EAN = " + req.params.EAN;
 
@@ -99,4 +99,4 @@ const updateProductByEAN = async function (req, res) {
     return res.send("Product has been updated");
 }
 
-module.exports = {getAllProducts, getProductByID, deleteProductByEAN, insertProduct, updateProductByEAN}
+module.exports = {getAllProducts, getProductByEAN, deleteProductByEAN, insertProduct, updateProductByEAN}

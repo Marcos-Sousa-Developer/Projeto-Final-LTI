@@ -1,25 +1,17 @@
-import React, {useState} from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import Aside from "./components/Aside";
-import Head from "./components/Head";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import React, {useState} from "react"
+import { Helmet, HelmetProvider } from "react-helmet-async"
+import Aside from "./components/Aside"
+import Head from "./components/Head"
+import TopBar from "./components/TopBar"
+import Footer from "./components/Footer"
 import Profile from './components/UsersProfiles/Profile'
 import UserData from './components/UsersProfiles/UserData' 
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import SupportActivity from "./components/ProfilesComponents/SupportActivity"
+import MessagesActivity from "./components/ProfilesComponents/MessagesActivity"
+
 
 function Admin_Perfil() {
-
-  const [isread_Only, setRead_Only] = useState(true);
-  const [isform_disable, setForm_disable] = useState(true);
-
-
-  const activeOrDeactivateForm = () => {
-
-    isread_Only ? setRead_Only(false) : setRead_Only(true);
-    isform_disable ? setForm_disable(false) : setForm_disable(true);
-
-  }
 
   return (
     <div>
@@ -29,7 +21,7 @@ function Admin_Perfil() {
         </Helmet>
       </HelmetProvider>
       <Head></Head>
-      <Header></Header>
+      <TopBar></TopBar>
       <Aside></Aside>
       <main id="main" className="main">
         <div className="pagetitle">
@@ -37,43 +29,28 @@ function Admin_Perfil() {
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <Link to="/admin"  >Home</Link>
+                <Link to="/admin">Home</Link>
               </li>
               <li className="breadcrumb-item active">Meu Perfil</li>
             </ol>
           </nav>
         </div>
-        
+
         <section className="section dashboard">
           <div className="col-lg-12">
-            <div className="card">
-              <br></br>
-              <div className="card-body">
-                <div className="row">
-                  <Profile></Profile>
-                  <UserData read_Only={isread_Only} form_disable={isform_disable}></UserData>
+            <div className="row">
+              <Profile></Profile>
+
+              <div className="col-lg-8">
+                <UserData></UserData>
+
+                <div className="row justify-content-center">
+                  <SupportActivity></SupportActivity>
+                  <MessagesActivity></MessagesActivity>
                 </div>
-                <div className="text-center">
-                  {
-                    isread_Only ? 
-                    (
-                      <button className="btn btn-warning" style={{ fontSize: "15px" }} onClick={() => activeOrDeactivateForm()}>
-                      Editar
-                      </button>
-                    ) : 
-                    (
-                      <div>
-                        <button className="btn btn-secondary" style={{ fontSize: "15px" }} onClick={() => activeOrDeactivateForm()}>
-                        Fechar
-                        </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button className="btn btn-success" style={{ fontSize: "15px" }}>
-                        Alterar
-                        </button>
-                      </div>
-                    )
-                  }
-                </div>
+
               </div>
+
             </div>
           </div>
         </section>
@@ -83,4 +60,4 @@ function Admin_Perfil() {
   );
 }
 
-export default Admin_Perfil;
+export default Admin_Perfil

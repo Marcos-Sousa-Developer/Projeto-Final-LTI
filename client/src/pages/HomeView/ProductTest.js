@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import getFromDB from '../../hooks/getFromDB';
 import postToDB from '../../hooks/postToDB';
 
 function ProductTest() {
@@ -24,25 +25,138 @@ function ProductTest() {
       setDescricao(event.target.value)
     }
 
-    function erros(){
+    async function verifyEAN(EAN){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+      //Não é null
+      //Não pode existir na bd ainda
+      //Tem 8 ou 13 algarismos e são todos numéricos
+
+      if(EAN == "" || EAN == null) {
+        // O EAN não pode ser nulo
+        return "Deve de inserir um EAN válido";
+      }
+
+      let product = await getFromDB("/products/" + EAN);
+      
+      if(product.length == 1){
+        return "O produto com o EAN inserido já se encontra criado"
+      }
+
+      if (EAN.length !== 8 && EAN.length !== 13) {
+        // O EAN deve ter 8 ou 13 dígitos
+        return "O EAN deve ter 8 ou 13 dígitos";
+      }
+      
+      var checksum = 0;
+      for (var i = 0; i < EAN.length - 1; i++) {
+        var digit = parseInt(EAN[i], 10);
+        if (isNaN(digit)) {
+          // O EAN deve conter apenas dígitos numéricos
+          return "O EAN deve conter apenas dígitos numéricos";
+        }
+        checksum += (i % 2 === 0) ? digit * 3 : digit;
+      }
+      
+      var lastDigit = parseInt(EAN[EAN.length - 1], 10);
+      if (isNaN(lastDigit)) {
+        // O EAN deve conter apenas dígitos numéricos
+        return "O EAN deve conter apenas dígitos numéricos";
+      } else {
+        return "OK";
+      }
+
+      //if(((10 - (checksum % 10)) === lastDigit) == true){
+      //  return "OK" ;
+      //} else{
+      //  return "EAN inválido";
+      //}
+    }
+
+    async function verifyName(name){
+      //retornar OK se estiver tudo bem e se não, o erro 
+      //não é null
+
+      if(name == "" || name == null) {
+        // O EAN não pode ser nulo
+        return "Deve de inserir um nome válido";
+      }
+      return "OK"
+    }
+
+    async function verifyProductionDate(dateString){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+      //Não é null
+      //a data tem de ser mais antiga que a data atual
+
+      if(dateString == "" || dateString == null) {
+        // A data de produção não pode ser nula
+        return "Deve de inserir uma data de produção válida";
+      }
+
+      var date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        // A data de produção tem de ser válida
+        return "Deve de inserir uma data de produção válida";
+      }
+
+      var today = new Date();
+      if((date < today) == false){
+        //"A data de produção deve de ser anterior à data de hoje"
+        return "A data de produção deve de ser anterior ou igual à data de hoje";
+      } else {
+        return "OK";
+      }
+    }
+
+    async function verifyDescription(description){
+      //retornar OK se estiver tudo bem e se não, o erro
+      //não é null
+
+      if(description == "" || description == null) {
+        // O EAN não pode ser nulo
+        return "Deve de inserir uma descrição válida";
+      }
+      return "OK"
     }
 
     const submit = async () => {
 
-      //tratamento de erros
-        erro()
+      let validEAN = await verifyEAN(EAN);
+      let validName = await verifyName(name);
+      let validProductionDate = await verifyProductionDate(data_producao);
+      let validDescription = await verifyDescription(descricao);
 
-       let product = await postToDB("/products",{
-            EAN: EAN,
-            name: name,
-            production_date: data_producao,
-            description: descricao,
+      let product;
+      
+      // Se todos os verifys forem OK, entra 
+      if(validEAN == "OK" && validName == "OK" && validProductionDate == "OK"  && validDescription == "OK"){
+        product = await postToDB("/products",{
+          EAN: EAN,
+          name: name,
+          production_date: data_producao,
+          description: descricao,
         })
-        if(product == true){
-          alert("Product created")
-        } else {
-          alert("Product not created, try again")
+      }
+
+      let text = "Não foi possivel criar o produto\n";
+      //No futuro é suposto mostrar o erro por baixo de cada input no form
+      if(product == true){
+        text = "Produto criado"
+      } else if(validEAN != "OK" || validName != "OK" || validProductionDate != "OK" || validDescription != "OK"){
+        if(validEAN != "OK" ){
+          text += validEAN + "\n"
         }
+        if(validName != "OK" ){
+          text += validName + "\n"
+        }
+        if (validProductionDate != "OK"){
+          text += validProductionDate + "\n"
+        }
+        if(validDescription != "OK" ){
+          text += validDescription + "\n"
+        }
+      }
+      alert(text)
     }
 
   return (

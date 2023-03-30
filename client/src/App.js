@@ -7,9 +7,8 @@ import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
 import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
 import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Settings from "./pages/Admin/Settings";
-import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Category, ProductTest} from './pages/HomeView/index';
+import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Category, ProductTest, ConsumerTest, SupplierTest} from './pages/HomeView/index';
 import { ShopContextProvider } from "./context/ShopContextProvider";
-import './index.css';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -67,6 +66,8 @@ function App() {
             <Route path="/loginTest" element={<LoginTest />} />
             <Route path="/productTest" element={<ProductTest />} />
             <Route path="/registerTest" element={<RegisterTest />} />
+            <Route path="/consumerTest" element={<ConsumerTest />} />
+            <Route path="/supplierTest" element={<SupplierTest />} />
           {/* ------------- */}
 
 
