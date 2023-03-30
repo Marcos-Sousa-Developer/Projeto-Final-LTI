@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import getFromDB from '../../hooks/getFromDB';
 import postToDB from '../../hooks/postToDB';
 
 function ProductTest() {
@@ -24,14 +25,21 @@ function ProductTest() {
       setDescricao(event.target.value)
     }
 
-    function verifyEAN(EAN){
+    async function verifyEAN(EAN){
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
       //Não é null
+      //Não pode existir na bd ainda
       //Tem 8 ou 13 algarismos e são todos numéricos
 
       if(EAN == "" || EAN == null) {
         // O EAN não pode ser nulo
         return "Deve de inserir um EAN válido";
+      }
+
+      let product = await getFromDB("/products/" + EAN);
+      
+      if(product.length == 1){
+        return "O produto com o EAN inserido já se encontra criado"
       }
 
       if (EAN.length !== 8 && EAN.length !== 13) {
@@ -64,7 +72,7 @@ function ProductTest() {
       //}
     }
 
-    function verifyName(name){
+    async function verifyName(name){
       //retornar OK se estiver tudo bem e se não, o erro 
       //não é null
 
@@ -75,7 +83,7 @@ function ProductTest() {
       return "OK"
     }
 
-    function verifyProductionDate(dateString){
+    async function verifyProductionDate(dateString){
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
       //Não é null
       //a data tem de ser mais antiga que a data atual
@@ -100,7 +108,7 @@ function ProductTest() {
       }
     }
 
-    function verifyDescription(description){
+    async function verifyDescription(description){
       //retornar OK se estiver tudo bem e se não, o erro
       //não é null
 
@@ -113,10 +121,10 @@ function ProductTest() {
 
     const submit = async () => {
 
-      let validEAN = verifyEAN(EAN);
-      let validName = verifyName(name)
-      let validProductionDate = verifyProductionDate(data_producao)
-      let validDescription = verifyDescription(descricao)
+      let validEAN = await verifyEAN(EAN);
+      let validName = await verifyName(name);
+      let validProductionDate = await verifyProductionDate(data_producao);
+      let validDescription = await verifyDescription(descricao);
 
       let product;
       

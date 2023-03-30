@@ -4,8 +4,6 @@ import API_URL from '../config/serverConnect'
 
 function getAllFromDB(url) { 
 
-    //const [users, setUsers]= useState([]); 
-
     return new Promise((resolve, reject) => { 
 
         let url_endpoint = API_URL+url

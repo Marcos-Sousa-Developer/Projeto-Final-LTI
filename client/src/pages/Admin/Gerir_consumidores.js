@@ -7,7 +7,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import FilterSearch from "./components/Managements/FilterSearch";
 
-
 function Gerir_Consumidores() { 
 
   return (

@@ -13,13 +13,11 @@ function RegisterTest() {
     setEmail(event.target.value)
   }
 
-
   const handleSetPassword = (event) => {
     setPassword(event.target.value)
   }
 
   const handlerCreate = async () => {
-
      let isActive = await auth.signUp(email,password)
      console.log(isActive)
   } 

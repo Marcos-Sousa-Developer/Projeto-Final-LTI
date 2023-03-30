@@ -204,12 +204,22 @@ img, picture {
   align-items: center;
 }
 
-#sidebar-toggler {
+#modal-toggler {
   display: inline-block;
   cursor: pointer;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background-color: #EB5C1F;
+  color: white;
+  border-radius: 10px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+#modal-toggler:hover {
+  opacity: 1;
 }
 
-.overlay {
+.overlayModal {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -220,78 +230,129 @@ img, picture {
   display: none;
   opacity: 0;
 }
-.overlay.active {
+.overlayModal.activeModal {
   display: block;
   opacity: 1;
   margin: 0;
 }
 
-.app__sidebar_content {
+.app__anuncio_modal_content {
   display: grid;
   grid-template-rows: 1fr auto;
   grid-template-columns: 1fr auto;
   gap: 1rem;
 }
 
-.app__sidebar {
+.app__anuncio_modal {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  min-width: 15rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 20rem;
   max-width: 25rem;
+  max-height: 100vh;
   padding: 2rem;
   z-index: 1000;
   background: white;
-  transform: translateX(-100%);
   overflow: auto;
+  visibility: hidden;
 }
-.app__sidebar.active {
-  transform: translateX(0%);
+.app__anuncio_modal.activeModal {
   margin: 0;
+  visibility: visible;
 }
-.app__sidebar_navs {
+.app__anuncio_modal_navs {
   grid-column: span 2;
 }
-.app__sidebar_navs ul {
+.app__anuncio_modal_navs ul {
   margin: 0;
   padding: 0;
   font-weight: lighter;
 }
-.app__sidebar_navs ul > * {
+.app__anuncio_modal_navs ul > * {
   line-height: 2.5rem;
 }
-.app__sidebar_navs_category {
+.app__anuncio_modal_navs_category {
   margin-bottom: 0.75rem;
 }
-.app__sidebar_navs_category-title {
+.app__anuncio_modal_navs_category-title {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
   transition: all 350ms ease;
 }
-.app__sidebar_navs_category-title .app__sidebar_navs_category-title_right {
+.app__anuncio_modal_navs_category-title .app__anuncio_modal_navs_category-title_right {
   transform: rotate(0deg);
   transition: all 350ms ease;
 }
-.app__sidebar_navs_category-title:hover .app__sidebar_navs_category-title_right {
+.app__anuncio_modal_navs_category-title:hover .app__anuncio_modal_navs_category-title_right {
   transform: rotate(90deg);
 }
-.app__sidebar_navs_category-title:hover .app__sidebar_navs_category-title_right > *, .app__sidebar_navs_category-title:hover .app__sidebar_navs_category-title_up > *, .app__sidebar_navs_category-title:hover p {
+.app__anuncio_modal_navs_category-title:hover .app__anuncio_modal_navs_category-title_right > *, .app__anuncio_modal_navs_category-title:hover .app__anuncio_modal_navs_category-title_up > *, .app__anuncio_modal_navs_category-title:hover p {
   color: #EB5C1F;
 }
-.app__sidebar_navs_category-title p {
+.app__anuncio_modal_navs_category-title p {
   margin: 0;
 }
-.app__sidebar_navs_category-title span {
+.app__anuncio_modal_navs_category-title span {
   margin-left: 1rem;
 }
-.app__sidebar_navs_category-content {
+.app__anuncio_modal_navs_category-content {
   max-height: 0;
   overflow: hidden;
   transition: all 350ms ease;
 }
-.app__sidebar_navs_category .show {
+.app__anuncio_modal_navs_category-content label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.app__anuncio_modal_navs_category-content label input[type=radio] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.app__anuncio_modal_navs_category-content label .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 3px solid #EEEEEE;
+  margin-top: 0.5rem;
+  transition: all 200ms ease-in-out;
+}
+.app__anuncio_modal_navs_category-content label .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.app__anuncio_modal_navs_category-content label:hover input ~ .checkmark {
+  border: 3px solid #EB5C1F;
+}
+.app__anuncio_modal_navs_category-content label input:checked ~ .checkmark {
+  border: 3px solid #EB5C1F;
+  background-color: #EB5C1F;
+}
+.app__anuncio_modal_navs_category-content label input:checked ~ .checkmark:after {
+  display: block;
+}
+.app__anuncio_modal_navs_category-content label .checkmark:after {
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+}
+.app__anuncio_modal_navs_category .show {
   height: auto;
   max-height: 400px;
   margin-left: 1rem;
