@@ -2,15 +2,6 @@ import React, { useState } from 'react';
 import putToDB from '../../hooks/putToDB';
 
 function ConsumerTest() {
-
-    /*
-    name
-    email
-    nif
-    mobile_number
-    address
-    account_status
-    */
     
     const [name, setName] = useState(null)
     const [email, setEmail] = useState(null)
@@ -48,6 +39,12 @@ function ConsumerTest() {
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //podem ser null
         //tem de ter um @
+        
+        if(email != null && email != ""){
+          if(!email.includes("@")){
+            return "Deve de inserir um email válido";
+          }
+        }
         return "OK"
     }
 
@@ -58,24 +55,24 @@ function ConsumerTest() {
 
         if(nif != null && nif != ""){
             if(nif.length != 9){
-                // O EAN deve ter 9 dígitos
-                return "O EAN deve ter 9 dígitos";
+                // O NIF deve ter 9 dígitos
+                return "O NIF deve ter 9 dígitos";
             }
             for (var i = 0; i < nif.length; i++) {
                 var digit = parseInt(nif[i], 10);
                 if (isNaN(digit)) {
                   // O NIF deve conter apenas dígitos numéricos
-                return "O NIF deve conter apenas dígitos numéricos";
+                  return "O NIF deve conter apenas dígitos numéricos";
                 }
-              }
-            return "OK"
+            }
         }
+        return "OK"
     }
 
     async function verifyMobileNumber(mobile_number){
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //podem ser null
-        //9 algarismos ?? 
+        //9 algarismos ?? depende do código do pais 
         return "OK"
     }
 
@@ -102,80 +99,52 @@ function ConsumerTest() {
         let validMobileNumber = await verifyMobileNumber(mobile_number);
         let validAddress = await verifyAddress(address);
 
+        console.log(validName)
+        console.log(validEmail)
+        console.log(validNif)
+        console.log(validMobileNumber)
+        console.log(validAddress)
+
         //Get the id consumer
         let id = 2;
         
         let consumerUpdated;
 
-        if(validName == "OK" && validEmail == "OK" && validNif == "OK"  && validMobileNumber == "OK" && validAddress == "OK"){
-            consumerUpdated = await putToDB("/consumers/" + id,{
+        if(!((name == null || name == "") && (email == null || email == "") && (nif == null || nif == "") && (mobile_number == null || mobile_number == "") && (address == null || address == ""))){
+            if(validName == "OK" && validEmail == "OK" && validNif == "OK" && validMobileNumber == "OK" && validAddress == "OK" ){
+                consumerUpdated = await putToDB("/consumers/" + id,{
                 name: name,
                 email: email,
                 nif: nif,
                 mobile_number: mobile_number,
                 address: address,
-            })
-        }    
+              })
+          }    
 
-        console.log(consumerUpdated)
-
-
-
-        let text = "Não foi possivel alterar os dados\n";
-        if(consumerUpdated == true){
-            text = "Dados alterados"
-        } else if(validName != "OK" || validEmail != "OK" || validNif != "OK" || validMobileNumber != "OK" || validAddress != "OK"){
-            if(validName != "OK" ){
-              text += validName + "\n"
-            }
-            if(validEmail != "OK" ){
-              text += validEmail + "\n"
-            }
-            if (validNif != "OK"){
-              text += validNif + "\n"
-            }
-            if(validMobileNumber != "OK" ){
-              text += validMobileNumber + "\n"
-            }
-            if(validAddress != "OK" ){
-                text += validAddress + "\n"
-            }
-        } 
-        alert(text) 
+          let text = "Não foi possivel alterar os dados\n";
+          if(consumerUpdated == true){
+              text = "Dados alterados"
+              alert(text) 
+          } else if(validName != "OK" || validEmail != "OK" || validNif != "OK" || validMobileNumber != "OK" || validAddress != "OK"){
+              if(validName != "OK" ){
+                text += validName + "\n"
+              }
+              if(validEmail != "OK" ){
+                text += validEmail + "\n"
+              }
+              if (validNif != "OK"){
+                text += validNif + "\n"
+              }
+              if(validMobileNumber != "OK" ){
+                text += validMobileNumber + "\n"
+              }
+              if(validAddress != "OK" ){
+                  text += validAddress + "\n"
+              }
+              alert(text) 
+          } 
+        }      
     }
-
-        /*
-        
-        // Se todos os verifys forem OK, entra 
-        if(validEAN == "OK" && validName == "OK" && validProductionDate == "OK"  && validDescription == "OK"){
-          product = await putToDB("/products",{
-            EAN: EAN,
-            name: name,
-            production_date: data_producao,
-            description: descricao,
-          })
-        }
-  
-        let text = "Não foi possivel criar o produto\n";
-        //No futuro é suposto mostrar o erro por baixo de cada input no form
-        if(product == true){
-          text = "Produto criado"
-        } else if(validEAN != "OK" || validName != "OK" || validProductionDate != "OK" || validDescription != "OK"){
-          if(validEAN != "OK" ){
-            text += validEAN + "\n"
-          }
-          if(validName != "OK" ){
-            text += validName + "\n"
-          }
-          if (validProductionDate != "OK"){
-            text += validProductionDate + "\n"
-          }
-          if(validDescription != "OK" ){
-            text += validDescription + "\n"
-          }
-        }
-        alert(text)
-      }*/
 
   return (
     <div>
