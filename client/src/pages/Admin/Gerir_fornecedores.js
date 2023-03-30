@@ -4,15 +4,11 @@ import Head from "./components/Head";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import getAllFromDB from "../../hooks/getAllFromDB";
-import Navigator from "./components/Navigator";
-import SearchBar from './components/ProfilesComponents/SearchBar';
+import FilterSearch from "./components/Managements/FilterSearch";
 import { Link } from "react-router-dom";
 
 
-function Gerir_fornecedores() {
-
-    const suppliers = getAllFromDB("/suppliers")
+function Gerir_Fornecedores() {
 
     return (
     <div>
@@ -26,32 +22,27 @@ function Gerir_fornecedores() {
         <Aside></Aside>
 
         <main id="main" className="main">
-        <div className="pagetitle">
-            <h1>Gerir Fornecedores</h1>
-            <nav>
+        <div className="pagetitle" style={{paddingBottom: "10px"}}>
+          <h1> Gerir Fornecedores</h1>
+          <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <Link to="/admin"  >Home</Link>
+                <Link to="/admin">Home</Link>
               </li>
               <li className="breadcrumb-item active">Gerir Fornecedores</li>
             </ol>
           </nav>
         </div>
+
         <section className="section dashboard">
-            <div className="col-lg-12">
-              <div className="row">
-                <h5 className="card-title">
-                  <i className="bi bi-briefcase"></i> Fornecedores
-                  <SearchBar></SearchBar>
-                </h5>
-                <Navigator users={suppliers} user_type={"supplier"}></Navigator>
-              </div>
-            </div>
+          <FilterSearch url={'/suppliers'} type={"supplier"} name={"Fornecedores"} filter1={"Nome ou iniciais do fornecedor"} filter2={"Indentifcador do Fornecedor"} 
+                filter3={"Email"} filter4={"Endereço"} filter5={"Telemóvel / Telefone"}>
+          </FilterSearch>
         </section>
-        </main>
+      </main>
         <Footer></Footer>
     </div>
     );
 }
 
-export default React.memo(Gerir_fornecedores);
+export default React.memo(Gerir_Fornecedores);

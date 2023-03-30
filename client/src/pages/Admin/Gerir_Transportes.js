@@ -9,14 +9,14 @@ import FilterSearch from "./components/Managements/FilterSearch";
 
 
 // user can be consumer, supplier or admin
-function Gerir_Produtos() { 
+function Gerir_Transportes() { 
 
     
     return (
       <div>
         <HelmetProvider>
           <Helmet>
-            <title>Admin-Gerir Produtos</title>
+            <title>Admin-Gerir Transportes</title>
           </Helmet>
         </HelmetProvider>
         <Head></Head>
@@ -25,7 +25,7 @@ function Gerir_Produtos() {
 
         <main id="main" className="main">
           <div className="pagetitle" style={{paddingBottom: "10px"}}>
-            <h1>Gerir Produtos</h1>
+            <h1>Gerir Transportes</h1>
             <nav>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -33,14 +33,14 @@ function Gerir_Produtos() {
                     Home
                   </Link>
                 </li>
-                <li className="breadcrumb-item active">Gerir Produtos</li>
+                <li className="breadcrumb-item active">Gerir Transportes</li>
               </ol>
             </nav>
           </div>
           <section className="section dashboard">
 
-          <FilterSearch url={'/products'} type={"product"} name={"Produtos"} filter1={"Nome ou iniciais do produto"} filter2={"EAN"} 
-              filter3={"Categoria do Produto"} filter4={"Unidade de Produção"} filter5={"Data de Produção"}
+          <FilterSearch url={'/vehicles'} type={"vehicle"} name={"Tansportes"} filter1={"Nome ou iniciais do transporte"} filter2={"Matricula"} 
+              filter3={"Unidade de Produção"} filter4={"Capacidade"} filter5={"Data de Produção"}
             >
             </FilterSearch>
 
@@ -52,4 +52,4 @@ function Gerir_Produtos() {
 }
 
 
-export default Gerir_Produtos
+export default Gerir_Transportes

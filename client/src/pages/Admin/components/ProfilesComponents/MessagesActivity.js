@@ -5,8 +5,8 @@ import 'react-circular-progressbar/dist/styles.css';
 function MessagesActivity() {
   return (
     <div className="col-md-4">
-    <div className="h-100">
-      <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
+    <div className=" h-100">
+      <div className="mx-auto d-flex flex-column justify-content-center align-items-center" style={{paddingTop:"8px"}}>
         <h5>Mensagens Respondidas</h5>
         <div style={{ width: "60%" }}>
           <CircularProgressbar
@@ -23,6 +23,7 @@ function MessagesActivity() {
         </div>
         <h5>Total: 100</h5>
       </div>
+      <hr></hr>
     </div>
   </div>
   )

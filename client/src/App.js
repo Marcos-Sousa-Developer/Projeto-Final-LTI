@@ -2,8 +2,8 @@ import { Routes, Route, useLocation  } from "react-router-dom";
 import RequireAuth from "./components/RequireAuth"
 import Dashboard from "./pages/Admin/Dashboard";
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
-import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
-import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
+import Gerir_Consumidores from "./pages/Admin/Gerir_Consumidores";
+import Gerir_Fornecedores from "./pages/Admin/Gerir_Fornecedores";
 import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
 import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Settings from "./pages/Admin/Settings";
@@ -12,6 +12,7 @@ import { ShopContextProvider } from "./context/ShopContextProvider";
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 
 function App() {
 
@@ -40,8 +41,9 @@ function App() {
                 <Route index element={ <RequireAuth><Dashboard /></RequireAuth> }/>
                 <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
                 <Route exact path="gerir_adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
-                <Route exact path="gerir_consumidores" element={<RequireAuth><Gerir_consumidores /></RequireAuth>} />
-                <Route exact path="gerir_fornecedores" element={<RequireAuth><Gerir_fornecedores /></RequireAuth>} />
+                <Route exact path="gerir_consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
+                <Route exact path="gerir_fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
+                <Route exact path="gerir_transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />
                 <Route exact path="gerir_produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
                 <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
               </Route>

@@ -2030,6 +2030,9 @@ progress {
         --bs-gutter-y: 3rem
     }
 }
+.table th, .table td {
+    width: 8px !important;
+  }
 
 .table {
     --bs-table-color: var(--bs-body-color);
@@ -2059,6 +2062,9 @@ progress {
 .table>tbody {
     vertical-align: inherit
 }
+.table thead th {
+    padding: 0.5rem !important;
+  }
 
 .table>thead {
     vertical-align: bottom

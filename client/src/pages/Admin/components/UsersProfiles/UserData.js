@@ -19,9 +19,9 @@ function UserData() {
       <div className="card">
         <form>
           <div className="container">
+          <br></br>
             <div className="row">
-              <div className="form-group col-md-4">
-                <br></br>
+              <div className="form-group col-md-4 mb-3">
                 <label htmlFor="name">Nome</label>
                 <input
                   className="form-control"
@@ -31,8 +31,7 @@ function UserData() {
                   readOnly={isread_Only}
                 ></input>
               </div>
-              <div className="form-group col-md-4">
-                <br></br>
+              <div className="form-group col-md-4 mb-3">
                 <label htmlFor="mobile">Telemóvel</label>
                 <input
                   className="form-control"
@@ -42,8 +41,7 @@ function UserData() {
                   readOnly={isread_Only}
                 ></input>
               </div>
-              <div className="form-group col-md-4">
-                <br></br>
+              <div className="form-group col-md-4 mb-3">
                 <label htmlFor="date">Data de Nascimento</label>
                 <input
                   className="form-control"
@@ -54,8 +52,7 @@ function UserData() {
                 ></input>
               </div>
             </div>
-            <br></br>
-            <div className="form-group col-md-12">
+            <div className="form-group col-md-12 mb-3">
               <label htmlFor="email">Email </label>
               <input
                 className="form-control"
@@ -66,8 +63,7 @@ function UserData() {
               ></input>
             </div>
             <div className="row">
-              <div className="form-group col-md-4">
-                <br></br>
+              <div className="form-group col-md-4 mb-3">
                 <label htmlFor="date">Data de Nascimento</label>
                 <input
                   className="form-control"
@@ -77,8 +73,7 @@ function UserData() {
                   readOnly={isread_Only}
                 ></input>
               </div>
-              <div className="form-group col-md-4">
-                <br></br>
+              <div className="form-group col-md-4 mb-3">
                 <label htmlFor="country">País</label>
                 <input
                   className="form-control"
@@ -88,8 +83,7 @@ function UserData() {
                   readOnly={isread_Only}
                 ></input>
               </div>
-              <div className="form-group col-md-4">
-                <br></br>
+              <div className="form-group col-md-4 mb-3">
                 <label htmlFor="state">Distrito</label>
                 <input
                   className="form-control"
@@ -100,8 +94,7 @@ function UserData() {
                 ></input>
               </div>
             </div>
-            <br></br>
-            <div className="form-group col-md-12">
+            <div className="form-group col-md-12 mb-3">
               <label htmlFor="address">Endereço</label>
               <input
                 type="text"
@@ -112,9 +105,8 @@ function UserData() {
                 readOnly={isread_Only}
               ></input>
             </div>
-            <br></br>
             <div className="row">
-              <div className="form-group col-md-4">
+              <div className="form-group col-md-4 mb-3">
                 <label htmlFor="concelho">Concelho</label>
                 <input
                   className="form-control"
@@ -123,9 +115,8 @@ function UserData() {
                   disabled={isform_disable}
                   readOnly={isread_Only}
                 ></input>
-                <br></br>
               </div>
-              <div className="form-group col-md-5">
+              <div className="form-group col-md-5 mb-3">
                 <label htmlFor="freguesia">Freguesia</label>
                 <input
                   className="form-control"
@@ -134,9 +125,8 @@ function UserData() {
                   disabled={isform_disable}
                   readOnly={isread_Only}
                 ></input>
-                <br></br>
               </div>
-              <div className="form-group col-md-3">
+              <div className="form-group col-md-3 mb-3">
                 <label htmlFor="postal_code">Código Postal</label>
                 <input
                   className="form-control"
@@ -148,7 +138,7 @@ function UserData() {
               </div>
             </div>
           </div>
-          <div className="text-center">
+          <div className="text-center" style={{paddingBottom: "15px"}}>
             {isread_Only ? (
               <button
                 className="btn btn-warning"
@@ -176,7 +166,6 @@ function UserData() {
               </div>
             )}
           </div>
-          <br></br>
         </form>
       </div>
     </div>

@@ -106,7 +106,7 @@ function Aside() {
         <li className="nav-heading">Gestão de Transportes</li>
 
         <li className="nav-item">
-          <Link to="/admin" className="nav-link collapsed">
+          <Link to="/admin/gerir_transportes" className="nav-link collapsed">
             <i className="bi bi-car-front"/>
             <span>Gerir Transportes</span>
           </Link>
