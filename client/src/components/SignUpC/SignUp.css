@@ -114,13 +114,13 @@ img, picture {
 }
 
 .app__SignUp {
-  margin: 1rem auto;
+  margin: 2rem auto;
 }
 .app__SignUp_rectangle1 {
   position: absolute;
   top: 0;
   right: 0;
-  width: 200px;
+  width: 150px;
   height: inherit;
 }
 .app__SignUp_rectangle2 {
@@ -132,7 +132,7 @@ img, picture {
 .app__SignUp_box {
   padding: 3rem 1.5rem;
   width: 90%;
-  margin: auto;
+  margin: 6rem auto auto auto;
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   border-radius: 10px;

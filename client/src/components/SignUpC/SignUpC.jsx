@@ -6,6 +6,22 @@ import './SignUp.css';
 import images from '../../assets/images';
 
 const SignUpC = () => {
+
+    const [showExtraInputs, setShowExtraInputs] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("");
+  
+    const handleOptionChange = (e) => {
+      setSelectedOption(e.target.value);
+      setShowExtraInputs(true);
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log("Form submitted");
+      console.log("Selected option:", selectedOption);
+      // Perform form submission logic here
+    };
+
     return (
     <>
         <img className='app__SignUp_rectangle1' src={images.Rectangle1} alt="" />
@@ -17,57 +33,67 @@ const SignUpC = () => {
                     <div className='app__SignUp_box1'>
                         <form>
                             <div>
-                                <p>E-mail</p>
-                                <div className='app__SignUp_box11'>
-                                    <FiMail fontSize={22} color='black'  aria-hidden="true"/>
+                                <label>
                                     <input
-                                        name=""
-                                        id=""
-                                        type="text"
-                                        required
+                                        type="radio"
+                                        value="Comprador"
+                                        checked={selectedOption === "Comprador"}
+                                        onChange={handleOptionChange}
                                     />
-                                </div>
+                                    Comprador
+                                </label>
                             </div>
                             <div>
-                                <p>Password</p>
-                                <div className='app__SignUp_box11'>
-                                    <FiLock fontSize={22} color='black'  aria-hidden="true"/>
+                                <label>
                                     <input
-                                        name=""
-                                        id=""
-                                        type="password"
-                                        required
+                                        type="radio"
+                                        value="Fornecedor"
+                                        checked={selectedOption === "Fornecedor"}
+                                        onChange={handleOptionChange}
                                     />
-                                </div>
+                                    Fornecedor
+                                </label>
                             </div>
-
-                            <div className='app__SignUp_box131'>
-                            <p>É um vendedor ou comprador</p>
-                              <div className='app__SignUp_box131_Buttons'>
-                              <button className='main__action_btn buttonComprador' type='submit'>Comprador</button>
-                              <button className='main__action_btn buttonVendedor' type='submit'>Vendedor</button>
-                              </div>
-                            </div>
-
-                            <div className='app__SignUp_box13'>
-                            <button className='main__action_btn' type='submit'>Sign Up</button>
-                            </div>
+                            {showExtraInputs && (
+                                <>
+                                    <div>
+                                        <p>E-mail</p>
+                                        <div className='app__SignUp_box11'>
+                                            <FiMail fontSize={22} color='black'  aria-hidden="true"/>
+                                            <input
+                                                name=""
+                                                id=""
+                                                type="text"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p>Password</p>
+                                        <div className='app__SignUp_box11'>
+                                            <FiLock fontSize={22} color='black'  aria-hidden="true"/>
+                                            <input
+                                                name=""
+                                                id=""
+                                                type="password"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className='app__SignUp_box13'>
+                                        <button className='main__action_btn' type='submit' onClick={handleSubmit}>Registar</button>
+                                    </div>
+                                </>
+                            )}
                         </form>
                     </div>
                     <div className='app__SignUp_box2'>
-                        <p>or</p>    
-
+                        <p style={{margin: '0'}}>or</p>    
                     </div>
                     <div className='app__SignUp_box3'>
-                            <button className='app__SignUp_box30 ButtonGoogle'>
-                                Google
-                            </button>
-                            <button className='app__SignUp_box30 ButtonFacebook'>
-                                Facebook
-                            </button>
-                            <button className='app__SignUp_box30 ButtonTwitter'>
-                                Twitter
-                            </button>
+                        <button className='app__SignUp_box30 ButtonGoogle'>Google</button>
+                        <button className='app__SignUp_box30 ButtonFacebook'>Facebook</button>
+                        <button className='app__SignUp_box30 ButtonTwitter'>Twitter</button>
                     </div>
                 </div>    
         </div>
