@@ -1,16 +1,15 @@
 @import '../../../index.scss';
 
-
 $transition-sidebar: all 350ms ease;
 $overlay-bg:        hsla(0, 0%, 9%, 0.863);
-
 
 .app__anuncio{
     margin: 1rem auto 2rem;
 
     &_inputArea{
         border: $border;
-        padding: 1rem 4rem 2rem 4rem;
+        padding: 2rem 6rem 3rem 6rem;
+        min-height: 400px;
 
         p{
             margin: 1rem 0 .5rem;
@@ -18,150 +17,179 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
     }
 
     &_content{
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        gap: 4rem;
 
-        &-product{
-            .app__anuncio_image_sectionBtn{
-                margin-top: 1rem;
+        &_stepBtns{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
 
-                & >* >*{
-                    transition: all 150ms ease-in;
-                }
-                
-                &:hover >* >*{
-                    color: $orange;
-                }
+            polyline{
+                color: white;
             }
 
-            .app__anuncio_image_section-content{
-                margin-top: 1rem;
+            &>*>*{
+                background-color: $orange;
+                margin-bottom: .125rem;
             }
+        }
 
-            .app__anuncio_image_input{
-                border: $border;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 10px;
-
-                input{
-                    display: none;
-                }
-
-                div{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-            }
-
-            .app__anuncio_images_selected{
-                display: grid;
-                grid-template-columns: repeat(auto-fit, 100px);
-                gap: 1rem;
-                margin-bottom: 1rem;
-
-                & > *{
-                    min-width: 100px;
-                    min-height: 80px;
-                }
-            }
-
-            .app__anuncio_image_selected{
-                position: relative;
-                border-radius: 10px;
-
-                &_img{
-                    border-radius: 10px;
-                    object-fit: cover;
-                    width: 100px;
-                    height: 80px;
-                }
-
-                &_deleteBtn{
-                    position: absolute;
-                    right: 0rem;
-                    top: 0rem;
-                    background-color: $orange;
-
-                    & > *{
-                        color: white;
-                    }
-                }
-            }
-
-            &_area{
+        &_generalInfo{
+            &_1, &_2{
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 4rem;
+                gap: 8rem;
+            }
 
-                & > *{
-                    width: 85%;
-                }
+            &_1{
+
+            }
+
+            &_2{
+
             }
         }
 
-        &-contact{
-            &_area{
-                & > *{
-                    width: 90%;
-                    margin: 0 auto;
-                }
-            }
+        &_productInfo{
 
-            &_actions{
-                margin-top: 1rem;
+        }
+
+        &_supplierInfo{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+        }
+
+        .app__anuncio_image_sectionBtn{
+            margin-top: 1rem;
+            & >* >*{
+                transition: all 150ms ease-in;
+            }
+            
+            &:hover >* >*{
+                color: $orange;
+            }
+        }
+
+        .app__anuncio_image_section-content{
+            margin-top: 1rem;
+        }
+
+        .app__anuncio_image_input{
+            border: $border;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            input{
+                display: none;
+            }
+            div{
                 display: flex;
-                justify-content: space-evenly;
+                flex-direction: column;
                 align-items: center;
             }
         }
+
+        .app__anuncio_images_selected{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 100px);
+            gap: 1rem;
+            margin-bottom: 1rem;
+            & > *{
+                min-width: 100px;
+                min-height: 80px;
+            }
+        }
+
+        .app__anuncio_image_selected{
+            position: relative;
+            border-radius: 10px;
+            &_img{
+                border-radius: 10px;
+                object-fit: cover;
+                width: 100px;
+                height: 80px;
+            }
+            &_deleteBtn{
+                position: absolute;
+                right: 0rem;
+                top: 0rem;
+                background-color: $blue;
+                & > *{
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+.app__anuncio_progressBar{
+    width: 50%;
+    margin: 0 auto;
+    height: 20px;
+    border-radius: 10px;
+    border: $border;
+    margin-bottom: 2rem;
+    position: relative;
+
+    span{
+        position: absolute;
+        left: 50%;
+        top: 0;
+        font-size: 9.5px;
+        font-weight: bold;
+        transition: all 200ms ease-in;
+    }
+
+    div {
+        width: 33.3%;
+        height: 100%;
+        border-radius: 10px;
+        background-color: $blue;
+        transition: all 200ms ease-in;
     }
 }
 
 //Category Modal
 
 #modal-toggler{
-  display: inline-block;
-  cursor: pointer;
-  margin: 0;
-  padding: .5rem 1rem;
-  background-color: $orange;
-  color: white;
-  border-radius: 10px;
-  opacity: .8;
-  transition: all 200ms ease-in-out;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0;
+    padding: .5rem 1rem;
+    color: black;
+    border-radius: 10px;
+    border: $border;
+    transition: all 150ms ease-in-out;
 
-  &:hover{
-    opacity: 1;
-  }
+    &:hover{
+        border: 3px solid rgba(235, 92, 31, 0.8);
+    }
 }
 
 .overlayModal{
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  background-color: $overlay-bg;
-  display: none;
-  opacity: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background-color: $overlay-bg;
+    display: none;
+    opacity: 0;
 
-  &.activeModal{
-    display: block;
-    opacity: 1;
-    margin: 0;
-  }
+    &.activeModal{
+        display: block;
+        opacity: 1;
+        margin: 0;
+    }
 }
 
 .app__anuncio_modal_content{
-  display: grid;
-  grid-template-rows: 1fr auto;
-  grid-template-columns: 1fr auto;
-  gap: 1rem;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
 }
 
 .app__anuncio_modal{
@@ -304,77 +332,56 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
 @media screen and (max-width: 1500px) {
     .app__anuncio_content{
         & .app__anuncio_inputArea{
-            padding: 1rem 2rem 2rem 2rem;
+            padding: 1rem 3rem 2rem 3rem;
         }
 
-        &-product_area{
-            gap: 0rem;
+        &_generalInfo_1, &_generalInfo_2, &_supplierInfo{
+            gap: 3rem;
         }
     }
 }
 
 @media screen and (max-width: 1200px) {
-    .app__anuncio_content{
-        grid-template-columns: 1fr;
-        gap: 2rem;
-
-        & .app__anuncio_inputArea{
-            padding: 1rem 0rem 2rem 0rem;
-        }
-
-        &-product_area > *{
-            margin: 0 auto;
-        }
-
-        &-contact_area{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-
-            & > *{
-                width: 80%;
-            }
-        }
+    .app__anuncio_progressBar{
+        width: 70%;
     }
 
-    .app__anuncio_image_section, .app__anuncio_description_section{
-        width: 92.5%;
-        margin: 0 auto;
+    .app__anuncio_content{
+        & .app__anuncio_inputArea{
+            padding: 1rem 2rem 2rem 2rem;
+        }
+
+        &_generalInfo_1, &_generalInfo_2, &_supplierInfo{
+            gap: 2rem;
+        }
     }
 }
 
-@media screen and (max-width: 500px) {
-    .app__anuncio_content{
-        grid-template-columns: 1fr;
-
-        &-contact_area{
-            display: block;
-        }
-
-        &-product{
-            .app__anuncio_images_selected{
-                grid-template-columns: repeat(auto-fit, 80px);
-                gap: 1rem;
-        
-                & > *{
-                    min-width: 80px;
-                    min-height: 60px;
-                }
-            }
-
-            .app__anuncio_image_selected_img{
-                width: 80px;
-                height: 60px;
-            }
-
-            &_area{
-                grid-template-columns: 1fr;
-                grid-template-rows: 1fr 1fr;
-            }
-        }
+@media screen and (max-width: 700px) {
+    .app__anuncio_progressBar{
+        margin: 1rem auto;
+        width: 80%;
     }
 
-    .app__anuncio_image_section, .app__anuncio_description_section{
-        width: 85%;
-        margin: 0 auto;
+    .app__anuncio_content{
+        &_generalInfo_1, &_generalInfo_2, &_supplierInfo{
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .app__anuncio_images_selected{
+            grid-template-columns: repeat(auto-fit, 80px);
+            gap: 1rem;
+    
+            & > *{
+                min-width: 80px;
+                min-height: 60px;
+            }
+        }
+
+        .app__anuncio_image_selected_img{
+            width: 80px;
+            height: 60px;
+        }
     }
 }
