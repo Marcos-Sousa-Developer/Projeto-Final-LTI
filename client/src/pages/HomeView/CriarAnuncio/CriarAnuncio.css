@@ -136,10 +136,20 @@ img, picture {
   background-color: #EB5C1F;
   margin-bottom: 0.125rem;
 }
-.app__anuncio_content_generalInfo_1, .app__anuncio_content_generalInfo_2 {
+.app__anuncio_content_generalInfo {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 6rem;
+}
+.app__anuncio_content_generalInfo_1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8rem;
+  gap: 6rem;
+}
+.app__anuncio_content_productInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 8rem;
 }
 .app__anuncio_content_supplierInfo {
   display: grid;
@@ -209,17 +219,19 @@ img, picture {
   margin: 0 auto;
   height: 20px;
   border-radius: 10px;
-  border: 3px solid #EEEEEE;
+  border: 3px solid #76CBFF;
   margin-bottom: 2rem;
   position: relative;
 }
 .app__anuncio_progressBar span {
   position: absolute;
-  left: 50%;
+  left: 46%;
   top: 0;
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: bold;
   transition: all 200ms ease-in;
+  color: white;
+  background-color: rgba(31, 198, 235, 0.1);
 }
 .app__anuncio_progressBar div {
   width: 33.3%;
@@ -228,12 +240,40 @@ img, picture {
   background-color: #76CBFF;
   transition: all 200ms ease-in;
 }
+.app__anuncio_progressBar::after {
+  content: "2";
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #76CBFF;
+}
+.app__anuncio_progressBar::before {
+  content: "1";
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: -8px;
+  left: -4px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #76CBFF;
+}
 
 #modal-toggler {
   display: inline-block;
   cursor: pointer;
   margin: 0;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem;
   color: black;
   border-radius: 10px;
   border: 3px solid #EEEEEE;
@@ -387,8 +427,11 @@ img, picture {
   .app__anuncio_content .app__anuncio_inputArea {
     padding: 1rem 3rem 2rem 3rem;
   }
-  .app__anuncio_content_generalInfo_1, .app__anuncio_content_generalInfo_2, .app__anuncio_content_supplierInfo {
-    gap: 3rem;
+  .app__anuncio_content_generalInfo, .app__anuncio_content_generalInfo_1 {
+    gap: 2rem;
+  }
+  .app__anuncio_content_productInfo {
+    gap: 1rem 6rem;
   }
 }
 @media screen and (max-width: 1200px) {
@@ -398,8 +441,11 @@ img, picture {
   .app__anuncio_content .app__anuncio_inputArea {
     padding: 1rem 2rem 2rem 2rem;
   }
-  .app__anuncio_content_generalInfo_1, .app__anuncio_content_generalInfo_2, .app__anuncio_content_supplierInfo {
-    gap: 2rem;
+  .app__anuncio_content_generalInfo, .app__anuncio_content_generalInfo_1 {
+    gap: 1rem;
+  }
+  .app__anuncio_content_productInfo {
+    gap: 1rem 3rem;
   }
 }
 @media screen and (max-width: 700px) {
@@ -407,7 +453,14 @@ img, picture {
     margin: 1rem auto;
     width: 80%;
   }
-  .app__anuncio_content_generalInfo_1, .app__anuncio_content_generalInfo_2, .app__anuncio_content_supplierInfo {
+  .app__anuncio_content .app__anuncio_inputArea {
+    padding: 1rem;
+  }
+  .app__anuncio_content_generalInfo {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .app__anuncio_content_productInfo {
     grid-template-columns: 1fr;
     gap: 0;
   }
