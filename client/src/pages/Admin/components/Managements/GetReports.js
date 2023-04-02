@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import BarReports from '../Reports/BarReports'
 import getAllFromDB from '../../../../hooks/getAllFromDB'
 
+let tableData = {}
+
 function GetReports() {
 
     const [continent, setContinent] = useState("");
@@ -15,8 +17,10 @@ function GetReports() {
     const [result, setResult] = useState(null)
     const [showBarResult, setShowBarResult] = useState(true)
     const [showExportResult, setShowExportResult] = useState(false)
-    const [tableData, setTableData] = useState({})
-
+    
+    /**
+     * @description fetch data from DB
+     */
     const fetchResults = async () => { 
 
         setShowBarResult(false)
@@ -33,18 +37,18 @@ function GetReports() {
             town: town,
             status: status,
             total_orders: total_Orders,
-            date: date
+            created_at: date,
         }
         let response = ""
         if(allEmpty == true) {  
-            let response = await getAllFromDB('/consumers') 
+            response = await getAllFromDB('/consumers') 
             setResult(response)
             mapData(response)
            
         }
 
         else {
-            let response = await getAllFromDB('/consumers',params) 
+            response = await getAllFromDB('/consumers',params) 
             setResult(response)
             mapData(response)
            
@@ -52,12 +56,16 @@ function GetReports() {
         }
 
         setShowBarResult(true)
+        setShowExportResult(true)
     }
 
+    /**
+     * @param {*} datas //response from fetch results
+     * @description set into tableData values
+     */
     function mapData(datas) {  
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        let tableData = {}
-
+        tableData = {}
         datas.map((data) => { 
 
             const dateString = data.created_at 
@@ -75,14 +83,14 @@ function GetReports() {
                 
             
         })
-        setTableData(tableData)
+
     }
 
 
   return (
     <>
         {
-            showBarResult ? (<BarReports data={tableData}></BarReports>) : (
+            showBarResult ? (<BarReports datas={tableData}></BarReports>) : (
                 <div className="text-center">
                     <div className="spinner-border" style={{width: "10rem", height: "10rem"}} role="status"></div>
                 </div>
@@ -154,11 +162,11 @@ function GetReports() {
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-primary" onClick={fetchResults}>Obter relatório</button>
             &nbsp;&nbsp;&nbsp;
-            {
+            {/*
                 showExportResult && (
                     <button type="button" class="btn btn-success" onClick={fetchResults}>exportar relatório</button>
                 )
-            }
+            */}
         </div>
                
     </>

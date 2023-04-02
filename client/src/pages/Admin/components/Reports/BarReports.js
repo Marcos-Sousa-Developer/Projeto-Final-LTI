@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -19,8 +19,9 @@ import {
     Legend
   );
 
+  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
   let tableContent = {}
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
   const options = {
     responsive: true,
@@ -35,7 +36,7 @@ const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
     },
   };
 
-  const data = {
+  let data = {
     labels,
     datasets: [
       {
@@ -48,14 +49,40 @@ const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 function BarReports({datas}) { 
 
-  tableContent = datas
+  const [show, setShow] = useState(false)
+
+  function setData() {
+    data = {
+      labels,
+      datasets: [
+        {
+          label: 'Novos utilizadores',
+          data: labels.map((label) => datas[label] ?? 0),
+          backgroundColor: 'coral',
+        }
+      ],
+    };
+    setShow(true)
+  }
+
+  useEffect(() => {
+
+    if(datas !== {}) {
+
+      setData()
+
+
+    }
+  })
 
 
   return (
 
     <div >
-
-        <Bar options={options} data={data} />
+        {
+          show &&  <Bar options={options} data={data} />
+        }
+        
         <br></br>
         <hr></hr>
 
