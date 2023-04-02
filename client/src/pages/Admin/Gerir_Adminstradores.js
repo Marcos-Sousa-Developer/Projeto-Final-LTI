@@ -1,10 +1,11 @@
 import React from "react";
 import Aside from "./components/Aside";
 import Head from "./components/Head";
-import Header from "./components/Header";
+import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import FilterSearch from "./components/Managements/FilterSearch";
 
 function Gerir_Adminstradores() { 
 
@@ -16,11 +17,11 @@ function Gerir_Adminstradores() {
         </Helmet>
       </HelmetProvider>
       <Head></Head>
-      <Header></Header>
+      <TopBar></TopBar>
       <Aside></Aside>
 
       <main id="main" className="main">
-        <div className="pagetitle">
+        <div className="pagetitle" style={{paddingBottom: "10px"}}>
           <h1>Gerir Adminstradores</h1>
           <nav>
             <ol className="breadcrumb">
@@ -31,82 +32,11 @@ function Gerir_Adminstradores() {
             </ol>
           </nav>
         </div>
+
         <section className="section dashboard">
-          <div className="col-xl-12">
-            
-            <div className="row ">
-              <h5 className="card-title"><i className="bi bi-star"></i> Adminstradores </h5>
-
-                <div className="col-xxl-3">
-                  <div className="card" style={{ textAlign: "center" }}>
-                    <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap"  style={{ width: "60%" }}></img>
-                    <div className="card-body">
-                      <h5 className="card-title">Gabriel Fonseca</h5>
-                      <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>
-                      <a href="#" className="btn btn-primary">Ver Detalhes</a>
-                      {/*<i className="bi bi-trash3" style={{float:"right", fontSize:"1.5rem"}}></i>*/}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xxl-3">
-                  <div className="card" style={{ textAlign: "center" }}>
-                    <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap"  style={{ width: "60%" }}></img>
-                    <div className="card-body">
-                      <h5 className="card-title">Marcos Leitão</h5>
-                      <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>
-                      <a href="#" className="btn btn-primary">Ver Detalhes</a>
-                      {/*<i className="bi bi-trash3" style={{float:"right", fontSize:"1.5rem"}}></i>*/}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xxl-3">
-                  <div className="card" style={{ textAlign: "center" }}>
-                    <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap"  style={{ width: "60%" }}></img>
-                    <div className="card-body">
-                      <h5 className="card-title">Miguel Fernandes</h5>
-                      <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>
-                      <a href="#" className="btn btn-primary">Ver Detalhes</a>
-                      {/*<i className="bi bi-trash3" style={{float:"right", fontSize:"1.5rem"}}></i>*/}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xxl-3">
-                  <div className="card" style={{ textAlign: "center" }}>
-                    <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap" style={{ width: "60%" }}></img>
-                    <div className="card-body">
-                      <h5 className="card-title">Pedro Moita</h5>
-                      <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>
-                      <a href="#" className="btn btn-primary">Ver Detalhes</a>
-                      {/*<i className="bi bi-trash3" style={{float:"right", fontSize:"1.5rem"}}></i>*/}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xxl-3">
-                  <div className="card" style={{ textAlign: "center" }}>
-                    <br></br>
-                    <img className="card-img-top rounded mx-auto d-block" src="https://nationalgeographic.pt/images/revistas/192/MACACOS/macacos3A.jpg" alt="Card image cap" style={{ width: "60%" }}></img>
-                    <div className="card-body">
-                      <h5 className="card-title">Rafel Ribeiro</h5>
-                      <p className="card-text">fcXXXXX@greatergoods.admin.pt</p>
-                      <div className="" >
-                        <a href="#" className="btn btn-primary">Ver Detalhes</a>
-                        {/*<i className="bi bi-trash3" style={{float:"right", fontSize:"1.5rem"}}></i>*/}
-                      </div>
-                    </div>
-                  </div>
-                </div>
- 
-              
-            </div>
-          </div>
+          <FilterSearch url={'/admins'} type={"admin"} name={"Adminstradores"} filter1={"Nome ou iniciais do administrador"} filter2={"Indentifcador do Administrador"} 
+                filter3={"Email"} filter4={"Endereço"} filter5={"Telemóvel / Telefone"}>
+          </FilterSearch>
         </section>
       </main>
       <Footer></Footer>

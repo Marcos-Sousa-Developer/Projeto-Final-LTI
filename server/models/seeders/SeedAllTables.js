@@ -30,6 +30,7 @@ exec('node ./models/seeders/SeederProductTable.js',
         }
 });
 
+
 exec('node ./models/seeders/SeederCategoryTable.js',
     function (error, stdout) {
 
@@ -40,6 +41,8 @@ exec('node ./models/seeders/SeederCategoryTable.js',
         }
 });
 
+//TODO NEEDS FACTORIES TO RUN
+/*
 exec('node ./models/seeders/SeederSubCategoryTable.js',
     function (error, stdout) {
 
@@ -49,7 +52,10 @@ exec('node ./models/seeders/SeederSubCategoryTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/
 
+//TODO NEEDS FACTORIES TO RUN
+/*
 exec('node ./models/seeders/SeederSubSubCategoryTable.js',
     function (error, stdout) {
 
@@ -59,7 +65,10 @@ exec('node ./models/seeders/SeederSubSubCategoryTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/
 
+//TODO NEEDS TO FIX SEED SUPPLIER PRODUCT
+/*
 exec('node ./models/seeders/SeederSupplierProductTable.js',
     function (error, stdout) {
 
@@ -69,7 +78,10 @@ exec('node ./models/seeders/SeederSupplierProductTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/
 
+//TODO NEEDS TO FIX SEED ORDER TABLE
+/*
 exec('node ./models/seeders/SeederOrderTable.js',
     function (error, stdout) {
 
@@ -79,7 +91,10 @@ exec('node ./models/seeders/SeederOrderTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/
 
+//TODO NEEDS TO FIX VHEICLE SEED
+/*
 exec('node ./models/seeders/SeederVehicleTable.js',
     function (error, stdout) {
 
@@ -89,7 +104,10 @@ exec('node ./models/seeders/SeederVehicleTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/
 
+//TODO NEEDS TO FIX PRODUCTION UNIT SEED
+/*
 exec('node ./models/seeders/SeederProductionUnitTable.js',
     function (error, stdout) {
 
@@ -99,3 +117,4 @@ exec('node ./models/seeders/SeederProductionUnitTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/

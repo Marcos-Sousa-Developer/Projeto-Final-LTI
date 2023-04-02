@@ -3,7 +3,7 @@ const router = express.Router();
 const orderController = require('../controllers/OrderController');
 
 //Get all orders
-router.get('/', orderController.getAllOrders)
+router.get('/', orderController.getAllorSomeOrders)
 
 //Get order
 router.get('/:id', orderController.getOrderByID)

@@ -3,12 +3,15 @@ const authenticateUser = require('./auth')
 const express = require('express');
 const app = express(); 
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const port = process.env.DEVELOPMENT_PORT || 5000;  
 
 const cors = require("cors")
 
 app.use(cors())
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use('/api/users' , require('./api/ApiUsers'))
 app.use('/api/consumers' , require('./api/ApiConsumers'))
@@ -29,11 +32,13 @@ const apiRouter = express.Router();
 //apiRouter.use(authenticateUser)
 
 apiRouter.use('/users' , require('./api/ApiUsers'))
+apiRouter.use('/admins' , require('./api/ApiAdmins'))
 apiRouter.use('/consumers' , require('./api/ApiConsumers'))
 apiRouter.use('/suppliers' , require('./api/ApiSuppliers'))
 apiRouter.use('/products' , require('./api/ApiProducts'))
 apiRouter.use('/categories' , require('./api/ApiCategories'))
 apiRouter.use('/subcategories' , require('./api/ApiSubcategories'))
+apiRouter.use('/vehicles' , require('./api/ApiVehicles'))
 apiRouter.get('/', (req, res) => {
     res.send({ express: 'HELLO WORLD, YOU ARE CONNECTED TO THE API, PLEASE THE CHECK ENDPOINTS' });
 }); 

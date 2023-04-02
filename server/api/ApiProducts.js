@@ -3,10 +3,10 @@ const router = express.Router();
 const productController = require('../controllers/ProductController');
 
 //Get all products
-router.get('/', productController.getAllProducts)
+router.get('/', productController.getAllorSomeProducts)
 
 //Get product by ean
-router.get('/:EAN', productController.getProductByID)
+router.get('/:EAN', productController.getProductByEAN)
 
 //Delete product by ean
 router.delete('/:EAN', productController.deleteProductByEAN)

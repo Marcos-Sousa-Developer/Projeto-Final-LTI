@@ -3,7 +3,7 @@ const router = express.Router();
 const subcategoryController = require('../controllers/SubcategoryController');
 
 //Get all subcategories
-router.get('/', subcategoryController.getAllSubcategories)
+router.get('/', subcategoryController.getAllorSomeSubcategories)
 
 //Get subcategory by id
 router.get('/:id', subcategoryController.getSubcategoryByID)

@@ -2,17 +2,18 @@ import { Routes, Route, useLocation  } from "react-router-dom";
 import RequireAuth from "./components/RequireAuth"
 import Dashboard from "./pages/Admin/Dashboard";
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
-import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
-import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
+import Gerir_Consumidores from "./pages/Admin/Gerir_Consumidores";
+import Gerir_Fornecedores from "./pages/Admin/Gerir_Fornecedores";
 import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
 import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Settings from "./pages/Admin/Settings";
-import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio} from './pages/HomeView/index';
+import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Category, ProductTest, ConsumerTest, SupplierTest} from './pages/HomeView/index';
 import { ShopContextProvider } from "./context/ShopContextProvider";
-import './index.css';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
+import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
 
 function App() {
 
@@ -40,10 +41,12 @@ function App() {
               <Route path="admin">
                 <Route index element={ <RequireAuth><Dashboard /></RequireAuth> }/>
                 <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
-                <Route exact path="gerir_adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
-                <Route exact path="gerir_consumidores" element={<RequireAuth><Gerir_consumidores /></RequireAuth>} />
-                <Route exact path="gerir_fornecedores" element={<RequireAuth><Gerir_fornecedores /></RequireAuth>} />
-                <Route exact path="gerir_produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
+                <Route exact path="gerir/adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
+                <Route exact path="gerir/consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
+                <Route exact path="gerir/fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
+                <Route exact path="gerir/produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
+                <Route exact path="gerir/transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />
+                <Route exact path="relatorios/cosumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
                 <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
               </Route>
             )
@@ -64,13 +67,18 @@ function App() {
           }   
           
           {/*----- Only for testing ----- */}
-            <Route path="/login" element={<LoginTest />} />
-            <Route path="/register" element={<RegisterTest />} />
+            <Route path="/loginTest" element={<LoginTest />} />
+            <Route path="/productTest" element={<ProductTest />} />
+            <Route path="/registerTest" element={<RegisterTest />} />
+            <Route path="/consumerTest" element={<ConsumerTest />} />
+            <Route path="/supplierTest" element={<SupplierTest />} />
           {/* ------------- */}
 
 
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/category" element={<Category />} />
+
 
           {/* para dps meter dentro do supplier */}
           <Route path="/anuncio" element={<CriarAnuncio />} />

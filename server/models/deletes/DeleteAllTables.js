@@ -10,6 +10,16 @@ exec('node ./models/deletes/DeleteUserTable.js',
         }
 });
 
+exec('node ./models/deletes/DeleteAdminTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
 exec('node ./models/deletes/DeleteConsumerTable.js',
     function (error, stdout) {
 

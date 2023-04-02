@@ -23,7 +23,7 @@ function DeleteAccountModal({isShowingModal}) {
           <div className="modal-content">
             <div className="modal-header">
               <h2 className="modal-title">
-                <i class="bi bi-exclamation-triangle"></i>
+                <i style={{color:"red"}} class="bi bi-exclamation-triangle"></i>
               </h2>
 
               <button type="button" onClick={isShowingModal} className="close">
@@ -33,12 +33,21 @@ function DeleteAccountModal({isShowingModal}) {
 
             <div className="modal-body">
               <div className="container">
-                <div className="card" style={{textAlign: "center" }}>
+                <div style={{textAlign: "center" }}>
                     <br></br>
-                    <div className="card-body">
+                    <div>
                         <h2 style={{color:"black"}}>Apagar conta?</h2>
-                        <p className="card-text">Apagar a tua conta é um ato permanente e não pode ser revertido.</p>
+                        <p className="card-text">Apagar a conta é um ato permanente e não pode ser revertido.</p>
                         <p className="card-text" style={{color:"red", fontWeight: "bold"}}>Tens mesmo a certeza?</p>
+                        <form class="form-inline">
+
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Insere a tua password"></input>
+                            <button type="submit" class="btn btn-warning">Confirmar</button>
+                          </div>
+
+                          
+                        </form>
                     </div>
                 </div>
               </div>
@@ -55,7 +64,7 @@ function DeleteAccountModal({isShowingModal}) {
 
               <button
                 type="button"
-                className="btn btn-danger">
+                className="btn btn-danger" style={{opacity: "0.5"}}>
                 Apagar
               </button>
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 import Aside from "./components/Aside";
 import Footer from "./components/Footer";
 import Head from "./components/Head";
-import Header from "./components/Header";
+import TopBar from "./components/TopBar";
 import Main from "./components/Sections/Main";
 import {Helmet, HelmetProvider} from 'react-helmet-async'; 
 import Scripts from "./components/Scripts";
@@ -19,7 +19,7 @@ function Dashboard() {
 
       <Head></Head>
 
-      <Header></Header>
+      <TopBar></TopBar>
 
       <Aside></Aside>
 
