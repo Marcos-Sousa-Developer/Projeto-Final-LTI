@@ -138,7 +138,7 @@ img, picture {
 }
 .app__anuncio_content_generalInfo {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 3fr 1fr;
   gap: 6rem;
 }
 .app__anuncio_content_generalInfo_1 {
@@ -215,8 +215,8 @@ img, picture {
 }
 
 .app__anuncio_progressBar {
-  width: 50%;
-  margin: 0 auto;
+  width: 60%;
+  margin: 1rem auto;
   height: 20px;
   border-radius: 10px;
   border: 3px solid #76CBFF;
@@ -225,7 +225,7 @@ img, picture {
 }
 .app__anuncio_progressBar span {
   position: absolute;
-  left: 46%;
+  left: 45%;
   top: 0;
   font-size: 10px;
   font-weight: bold;
@@ -269,6 +269,15 @@ img, picture {
   background-color: #76CBFF;
 }
 
+.buttonToggleModal_area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.buttonToggleModal_area_selected_category {
+  font-size: 0.75rem;
+}
+
 #modal-toggler {
   display: inline-block;
   cursor: pointer;
@@ -278,6 +287,8 @@ img, picture {
   border-radius: 10px;
   border: 3px solid #EEEEEE;
   transition: all 150ms ease-in-out;
+  align-self: start;
+  text-align: center;
 }
 #modal-toggler:hover {
   border: 3px solid rgba(235, 92, 31, 0.8);
@@ -424,6 +435,9 @@ img, picture {
 }
 
 @media screen and (max-width: 1500px) {
+  .buttonToggleModal_area {
+    gap: 2rem;
+  }
   .app__anuncio_content .app__anuncio_inputArea {
     padding: 1rem 3rem 2rem 3rem;
   }
@@ -438,8 +452,15 @@ img, picture {
   .app__anuncio_progressBar {
     width: 70%;
   }
+  .buttonToggleModal_area {
+    gap: 1rem;
+    grid-template-columns: 2fr 1fr;
+  }
   .app__anuncio_content .app__anuncio_inputArea {
     padding: 1rem 2rem 2rem 2rem;
+  }
+  .app__anuncio_content_generalInfo {
+    grid-template-columns: 2fr 1fr;
   }
   .app__anuncio_content_generalInfo, .app__anuncio_content_generalInfo_1 {
     gap: 1rem;
@@ -448,10 +469,16 @@ img, picture {
     gap: 1rem 3rem;
   }
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   .app__anuncio_progressBar {
     margin: 1rem auto;
     width: 80%;
+  }
+  .app__anuncio_progressBar span {
+    display: none;
+  }
+  .buttonToggleModal_area {
+    grid-template-columns: 1fr 1fr;
   }
   .app__anuncio_content .app__anuncio_inputArea {
     padding: 1rem;
