@@ -99,3 +99,13 @@ exec('node ./models/resets/ResetProductionUnitTable.js',
              console.log('exec error: ' + error);
         }
 });
+
+exec('node ./models/resets/ResetOrderedProduct.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});

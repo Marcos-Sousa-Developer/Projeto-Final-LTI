@@ -118,3 +118,13 @@ exec('node ./models/seeders/SeederProductionUnitTable.js',
         }
 });
 */
+
+exec('node ./models/seeders/SeedOrderedProduct.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});

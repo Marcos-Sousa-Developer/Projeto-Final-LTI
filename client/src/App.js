@@ -14,18 +14,23 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
+import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
+import LoadingPage from "./pages/LoadingPage";
 
 function App() {
 
-  const [userType, setUserType] = useState(false) 
+  const [userType, setUserType] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [cookies] = useCookies(['userSession']);
   const location = useLocation();
 
   const getUserType = async () => {
+    setLoading(true)
     if(cookies.userSession){
       let type = await getClientType('/userType')
       setUserType(type)
-    }    
+    }
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -34,6 +39,10 @@ function App() {
 
   return (
     <ShopContextProvider>
+
+      {
+
+        !loading ? (
       
         <Routes>
           {userType == "admin" &&
@@ -47,6 +56,7 @@ function App() {
                 <Route exact path="gerir/produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
                 <Route exact path="gerir/transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />
                 <Route exact path="relatorios/cosumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
+                <Route exact path="relatorios/encomendas" element={<RequireAuth><Relatorios_Encomendas /></RequireAuth>} />
                 <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
               </Route>
             )
@@ -90,6 +100,13 @@ function App() {
           <Route path="*" element={<NotFound />} />
 
         </Routes>
+        )
+
+        : 
+
+        <LoadingPage></LoadingPage>
+
+  }
 
       
     </ShopContextProvider>
