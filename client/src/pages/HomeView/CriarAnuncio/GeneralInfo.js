@@ -22,7 +22,7 @@ const GeneralInfo = ({ formData, setFormData }) => {
         return(
             <div className={ `app__anuncio_modal ${className}` }>
                 <div className="app__anuncio_modal_content">
-                    <p style={{margin: '4px', fontWeight:'bold'}}>Escolha uma categoria</p>
+                    <p style={{margin: '4px', fontWeight:'bold'}}>{formData.categoria.length > 0 ? 'Categoria escolhida!' : 'Escolha uma categoria'}</p>
                     <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
                     <div className="app__anuncio_modal_navs">
                         <ul>
@@ -37,7 +37,7 @@ const GeneralInfo = ({ formData, setFormData }) => {
                                             {category.subcategory.map(subcategory => (
                                                 <div key={subcategory}>
                                                     <label>{subcategory}  
-                                                        <input type="radio" name="CriarAnuncioRadio" value={subcategory} ></input>
+                                                        <input type="radio" name="CriarAnuncioRadio" value={[category.name, subcategory]} onClick={(e) => {setFormData({ ...formData, categoria: e.target.value });}}></input>
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </div>
@@ -56,7 +56,10 @@ const GeneralInfo = ({ formData, setFormData }) => {
     //Modal tooggle
     const ButtonToggleModal = (props) => {
         return(
-            <p className='app__pointer' id="modal-toggler" onClick={ props.onClick }>Escolher <FiChevronDown></FiChevronDown></p>
+            <div className='buttonToggleModal_area'>
+                <p className='app__pointer' id="modal-toggler" onClick={ props.onClick }> {formData.categoria.length > 0 ? 'Alterar ' : 'Escolher '}<FiChevronDown></FiChevronDown></p> 
+                <p className='buttonToggleModal_area_selected_category' style={{margin:'0'}}>{formData.categoria}</p>
+            </div>
         )
     }
     
