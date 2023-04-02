@@ -3,7 +3,7 @@ const router = express.Router();
 const vehicleController = require('../controllers/VehicleController');
 
 //Get all vehicles
-router.get('/', vehicleController.getAllVehicles)
+router.get('/', vehicleController.getAllorSomeVehicles)
 
 //Get vehicle by license_plate
 router.get('/:license_plate', vehicleController.getVehicleByID)

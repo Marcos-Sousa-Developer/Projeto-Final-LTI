@@ -6,9 +6,31 @@ let dbConnection = require('./DatabaseController')
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllCategories = async function (req, res) { 
+const getAllorSomeCategories = async function (req, res) { 
 
     const statement = "SELECT * FROM categories";
+
+    if(Object.keys(req.query).length !== 0) {
+        statement += " WHERE "
+
+        for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+            let key = Object.keys(req.query)[i];
+            let value = Object.values(req.query)[i]
+            let nextKey = Object.keys(req.query)[i+1];
+            let nextValue = Object.values(req.query)[i+1]
+            
+            if(value != ""){
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
+    
+            if(nextKey != undefined && nextValue != ""){
+                statement += ` AND ` ;
+            }
+        }
+    }
 
     let result = await dbConnection(statement)  
 
@@ -88,7 +110,28 @@ const insertCategory = async function (req, res) {
  */
 const updateCategoryByID = async function (req, res) { 
 
-    const statement = `UPDATE categories SET name='${req.query.name}' WHERE id='${parseInt(req.params.id)}'`;
+    const statement = `UPDATE categories SET `;
+
+    for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+        
+        let key = Object.keys(req.query)[i];
+        let value = Object.values(req.query)[i]
+        let nextKey = Object.keys(req.query)[i+1];
+        let nextValue = Object.values(req.query)[i+1]
+        
+        if(value != ""){
+            statement += key;
+            statement += `='`;
+            statement += value; 
+            statement += `'` ;
+        }
+
+        if(nextKey != undefined && nextValue != ""){
+            statement += `, ` ;
+        }
+    }
+
+    statement += ` WHERE id='${parseInt(req.params.id)}';`;
 
     let result = await dbConnection(statement);
 
@@ -99,4 +142,4 @@ const updateCategoryByID = async function (req, res) {
     return res.send("Category has been updated");
 }
 
-module.exports = {getAllCategories, getCategoryByID, deleteCategoryByID, insertCategory, updateCategoryByID}
+module.exports = {getAllorSomeCategories, getCategoryByID, deleteCategoryByID, insertCategory, updateCategoryByID}

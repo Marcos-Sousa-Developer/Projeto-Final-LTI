@@ -9,14 +9,11 @@ let dbConnection = require('./DatabaseController')
 const getAllorSomeConsumers = async function (req, res) { 
 
     let statement = "SELECT * FROM consumers";
-
+    
     if(Object.keys(req.query).length !== 0) {
-
-
         statement += " WHERE "
 
         for(let i = 0 ; i < Object.keys(req.query).length; i++) {
-        
             let key = Object.keys(req.query)[i];
             let value = Object.values(req.query)[i]
             let nextKey = Object.keys(req.query)[i+1];
