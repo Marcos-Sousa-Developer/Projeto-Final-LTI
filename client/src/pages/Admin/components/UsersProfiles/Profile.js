@@ -19,14 +19,15 @@ function Profile() {
           <p className="text-muted">andersonsupport@greatergoods.com</p>
           <p className="text-muted">Faculdade de Ciências, FCUL</p>
           {/* 
-          <div className="d-flex justify-content-center mb-2">
-            <button type="button" className="btn btn-primary">
-              Follow
-            </button>
-            <button type="button" className="btn btn-outline-primary ms-1">
-              Message
-            </button>
-          </div>*/}
+            <div className="d-flex justify-content-center mb-2">
+              <button type="button" className="btn btn-primary">
+                Follow
+              </button>
+              <button type="button" className="btn btn-outline-primary ms-1">
+                Message
+              </button>
+            </div>
+          */}
           </div> 
       </div>
 

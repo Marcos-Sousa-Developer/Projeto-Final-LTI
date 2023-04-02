@@ -8,7 +8,7 @@ let values = []
 
 fake_supplier_data.forEach(row => {
 
-    values.push([row.name, row.email, row.nif, row.mobile_number, row.address, row.account_status])     
+    values.push([row.name, row.email, row.nif, row.mobile_number, row.address, row.status])     
 });
 
 pool.query(statement, [values], function(error, result){

@@ -1,8 +1,12 @@
 import axios from 'axios'
+import API_URL from '../config/serverConnect'
+
 
 async function getFromDB(url, params) {
 
-    return await axios.get("/api" + url, null, {params: params})
+    let url_endpoint = API_URL+url
+
+    return await axios.get(url_endpoint, {params})
         .then((response) => {
             if(response.status == 200){
                 return response.data

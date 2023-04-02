@@ -6,9 +6,34 @@ let dbConnection = require('./DatabaseController')
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllConsumers = async function (req, res) { 
+const getAllorSomeConsumers = async function (req, res) { 
 
-    const statement = "SELECT * FROM consumers";
+    let statement = "SELECT * FROM consumers";
+
+    if(Object.keys(req.query).length !== 0) {
+
+
+        statement += " WHERE "
+
+        for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+        
+            let key = Object.keys(req.query)[i];
+            let value = Object.values(req.query)[i]
+            let nextKey = Object.keys(req.query)[i+1];
+            let nextValue = Object.values(req.query)[i+1]
+            
+            if(value != ""){
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
+    
+            if(nextKey != undefined && nextValue != ""){
+                statement += ` AND ` ;
+            }
+        }
+    }
 
     let result = await dbConnection(statement)  
 
@@ -67,10 +92,15 @@ const deleteConsumerByID = async function (req, res) {
  */
 const insertConsumer = async function (req, res) {
 
-    const data = [req.query.name, req.query.email, req.query.nif, req.query.mobile_number, req.query.address, JSON.parse(req.query.account_status)];
+    const data = [req.query.uid, req.query.name, req.query.email, req.query.nif, 
+                req.query.mobile_number, req.query.continent,
+                req.query.country,req.query.district,
+                req.query.city, req.query.town, req.query.address,
+                req.query.postal_code];
 
-    const statement = "INSERT INTO consumers (name, email, nif, mobile_number, address, account_status) VALUES ?";
-
+    const statement = "INSERT INTO consumers (uid, name, email, nif, mobile_number, continent, country, district, " +
+                    "city, town, address, postal_code) VALUES ?";
+ 
     let result = await dbConnection(statement, [data]);
 
     if (result === "error") {
@@ -158,4 +188,4 @@ const deactivateConsumerByID = async function (req, res) {
     return res.send("Consumer has been deactivated");
 }
 
-module.exports = {getAllConsumers, getConsumerByID, deleteConsumerByID, insertConsumer, updateConsumerByID, deactivateConsumerByID, activateConsumerByID}
+module.exports = {getAllorSomeConsumers, getConsumerByID, deleteConsumerByID, insertConsumer, updateConsumerByID, deactivateConsumerByID, activateConsumerByID}

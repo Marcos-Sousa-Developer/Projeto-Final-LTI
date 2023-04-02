@@ -1,8 +1,11 @@
 import axios from 'axios'
+import API_URL from '../config/serverConnect'
 
 async function postToDB(url, params) {
 
-    return await axios.post("/api" + url, null, {params: params})
+    let url_endpoint = API_URL+url
+
+    return await axios.post(url_endpoint, {params})
         .then((response) => {
             if(response.status == 200){
                 return true
