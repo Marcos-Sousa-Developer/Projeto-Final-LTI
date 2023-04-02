@@ -35,7 +35,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
 
         &_generalInfo{
             display: grid;
-            grid-template-columns: 4fr 1fr;
+            grid-template-columns: 3fr 1fr;
             gap: 6rem;
 
             &_1{
@@ -122,8 +122,8 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
 }
 
 .app__anuncio_progressBar{
-    width: 50%;
-    margin: 0 auto;
+    width: 60%;
+    margin: 1rem auto;
     height: 20px;
     border-radius: 10px;
     border: 3px solid $blue;
@@ -132,7 +132,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
 
     span{
         position: absolute;
-        left: 46%;
+        left: 45%;
         top: 0;
         font-size: 10px;
         font-weight: bold;
@@ -182,6 +182,16 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
 
 //Category Modal
 
+.buttonToggleModal_area{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+
+    &_selected_category{
+        font-size: .75rem;
+    }
+}
+
 #modal-toggler{
     display: inline-block;
     cursor: pointer;
@@ -191,6 +201,8 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
     border-radius: 10px;
     border: $border;
     transition: all 150ms ease-in-out;
+    align-self: start;
+    text-align: center;
 
     &:hover{
         border: 3px solid rgba(235, 92, 31, 0.8);
@@ -360,6 +372,10 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
 }
 
 @media screen and (max-width: 1500px) {
+    .buttonToggleModal_area{
+        gap: 2rem;
+    }
+
     .app__anuncio_content{
         & .app__anuncio_inputArea{
             padding: 1rem 3rem 2rem 3rem;
@@ -380,9 +396,18 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
         width: 70%;
     }
 
+    .buttonToggleModal_area{
+        gap: 1rem;
+        grid-template-columns: 2fr 1fr;
+    }
+
     .app__anuncio_content{
         & .app__anuncio_inputArea{
             padding: 1rem 2rem 2rem 2rem;
+        }
+
+        &_generalInfo{
+            grid-template-columns: 2fr 1fr;
         }
 
         &_generalInfo, &_generalInfo_1{
@@ -395,10 +420,18 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
     .app__anuncio_progressBar{
         margin: 1rem auto;
         width: 80%;
+
+        span{
+            display: none;
+        }
+    }
+
+    .buttonToggleModal_area{
+        grid-template-columns: 1fr 1fr;
     }
 
     .app__anuncio_content{
