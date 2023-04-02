@@ -6,7 +6,7 @@ async function getFromDB(url, params) {
 
     let url_endpoint = API_URL+url
 
-    return await axios.get(url_endpoint, null, {params: params})
+    return await axios.get(url_endpoint, {params})
         .then((response) => {
             if(response.status == 200){
                 return response.data

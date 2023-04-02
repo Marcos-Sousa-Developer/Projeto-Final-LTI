@@ -19,6 +19,9 @@ import {
     Legend
   );
 
+  let tableContent = {}
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
   const options = {
     responsive: true,
     plugins: {
@@ -27,26 +30,25 @@ import {
       },
       title: {
         display: true,
-        text: 'Crescimento dos utilizadores durante o ano de 2023',
+        text: 'Crescimento dos utilizadores',
       },
     },
   };
-
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
   const data = {
     labels,
     datasets: [
       {
         label: 'Novos utilizadores',
-        //data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+        data: labels.map((label) => tableContent[label] ?? 0),
         //backgroundColor: 'rgba(255, 99, 132, 0.5)',
       }
     ],
   };
 
-function BarReports() {
+function BarReports({datas}) { 
 
+  tableContent = datas
 
 
   return (

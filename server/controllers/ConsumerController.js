@@ -6,9 +6,34 @@ let dbConnection = require('./DatabaseController')
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllConsumers = async function (req, res) { 
+const getAllorSomeConsumers = async function (req, res) { 
 
-    const statement = "SELECT * FROM consumers";
+    let statement = "SELECT * FROM consumers";
+
+    if(Object.keys(req.query).length !== 0) {
+
+
+        statement += " WHERE "
+
+        for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+        
+            let key = Object.keys(req.query)[i];
+            let value = Object.values(req.query)[i]
+            let nextKey = Object.keys(req.query)[i+1];
+            let nextValue = Object.values(req.query)[i+1]
+            
+            if(value != ""){
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
+    
+            if(nextKey != undefined && nextValue != ""){
+                statement += ` AND ` ;
+            }
+        }
+    }
 
     let result = await dbConnection(statement)  
 
@@ -163,4 +188,4 @@ const deactivateConsumerByID = async function (req, res) {
     return res.send("Consumer has been deactivated");
 }
 
-module.exports = {getAllConsumers, getConsumerByID, deleteConsumerByID, insertConsumer, updateConsumerByID, deactivateConsumerByID, activateConsumerByID}
+module.exports = {getAllorSomeConsumers, getConsumerByID, deleteConsumerByID, insertConsumer, updateConsumerByID, deactivateConsumerByID, activateConsumerByID}

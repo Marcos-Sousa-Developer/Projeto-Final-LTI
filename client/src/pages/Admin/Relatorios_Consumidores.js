@@ -6,7 +6,6 @@ import TopBar from "./components/TopBar"
 import Aside from "./components/Aside"
 import Footer from "./components/Footer"
 import GetReports from './components/Managements/GetReports'
-import BarReports from './components/Reports/BarReports'
 
 function Relatorios_Consumidores() {
   
@@ -36,8 +35,6 @@ function Relatorios_Consumidores() {
           </nav>
         </div>
         <br></br>
-
-        <BarReports></BarReports>
 
         <section className="section dashboard">
 

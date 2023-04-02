@@ -3,7 +3,7 @@ let pool = require('../../config/dbConfigLocal')
 const fake_consumer_data = require('../factories/FAKE_CONSUMER_DATA.json')
 
 const statement = "INSERT INTO consumers (uid, name, email, nif, mobile_number, continent, country, district, " +
-                                         "city, town, address, postal_code, status, shopping_cart, orders) VALUES ? "
+                                         "city, town, address, postal_code, status, shopping_cart, total_orders) VALUES ? "
 
 let values = [] 
 
@@ -13,7 +13,7 @@ fake_consumer_data.forEach(row => {
                 row.mobile_number, row.continent,
                 row.country,row.district,
                 row.city, row.town, row.address,
-                row.postal_code, row.status, row.shopping_cart, row.orders])     
+                row.postal_code, row.status, row.shopping_cart, row.total_orders])     
 });
 
 pool.query(statement, [values], function(error, result){

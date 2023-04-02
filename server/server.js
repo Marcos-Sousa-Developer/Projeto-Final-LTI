@@ -3,12 +3,15 @@ const authenticateUser = require('./auth')
 const express = require('express');
 const app = express(); 
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const port = process.env.DEVELOPMENT_PORT || 5000;  
 
 const cors = require("cors")
 
 app.use(cors())
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use('/api/users' , require('./api/ApiUsers'))
 app.use('/api/consumers' , require('./api/ApiConsumers'))

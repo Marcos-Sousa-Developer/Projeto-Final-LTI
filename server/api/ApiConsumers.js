@@ -3,9 +3,9 @@ const router = express.Router();
 const consumerController = require('../controllers/ConsumerController');
 
 //Get all consumers
-router.get('/', consumerController.getAllConsumers)
+router.get('/', consumerController.getAllorSomeConsumers)
 
-//Get consumer by id
+//Get consumer by params
 router.get('/:id', consumerController.getConsumerByID)
 
 //Delete consumer by id

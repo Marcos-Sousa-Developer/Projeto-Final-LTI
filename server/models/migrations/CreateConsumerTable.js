@@ -17,7 +17,8 @@ const statement = "CREATE TABLE consumers ( " +
                   "postal_code varchar(255), " + 
                   "status BOOLEAN NOT NULL default 1, " + 
                   "shopping_cart varchar(255), " + //add NOT NULL
-                  "orders varchar(255), " + //add NOT NULL     Coloquei assim, em vez de encomendas recebidas e por receber, porque depois podemos ir ver ao status da encomenda
+                  "total_orders int NOT NULL DEFAULT 0, " + //add NOT NULL     Coloquei assim, em vez de encomendas recebidas e por receber, porque depois podemos ir ver ao status da encomenda
+                  "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "PRIMARY KEY (id))"; 
 
 //AFTER INSERT NEW CONSUMERS AUTOMATICALY INSERT ON USER TABLE

@@ -1,22 +1,43 @@
 import axios from 'axios'
 import API_URL from '../config/serverConnect'
 
-function getAllFromDB(url) { 
+function getAllFromDB(url,params=null) { 
 
     return new Promise((resolve, reject) => { 
 
-        let url_endpoint = API_URL+url
+        let url_endpoint = API_URL+url 
 
-        axios.get(url_endpoint).then((response) => {
-            resolve(response.data)
-        })
+        if(params === null) {
 
-        .catch((error) => { 
+            axios.get(url_endpoint).then((response) => {
+                resolve(response.data)
+            })
+    
+            .catch((error) => { 
+    
+                reject("")
+    
+            })    
 
-            reject("")
+        }
 
-        })
+        else {
 
+            axios.get(url_endpoint, {params})
+            
+                .then((response) => {
+                    resolve(response.data)
+                })
+        
+                .catch((error) => { 
+        
+                    reject("")
+        
+                })    
+
+        }
+
+        
 
     })
 }
