@@ -19,7 +19,7 @@ import {
     Legend
   );
 
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   let tableContent = {}
 
@@ -42,7 +42,6 @@ import {
       {
         label: 'Novos utilizadores',
         data: labels.map((label) => tableContent[label] ?? 0),
-        //backgroundColor: 'rgba(255, 99, 132, 0.5)',
       }
     ],
   };
@@ -51,6 +50,9 @@ function BarReports({datas}) {
 
   const [show, setShow] = useState(false)
 
+  /**
+   * @description set data to barReports
+   */
   function setData() {
     data = {
       labels,
@@ -75,9 +77,7 @@ function BarReports({datas}) {
     }
   })
 
-
   return (
-
     <div >
         {
           show &&  <Bar options={options} data={data} />
@@ -85,10 +85,7 @@ function BarReports({datas}) {
         
         <br></br>
         <hr></hr>
-
     </div>
-    
-    
   )
 }
 

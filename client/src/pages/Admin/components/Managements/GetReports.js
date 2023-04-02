@@ -92,7 +92,7 @@ function GetReports() {
         {
             showBarResult ? (<BarReports datas={tableData}></BarReports>) : (
                 <div className="text-center">
-                    <div className="spinner-border" style={{width: "10rem", height: "10rem"}} role="status"></div>
+                    <div className="spinner-border" style={{width: "10rem", height: "10rem", color: "coral"}} role="status"></div>
                 </div>
             )
         }
