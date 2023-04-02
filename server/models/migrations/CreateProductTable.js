@@ -1,7 +1,7 @@
 let pool = require('../../config/dbConfigLocal')
 
 const statement = "CREATE TABLE products ( " +
-                  "EAN int NOT NULL, " +
+                  "EAN bigint NOT NULL, " +
                   "name varchar(255) NOT NULL, " + 
                   "production_date DATE NOT NULL, " +
                   "description varchar(500) NOT NULL, " +

@@ -1,7 +1,7 @@
 let dbConnection = require('./DatabaseController')
 
 /**
- * Async function to get all consumers and await from database response
+ * Async function to get all or some consumers and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
  * @returns result data
@@ -46,7 +46,7 @@ const getAllorSomeConsumers = async function (req, res) {
             }
         }
     }
-    
+
     let result = await dbConnection(statement)  
 
     if (result === "error") {
