@@ -3,13 +3,19 @@ const createUserTable = require('./CreateUserTable')
 
 const statement = "CREATE TABLE consumers ( " +
                   "id int NOT NULL AUTO_INCREMENT, " + 
-                  "uid varchar(100), " +
+                  "uid varchar(100) NOT NULL, " +
                   "name varchar(255) NOT NULL, " + 
                   "email varchar(255) NOT NULL, " +
                   "nif varchar(255) NOT NULL, " +
                   "mobile_number varchar(255) NOT NULL, " +
-                  "address varchar(255) NOT NULL, " + 
-                  "status BOOLEAN NOT NULL, " + 
+                  "continent varchar(255) NOT NULL, " +
+                  "country varchar(255) NOT NULL, " + 
+                  "district varchar(255), " +
+                  "city varchar(255), " + 
+                  "town varchar(255), " + 
+                  "address varchar(255), " +
+                  "postal_code varchar(255), " + 
+                  "status BOOLEAN NOT NULL default 1, " + 
                   "shopping_cart varchar(255), " + //add NOT NULL
                   "orders varchar(255), " + //add NOT NULL     Coloquei assim, em vez de encomendas recebidas e por receber, porque depois podemos ir ver ao status da encomenda
                   "PRIMARY KEY (id))"; 

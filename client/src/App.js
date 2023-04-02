@@ -13,6 +13,7 @@ import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
+import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
 
 function App() {
 
@@ -40,11 +41,12 @@ function App() {
               <Route path="admin">
                 <Route index element={ <RequireAuth><Dashboard /></RequireAuth> }/>
                 <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
-                <Route exact path="gerir_adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
-                <Route exact path="gerir_consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
-                <Route exact path="gerir_fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
-                <Route exact path="gerir_transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />
-                <Route exact path="gerir_produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
+                <Route exact path="gerir/adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
+                <Route exact path="gerir/consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
+                <Route exact path="gerir/fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
+                <Route exact path="gerir/produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
+                <Route exact path="gerir/transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />
+                <Route exact path="relatorios/cosumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
                 <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
               </Route>
             )

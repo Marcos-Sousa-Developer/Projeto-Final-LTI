@@ -225,7 +225,7 @@ function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filt
 
               (
                 <button type="submit" className="btn btn-primary mb-2" onClick={getResponses}>
-                  Procurar
+                  Pesquisar
                 </button>
               )
               :
