@@ -1,6 +1,6 @@
 import React from 'react'
-//import { CircularProgressbar } from 'react-circular-progressbar';
-//import 'react-circular-progressbar/dist/styles.css';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 function MessagesActivity() {
   return (
