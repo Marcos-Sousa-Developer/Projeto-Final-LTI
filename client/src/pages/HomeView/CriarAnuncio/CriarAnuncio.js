@@ -38,6 +38,102 @@ function CriarAnuncio() {
       }
     };
 
+    async function verifyTitle(title){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(title == "" || title == null) {
+            // O título não pode ser nulo
+            return "Deve de inserir um título válido";
+        }
+        return "OK"
+    }
+
+    async function verifyPrice(price){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(price == "" || price == null) {
+            // O preço não pode ser nulo
+            return "Deve de inserir um preço válido";
+        }
+        return "OK"
+    }
+
+    async function verifyDescription(description){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(description == "" || description == null) {
+            // A descrição não pode ser nula
+            return "Deve de inserir uma descrição válida";
+        }
+        return "OK"
+    }
+
+    async function verifyCategory(category){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(category == "" || category == null) {
+            // A categoria não pode ser nulo
+            return "Deve de inserir uma categoria válida";
+        }
+        return "OK"
+    }
+
+    async function verifyName(name){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(name == "" || name == null) {
+            // O nome não pode ser nulo
+            return "Deve de inserir um nome válido";
+        }
+        return "OK"
+    }
+
+    async function verifyEmail(email){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        //tem de ter um @
+        if(email == "" || email == null) {
+            // O email não pode ser nulo
+            return "Deve de inserir um email válido";
+        }
+        if(!email.includes("@")){
+            return "Deve de inserir um email válido";
+        }
+        return "OK"
+    }
+
+    async function verifyMobileNumber(mobile_number){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        //9 algarismos ?? depende do código do pais 
+        if(mobile_number == "" || mobile_number == null) {
+            // O número de telemóvel não pode ser nulo
+            return "Deve de inserir um número de telemóvel válido";
+        }
+        return "OK"
+    }
+
+
+
+    const submit = async () => {
+
+        let validTitle = await verifyTitle(formData.titulo);
+        let validPrice = await verifyPrice(formData.preco);
+        let validDescription = await verifyDescription(formData.descricao);
+        let validCategory = await verifyCategory(formData.categoria);
+        let validName = await verifyName(formData.nome);
+        let validEmail = await verifyEmail(formData.email);
+        let validMobileNumber = await verifyMobileNumber(formData.telemovel);
+
+        let ad;
+        // Se todos os verifys forem OK, entra 
+
+        //cria produto
+        // cria anuncio
+
+        
+    }
+
     return (
     <>
         <NavbarSupplier></NavbarSupplier>
@@ -60,7 +156,7 @@ function CriarAnuncio() {
                     :
                         <>
                             <button type='button' onClick={() => { setPage((currPage) => currPage - 1); useEffectd(); }} className='main__action_btn'><FiChevronLeft></FiChevronLeft> Anterior</button>
-                            <button type='button' onClick={() => {console.log(formData)}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
+                            <button type='button' onClick={() => {submit()}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
                         </>
                     } 
                 </div>
