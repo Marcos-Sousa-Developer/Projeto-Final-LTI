@@ -88,42 +88,15 @@ function CriarAnuncio() {
         return "OK"
     }
 
-    async function verifyEmail(email){
-        //Retorna OK se estiver tudo bem, se não, retorna o erro 
-        //não pode ser null
-        //tem de ter um @
-        if(email == "" || email == null) {
-            // O email não pode ser nulo
-            return "Deve de inserir um email válido";
-        }
-        if(!email.includes("@")){
-            return "Deve de inserir um email válido";
-        }
-        return "OK"
-    }
-
-    async function verifyMobileNumber(mobile_number){
-        //Retorna OK se estiver tudo bem, se não, retorna o erro 
-        //não pode ser null
-        //9 algarismos ?? depende do código do pais 
-        if(mobile_number == "" || mobile_number == null) {
-            // O número de telemóvel não pode ser nulo
-            return "Deve de inserir um número de telemóvel válido";
-        }
-        return "OK"
-    }
-
-
-
     const submit = async () => {
+
+        console.log(formData)
 
         let validTitle = await verifyTitle(formData.titulo);
         let validPrice = await verifyPrice(formData.preco);
         let validDescription = await verifyDescription(formData.descricao);
         let validCategory = await verifyCategory(formData.categoria);
         let validName = await verifyName(formData.nome);
-        let validEmail = await verifyEmail(formData.email);
-        let validMobileNumber = await verifyMobileNumber(formData.telemovel);
 
         let ad;
         // Se todos os verifys forem OK, entra 
@@ -131,7 +104,27 @@ function CriarAnuncio() {
         //cria produto
         // cria anuncio
 
-        
+        let text = "Não foi possivel criar o produto\n";
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK" && validName == "OK"){
+            text = "OK"
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validName != "OK"){
+            if(validTitle != "OK" ){
+              text += validTitle + "\n"
+            }
+            if(validPrice != "OK" ){
+              text += validPrice + "\n"
+            }
+            if (validDescription != "OK"){
+              text += validDescription + "\n"
+            }
+            if(validCategory != "OK" ){
+              text += validCategory + "\n"
+            }
+            if(validName != "OK" ){
+                text += validName + "\n"
+            }
+          }
+          alert(text)
     }
 
     return (
@@ -157,7 +150,8 @@ function CriarAnuncio() {
                         <>
                             <button type='button' onClick={() => { setPage((currPage) => currPage - 1); useEffectd(); }} className='main__action_btn'><FiChevronLeft></FiChevronLeft> Anterior</button>
                             <button type='button' onClick={() => {submit()}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
-                        </>
+                            {/*colocar type SUBMIT*/}
+                            </>
                     } 
                 </div>
             </form>
