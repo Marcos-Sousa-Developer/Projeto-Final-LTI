@@ -36,7 +36,9 @@ const getAllorSomeCategories = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get all categories");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no category in the database");
+    }
     
     return res.send(result)
 }
@@ -55,7 +57,9 @@ const getCategoryByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get category with id " + req.params.id);
-    } 
+    } else if (result.length < 1) {
+        return res.send("Category with id " + req.params.id + " does not exist in the database");
+    }
     
     return res.send(result)
 }
@@ -110,7 +114,7 @@ const insertCategory = async function (req, res) {
  */
 const updateCategoryByID = async function (req, res) { 
 
-    const statement = `UPDATE categories SET `;
+    let statement = `UPDATE categories SET `;
 
     for(let i = 0 ; i < Object.keys(req.query).length; i++) {
         
@@ -137,6 +141,8 @@ const updateCategoryByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this category");
+    } else if (result.affectedRows == 0) {
+        return res.send("Category with id " + req.params.id + " does not exist in the database");
     }
 
     return res.send("Category has been updated");

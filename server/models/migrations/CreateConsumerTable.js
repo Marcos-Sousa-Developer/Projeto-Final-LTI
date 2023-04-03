@@ -10,15 +10,16 @@ const statement = "CREATE TABLE consumers ( " +
                   "mobile_number varchar(255) NOT NULL, " +
                   "continent varchar(255) NOT NULL, " +
                   "country varchar(255) NOT NULL, " + 
-                  "district varchar(255), " +
-                  "city varchar(255), " + 
-                  "town varchar(255), " + 
-                  "address varchar(255), " +
-                  "postal_code varchar(255), " + 
+                  "district varchar(255) NOT NULL, " +
+                  "city varchar(255) NOT NULL, " + 
+                  "town varchar(255) NOT NULL, " + 
+                  "address varchar(255) NOT NULL, " +
+                  "postal_code varchar(255) NOT NULL, " + 
                   "status BOOLEAN NOT NULL default 1, " + 
                   "shopping_cart varchar(255), " + //add NOT NULL
                   "total_orders int NOT NULL DEFAULT 0, " + //add NOT NULL     Coloquei assim, em vez de encomendas recebidas e por receber, porque depois podemos ir ver ao status da encomenda
                   "created_at DATE DEFAULT (CURRENT_DATE), " +
+                  "UNIQUE (email, nif, mobile_number), " +
                   "PRIMARY KEY (id))"; 
 
 //AFTER INSERT NEW CONSUMERS AUTOMATICALY INSERT ON USER TABLE

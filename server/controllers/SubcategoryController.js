@@ -36,7 +36,9 @@ const getAllorSomeSubcategories = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get all subcategories");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no subcategory in the database");
+    }
     
     return res.send(result)
 }
@@ -55,7 +57,9 @@ const getSubcategoryByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get subcategory with id " + req.params.id);
-    } 
+    } else if (result.length < 1) {
+        return res.send("Subcategory with id " + req.params.id + " does not exist in the database");
+    }
     
     return res.send(result)
 }
@@ -110,7 +114,7 @@ const insertSubcategory = async function (req, res) {
  */
 const updateSubcategoryByID = async function (req, res) { 
 
-    const statement = `UPDATE subcategories SET `;
+    let statement = `UPDATE subcategories SET `;
 
     for(let i = 0 ; i < Object.keys(req.query).length; i++) {
         
@@ -137,9 +141,11 @@ const updateSubcategoryByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this subcategory");
+    } else if (result.affectedRows == 0) {
+        return res.send("Subcategory with id " + req.params.id + " does not exist in the database");
     }
 
-    return res.send("Category has been updated");
+    return res.send("Subcategory has been updated");
 }
 
 module.exports = {getAllorSomeSubcategories, getSubcategoryByID, deleteSubcategoryByID, insertSubcategory, updateSubcategoryByID}

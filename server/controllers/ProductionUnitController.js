@@ -36,7 +36,9 @@ const getAllorSomeProductionUnits = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get all production units");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no production unit in the database");
+    }
     
     return res.send(result)
 }
@@ -55,7 +57,9 @@ const getProductionUnitByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get production unit with id " + req.params.id);
-    } 
+    } else if (result.length < 1) {
+        return res.send("Production unit with id " + req.params.id + " does not exist in the database");
+    }
     
     return res.send(result)
 }
@@ -110,7 +114,7 @@ const insertProductionUnit = async function (req, res) {
  */
 const updateProductionUnitByID = async function (req, res) { 
 
-    const statement = `UPDATE productionUnits SET `;
+    let statement = `UPDATE productionUnits SET `;
 
     for(let i = 0 ; i < Object.keys(req.query).length; i++) {
         
@@ -137,6 +141,8 @@ const updateProductionUnitByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this production unit");
+    } else if (result.affectedRows == 0) {
+        return res.send("Production unit with id " + req.params.id + " does not exist in the database");
     }
 
     return res.send("Production unit has been updated");

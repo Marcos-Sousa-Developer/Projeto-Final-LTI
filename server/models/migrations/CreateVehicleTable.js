@@ -3,7 +3,7 @@ let pool = require('../../config/dbConfigLocal')
 const statement = "CREATE TABLE vehicles ( " +
                   "license_plate varchar(255) NOT NULL, " +
                   "name varchar(255) NOT NULL, " +
-                  "production_unit varchar(255) NOT NULL, " + 
+                  "production_unit varchar(255), " + 
                   "status varchar(255) NOT NULL, " + 
                   "capacity float NOT NULL, " +
                   "orders_list varchar(255), " +
