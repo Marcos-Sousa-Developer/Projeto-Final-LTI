@@ -8,7 +8,7 @@ let dbConnection = require('./DatabaseController')
  */
 const getAllorSomeSubcategories = async function (req, res) { 
 
-    const statement = "SELECT * FROM subcategories";
+    let statement = "SELECT * FROM subcategories";
     
     if(Object.keys(req.query).length !== 0) {
         statement += " WHERE "

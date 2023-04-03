@@ -8,7 +8,7 @@ let dbConnection = require('./DatabaseController')
  */
 const getAllorSomeAdmins = async function (req, res) { 
 
-    const statement = "SELECT * FROM admins";  
+    let statement = "SELECT * FROM admins";  
     
     if(Object.keys(req.query).length !== 0) {
         statement += " WHERE "
