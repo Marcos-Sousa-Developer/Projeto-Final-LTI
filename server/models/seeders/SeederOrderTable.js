@@ -1,14 +1,14 @@
-let pool = require('../../config/dbConfigLocal') 
+let pool = require('../../config/dbConfigLocal')
 
-const fake_consumer_data = require('../factories/FAKE_CONSUMER_DATA.json')
+const fake_order_data = require('../factories/FAKE_ORDER_DATA.json')
 
-const statement = "INSERT INTO orders (name, email, nif, mobile_number, address, account_status) VALUES ? "
+const statement = "INSERT INTO orders (order_number, order_date, order_status, products_list, total, address, size) VALUES ? "
 
 let values = [] 
 
-fake_consumer_data.forEach(row => {
+fake_order_data.forEach(row => {
 
-    values.push([row.name, row.email, row.nif, row.mobile_number, row.address, row.account_status])     
+    values.push([row.order_number, row.order_date, row.order_status, row.products_list, row.total, row.address, row.size])     
 });
 
 pool.query(statement, [values], function(error, result){

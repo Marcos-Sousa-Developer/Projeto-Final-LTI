@@ -6,10 +6,32 @@ let dbConnection = require('./DatabaseController')
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllAdmins = async function (req, res) { 
+const getAllorSomeAdmins = async function (req, res) { 
 
     const statement = "SELECT * FROM admins";  
     
+    if(Object.keys(req.query).length !== 0) {
+        statement += " WHERE "
+
+        for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+            let key = Object.keys(req.query)[i];
+            let value = Object.values(req.query)[i]
+            let nextKey = Object.keys(req.query)[i+1];
+            let nextValue = Object.values(req.query)[i+1]
+            
+            if(value != ""){
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
+    
+            if(nextKey != undefined && nextValue != ""){
+                statement += ` AND ` ;
+            }
+        }
+    }
+
     let result = await dbConnection(statement) 
     
     if (result.includes("error")) {
@@ -19,4 +41,4 @@ const getAllAdmins = async function (req, res) {
     return res.send(result) 
 } 
 
-module.exports = {getAllAdmins}
+module.exports = {getAllorSomeAdmins}

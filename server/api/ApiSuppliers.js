@@ -3,7 +3,7 @@ const router = express.Router();
 const supplierController = require('../controllers/SupplierController');
 
 //Get all suppliers
-router.get('/', supplierController.getAllSuppliers)
+router.get('/', supplierController.getAllorSomeSuppliers)
 
 //Get supplier by id
 router.get('/:id', supplierController.getSupplierByID)

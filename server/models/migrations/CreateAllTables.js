@@ -109,3 +109,13 @@ exec('node ./models/migrations/CreateProductionUnitTable.js',
              console.log('exec error: ' + error);
         }
 });
+
+exec('node ./models/migrations/CreateOrderedProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});

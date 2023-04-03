@@ -1,200 +1,68 @@
-import React, {useState} from 'react';
-import { FiPlus, FiX, FiTrash2, FiChevronUp, FiChevronRight } from 'react-icons/fi';
+import React, {useState, useEffect} from 'react';
+import {FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
+import GeneralInfo from './GeneralInfo';
+import ProductInfo from './ProductInfo';
 import { categories } from '../../../utilities/categories';
 import "./CriarAnuncio.css";
-
-function handleSubmit(event) {
-    event.preventDefault();
-    // Get input values
-    const inputValues = [];
-    const inputs = event.target.querySelectorAll('input');
-    inputs.forEach((input) => {
-      inputValues.push(input.value);
-    });
-    // Get values from InputField components
-    const inputFields = event.target.querySelectorAll('InputField');
-    inputFields.forEach((inputField) => {
-      inputValues.push(inputField.props.value);
-    });
-    // Print input values to console
-    console.log(inputValues);
-}
+import "../../../components/InputField/InputField.css";
 
 function CriarAnuncio() {
+    // Scroll to top on page change
+    const useEffectd = () => {
+        window.scrollTo(0, 0);
+    };
 
+    // Form step logic
+    const [page, setPage] = useState(0);
 
-    //Modal
-    const Modal = ({ className }) => {
-        const [selectedModal, setSelectedModal] = useState(null);
-    
-        const toggleModal = (i) =>{
-          if (selectedModal === i){
-            return setSelectedModal(null);
-          }
-          
-          setSelectedModal(i);
-        }
-    
-        return(
-          <div className={ `app__anuncio_modal ${className}` }>
-            <div className="app__anuncio_modal_content">
-                <p style={{margin: '0', fontWeight:'bold'}}>Escolha uma categoria</p>
-                <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
-                <div className="app__anuncio_modal_navs">
-                    <ul>
-                        {categories.map((category, i) => {
-                            return (
-                                <div key={category.name} className='app__anuncio_modal_navs_category'>
-                                    <div className='app__anuncio_modal_navs_category-title' onClick={()=>toggleModal(i)}>
-                                        <p>{category.name}</p>
-                                        <span>{selectedModal === i ? <FiChevronUp className='app__anuncio_modal_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__anuncio_modal_navs_category-title_right'></FiChevronRight>}</span>
-                                    </div>
-                                    <div className={selectedModal === i ? 'app__anuncio_modal_navs_category-content show' : 'app__anuncio_modal_navs_category-content'}>
-                                        {category.subcategory.map(subcategory => (
-                                            <div key={subcategory}>
-                                                <label>{subcategory}  
-                                                    <input type="radio" name="radio"></input>
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </ul>
-                </div>
-            </div>
-          </div>
-        )
-    }
-    
-    //Modal tooggle
-    const ButtonToggleModal = (props) => {
-        return(
-            <p className='app__pointer' id="modal-toggler" onClick={ props.onClick }>Escolher</p>
-        )
-    }
-    
-    //Modal overlay
-    const OverlayModal = ({ className, onClick}) => {
-        return(
-            <div className={ className } onClick={ onClick }></div>
-        )
-    }
-    
-    const [activeModal, setActiveModal] = useState(false);
-    const toggleActiveModal = () => setActiveModal(!activeModal);
+    const [formData, setFormData] = useState({
+        titulo: "",
+        preco: 0,
+        descricao: "",
+        categoria: [],
+        nome: "",
+        email: "",
+        telemovel: 0,
+        localizacao: "",
+    });
 
-    //Images
-    const [selectedImages, setSelectedImages] = useState([]);
+    const FormTitles = ["Dados Gerais", "Detalhes do Produto"];
 
-    const onSelectFile = (event) => {
-
-        const selectedFiles = event.target.files;
-        const selectedFilesArray = Array.from(selectedFiles);
-
-        const imagesArray = selectedFilesArray.map((file) => {
-            return URL.createObjectURL(file);
-        });
-
-        if (selectedImages.length + imagesArray.length <= 8) {
-            setSelectedImages((previousImages) => previousImages.concat(imagesArray));
-        }
-
-        event.target.value = ""; // for bug in chrome
-    }
-
-    //textarea character counter
-    const [text, setText] = useState('');
+    const PageDisplay = () => {
+      if (page === 0) {
+        return <GeneralInfo formData={formData} setFormData={setFormData} />;
+      } else {
+        return <ProductInfo formData={formData} setFormData={setFormData} />;
+      }
+    };
 
     return (
     <>
         <NavbarSupplier></NavbarSupplier>
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
-            <form onSubmit={handleSubmit} className='app__anuncio_content' id='anuncio_form' style={{marginTop:'1rem'}}>
-                <div className='app__anuncio_content-product'>
-                    <p>Dados do Produto</p>
-                    <div className='app__anuncio_inputArea'>
-                        <div className='app__anuncio_content-product_area'>
-                            <div className='app__anuncio_content-product_area-g1'>
-                                <InputField title='Título' inputype='text'></InputField>
-                                <InputField title='Preço' inputype='number'></InputField>
-                            </div>
-                            <div className='app__anuncio_content-product_area-g2'>
-                                <InputField title='Data de produção' inputype='date'></InputField>
-                                <div>
-                                    <p>Categoria</p>
-                                    <ButtonToggleModal onClick={toggleActiveModal}/>
-                                    <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
-                                    <Modal className={ activeModal ? 'activeModal' : null}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='app__anuncio_description_section'>
-                            <p>Descrição</p>
-                            <textarea 
-                                style={{width:'100%', maxHeight: '150px', minHeight:'85px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
-                                form='anuncio_form' 
-                                maxLength="600" 
-                                onInput={(e) => {
-                                    setText(e.target.value);
-                                }}>
-                            </textarea>
-                            <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
-                        </div>
-                        <div className='app__anuncio_image_section'>
-                            <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span></p>
-                            <div className='app__anuncio_image_section-content'>
-                                <div className='app__anuncio_images_selected'>
-                                    {selectedImages.length < 8 &&
-                                        <label className='app__anuncio_image_input app__pointer'>
-                                            <div>
-                                                <FiPlus style={{textAlign: 'center'}}></FiPlus>
-                                            </div>
-                                            <input type="file" accept="image/*" multiple onChange={onSelectFile}/>
-                                        </label>
-                                    }
-                                    {selectedImages &&
-                                        selectedImages.map((image, index)=>{
-                                            return(
-                                                <div key={image} className='app__anuncio_image_selected'>
-                                                    <img src={image} alt='' className='app__anuncio_image_selected_img'/>
-                                                    <FiX className='app__anuncio_image_selected_deleteBtn app__pointer' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}></FiX>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                                {selectedImages.length > 0 &&
-                                    <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => setSelectedImages([])}>limpar tudo <FiTrash2></FiTrash2></span>
-                                }
-                            </div>
-                            {selectedImages.length === 8 &&
-                                <p style={{margin: '0', color: '#EB5C1F'}}>Atingiu o limite de imagens!</p>
-                            }
-                        </div>
+            <form onSubmit={() => {console.log(formData)}} className='app__anuncio_content' id='anuncio_form' style={{marginTop:'1rem'}}>
+                <p>{FormTitles[page]}</p>
+                <div className='app__anuncio_inputArea'>
+                    <div className='app__anuncio_progressBar'>
+                        <span>
+                            {page == 0 ? '50%' : '100%'}
+                        </span>
+                        <div style={{ width: page == 0 ? "50%"  : "100%" }}></div>
                     </div>
+                    {PageDisplay()}
                 </div>
-                <div className='app__anuncio_content-contact'>
-                    <p>Dados de Contacto</p>
-                    <div className='app__anuncio_inputArea app__anuncio_content-contact_area'>
-                        <div>
-                            <InputField title='Nome do anunciante' inputype='text'></InputField>
-                            <InputField title='Telemóvel' inputype='tel'></InputField>
-                        </div>
-                        <div>
-                            <InputField title='Email' inputype='email'></InputField>
-                            <InputField title='Localização' inputype='text'></InputField>
-                        </div>
-                    </div>
-                    <div className='app__anuncio_content-contact_actions'>
-                        <a className='app__text_effect'>Pré-visualizar</a>
-                        <button type='submit' className='main__action_btn flex'>Publicar</button>
-                    </div>
+                <div className='app__anuncio_content_stepBtns' style={{ justifyContent: page == 0 ? "flex-end" : "space-between"}}>
+                    {page == 0 ?
+                            <button type='button' onClick={() => {setPage((currPage) => currPage + 1); useEffectd()}} className='main__action_btn'>Continuar <FiChevronRight></FiChevronRight></button>
+                    :
+                        <>
+                            <button type='button' onClick={() => { setPage((currPage) => currPage - 1); useEffectd(); }} className='main__action_btn'><FiChevronLeft></FiChevronLeft> Anterior</button>
+                            <button type='button' onClick={() => {console.log(formData)}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
+                        </>
+                    } 
                 </div>
             </form>
         </div>

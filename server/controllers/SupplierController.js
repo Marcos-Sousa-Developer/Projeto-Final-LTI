@@ -1,14 +1,36 @@
 let dbConnection = require('./DatabaseController')
 
 /**
- * Async function to get all suppliers and await from database response
+ * Async function to get all or some suppliers and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllSuppliers = async function (req, res) { 
+const getAllorSomeSuppliers = async function (req, res) { 
 
     const statement = "SELECT * FROM suppliers";
+    
+    if(Object.keys(req.query).length !== 0) {
+        statement += " WHERE "
+
+        for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+            let key = Object.keys(req.query)[i];
+            let value = Object.values(req.query)[i]
+            let nextKey = Object.keys(req.query)[i+1];
+            let nextValue = Object.values(req.query)[i+1]
+            
+            if(value != ""){
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
+    
+            if(nextKey != undefined && nextValue != ""){
+                statement += ` AND ` ;
+            }
+        }
+    }
 
     let result = await dbConnection(statement)  
 
@@ -88,7 +110,28 @@ const insertSupplier = async function (req, res) {
  */
 const updateSupplierByID = async function (req, res) {
 
-    const statement = `UPDATE suppliers SET name='${req.query.name}', email='${req.query.email}', nif='${req.query.nif}', mobile_number='${req.query.mobile_number}', address='${req.query.address}', account_status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    const statement = `UPDATE suppliers SET `;
+
+    for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+        
+        let key = Object.keys(req.query)[i];
+        let value = Object.values(req.query)[i]
+        let nextKey = Object.keys(req.query)[i+1];
+        let nextValue = Object.values(req.query)[i+1]
+        
+        if(value != ""){
+            statement += key;
+            statement += `='`;
+            statement += value; 
+            statement += `'` ;
+        }
+
+        if(nextKey != undefined && nextValue != ""){
+            statement += `, ` ;
+        }
+    }
+
+    statement += ` WHERE id='${parseInt(req.params.id)}';`;
 
     let result = await dbConnection(statement);
 
@@ -137,4 +180,4 @@ const deactivateSupplierByID = async function (req, res) {
     return res.send("Supplier has been deactivated");
 }
 
-module.exports = {getAllSuppliers, getSupplierByID, deleteSupplierByID, insertSupplier, updateSupplierByID, activateSupplierByID, deactivateSupplierByID}
+module.exports = {getAllorSomeSuppliers, getSupplierByID, deleteSupplierByID, insertSupplier, updateSupplierByID, activateSupplierByID, deactivateSupplierByID}
