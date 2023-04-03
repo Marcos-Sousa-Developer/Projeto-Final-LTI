@@ -8,6 +8,22 @@
   scroll-behavior: smooth; 
 }
 
+.table-striped tbody tr:hover {
+  background-color: #eb5c1f55;
+  cursor: pointer;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+
 body {
   font-family: 'Poppins', sans-serif;
   background: #f6f9ff;
@@ -269,7 +285,7 @@ button {
 }
 
 .card-title span {
-  color: #EB5C1F;
+  color: #4a4949db;
   opacity: 0.8;
   font-size: 14px;
   font-weight: 400;
@@ -347,15 +363,15 @@ button {
 }
 
 .breadcrumb a:hover {
-  color: #51678f;
+  color: #ff875490;
 }
 
 .breadcrumb .breadcrumb-item::before {
-  color: #899bbd;
+  color: #ff875490;
 }
 
 .breadcrumb .active {
-  color: #EB5C1F;
+  color: 4a4949db;
   font-weight: 600;
 }
 
@@ -402,7 +418,7 @@ button {
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #EB5C1F;
+  color: 4a4949db;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -704,7 +720,7 @@ button {
 .sidebar-nav .nav-heading {
   font-size: 11px;
   text-transform: uppercase;
-  color: #EB5C1F;
+  color: 4a4949db;
   opacity: 0.4;
   font-weight: 600;
   margin: 10px 0 5px 15px;
@@ -743,7 +759,7 @@ button {
 }
 
 .sidebar-nav .nav-link:hover i {
-  color: #EB5C1F;
+  color: 4a4949db;
 }
 
 /* MY CUSTOM */
@@ -797,10 +813,12 @@ button {
   background-color: #4154f1;
 }
 
+
 /*--------------------------------------------------------------
 # Dashboard
 --------------------------------------------------------------*/
 /* Filter dropdown */
+
 .dashboard .filter {
   position: absolute;
   right: 0px;
@@ -845,7 +863,6 @@ button {
 
 .dashboard .info-card h6 {
   font-size: 28px;
-  color: #EB5C1F;
   font-weight: 700;
   margin: 0;
   padding: 0;

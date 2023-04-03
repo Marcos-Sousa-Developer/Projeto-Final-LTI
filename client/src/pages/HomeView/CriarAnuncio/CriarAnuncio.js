@@ -1,233 +1,164 @@
-import React, {useState} from 'react';
-import { FiPlus, FiX, FiTrash2 } from 'react-icons/fi';
+import React, {useState, useEffect} from 'react';
+import {FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
+import GeneralInfo from './GeneralInfo';
+import ProductInfo from './ProductInfo';
+import { categories } from '../../../utilities/categories';
 import "./CriarAnuncio.css";
-
-function handleSubmit(event) {
-    event.preventDefault();
-    // Get input values
-    const inputValues = [];
-    const inputs = event.target.querySelectorAll('input');
-    inputs.forEach((input) => {
-      inputValues.push(input.value);
-    });
-    // Get values from InputField components
-    const inputFields = event.target.querySelectorAll('InputField');
-    inputFields.forEach((inputField) => {
-      inputValues.push(inputField.props.value);
-    });
-    // Print input values to console
-    console.log(inputValues);
-}
-
-/*
-const Category = ({ categoryType, onClick }) => {
-    return (
-      <div onClick={onClick}>
-        {categoryType}
-      </div>
-    );
-};
-  
-const CategoryPage = ({ categoryType, onClick }) => {
-    return (
-      <div>
-        <div>{categoryType}</div>
-        <p>Subcaterogias</p>
-        <p onClick={onClick}>Back</p>
-      </div>
-    );
-};
-
-const Teste = ({categoryType}) => {
-    const [showCategoryPage, setShowCategoryPage] = useState(false);
-    return (
-        <>
-        {showCategoryPage ? (
-            <CategoryPage categoryType={categoryType} onClick={() => setShowCategoryPage(false)}/>
-          ) : (
-            <Category categoryType={categoryType} onClick={() => setShowCategoryPage(true)}/>
-          )}
-        </>
-    )
-}
-*/
-
-const categories = [
-    {name: 'Category 1', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3'] },
-    {name: 'Category 2', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3'] },
-    {name: 'Category 3', subcategory: ['SubCategoria 1', 'SubCategoria 2', 'SubCategoria 3'] },
-];
-  
-
-const Category = ({ category, onSelect }) => {
-    return (
-      <div onClick={() => onSelect(category)}>
-        {category.name}
-      </div>
-    );
-};
-
-const CategoryDetails = ({ category, onBack }) => {
-  return (
-    <div>
-        <h2>{category.name}</h2>
-        <ul>
-            {category.subcategory.map(subcategory => (
-                <li key={subcategory}>{subcategory}</li>
-            ))}
-        </ul>
-        <button onClick={onBack}>Back</button>
-    </div>
-  );
-};
-  
-const Modal = ({ closeModal }) => {
-    const [selectedCategory, setSelectedCategory] = useState(null);
-
-    const handleCategorySelect = (category) => {
-      setSelectedCategory(category);
-    };
-  
-    const handleBackClick = () => {
-      setSelectedCategory(null);
-    };
-  
-    return (
-      <>
-        <p>Categorias</p>
-        <span onClick={() => closeModal(false)}>X</span>
-            <div>
-                {selectedCategory ? (
-                    <CategoryDetails category={selectedCategory} onBack={handleBackClick}/>
-                ) : (
-                    categories.map((category, index) => (
-                        <Category key={index} category={category} onSelect={handleCategorySelect}/>
-                    ))
-                )}
-            </div>
-      </>
-    );
-};
+import "../../../components/InputField/InputField.css";
 
 function CriarAnuncio() {
+    // Scroll to top on page change
+    const useEffectd = () => {
+        window.scrollTo(0, 0);
+    };
 
-    const [selectedImages, setSelectedImages] = useState([]);
+    // Form step logic
+    const [page, setPage] = useState(0);
 
-    const onSelectFile = (event) => {
+    const [formData, setFormData] = useState({
+        titulo: "",
+        preco: 0,
+        descricao: "",
+        categoria: [],
+        nome: "",
+        email: "",
+        telemovel: 0,
+        localizacao: "",
+    });
 
-        const selectedFiles = event.target.files;
-        const selectedFilesArray = Array.from(selectedFiles);
+    const FormTitles = ["Dados Gerais", "Detalhes do Produto"];
 
-        const imagesArray = selectedFilesArray.map((file) => {
-            return URL.createObjectURL(file);
-        });
+    const PageDisplay = () => {
+      if (page === 0) {
+        return <GeneralInfo formData={formData} setFormData={setFormData} />;
+      } else {
+        return <ProductInfo formData={formData} setFormData={setFormData} />;
+      }
+    };
 
-        if (selectedImages.length + imagesArray.length <= 8) {
-            setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+    async function verifyTitle(title){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(title == "" || title == null) {
+            // O título não pode ser nulo
+            return "Deve de inserir um título válido";
         }
-
-        event.target.value = ""; // FOR BUG IN CHROME
+        return "OK"
     }
 
-    const [text, setText] = useState('');
+    async function verifyPrice(price){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(price == "" || price == null) {
+            // O preço não pode ser nulo
+            return "Deve de inserir um preço válido";
+        }
+        return "OK"
+    }
 
-    const [openModal, setOpenModal] = useState(false);
+    async function verifyDescription(description){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(description == "" || description == null) {
+            // A descrição não pode ser nula
+            return "Deve de inserir uma descrição válida";
+        }
+        return "OK"
+    }
+
+    async function verifyCategory(category){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(category == "" || category == null) {
+            // A categoria não pode ser nulo
+            return "Deve de inserir uma categoria válida";
+        }
+        return "OK"
+    }
+
+    async function verifyName(name){
+        //Retorna OK se estiver tudo bem, se não, retorna o erro 
+        //não pode ser null
+        if(name == "" || name == null) {
+            // O nome não pode ser nulo
+            return "Deve de inserir um nome válido";
+        }
+        return "OK"
+    }
+
+    const submit = async () => {
+
+        console.log(formData)
+
+        let validTitle = await verifyTitle(formData.titulo);
+        let validPrice = await verifyPrice(formData.preco);
+        let validDescription = await verifyDescription(formData.descricao);
+        let validCategory = await verifyCategory(formData.categoria);
+        let validName = await verifyName(formData.nome);
+
+        let ad;
+        // Se todos os verifys forem OK, entra 
+
+        //cria produto
+        // cria anuncio
+
+        let text = "Não foi possivel criar o produto\n";
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK" && validName == "OK"){
+            text = "OK"
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validName != "OK"){
+            if(validTitle != "OK" ){
+              text += validTitle + "\n"
+            }
+            if(validPrice != "OK" ){
+              text += validPrice + "\n"
+            }
+            if (validDescription != "OK"){
+              text += validDescription + "\n"
+            }
+            if(validCategory != "OK" ){
+              text += validCategory + "\n"
+            }
+            if(validName != "OK" ){
+                text += validName + "\n"
+            }
+          }
+          alert(text)
+    }
 
     return (
     <>
         <NavbarSupplier></NavbarSupplier>
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
-            <form onSubmit={handleSubmit} className='app__anuncio_content' id='anuncio_form' style={{marginTop:'1rem'}}>
-                <div className='app__anuncio_content-product'>
-                    <p>Dados do Produto</p>
-                    <div className='app__anuncio_inputArea'>
-                        <div className='app__anuncio_content-product_area'>
-                            <div className='app__anuncio_content-product_area-g1'>
-                                <InputField title='Título' inputype='text'></InputField>
-                                <InputField title='Preço' inputype='number'></InputField>
-                            </div>
-                            <div className='app__anuncio_content-product_area-g2'>
-                                <InputField title='Data de produção' inputype='date'></InputField>
-                                <div>
-                                    <p>Categoria</p>
-                                    <a className='main__action_btn' onClick={() => {setOpenModal(true)}}>Escolher</a>
-                                    {openModal &&
-                                        <Modal closeModal={setOpenModal}></Modal>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div className='app__anuncio_description_section'>
-                            <p>Descrição</p>
-                            <textarea 
-                                style={{width:'100%', maxHeight: '150px', minHeight:'85px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
-                                form='anuncio_form' 
-                                maxLength="600" 
-                                onInput={(e) => {
-                                    setText(e.target.value);
-                                }}>
-                            </textarea>
-                            <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
-                        </div>
-                        <div className='app__anuncio_image_section'>
-                            <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span></p>
-                            <div className='app__anuncio_image_section-content'>
-                                <div className='app__anuncio_images_selected'>
-                                    {selectedImages.length < 8 &&
-                                        <label className='app__anuncio_image_input app__pointer'>
-                                            <div>
-                                                <FiPlus style={{textAlign: 'center'}}></FiPlus>
-                                            </div>
-                                            <input type="file" accept="image/*" multiple onChange={onSelectFile}/>
-                                        </label>
-                                    }
-                                    {selectedImages &&
-                                        selectedImages.map((image, index)=>{
-                                            return(
-                                                <div key={image} className='app__anuncio_image_selected'>
-                                                    <img src={image} alt='' className='app__anuncio_image_selected_img'/>
-                                                    <FiX className='app__anuncio_image_selected_deleteBtn app__pointer' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}></FiX>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                                {selectedImages.length > 0 &&
-                                    <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => setSelectedImages([])}>limpar tudo <FiTrash2></FiTrash2></span>
-                                }
-                            </div>
-                            {selectedImages.length === 8 &&
-                                <p style={{margin: '0', color: '#EB5C1F'}}>Atingiu o limite de imagens!</p>
-                            }
-                        </div>
+            <form onSubmit={() => {console.log(formData)}} className='app__anuncio_content' id='anuncio_form' style={{marginTop:'1rem'}}>
+                <p>{FormTitles[page]}</p>
+                <div className='app__anuncio_inputArea'>
+                    <div className='app__anuncio_progressBar'>
+                        <span>
+                            {page == 0 ? '50%' : '100%'}
+                        </span>
+                        <div style={{ width: page == 0 ? "50%"  : "100%" }}></div>
                     </div>
+                    {PageDisplay()}
                 </div>
-                <div className='app__anuncio_content-contact'>
-                    <p>Dados de Contacto</p>
-                    <div className='app__anuncio_inputArea app__anuncio_content-contact_area'>
-                        <div>
-                            <InputField title='Nome do anunciante' inputype='text'></InputField>
-                            <InputField title='Telemóvel' inputype='tel'></InputField>
-                        </div>
-                        <div>
-                            <InputField title='Email' inputype='email'></InputField>
-                            <InputField title='Localização' inputype='text'></InputField>
-                        </div>
-                    </div>
-                    <div className='app__anuncio_content-contact_actions'>
-                        <a className='app__text_effect'>Pré-visualizar</a>
-                        <button type='submit' className='main__action_btn flex'>Publicar</button>
-                    </div>
+                <div className='app__anuncio_content_stepBtns' style={{ justifyContent: page == 0 ? "flex-end" : "space-between"}}>
+                    {page == 0 ?
+                            <button type='button' onClick={() => {setPage((currPage) => currPage + 1); useEffectd()}} className='main__action_btn'>Continuar <FiChevronRight></FiChevronRight></button>
+                    :
+                        <>
+                            <button type='button' onClick={() => { setPage((currPage) => currPage - 1); useEffectd(); }} className='main__action_btn'><FiChevronLeft></FiChevronLeft> Anterior</button>
+                            <button type='button' onClick={() => {submit()}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
+                            {/*colocar type SUBMIT*/}
+                            </>
+                    } 
                 </div>
             </form>
         </div>
         <Footer></Footer>
     </>
   )
-
 }
 
 export default CriarAnuncio

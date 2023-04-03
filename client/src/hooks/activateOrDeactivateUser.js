@@ -1,6 +1,7 @@
 import axios from 'axios' 
 import API_URL from '../config/serverConnect'
 
+
 const activateOrDeactivateUser = async (url, status) => { 
 
     let url_endpoint = API_URL+url
@@ -10,7 +11,7 @@ const activateOrDeactivateUser = async (url, status) => {
       account_status : status
     }
     
-  await axios.put(url_endpoint, null, {params: params})
+  await axios.put(url_endpoint, {params})
     .then((response) => {
       if (response.status == 200) {
         window.location.reload();

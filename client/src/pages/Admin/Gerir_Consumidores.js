@@ -1,17 +1,13 @@
 import React from "react";
 import Aside from "./components/Aside";
 import Head from "./components/Head";
-import Header from "./components/Header";
-import Navigator from "./components/Navigator";
+import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
-import SearchBar from './components/ProfilesComponents/SearchBar';
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import getAllFromDB from "../../hooks/getAllFromDB";
 import { Link } from "react-router-dom";
+import FilterSearch from "./components/Managements/FilterSearch";
 
-function Gerir_consumidores() { 
-
-  const consumers = getAllFromDB("/consumers")
+function Gerir_Consumidores() { 
 
   return (
     <div>
@@ -21,32 +17,29 @@ function Gerir_consumidores() {
         </Helmet>
       </HelmetProvider>
       <Head></Head>
-      <Header></Header>
+      <TopBar></TopBar>
       <Aside></Aside>
 
       <main id="main" className="main">
-        <div className="pagetitle">
+        <div className="pagetitle" style={{paddingBottom: "10px"}}>
           <h1> Gerir Consumidores</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <Link to="/admin"  >Home</Link>
+                <Link to="/admin">Home</Link>
               </li>
               <li className="breadcrumb-item active">Gerir Consumidores</li>
             </ol>
           </nav>
         </div>
+
         <section className="section dashboard">
-          <div className="col-lg-12">
-            <div className="row">
-              <h5 className="card-title"><i className="bi bi-bag"></i> Consumidores 
-                <SearchBar></SearchBar>
-              </h5>
-              <div className="col-12">
-                <Navigator users={consumers} user_type={"consumer"}></Navigator>    
-              </div>
-            </div>
-          </div>
+
+            <FilterSearch url={'/consumers'} type={"consumer"} name={"Consumidores"} filter1={"Nome ou iniciais do consumidor"} filter2={"Indentifcador do Consumidor"} 
+              filter3={"Email"} filter4={"Endereço"} filter5={"Telemóvel / Telefone"}
+            >
+            </FilterSearch>
+
         </section>
       </main>
       <Footer></Footer>
@@ -54,4 +47,4 @@ function Gerir_consumidores() {
   );
 }
 
-export default React.memo(Gerir_consumidores);
+export default React.memo(Gerir_Consumidores);

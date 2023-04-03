@@ -3,7 +3,7 @@ const router = express.Router();
 const categoryController = require('../controllers/CategoryController');
 
 //Get all categories
-router.get('/', categoryController.getAllCategories)
+router.get('/', categoryController.getAllorSomeCategories)
 
 //Get category by id
 router.get('/:id', categoryController.getCategoryByID)

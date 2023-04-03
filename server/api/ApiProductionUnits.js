@@ -3,7 +3,7 @@ const router = express.Router();
 const productionUnitController = require('../controllers/ProductionUnitController');
 
 //Get all production units
-router.get('/', productionUnitController.getAllProductionUnits)
+router.get('/', productionUnitController.getAllorSomeProductionUnits)
 
 //Get production unit by id
 router.get('/:id', productionUnitController.getProductionUnitByID)

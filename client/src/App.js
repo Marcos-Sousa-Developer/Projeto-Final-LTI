@@ -2,29 +2,35 @@ import { Routes, Route, useLocation  } from "react-router-dom";
 import RequireAuth from "./components/RequireAuth"
 import Dashboard from "./pages/Admin/Dashboard";
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
-import Gerir_consumidores from "./pages/Admin/Gerir_consumidores";
-import Gerir_fornecedores from "./pages/Admin/Gerir_fornecedores";
+import Gerir_Consumidores from "./pages/Admin/Gerir_Consumidores";
+import Gerir_Fornecedores from "./pages/Admin/Gerir_Fornecedores";
 import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
 import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Settings from "./pages/Admin/Settings";
-import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Category, ProductTest} from './pages/HomeView/index';
+import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Category, ProductTest, ConsumerTest, SupplierTest} from './pages/HomeView/index';
 import { ShopContextProvider } from "./context/ShopContextProvider";
-import './index.css';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
+import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
+import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
+import LoadingPage from "./pages/LoadingPage";
 
 function App() {
 
-  const [userType, setUserType] = useState(false) 
+  const [userType, setUserType] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [cookies] = useCookies(['userSession']);
   const location = useLocation();
 
   const getUserType = async () => {
+    setLoading(true)
     if(cookies.userSession){
       let type = await getClientType('/userType')
       setUserType(type)
-    }    
+    }
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -33,6 +39,10 @@ function App() {
 
   return (
     <ShopContextProvider>
+
+      {
+
+        !loading ? (
       
         <Routes>
           {userType == "admin" &&
@@ -40,10 +50,13 @@ function App() {
               <Route path="admin">
                 <Route index element={ <RequireAuth><Dashboard /></RequireAuth> }/>
                 <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
-                <Route exact path="gerir_adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
-                <Route exact path="gerir_consumidores" element={<RequireAuth><Gerir_consumidores /></RequireAuth>} />
-                <Route exact path="gerir_fornecedores" element={<RequireAuth><Gerir_fornecedores /></RequireAuth>} />
-                <Route exact path="gerir_produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
+                <Route exact path="gerir/adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
+                <Route exact path="gerir/consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
+                <Route exact path="gerir/fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
+                <Route exact path="gerir/produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
+                <Route exact path="gerir/transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />
+                <Route exact path="relatorios/cosumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
+                <Route exact path="relatorios/encomendas" element={<RequireAuth><Relatorios_Encomendas /></RequireAuth>} />
                 <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
               </Route>
             )
@@ -67,6 +80,8 @@ function App() {
             <Route path="/loginTest" element={<LoginTest />} />
             <Route path="/productTest" element={<ProductTest />} />
             <Route path="/registerTest" element={<RegisterTest />} />
+            <Route path="/consumerTest" element={<ConsumerTest />} />
+            <Route path="/supplierTest" element={<SupplierTest />} />
           {/* ------------- */}
 
 
@@ -85,6 +100,13 @@ function App() {
           <Route path="*" element={<NotFound />} />
 
         </Routes>
+        )
+
+        : 
+
+        <LoadingPage></LoadingPage>
+
+  }
 
       
     </ShopContextProvider>

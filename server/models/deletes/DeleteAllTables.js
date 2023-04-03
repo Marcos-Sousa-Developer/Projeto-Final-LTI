@@ -10,6 +10,16 @@ exec('node ./models/deletes/DeleteUserTable.js',
         }
 });
 
+exec('node ./models/deletes/DeleteAdminTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
 exec('node ./models/deletes/DeleteConsumerTable.js',
     function (error, stdout) {
 
@@ -101,6 +111,16 @@ exec('node ./models/deletes/DeleteVehicleTable.js',
 });
 
 exec('node ./models/deletes/DeleteProductionUnitTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/deletes/DeleteOrderedProduct.js',
     function (error, stdout) {
 
         console.log(stdout);

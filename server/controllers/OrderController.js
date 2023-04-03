@@ -1,20 +1,44 @@
 let dbConnection = require('./DatabaseController')
 
 /**
- * Async function to get all orders and await from database response
+ * Async function to get all or some orders and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllOrders = async function (req, res) { 
+const getAllorSomeOrders = async function (req, res) { 
 
-    const statement = "SELECT * FROM orders";
+    let statement = "SELECT * FROM orders";
+    
+    if(Object.keys(req.query).length !== 0) {
+        statement += " WHERE "
+
+        for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+            let key = Object.keys(req.query)[i];
+            let value = Object.values(req.query)[i]
+            let nextKey = Object.keys(req.query)[i+1];
+            let nextValue = Object.values(req.query)[i+1]
+            
+            if(value != ""){
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
+    
+            if(nextKey != undefined && nextValue != ""){
+                statement += ` AND ` ;
+            }
+        }
+    }
 
     let result = await dbConnection(statement)  
 
     if (result === "error") {
         return res.status(500).json("Not possible to get all orders");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no order in the database");
+    }
     
     return res.send(result)
 }
@@ -33,7 +57,9 @@ const getOrderByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get order with id " + req.params.id);
-    } 
+    } else if (result.length < 1) {
+        return res.send("Order with id " + req.params.id + " does not exist in the database");
+    }
     
     return res.send(result)
 }
@@ -88,15 +114,38 @@ const insertOrder = async function (req, res) {
  */
 const updateOrderByID = async function (req, res) { 
 
-    const statement = `UPDATE orders SET order_number='${req.query.order_number}', order_date='${req.query.order_date}', order_status='${req.query.order_status}', total='${req.query.total}', address='${req.query.address}', size='${req.query.size}' WHERE id='${parseInt(req.params.id)}'`;
+    let statement = `UPDATE orders SET `;
+
+    for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+        
+        let key = Object.keys(req.query)[i];
+        let value = Object.values(req.query)[i]
+        let nextKey = Object.keys(req.query)[i+1];
+        let nextValue = Object.values(req.query)[i+1]
+        
+        if(value != ""){
+            statement += key;
+            statement += `='`;
+            statement += value; 
+            statement += `'` ;
+        }
+
+        if(nextKey != undefined && nextValue != ""){
+            statement += `, ` ;
+        }
+    }
+
+    statement += ` WHERE id='${parseInt(req.params.id)}';`;
 
     let result = await dbConnection(statement);
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this order");
+    } else if (result.affectedRows == 0) {
+        return res.send("Order with id " + req.params.id + " does not exist in the database");
     }
 
     return res.send("Order has been updated");
 }
 
-module.exports = {getAllOrders, getOrderByID, deleteOrderByID, insertOrder, updateOrderByID}
+module.exports = {getAllorSomeOrders, getOrderByID, deleteOrderByID, insertOrder, updateOrderByID}

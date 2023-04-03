@@ -1,27 +1,45 @@
-import {useEffect,useState} from 'react' 
 import axios from 'axios'
 import API_URL from '../config/serverConnect'
 
-function getAllFromDB(url) { 
+function getAllFromDB(url,params=null) { 
 
-    const [users, setUsers]= useState([]);
-    
-    useEffect(()=>{
-        
-        (
-           async function(){
-                
-            let url_endpoint = API_URL+url
-            
-            await axios.get(url_endpoint).then((response) => {
-            
-                setUsers(response.data)
+    return new Promise((resolve, reject) => { 
+
+        let url_endpoint = API_URL+url 
+
+        if(params === null) {
+
+            axios.get(url_endpoint).then((response) => {
+                resolve(response.data)
             })
-           }
-        )()
-     },[url]) //dependecy, we need to put the thing that change
+    
+            .catch((error) => { 
+    
+                reject("")
+    
+            })    
 
-    return users
+        }
+
+        else {
+
+            axios.get(url_endpoint, {params})
+            
+                .then((response) => {
+                    resolve(response.data)
+                })
+        
+                .catch((error) => { 
+        
+                    reject("")
+        
+                })    
+
+        }
+
+        
+
+    })
 }
 
 export default getAllFromDB

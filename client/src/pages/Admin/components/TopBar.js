@@ -3,7 +3,7 @@ import images from '../../../assets/images.js';
 import NavBar from './NavBar'
 import { Link } from "react-router-dom";
 
-function Header() {  
+function TopBar() {  
 
     const toggleAside = () => {
 
@@ -45,4 +45,4 @@ function Header() {
   )
 }
 
-export default Header
+export default TopBar

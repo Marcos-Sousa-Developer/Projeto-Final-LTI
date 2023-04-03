@@ -72,21 +72,21 @@ function Aside() {
           <ul id="gerir-users" className={showU} data-bs-parent="#sidebar-nav">
             
             <li>
-              <Link  to="/admin/gerir_adminstradores">
+              <Link  to="/admin/gerir/adminstradores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Administradores</span>
               </Link>
             </li>
 
             <li>
-              <Link  to="/admin/gerir_consumidores">
+              <Link  to="/admin/gerir/consumidores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Consumidores</span>
               </Link>
             </li>
 
             <li>
-              <Link  to="/admin/gerir_fornecedores">
+              <Link  to="/admin/gerir/fornecedores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Fornecedores</span>
               </Link> 
@@ -97,7 +97,7 @@ function Aside() {
         <li className="nav-heading">Gestão de Produtos</li>
 
         <li className="nav-item">
-          <Link  to="/admin/gerir_produtos" className="nav-link collapsed">
+          <Link  to="/admin/gerir/produtos" className="nav-link collapsed">
             <i className="bi bi-cart"/>
             <span>Gerir Produtos</span>
           </Link>
@@ -106,7 +106,7 @@ function Aside() {
         <li className="nav-heading">Gestão de Transportes</li>
 
         <li className="nav-item">
-          <Link to="/admin" className="nav-link collapsed">
+          <Link to="/admin/gerir/transportes" className="nav-link collapsed">
             <i className="bi bi-car-front"/>
             <span>Gerir Transportes</span>
           </Link>
@@ -123,7 +123,7 @@ function Aside() {
 
           <ul id="data-activity" className={showR} data-bs-parent="#sidebar-nav">
             <li>
-              <Link to="/admin">
+              <Link to="/admin/relatorios/cosumidores">
                 <i className="bi bi-circle"/>
                 <span>Relatório de Consumidores</span>
               </Link>
@@ -132,14 +132,14 @@ function Aside() {
             <li>
               <Link to="/admin">
                 <i className="bi bi-circle"/>
-                <span>Relatório de Encomendas</span>
+                <span>Relatório de Fornecedores</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/admin">
+              <Link to="/admin/relatorios/encomendas">
                 <i className="bi bi-circle"/>
-                <span>Relatório de Fornecedores</span>
+                <span>Relatório de Encomendas</span>
               </Link>
             </li>
 

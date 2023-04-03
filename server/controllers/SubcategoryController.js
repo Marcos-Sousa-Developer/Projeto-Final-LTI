@@ -1,20 +1,44 @@
 let dbConnection = require('./DatabaseController')
 
 /**
- * Async function to get all subcategories and await from database response
+ * Async function to get all or some subcategories and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllSubcategories = async function (req, res) { 
+const getAllorSomeSubcategories = async function (req, res) { 
 
-    const statement = "SELECT * FROM subcategories";
+    let statement = "SELECT * FROM subcategories";
+    
+    if(Object.keys(req.query).length !== 0) {
+        statement += " WHERE "
+
+        for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+            let key = Object.keys(req.query)[i];
+            let value = Object.values(req.query)[i]
+            let nextKey = Object.keys(req.query)[i+1];
+            let nextValue = Object.values(req.query)[i+1]
+            
+            if(value != ""){
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
+    
+            if(nextKey != undefined && nextValue != ""){
+                statement += ` AND ` ;
+            }
+        }
+    }
 
     let result = await dbConnection(statement)  
 
     if (result === "error") {
         return res.status(500).json("Not possible to get all subcategories");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no subcategory in the database");
+    }
     
     return res.send(result)
 }
@@ -33,7 +57,9 @@ const getSubcategoryByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get subcategory with id " + req.params.id);
-    } 
+    } else if (result.length < 1) {
+        return res.send("Subcategory with id " + req.params.id + " does not exist in the database");
+    }
     
     return res.send(result)
 }
@@ -88,15 +114,38 @@ const insertSubcategory = async function (req, res) {
  */
 const updateSubcategoryByID = async function (req, res) { 
 
-    const statement = `UPDATE subcategories SET name='${req.query.name}' WHERE id='${parseInt(req.params.id)}'`;
+    let statement = `UPDATE subcategories SET `;
+
+    for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+        
+        let key = Object.keys(req.query)[i];
+        let value = Object.values(req.query)[i]
+        let nextKey = Object.keys(req.query)[i+1];
+        let nextValue = Object.values(req.query)[i+1]
+        
+        if(value != ""){
+            statement += key;
+            statement += `='`;
+            statement += value; 
+            statement += `'` ;
+        }
+
+        if(nextKey != undefined && nextValue != ""){
+            statement += `, ` ;
+        }
+    }
+
+    statement += ` WHERE id='${parseInt(req.params.id)}';`;
 
     let result = await dbConnection(statement);
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this subcategory");
+    } else if (result.affectedRows == 0) {
+        return res.send("Subcategory with id " + req.params.id + " does not exist in the database");
     }
 
-    return res.send("Category has been updated");
+    return res.send("Subcategory has been updated");
 }
 
-module.exports = {getAllSubcategories, getSubcategoryByID, deleteSubcategoryByID, insertSubcategory, updateSubcategoryByID}
+module.exports = {getAllorSomeSubcategories, getSubcategoryByID, deleteSubcategoryByID, insertSubcategory, updateSubcategoryByID}
