@@ -132,14 +132,14 @@ function Aside() {
             <li>
               <Link to="/admin">
                 <i className="bi bi-circle"/>
-                <span>Relatório de Encomendas</span>
+                <span>Relatório de Fornecedores</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/admin">
+              <Link to="/admin/relatorios/encomendas">
                 <i className="bi bi-circle"/>
-                <span>Relatório de Fornecedores</span>
+                <span>Relatório de Encomendas</span>
               </Link>
             </li>
 

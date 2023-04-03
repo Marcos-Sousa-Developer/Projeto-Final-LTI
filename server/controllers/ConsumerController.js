@@ -17,20 +17,24 @@ const getAllorSomeConsumers = async function (req, res) {
         for(let i = 0 ; i < Object.keys(req.query).length; i++) {
             let key = Object.keys(req.query)[i];
             let value = Object.values(req.query)[i]
-            if(value != ""){ 
+
+            if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
                 params[key] = value
             }
 
         }
 
-        statement += " WHERE "
+        statement += " WHERE (created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
 
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
 
             let key = Object.keys(params)[i];
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
-            let nextValue = Object.values(params)[i+1]
+
+            if(i == 0){
+                statement += " AND ";
+            }
 
             statement += key;
             statement += `='`;

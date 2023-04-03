@@ -5,40 +5,39 @@ import Head from "./components/Head"
 import TopBar from "./components/TopBar"
 import Aside from "./components/Aside"
 import Footer from "./components/Footer"
-import GetConsumersReports from './components/Managements/GetConsumersReports'
+import GetOrdersReports from './components/Managements/GetOrdersReports'
 
-function Relatorios_Consumidores() {
-  
+function Relatorios_Encomendas() {
   return (
     <div>
+        <HelmetProvider>
+            <Helmet>
+            <title>Admin - Relatorios de Consumidores</title>
+            </Helmet>
+        </HelmetProvider>
+        <Head></Head>
+        <TopBar></TopBar>
+        <Aside></Aside>
 
-      <HelmetProvider>
-        <Helmet>
-          <title>Admin - Relatorios de Consumidores</title>
-        </Helmet>
-      </HelmetProvider>
-      <Head></Head>
-      <TopBar></TopBar>
-      <Aside></Aside>
-
-      <main id="main" className="main">
+        <main id="main" className="main">
 
         <div className="pagetitle">
-          <h1>Relatorios de Consumidores</h1>
+          <h1>Relatorios de Encomendas</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <Link to="/admin">Home</Link>
               </li>
-              <li className="breadcrumb-item active">Relatorios de Consumidores</li>
+              <li className="breadcrumb-item active">Relatorios de Encomendas</li>
             </ol>
           </nav>
         </div>
+
         <br></br>
 
         <section className="section dashboard">
 
-         <GetConsumersReports></GetConsumersReports>
+          <GetOrdersReports></GetOrdersReports>
 
 
         </section>
@@ -48,4 +47,4 @@ function Relatorios_Consumidores() {
   )
 }
 
-export default Relatorios_Consumidores
+export default Relatorios_Encomendas

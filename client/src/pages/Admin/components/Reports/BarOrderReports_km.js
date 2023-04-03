@@ -19,7 +19,7 @@ import {
     Legend
   );
 
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const labels = ['0-10 km', '10-50 km', '50-100 km', '100-500 km,', '500-1000 km', 'more than 1000 km'];
 
   let tableContent = {}
 
@@ -31,7 +31,7 @@ import {
       },
       title: {
         display: true,
-        text: 'Crescimento dos utilizadores',
+        text: 'Distribuição dos produtos encomendados pela proximidade (km) entre consumidores e fornecedores',
       },
     },
   };
@@ -40,23 +40,25 @@ import {
     labels,
     datasets: [
       {
-        label: 'Novos utilizadores',
+        label: 'Distribuição dos produtos encomendados em km',
         data: labels.map((label) => tableContent[label] ?? 0),
-        //backgroundColor: 'rgba(255, 99, 132, 0.5)',
       }
     ],
   };
 
-function BarReports({datas}) { 
+function BarOrderReports_km({datas}) { 
 
   const [show, setShow] = useState(false)
 
+  /**
+   * @description set data to barReports
+   */
   function setData() {
     data = {
       labels,
       datasets: [
         {
-          label: 'Novos utilizadores',
+          label: 'Distribuição dos produtos encomendados',
           data: labels.map((label) => datas[label] ?? 0),
           backgroundColor: 'coral',
         }
@@ -75,9 +77,7 @@ function BarReports({datas}) {
     }
   })
 
-
   return (
-
     <div >
         {
           show &&  <Bar options={options} data={data} />
@@ -85,11 +85,8 @@ function BarReports({datas}) {
         
         <br></br>
         <hr></hr>
-
     </div>
-    
-    
   )
 }
 
-export default BarReports
+export default  BarOrderReports_km

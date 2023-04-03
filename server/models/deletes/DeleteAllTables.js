@@ -119,3 +119,13 @@ exec('node ./models/deletes/DeleteProductionUnitTable.js',
              console.log('exec error: ' + error);
         }
 });
+
+exec('node ./models/deletes/DeleteOrderedProduct.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});

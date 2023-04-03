@@ -7,12 +7,7 @@ const statement = "INSERT INTO categories (name) VALUES ? "
 let values = []
 
 fake_category_data.forEach(row => {
-
-<<<<<<< HEAD
     values.push([row.name])     
-=======
-    values.push([row.id, row.name])     
->>>>>>> master
 });
 
 pool.query(statement, [values], function(error, result){
