@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { FiX, FiChevronRight, FiChevronDown } from 'react-icons/fi';
+import { FiX, FiChevronRight, FiChevronLeft, FiChevronDown } from 'react-icons/fi';
 
 import {teste} from '../../../utilities/teste';
 import "./CriarAnuncio.css";
@@ -8,42 +8,51 @@ const GeneralInfo = ({ formData, setFormData }) => {
 
     const Category = ({ category, onClick }) => {
         return (
-          <div onClick={() => onClick(category)}>
-            {category}
+          <div className='app__pointer' style={{marginBottom:'.75rem'}} onClick={() => onClick(category)}>
+            <a className='app__text_effect'>{category}</a>
           </div>
         );
     };
     
     const CategoryDetails = ({ category, onClick }) => {
-        const [hoveredSubcategory, setHoveredSubcategory] = useState(null);
+
+        const [clickedSubcategory, setClickedSubcategory] = useState(null);
 
         return (
-            <div>
-                <button onClick={onClick}>Back</button> <h2>{category.name}</h2>
+            <div className='category_details'>
+                <div className='app__pointer' style={{display: 'inline-flex', marginBottom:'2rem'}} onClick={onClick}>
+                    <button><FiChevronLeft fontSize={20} color="black" style={{marginRight:'1rem'}}></FiChevronLeft></button> 
+                    <p style={{margin:'0'}}>{category.name}</p>
+                </div>
                 <ul>
                     {category.subcategories.map((subcategory, i) => (
                     <li key={i}>
-                        <h5 onMouseEnter={() => setHoveredSubcategory(i)}>{subcategory.name}</h5>
-                        {hoveredSubcategory === i && (
-                        <ul>
-                            <div className=''>
-                            {subcategory.subsubcategories.map((subsubcategory, j) => (
-                                <li key={j}>
-                                    <label>{subsubcategory} 
-                                        <input 
-                                            style={{display:'none'}}
-                                            type="radio" 
-                                            name="CriarAnuncioRadio" 
-                                            value={[category.name, subcategory.name, subsubcategory]} 
-                                            onChange={(e) => {setFormData({ ...formData, categoria: e.target.value })}}
-                                            onClick={toggleActiveModal}>
-                                        </input> 
-                                    </label>
-                                </li>
-                            ))}
+                        <div className='teste1'>
+                            <div style={{display:'flex', justifyContent:'space-between'}} className='app__pointer' onClick={() => setClickedSubcategory(i)}>
+                                <p style={{margin:'0 1rem 0 0'}}>{subcategory.name}</p>
+                                <FiChevronRight style={{margin:'.75rem 0 0 0'}}></FiChevronRight>
                             </div>
-                        </ul>
-                        )}
+                            {clickedSubcategory === i && (
+                            <div className='subsubcategories'>
+                                <div className='subsubcategories_content'>
+                                {subcategory.subsubcategories.map((subsubcategory, j) => (
+                                    <li key={j}>
+                                        <label className='app__pointer'><p style={{fontSize:'14px', margin: '0'}}>{subsubcategory}</p>
+                                            <input 
+                                                style={{display:'none'}}
+                                                type="radio" 
+                                                name="CriarAnuncioRadio" 
+                                                value={[category.name, subcategory.name, subsubcategory]} 
+                                                onChange={(e) => {setFormData({ ...formData, categoria: e.target.value })}}
+                                                onClick={toggleActiveModal}>
+                                            </input> 
+                                        </label>
+                                    </li>
+                                ))}
+                                </div>
+                            </div>
+                            )}
+                        </div>
                     </li>
                     ))}
                 </ul>
@@ -68,9 +77,11 @@ const GeneralInfo = ({ formData, setFormData }) => {
         return(
             <div className={ `app__anuncio_modal ${className}` }>
                 <div className="app__anuncio_modal_content">
-                    <p style={{margin: '4px', fontWeight:'bold'}}>{formData.categoria.length > 0 ? 'Categoria escolhida!' : 'Escolha uma categoria'}</p>
-                    <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
-                    <div className="app__anuncio_modal_navs">
+                    <div className="app__anuncio_modal_header">
+                        <p style={{margin: '4px', fontWeight:'bold'}}>{formData.categoria.length > 0 ? 'Categoria escolhida!' : 'Escolha uma categoria'}</p>
+                        <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
+                    </div>
+                    <div className="app__anuncio_modal_body">
                         {selectedCategory ? (
                             <CategoryDetails category={selectedCategory} onClick={() => setSelectedCategory(null)}/>
                         ) : (

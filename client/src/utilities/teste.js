@@ -9,7 +9,7 @@ export const teste = [
                     "Massa",
                     "Farinha e Pão Ralado",
                     "Feijão, Grão de Bico",
-                    "Outros em Arroz, Massa e Farinha"
+                    "Outros"
                 ]
             },
             { 
@@ -46,8 +46,8 @@ export const teste = [
             { 
                 name: "Outros produtos",
                 subsubcategories: [
-                    "Outros Produtos em Agricultura",
-                    "Outros Produtos em Alimentos"
+                    "Outros Produtos Agricolas",
+                    "Outros Produtos Alimentares"
                 ]
             }
         ],
@@ -67,7 +67,7 @@ export const teste = [
                         "Alimentação",
                         "Saúde e Higiene",
                         "Acessórios para cão",
-                        "Outros cães"
+                        "Outros"
                     ]
                 },
                 { 
@@ -76,7 +76,7 @@ export const teste = [
                         "Alimentação",
                         "Saúde e Higiene",
                         "Acessórios para gato",
-                        "Outros em Gatos"
+                        "Outros"
                     ]
                 },
                 { 
@@ -85,7 +85,7 @@ export const teste = [
                         "Alimentação",
                         "Saúde e Higiene",
                         "Acessórios",
-                        "Outros em Animais"
+                        "Outros"
                     ]
                 }
             ],
@@ -163,7 +163,7 @@ export const teste = [
                     "Peças auto",
                     "Filtros",
                     "Acessórios auto",
-                    "Outros em Mecância e Acessórios auto"
+                    "Outros"
                 ]
             },
             { 
@@ -176,7 +176,7 @@ export const teste = [
                     "Categoria D",
                     "Categoria DE",
                     "Categoria F",
-                    "Outros pneus"
+                    "Outros"
                 ]
             },
             { 
@@ -268,7 +268,7 @@ export const teste = [
                     "Bonecas e Peluches",
                     "Brinquedos para Bebés",
                     "Drones e Acessórios",
-                    "Outros Brinquedos e Jogos"
+                    "Outros"
                 ]
             },
             { 
@@ -281,7 +281,7 @@ export const teste = [
                     "Instrumentos de Sopro",
                     "Baterias e Percussão",
                     "Acessórios para Instrumentos Musicais",
-                    "Outros Instrumentos Musicais"
+                    "Outros"
                 ]
             },
             { 
@@ -311,7 +311,7 @@ export const teste = [
                     "Revistas",
                     "Saúde",
                     "Viagens",
-                    "Outros não listados"
+                    "Outros"
                 ],
                 features: [
                     {
@@ -328,7 +328,7 @@ export const teste = [
                     "Porta-Chaves, Isqueiros e Cinzeiros",
                     "Máquinas Coleccionáveis",
                     "Calendários e Posters",
-                    "Outras Colecções e Antiguidades"
+                    "Outras"
                 ]
             },
             { 
@@ -390,7 +390,7 @@ export const teste = [
                     "Malas",
                     "Malas de Viagem",
                     "Óculos de Sol",
-                    "Outras Malas e Acessórios"
+                    "Outras"
                 ],
                 features: [
                     {
@@ -406,7 +406,7 @@ export const teste = [
                     "Brincos",
                     "Pulseiras",
                     "Anéis",
-                    "Outras Jóias, Relógios e Bijuteria"
+                    "Outras"
                 ],
                 features: [
                     {
@@ -425,7 +425,7 @@ export const teste = [
                     "Higiene Oral",
                     "Maquilhagem",
                     "Perfumes",
-                    "Outros em Saúde e Beleza"
+                    "Outros"
                 ],
                 features: [
                     {
@@ -456,7 +456,7 @@ export const teste = [
                     "Velas e Cinzeiros",
                     "Relógios e Estatuetas",
                     "Almofadas",
-                    "Outros Utilidades e Decoração"
+                    "Outros"
                 ]
             },
             { 
@@ -469,7 +469,7 @@ export const teste = [
                     "Piscinas e Acessorios",
                     "Churrasqueiras, Grelhadores e Acessórios",
                     "Adubos e Substratos",
-                    "Outros em Jardim e Bricolage"
+                    "Outros"
                 ]
             },
             { 
@@ -489,7 +489,7 @@ export const teste = [
                     "Cabides, Bengaleiros e Sapateiras",
                     "Louceiros e Cristaleiras",
                     "Bares e Garrafeiras",
-                    "Outros Móveis"
+                    "Outros"
                 ]
             }
         ],
@@ -525,7 +525,7 @@ export const teste = [
                     "Scanners",
                     "Servidores",
                     "Software",
-                    "Outros Computadores e Informática"
+                    "Outros"
                 ]
             },
             { 
@@ -540,7 +540,7 @@ export const teste = [
                     "Discos Rígidos",
                     "Periféricos",
                     "Processadores",
-                    "Outros Accesórios de Computadores e Informática"
+                    "Outros"
                 ]
             },
             { 

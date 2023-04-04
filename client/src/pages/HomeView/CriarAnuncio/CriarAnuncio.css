@@ -113,6 +113,20 @@ img, picture {
   opacity: 1;
 }
 
+.category_details .teste1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.category_details .subsubcategories {
+  height: 100%;
+  position: relative;
+}
+.category_details .subsubcategories_content {
+  position: absolute;
+  width: 100%;
+}
+
 .app__anuncio {
   margin: 1rem auto 2rem;
 }
@@ -218,7 +232,6 @@ img, picture {
   width: 60%;
   margin: 1rem auto;
   height: 20px;
-  border-radius: 10px;
   border: 3px solid #76CBFF;
   margin-bottom: 2rem;
   position: relative;
@@ -236,7 +249,6 @@ img, picture {
 .app__anuncio_progressBar div {
   width: 33.3%;
   height: 100%;
-  border-radius: 10px;
   background-color: #76CBFF;
   transition: all 200ms ease-in;
 }
@@ -246,7 +258,7 @@ img, picture {
   text-align: center;
   position: absolute;
   top: -8px;
-  right: -4px;
+  right: -7px;
   width: 30px;
   height: 30px;
   line-height: 30px;
@@ -260,7 +272,7 @@ img, picture {
   text-align: center;
   position: absolute;
   top: -8px;
-  left: -4px;
+  left: -7px;
   width: 30px;
   height: 30px;
   line-height: 30px;
@@ -313,9 +325,8 @@ img, picture {
 
 .app__anuncio_modal_content {
   display: grid;
-  grid-template-rows: 1fr auto;
-  grid-template-columns: 1fr auto;
-  gap: 1rem;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
 }
 
 .app__anuncio_modal {
@@ -323,61 +334,65 @@ img, picture {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 75%;
-  height: 100vh;
+  min-width: 30rem;
+  min-height: 30rem;
   padding: 2rem;
   z-index: 1000;
   background: white;
+  overflow: auto;
   visibility: hidden;
 }
 .app__anuncio_modal.activeModal {
   margin: 0;
   visibility: visible;
 }
-.app__anuncio_modal_navs {
-  grid-column: span 2;
-  overflow: auto;
-  height: 90vh;
+.app__anuncio_modal_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
-.app__anuncio_modal_navs ul {
+.app__anuncio_modal_body {
+  grid-column: span 2;
+}
+.app__anuncio_modal_body ul {
   margin: 0;
   padding: 0;
   font-weight: lighter;
 }
-.app__anuncio_modal_navs ul > * {
+.app__anuncio_modal_body ul > * {
   line-height: 2.5rem;
 }
-.app__anuncio_modal_navs_category {
+.app__anuncio_modal_body_category {
   margin-bottom: 0.75rem;
 }
-.app__anuncio_modal_navs_category-title {
+.app__anuncio_modal_body_category-title {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
   transition: all 350ms ease;
 }
-.app__anuncio_modal_navs_category-title .app__anuncio_modal_navs_category-title_right {
+.app__anuncio_modal_body_category-title .app__anuncio_modal_navs_category-title_right {
   transform: rotate(0deg);
   transition: all 350ms ease;
 }
-.app__anuncio_modal_navs_category-title:hover .app__anuncio_modal_navs_category-title_right {
+.app__anuncio_modal_body_category-title:hover .app__anuncio_modal_navs_category-title_right {
   transform: rotate(90deg);
 }
-.app__anuncio_modal_navs_category-title:hover .app__anuncio_modal_navs_category-title_right > *, .app__anuncio_modal_navs_category-title:hover .app__anuncio_modal_navs_category-title_up > *, .app__anuncio_modal_navs_category-title:hover p {
+.app__anuncio_modal_body_category-title:hover .app__anuncio_modal_navs_category-title_right > *, .app__anuncio_modal_body_category-title:hover .app__anuncio_modal_navs_category-title_up > *, .app__anuncio_modal_body_category-title:hover p {
   color: #EB5C1F;
 }
-.app__anuncio_modal_navs_category-title p {
+.app__anuncio_modal_body_category-title p {
   margin: 0;
 }
-.app__anuncio_modal_navs_category-title span {
+.app__anuncio_modal_body_category-title span {
   margin-left: 1rem;
 }
-.app__anuncio_modal_navs_category-content {
+.app__anuncio_modal_body_category-content {
   max-height: 0;
   overflow: hidden;
   transition: all 350ms ease;
 }
-.app__anuncio_modal_navs_category-content label {
+.app__anuncio_modal_body_category-content label {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -387,7 +402,7 @@ img, picture {
      -moz-user-select: none;
           user-select: none;
 }
-.app__anuncio_modal_navs_category .show {
+.app__anuncio_modal_body_category .show {
   height: auto;
   max-height: 400px;
   margin-left: 1rem;
