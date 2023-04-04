@@ -30,7 +30,6 @@ exec('node ./models/seeders/SeederProductTable.js',
         }
 });
 
-
 exec('node ./models/seeders/SeederCategoryTable.js',
     function (error, stdout) {
 
