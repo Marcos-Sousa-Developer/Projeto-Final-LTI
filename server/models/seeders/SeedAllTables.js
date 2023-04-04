@@ -30,7 +30,8 @@ exec('node ./models/seeders/SeederProductTable.js',
         }
 });
 
-
+//TODO NEEDS FACTORIES TO RUN -> with GENERATE
+/*
 exec('node ./models/seeders/SeederCategoryTable.js',
     function (error, stdout) {
 
@@ -40,7 +41,7 @@ exec('node ./models/seeders/SeederCategoryTable.js',
              console.log('exec error: ' + error);
         }
 });
-
+*/
 //TODO NEEDS FACTORIES TO RUN
 /*
 exec('node ./models/seeders/SeederSubCategoryTable.js',
