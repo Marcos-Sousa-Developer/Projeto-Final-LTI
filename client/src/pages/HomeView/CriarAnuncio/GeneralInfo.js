@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { FiPlus, FiX, FiTrash2, FiChevronUp, FiChevronRight,FiChevronDown } from 'react-icons/fi';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
-import { categories } from '../../../utilities/categories';
+import categories from '../../../utilities/categories.json';
+import {teste} from '../../../utilities/teste';
 import "./CriarAnuncio.css";
 
 const GeneralInfo = ({ formData, setFormData }) => {
@@ -26,26 +27,34 @@ const GeneralInfo = ({ formData, setFormData }) => {
                     <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
                     <div className="app__anuncio_modal_navs">
                         <ul>
-                            {categories.map((category, i) => {
-                                return (
-                                    <div key={category.name} className='app__anuncio_modal_navs_category'>
-                                        <div className='app__anuncio_modal_navs_category-title' onClick={()=>toggleModal(i)}>
-                                            <p>{category.name}</p>
-                                            <span>{selectedModal === i ? <FiChevronUp className='app__anuncio_modal_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__anuncio_modal_navs_category-title_right'></FiChevronRight>}</span>
-                                        </div>
-                                        <div className={selectedModal === i ? 'app__anuncio_modal_navs_category-content show' : 'app__anuncio_modal_navs_category-content'}>
-                                            {category.subcategory.map(subcategory => (
-                                                <div key={subcategory}>
-                                                    <label>{subcategory}  
-                                                        <input type="radio" name="CriarAnuncioRadio" value={[category.name, subcategory]} onClick={(e) => {setFormData({ ...formData, categoria: e.target.value });}}></input>
+                        {teste.map((category, i) => (
+                            <li key={i}>
+                                <h2>{category.name}</h2>
+                                <ul>
+                                {category.subcategories.map((subcategory, x) => (
+                                    <li key={x}>
+                                        <h5>{subcategory.name}</h5>
+                                        <ul>
+                                            {subcategory.subsubcategories.map((subsubcategory, y) => (
+                                                <div key={y}>
+                                                    <label>{subsubcategory} 
+                                                        <input 
+                                                            type="radio" 
+                                                            name="CriarAnuncioRadio" 
+                                                            value={[category.name, subcategory.name, subsubcategory]} 
+                                                            onChange={(e) => {setFormData({ ...formData, categoria: e.target.value })}}
+                                                            onClick={toggleActiveModal}>
+                                                        </input> 
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </div>
                                             ))}
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                                        </ul>
+                                    </li>
+                                ))}
+                                </ul>
+                            </li>
+                            ))}
                         </ul>
                     </div>
                 </div>

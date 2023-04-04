@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { FiPlus, FiX, FiTrash2, FiChevronUp, FiChevronRight } from 'react-icons/fi';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
-import { categories } from '../../../utilities/categories';
+import { categories } from '../../../utilities/categorias';
 import "./CriarAnuncio.css";
 
 const ProductInfo = ({ formData, setFormData }) => {

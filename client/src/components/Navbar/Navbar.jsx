@@ -5,7 +5,7 @@ import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight }
 import images from '../../assets/images.js';
 import { PRODUCTS } from '../../assets/products';
 import { ShopContext } from '../../context/ShopContextProvider';
-import { categories } from '../../utilities/categories'
+import { categorias } from '../../utilities/categorias.js'
 import Searchbar from './Searchbar/Searchbar';
 import './styles/Sidebar.css';
 import './styles/Navbar.css';
@@ -33,7 +33,7 @@ const Navbar = () => {
                 <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleSidebar}></FiX>
                 <div className="app__sidebar_navs">
                     <ul>
-                        {categories.map((category, i) => {
+                        {categorias.map((category, i) => {
                             return (
                                 <div key={category.name} className='app__sidebar_navs_category'>
                                     <div className='app__sidebar_navs_category-title' onClick={()=>toggleAccordion(i)}>

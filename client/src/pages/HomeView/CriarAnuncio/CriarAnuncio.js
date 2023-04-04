@@ -4,7 +4,7 @@ import {FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
 import GeneralInfo from './GeneralInfo';
 import ProductInfo from './ProductInfo';
-import { categories } from '../../../utilities/categories';
+import { categories } from '../../../utilities/categorias';
 import "./CriarAnuncio.css";
 import "../../../components/InputField/InputField.css";
 
@@ -151,7 +151,7 @@ function CriarAnuncio() {
                             <button type='button' onClick={() => { setPage((currPage) => currPage - 1); useEffectd(); }} className='main__action_btn'><FiChevronLeft></FiChevronLeft> Anterior</button>
                             <button type='button' onClick={() => {submit()}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
                             {/*colocar type SUBMIT*/}
-                            </>
+                        </>
                     } 
                 </div>
             </form>
