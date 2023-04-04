@@ -10,8 +10,8 @@ const statement = "CREATE TABLE suppliers ( " +
                   "mobile_number varchar(255) NOT NULL, " +
                   "address varchar(255) NOT NULL, " +
                   "status BOOLEAN NOT NULL default 1, " + 
-                  "products_list varchar(255), " + //add NOT NULL
-                  "orders varchar(255), " + //add NOT NULL
+                  "products_list varchar(255), " +
+                  "orders varchar(255), " +
                   "UNIQUE (email, nif, mobile_number), " +
                   "PRIMARY KEY (id))";    
 

@@ -30,8 +30,6 @@ exec('node ./models/seeders/SeederProductTable.js',
         }
 });
 
-//TODO NEEDS FACTORIES TO RUN -> with GENERATE
-/*
 exec('node ./models/seeders/SeederCategoryTable.js',
     function (error, stdout) {
 
@@ -41,9 +39,7 @@ exec('node ./models/seeders/SeederCategoryTable.js',
              console.log('exec error: ' + error);
         }
 });
-*/
-//TODO NEEDS FACTORIES TO RUN
-/*
+
 exec('node ./models/seeders/SeederSubCategoryTable.js',
     function (error, stdout) {
 
@@ -53,10 +49,7 @@ exec('node ./models/seeders/SeederSubCategoryTable.js',
              console.log('exec error: ' + error);
         }
 });
-*/
 
-//TODO NEEDS FACTORIES TO RUN
-/*
 exec('node ./models/seeders/SeederSubSubCategoryTable.js',
     function (error, stdout) {
 
@@ -66,11 +59,8 @@ exec('node ./models/seeders/SeederSubSubCategoryTable.js',
              console.log('exec error: ' + error);
         }
 });
-*/
 
-//TODO NEEDS TO FIX SEED SUPPLIER PRODUCT
-/*
-exec('node ./models/seeders/SeederSupplierProductTable.js',
+exec('node ./models/seeders/SeederAdTable.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -79,10 +69,8 @@ exec('node ./models/seeders/SeederSupplierProductTable.js',
              console.log('exec error: ' + error);
         }
 });
-*/
 
-//TODO NEEDS TO FIX SEED ORDER TABLE
-/*
+
 exec('node ./models/seeders/SeederOrderTable.js',
     function (error, stdout) {
 
@@ -92,10 +80,7 @@ exec('node ./models/seeders/SeederOrderTable.js',
              console.log('exec error: ' + error);
         }
 });
-*/
 
-//TODO NEEDS TO FIX VHEICLE SEED
-/*
 exec('node ./models/seeders/SeederVehicleTable.js',
     function (error, stdout) {
 
@@ -105,10 +90,7 @@ exec('node ./models/seeders/SeederVehicleTable.js',
              console.log('exec error: ' + error);
         }
 });
-*/
 
-//TODO NEEDS TO FIX PRODUCTION UNIT SEED
-/*
 exec('node ./models/seeders/SeederProductionUnitTable.js',
     function (error, stdout) {
 
@@ -118,9 +100,18 @@ exec('node ./models/seeders/SeederProductionUnitTable.js',
              console.log('exec error: ' + error);
         }
 });
-*/
 
-exec('node ./models/seeders/SeedOrderedProduct.js',
+exec('node ./models/seeders/SeedOrderedProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/seeders/SeedProductProductionUnitTable.js',
     function (error, stdout) {
 
         console.log(stdout);

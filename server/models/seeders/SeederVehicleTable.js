@@ -17,7 +17,7 @@ pool.query(statement, [values], function(error, result){
         throw error + '\n' + 'Not possible insert data into table vehicles'
     } 
 
-    console.log("Insert vehicle completed");
+    console.log("Insert vehicles completed");
 
     process.exit();
 });

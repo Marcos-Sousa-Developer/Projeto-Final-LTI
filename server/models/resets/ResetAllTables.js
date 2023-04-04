@@ -60,7 +60,7 @@ exec('node ./models/resets/ResetSubSubCategoryTable.js',
         }
 });
 
-exec('node ./models/resets/ResetSupplierProductTable.js',
+exec('node ./models/resets/ResetAdTable.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -100,7 +100,27 @@ exec('node ./models/resets/ResetProductionUnitTable.js',
         }
 });
 
-exec('node ./models/resets/ResetOrderedProduct.js',
+exec('node ./models/resets/ResetOrderedProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/resets/ResetProductProductionUnitTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/resets/ResetAdminTable.js',
     function (error, stdout) {
 
         console.log(stdout);
