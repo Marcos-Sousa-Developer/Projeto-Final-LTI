@@ -100,16 +100,16 @@ export const teste = [
             name: "Bebé e Criança",
             subcategories: [
                 { 
-                name: "Calçado",
-                subsubcategories: [
-                    "Calçado Menino",
-                    "Calçado Menina"
-                ],
-                "features": [
-                    {
-                    "Género": ["Menino","Menina"]
-                    }
-                ]
+                    name: "Calçado",
+                    subsubcategories: [
+                        "Calçado Menino",
+                        "Calçado Menina"
+                    ],
+                    "features": [
+                        {
+                        "Género": ["Menino","Menina"]
+                        }
+                    ]
                 },
                 { 
                     name: "Roupinhas",
@@ -137,22 +137,22 @@ export const teste = [
                         "Mantas",
                         "Almofadas"
                     ]
-            },
-            { 
-            name: "Refeição e utensilios",
-            subsubcategories: [
-                "Biberão",
-                "Chupetas",
-                "Utensilios"          
+                },
+                { 
+                    name: "Refeição e utensilios",
+                    subsubcategories: [
+                        "Biberão",
+                        "Chupetas",
+                        "Utensilios"          
+                    ]
+                }
+            ],
+            features: [
+                {
+                    Marca: "",
+                    Estado: ["Novo","Usado"]
+                }
             ]
-            }
-        ],
-        features: [
-            {
-                Marca: "",
-                Estado: ["Novo","Usado"]
-            }
-        ]
     },
     {
         name: "Carros, motos e barcos",

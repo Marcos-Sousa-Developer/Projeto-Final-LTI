@@ -387,46 +387,6 @@ img, picture {
      -moz-user-select: none;
           user-select: none;
 }
-.app__anuncio_modal_navs_category-content label input[type=radio] {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-.app__anuncio_modal_navs_category-content label .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  border: 3px solid #EEEEEE;
-  margin-top: 0.5rem;
-  transition: all 200ms ease-in-out;
-}
-.app__anuncio_modal_navs_category-content label .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-.app__anuncio_modal_navs_category-content label:hover input ~ .checkmark {
-  border: 3px solid #EB5C1F;
-}
-.app__anuncio_modal_navs_category-content label input:checked ~ .checkmark {
-  border: 3px solid #EB5C1F;
-  background-color: #EB5C1F;
-}
-.app__anuncio_modal_navs_category-content label input:checked ~ .checkmark:after {
-  display: block;
-}
-.app__anuncio_modal_navs_category-content label .checkmark:after {
-  top: 4px;
-  left: 4px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: white;
-}
 .app__anuncio_modal_navs_category .show {
   height: auto;
   max-height: 400px;

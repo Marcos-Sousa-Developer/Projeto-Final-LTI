@@ -313,53 +313,6 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
                     margin-bottom: 12px;
                     cursor: pointer;
                     user-select: none;
-
-                    input[type='radio'] {
-                        position: absolute;
-                        opacity: 0;
-                        cursor: pointer;
-                    }
-
-                    .checkmark {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        height: 25px;
-                        width: 25px;
-                        background-color: #ffffff;
-                        border-radius: 50%;
-                        border: $border;
-                        margin-top: .5rem;
-                        transition: all 200ms ease-in-out;
-
-                        &:after {
-                            content: "";
-                            position: absolute;
-                            display: none;
-                        }
-                    }
-
-                    &:hover input ~ .checkmark {
-                        border: 3px solid $orange;
-                    }
-
-                    input:checked ~ .checkmark {
-                        border: 3px solid $orange;
-                        background-color: $orange;
-                    }
-
-                    input:checked ~ .checkmark:after {
-                        display: block;
-                    }
-
-                    .checkmark:after {
-                        top: 4px;
-                        left: 4px;
-                        width: 12px;
-                        height: 12px;
-                        border-radius: 50%;
-                        background: white;
-                    }
                 }
             }
 
