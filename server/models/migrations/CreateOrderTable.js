@@ -10,14 +10,10 @@ const statement = "CREATE TABLE orders ( " +
                   "address varchar(255) NOT NULL, " +
                   "size float NOT NULL, " +
                   "id_supplier_product int, " +
-                  "id_consumer int, " + //ADD NOT NULL
-                  "id_vehicle int, " + //ADD NOT NULL
+                  "id_consumer int, " +
+                  "id_vehicle int, " +
                   "UNIQUE (order_number), " +
                   "PRIMARY KEY (id))";
-                  //"PRIMARY KEY (id), " +
-                  //"FOREIGN KEY (id_supplier_product) REFERENCES supplierProducts(id)," +
-                  //"FOREIGN KEY (id_consumer) REFERENCES consumers(id)," +
-                  //"FOREIGN KEY (id_vehicle) REFERENCES vehicles(license_plate))";
 
 pool.query(statement, function(error, result) {
 

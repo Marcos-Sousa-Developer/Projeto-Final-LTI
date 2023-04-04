@@ -14,10 +14,10 @@ fake_productionunit_data.forEach(row => {
 pool.query(statement, [values], function(error, result){
 
     if (error) {
-        throw error + '\n' + 'Not possible insert data into table production units'
+        throw error + '\n' + 'Not possible insert data into table productionUnits'
     } 
 
-    console.log("Insert production unit completed");
+    console.log("Insert productionUnits completed");
 
     process.exit();
 });

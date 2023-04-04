@@ -80,7 +80,7 @@ exec('node ./models/deletes/DeleteSubSubCategoryTable.js',
         }
 });
 
-exec('node ./models/deletes/DeleteSupplierProductTable.js',
+exec('node ./models/deletes/DeleteAdTable.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -120,7 +120,17 @@ exec('node ./models/deletes/DeleteProductionUnitTable.js',
         }
 });
 
-exec('node ./models/deletes/DeleteOrderedProduct.js',
+exec('node ./models/deletes/DeleteOrderedProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/deletes/DeleteProductProductionUnitTable.js',
     function (error, stdout) {
 
         console.log(stdout);
