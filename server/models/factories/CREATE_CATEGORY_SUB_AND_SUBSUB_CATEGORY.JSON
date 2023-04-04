@@ -1,7 +1,8 @@
 {
   "categories": [
+
     {
-      "name": "Agricultura e Mercearia",
+      "name": "Agricultura e Alimentos",
       "subcategories": [
         { 
           "name": "Arroz, Massa e Farinha",
@@ -47,12 +48,21 @@
         { 
           "name": "Outros produtos",
           "subsubcategories": [
-            "Outros Produtos de Agricultura",
-            "Outros Produtos de Mercearia"
+            "Outros Produtos em Agricultura",
+            "Outros Produtos em Alimentos"
           ]
         }
+      ],
+      "features": [
+        {
+          "Local de Produção": "",
+          "Validade": "date"
+        }
       ]
+      
     },
+
+
     {
       "name": "Animais",
       "subcategories": [
@@ -83,23 +93,41 @@
             "Outros em Animais"
           ]
         }
+      ],
+      "features": [
+        {
+          "Marca": "",
+          "Estado": ["Novo","Usado"]
+        }
       ]
     },
+
+
     {
       "name": "Bebé e Criança",
       "subcategories": [
         { 
           "name": "Calçado",
           "subsubcategories": [
-            "Calçado Masculino",
-            "Calçado Feminino"
+            "Calçado Menino",
+            "Calçado Menina"
+          ],
+          "features": [
+            {
+              "Género": ["Menino","Menina"]
+            }
           ]
         },
         { 
           "name": "Roupinhas",
           "subsubcategories": [
-            "Roupinhas Masculina",
-            "Roupinhas Feminina"
+            "Roupinhas Menino",
+            "Roupinhas Menina"
+          ],
+          "features": [
+            {
+              "Género": ["Menino","Menina"]
+            }
           ]
         },
         { 
@@ -125,8 +153,16 @@
             "Utensilios"          
           ]
         }
+      ],
+      "features": [
+        {
+          "Marca": "",
+          "Estado": ["Novo","Usado"]
+        }
       ]
     },
+
+
     {
       "name": "Carros, motos e barcos",
       "subcategories": [
@@ -160,8 +196,16 @@
             "Outras Ferramentas"
           ]
         }
+      ],
+      "features": [
+        {
+          "Marca": "",
+          "Estado": ["Novo","Usado"]
+        }
       ]
     },
+
+
     {
       "name": "Desportos",
       "subcategories": [
@@ -178,8 +222,16 @@
             "Outros Desportos"
           ]
         }
+      ],
+      "features": [
+        {
+          "Marca": "",
+          "Estado": ["Novo","Usado"]
+        }
       ]
     },
+
+
     {
         "name": "Eletrodomésticos",
         "subcategories": [
@@ -207,8 +259,17 @@
               "Aquecimento de Água"
             ]
           } 
+        ],
+        "features": [
+          {
+            "Marca": "",
+            "Estado": ["Novo","Usado"],
+            "Garantia": ""
+          }
         ]
     },
+
+
     {
       "name": "Lazer",
       "subcategories": [
@@ -266,6 +327,11 @@
             "Saúde",
             "Viagens",
             "Outros não listados"
+          ],
+          "features": [
+            {
+              "Auto": ""
+            }
           ]
         },
         { 
@@ -295,8 +361,16 @@
             "CDS - Música"
           ]
         }
+      ],
+      "features": [
+        {
+          "Marca": "",
+          "Estado": ["Novo","Usado"]
+        }
       ]
     },
+
+
     {
       "name": "Moda",
       "subcategories": [
@@ -305,6 +379,11 @@
           "subsubcategories": [
             "Homem",
             "Mulher"
+          ],
+          "features": [
+            {
+              "Género": ["Homem","Mulher"]
+            }
           ]
         },
         { 
@@ -312,6 +391,11 @@
           "subsubcategories": [
             "Homem",
             "Mulher"
+          ],
+          "features": [
+            {
+              "Género": ["Homem","Mulher"]
+            }
           ]
         },
         { 
@@ -324,6 +408,11 @@
             "Malas de Viagem",
             "Óculos de Sol",
             "Outras Malas e Acessórios"
+          ],
+          "features": [
+            {
+              "Género": ["Homem","Mulher"]
+            }
           ]
         },
         { 
@@ -335,6 +424,11 @@
             "Pulseiras",
             "Anéis",
             "Outras Jóias, Relógios e Bijuteria"
+          ],
+          "features": [
+            {
+              "Género": ["Homem","Mulher"]
+            }
           ]
         },
         { 
@@ -349,10 +443,24 @@
             "Maquilhagem",
             "Perfumes",
             "Outros em Saúde e Beleza"
+          ],
+          "features": [
+            {
+              "Género": ["Homem","Mulher"]
+            }
           ]
+        }
+      ],
+      "features": [
+        {
+          "Marca": "",
+          "Estado": ["Novo","Usado"]
         }
       ]
     },
+
+
+
     {
       "name": "Móveis, Casa e Jardim",
       "subcategories": [
@@ -404,9 +512,17 @@
             "Outros Móveis"
           ]
         }
+      ],
+      "features": [
+        {
+          "Marca": "",
+          "Estado": ["Novo","Usado"]
+        }
       ]
     },
-        {
+
+
+    {
       "name": "Tecnologia",
       "subcategories": [
         { 
@@ -420,27 +536,33 @@
         { 
           "name": "Computadores e Informática",
           "subsubcategories": [
-            "Acessórios",
-            "Acessórios para Portáteis",
             "Apple",
-            "Armazenamento",
-            "Componentes",
             "Computadores",
-            "Consumíveis Impressora",
-            "Discos Externos",
-            "Discos Rígidos",
             "Fotocopiadoras",
             "Impressoras",
             "Monitores",
             "Portáteis",
-            "Periféricos",
-            "Processadores",
             "Projectores",
             "Redes",
             "Scanners",
             "Servidores",
             "Software",
             "Outros Computadores e Informática"
+          ]
+        },
+        { 
+          "name": "Acessórios para Informática",
+          "subsubcategories": [
+            "Acessórios",
+            "Acessórios para Portáteis",
+            "Armazenamento",
+            "Componentes",
+            "Consumíveis Impressora",
+            "Discos Externos",
+            "Discos Rígidos",
+            "Periféricos",
+            "Processadores",
+            "Outros Accesórios de Computadores e Informática"
           ]
         },
         { 
@@ -459,8 +581,16 @@
             "Acessórios"
           ]
         }       
+      ],
+      "features": [
+        {
+          "Marca": "",
+          "Estado": ["Novo","Usado"]
+        }
       ]
     },
+
+
     {
       "name": "Outras Vendas",
       "subcategories": [
@@ -468,10 +598,15 @@
           "name": "Outros artigos",
           "subsubcategories": [
             "Material Escolar",
-            "Licenças e Alvarás",
             "Outros Artigos"
           ]
         }      
+      ],
+      "features": [
+        {
+          "Marca": "",
+          "Estado": ["Novo","Usado"]
+        }
       ]
     }  
   ]
