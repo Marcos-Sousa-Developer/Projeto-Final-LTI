@@ -1,14 +1,14 @@
 let pool = require('../../config/dbConfigLocal')
 
-const fake_subsubcategory_data = require('../factories/FAKE_SUBSUBCATEGORY_DATA.json')
+const subsubcategory_data = require('../factories/SUBSUBCATEGORY_DATA.json')
 
-const statement = "INSERT INTO subsubcategories (name) VALUES ? "
+const statement = "INSERT INTO subsubcategories (id, name, id_subcategory) VALUES ? "
 
 let values = []
 
-fake_subsubcategory_data.forEach(row => {
+subsubcategory_data.forEach(row => {
 
-    values.push([row.name])     
+    values.push([row.id, row.name, row.id_subcategory])     
 });
 
 pool.query(statement, [values], function(error, result){
