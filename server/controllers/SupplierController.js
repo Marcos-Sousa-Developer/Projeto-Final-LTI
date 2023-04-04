@@ -8,7 +8,7 @@ let dbConnection = require('./DatabaseController')
  */
 const getAllorSomeSuppliers = async function (req, res) { 
 
-    const statement = "SELECT * FROM suppliers";
+    let statement = "SELECT * FROM suppliers";
     
     if(Object.keys(req.query).length !== 0) {
         statement += " WHERE "
@@ -36,7 +36,9 @@ const getAllorSomeSuppliers = async function (req, res) {
 
     if (result.includes("error")) {
         return res.status(500).json("Not possible to get all suppliers");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no supplier in the database");
+    }
 
     return res.send(result)
 }
@@ -55,7 +57,9 @@ const getSupplierByID = async function (req, res) {
 
     if (result.includes("error")) {
         return res.status(500).json("Not possible to get supplier with id " + req.params.id);
-    } 
+    } else if (result.length < 1) {
+        return res.send("Supplier with id " + req.params.id + " does not exist in the database");
+    }
 
     return res.send(result)
 } 
@@ -89,9 +93,9 @@ const deleteSupplierByID = async function (req, res) {
  */
 const insertSupplier = async function (req, res) {
 
-    const data = [req.query.name, req.query.email, req.query.nif, req.query.mobile_number, req.query.address, JSON.parse(req.query.account_status)];
+    const data = [req.query.uid, req.query.name, req.query.email, req.query.nif, req.query.mobile_number,req.query.address];
 
-    const statement = "INSERT INTO suppliers (name, email, nif, mobile_number, address, account_status) VALUES ?";
+    const statement = "INSERT INTO suppliers (uid, name, email, nif, mobile_number, address) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
@@ -110,7 +114,7 @@ const insertSupplier = async function (req, res) {
  */
 const updateSupplierByID = async function (req, res) {
 
-    const statement = `UPDATE suppliers SET `;
+    let statement = `UPDATE suppliers SET `;
 
     for(let i = 0 ; i < Object.keys(req.query).length; i++) {
         
@@ -137,6 +141,8 @@ const updateSupplierByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this supplier");
+    } else if (result.affectedRows == 0) {
+        return res.send("Supplier with id " + req.params.id + " does not exist in the database");
     }
 
     return res.send("Supplier has been updated");

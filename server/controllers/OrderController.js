@@ -8,7 +8,7 @@ let dbConnection = require('./DatabaseController')
  */
 const getAllorSomeOrders = async function (req, res) { 
 
-    const statement = "SELECT * FROM orders";
+    let statement = "SELECT * FROM orders";
     
     if(Object.keys(req.query).length !== 0) {
         statement += " WHERE "
@@ -36,7 +36,9 @@ const getAllorSomeOrders = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get all orders");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no order in the database");
+    }
     
     return res.send(result)
 }
@@ -55,7 +57,9 @@ const getOrderByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get order with id " + req.params.id);
-    } 
+    } else if (result.length < 1) {
+        return res.send("Order with id " + req.params.id + " does not exist in the database");
+    }
     
     return res.send(result)
 }
@@ -110,7 +114,7 @@ const insertOrder = async function (req, res) {
  */
 const updateOrderByID = async function (req, res) { 
 
-    const statement = `UPDATE orders SET `;
+    let statement = `UPDATE orders SET `;
 
     for(let i = 0 ; i < Object.keys(req.query).length; i++) {
         
@@ -137,6 +141,8 @@ const updateOrderByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this order");
+    } else if (result.affectedRows == 0) {
+        return res.send("Order with id " + req.params.id + " does not exist in the database");
     }
 
     return res.send("Order has been updated");

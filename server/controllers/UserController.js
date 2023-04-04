@@ -8,7 +8,7 @@ let dbConnection = require('./DatabaseController')
  */
 const getAllorSomeUsers = async function (req, res) { 
 
-    const statement = "SELECT * FROM users";  
+    let statement = "SELECT * FROM users";  
         
     if(Object.keys(req.query).length !== 0) {
         statement += " WHERE "
@@ -36,7 +36,9 @@ const getAllorSomeUsers = async function (req, res) {
     
     if (result.includes("error")) {
         return res.status(500).json("Not possible to get all users");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no user in the database");
+    }
     
     return res.send(result) 
 } 

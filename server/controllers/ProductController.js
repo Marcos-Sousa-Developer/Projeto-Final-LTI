@@ -8,7 +8,7 @@ let dbConnection = require('./DatabaseController')
  */
 const getAllorSomeProducts = async function (req, res) { 
 
-    const statement = "SELECT * FROM products";
+    let statement = "SELECT * FROM products";
     
     if(Object.keys(req.query).length !== 0) {
         statement += " WHERE "
@@ -36,7 +36,9 @@ const getAllorSomeProducts = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get all products");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no product in the database");
+    }
     
     return res.send(result)
 }
@@ -55,7 +57,9 @@ const getProductByEAN = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get product with EAN " + req.params.EAN);
-    } 
+    } else if (result.length < 1) {
+        return res.send("Product with EAN " + req.params.EAN + " does not exist in the database");
+    }
     
     return res.send(result)
 }
@@ -110,7 +114,7 @@ const insertProduct = async function (req, res) {
  */
 const updateProductByEAN = async function (req, res) { 
 
-    const statement = `UPDATE products SET `;
+    let statement = `UPDATE products SET `;
 
     for(let i = 0 ; i < Object.keys(req.query).length; i++) {
         
@@ -137,6 +141,8 @@ const updateProductByEAN = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this product");
+    } else if (result.affectedRows == 0) {
+        return res.send("Product with EAN " + req.params.EAN + " does not exist in the database");
     }
 
     return res.send("Product has been updated");

@@ -1,4 +1,4 @@
-const pool = require('../config/dbConfigDocker') 
+const pool = require('../config/dbConfigDocker')
 
 /**
  * THIS FUNCTION MAKE A REQUEST TO DATABASE

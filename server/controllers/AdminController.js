@@ -8,7 +8,7 @@ let dbConnection = require('./DatabaseController')
  */
 const getAllorSomeAdmins = async function (req, res) { 
 
-    const statement = "SELECT * FROM admins";  
+    let statement = "SELECT * FROM admins";  
     
     if(Object.keys(req.query).length !== 0) {
         statement += " WHERE "
@@ -36,7 +36,9 @@ const getAllorSomeAdmins = async function (req, res) {
     
     if (result.includes("error")) {
         return res.status(500).json("Not possible to get all admins");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no admin in the database");
+    }
     
     return res.send(result) 
 } 

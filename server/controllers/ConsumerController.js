@@ -51,7 +51,9 @@ const getAllorSomeConsumers = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get all consumers");
-    } 
+    } else if (result.length < 1) {
+        return res.send("There is no consumer in the database");
+    }
     
     return res.send(result)
 }
@@ -70,7 +72,9 @@ const getConsumerByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to get consumer with id " + req.params.id);
-    } 
+    } else if (result.length < 1) {
+        return res.send("Consumer with id " + req.params.id + " does not exist in the database");
+    }
     
     return res.send(result)
 }
@@ -130,7 +134,7 @@ const insertConsumer = async function (req, res) {
  */
 const updateConsumerByID = async function (req, res) { 
 
-    let statement = `UPDATE consumers SET `
+    let statement = `UPDATE consumers SET `;
 
     for(let i = 0 ; i < Object.keys(req.query).length; i++) {
         
@@ -157,6 +161,8 @@ const updateConsumerByID = async function (req, res) {
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this consumer");
+    } else if (result.affectedRows == 0) {
+        return res.send("Consumer with id " + req.params.id + " does not exist in the database");
     }
 
     return res.send("Consumer has been updated");
