@@ -121,8 +121,8 @@
         { 
           "name": "Roupinhas",
           "subsubcategories": [
-            "Roupinhas Menino",
-            "Roupinhas Menina"
+            "Calçado Menino",
+            "Calçado Menina"
           ],
           "features": [
             {
@@ -146,11 +146,11 @@
           ]
         },
         { 
-          "name": "Refeição e utensilios",
+          "name": "Refeição e Utensílios",
           "subsubcategories": [
             "Biberão",
             "Chupetas",
-            "Utensilios"          
+            "Utensílios"          
           ]
         }
       ],
@@ -236,7 +236,7 @@
         "name": "Eletrodomésticos",
         "subcategories": [
           { 
-            "name": "Grandes Domésticos",
+            "name": "Grandes Eletrodomésticos",
             "subsubcategories": [
               "Frigoríficos e Arcas", 
               "Máquinas de Roupa",            
@@ -248,7 +248,7 @@
             ]
           },
           { 
-            "name": "Pequenos Domésticos",
+            "name": "Pequenos Eletrodomésticos",
             "subsubcategories": [
               "Micro-ondas e Mini Fornos",  
               "Máquinas de Café",           
@@ -287,7 +287,7 @@
           ]
         },
         { 
-          "name": "Instrumentos musicais",
+          "name": "Instrumentos Musicais",
           "subsubcategories": [
             "Guitarras e Baixos",
             "Som, Audio e Equipamento DJ",

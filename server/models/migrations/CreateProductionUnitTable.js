@@ -6,13 +6,9 @@ const statement = "CREATE TABLE productionUnits ( " +
                   "location varchar(255) NOT NULL, " + 
                   "capacity float NOT NULL, " +  
                   "id_vehicle int, " +
-                  "id_supplier int, " + //ADD NOT NULL
+                  "id_supplier int, " +
                   "id_product int, " +
                   "PRIMARY KEY (id))";
-                  //"PRIMARY KEY (id), " +
-                  //"FOREIGN KEY (id_vehicle) REFERENCES vehicles(license_plate), " +
-                  //"FOREIGN KEY (id_supplier) REFERENCES suppliers(id), " +
-                  //"FOREIGN KEY (id_product) REFERENCES products(id))"; 
 
 pool.query(statement, function(error, result) {
 

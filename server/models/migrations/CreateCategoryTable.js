@@ -1,13 +1,10 @@
 let pool = require('../../config/dbConfigLocal')
 
 const statement = "CREATE TABLE categories ( " +
-                  "id int NOT NULL AUTO_INCREMENT, " +
+                  "id int NOT NULL, " +
                   "name varchar(255) NOT NULL, " +
                   "UNIQUE (name), " +
                   "PRIMARY KEY (id))";
-                  //"PRIMARY KEY (id), " +
-                  //"FOREIGN KEY (id_subcategory) REFERENCES categories(id), " +
-                  //"FOREIGN KEY (id_product) REFERENCES products(id))";  
 
 pool.query(statement, function(error, result) {
 

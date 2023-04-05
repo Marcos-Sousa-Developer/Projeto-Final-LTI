@@ -7,10 +7,8 @@ const statement = "CREATE TABLE vehicles ( " +
                   "status varchar(255) NOT NULL, " + 
                   "capacity float NOT NULL, " +
                   "orders_list varchar(255), " +
-                  "id_production_unit int, " + //add NOT NULL
+                  "id_production_unit int, " +
                   "PRIMARY KEY (license_plate))";
-                  //"PRIMARY KEY (license_plate), " +
-                  //"FOREIGN KEY (id_production_unit) REFERENCES productionUnits(id))"; 
 
 pool.query(statement, function(error, result) {
 

@@ -6,8 +6,10 @@ function ProductTest() {
 
     const [EAN, setEAN] = useState(null)
     const [name, setName] = useState(null)
-    const [data_producao, setDataProducao] = useState(null)
-    const [descricao, setDescricao] = useState(null)
+    const [production_date, setProductionDate] = useState(null)
+    const [description, setDescription] = useState(null)
+    const [title, setTitle] = useState(null)
+    const [price, setPrice] = useState(null)
 
     const handleSetEAN = (event) => {
         setEAN(event.target.value)
@@ -17,13 +19,23 @@ function ProductTest() {
       setName(event.target.value)
     }
 
-    const handleSetDataProducao = (event) => {
-      setDataProducao(event.target.value)
+    const handleSetProductionDate = (event) => {
+      setProductionDate(event.target.value)
     }
 
-    const handleSetDescricao = (event) => {
-      setDescricao(event.target.value)
+    const handleSetDescription = (event) => {
+      setDescription(event.target.value)
     }
+
+    const handleSetTitle= (event) => {
+      setTitle(event.target.value)
+    }
+
+    const handleSetPrice= (event) => {
+      setPrice(event.target.value)
+    }
+
+
 
     async function verifyEAN(EAN){
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
@@ -39,7 +51,7 @@ function ProductTest() {
       let product = await getFromDB("/products/" + EAN);
       
       if(product.length == 1){
-        return "O produto com o EAN inserido já se encontra criado"
+        return "O produto com o EAN inserido já se encontra criado";
       }
 
       if (EAN.length !== 8 && EAN.length !== 13) {
@@ -119,12 +131,34 @@ function ProductTest() {
       return "OK"
     }
 
+    async function searchEAN(){
+      console.log(EAN)
+      let validEAN = await verifyEAN(EAN);
+      console.log(validEAN)
+      if(validEAN == "OK" || validEAN == "O produto com o EAN inserido já se encontra criado"){
+          //get à api
+          let getEAN = await getFromDB("/products",{
+            EAN: EAN,
+          })
+          if(getEAN.length == 1){
+            console.log("entrou")
+            //pode continuar com o anuncio e vai para outra página
+          }else{
+            alert(getEAN)
+          }
+      }else {
+        alert(validEAN)
+      }
+    }
+
     const submit = async () => {
 
       let validEAN = await verifyEAN(EAN);
       let validName = await verifyName(name);
-      let validProductionDate = await verifyProductionDate(data_producao);
-      let validDescription = await verifyDescription(descricao);
+      let validProductionDate = await verifyProductionDate(production_date);
+      let validDescription = await verifyDescription(description);
+      //title
+      //price
 
       let product;
       
@@ -161,13 +195,33 @@ function ProductTest() {
 
   return (
     <div>
-      <form action="" method="post">
-        <input type="text" placeholder="EAN" value = {EAN ?? ""} name="EAN" onChange={handleSetEAN} required></input><br></br>
-        <input type="text" placeholder="Nome" value = {name ?? ""} name="name" onChange={handleSetName} required></input><br></br>
-        <input type="date" placeholder="Data de Producao" value = {data_producao ?? ""} name="data_producao" onChange={handleSetDataProducao} required></input><br></br>
-        <input type="text" placeholder="Descrição" value = {descricao ?? ""} name="descricao" onChange={handleSetDescricao} required></input><br></br>
-      </form>
-      <button type="submit" onClick={() => submit()}>Create Product</button>
+
+    <input type="search" placeholder="EAN" value = {EAN ?? ""} name="EAN" onChange={handleSetEAN}></input><br></br>
+    <button onClick={() => searchEAN()}>Search EAN</button>
+    <br></br><br></br>
+
+    <p>Se já existir EAN</p>
+
+    <form action="" method="post">
+      <input type="text" placeholder="Titulo" value = {title ?? ""} name="title" onChange={handleSetTitle} required></input><br></br>
+      <input type="text" placeholder="Descrição" value = {description ?? ""} name="description" onChange={handleSetDescription} required></input><br></br>
+      <input type="text" placeholder="Preço" value = {price ?? ""} name="price" onChange={handleSetPrice} required></input><br></br>
+    </form>
+
+    <button type="submit" onClick={() => submit()}>Criar produto</button>
+
+    <br></br><br></br>
+    <p>Se não existir EAN</p>
+
+    <form action="" method="post">
+      <input type="text" placeholder="Titulo" value = {title ?? ""} name="title" onChange={handleSetTitle} required></input><br></br>
+      <input type="text" placeholder="Descrição" value = {description ?? ""} name="description" onChange={handleSetDescription} required></input><br></br>
+      <input type="text" placeholder="Preço" value = {price ?? ""} name="price" onChange={handleSetPrice} required></input><br></br>
+      <input type="text" placeholder="EAN" value = {EAN ?? ""} name="EAN" onChange={handleSetEAN} required></input><br></br>
+    </form>
+
+    <button type="submit" onClick={() => submit()}>Criar produto</button>
+    
     </div>
   )
 }

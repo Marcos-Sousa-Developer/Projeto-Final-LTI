@@ -70,7 +70,7 @@ exec('node ./models/migrations/CreateSubSubCategoryTable.js',
         }
 });
 
-exec('node ./models/migrations/CreateSupplierProductTable.js',
+exec('node ./models/migrations/CreateAdTable.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -111,6 +111,16 @@ exec('node ./models/migrations/CreateProductionUnitTable.js',
 });
 
 exec('node ./models/migrations/CreateOrderedProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/migrations/CreateProductProductionUnitTable.js',
     function (error, stdout) {
 
         console.log(stdout);
