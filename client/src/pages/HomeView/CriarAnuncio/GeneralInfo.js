@@ -20,42 +20,70 @@ const GeneralInfo = ({ formData, setFormData }) => {
 
         return (
             <div className='category_details'>
-                <div className='app__pointer' style={{display: 'inline-flex', marginBottom:'2rem'}} onClick={onClick}>
+                <div className='app__pointer category_details_header' style={{display: 'inline-flex', marginBottom:'2rem'}} onClick={onClick}>
                     <button><FiChevronLeft fontSize={20} color="black" style={{marginRight:'1rem'}}></FiChevronLeft></button> 
                     <p style={{margin:'0'}}>{category.name}</p>
                 </div>
-                <ul>
-                    {category.subcategories.map((subcategory, i) => (
-                    <li key={i}>
-                        <div className='teste1'>
-                            <div style={{display:'flex', justifyContent:'space-between'}} className='app__pointer' onClick={() => setClickedSubcategory(i)}>
-                                <p style={{margin:'0 1rem 0 0'}}>{subcategory.name}</p>
-                                <FiChevronRight style={{margin:'.75rem 0 0 0'}}></FiChevronRight>
-                            </div>
-                            {clickedSubcategory === i && (
-                            <div className='subsubcategories'>
-                                <div className='subsubcategories_content'>
-                                {subcategory.subsubcategories.map((subsubcategory, j) => (
-                                    <li key={j}>
-                                        <label className='app__pointer'><p style={{fontSize:'14px', margin: '0'}}>{subsubcategory}</p>
+                <div className='category_details_body'>
+                    <div className='category_details_body_1'>
+                        {category.subcategories.map((subcategory, i) => (
+                            <li key={i}>
+                            <div>
+                                <div className={`app__pointer category_details_body_1_sub ${clickedSubcategory === i ? ' clickedSubcategory' : ''}`} onClick={() => setClickedSubcategory(i)}>
+                                    <p style={{margin:'0 1rem 0 0'}}>{subcategory.name}</p>
+                                    <FiChevronRight className='ok'/>
+                                </div>
+                                {clickedSubcategory === i && (
+                                <div className='subsubcategories' style={{display:'none'}}>
+                                    <div className='subsubcategories_content'>
+                                    {subcategory.subsubcategories.map((subsubcategory, j) => (
+                                        <li key={j}>
+                                        <label className='app__pointer'>
+                                            <p style={{fontSize:'14px', margin: '0'}}>{subsubcategory}</p>
                                             <input 
-                                                style={{display:'none'}}
-                                                type="radio" 
-                                                name="CriarAnuncioRadio" 
-                                                value={[category.name, subcategory.name, subsubcategory]} 
-                                                onChange={(e) => {setFormData({ ...formData, categoria: e.target.value })}}
-                                                onClick={toggleActiveModal}>
+                                            style={{display:'none'}}
+                                            type="radio" 
+                                            name="CriarAnuncioRadio" 
+                                            value={[category.name, subcategory.name, subsubcategory]} 
+                                            onChange={(e) => {setFormData({ ...formData, categoria: e.target.value })}}
+                                            onClick={toggleActiveModal}>
+                                            </input> 
+                                        </label>
+                                        </li>
+                                    ))}
+                                    </div>
+                                </div>
+                                )}
+                            </div>
+                            </li>
+                        ))}
+                    </div>
+                    <div className='category_details_body_2'>
+                        <div className='subsubcategories'>
+                            <div className='subsubcategories_content'>
+                            {category.subcategories.map((subcategory, i) => (
+                                clickedSubcategory === i && (
+                                subcategory.subsubcategories.map((subsubcategory, j) => (
+                                    <li key={j}>
+                                        <label className='app__pointer'>
+                                            <p style={{fontSize:'14px', margin: '0'}}>{subsubcategory}</p>
+                                            <input 
+                                            style={{display:'none'}}
+                                            type="radio" 
+                                            name="CriarAnuncioRadio" 
+                                            value={[category.name, subcategory.name, subsubcategory]} 
+                                            onChange={(e) => {setFormData({ ...formData, categoria: e.target.value })}}
+                                            onClick={toggleActiveModal}>
                                             </input> 
                                         </label>
                                     </li>
-                                ))}
-                                </div>
+                                ))
+                                )
+                            ))}
                             </div>
-                            )}
                         </div>
-                    </li>
-                    ))}
-                </ul>
+                    </div>
+                </div>
             </div>
         );
     };

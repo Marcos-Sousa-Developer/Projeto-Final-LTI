@@ -113,20 +113,6 @@ img, picture {
   opacity: 1;
 }
 
-.category_details .teste1 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-}
-.category_details .subsubcategories {
-  height: 100%;
-  position: relative;
-}
-.category_details .subsubcategories_content {
-  position: absolute;
-  width: 100%;
-}
-
 .app__anuncio {
   margin: 1rem auto 2rem;
 }
@@ -335,7 +321,7 @@ img, picture {
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 30rem;
-  min-height: 30rem;
+  min-height: 33rem;
   padding: 2rem;
   z-index: 1000;
   background: white;
@@ -407,6 +393,34 @@ img, picture {
   max-height: 400px;
   margin-left: 1rem;
   transition: all 350ms ease;
+}
+.app__anuncio_modal_body .category_details .category_details_body {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.app__anuncio_modal_body .category_details .category_details_body_1_sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.app__anuncio_modal_body .category_details .category_details_body_1_sub p, .app__anuncio_modal_body .category_details .category_details_body_1_sub .ok > * {
+  transition: all 150ms ease-in;
+}
+.app__anuncio_modal_body .category_details .category_details_body_1_sub:hover p, .app__anuncio_modal_body .category_details .category_details_body_1_sub:hover .ok > * {
+  color: rgba(235, 92, 31, 0.8);
+}
+.app__anuncio_modal_body .category_details .category_details_body .subsubcategories {
+  position: absolute;
+  top: 0;
+}
+.app__anuncio_modal_body .category_details .category_details_body .subsubcategories_content li p {
+  padding-bottom: 0.5rem;
+}
+.app__anuncio_modal_body .clickedSubcategory p, .app__anuncio_modal_body .clickedSubcategory .ok > * {
+  color: rgba(235, 92, 31, 0.8);
 }
 
 @media screen and (max-width: 1500px) {
