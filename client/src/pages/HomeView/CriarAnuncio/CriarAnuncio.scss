@@ -1,7 +1,7 @@
 @import '../../../index.scss';
 
 $transition-sidebar: all 350ms ease;
-$overlay-bg:        hsla(0, 0%, 9%, 0.863);
+$overlay-bg:        hsla(0, 0%, 10%, 0.85);
 
 .app__anuncio{
     margin: 1rem auto 2rem;
@@ -35,14 +35,8 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
 
         &_generalInfo{
             display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 6rem;
-
-            &_1{
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 6rem;
-            }
+            grid-template-columns: 2fr auto 2fr;
+            gap: 4rem;
         }
 
         &_productInfo{
@@ -78,6 +72,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
             align-items: center;
             justify-content: center;
             border-radius: 10px;
+            transition: all 150ms ease-in;
             input{
                 display: none;
             }
@@ -85,6 +80,9 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+            }
+            &:hover{
+                border: 3px solid rgba(235, 92, 31, 0.8);
             }
         }
 
@@ -121,6 +119,8 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
     }
 }
 
+//ProgressBar
+/*
 .app__anuncio_progressBar{
     width: 60%;
     margin: 1rem auto;
@@ -177,12 +177,12 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
         background-color: $blue;
     }
 }
-
+*/
 //Category Modal
 
 .buttonToggleModal_area{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     gap: 3rem;
 
     &_selected_category{
@@ -198,7 +198,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
     color: black;
     border-radius: 10px;
     border: $border;
-    transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in;
     align-self: start;
     text-align: center;
 
@@ -258,10 +258,6 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
     &_body{
         grid-column: span 2;
         //overflow: auto;
-
-        .categoria{
-            //display: block;
-        }
 
         ul{
             margin: 0;
@@ -341,6 +337,10 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
                     justify-content: space-between;
                     align-items: center;
                     margin-bottom: 1rem;
+
+                    p{
+                        margin: 0 1rem 0 0;
+                    }
             
                     p, .ok>*{
                         transition: all 150ms ease-in;
@@ -351,6 +351,11 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
                             color:rgba(235, 92, 31, 0.8);
                         }
                     }
+                }
+
+                &_2 p{
+                    font-size: 14px;
+                    margin: 0;
                 }
             
                 .subsubcategories{
@@ -382,7 +387,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
             padding: 1rem 3rem 2rem 3rem;
         }
 
-        &_generalInfo, &_generalInfo_1{
+        &_generalInfo{
             gap: 2rem;
         }
 
@@ -398,8 +403,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
     }
 
     .buttonToggleModal_area{
-        gap: 1rem;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr 2fr;
     }
 
     .app__anuncio_content{
@@ -408,11 +412,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
         }
 
         &_generalInfo{
-            grid-template-columns: 2fr 1fr;
-        }
-
-        &_generalInfo, &_generalInfo_1{
-            gap: 1rem;
+            grid-template-columns: 2fr 1fr 3fr;
         }
 
         &_productInfo{
@@ -421,7 +421,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
     }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 800px) {
     .app__anuncio_progressBar{
         margin: 1rem auto;
         width: 80%;
@@ -432,7 +432,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
     }
 
     .buttonToggleModal_area{
-        grid-template-columns: 1fr 1fr;
+        display: flex;
     }
 
     .app__anuncio_content{
@@ -441,8 +441,12 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
         }
 
         &_generalInfo{
-            grid-template-columns: 1fr;
-            gap: 0;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem 2rem;
+
+            .app__anuncio_content_generalInfo_categoria{
+                grid-column: span 2;
+            }
         }
 
         &_productInfo{
@@ -463,6 +467,44 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
         .app__anuncio_image_selected_img{
             width: 80px;
             height: 60px;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .buttonToggleModal_area{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .app__anuncio_modal{
+        min-width: 20rem;
+        min-height: 450px;
+        padding: 1rem;
+
+        .category_details{
+
+            & .category_details_body{
+                gap: 1rem;
+                grid-template-columns: 1.5fr 1fr;
+
+                &_1_sub p{
+                    font-size: 14px;
+                    margin: 0 .5rem 0 0;
+                }
+
+                &_1_sub{
+                    align-items: start;
+
+                    .ok{
+                        margin-top: .125rem;
+                    }
+                }
+
+                &_2 p{
+                    font-size: 12px;
+                }
+            }
         }
     }
 }
