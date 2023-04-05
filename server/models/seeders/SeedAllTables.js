@@ -30,6 +30,29 @@ exec('node ./models/seeders/SeederProductTable.js',
         }
 });
 
+exec('node ./models/seeders/SeederProductTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+exec('node ./models/seeders/SeederInventory.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
+
+//TODO
+/* Changed with seed All Category, subCategory and subsubcategory
 exec('node ./models/seeders/SeederCategoryTable.js',
     function (error, stdout) {
 
@@ -59,7 +82,11 @@ exec('node ./models/seeders/SeederSubSubCategoryTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/
 
+//TODO
+//Fake data not correct
+/*
 exec('node ./models/seeders/SeederAdTable.js',
     function (error, stdout) {
 
@@ -69,6 +96,7 @@ exec('node ./models/seeders/SeederAdTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/
 
 
 exec('node ./models/seeders/SeederOrderTable.js',
@@ -81,6 +109,8 @@ exec('node ./models/seeders/SeederOrderTable.js',
         }
 });
 
+//TODO does not work because some database elements, miss names
+/*
 exec('node ./models/seeders/SeederVehicleTable.js',
     function (error, stdout) {
 
@@ -90,6 +120,7 @@ exec('node ./models/seeders/SeederVehicleTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/
 
 exec('node ./models/seeders/SeederProductionUnitTable.js',
     function (error, stdout) {
@@ -101,7 +132,7 @@ exec('node ./models/seeders/SeederProductionUnitTable.js',
         }
 });
 
-exec('node ./models/seeders/SeedOrderedProductTable.js',
+exec('node ./models/seeders/SeederOrderedProductTable.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -111,6 +142,8 @@ exec('node ./models/seeders/SeedOrderedProductTable.js',
         }
 });
 
+//TODO does not work because not have json data
+/*
 exec('node ./models/seeders/SeedProductProductionUnitTable.js',
     function (error, stdout) {
 
@@ -120,3 +153,4 @@ exec('node ./models/seeders/SeedProductProductionUnitTable.js',
              console.log('exec error: ' + error);
         }
 });
+*/

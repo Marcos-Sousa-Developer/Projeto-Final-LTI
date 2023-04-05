@@ -1,8 +1,9 @@
 let pool = require('../../config/dbConfigLocal')
 
 const statement = "CREATE TABLE subsubcategories ( " +
-                  "id int NOT NULL, " + 
-                  "name varchar(255) NOT NULL, " + 
+                  "id int NOT NULL AUTO_INCREMENT, " + 
+                  "name varchar(255) NOT NULL, " +
+                  "characteristics varchar(1000) NOT NULL, " +
                   "id_subcategory int, " +
                   "PRIMARY KEY (id))";
 

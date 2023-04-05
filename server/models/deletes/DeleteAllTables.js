@@ -130,6 +130,16 @@ exec('node ./models/deletes/DeleteOrderedProductTable.js',
         }
 });
 
+exec('node ./models/deletes/DeleteSupplierProductsTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
 exec('node ./models/deletes/DeleteProductProductionUnitTable.js',
     function (error, stdout) {
 
