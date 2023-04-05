@@ -35,7 +35,8 @@ const ProductInfo = ({ formData, setFormData }) => {
                 <textarea 
                     style={{width:'100%', maxHeight: '170px', minHeight:'120px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
                     form='anuncio_form' 
-                    maxLength="600" 
+                    maxLength="500" 
+                    placeholder='Indique alguns detalhes sobre o seu produto'
                     onInput={(e) => {
                         setText(e.target.value);
                         setFormData({ ...formData, descricao: e.target.value })
@@ -74,14 +75,22 @@ const ProductInfo = ({ formData, setFormData }) => {
                     <p style={{margin: '0', color: '#EB5C1F'}}>Atingiu o limite de imagens!</p>
                 }
             </div>
-            <div className='inputField'>
-                <p>Telemóvel</p>
-                <input type='tel' required onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
+            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem'}}>
+                <div className='inputField'>
+                    <p>Telemóvel</p>
+                    <input type='tel' required placeholder='912345678' onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
+                </div>
+                <div className='inputField'>
+                    <p>Email</p>
+                    <input type='email' required placeholder='exemplo@gmail.com' onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
+                </div> 
             </div>
-            <div className='inputField'>
-                <p>Email</p>
-                <input type='email' required onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
-            </div>            
+            <div>
+                <p>Unidades de Produção</p>
+                <div>
+
+                </div>
+            </div>           
         </div>
     )
 }

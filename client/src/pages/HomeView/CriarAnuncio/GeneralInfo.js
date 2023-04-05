@@ -30,7 +30,7 @@ const GeneralInfo = ({ formData, setFormData }) => {
                             <li key={i}>
                             <div>
                                 <div className={`app__pointer category_details_body_1_sub ${clickedSubcategory === i ? ' clickedSubcategory' : ''}`} onClick={() => setClickedSubcategory(i)}>
-                                    <p style={{margin:'0 1rem 0 0'}}>{subcategory.name}</p>
+                                    <p>{subcategory.name}</p>
                                     <FiChevronRight className='ok'/>
                                 </div>
                                 {clickedSubcategory === i && (
@@ -66,7 +66,7 @@ const GeneralInfo = ({ formData, setFormData }) => {
                                 subcategory.subsubcategories.map((subsubcategory, j) => (
                                     <li key={j}>
                                         <label className='app__pointer'>
-                                            <p style={{fontSize:'14px', margin: '0'}}>{subsubcategory}</p>
+                                            <p>{subsubcategory}</p>
                                             <input 
                                             style={{display:'none'}}
                                             type="radio" 
@@ -146,22 +146,20 @@ const GeneralInfo = ({ formData, setFormData }) => {
 
     return (
     <div className='app__anuncio_content_generalInfo'>
-        <div className='app__anuncio_content_generalInfo_1'>
             <div className='inputField'>
                 <p>Título</p>
-                <input type='text' value={formData.titulo} required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
+                <input type='text' value={formData.titulo} placeholder='título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
             </div>
             <div className='inputField'>
                 <p>Preço (€)</p>
                 <input type='number' value={formData.preco} step="0.01" min="0" required onChange={(e) => {setFormData({ ...formData, preco: e.target.value });}}/>
             </div>
-        </div>
-        <div className='app__anuncio_content_generalInfo_2'>
-            <p>Categoria</p>
-            <ButtonToggleModal onClick={toggleActiveModal}/>
-            <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
-            <Modal className={ activeModal ? 'activeModal' : null}/>
-        </div>
+            <div className='app__anuncio_content_generalInfo_categoria'>
+                <p>Categoria</p>
+                <ButtonToggleModal onClick={toggleActiveModal}/>
+                <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
+                <Modal className={ activeModal ? 'activeModal' : null}/>
+            </div>
     </div>
     )
 }

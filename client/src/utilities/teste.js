@@ -107,7 +107,7 @@ export const teste = [
                     ],
                     "features": [
                         {
-                        "Género": ["Menino","Menina"]
+                            Género: ["Menino","Menina"]
                         }
                     ]
                 },
@@ -349,8 +349,8 @@ export const teste = [
         ],
         features: [
             {
-                "Marca": "",
-                "Estado": ["Novo","Usado"]
+                Marca: "",
+                Estado: ["Novo","Usado"]
             }
         ]
     },
@@ -365,7 +365,7 @@ export const teste = [
                 ],
                 features: [
                     {
-                    Género: ["Homem","Mulher"]
+                        Género: ["Homem","Mulher"]
                     }
                 ]
             },
@@ -377,7 +377,7 @@ export const teste = [
                 ],
                 features: [
                     {
-                    Género: ["Homem","Mulher"]
+                        Género: ["Homem","Mulher"]
                     }
                 ]
             },
@@ -394,7 +394,7 @@ export const teste = [
                 ],
                 features: [
                     {
-                    Género: ["Homem","Mulher"]
+                        Género: ["Homem","Mulher"]
                     }
                 ]
             },
@@ -410,7 +410,7 @@ export const teste = [
                 ],
                 features: [
                     {
-                    Género: ["Homem","Mulher"]
+                        Género: ["Homem","Mulher"]
                     }
                 ]
             },
@@ -429,15 +429,15 @@ export const teste = [
                 ],
                 features: [
                     {
-                    Género: ["Homem","Mulher"]
+                        Género: ["Homem","Mulher"]
                     }
                 ]
             }
         ],
         features: [
             {
-            Marca: "",
-            Estado: ["Novo","Usado"]
+                Marca: "",
+                Estado: ["Novo","Usado"]
             }
         ]
     },
@@ -562,8 +562,8 @@ export const teste = [
         ],
         features: [
             {
-                "Marca": "",
-                "Estado": ["Novo","Usado"]
+                Marca: "",
+                Estado: ["Novo","Usado"]
             }
         ]
     },

@@ -16,6 +16,7 @@ import FAQ from './FAQ/FAQ';
 import CriarAnuncio from './CriarAnuncio/CriarAnuncio';
 import Anunciar from './CriarAnuncio/Anunciar';
 import Category from './Category/Category';
+import ProductPage from './ProductPage/ProductPage';
 
 export {
     Home,
@@ -35,4 +36,5 @@ export {
     Anunciar,
     ProductTest,
     Category,
+    ProductPage,
 };

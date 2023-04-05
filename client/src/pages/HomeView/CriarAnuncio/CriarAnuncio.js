@@ -19,7 +19,7 @@ function CriarAnuncio() {
 
     const [formData, setFormData] = useState({
         titulo: "",
-        preco: 0,
+        preco: 0.00,
         descricao: "",
         categoria: [],
         nome: "",
@@ -28,7 +28,7 @@ function CriarAnuncio() {
         localizacao: "",
     });
 
-    const FormTitles = ["Dados Gerais", "Detalhes do Produto"];
+    const FormTitles = ["Detalhes do Produto", "Detalhes do Anúncio"];
 
     const PageDisplay = () => {
       if (page === 0) {
@@ -137,7 +137,7 @@ function CriarAnuncio() {
                 <div className='app__anuncio_inputArea'>
                     <div className='app__anuncio_progressBar'>
                         <span>
-                            {page == 0 ? '50%' : '100%'}
+                            {/*page == 0 ? '50%' : '100%'*/}
                         </span>
                         <div style={{ width: page == 0 ? "50%"  : "100%" }}></div>
                     </div>
