@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EEEEEE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.5333333333);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #EB5C1F;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: black;
+  background-color: white;
+  font-family: "Poppins", sans-serif;
+  list-style: none;
+  scroll-behavior: smooth;
+}
+
+img, picture {
+  max-width: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__container {
+  max-width: 1650px;
+  width: 95%;
+}
+
+.app__pointer {
+  cursor: pointer;
+}
+
+.app__icon_effect > * {
+  color: black;
+  transition: color 0.1s ease-in-out;
+}
+
+.app__icon_effect:hover > * {
+  color: #EB5C1F;
+}
+
+.app__text_effect {
+  color: black;
+  position: relative;
+  border-bottom-width: 0%;
+  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.app__text_effect:hover {
+  color: #EB5C1F;
+}
+.app__text_effect::before {
+  content: "";
+  position: absolute;
+  border-radius: 100vmax;
+  bottom: -2px;
+  right: 0;
+  width: 0;
+  height: 3px;
+  background-color: #EB5C1F;
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.app__text_effect:hover::before {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
+
+.search_close_btn::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  position: relative;
+  right: -5px;
+  height: 24px;
+  width: 24px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
+  cursor: pointer;
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+.search_close_btn::-webkit-search-cancel-button:hover {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="darkorange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
+}
+
+.main__action_btn {
+  background-color: #EB5C1F;
+  color: white;
+  padding: 8px 50px;
+  border-radius: 15px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.main__action_btn:hover {
+  opacity: 1;
+}
+
+.app__anunciar {
+  margin: 1rem auto 2rem;
+}
+.app__anunciar_content {
+  border: 3px solid #EEEEEE;
+}/*# sourceMappingURL=Anunciar.css.map */

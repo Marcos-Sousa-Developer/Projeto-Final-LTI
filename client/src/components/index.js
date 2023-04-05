@@ -1,4 +1,5 @@
 import Navbar from './Navbar/Navbar';
+import Searchbar from './Navbar/Searchbar/Searchbar';
 import NavbarSupplier from './Navbar/NavbarSupplier';
 import Footer from './Footer/Footer';
 import SignInC from './SignInC/SignInC';
@@ -9,6 +10,7 @@ import InputField from './InputField/InputField';
 
 export {
   Navbar,
+  Searchbar,
   NavbarSupplier,
   Footer,
   SignInC,

@@ -14,6 +14,7 @@ import SignUp from './SignUp';
 import NotFound from './NotFound/NotFound';
 import FAQ from './FAQ/FAQ';
 import CriarAnuncio from './CriarAnuncio/CriarAnuncio';
+import Anunciar from './CriarAnuncio/Anunciar';
 import Category from './Category/Category';
 
 export {
@@ -31,6 +32,7 @@ export {
     NotFound,
     FAQ,
     CriarAnuncio,
+    Anunciar,
     ProductTest,
     Category,
 };
