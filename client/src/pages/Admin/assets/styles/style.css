@@ -8,6 +8,20 @@
   scroll-behavior: smooth; 
 }
 
+#app_table_paginate a{
+  display: inline-block;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+
+}
+#app_table_paginate a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#app_table_paginate a:hover:not(.active) {background-color: #ddd;}
+
 .table-striped tbody tr:hover {
   background-color: #eb5c1f55;
   cursor: pointer;

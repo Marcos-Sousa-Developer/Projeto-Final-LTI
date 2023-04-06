@@ -8,10 +8,17 @@ const statement = "CREATE TABLE suppliers ( " +
                   "email varchar(255) NOT NULL, " +
                   "nif varchar(255) NOT NULL, " +
                   "mobile_number varchar(255) NOT NULL, " +
+                  "continent varchar(255) NOT NULL, " +
+                  "country varchar(255) NOT NULL, " + 
+                  "district varchar(255) NOT NULL, " +
+                  "city varchar(255) NOT NULL, " + 
+                  "town varchar(255) NOT NULL, " + 
                   "address varchar(255) NOT NULL, " +
+                  "postal_code varchar(255) NOT NULL, " + 
                   "status BOOLEAN NOT NULL default 1, " + 
                   "products_list varchar(255), " +
                   "orders varchar(255), " +
+                  "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "UNIQUE (email, nif, mobile_number), " +
                   "PRIMARY KEY (id))";    
 

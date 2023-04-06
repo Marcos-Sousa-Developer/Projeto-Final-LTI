@@ -1,27 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-  import { Bar } from 'react-chartjs-2';
+import {Chart as ChartJS,CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend,} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
   
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-  );
+  ChartJS.register(CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend);
 
   const labels = ['freguesia', 'município', 'distrito', 'país', 'continente', 'mundo'];
-
-  let tableContent = {}
 
   const options = {
     responsive: true,
@@ -41,7 +24,7 @@ import {
     datasets: [
       {
         label: 'Distribuição dos produtos encomendados',
-        data: labels.map((label) => tableContent[label] ?? 0),
+        data: labels.map((label) => 0),
       }
     ],
   };
@@ -70,10 +53,7 @@ function BarOrderReports_location({datas}) {
   useEffect(() => {
 
     if(datas !== {}) {
-
       setData()
-
-
     }
   })
 
@@ -82,7 +62,6 @@ function BarOrderReports_location({datas}) {
         {
           show &&  <Bar options={options} data={data} />
         }
-        
         <br></br>
         <hr></hr>
     </div>

@@ -5,7 +5,7 @@ import Head from "./components/Head"
 import TopBar from "./components/TopBar"
 import Aside from "./components/Aside"
 import Footer from "./components/Footer"
-import GetOrdersReports from './components/Managements/GetOrdersReports'
+import GetOrdersReports from './components/Reports/GetOrdersReports'
 
 function Relatorios_Encomendas() {
   return (

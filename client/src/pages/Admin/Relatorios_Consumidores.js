@@ -5,7 +5,7 @@ import Head from "./components/Head"
 import TopBar from "./components/TopBar"
 import Aside from "./components/Aside"
 import Footer from "./components/Footer"
-import GetConsumersReports from './components/Managements/GetConsumersReports'
+import GetConsumersReports from './components/Reports/GetConsumersReports'
 
 function Relatorios_Consumidores() {
   

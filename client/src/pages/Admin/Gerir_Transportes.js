@@ -5,7 +5,7 @@ import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import FilterSearch from "./components/Managements/FilterSearch";
+import FilterSearch from "./components/Filters/FilterSearch";
 
 
 // user can be consumer, supplier or admin

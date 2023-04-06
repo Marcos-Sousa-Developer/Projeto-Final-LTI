@@ -1,27 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-  import { Bar } from 'react-chartjs-2';
+import {Chart as ChartJS, CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend,} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
   
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-  );
+  ChartJS.register(CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend);
 
-  const labels = ['0-10 km', '10-50 km', '50-100 km', '100-500 km,', '500-1000 km', 'more than 1000 km'];
-
-  let tableContent = {}
+  const labels = ['0-10 km', '10-50 km', '50-100 km', '100-500 km', '500-1000 km', 'more than 1000 km'];
 
   const options = {
     responsive: true,
@@ -41,7 +24,7 @@ import {
     datasets: [
       {
         label: 'Distribuição dos produtos encomendados em km',
-        data: labels.map((label) => tableContent[label] ?? 0),
+        data: labels.map((label) =>  0),
       }
     ],
   };
@@ -68,12 +51,8 @@ function BarOrderReports_km({datas}) {
   }
 
   useEffect(() => {
-
     if(datas !== {}) {
-
       setData()
-
-
     }
   })
 

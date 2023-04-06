@@ -1,15 +1,15 @@
 let dbConnection = require('./DatabaseController')
 
 /**
- * Async fucntion to get all users and await from database response
+ * Async function to get all or some ordered products and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllorSomeAdmins = async function (req, res) { 
+const getAllorSomeOrderedProducts = async function (req, res) { 
 
-    let statement = "SELECT * FROM admins";  
-    
+    let statement = "SELECT * FROM orderedProducts";
+
     if(Object.keys(req.query).length !== 0) { 
 
         let params = {} 
@@ -47,15 +47,16 @@ const getAllorSomeAdmins = async function (req, res) {
         }
     }
 
-    let result = await dbConnection(statement) 
-    
-    if (result.includes("error")) {
-        return res.status(500).json("Not possible to get all admins");
+
+    let result = await dbConnection(statement)  
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to get all ordered products");
     } else if (result.length < 1) {
-        return res.send("There is no admin in the database");
+        return res.send("There is no ordered products in the database");
     }
     
-    return res.send(result) 
-} 
+    return res.send(result)
+}
 
-module.exports = {getAllorSomeAdmins}
+module.exports = {getAllorSomeOrderedProducts}
