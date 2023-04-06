@@ -40,7 +40,7 @@ exec('node ./models/seeders/SeederProductTable.js',
         }
 });
 
-exec('node ./models/seeders/SeederInventory.js',
+/*exec('node ./models/seeders/SeederInventory.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -48,7 +48,7 @@ exec('node ./models/seeders/SeederInventory.js',
         if (error !== null) {
              console.log('exec error: ' + error);
         }
-});
+});*/
 
 
 //TODO
@@ -84,9 +84,6 @@ exec('node ./models/seeders/SeederSubSubCategoryTable.js',
 });
 */
 
-//TODO
-//Fake data not correct
-/*
 exec('node ./models/seeders/SeederAdTable.js',
     function (error, stdout) {
 
@@ -96,8 +93,6 @@ exec('node ./models/seeders/SeederAdTable.js',
              console.log('exec error: ' + error);
         }
 });
-*/
-
 
 exec('node ./models/seeders/SeederOrderTable.js',
     function (error, stdout) {
@@ -109,8 +104,6 @@ exec('node ./models/seeders/SeederOrderTable.js',
         }
 });
 
-//TODO does not work because some database elements, miss names
-/*
 exec('node ./models/seeders/SeederVehicleTable.js',
     function (error, stdout) {
 
@@ -120,7 +113,6 @@ exec('node ./models/seeders/SeederVehicleTable.js',
              console.log('exec error: ' + error);
         }
 });
-*/
 
 exec('node ./models/seeders/SeederProductionUnitTable.js',
     function (error, stdout) {
@@ -142,9 +134,8 @@ exec('node ./models/seeders/SeederOrderedProductTable.js',
         }
 });
 
-//TODO does not work because not have json data
-/*
-exec('node ./models/seeders/SeedProductProductionUnitTable.js',
+
+/*exec('node ./models/seeders/SeedProductProductionUnitTable.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -152,5 +143,4 @@ exec('node ./models/seeders/SeedProductProductionUnitTable.js',
         if (error !== null) {
              console.log('exec error: ' + error);
         }
-});
-*/
+});*/
