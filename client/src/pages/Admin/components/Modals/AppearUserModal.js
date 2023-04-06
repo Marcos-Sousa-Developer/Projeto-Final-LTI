@@ -35,9 +35,9 @@ function AppearUserModal({url, element, isShowingModal, element_type }) {
             </div>
 
             
-              <div className="modal-body" style={{maxHeight: "10px"}}>
+              <div className="modal-body h-auto">
                 <div style={{textAlign: "center" }}> 
-                  {state[element_type]} {element.id ?? element.EAN ?? element.licence_plate} está {element.status == 0 ? "ativado." : "desativado."}
+                  {state[element_type]} { element.uid ?? element.EAN ?? element.licence_plate ?? element.id} está {element.status == 0 ? "desativado." : "ativado."}
                 </div>
               </div>
             
@@ -46,7 +46,7 @@ function AppearUserModal({url, element, isShowingModal, element_type }) {
               <a href="#" className="btn btn-primary">Ver Detalhes</a>
             </div>
 
-            <button type="button" onClick={() => handleelement()} className="btn btn-warning">
+            <button type="button" className="btn btn-warning">
               {element.status == 0 ? "Ativar" : "Desativar"}
             </button>
 

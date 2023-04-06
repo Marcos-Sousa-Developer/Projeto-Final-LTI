@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import BarConsumersReports from '../BarReports/BarConsumersReports'
+import BarUsersReports from '../BarReports/BarUsersReports'
 import getAllFromDB from '../../../../hooks/getAllFromDB'
 
 let tableData = {}
 
-function GetConsumersReports() {
+function GetUsersReports({url, type}) {
 
     const [continent, setContinent] = useState("");
     const [country, setCountry] = useState("");
@@ -15,10 +15,10 @@ function GetConsumersReports() {
     const [total_Orders, setTotalOrders] = useState("");
     const [dateInit, setDateInit] = useState(new Date(2023, 0, 1).toLocaleDateString()); 
     const [dateFinal, setDateFinal] = useState(new Date().toLocaleDateString()); 
-    const [result, setResult] = useState(null)
     const [showBarResult, setShowBarResult] = useState(true)
-    const [showExportResult, setShowExportResult] = useState(false)
+    const [dateError, setDateError] = useState(false)
     const [error, setError] = useState(false)
+
     
     /**
      * @description fetch data from DB
@@ -27,13 +27,9 @@ function GetConsumersReports() {
 
         if(dateInit < dateFinal) {
 
-            setError(false)
+            setDateError(false)
 
             setShowBarResult(false)
-
-            let allEmpty = [continent, country, 
-                            district, city, town,
-                            status, total_Orders, dateInit, dateFinal].every(item => item === "");
 
             const params = {
                 continent: continent,
@@ -47,25 +43,21 @@ function GetConsumersReports() {
                 created_at_final: dateInit.includes("/") ? dateFinal.substring(6,10) + '-' + dateFinal.substring(3,5) + '-' + dateFinal.substring(0,2) : dateFinal
             }
             let response = ""
-            if(allEmpty == true) {  
-                response = await getAllFromDB('/consumers') 
-                setResult(response)
+                
+            try {
+                response = await getAllFromDB(url,params) 
                 mapData(response)
+                setError(false)
             }
-    
-            else {
-                response = await getAllFromDB('/consumers',params) 
-                setResult(response)
-                mapData(response)    
+            catch(e) {
+                setError(true)
             }
 
             setShowBarResult(true)
-            setShowExportResult(true)
-
         }
 
         else {
-            setError(true)
+            setDateError(true)
         }
     }
 
@@ -96,7 +88,7 @@ function GetConsumersReports() {
   return (
     <>
         {
-            showBarResult ? (<BarConsumersReports datas={tableData}></BarConsumersReports>) : (
+            showBarResult ? (<BarUsersReports datas={tableData} type={type}></BarUsersReports>) : (
                 <div className="text-center">
                     <div className="spinner-border" style={{width: "10rem", height: "10rem", color: "coral"}} role="status"></div>
                 </div>
@@ -105,7 +97,7 @@ function GetConsumersReports() {
        
 
         <br></br>
-        <h5>Obter relátorio de utilizadores</h5>
+        <h5>Obter relátorio de {type}</h5>
 
         <small style={{color:"red"}}>
         Nenhum dos dados é obrigatório, porém quanto menos especifico
@@ -119,17 +111,17 @@ function GetConsumersReports() {
         <br></br>
             <div className="row">
 
-                <div className="form-group col-md-2 mb-3">
+                <div className="form-group col-md-2 mb-2">
                     <label htmlFor="continent">Continente</label>
                     <input className="form-control" id="continent" onChange={(event) => setContinent(event.target.value)}></input>
                 </div>
 
-                <div className="form-group col-md-2 mb-3">
+                <div className="form-group col-md-2 mb-2">
                     <label htmlFor="country">País</label>
                     <input className="form-control" id="country" onChange={(event) => setCountry(event.target.value)}></input>
                 </div>
 
-                <div className="form-group col-md-2 mb-3">
+                <div className="form-group col-md-2 mb-2">
                     <label htmlFor="district">Distrito</label>
                     <input className="form-control" id="district" onChange={(event) => setDistrict(event.target.value)}></input>
                 </div>
@@ -144,18 +136,18 @@ function GetConsumersReports() {
                     <input className="form-control" id="town" onChange={(event) => setTown(event.target.value)}></input>
                 </div>
 
-                <div className="form-group col-md-4 mb-3">
+                <div className="form-group col-md-4 mb-4">
                     <label htmlFor="created_at">Periodo inicial da criação de conta</label>
                     <input type="date" className="form-control" id="created_at" onChange={(event) => setDateInit(event.target.value)}></input>
                 </div>
 
-                <div className="form-group col-md-4 mb-3">
+                <div className="form-group col-md-4 mb-4">
                     <label htmlFor="created_at">Periodo final da criação de conta</label>
                     <input type="date" className="form-control" id="created_at" onChange={(event) => setDateFinal(event.target.value)}></input>
                 </div>
 
 
-                <div className="form-group col-md-2 mb-3">
+                <div className="form-group col-md-2 mb-2">
                     <label htmlFor="status">Estado</label>
                     <select className="form-select" onChange={(event) => setStatus(event.target.value)} aria-label="Default select example">
                         <option defaultValue value=""> Selecionar todos</option>
@@ -164,7 +156,7 @@ function GetConsumersReports() {
                     </select>
                 </div>
 
-                <div className="form-group col-md-2 mb-3">
+                <div className="form-group col-md-2 mb-2">
                     <label htmlFor="orders">NºEncomendas</label>
                     <input className="form-control" id="orders" onChange={(event) => setTotalOrders(event.target.value)}></input>
                 </div>
@@ -174,32 +166,26 @@ function GetConsumersReports() {
         </form>
 
         {
-            error && (
+            dateError && (
                 <div class="d-flex justify-content-center">
                     <big style={{color: "red"}}>Periodo inválido, por favor escolha um periodo válido!</big>
                 </div>
             )
         }
 
-       
-                
+        {
+            error && (
+                <div class="d-flex justify-content-center">
+                    <big style={{color: "red"}}>Nenhum dado encontrado.</big>
+                </div>
+            )
+        }
+      
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-primary" onClick={fetchResults}>Obter relatório</button>
-            
-            &nbsp;&nbsp;&nbsp;
-            {/*
-                showExportResult && (
-                    <button type="button" class="btn btn-success" onClick={fetchResults}>exportar relatório</button>
-                )
-            */}
-        </div>
-       
-
-       
-
-               
+        </div>    
     </>
   )
 }
 
-export default GetConsumersReports
+export default GetUsersReports

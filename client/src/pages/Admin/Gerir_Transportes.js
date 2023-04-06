@@ -5,7 +5,7 @@ import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import FilterSearch from "./components/Filters/FilterSearch";
+import FilterSearchVehicle from './components/Filters/FilterSearchVehicle';
 
 
 // user can be consumer, supplier or admin
@@ -39,10 +39,7 @@ function Gerir_Transportes() {
           </div>
           <section className="section dashboard">
 
-          <FilterSearch url={'/vehicles'} type={"vehicle"} name={"Tansportes"} filter1={"Nome ou iniciais do transporte"} filter2={"Matricula"} 
-              filter3={"Unidade de Produção"} filter4={"Capacidade"} filter5={"Data de Produção"}
-            >
-            </FilterSearch>
+            <FilterSearchVehicle></FilterSearchVehicle>
 
           </section>
         </main>

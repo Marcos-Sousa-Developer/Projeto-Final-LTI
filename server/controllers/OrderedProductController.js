@@ -36,10 +36,23 @@ const getAllorSomeOrderedProducts = async function (req, res) {
                 statement += " AND ";
             }
 
-            statement += key;
-            statement += `='`;
-            statement += value; 
-            statement += `'` ;
+            if(key != "price") {
+
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+
+            }
+            else{
+
+                statement += key;
+                statement += `<='`;
+                statement += value; 
+                statement += `'` ;
+
+            }
+
 
             if(nextKey != undefined){
                 statement += ` AND ` ;

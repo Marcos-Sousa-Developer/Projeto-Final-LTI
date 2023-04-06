@@ -123,14 +123,14 @@ function Aside() {
 
           <ul id="data-activity" className={showR} data-bs-parent="#sidebar-nav">
             <li>
-              <Link to="/admin/relatorios/cosumidores">
+              <Link to="/admin/relatorios/consumidores">
                 <i className="bi bi-circle"/>
                 <span>Relatório de Consumidores</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/admin">
+              <Link to="/admin/relatorios/fornecedores">
                 <i className="bi bi-circle"/>
                 <span>Relatório de Fornecedores</span>
               </Link>
@@ -143,12 +143,6 @@ function Aside() {
               </Link>
             </li>
 
-            <li>
-              <Link to="/admin">
-                <i className="bi bi-circle" />
-                <span>Relatório de Veiculos</span>
-              </Link>
-            </li>
           </ul>
         </li>
 

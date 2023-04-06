@@ -17,6 +17,7 @@ function GetOrdersReports() {
     const [dateFinal, setDateFinal] = useState(new Date().toLocaleDateString()); 
     const [showBarResult, setShowBarResult] = useState(true)
     const [showExportResult, setShowExportResult] = useState(false)
+    const [dateError, setDateError] = useState(false)
     const [error, setError] = useState(false)
     
     /**
@@ -26,9 +27,27 @@ function GetOrdersReports() {
 
         if(dateInit < dateFinal) {
 
-            setError(false)
+            setDateError(false)
 
             setShowBarResult(false)
+
+            tableKmData = {
+                '0-10 km':0, 
+                '10-50 km':0, 
+                '50-100 km':0, 
+                '100-500 km':0, 
+                '500-1000 km':0, 
+                'more than 1000 km':0
+            }
+
+            tableLocationData = {
+                'freguesia':0, 
+                'município':0, 
+                'distrito':0, 
+                'país':0, 
+                'continente':0, 
+                'mundo':0
+            }
 
             const params = {
                 product_category: category,
@@ -39,12 +58,16 @@ function GetOrdersReports() {
                 created_at_final: dateInit.includes("/") ? dateFinal.substring(6,10) + '-' + dateFinal.substring(3,5) + '-' + dateFinal.substring(0,2) : dateFinal
             }
     
-            let response = await getAllFromDB('/orderedProducts',params) 
-            if(typeof response == String) {
-                response = []
+            let response = ""
+            try {
+                response = await getAllFromDB('/orderedProducts',params) 
+                mapKmData(response)  
+                mapLocationData(response)  
+                setError(false)
             }
-            mapKmData(response)  
-            mapLocationData(response)  
+            catch(e) {
+                setError(true)
+            }
 
             setShowExportResult(true)
             setShowBarResult(true)
@@ -52,7 +75,7 @@ function GetOrdersReports() {
         }
 
         else {
-            setError(true)
+            setDateError(true)
         }
     }
 
@@ -61,15 +84,6 @@ function GetOrdersReports() {
      * @description set into tableKmData values
      */
     function mapKmData(datas) {  
-
-        tableKmData = {
-            '0-10 km':0, 
-            '10-50 km':0, 
-            '50-100 km':0, 
-            '100-500 km':0, 
-            '500-1000 km':0, 
-            'more than 1000 km':0
-        }
 
         datas.map((data) => { 
 
@@ -99,15 +113,6 @@ function GetOrdersReports() {
      * @description set into tableLocationData values
      */
     function mapLocationData(datas) {  
-
-        tableLocationData = {
-            'freguesia':0, 
-            'município':0, 
-            'distrito':0, 
-            'país':0, 
-            'continente':0, 
-            'mundo':0
-        }
 
         datas.map((data) => { 
 
@@ -210,11 +215,18 @@ function GetOrdersReports() {
         </form>
 
         {
-            error && (
+            dateError && (
                 <div class="d-flex justify-content-center">
                     <big style={{color: "red"}}>Periodo inválido, por favor escolha um periodo válido!</big>
                 </div>
-                
+            )
+        }
+
+        {
+            error && (
+                <div class="d-flex justify-content-center">
+                    <big style={{color: "red"}}>Nenhum dado encontrado.</big>
+                </div>
             )
         }
 

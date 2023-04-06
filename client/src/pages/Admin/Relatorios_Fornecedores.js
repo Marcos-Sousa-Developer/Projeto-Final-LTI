@@ -7,14 +7,14 @@ import Aside from "./components/Aside"
 import Footer from "./components/Footer"
 import GetUsersReports from './components/Reports/GetUsersReports'
 
-function Relatorios_Consumidores() {
+function Relatorios_Fornecedores() {
   
   return (
     <div>
 
       <HelmetProvider>
         <Helmet>
-          <title>Admin - Relatorios de Consumidores</title>
+          <title>Admin - Relatorios de Fornecedores</title>
         </Helmet>
       </HelmetProvider>
       <Head></Head>
@@ -24,13 +24,13 @@ function Relatorios_Consumidores() {
       <main id="main" className="main">
 
         <div className="pagetitle">
-          <h1>Relatorios de Consumidores</h1>
+          <h1>Relatorios de Fornecedores</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <Link to="/admin">Home</Link>
               </li>
-              <li className="breadcrumb-item active">Relatorios de Consumidores</li>
+              <li className="breadcrumb-item active">Relatorios de Fornecedores</li>
             </ol>
           </nav>
         </div>
@@ -38,7 +38,7 @@ function Relatorios_Consumidores() {
 
         <section className="section dashboard">
 
-         <GetUsersReports url={'/consumers'} type={"Consumidores"}></GetUsersReports>
+         <GetUsersReports url={'/suppliers'} type={"Fornecedores"}></GetUsersReports>
 
 
         </section>
@@ -48,4 +48,4 @@ function Relatorios_Consumidores() {
   )
 }
 
-export default Relatorios_Consumidores
+export default Relatorios_Fornecedores

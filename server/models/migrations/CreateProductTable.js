@@ -3,14 +3,15 @@ let pool = require('../../config/dbConfigLocal')
 const statement = "CREATE TABLE products ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
                   "EAN BIGINT NOT NULL, " +
-                  "name varchar(255) NOT NULL, " + 
-                  "production_date DATE NOT NULL, " +
-                  "description varchar(500) NOT NULL, " +
-                  "id_category int, " +
-                  "id_production_unit int, " +
-                  "status BOOLEAN DEFAULT 1, " +  
+                  "name varchar(200) NOT NULL DEFAULT 'Unknown', "+
+                  "description varchar(200) NOT NULL, " +
+                  "category_name varchar(200) NOT NULL, " +
+                  "subcategory_name varchar(200) NOT NULL, " +
+                  "subsubcategory_name varchar(200) NOT NULL, " +
+                  "default_characteristics varchar(200), " +
+                  "status BOOLEAN DEFAULT 1, " + 
+                  "created_at DATE DEFAULT (CURRENT_DATE), " + 
                   "PRIMARY KEY (id))";
-
 
 pool.query(statement, function(error, result) {
 

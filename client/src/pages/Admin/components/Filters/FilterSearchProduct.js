@@ -8,17 +8,13 @@ $.DataTable = require('datatables.net')
 
 let datas = null
 
-function FilterSearchUser({url,nameOfSearch,type}) {
+function FilterSearchProduct() {
 
-    const [uid,setUID] = useState("")
+    const [EAN,setEAN] = useState("")
     const [name,setName] = useState("")
-    const [email,setEmail] = useState("")
-    const [continent,setContinent] = useState("")
-    const [country,setCountry] = useState("")
-    const [district,setDistrict] = useState("")
-    const [city,setCity] = useState("")
-    const [town,setTown] = useState("")
-    const [postal_code,setPostalCode] = useState("")
+    const [category,setCategory] = useState("")
+    const [subcateogry,setSubCategory] = useState("")
+    const [subsubcategory,setSubSubCateogry] = useState("")
     const [status,setStatus] = useState("")
     const [dateInit,setDateInit] = useState(new Date(2023, 0, 1).toLocaleDateString())
     const [dateFinal,setDateFinal] = useState(new Date().toLocaleDateString())
@@ -55,22 +51,18 @@ function FilterSearchUser({url,nameOfSearch,type}) {
   const getResponses = async () => {
 
     const params = {
-        uid: uid,
-        name:name,
-        email:email,
-        continent: continent,
-        country: country,
-        district: district,
-        city: city,
-        town: town,
-        postal_code:postal_code,
+        EAN: EAN,
+        name: name,
+        category_name: category,
+        subcateogry_name: subcateogry,
+        subsubcategory_name: subsubcategory,
         status: status,
         created_at_init: dateInit.includes("/") ? dateInit.substring(6,10) + '-' + dateInit.substring(3,5) + '-' + dateInit.substring(0,2) : dateInit,
         created_at_final: dateFinal.includes("/") ? dateFinal.substring(6,10) + '-' + dateFinal.substring(3,5) + '-' + dateFinal.substring(0,2) : dateFinal
     }
 
     setLoading(true)
-    let resp = await getAllFromDB(url,params) 
+    let resp = await getAllFromDB('/products',params) 
     try {
       setRow(resp)
       setError(false)
@@ -103,23 +95,16 @@ function FilterSearchUser({url,nameOfSearch,type}) {
       
       resp.map((r) => { 
       table.row.add(
-        [ r.uid,
-          r.name, 
-          r.email,
-          r.continent,
-          r.country,
-          r.district,
-          r.city,
-          r.town,
-          r.postal_code,
+        [ r.id,
+          r.EAN,
+          r.name,
+          r.category_name, 
+          r.subcategory_name,
+          r.subsubcategory_name,
           r.status == 1 ? "Ativado" : "Desativado",
           r.created_at
         ]).draw();    
       })
-
-
-
-    
   }
 
   /**
@@ -149,7 +134,7 @@ function FilterSearchUser({url,nameOfSearch,type}) {
       },
       "rowCallback": function(row, data) {
         $(row).off('click').on('click', function() {
-            getObject("uid",data[0])
+            getObject("id",data[0])
         });
 
       },
@@ -173,7 +158,7 @@ function FilterSearchUser({url,nameOfSearch,type}) {
 
   return (
     <>
-      <h6>Pesquisar por {nameOfSearch}</h6>
+      <h6>Pesquisar por Produtos</h6>
 
       <small style={{color:"red"}}>
         Nenhum dos filtros é obrigatório, porém quanto menos especifico mais demorada é a obtenção dos dados... <br></br>
@@ -186,23 +171,18 @@ function FilterSearchUser({url,nameOfSearch,type}) {
         <br></br>
 
         <div className="row">
-          <div className="form-group col-xxl-3 mb-3">
-            <label>Indentificador</label>
-            <input type="text" className="form-control" onChange={(e) => setUID(e.target.value)}></input>
+          <div className="form-group col-xxl-4 mb-4">
+            <label>EAN</label>
+            <input type="text" className="form-control" onChange={(e) => setEAN(e.target.value)}></input>
           </div>
 
-          <div className="form-group col-xxl-3 mb-3">
+          <div className="form-group col-xxl-4 mb-4">
             <label>Nome ou iniciais</label>
             <input type="text" className="form-control" onChange={(e) => setName(e.target.value)}></input>
           </div>
 
-          <div className="form-group col-xxl-3 mb-3">
-            <label>Email</label>
-            <input type="text" className="form-control" onChange={(e) => setEmail(e.target.value)}></input>
-          </div>
-
-          <div className="form-group col-xxl-3 mb-3">
-            <label>Estado de Conta</label>
+          <div className="form-group col-xxl-4 mb-4">
+            <label>Estado</label>
             <select className="form-select" aria-label="Default select example" onChange={(e) => setStatus(e.target.value)}>
               <option defaultValue value="none"> Selecionar todos</option>
               <option value="1">Apenas ativados</option>
@@ -210,56 +190,41 @@ function FilterSearchUser({url,nameOfSearch,type}) {
             </select>
           </div>
 
-          <div className="form-group col-xxl-2 mb-3">
-            <label>Continente</label>
-            <input type="text" className="form-control" onChange={(e) => setContinent(e.target.value)}></input>
+          <div className="form-group col-xxl-4 mb-4">
+            <label>Nome da Categoria</label>
+            <input type="text" className="form-control" onChange={(e) => setCategory(e.target.value)}></input>
           </div>
 
-          <div className="form-group col-xxl-2 mb-3">
-            <label>País</label>
-            <input type="text" className="form-control" onChange={(e) => setCountry(e.target.value)}></input>
+          <div className="form-group col-xxl-4 mb-4">
+            <label>Nome da Subcategoria</label>
+            <input type="text" className="form-control" onChange={(e) => setSubCategory(e.target.value)}></input>
           </div>
 
-          <div className="form-group col-xxl-2 mb-3">
-            <label>Distrito</label>
-            <input type="text" className="form-control" onChange={(e) => setDistrict(e.target.value)}></input>
+          <div className="form-group col-xxl-4 mb-4">
+            <label>Nome da Sub de Subcategoria</label>
+            <input type="text" className="form-control" onChange={(e) => setSubSubCateogry(e.target.value)}></input>
           </div>
 
-          <div className="form-group col-xxl-2 mb-3">
-            <label>Cidade</label>
-            <input type="text" className="form-control" onChange={(e) => setCity(e.target.value)}></input>
-          </div>
+          <div className="form-group col-xl-3 mb-3"></div>
 
-          <div className="form-group col-xxl-2 mb-3">
-            <label>Freguesia</label>
-            <input type="text" className="form-control" onChange={(e) => setTown(e.target.value)}></input>
-          </div>
-
-          <div className="form-group col-xxl-2 mb-3">
-            <label>Código Postal</label>
-            <input type="text" className="form-control" onChange={(e) => setPostalCode(e.target.value)}></input>
-          </div>
-
-          <div className="form-group col-md-3 mb-3"></div>
-
-          <div className="form-group col-md-3 mb-3">
-            <label htmlFor="created_at">Periodo inicial da criação de conta</label>
+          <div className="form-group col-xl-3 mb-3">
+            <label htmlFor="created_at">Periodo inicial da criação</label>
             <input type="date" className="form-control" id="created_at" onChange={(event) => setDateInit(event.target.value)}></input>
           </div>
 
-          <div className="form-group col-md-3 mb-3">
-            <label htmlFor="created_at">Periodo final da criação de conta</label>
+          <div className="form-group col-xl-3 mb-3">
+            <label htmlFor="created_at">Periodo final da criação</label>
             <input type="date" className="form-control" id="created_at" onChange={(event) => setDateFinal(event.target.value)}></input>
           </div>
           
-          <div className="form-group col-md-3 mb-3"></div>
+          <div className="form-group col-xl-3"></div>
 
 
           {
             error && (<small className="d-flex justify-content-center" style={{color: "red"}}>Nenhum dado encontrado</small>)
           }
 
-          <div className="form-group col-xxl-12 mb-3 d-flex justify-content-center">
+          <div className="form-group col-xxl-12 d-flex justify-content-center">
             {
               (!isloading) ? 
 
@@ -282,15 +247,12 @@ function FilterSearchUser({url,nameOfSearch,type}) {
           <table id="app_table" className="table table-striped border">
             <thead className="thead-dark">
               <tr>
-                <th scope="col">UID</th>
+                <th scope="col">ID</th>
+                <th scope="col">EAN</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Email</th>
-                <th scope="col">Continente</th>
-                <th scope="col">País</th>
-                <th scope="col">Distrito</th>
-                <th scope="col">Cidade</th>
-                <th scope="col">Freguesia</th>
-                <th scope="col">Código Postal</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Subcategoria</th>
+                <th scope="col">Sub Subcategoria</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Criado em</th>
               </tr>
@@ -304,7 +266,7 @@ function FilterSearchUser({url,nameOfSearch,type}) {
       {
         (show) && 
         (
-        <AppearUserModal url={url} element={elementToShow} isShowingModal={isShowingModal} element_type={type}></AppearUserModal>
+        <AppearUserModal url={'/products'} element={elementToShow} isShowingModal={isShowingModal} element_type={"product"}></AppearUserModal>
         )
       }
       
@@ -312,4 +274,4 @@ function FilterSearchUser({url,nameOfSearch,type}) {
   );
 }
 
-export default FilterSearchUser
+export default FilterSearchProduct

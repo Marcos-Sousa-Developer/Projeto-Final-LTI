@@ -10,23 +10,38 @@ const getAllorSomeProducts = async function (req, res) {
 
     let statement = "SELECT * FROM products";
     
-    if(Object.keys(req.query).length !== 0) {
-        statement += " WHERE "
+    if(Object.keys(req.query).length !== 0) { 
+
+        let params = {} 
 
         for(let i = 0 ; i < Object.keys(req.query).length; i++) {
             let key = Object.keys(req.query)[i];
             let value = Object.values(req.query)[i]
-            let nextKey = Object.keys(req.query)[i+1];
-            let nextValue = Object.values(req.query)[i+1]
-            
-            if(value != ""){
-                statement += key;
-                statement += `='`;
-                statement += value; 
-                statement += `'` ;
+
+            if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
+                params[key] = value
             }
-    
-            if(nextKey != undefined && nextValue != ""){
+
+        }
+
+        statement += " WHERE (created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+
+        for(let i = 0 ; i < Object.keys(params).length; i++) { 
+
+            let key = Object.keys(params)[i];
+            let value = Object.values(params)[i]
+            let nextKey = Object.keys(params)[i+1];
+
+            if(i == 0){
+                statement += " AND ";
+            }
+
+            statement += key;
+            statement += `='`;
+            statement += value; 
+            statement += `'` ;
+
+            if(nextKey != undefined){
                 statement += ` AND ` ;
             }
         }

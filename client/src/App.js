@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
+import Relatorios_Fornecedores from "./pages/Admin/Relatorios_Fornecedores";
 import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
 import LoadingPage from "./pages/LoadingPage";
 
@@ -55,7 +56,8 @@ function App() {
                 <Route exact path="gerir/fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
                 <Route exact path="gerir/produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
                 <Route exact path="gerir/transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />
-                <Route exact path="relatorios/cosumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
+                <Route exact path="relatorios/consumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
+                <Route exact path="relatorios/fornecedores" element={<RequireAuth><Relatorios_Fornecedores /></RequireAuth>} />
                 <Route exact path="relatorios/encomendas" element={<RequireAuth><Relatorios_Encomendas /></RequireAuth>} />
                 <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
               </Route>
