@@ -10,7 +10,7 @@ let datas = null
 
 function FilterSearchVehicle() {
 
-    const [licence,setLicence] = useState("")
+    const [license,setLicense] = useState("")
     const [name,setName] = useState("")
     const [capacity,setCapacity] = useState("")
     const [productionUnit,setProductionUnit] = useState("")
@@ -50,7 +50,7 @@ function FilterSearchVehicle() {
   const getResponses = async () => {
 
     const params = {
-        licence_plate: licence,
+        license_plate: license,
         name: name,
         production_unit: productionUnit,
         capacity: capacity,
@@ -93,11 +93,11 @@ function FilterSearchVehicle() {
       
       resp.map((r) => { 
       table.row.add(
-        [ r.licence_plate,
+        [ r.license_plate,
           r.name,
-          r.production_unit,
+          r.production_unit ?? 'UNKNOWN',
           r.capacity, 
-          r.status == 1 ? "Ativado" : "Desativado",
+          "Desativado",
           r.created_at
         ]).draw();    
       })
@@ -130,7 +130,7 @@ function FilterSearchVehicle() {
       },
       "rowCallback": function(row, data) {
         $(row).off('click').on('click', function() {
-            getObject("licence_plate",data[0])
+            getObject("license_plate",data[0])
         });
 
       },
@@ -169,22 +169,18 @@ function FilterSearchVehicle() {
         <div className="row">
           <div className="form-group col-xxl-4 mb-4">
             <label>Matricula</label>
-            <input type="text" className="form-control" onChange={(e) => setEAN(e.target.value)}></input>
+            <input type="text" className="form-control" onChange={(e) => setLicense(e.target.value)}></input>
           </div>
 
           <div className="form-group col-xxl-4 mb-4">
-            <label>Nome ou iniciais</label>
+            <label>Nome</label>
             <input type="text" className="form-control" onChange={(e) => setName(e.target.value)}></input>
           </div>
 
           <div className="form-group col-xxl-4 mb-4">
             <label>Nome da unidade de Produção</label>
-            <input type="text" className="form-control" onChange={(e) => setCategory(e.target.value)}></input>
+            <input type="text" className="form-control" onChange={(e) => setProductionUnit(e.target.value)}></input>
           </div>
-
-
-          <div className="form-group col-xxl-3 mb-3"></div>
-
 
           <div className="form-group col-xxl-3 mb-3">
             <label>Estado</label>
@@ -197,11 +193,18 @@ function FilterSearchVehicle() {
 
           <div className="form-group col-xxl-3 mb-3">
             <label>Capacidade</label>
-            <input type="text" className="form-control" onChange={(e) => setSubCategory(e.target.value)}></input>
+            <input type="text" className="form-control" onChange={(e) => setCapacity(e.target.value)}></input>
           </div>
 
-          <div className="form-group col-xxl-3 mb-3"></div>
+          <div className="form-group col-xl-3 mb-3">
+            <label htmlFor="created_at">Periodo inicial da criação</label>
+            <input type="date" className="form-control" id="created_at" onChange={(event) => setDateInit(event.target.value)}></input>
+          </div>
 
+          <div className="form-group col-xl-3 mb-3">
+            <label htmlFor="created_at">Periodo final da criação</label>
+            <input type="date" className="form-control" id="created_at" onChange={(event) => setDateFinal(event.target.value)}></input>
+          </div>
 
           {
             error && (<small className="d-flex justify-content-center" style={{color: "red"}}>Nenhum dado encontrado</small>)
@@ -230,7 +233,7 @@ function FilterSearchVehicle() {
           <table id="app_table" className="table table-striped border">
             <thead className="thead-dark">
               <tr>
-                <th scope="col">Matricula</th>
+                <th scope="col">Matrícula</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Unidade de Produção</th>
                 <th scope="col">Capacidade</th>
