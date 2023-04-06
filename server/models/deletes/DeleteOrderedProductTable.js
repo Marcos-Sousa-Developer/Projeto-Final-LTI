@@ -1,15 +1,15 @@
 let pool = require('../../config/dbConfigLocal')
 
-const statement = "DROP TABLE IF EXISTS orderedProduct";
+const statement = "DROP TABLE IF EXISTS orderedProducts";
 
 pool.query(statement, function(error, result){
 
     if(error){
 
-        throw error + '\n' + 'Not possible delete table OrderedProduct'
+        throw error + '\n' + 'Not possible delete table OrderedProducts'
     }
 
-    console.log("Table OrderedProduct deleted");
+    console.log("Table OrderedProducts deleted");
 
     process.exit();
 });

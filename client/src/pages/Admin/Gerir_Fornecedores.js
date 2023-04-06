@@ -4,8 +4,9 @@ import Head from "./components/Head";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import FilterSearch from "./components/Managements/FilterSearch";
 import { Link } from "react-router-dom";
+import FilterSearchUser from "./components/Filters/FilterSearchUser";
+
 
 
 function Gerir_Fornecedores() {
@@ -35,9 +36,7 @@ function Gerir_Fornecedores() {
         </div>
 
         <section className="section dashboard">
-          <FilterSearch url={'/suppliers'} type={"supplier"} name={"Fornecedores"} filter1={"Nome ou iniciais do fornecedor"} filter2={"Indentifcador do Fornecedor"} 
-                filter3={"Email"} filter4={"Endereço"} filter5={"Telemóvel / Telefone"}>
-          </FilterSearch>
+          <FilterSearchUser url={"/suppliers"} nameOfSearch={"Fornecedores"} type={"supplier"}></FilterSearchUser>
         </section>
       </main>
         <Footer></Footer>

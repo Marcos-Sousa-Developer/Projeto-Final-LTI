@@ -38,6 +38,7 @@ apiRouter.use('/suppliers' , require('./api/ApiSuppliers'))
 apiRouter.use('/products' , require('./api/ApiProducts'))
 apiRouter.use('/categories' , require('./api/ApiCategories'))
 apiRouter.use('/subcategories' , require('./api/ApiSubcategories'))
+apiRouter.use('/orderedProducts' , require('./api/ApiOrderedProducts'))
 apiRouter.use('/vehicles' , require('./api/ApiVehicles'))
 apiRouter.get('/', (req, res) => {
     res.send({ express: 'HELLO WORLD, YOU ARE CONNECTED TO THE API, PLEASE THE CHECK ENDPOINTS' });

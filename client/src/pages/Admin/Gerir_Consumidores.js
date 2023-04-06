@@ -5,7 +5,7 @@ import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import FilterSearch from "./components/Managements/FilterSearch";
+import FilterSearchUser from "./components/Filters/FilterSearchUser";
 
 function Gerir_Consumidores() { 
 
@@ -35,10 +35,7 @@ function Gerir_Consumidores() {
 
         <section className="section dashboard">
 
-            <FilterSearch url={'/consumers'} type={"consumer"} name={"Consumidores"} filter1={"Nome ou iniciais do consumidor"} filter2={"Indentifcador do Consumidor"} 
-              filter3={"Email"} filter4={"Endereço"} filter5={"Telemóvel / Telefone"}
-            >
-            </FilterSearch>
+            <FilterSearchUser url={'/consumers'} nameOfSearch={"Consumidores"} type={"consumer"}></FilterSearchUser>
 
         </section>
       </main>

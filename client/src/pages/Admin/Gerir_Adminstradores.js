@@ -5,7 +5,7 @@ import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import FilterSearch from "./components/Managements/FilterSearch";
+import FilterSearchUser from "./components/Filters/FilterSearchUser";
 
 function Gerir_Adminstradores() { 
 
@@ -34,9 +34,7 @@ function Gerir_Adminstradores() {
         </div>
 
         <section className="section dashboard">
-          <FilterSearch url={'/admins'} type={"admin"} name={"Adminstradores"} filter1={"Nome ou iniciais do administrador"} filter2={"Indentifcador do Administrador"} 
-                filter3={"Email"} filter4={"Endereço"} filter5={"Telemóvel / Telefone"}>
-          </FilterSearch>
+          <FilterSearchUser url={"/admins"} nameOfSearch={"Administradores"} type={"admin"}></FilterSearchUser>
         </section>
       </main>
       <Footer></Footer>

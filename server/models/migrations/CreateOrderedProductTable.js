@@ -1,24 +1,29 @@
 let pool = require('../../config/dbConfigLocal')
 
-const statement = "CREATE TABLE orderedProduct ( " +
+const statement = "CREATE TABLE orderedProducts ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
                   "order_id int NOT NULL, " +
                   "product_EAN BIGINT NOT NULL, " +
-                  "product_owner int NOT NULL, " +
-                  "product_buyer int NOT NULL, " +
-                  "product_location varchar(255), " +
-                  "buyer_location varchar(255), " +
+                  "product_category varchar(255) NOT NULL, " +
+                  "product_subcategory varchar(255) NOT NULL, " +
+                  "product_subsubcategory varchar(255) NOT NULL, " +
+                  "product_owner_id int NOT NULL, " +
+                  "product_buyer_id int NOT NULL, " +
+                  "product_location varchar(255) NOT NULL, " +
+                  "buyer_location varchar(255) NOT NULL, " +
                   "orderDistance_km varchar(255) NOT NULL, " +
+                  "sameLocation varchar(255) NOT NULL, " +
                   "price float NOT NULL, " +
+                  "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "PRIMARY KEY (id))";
 
 pool.query(statement, function(error, result) {
 
     if (error) {
-        throw error + '\n' + 'Not possible create table OrderedProduct'
+        throw error + '\n' + 'Not possible create table OrderedProducts'
     }
 
-    console.log("Table OrderedProduct created"); 
+    console.log("Table OrderedProducts created"); 
 
     process.exit()
 });

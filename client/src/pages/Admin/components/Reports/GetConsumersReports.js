@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import BarConsumersReports from '../Reports/BarConsumersReports'
+import BarConsumersReports from '../BarReports/BarConsumersReports'
 import getAllFromDB from '../../../../hooks/getAllFromDB'
 
 let tableData = {}
@@ -88,12 +88,8 @@ function GetConsumersReports() {
             if(!tableData.hasOwnProperty(monthName)) {
                 tableData[monthName] = 0
             }
-            tableData[monthName] +=1
-                
-                
-            
+            tableData[monthName] +=1 
         })
-
     }
 
 

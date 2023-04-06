@@ -122,7 +122,6 @@ function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filt
           '<"col-sm-12 col-md-6"p>' +
           '>',
       "processing": true,
-      
       language: {
         search: "_INPUT_",
         searchPlaceholder: "Procurar...",
@@ -158,8 +157,9 @@ function FilterSearch({url, type, name, filter1, filter2, filter3, filter4, filt
         $("#app_table_length").css('float','right');
         $("#app_table_info").css('float','left');
         $("#app_table_paginate").css('float','right');
-
         $("#bottom").css('text-align','center');
+        $("#bottom").css('text-align','center');
+        $("#app_table_paginate").addClass("pagination")
         
       },
       "bDestroy": true,
