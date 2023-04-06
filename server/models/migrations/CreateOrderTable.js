@@ -2,7 +2,7 @@ let pool = require('../../config/dbConfigLocal')
 
 const statement = "CREATE TABLE orders ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
-                  "order_number int NOT NULL, " +
+                  "order_number bigint NOT NULL, " +
                   "order_date DATE NOT NULL, " +
                   "order_status varchar(255) NOT NULL, " +
                   "products_list varchar(255), " +
