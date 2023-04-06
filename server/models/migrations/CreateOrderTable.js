@@ -6,9 +6,9 @@ const statement = "CREATE TABLE orders ( " +
                   "order_date DATE NOT NULL, " +
                   "order_status varchar(255) NOT NULL, " +
                   "products_list varchar(255), " +
-                  "total float NOT NULL, " +
+                  "total_price float NOT NULL, " +
                   "address varchar(255) NOT NULL, " +
-                  "size float NOT NULL, " +
+                  "total_products int NOT NULL, " +
                   "id_supplier_product int, " +
                   "id_consumer int, " +
                   "id_vehicle int, " +

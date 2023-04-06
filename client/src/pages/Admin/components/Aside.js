@@ -103,6 +103,24 @@ function Aside() {
           </Link>
         </li>
 
+        <li className="nav-heading">Gestão de Vendas Anúnciadas</li>
+
+        <li className="nav-item">
+          <Link  to="/admin/gerir/anuncio" className="nav-link collapsed">
+            <i class="bi bi-currency-dollar"></i>
+            <span>Gerir Anúncios</span>
+          </Link>
+        </li>
+
+        <li className="nav-heading">Gerir Encomendas Realizadas</li>
+
+        <li className="nav-item">
+          <Link to="/admin/gerir/encomendas" className="nav-link collapsed">
+            <i class="bi bi-box-seam"></i>
+            <span>Gerir Encomendas</span>
+          </Link>
+        </li>
+
         <li className="nav-heading">Gestão de Transportes</li>
 
         <li className="nav-item">
@@ -148,12 +166,12 @@ function Aside() {
 
         <li className="nav-heading">Ferramentas</li>
 
-        <li className="nav-item">
+        {/*<li className="nav-item">
           <Link to="/admin" className="nav-link collapsed">
             <i className="bi bi-envelope"/>
             <span>Enviar Email</span>
           </Link>
-        </li>
+        </li>*/}
 
         <li className="nav-item">
           <Link to="/admin" className="nav-link collapsed">
