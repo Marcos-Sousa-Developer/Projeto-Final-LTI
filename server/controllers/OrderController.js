@@ -10,27 +10,58 @@ const getAllorSomeOrders = async function (req, res) {
 
     let statement = "SELECT * FROM orders";
     
-    if(Object.keys(req.query).length !== 0) {
-        statement += " WHERE "
+    if(Object.keys(req.query).length !== 0) { 
+
+        console.log(req.query)
+
+        let params = {} 
 
         for(let i = 0 ; i < Object.keys(req.query).length; i++) {
             let key = Object.keys(req.query)[i];
             let value = Object.values(req.query)[i]
-            let nextKey = Object.keys(req.query)[i+1];
-            let nextValue = Object.values(req.query)[i+1]
-            
-            if(value != ""){
+
+            if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
+                params[key] = value
+            }
+
+        }
+
+        statement += " WHERE (order_date BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+
+        for(let i = 0 ; i < Object.keys(params).length; i++) { 
+
+            let key = Object.keys(params)[i];
+            let value = Object.values(params)[i]
+            let nextKey = Object.keys(params)[i+1];
+
+            if(i == 0){
+                statement += " AND ";
+            }
+
+            if(key != "total_price" && key != "total_products") {
+
                 statement += key;
                 statement += `='`;
                 statement += value; 
                 statement += `'` ;
+
             }
-    
-            if(nextKey != undefined && nextValue != ""){
+            else{
+
+                statement += key;
+                statement += `<='`;
+                statement += value; 
+                statement += `'` ;
+
+            }
+
+            if(nextKey != undefined){
                 statement += ` AND ` ;
             }
         }
     }
+
+    console.log(statement)
 
     let result = await dbConnection(statement)  
 
