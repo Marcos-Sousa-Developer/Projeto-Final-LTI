@@ -137,7 +137,7 @@ const signIn = async (req, res) => {
  * @return userType
  */
 const userType = (req, res) => { 
-  return res.send("admin"); //Trocar para consumer se quiser ir 
+  return res.send("supplier"); //Trocar para consumer se quiser ir 
 }
 
 module.exports = {signIn, userType}
