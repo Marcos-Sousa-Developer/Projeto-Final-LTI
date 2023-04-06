@@ -131,8 +131,6 @@ const updateSupplierByID = async function (req, res) {
 
     let statement = `UPDATE suppliers SET `;
 
-    console.log(req.query)
-
     for(let i = 0 ; i < Object.keys(req.query).length; i++) {
         
         let key = Object.keys(req.query)[i];
