@@ -1,21 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
+import { Cookies, useCookies } from 'react-cookie';
 import { FiArrowLeft, FiArrowRight, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import { PRODUCTS } from '../../../assets/products';
 import { Navbar, Footer, SubHeading } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
-import { ShopContext } from '../../../context/ShopContextProvider';
 import { CartItem } from './CartItem';
 import images from '../../../assets/images.js';
 
 import './Cart.css';
+import { useState } from 'react';
 
 const Cart = () => {
 
-  const { cartItems, getTotalCartAmount, removeAllFromCart, checkout } = useContext(ShopContext);
-  const totalAmount = getTotalCartAmount();
-  let totalCartItems = 0;
+  const [cookies] = useCookies(['cart']);
+  const [totalItems] = useState(Object.keys(cookies.cart).length ?? 0)
+  const [totalAmount, setTotalAmount] = useState(1)
+  
+
+  useEffect(() => {
+
+    let total= 0;
+    for (const item in cookies.cart) {
+        total += (cookies.cart[item][1] * cookies.cart[item][0]);
+    }
+    setTotalAmount(total)
+
+  },[cookies.cart])
 
   return (
     <>
@@ -31,7 +43,7 @@ const Cart = () => {
                   <FiArrowLeft></FiArrowLeft>
                   <p>Continuar a comprar</p>
                 </Link>
-                <button className='flex app__cart_before_content_btn' onClick={() => removeAllFromCart()}>
+                <button className='flex app__cart_before_content_btn'>
                   <FiTrash2></FiTrash2>
                   <p>Limpar carrinho</p>
                 </button>
@@ -41,8 +53,7 @@ const Cart = () => {
             <div className='app__cart_content'>
               <div className='app__cart_subcontent'>
                 {PRODUCTS.map((product) => {
-                  if(cartItems[product.id] !== 0){
-                    totalCartItems++;
+                  if(![0,undefined].includes(cookies.cart[product.id]) ){
                     return <CartItem data={product}></CartItem>
                   }
                 })}
@@ -50,10 +61,10 @@ const Cart = () => {
 
               <div className='app__cart_checkout_area'>
                 <p style={{marginBottom: '1rem', fontSize: '1.5rem'}}>Sumário</p>
-                <p>Nº de Items: {totalCartItems}</p>
-                <p>SubTotal: </p>
+                <p>Nº de Items: {totalItems}</p>
+                <p>SubTotal: {0}</p>
                 <p>Total: <PriceDisplay className='product_price' price={totalAmount} /></p>
-                <button className='main__action_btn app__cart_checkout_btn' onClick={() => checkout() }>Checkout</button>
+                <button className='main__action_btn app__cart_checkout_btn' >Checkout</button>
               </div>
             </div>
           </>

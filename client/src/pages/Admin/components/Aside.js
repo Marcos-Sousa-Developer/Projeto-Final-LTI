@@ -44,7 +44,7 @@ function Aside() {
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-item">
           <span className="nav-link">
-            <Link  to="/admin">
+            <Link reloadDocument  to="/admin">
               <i className="bi bi-grid"/>
               <span>Painel de Controlo</span>
               </Link>
@@ -54,7 +54,7 @@ function Aside() {
         <li className="nav-heading">Editar Perfil</li>
 
         <li className="nav-item">
-          <Link  to="/admin/perfil" className="nav-link collapsed">
+          <Link reloadDocument  to="/admin/perfil" className="nav-link collapsed">
             <i className="bi bi-person"/>
             <span>Meu Perfil</span>
           </Link>
@@ -72,21 +72,21 @@ function Aside() {
           <ul id="gerir-users" className={showU} data-bs-parent="#sidebar-nav">
             
             <li>
-              <Link  to="/admin/gerir/adminstradores">
+              <Link reloadDocument  to="/admin/gerir/adminstradores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Administradores</span>
               </Link>
             </li>
 
             <li>
-              <Link  to="/admin/gerir/consumidores">
+              <Link reloadDocument  to="/admin/gerir/consumidores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Consumidores</span>
               </Link>
             </li>
 
             <li>
-              <Link  to="/admin/gerir/fornecedores">
+              <Link reloadDocument  to="/admin/gerir/fornecedores">
                 <i className="bi bi-circle"/>
                 <span>Gerir Fornecedores</span>
               </Link> 
@@ -97,7 +97,7 @@ function Aside() {
         <li className="nav-heading">Gestão de Produtos</li>
 
         <li className="nav-item">
-          <Link  to="/admin/gerir/produtos" className="nav-link collapsed">
+          <Link reloadDocument  to="/admin/gerir/produtos" className="nav-link collapsed">
             <i className="bi bi-cart"/>
             <span>Gerir Produtos</span>
           </Link>
@@ -106,7 +106,7 @@ function Aside() {
         <li className="nav-heading">Gestão de Vendas Anúnciadas</li>
 
         <li className="nav-item">
-          <Link  to="/admin/gerir/anuncio" className="nav-link collapsed">
+          <Link reloadDocument  to="/admin/gerir/anuncio" className="nav-link collapsed">
             <i class="bi bi-currency-dollar"></i>
             <span>Gerir Anúncios</span>
           </Link>
@@ -115,7 +115,7 @@ function Aside() {
         <li className="nav-heading">Gerir Encomendas Realizadas</li>
 
         <li className="nav-item">
-          <Link to="/admin/gerir/encomendas" className="nav-link collapsed">
+          <Link reloadDocument to="/admin/gerir/encomendas" className="nav-link collapsed">
             <i class="bi bi-box-seam"></i>
             <span>Gerir Encomendas</span>
           </Link>
@@ -124,7 +124,7 @@ function Aside() {
         <li className="nav-heading">Gestão de Transportes</li>
 
         <li className="nav-item">
-          <Link to="/admin/gerir/transportes" className="nav-link collapsed">
+          <Link reloadDocument to="/admin/gerir/transportes" className="nav-link collapsed">
             <i className="bi bi-car-front"/>
             <span>Gerir Transportes</span>
           </Link>
@@ -141,21 +141,21 @@ function Aside() {
 
           <ul id="data-activity" className={showR} data-bs-parent="#sidebar-nav">
             <li>
-              <Link to="/admin/relatorios/consumidores">
+              <Link reloadDocument to="/admin/relatorios/consumidores">
                 <i className="bi bi-circle"/>
                 <span>Relatório de Consumidores</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/admin/relatorios/fornecedores">
+              <Link reloadDocument to="/admin/relatorios/fornecedores">
                 <i className="bi bi-circle"/>
                 <span>Relatório de Fornecedores</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/admin/relatorios/encomendas">
+              <Link reloadDocument to="/admin/relatorios/encomendas">
                 <i className="bi bi-circle"/>
                 <span>Relatório de Encomendas</span>
               </Link>
@@ -167,28 +167,28 @@ function Aside() {
         <li className="nav-heading">Ferramentas</li>
 
         {/*<li className="nav-item">
-          <Link to="/admin" className="nav-link collapsed">
+          <Link reloadDocument to="/admin" className="nav-link collapsed">
             <i className="bi bi-envelope"/>
             <span>Enviar Email</span>
           </Link>
         </li>*/}
 
         <li className="nav-item">
-          <Link to="/admin" className="nav-link collapsed">
+          <Link reloadDocument to="/admin" className="nav-link collapsed">
             <i className="bi bi-chat-left-dots"/>
             <span>Mensagens</span>
           </Link>
         </li>
 
         <li className="nav-item">
-          <Link to="/admin" className="nav-link collapsed" >
+          <Link reloadDocument to="/admin" className="nav-link collapsed" >
             <i className="bi bi-question-circle" />
             <span>Suporte</span>
           </Link>
         </li>
 
         <li className="nav-item">
-          <Link  to="/admin/settings" className="nav-link collapsed">
+          <Link reloadDocument  to="/admin/settings" className="nav-link collapsed">
             <i className="bi bi-gear"/>
             <span>Definições</span>
           </Link>

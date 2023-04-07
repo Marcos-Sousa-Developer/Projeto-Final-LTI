@@ -11,7 +11,6 @@ import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
 import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage} from './pages/HomeView/index';
-import { ShopContextProvider } from "./context/ShopContextProvider";
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -42,8 +41,7 @@ function App() {
   },[location])
 
   return (
-    <ShopContextProvider>
-
+    <>
       {
 
         !loading ? (
@@ -119,7 +117,7 @@ function App() {
   }
 
       
-    </ShopContextProvider>
+    </>
 
   );
 }
