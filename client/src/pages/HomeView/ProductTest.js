@@ -141,7 +141,6 @@ function ProductTest() {
             EAN: EAN,
           })
           if(getEAN.length == 1){
-            console.log("entrou")
             //pode continuar com o anuncio e vai para outra página
           }else{
             alert(getEAN)
