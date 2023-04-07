@@ -10,7 +10,10 @@ const getAllorSomeAds = async function (req, res) {
 
     let statement = "SELECT * FROM ads";
 
+    console.log(req.query)
+
     if(Object.keys(req.query).length !== 0) { 
+        statement += " WHERE "
 
         let params = {} 
 
@@ -24,7 +27,12 @@ const getAllorSomeAds = async function (req, res) {
 
         }
 
-        statement += " WHERE (created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+        if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+            if(Object.keys(params).length > 0){
+                statement += " AND ";
+            }
+        }
 
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
 
@@ -32,22 +40,25 @@ const getAllorSomeAds = async function (req, res) {
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
 
-            if(i == 0){
-                statement += " AND ";
-            }
-
-            if(key != "price") {
+            if(key == "price") {
 
                 statement += key;
-                statement += `='`;
+                statement += `<='`;
                 statement += value; 
                 statement += `'` ;
+ 
+            } else if(key == "title") {
+
+                statement += key;
+                statement += ` LIKE '%`;
+                statement += value; 
+                statement += `%'` ;
 
             }
             else{
 
                 statement += key;
-                statement += `<='`;
+                statement += `='`;
                 statement += value; 
                 statement += `'` ;
 
