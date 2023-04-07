@@ -3,6 +3,8 @@ import { FiX, FiChevronRight, FiChevronLeft, FiChevronDown } from 'react-icons/f
 
 import {teste} from '../../../utilities/teste';
 import "./CriarAnuncio.css";
+import Features from './Features';
+import SubFeatures from './SubFeatures';
 
 const GeneralInfo = ({ formData, setFormData }) => {
 
@@ -20,7 +22,7 @@ const GeneralInfo = ({ formData, setFormData }) => {
 
         return (
             <div className='category_details'>
-                <div className='app__pointer category_details_header' style={{display: 'inline-flex', marginBottom:'2rem'}} onClick={onClick}>
+                <div className='app__pointer category_details_header' onClick={onClick}>
                     <button><FiChevronLeft fontSize={20} color="black" style={{marginRight:'1rem'}}></FiChevronLeft></button> 
                     <p style={{margin:'0'}}>{category.name}</p>
                 </div>
@@ -71,8 +73,14 @@ const GeneralInfo = ({ formData, setFormData }) => {
                                             style={{display:'none'}}
                                             type="radio" 
                                             name="CriarAnuncioRadio" 
-                                            value={[category.name, subcategory.name, subsubcategory]} 
-                                            onChange={(e) => {setFormData({ ...formData, categoria: e.target.value })}}
+                                            value={subsubcategory} 
+                                            onChange={(e) => {setFormData({...formData, 
+                                                categoria: category.name,
+                                                subcategoria: subcategory.name,
+                                                subsubcategoria: e.target.value,
+                                                features: category.features
+                                                });
+                                            }}
                                             onClick={toggleActiveModal}>
                                             </input> 
                                         </label>
@@ -145,7 +153,8 @@ const GeneralInfo = ({ formData, setFormData }) => {
 
 
     return (
-    <div className='app__anuncio_content_generalInfo'>
+    <>
+        <div className='app__anuncio_content_generalInfo'>
             <div className='inputField'>
                 <p>Título</p>
                 <input type='text' value={formData.titulo} placeholder='título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
@@ -160,7 +169,14 @@ const GeneralInfo = ({ formData, setFormData }) => {
                 <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
                 <Modal className={ activeModal ? 'activeModal' : null}/>
             </div>
-    </div>
+        </div>
+        <div>
+            <Features formData={formData} setFormData={setFormData} features={formData.features}></Features>
+        </div>
+        <div>
+            <SubFeatures formData={formData} setFormData={setFormData}></SubFeatures>
+        </div>
+    </>
     )
 }
 
