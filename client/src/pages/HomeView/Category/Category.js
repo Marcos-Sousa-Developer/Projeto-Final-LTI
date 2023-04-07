@@ -17,7 +17,7 @@ const Category = () => {
       <div className='app__Category main__container'>
 
         <div className='app__Category_Caminho'>
-        <p> Home > Categoria</p>
+        <p> Home {">"} Categoria</p>
         <h2><strong>Categoria</strong></h2>
         </div>
 
