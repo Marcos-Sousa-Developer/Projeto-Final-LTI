@@ -1,5 +1,15 @@
 let exec = require('child_process').exec;
 
+exec('node ./models/resets/ResetAdminTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
 exec('node ./models/resets/ResetConsumerTable.js',
     function (error, stdout) {
 
@@ -111,16 +121,6 @@ exec('node ./models/resets/ResetOrderedProductTable.js',
 });
 
 exec('node ./models/resets/ResetProductProductionUnitTable.js',
-    function (error, stdout) {
-
-        console.log(stdout);
-
-        if (error !== null) {
-             console.log('exec error: ' + error);
-        }
-});
-
-exec('node ./models/resets/ResetAdminTable.js',
     function (error, stdout) {
 
         console.log(stdout);
