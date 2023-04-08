@@ -53,7 +53,7 @@ export const teste = [
         ],
         features: [
             {
-                LocaldeProdução: "",
+                LocaldeProducao: "",
                 Validade: "date"
             }
         ]
@@ -105,11 +105,6 @@ export const teste = [
                         "Calçado Menino",
                         "Calçado Menina"
                     ],
-                    "features": [
-                        {
-                            Género: ["Menino","Menina"]
-                        }
-                    ]
                 },
                 { 
                     name: "Roupinhas",
@@ -117,11 +112,6 @@ export const teste = [
                         "Roupinhas Menino",
                         "Roupinhas Menina"
                     ],
-                    features: [
-                        {
-                            Género: ["Menino","Menina"]
-                        }
-                    ]
                 },
                 { 
                     name: "Passeio",
@@ -199,23 +189,24 @@ export const teste = [
         name: "Desportos",
         subcategories: [
             { 
-            name: "Deporto",
-            subsubcategories: [
-                "Futebol",
-                "Futsal",
-                "Surf e Bodyboard",
-                "Caminhada, Corrida e Atletismo",
-                "Patins, Skates e Trotinetes",
-                "Musculação e Fitness",
-                "Desportos de Combate",
-                "Outros Desportos"
-            ]
+                name: "Deporto",
+                subsubcategories: [
+                    "Futebol",
+                    "Futsal",
+                    "Surf e Bodyboard",
+                    "Caminhada, Corrida e Atletismo",
+                    "Patins, Skates e Trotinetes",
+                    "Musculação e Fitness",
+                    "Desportos de Combate",
+                    "Outros Desportos"
+                ]
             }
         ],
         features: [
             {
                 Marca: "",
-                Estado: ["Novo","Usado"]
+                Estado: ["Novo","Usado"],
+                Garantia: ""
             }
         ]
     },
@@ -248,11 +239,12 @@ export const teste = [
             } 
         ],
         features: [
-          {
-            Marca: "",
-            Estado: ["Novo","Usado"],
-            Garantia: ""
-          }
+            {
+                Marca: "",
+                Estado: ["Novo","Usado"],
+                Garantia: "",
+                ClasseEnergetica: ""
+            }
         ]
     },
     {
@@ -312,11 +304,6 @@ export const teste = [
                     "Saúde",
                     "Viagens",
                     "Outros"
-                ],
-                features: [
-                    {
-                        Auto: ""
-                    }
                 ]
             },
             { 
@@ -363,11 +350,6 @@ export const teste = [
                     "Homem",
                     "Mulher"
                 ],
-                features: [
-                    {
-                        Género: ["Homem","Mulher"]
-                    }
-                ]
             },
             { 
                 name: "Calçado",
@@ -375,11 +357,6 @@ export const teste = [
                     "Homem",
                     "Mulher"
                 ],
-                features: [
-                    {
-                        Género: ["Homem","Mulher"]
-                    }
-                ]
             },
             { 
                 name: "Malas e Acessórios",
@@ -392,11 +369,6 @@ export const teste = [
                     "Óculos de Sol",
                     "Outras"
                 ],
-                features: [
-                    {
-                        Género: ["Homem","Mulher"]
-                    }
-                ]
             },
             { 
                 name: "Jóias, Relógios e Bijuteria",
@@ -408,11 +380,6 @@ export const teste = [
                     "Anéis",
                     "Outras"
                 ],
-                features: [
-                    {
-                        Género: ["Homem","Mulher"]
-                    }
-                ]
             },
             { 
                 name: "Saúde e Beleza",
@@ -427,11 +394,6 @@ export const teste = [
                     "Perfumes",
                     "Outros"
                 ],
-                features: [
-                    {
-                        Género: ["Homem","Mulher"]
-                    }
-                ]
             }
         ],
         features: [
@@ -515,16 +477,16 @@ export const teste = [
                 name: "Computadores e Informática",
                 subsubcategories: [
                     "Apple",
-                    "Computadores",
+                    "Computadores",  //Processador, ram, sistema operativo, armazenamento, tipo de armazenamento
                     "Fotocopiadoras",
                     "Impressoras",
-                    "Monitores",
-                    "Portáteis",
-                    "Projectores",
+                    "Monitores",    //Polegadas, resolução
+                    "Portáteis",    //Tamanho de ecrã
+                    "Projectores",  //Tamanho de ecrã
                     "Redes",
                     "Scanners",
-                    "Servidores",
-                    "Software",
+                    "Servidores",   //armazenamento
+                    "Software",     //tipo de software
                     "Outros"
                 ]
             },
@@ -533,11 +495,11 @@ export const teste = [
                 subsubcategories: [
                     "Acessórios",
                     "Acessórios para Portáteis",
-                    "Armazenamento",
+                    "Armazenamento",    //tamanho de armazenamento
                     "Componentes",
                     "Consumíveis Impressora",
-                    "Discos Externos",
-                    "Discos Rígidos",
+                    "Discos Externos",  //tamanho de armazenamento, SSD ou HDD
+                    "Discos Rígidos",   //tamanho de armazenamento
                     "Periféricos",
                     "Processadores",
                     "Outros"
@@ -546,7 +508,7 @@ export const teste = [
             { 
                 name: "TV, Som e Fotografia",
                 subsubcategories: [
-                    "Tv",
+                    "Tv", //Polegadas, resolução
                     "Som",
                     "Fotografia"
                 ]
@@ -557,13 +519,19 @@ export const teste = [
                     "Telemóveis",
                     "Tablets",
                     "Acessórios"
+                ],
+                features: [
+                    {
+                        SistemaOperativo: ["Android", "iOS", "Windows Phone", "BlackBerry OS", "Harmony OS", "Nenhum"],
+                    }
                 ]
             }       
         ],
         features: [
             {
                 Marca: "",
-                Estado: ["Novo","Usado"]
+                Estado: ["Novo","Usado"],
+                Garantia: ""
             }
         ]
     },

@@ -142,8 +142,10 @@ img, picture {
 .app__ConsumerProfile_options li a:hover {
   color: rgb(0, 0, 0);
 }
-.app__ConsumerProfile_box {
+.app__ConsumerProfile_border {
   border: 3.5px solid #EEEEEE;
+}
+.app__ConsumerProfile_box {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
@@ -165,6 +167,12 @@ img, picture {
   border-radius: 10px;
   padding: 0.25rem 0.5rem;
   font-size: large;
+}
+.app__ConsumerProfile_button {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a.option {

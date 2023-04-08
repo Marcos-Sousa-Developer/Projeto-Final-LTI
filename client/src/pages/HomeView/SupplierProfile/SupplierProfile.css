@@ -142,8 +142,11 @@ img, picture {
 .app__SupplierProfile_options li a:hover {
   color: rgb(0, 0, 0);
 }
-.app__SupplierProfile_box {
+.app__SupplierProfile_border {
   border: 3.5px solid #EEEEEE;
+}
+.app__SupplierProfile_box {
+  border-bottom: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
@@ -165,6 +168,12 @@ img, picture {
   border-radius: 10px;
   padding: 0.25rem 0.5rem;
   font-size: large;
+}
+.app__SupplierProfile_button {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a.option {

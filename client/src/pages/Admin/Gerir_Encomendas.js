@@ -5,18 +5,17 @@ import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import FilterSearchVehicle from './components/Filters/FilterSearchVehicle';
-
+import FilterSearchOrder from './components/Filters/FilterSearchOrder';
 
 // user can be consumer, supplier or admin
-function Gerir_Transportes() { 
+function Gerir_Encomendas() { 
 
     
     return (
       <div>
         <HelmetProvider>
           <Helmet>
-            <title>Admin-Gerir Transportes</title>
+            <title>Admin-Gerir Encomendas</title>
           </Helmet>
         </HelmetProvider>
         <Head></Head>
@@ -25,7 +24,7 @@ function Gerir_Transportes() {
 
         <main id="main" className="main">
           <div className="pagetitle" style={{paddingBottom: "10px"}}>
-            <h1>Gerir Transportes</h1>
+            <h1>Gerir Encomendas</h1>
             <nav>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -33,13 +32,13 @@ function Gerir_Transportes() {
                     Home
                   </Link>
                 </li>
-                <li className="breadcrumb-item active">Gerir Transportes</li>
+                <li className="breadcrumb-item active">Gerir Encomendas</li>
               </ol>
             </nav>
           </div>
           <section className="section dashboard">
 
-            <FilterSearchVehicle></FilterSearchVehicle>
+            <FilterSearchOrder></FilterSearchOrder>
 
           </section>
         </main>
@@ -49,4 +48,4 @@ function Gerir_Transportes() {
 }
 
 
-export default Gerir_Transportes
+export default Gerir_Encomendas

@@ -8,6 +8,7 @@ const statement = "CREATE TABLE vehicles ( " +
                   "capacity float NOT NULL, " +
                   "orders_list varchar(255), " +
                   "id_production_unit int, " +
+                  "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "PRIMARY KEY (license_plate))";
 
 pool.query(statement, function(error, result) {

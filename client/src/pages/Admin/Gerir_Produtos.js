@@ -5,8 +5,7 @@ import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import FilterSearch from "./components/Filters/FilterSearch";
-
+import FilterSearchProduct from './components/Filters/FilterSearchProduct';
 
 // user can be consumer, supplier or admin
 function Gerir_Produtos() { 
@@ -39,10 +38,7 @@ function Gerir_Produtos() {
           </div>
           <section className="section dashboard">
 
-          <FilterSearch url={'/products'} type={"product"} name={"Produtos"} filter1={"Nome ou iniciais do produto"} filter2={"EAN"} 
-              filter3={"Categoria do Produto"} filter4={"Unidade de Produção"} filter5={"Data de Produção"}
-            >
-            </FilterSearch>
+            <FilterSearchProduct></FilterSearchProduct>
 
           </section>
         </main>

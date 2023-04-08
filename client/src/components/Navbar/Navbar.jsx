@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+
 import { Link } from 'react-router-dom';
 import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight } from 'react-icons/fi';
 
 import images from '../../assets/images.js';
-import { PRODUCTS } from '../../assets/products';
-import { ShopContext } from '../../context/ShopContextProvider';
 import { categorias } from '../../utilities/categorias.js'
 import Searchbar from './Searchbar/Searchbar';
 import './styles/Sidebar.css';
@@ -79,16 +79,17 @@ const Navbar = () => {
 
     //--------------------------Cart-----------------------------
 
-    const { cartItems } = useContext(ShopContext);
-    let totalCartItems = 0;
-
-    {PRODUCTS.map((product) => {
-        if(cartItems[product.id] !== 0){
-            totalCartItems++;
+    const [totalCartItems, setTotalCartItems] = useState(0)
+    const [cookies] = useCookies(['cart']);
+    
+    useEffect(() => {
+        let total = 0;
+        for (const item in cookies.cart) {
+            total += cookies.cart[item][0];
         }
-    })};
+        setTotalCartItems(total)
 
-    //----------------------------------------------------------
+    },[cookies.cart])
     
     return (
         <>

@@ -6,16 +6,19 @@ import Gerir_Consumidores from "./pages/Admin/Gerir_Consumidores";
 import Gerir_Fornecedores from "./pages/Admin/Gerir_Fornecedores";
 import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
 import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
+import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
+import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
+import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
 import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage} from './pages/HomeView/index';
-import { ShopContextProvider } from "./context/ShopContextProvider";
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
+import Relatorios_Fornecedores from "./pages/Admin/Relatorios_Fornecedores";
 import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
 import LoadingPage from "./pages/LoadingPage";
+
 
 function App() {
 
@@ -38,8 +41,7 @@ function App() {
   },[location])
 
   return (
-    <ShopContextProvider>
-
+    <>
       {
 
         !loading ? (
@@ -54,8 +56,11 @@ function App() {
                 <Route exact path="gerir/consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
                 <Route exact path="gerir/fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
                 <Route exact path="gerir/produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
+                <Route exact path="gerir/anuncio" element={<RequireAuth><Gerir_Anuncio /></RequireAuth>} />
+                <Route exact path="gerir/encomendas" element={<RequireAuth><Gerir_Encomendas /></RequireAuth>} />
                 <Route exact path="gerir/transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />
-                <Route exact path="relatorios/cosumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
+                <Route exact path="relatorios/consumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
+                <Route exact path="relatorios/fornecedores" element={<RequireAuth><Relatorios_Fornecedores /></RequireAuth>} />
                 <Route exact path="relatorios/encomendas" element={<RequireAuth><Relatorios_Encomendas /></RequireAuth>} />
                 <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
               </Route>
@@ -112,7 +117,7 @@ function App() {
   }
 
       
-    </ShopContextProvider>
+    </>
 
   );
 }

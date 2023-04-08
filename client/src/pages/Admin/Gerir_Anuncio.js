@@ -5,18 +5,16 @@ import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import FilterSearchVehicle from './components/Filters/FilterSearchVehicle';
-
+import FilterSearchAds from './components/Filters/FilterSearchAds';
 
 // user can be consumer, supplier or admin
-function Gerir_Transportes() { 
+function Gerir_Anuncio() { 
 
-    
     return (
       <div>
         <HelmetProvider>
           <Helmet>
-            <title>Admin-Gerir Transportes</title>
+            <title>Admin-Gerir Anuncio</title>
           </Helmet>
         </HelmetProvider>
         <Head></Head>
@@ -25,7 +23,7 @@ function Gerir_Transportes() {
 
         <main id="main" className="main">
           <div className="pagetitle" style={{paddingBottom: "10px"}}>
-            <h1>Gerir Transportes</h1>
+            <h1>Gerir Anuncio</h1>
             <nav>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -33,13 +31,13 @@ function Gerir_Transportes() {
                     Home
                   </Link>
                 </li>
-                <li className="breadcrumb-item active">Gerir Transportes</li>
+                <li className="breadcrumb-item active">Gerir Anuncio</li>
               </ol>
             </nav>
           </div>
           <section className="section dashboard">
 
-            <FilterSearchVehicle></FilterSearchVehicle>
+            <FilterSearchAds></FilterSearchAds>
 
           </section>
         </main>
@@ -49,4 +47,4 @@ function Gerir_Transportes() {
 }
 
 
-export default Gerir_Transportes
+export default Gerir_Anuncio

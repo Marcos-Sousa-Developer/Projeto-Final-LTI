@@ -1,23 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-  import { Bar } from 'react-chartjs-2';
+import {Chart as ChartJS,CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
   
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-  );
+  ChartJS.register(CategoryScale, LinearScale,BarElement,Title,Tooltip, Legend);
 
   const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -46,7 +31,7 @@ import {
     ],
   };
 
-function BarConsumersReports({datas}) { 
+function BarUsersReports({datas,type}) { 
 
   const [show, setShow] = useState(false)
 
@@ -58,7 +43,7 @@ function BarConsumersReports({datas}) {
       labels,
       datasets: [
         {
-          label: 'Novos utilizadores',
+          label: 'Novos ' + type,
           data: labels.map((label) => datas[label] ?? 0),
           backgroundColor: 'coral',
         }
@@ -89,4 +74,4 @@ function BarConsumersReports({datas}) {
   )
 }
 
-export default BarConsumersReports
+export default BarUsersReports
