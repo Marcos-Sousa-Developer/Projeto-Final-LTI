@@ -17,7 +17,7 @@ const statement = "CREATE TABLE suppliers ( " +
                   "postal_code varchar(255) NOT NULL, " + 
                   "status BOOLEAN NOT NULL default 1, " + 
                   "products_list varchar(255), " +
-                  "total_orders int NOT NULL DEFAULT 0, " +
+                  "orders varchar(255), " +
                   "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "UNIQUE (email, nif, mobile_number), " +
                   "PRIMARY KEY (id))";    

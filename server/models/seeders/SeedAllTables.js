@@ -30,7 +30,7 @@ exec('node ./models/seeders/SeederProductTable.js',
         }
 });
 
-exec('node ./models/seeders/SeederProductTable.js',
+/*exec('node ./models/seeders/SeederInventory.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -38,17 +38,7 @@ exec('node ./models/seeders/SeederProductTable.js',
         if (error !== null) {
              console.log('exec error: ' + error);
         }
-});
-
-exec('node ./models/seeders/SeederInventory.js',
-    function (error, stdout) {
-
-        console.log(stdout);
-
-        if (error !== null) {
-             console.log('exec error: ' + error);
-        }
-});
+});*/
 
 
 //TODO
