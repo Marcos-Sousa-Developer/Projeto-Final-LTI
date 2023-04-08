@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { FiX, FiChevronRight, FiChevronLeft, FiChevronDown } from 'react-icons/fi';
 
 import {teste} from '../../../utilities/teste';
@@ -23,8 +23,8 @@ const GeneralInfo = ({ formData, setFormData }) => {
         return (
             <div className='category_details'>
                 <div className='app__pointer category_details_header' onClick={onClick}>
-                    <button><FiChevronLeft fontSize={20} color="black" style={{marginRight:'1rem'}}></FiChevronLeft></button> 
-                    <p style={{margin:'0'}}>{category.name}</p>
+                    <button><FiChevronLeft fontSize={20} color="black"></FiChevronLeft></button> 
+                    <p>{category.name}</p>
                 </div>
                 <div className='category_details_body'>
                     <div className='category_details_body_1'>
@@ -68,7 +68,7 @@ const GeneralInfo = ({ formData, setFormData }) => {
                                 subcategory.subsubcategories.map((subsubcategory, j) => (
                                     <li key={j}>
                                         <label className='app__pointer'>
-                                            <p>{subsubcategory}</p>
+                                            <p className='app__text_effect'>{subsubcategory}</p>
                                             <input 
                                             style={{display:'none'}}
                                             type="radio" 
@@ -114,7 +114,7 @@ const GeneralInfo = ({ formData, setFormData }) => {
             <div className={ `app__anuncio_modal ${className}` }>
                 <div className="app__anuncio_modal_content">
                     <div className="app__anuncio_modal_header">
-                        <p style={{margin: '4px', fontWeight:'bold'}}>{formData.categoria.length > 0 ? 'Categoria escolhida!' : 'Escolha uma categoria'}</p>
+                        <p>Escolha uma categoria</p>
                         <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
                     </div>
                     <div className="app__anuncio_modal_body">
@@ -136,7 +136,14 @@ const GeneralInfo = ({ formData, setFormData }) => {
         return(
             <div className='buttonToggleModal_area'>
                 <p className='app__pointer' id="modal-toggler" onClick={ props.onClick }> {formData.categoria.length > 0 ? 'Alterar ' : 'Escolher '}<FiChevronDown></FiChevronDown></p> 
-                <p className='buttonToggleModal_area_selected_category' style={{margin:'0'}}>{formData.categoria}</p>
+                <div className='buttonToggleModal_area_selected_category'>
+                    {formData.categoria.length > 0 && 
+                        <div>
+                            <span>{formData.categoria}</span>
+                            <p>{formData.subsubcategoria}</p>
+                        </div>
+                    }
+                </div>
             </div>
         )
     }
@@ -157,7 +164,7 @@ const GeneralInfo = ({ formData, setFormData }) => {
         <div className='app__anuncio_content_generalInfo'>
             <div className='inputField'>
                 <p>Título</p>
-                <input type='text' value={formData.titulo} placeholder='título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
+                <input type='text' value={formData.titulo} placeholder='Título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
             </div>
             <div className='inputField'>
                 <p>Preço (€)</p>
@@ -170,12 +177,8 @@ const GeneralInfo = ({ formData, setFormData }) => {
                 <Modal className={ activeModal ? 'activeModal' : null}/>
             </div>
         </div>
-        <div>
-            <Features formData={formData} setFormData={setFormData} features={formData.features}></Features>
-        </div>
-        <div>
-            <SubFeatures formData={formData} setFormData={setFormData}></SubFeatures>
-        </div>
+        <Features formData={formData} setFormData={setFormData}></Features>
+        <SubFeatures formData={formData} setFormData={setFormData}></SubFeatures>
     </>
     )
 }

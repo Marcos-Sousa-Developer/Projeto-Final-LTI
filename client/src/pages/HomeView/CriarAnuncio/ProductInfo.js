@@ -67,13 +67,15 @@ const ProductInfo = ({ formData, setFormData }) => {
                             })
                         }
                     </div>
-                    {selectedImages.length > 0 &&
-                        <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => setSelectedImages([])}>limpar tudo <FiTrash2></FiTrash2></span>
-                    }
+                    <div style={{display:'flex', marginTop:'1rem'}}>
+                        {selectedImages.length > 0 &&
+                            <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => setSelectedImages([])}>limpar tudo <FiTrash2></FiTrash2></span>
+                        }
+                        {selectedImages.length === 8 &&
+                            <p style={{margin: '.25rem 0 0 0', color: '#EB5C1F', fontSize:'12px'}}>Atingiu o limite de imagens!</p>
+                        }
+                    </div>
                 </div>
-                {selectedImages.length === 8 &&
-                    <p style={{margin: '0', color: '#EB5C1F'}}>Atingiu o limite de imagens!</p>
-                }
             </div>
             <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem'}}>
                 <div className='inputField'>

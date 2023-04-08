@@ -12,7 +12,7 @@ const SubFeatures = ({formData, setFormData}) => {
     const subsubcategoria = formData.subsubcategoria;
 
     return (
-        <>
+        <div className='app__anuncio_sub_features'>
             {/*Validade da alimentação dos animais*/}
                 {subsubcategoria === "Alimentação" &&
                     <>
@@ -47,7 +47,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                     setFormData({ ...formData, sub_features: updatedFeatures });
                                 }}
                             >
-                                <option value="">Selecione um estado</option>
+                                <option value="">Escolher</option>
                                 <option value="Menino">Menino</option>
                                 <option value="Menina">Menina</option>
                             </select>
@@ -60,7 +60,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subcategoria === "Móveis" &&
                     <>
                         <div className='inputField'>
-                            <label>Largura:</label>
+                            <p>Largura:</p>
                             <input 
                                 type="number"
                                 value={formData.sub_features.find(sub_feature => sub_feature.Largura)?.Largura || ''}
@@ -74,7 +74,7 @@ const SubFeatures = ({formData, setFormData}) => {
                             ></input>
                         </div>
                         <div className='inputField'>
-                            <label>Comprimento:</label>
+                            <p>Comprimento:</p>
                             <input 
                                 type="number"
                                 value={formData.sub_features.find(sub_feature => sub_feature.Comprimento)?.Comprimento || ''}
@@ -93,7 +93,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Computadores" &&
                     <>
                         <div className='inputField'>
-                            <label>Processador:</label>
+                            <p>Processador:</p>
                             <input 
                                 type='text'
                                 value={formData.sub_features.find(sub_feature => sub_feature.Processador)?.Processador || ''}
@@ -107,7 +107,7 @@ const SubFeatures = ({formData, setFormData}) => {
                             ></input>
                         </div>
                         <div className='inputField'>
-                            <label>Memória RAM:</label>
+                            <p>Memória RAM:</p>
                             <select  
                                 value={formData.sub_features[0]?.MemoryRAM || ""}
                                 onChange={(e) => {
@@ -118,7 +118,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                     setFormData({ ...formData, sub_features: updatedFeatures });
                                 }}
                             >
-                                <option value="">Escolha um:</option>
+                                <option value="">Escolher</option>
                                 <option value="1GB">1GB</option>
                                 <option value="2GB">2GB</option>
                                 <option value="4GB">4GB</option>
@@ -129,7 +129,7 @@ const SubFeatures = ({formData, setFormData}) => {
                             </select>
                         </div>
                         <div className='inputField'>
-                            <label>Sistema operativo:</label>
+                            <p>Sistema operativo:</p>
                             <select  
                                 value={formData.sub_features[0]?.OperatingSystem || ""}
                                 onChange={(e) => {
@@ -140,7 +140,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                     setFormData({ ...formData, sub_features: updatedFeatures });
                                 }}
                             >
-                                <option value="">Selecione um estado</option>
+                                <option value="">Escolher</option>
                                 <option value="Microsoft Windows">Microsoft Windows</option>
                                 <option value="MacOS">MacOS</option>
                                 <option value="Linux">Linux</option>
@@ -152,7 +152,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Tv" || subsubcategoria === "Projectores" || subsubcategoria === "Portáteis" || subsubcategoria === "Monitores" ?
                     <>
                         <div className='inputField'>
-                            <label>Resolução:</label>
+                            <p>Resolução:</p>
                             <select  
                                 value={formData.sub_features[0]?.Resolution || ""}
                                 onChange={(e) => {
@@ -163,7 +163,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                     setFormData({ ...formData, sub_features: updatedFeatures });
                                 }}
                             >
-                                <option value="">Selecione um:</option>
+                                <option value="">Escolher</option>
                                 <option value="1920x1080 (Full HD)">1920x1080 (Full HD)</option>
                                 <option value="2560x1440 (QHD)">2560x1440 (QHD)</option>
                                 <option value="3440x1440 (WQHD)">3440x1440 (WQHD)</option>
@@ -180,7 +180,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Portáteis" || subsubcategoria === "Monitores" ?
                     <>
                         <div className='inputField'>
-                            <label>Tamanho de ecrã</label>
+                            <p>Tamanho de ecrã:</p>
                             <select  
                                 value={formData.sub_features[0]?.ScreenSize || ""}
                                 onChange={(e) => {
@@ -191,7 +191,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                     setFormData({ ...formData, sub_features: updatedFeatures });
                                 }}
                             >
-                                <option value="">Selecione um:</option>
+                                <option value="">Escolher</option>
                                 <option value="-21''">-21''</option>
                                 <option value="24''">24''</option>
                                 <option value="27''">27''</option>
@@ -210,7 +210,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Projetores" || subsubcategoria === "Tv" ?
                     <>
                         <div className='inputField'>
-                            <label>Tamanho de ecrã</label>
+                            <p>Tamanho de ecrã:</p>
                             <select  
                                 value={formData.sub_features[0]?.ScreenSize || ""}
                                 onChange={(e) => {
@@ -221,7 +221,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                     setFormData({ ...formData, sub_features: updatedFeatures });
                                 }}
                             >
-                                <option value="">Selecione um estado</option>
+                                <option value="">Escolher</option>
                                 <option value="-27''">-27''</option>
                                 <option value="32''">32''</option>
                                 <option value="43''">43''</option>
@@ -241,7 +241,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Software"  &&
                     <>
                         <div className='inputField'>
-                            <label>Tipo de software:</label>
+                            <p>Tipo de software:</p>
                             <input
                                 type="text"
                                 value={formData.sub_features.find(sub_feature => sub_feature.Validade)?.Validade || ''}
@@ -260,7 +260,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Armazenamento" || subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos" || subsubcategoria === "Servidores" || subsubcategoria === "Computadores" ?
                     <>
                         <div className='inputField'>
-                            <label>Tamanho de Armazenamento:</label>
+                            <p  style={{margin:'0 0 8px 0'}}>Capacidade de armazenamento:</p>
                             <select  
                                 value={formData.sub_features[0]?.StorageAmount || ""}
                                 onChange={(e) => {
@@ -271,7 +271,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                     setFormData({ ...formData, sub_features: updatedFeatures });
                                 }}
                             >
-                                <option value="">Escolha um</option>
+                                <option value="">Escolher</option>
                                 <option value="120GB">120GB</option>
                                 <option value="256GB">250GB</option>
                                 <option value="480GB">480GB</option>
@@ -293,7 +293,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos" || subsubcategoria === "Computadores" ?
                     <>
                         <div className='inputField'>
-                            <label>Tipo de armazenamento:</label>
+                            <p style={{margin:'0 0 8px 0'}}>Tipo de armazenamento:</p>
                             <select  
                                 value={formData.sub_features[0]?.StorageType || ""}
                                 onChange={(e) => {
@@ -304,7 +304,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                     setFormData({ ...formData, sub_features: updatedFeatures });
                                 }}
                             >
-                                <option value="">Selecione um</option>
+                                <option value="">Escolher</option>
                                 <option value="SSD">SSD</option>
                                 <option value="HDD">HDD</option>
                             </select>
@@ -317,7 +317,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Telemóveis" || subsubcategoria === "Tablets"  ? 
                     <>
                         <div>
-                            <label>Sistema operativo:</label>
+                            <p>Sistema operativo:</p>
                             <select 
                                 value={formData.sub_features[0]?.OperatingSystem || ""}
                                 onChange={(e) => {
@@ -328,7 +328,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                     setFormData({ ...formData, sub_features: updatedFeatures });
                                 }}
                             >
-                                <option value="">Selecione um</option>
+                                <option value="">Escolher</option>
                                 <option value="Android">Android</option>
                                 <option value="iOS">iOS</option>
                                 <option value="Windows Phone">Windows Phone</option>
@@ -341,7 +341,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 : 
                     null
                 }
-        </>
+        </div>
     )
 }
 

@@ -1,21 +1,17 @@
 import React from 'react';
 
-import {teste} from '../../../utilities/teste';
-import CriarAnuncio from './CriarAnuncio';
-
-const Features = ({features, formData, setFormData}) => {
-    const isMarcaFeatureExist = features.some(feature => feature.hasOwnProperty('Marca'));
-    const isValidadeFeatureExist = features.some(feature => feature.hasOwnProperty('Validade'));
-    const isLocaldeProducaoFeatureExist = features.some(feature => feature.hasOwnProperty('LocaldeProducao'));
-    const isEstadoFeatureExist = features.some(feature => feature.hasOwnProperty('Estado'));
-    const isGarantiaFeatureExist = features.some(feature => feature.hasOwnProperty('Garantia'));
-    const isClasseEnergeticaFeatureExist = features.some(feature => feature.hasOwnProperty('ClasseEnergetica'));
+const Features = ({formData, setFormData}) => {
+    const isMarcaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Marca'));
+    const isValidadeFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Validade'));
+    const isLocaldeProducaoFeatureExist = formData.features.some(feature => feature.hasOwnProperty('LocaldeProducao'));
+    const isEstadoFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Estado'));
+    const isGarantiaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Garantia'));
+    const isClasseEnergeticaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('ClasseEnergetica'));
 
     return (
         <>
-            <p>Acerca do produto</p>
-            {features.map((feature, g) => (
-                <div key={g}>
+            {formData.features.map((feature, g) => (
+                <div key={g} className='app__anuncio_features'>
                     {isMarcaFeatureExist && g === 0 ? 
                         <>
                             <div className='inputField'>
@@ -93,7 +89,7 @@ const Features = ({features, formData, setFormData}) => {
                                         setFormData({ ...formData, features: updatedFeatures });
                                     }}
                                     >
-                                    <option value="">Selecione um estado</option>
+                                    <option value="">Escolher</option>
                                     <option value="Novo">Novo</option>
                                     <option value="Usado">Usado</option>
                                 </select>
@@ -138,7 +134,7 @@ const Features = ({features, formData, setFormData}) => {
                                         setFormData({ ...formData, features: updatedFeatures });
                                     }}
                                     >
-                                    <option value="">Selecione uma classe</option>
+                                    <option value="">Escolher</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
