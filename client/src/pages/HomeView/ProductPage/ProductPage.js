@@ -4,15 +4,15 @@ import { Navbar, Footer } from '../../../components/index';
 import './ProductPage.css';
 
 const ProductPage = () => {
-  return (
-    <>
-        <Navbar></Navbar>
-        <div>
+    return (
+      <>
+          <Navbar></Navbar>
+          <div>
 
-        </div>
-        <Footer></Footer>
-    </>
-  )
+          </div>
+          <Footer></Footer>
+      </>
+    )
 }
 
 export default ProductPage

@@ -117,5 +117,36 @@ img, picture {
   margin: 1rem auto 2rem;
 }
 .app__anunciar_content {
+  margin-top: 1rem;
   border: 3px solid #EEEEEE;
+  padding: 2rem 6rem 3rem 6rem;
+  display: flex;
+  justify-content: space-around;
+}
+.app__anunciar_content_search {
+  max-width: 34rem;
+}
+.app__anunciar_content_search p {
+  width: 75%;
+  font-size: 24px;
+}
+.app__anunciar_content_novo_anuncio {
+  align-self: center;
+}
+.app__anunciar_content_novo_anuncio p {
+  margin-bottom: 2rem;
+  font-size: 18px;
+}
+.app__anunciar_content_novo_anuncio div {
+  text-align: center;
+}
+.app__anunciar_content_novo_anuncio a {
+  color: white;
+}
+
+@media screen and (max-width: 1500px) {
+  .app__anunciar_content {
+    padding: 2rem 4rem 3rem 4rem;
+    justify-content: space-between;
+  }
 }/*# sourceMappingURL=Anunciar.css.map */

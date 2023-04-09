@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import { FiX, FiChevronRight, FiChevronLeft, FiChevronDown } from 'react-icons/fi';
 
 import {teste} from '../../../utilities/teste';
-import "./CriarAnuncio.css";
 import Features from './Features';
 import SubFeatures from './SubFeatures';
+import "./styles/CriarAnuncio.css";
 
 const GeneralInfo = ({ formData, setFormData }) => {
 

@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
-import { FiPlus, FiX, FiTrash2, FiChevronUp, FiChevronRight } from 'react-icons/fi';
+import { FiPlus, FiX, FiTrash2} from 'react-icons/fi';
 
-import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
-import { categories } from '../../../utilities/categorias';
-import "./CriarAnuncio.css";
+import "./styles/CriarAnuncio.css";
 
 const ProductInfo = ({ formData, setFormData }) => {
     
@@ -80,11 +78,11 @@ const ProductInfo = ({ formData, setFormData }) => {
             <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem'}}>
                 <div className='inputField'>
                     <p>Telemóvel</p>
-                    <input type='tel' required placeholder='912345678' onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
+                    <input type='tel' required onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
                 </div>
                 <div className='inputField'>
                     <p>Email</p>
-                    <input type='email' required placeholder='exemplo@gmail.com' onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
+                    <input type='email' required onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
                 </div> 
             </div>
             <div>

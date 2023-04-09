@@ -5,7 +5,7 @@ import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../component
 import GeneralInfo from './GeneralInfo';
 import ProductInfo from './ProductInfo';
 import { categories } from '../../../utilities/categorias';
-import "./CriarAnuncio.css";
+import "./styles/CriarAnuncio.css";
 import "../../../components/InputField/InputField.css";
 
 function CriarAnuncio() {

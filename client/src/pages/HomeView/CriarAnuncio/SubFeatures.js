@@ -260,7 +260,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Armazenamento" || subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos" || subsubcategoria === "Servidores" || subsubcategoria === "Computadores" ?
                     <>
                         <div className='inputField'>
-                            <p  style={{margin:'0 0 8px 0'}}>Capacidade de armazenamento:</p>
+                            <p  style={{margin:'0 0 6px 0', fontSize:'14px'}}>Capacidade de armazenamento:</p>
                             <select  
                                 value={formData.sub_features[0]?.StorageAmount || ""}
                                 onChange={(e) => {
@@ -293,7 +293,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos" || subsubcategoria === "Computadores" ?
                     <>
                         <div className='inputField'>
-                            <p style={{margin:'0 0 8px 0'}}>Tipo de armazenamento:</p>
+                            <p style={{fontSize:'15px'}}>Tipo de armazenamento:</p>
                             <select  
                                 value={formData.sub_features[0]?.StorageType || ""}
                                 onChange={(e) => {
@@ -341,6 +341,50 @@ const SubFeatures = ({formData, setFormData}) => {
                 : 
                     null
                 }
+            {/*Especificações do Roupa*/}
+            {subcategoria === "Roupa"  &&
+                <>
+                    <div className='inputField'>
+                        <p>Tamanho:</p>
+                        <select 
+                            value={formData.sub_features[0]?.ClothingSize || ""}
+                            onChange={(e) => {
+                                const updatedFeature = { ...formData.sub_features[0] };
+                                updatedFeature.ClothingSize = e.target.value;
+                                const updatedFeatures = [...formData.sub_features];
+                                updatedFeatures[0] = updatedFeature;
+                                setFormData({ ...formData, sub_features: updatedFeatures });
+                            }}
+                        >
+                            <option value="">Escolher</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
+                    </div>
+                </>
+            }
+            {/*Especificações do Calçado*/}
+            {subcategoria === "Calçado"  &&
+                <>
+                    <div className='inputField'>
+                        <p>Tamanho:</p>
+                        <input
+                                type="number"
+                                value={formData.sub_features.find(sub_feature => sub_feature.ShowSize)?.ShowSize || ''}
+                                onChange={(e) => {
+                                  const updatedSubFeature = {...formData.sub_features[0]};
+                                  updatedSubFeature.ShowSize = e.target.value;
+                                  const updatedSubFeatures = [...formData.sub_features];
+                                  updatedSubFeatures[0] = updatedSubFeature;
+                                  setFormData({ ...formData, sub_features: updatedSubFeatures });
+                                }}                            
+                            ></input>
+                    </div>
+                </>
+            }
         </div>
     )
 }
