@@ -14,11 +14,11 @@ const Anunciar = () => {
             <SubHeading title="Anunciar"></SubHeading>
             <div className='app__anunciar_content'>
                 <div className='app__anunciar_content_search'>
-                    <p>Pesquise um produto existente no nosso catálogo</p>
-                    <Searchbar></Searchbar>
+                    <p>Pesquise um produto existente no nosso catálogo pelo EAN</p>
+                    <Searchbar placeholder="Teste"></Searchbar>
                 </div>
                 <div className='app__anunciar_content_novo_anuncio'>
-                    <p>...ou crie ou novo anúncio</p>
+                    <p>...ou crie um novo anúncio</p>
                     <div><Link to='/anuncio' className='main__action_btn'>Criar anuncio</Link></div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FiChevronRight, FiChevronLeft} from 'react-icons/fi';
+import getFromDB from '../../../hooks/getFromDB';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
 import GeneralInfo from './GeneralInfo';
@@ -31,6 +32,29 @@ function CriarAnuncio() {
         telemovel: 0,
         localizacao: "",
     });
+
+    const [EAN, setEAN] = useState(null);
+    const [id_subsubcategory, setIdSubSubCategory] = useState(null);
+
+    const [didMount, setDidMount] = useState(false)
+
+    async function getProduct(ean){
+
+        let product = await getFromDB("/products/" + ean);
+        let subsubcategory = product[0].id_subsubcategory;
+
+        setEAN(ean);
+        setIdSubSubCategory(subsubcategory);
+      }
+
+    useEffect(()=>{
+        let url = new URL(window.location)
+        let ean = url.searchParams.get("EAN")
+        if (ean != null){
+            getProduct(ean)
+        }
+        setDidMount(true)
+    }, [])
 
     const FormTitles = ["Detalhes do Produto", "Detalhes do Anúncio"];
 
@@ -133,6 +157,15 @@ function CriarAnuncio() {
 
     return (
     <>
+    {
+      didMount == false ? (
+        <>
+          Loading
+        </>
+      )
+      :
+      (
+      <>
         <NavbarSupplier></NavbarSupplier>
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
@@ -152,7 +185,7 @@ function CriarAnuncio() {
                             <button type='button' onClick={() => {setPage((currPage) => currPage + 1); useEffectd()}} className='main__action_btn'>Continuar <FiChevronRight></FiChevronRight></button>
                     :
                         <>
-                            <button type='button' onClick={() => { setPage((currPage) => currPage - 1); useEffectd(); }} className='main__action_btn'><FiChevronLeft></FiChevronLeft> Anterior</button>
+                            <button type='button' onClick={() => {setPage((currPage) => currPage - 1); useEffectd(); }} className='main__action_btn'><FiChevronLeft></FiChevronLeft> Anterior</button>
                             <button type='button' onClick={() => {submit()}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
                             {/*colocar type SUBMIT*/}
                         </>
@@ -161,8 +194,12 @@ function CriarAnuncio() {
             </form>
         </div>
         <Footer></Footer>
+        </>
+        )
+    }
     </>
-  )
+  );
+
 }
 
 export default CriarAnuncio

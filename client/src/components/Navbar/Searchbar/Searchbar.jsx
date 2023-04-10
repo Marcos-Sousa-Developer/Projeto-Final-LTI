@@ -5,6 +5,7 @@ import getFromDB from '../../../hooks/getFromDB';
 
 import { FiSearch } from 'react-icons/fi';
 import "./Searchbar.css";
+import { Link } from 'react-router-dom';
 
 const Searchbar = () => {
 
@@ -88,6 +89,7 @@ const Searchbar = () => {
             }
         }
         if(window.location.pathname === "/anunciar"){
+            document.getElementsByName('searchText')[0].placeholder='new text for email';
             //verificar o EAN
             let validEAN = await verifyEAN(searchTextClear);
 
@@ -96,7 +98,9 @@ const Searchbar = () => {
             if(validEAN == "OK"){
                 product = await getFromDB("/products/" + searchTextClear);
                 if(product.length == 1){
-                  //pode continuar com o anuncio e vai para outra página
+                  const data = {EAN: product[0].EAN};
+                  const queryString = new URLSearchParams(data).toString();
+                  window.location.href = `/anuncio?${queryString}`;
                 } else {
                   alert(product)
                 }
@@ -113,7 +117,6 @@ const Searchbar = () => {
                 <input
                     name="searchText"
                     autoComplete="off"
-                    id=""
                     className="search_close_btn"
                     placeholder="Pesquise..."
                     type="search"
