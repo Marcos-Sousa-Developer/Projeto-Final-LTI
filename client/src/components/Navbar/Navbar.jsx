@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
 import { Link } from 'react-router-dom';
-import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight } from 'react-icons/fi';
+import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 
 import images from '../../assets/images.js';
-import { categorias } from '../../utilities/categorias.js'
+import { teste } from '../../utilities/teste.js'
 import Searchbar from './Searchbar/Searchbar';
 import './styles/Sidebar.css';
 import './styles/Navbar.css';
@@ -14,6 +14,25 @@ import './styles/Navbar.css';
 const Navbar = () => {
 
     //---------------------------SideBar--------------------------
+
+    const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+
+    const SubsubCategory = ({ subcategory, onClick }) => {
+        return (
+          <div style={{marginBottom:'.75rem'}}>
+            <div className='app__pointer' onClick={onClick}  style={{fontSize:'12px'}}>
+                <FiChevronLeft></FiChevronLeft>    
+                Voltar atrás
+            </div>
+            <a className='app__pointer' style={{fontWeight:'500'}}>{subcategory.name} <span>(ver tudo)</span></a>
+            <div style={{marginLeft:'.75rem'}}>
+                {subcategory.subsubcategories.map((subsubcategory, i) => {
+                    return <li style={{lineHeight:'2rem'}}><a key={i} className='app__text_effect app__pointer' style={{fontSize:'14px'}}>{subsubcategory}</a></li>
+                })}
+            </div>
+          </div>
+        );
+    };
    
     const Sidebar = ({ className }) => {
         const [selected, setSelected] = useState(null);
@@ -33,27 +52,35 @@ const Navbar = () => {
                 <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleSidebar}></FiX>
                 <div className="app__sidebar_navs">
                     <ul>
-                        {categorias.map((category, i) => {
-                            return (
-                                <div key={category.name} className='app__sidebar_navs_category'>
-                                    <div className='app__sidebar_navs_category-title' onClick={()=>toggleAccordion(i)}>
-                                        <p>{category.name}</p>
-                                        <span>{selected === i ? <FiChevronUp className='app__sidebar_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__sidebar_navs_category-title_right'></FiChevronRight>}</span>
+                        {selectedSubCategory ? (
+                            <SubsubCategory subcategory={selectedSubCategory} onClick={() => setSelectedSubCategory(null)}></SubsubCategory>
+                        ) : (
+                            teste.map((category, i) => {
+                                return (
+                                    <div key={category.name} className='app__sidebar_navs_category'>
+                                        <div className='app__sidebar_navs_category-title' onClick={()=>toggleAccordion(i)}>
+                                            <p style={{fontWeight:'500'}}>{category.name}</p>
+                                            <span>{selected === i ? <FiChevronUp className='app__sidebar_navs_category-title_up'></FiChevronUp> : <FiChevronRight className='app__sidebar_navs_category-title_right'></FiChevronRight>}</span>
+                                        </div>
+                                        <div className={selected === i ? 'app__sidebar_navs_category-content show' : 'app__sidebar_navs_category-content'}>
+                                            {category.subcategories.map(subcategory => (
+                                                <li key={subcategory.name}>
+                                                    <a className='app__text_effect app__pointer' onClick={() => setSelectedSubCategory(subcategory)}>{subcategory.name}</a>
+                                                </li>
+                                            ))}
+                                        </div>
                                     </div>
-                                    <div className={selected === i ? 'app__sidebar_navs_category-content show' : 'app__sidebar_navs_category-content'}>
-                                        {category.subcategory.map(subcategory => (
-                                            <li key={subcategory}><Link to="/cart" className='app__text_effect' style={{fontSize:'.9rem'}}>{subcategory}</Link></li>
-                                        ))}
-                                    </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })
+                        )}
                     </ul>
                 </div>
             </div>
           </div>
         )
     }
+
+    //-----------------------ButtonToggle for modal------------------------
 
     const ButtonToggle = (props) => {
         return(
@@ -67,6 +94,8 @@ const Navbar = () => {
             </FiAlignLeft>
         )
     }
+
+    //-----------------------Dark Background Overlay------------------------
 
     const Overlay = ({ className, onClick}) => {
         return(
@@ -90,6 +119,8 @@ const Navbar = () => {
         setTotalCartItems(total)
 
     },[cookies.cart])
+
+    //-----------------------------------------------------------
     
     return (
         <>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -171,7 +171,7 @@ img, picture {
   line-height: 2.5rem;
 }
 .app__sidebar_navs_category {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
 }
 .app__sidebar_navs_category-title {
   display: flex;
@@ -199,6 +199,12 @@ img, picture {
   max-height: 0;
   overflow: hidden;
   transition: all 350ms ease;
+}
+.app__sidebar_navs_category-content li {
+  line-height: 2rem;
+}
+.app__sidebar_navs_category-content li a {
+  font-size: 14px;
 }
 .app__sidebar_navs_category .show {
   height: auto;
