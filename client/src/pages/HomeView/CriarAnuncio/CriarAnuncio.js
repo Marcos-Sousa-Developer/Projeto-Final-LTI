@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 import getFromDB from '../../../hooks/getFromDB';
+import {teste} from '../../../utilities/teste';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
 import GeneralInfo from './GeneralInfo';
 import ProductInfo from './ProductInfo';
-import { categories } from '../../../utilities/categorias';
+import { categorias, categories } from '../../../utilities/categorias';
 import "./styles/CriarAnuncio.css";
 import "../../../components/InputField/InputField.css";
 
@@ -31,6 +32,7 @@ function CriarAnuncio() {
         email: "",
         telemovel: 0,
         localizacao: "",
+        search: false,
     });
 
     const [EAN, setEAN] = useState(null);
@@ -41,10 +43,45 @@ function CriarAnuncio() {
     async function getProduct(ean){
 
         let product = await getFromDB("/products/" + ean);
-        let subsubcategory = product[0].id_subsubcategory;
+        let idsubsubcategory = product[0].id_subsubcategory;
+
+        //IR BUSCAR O NOME DA CATEGORIA, SUB E SUBSUB
+
+        let subSubCategory = await getFromDB("/subsubcategories/" + idsubsubcategory);
+        let subSubCategoriaNome = subSubCategory[0].name;
+        let subCategoriaId = subSubCategory[0].id_subCategory;
+        console.log(subSubCategory)
+
+        let subCategory = await getFromDB("/subcategories/" + subCategoriaId)
+        let subCategoriaNome = subCategory[0].name;
+        let categoriaId = subCategory[0].id_category;
+        console.log(subCategory)
+
+
+        let category = await getFromDB("/categories/" + categoriaId);
+        let categoriaNome = category[0].name;
+        console.log(category)
+
+        //IR BUSCAR AS FEATURES
+
+        let featuresEmpty = null;
+
+        teste.map((category) => {
+        if (category.name === categoriaNome) {
+            featuresEmpty = category.features;
+        }
+        });
+
+        setFormData({
+            search: true,
+            categoria: categoriaNome,
+            subcategoria: subCategoriaNome,
+            subsubcategoria: subSubCategoriaNome,
+            features: featuresEmpty,
+        });
 
         setEAN(ean);
-        setIdSubSubCategory(subsubcategory);
+        setIdSubSubCategory(idsubsubcategory);
       }
 
     useEffect(()=>{
