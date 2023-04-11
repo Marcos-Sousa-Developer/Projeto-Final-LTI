@@ -520,11 +520,6 @@ export const teste = [
                     "Tablets",
                     "Acessórios"
                 ],
-                features: [
-                    {
-                        SistemaOperativo: ["Android", "iOS", "Windows Phone", "BlackBerry OS", "Harmony OS", "Nenhum"],
-                    }
-                ]
             }       
         ],
         features: [

@@ -13,7 +13,6 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 /**
  * Api configuration, only for server
  */
@@ -31,6 +30,7 @@ apiRouter.use('/products' , require('./api/ApiProducts'))
 apiRouter.use('/productsForSell' , require('./api/ApiAds'))
 apiRouter.use('/productionUnits' , require('./api/ApiProductionUnits'))
 apiRouter.use('/subcategories' , require('./api/ApiSubcategories'))
+apiRouter.use('/subsubcategories' , require('./api/ApiSubSubcategories'))
 apiRouter.use('/suppliers' , require('./api/ApiSuppliers'))
 apiRouter.use('/users' , require('./api/ApiUsers'))
 apiRouter.use('/vehicles' , require('./api/ApiVehicles'))
