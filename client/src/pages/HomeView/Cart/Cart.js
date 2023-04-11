@@ -15,17 +15,23 @@ import { useState } from 'react';
 const Cart = () => {
 
   const [cookies] = useCookies(['cart']);
-  const [totalItems] = useState(Object.keys(cookies.cart).length ?? 0)
-  const [totalAmount, setTotalAmount] = useState(1)
+  const [totalItems, setTotalItems] = useState(0)
+  const [totalAmount, setTotalAmount] = useState(0)
   
 
   useEffect(() => {
 
-    let total= 0;
-    for (const item in cookies.cart) {
+    if(cookies.cart){
+      let total= 0;
+      let totalI = 0;
+      for (const item in cookies.cart) {
         total += (cookies.cart[item][1] * cookies.cart[item][0]);
-    }
+        totalI += cookies.cart[item][0]
+      }
     setTotalAmount(total)
+    setTotalItems(totalI)
+    }
+
 
   },[cookies.cart])
 
