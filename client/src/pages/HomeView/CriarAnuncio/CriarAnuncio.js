@@ -44,13 +44,16 @@ function CriarAnuncio() {
 
         let product = await getFromDB("/products/" + ean);
         let idsubsubcategory = product[0].id_subsubcategory;
+        console.log(idsubsubcategory)
 
         //IR BUSCAR O NOME DA CATEGORIA, SUB E SUBSUB
 
         let subSubCategory = await getFromDB("/subsubcategories/" + idsubsubcategory);
         let subSubCategoriaNome = subSubCategory[0].name;
-        let subCategoriaId = subSubCategory[0].id_subCategory;
+        let subCategoriaId = subSubCategory[0].id_subcategory;
+        console.log("subsub")
         console.log(subSubCategory)
+
 
         let subCategory = await getFromDB("/subcategories/" + subCategoriaId)
         let subCategoriaNome = subCategory[0].name;
@@ -77,6 +80,7 @@ function CriarAnuncio() {
             subcategoria: subCategoriaNome,
             subsubcategoria: subSubCategoriaNome,
             features: featuresEmpty,
+            //subfeatures
         });
 
         setEAN(ean);
