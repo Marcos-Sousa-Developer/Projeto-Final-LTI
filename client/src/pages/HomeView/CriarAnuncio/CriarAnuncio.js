@@ -57,7 +57,6 @@ function CriarAnuncio() {
         let categoriaId = subCategory[0].id_category;
         console.log(subCategory)
 
-
         let category = await getFromDB("/categories/" + categoriaId);
         let categoriaNome = category[0].name;
         console.log(category)
