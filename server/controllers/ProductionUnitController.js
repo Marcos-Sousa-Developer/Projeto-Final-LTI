@@ -93,9 +93,9 @@ const deleteProductionUnitByID = async function (req, res) {
  */
 const insertProductionUnit = async function (req, res) {
 
-    const data = [req.query.stock, req.query.location, req.query.capacity];
+    const data = [req.query.stock, req.query.location, req.query.capacity, req.query.id_vehicle, req.query.id_supplier, req.query.id_product];
 
-    const statement = "INSERT INTO productionUnits (stock, location, capacity) VALUES ?";
+    const statement = "INSERT INTO productionUnits (stock, location, capacity, id_vehicle, id_supplier, id_product) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

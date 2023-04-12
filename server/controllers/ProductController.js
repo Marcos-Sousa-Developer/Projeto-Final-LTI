@@ -108,9 +108,9 @@ const deleteProductByID = async function (req, res) {
  */
 const insertProduct = async function (req, res) {
 
-    const data = [req.query.EAN, req.query.name, req.query.production_date, req.query.description];
+    const data = [req.query.EAN, req.query.name, req.query.production_date, req.query.description, req.query.id_category, req.query.id_production_unit, req.query.status];
 
-    const statement = "INSERT INTO products (EAN, name, production_date, description) VALUES ?";
+    const statement = "INSERT INTO products (EAN, name, production_date, description, id_category, id_production_unit, status) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

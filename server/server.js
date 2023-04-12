@@ -13,6 +13,17 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use('/api/users' , require('./api/ApiUsers'))
+app.use('/api/consumers' , require('./api/ApiConsumers'))
+app.use('/api/suppliers' , require('./api/ApiSuppliers'))
+app.use('/api/products' , require('./api/ApiProducts'))
+app.use('/api/categories' , require('./api/ApiCategories'))
+app.use('/api/subcategories' , require('./api/ApiSubCategories'))
+app.use('/api/subsubcategories' , require('./api/ApiSubSubCategories'))
+app.use('/api/orders' , require('./api/ApiOrders'))
+app.use('/api/vehicles' , require('./api/ApiVehicles'))
+app.use('/api/productionUnits' , require('./api/ApiProductionUnits'))
+
 /**
  * Api configuration, only for server
  */
@@ -28,11 +39,10 @@ apiRouter.use('/orderedProducts' , require('./api/ApiOrderedProducts'))
 apiRouter.use('/orders' , require('./api/ApiOrders'))
 apiRouter.use('/products' , require('./api/ApiProducts'))
 apiRouter.use('/productsForSell' , require('./api/ApiAds'))
-apiRouter.use('/productionUnits' , require('./api/ApiProductionUnits'))
-apiRouter.use('/subcategories' , require('./api/ApiSubcategories'))
-apiRouter.use('/subsubcategories' , require('./api/ApiSubSubcategories'))
-apiRouter.use('/suppliers' , require('./api/ApiSuppliers'))
-apiRouter.use('/users' , require('./api/ApiUsers'))
+apiRouter.use('/categories' , require('./api/ApiCategories'))
+apiRouter.use('/subcategories' , require('./api/ApiSubCategories'))
+apiRouter.use('/subsubcategories' , require('./api/ApiSubSubCategories'))
+apiRouter.use('/orderedProducts' , require('./api/ApiOrderedProducts'))
 apiRouter.use('/vehicles' , require('./api/ApiVehicles'))
 apiRouter.get('/', (req, res) => {
     res.send({ express: 'HELLO WORLD, YOU ARE CONNECTED TO THE API, PLEASE THE CHECK ENDPOINTS' });
