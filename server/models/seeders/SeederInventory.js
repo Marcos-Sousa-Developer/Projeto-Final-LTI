@@ -1,7 +1,7 @@
 let pool = require('../../config/dbConfigLocal')
 const util = require('util');
 
-const inventory = require('../factories/CREATE_CATEGORY_SUB_AND_SUBSUB_CATEGORY.json')
+const inventory = require('../factories/FAKE_INVENTORY.json')
 
 const statementCategories = "INSERT INTO categories (name) VALUES (?) "
 const statementSubCategories = "INSERT INTO subcategories (name,characteristics,id_category) VALUES (?) "

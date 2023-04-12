@@ -9,6 +9,7 @@ const statement = "CREATE TABLE products ( " +
                   "id_subsubcategory int, " +
                   "id_production_unit int, " +
                   "status BOOLEAN DEFAULT 1, " +  
+                  "UNIQUE(EAN), " +
                   "PRIMARY KEY (id))";
 
 
