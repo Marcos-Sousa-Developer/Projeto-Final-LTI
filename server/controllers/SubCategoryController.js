@@ -6,7 +6,7 @@ let dbConnection = require('./DatabaseController')
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllorSomeSubcategories = async function (req, res) { 
+const getAllorSomeSubCategories = async function (req, res) { 
 
     let statement = "SELECT * FROM subcategories";
     
@@ -49,7 +49,7 @@ const getAllorSomeSubcategories = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const getSubcategoryByID = async function (req, res) { 
+const getSubCategoryByID = async function (req, res) { 
 
     const statement = "SELECT * FROM subcategories WHERE id = " + req.params.id
 
@@ -70,7 +70,7 @@ const getSubcategoryByID = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const deleteSubcategoryByID = async function (req, res) {
+const deleteSubCategoryByID = async function (req, res) {
 
     const statement = "DELETE FROM subcategories WHERE id = " + req.params.id
 
@@ -91,11 +91,11 @@ const deleteSubcategoryByID = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const insertSubcategory = async function (req, res) {
+const insertSubCategory = async function (req, res) {
 
-    const data = [req.query.name];
+    const data = [req.query.name, req.query.characteristics, req.query.id_category];
 
-    const statement = "INSERT INTO subcategories (name) VALUES ?";
+    const statement = "INSERT INTO subcategories (name, characteristics, id_category) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
@@ -112,7 +112,7 @@ const insertSubcategory = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const updateSubcategoryByID = async function (req, res) { 
+const updateSubCategoryByID = async function (req, res) { 
 
     let statement = `UPDATE subcategories SET `;
 
@@ -148,4 +148,4 @@ const updateSubcategoryByID = async function (req, res) {
     return res.send("Subcategory has been updated");
 }
 
-module.exports = {getAllorSomeSubcategories, getSubcategoryByID, deleteSubcategoryByID, insertSubcategory, updateSubcategoryByID}
+module.exports = {getAllorSomeSubCategories, getSubCategoryByID, deleteSubCategoryByID, insertSubCategory, updateSubCategoryByID}

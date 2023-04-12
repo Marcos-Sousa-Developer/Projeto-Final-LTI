@@ -124,9 +124,9 @@ const deleteOrderByID = async function (req, res) {
  */
 const insertOrder = async function (req, res) {
 
-    const data = [req.query.order_number, req.query.order_date, req.query.order_status, req.query.total, req.query.address, req.query.size];
+    const data = [req.query.order_number, req.query.order_date, req.query.order_status, req.query.products_list, req.query.total, req.query.address, req.query.size, req.query.id_supplier_product, req.query.id_consumer, req.query.id_vehicle];
 
-    const statement = "INSERT INTO orders (order_number, order_date, order_status, total, address, size) VALUES ?";
+    const statement = "INSERT INTO orders (order_number, order_date, order_status, products_list, total, address, size, id_supplier_product, id_consumer, id_vehicle) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

@@ -110,12 +110,13 @@ const insertConsumer = async function (req, res) {
 
     const data = [req.query.uid, req.query.name, req.query.email, req.query.nif, 
                 req.query.mobile_number, req.query.continent,
-                req.query.country,req.query.district,
+                req.query.country, req.query.district,
                 req.query.city, req.query.town, req.query.address,
-                req.query.postal_code];
+                req.query.postal_code, req.query.status, req.query.shopping_cart, 
+                req.query.total_orders, req.query.created_at];
 
     const statement = "INSERT INTO consumers (uid, name, email, nif, mobile_number, continent, country, district, " +
-                    "city, town, address, postal_code) VALUES ?";
+                    "city, town, address, postal_code, status, shopping_cart, total_orders, created_at) VALUES ?";
  
     let result = await dbConnection(statement, [data]);
 

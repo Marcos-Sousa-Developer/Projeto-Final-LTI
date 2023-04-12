@@ -109,9 +109,9 @@ const deleteVehicleByLicensePlate = async function (req, res) {
  */
 const insertVehicle = async function (req, res) {
 
-    const data = [req.query.license_plate, req.query.name, req.query.status, req.query.capacity];
+    const data = [req.query.license_plate, req.query.name, req.query.production_unit, req.query.status, req.query.capacity, req.query.orders_list, req.query.id_production_unit];
 
-    const statement = "INSERT INTO vehicles (license_plate, name, status, capacity) VALUES ?";
+    const statement = "INSERT INTO vehicles (license_plate, name, production_unit, status, capacity, orders_list, id_production_unit) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
