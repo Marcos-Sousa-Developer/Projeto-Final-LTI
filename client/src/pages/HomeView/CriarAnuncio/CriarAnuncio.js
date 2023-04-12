@@ -37,7 +37,6 @@ function CriarAnuncio() {
     });
 
     const [EAN, setEAN] = useState(null);
-    const [id_subsubcategory, setIdSubSubCategory] = useState(null);
 
     const [didMount, setDidMount] = useState(false)
 
@@ -69,11 +68,12 @@ function CriarAnuncio() {
         let subFeaturesEmpty = null;
 
         teste.map((category) => {  
-            console.log(category) 
         if (category.name === categoriaNome) {
             featuresEmpty = category.features;
-            category.map((subsubcategory) => {
-                console.log(subsubcategory)
+            category.subcategories.map((subcategory) => {
+                if (subcategory.name === subCategoriaNome) {
+                    subFeaturesEmpty = subcategory.features;
+                }
             });
         }
         });
@@ -84,11 +84,10 @@ function CriarAnuncio() {
             subcategoria: subCategoriaNome,
             subsubcategoria: subSubCategoriaNome,
             features: featuresEmpty,
-            //subfeatures
+            sub_features: subFeaturesEmpty,
         });
 
         setEAN(ean);
-        setIdSubSubCategory(idsubsubcategory);
       }
 
     useEffect(()=>{
