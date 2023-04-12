@@ -64,16 +64,16 @@ const getAllorSomeProducts = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const getProductByEAN = async function (req, res) { 
+const getProductByID = async function (req, res) { 
 
-    const statement = "SELECT * FROM products WHERE EAN = " + req.params.EAN;
+    const statement = "SELECT * FROM products WHERE id = " + req.params.id;
 
     let result = await dbConnection(statement)  
 
     if (result === "error") {
-        return res.status(500).json("Not possible to get product with EAN " + req.params.EAN);
+        return res.status(500).json("Not possible to get product with ID " + req.params.id);
     } else if (result.length < 1) {
-        return res.send("Product with EAN " + req.params.EAN + " does not exist in the database");
+        return res.send("Product with ID " + req.params.id + " does not exist in the database");
     }
     
     return res.send(result)
@@ -85,19 +85,19 @@ const getProductByEAN = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const deleteProductByEAN = async function (req, res) {
+const deleteProductByID = async function (req, res) {
 
-    const statement = "DELETE FROM products WHERE EAN = " + req.params.EAN
+    const statement = "DELETE FROM products WHERE ID = " + req.params.id
 
     let result = await dbConnection(statement)
 
     if (result === "error") {
-        return res.status(500).json("Not possible to delete the product with EAN " + req.params.EAN);
+        return res.status(500).json("Not possible to delete the product with ID " + req.params.id);
     } else if (result.affectedRows == 0) {
-        return res.send("Product with EAN " + req.params.EAN + " does not exist in the database");
+        return res.send("Product with ID " + req.params.id + " does not exist in the database");
     }
 
-    return res.send("Product with EAN " + req.params.EAN + " has been deleted");
+    return res.send("Product with ID " + req.params.id + " has been deleted");
 }
 
 /**
@@ -127,7 +127,7 @@ const insertProduct = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const updateProductByEAN = async function (req, res) { 
+const updateProductByID = async function (req, res) { 
 
     let statement = `UPDATE products SET `;
 
@@ -150,17 +150,17 @@ const updateProductByEAN = async function (req, res) {
         }
     }
 
-    statement += ` WHERE EAN='${parseInt(req.params.EAN)}';`;
+    statement += ` WHERE id='${parseInt(req.params.id)}';`;
 
     let result = await dbConnection(statement);
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this product");
     } else if (result.affectedRows == 0) {
-        return res.send("Product with EAN " + req.params.EAN + " does not exist in the database");
+        return res.send("Product with ID " + req.params.id + " does not exist in the database");
     }
 
     return res.send("Product has been updated");
 }
 
-module.exports = {getAllorSomeProducts, getProductByEAN, deleteProductByEAN, insertProduct, updateProductByEAN}
+module.exports = {getAllorSomeProducts, getProductByID, deleteProductByID, insertProduct, updateProductByID}
