@@ -158,7 +158,6 @@ const GeneralInfo = ({ formData, setFormData }) => {
     const [activeModal, setActiveModal] = useState(false);
     const toggleActiveModal = () => setActiveModal(!activeModal);    
 
-
     return (
     <>
         <div className='app__anuncio_content_generalInfo'>
@@ -172,9 +171,20 @@ const GeneralInfo = ({ formData, setFormData }) => {
             </div>
             <div className='app__anuncio_content_generalInfo_categoria'>
                 <p>Categoria</p>
-                <ButtonToggleModal onClick={toggleActiveModal}/>
-                <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
-                <Modal className={ activeModal ? 'activeModal' : null}/>
+                {formData.categoria != "" && formData.subcategoria != "" && formData.subsubcategoria != "" && formData.search ? 
+                
+                        <>
+                            <p>{formData.categoria}</p>
+                            <p>{formData.subcategoria}</p>
+                            <p>{formData.subsubcategoria}</p>
+                        </>
+                    :
+                        <>
+                            <ButtonToggleModal onClick={toggleActiveModal}/>
+                            <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
+                            <Modal className={ activeModal ? 'activeModal' : null}/>
+                        </>
+                } 
             </div>
         </div>
         <Features formData={formData} setFormData={setFormData}></Features>
