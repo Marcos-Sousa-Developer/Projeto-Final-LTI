@@ -21,7 +21,6 @@ const getAllorSomeSuppliers = async function (req, res) {
             if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
                 params[key] = value
             }
-
         }
 
         statement += " WHERE (created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"

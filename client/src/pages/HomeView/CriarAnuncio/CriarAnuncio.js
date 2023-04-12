@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 import getFromDB from '../../../hooks/getFromDB';
+import getAllFromDB from '../../../hooks/getAllFromDB';
 import {teste} from '../../../utilities/teste';
 
 import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
@@ -42,35 +43,38 @@ function CriarAnuncio() {
 
     async function getProduct(ean){
 
-        let product = await getFromDB("/products/" + ean);
+        let params = {
+            EAN: EAN,
+          };
+
+        let product = await getAllFromDB("/products/", params);
         let idsubsubcategory = product[0].id_subsubcategory;
-        console.log(idsubsubcategory)
 
         //IR BUSCAR O NOME DA CATEGORIA, SUB E SUBSUB
 
         let subSubCategory = await getFromDB("/subsubcategories/" + idsubsubcategory);
         let subSubCategoriaNome = subSubCategory[0].name;
         let subCategoriaId = subSubCategory[0].id_subcategory;
-        console.log("subsub")
-        console.log(subSubCategory)
-
 
         let subCategory = await getFromDB("/subcategories/" + subCategoriaId)
         let subCategoriaNome = subCategory[0].name;
         let categoriaId = subCategory[0].id_category;
-        console.log(subCategory)
 
         let category = await getFromDB("/categories/" + categoriaId);
         let categoriaNome = category[0].name;
-        console.log(category)
 
         //IR BUSCAR AS FEATURES
 
         let featuresEmpty = null;
+        let subFeaturesEmpty = null;
 
-        teste.map((category) => {
+        teste.map((category) => {  
+            console.log(category) 
         if (category.name === categoriaNome) {
             featuresEmpty = category.features;
+            category.map((subsubcategory) => {
+                console.log(subsubcategory)
+            });
         }
         });
 
@@ -146,16 +150,6 @@ function CriarAnuncio() {
         return "OK"
     }
 
-    async function verifyName(name){
-        //Retorna OK se estiver tudo bem, se não, retorna o erro 
-        //não pode ser null
-        if(name == "" || name == null) {
-            // O nome não pode ser nulo
-            return "Deve de inserir um nome válido";
-        }
-        return "OK"
-    }
-
     const submit = async () => {
 
         console.log(formData)
@@ -164,7 +158,6 @@ function CriarAnuncio() {
         let validPrice = await verifyPrice(formData.preco);
         let validDescription = await verifyDescription(formData.descricao);
         let validCategory = await verifyCategory(formData.categoria);
-        let validName = await verifyName(formData.nome);
 
         let ad;
         // Se todos os verifys forem OK, entra 
@@ -173,9 +166,9 @@ function CriarAnuncio() {
         // cria anuncio
 
         let text = "Não foi possivel criar o produto\n";
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK" && validName == "OK"){
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK"){
             text = "OK"
-        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validName != "OK"){
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK"){
             if(validTitle != "OK" ){
               text += validTitle + "\n"
             }
@@ -187,9 +180,6 @@ function CriarAnuncio() {
             }
             if(validCategory != "OK" ){
               text += validCategory + "\n"
-            }
-            if(validName != "OK" ){
-                text += validName + "\n"
             }
           }
           alert(text)

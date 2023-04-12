@@ -11,7 +11,7 @@ const getAllorSomeProducts = async function (req, res) {
     let statement = "SELECT * FROM products";
     
     if(Object.keys(req.query).length !== 0) { 
-
+        statement += " WHERE "
         let params = {} 
 
         for(let i = 0 ; i < Object.keys(req.query).length; i++) {
@@ -23,16 +23,17 @@ const getAllorSomeProducts = async function (req, res) {
             }
 
         }
-
-        statement += " WHERE (created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+        if(req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+        }
 
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
 
             let key = Object.keys(params)[i];
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
-
-            if(i == 0){
+            
+            if(i == 0 && req.query.created_at_init != undefined && req.query.created_at_final != undefined){
                 statement += " AND ";
             }
 
@@ -46,6 +47,7 @@ const getAllorSomeProducts = async function (req, res) {
             }
         }
     }
+    console.log(statement)
 
     let result = await dbConnection(statement)  
 
