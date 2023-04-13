@@ -2,13 +2,14 @@ let pool = require('../../config/dbConfigLocal')
 
 const subcategory_data = require('../factories/SUBCATEGORY_DATA.json')
 
-const statementInsert = "INSERT INTO subcategories (id, name, characteristics, id_category) VALUES ? "
+const statementInsert = "INSERT INTO subcategories (name, characteristics, "
+                        "id_category) VALUES ? "
 
 let values = []
 
 subcategory_data.forEach(row => {
 
-    values.push([row.id, row.name, row.characteristics, row.id_category])     
+    values.push([row.name, row.characteristics, row.id_category])     
 });
 
 
