@@ -24,19 +24,19 @@ function CriarAnuncio() {
         titulo: "",
         preco: 0.00,
         descricao: "",
+        data_producao: "",
         categoria: "",
         subcategoria: "",
         subsubcategoria: "",
         features: [],
         sub_features: [],
-        nome: "",
         email: "",
-        telemovel: 0,
-        localizacao: "",
+        telemovel: "",
         search: false,
     });
 
     const [EAN, setEAN] = useState(null);
+    const [idsubsubcategory, setIdSubSubCategory] = useState(null);
 
     const [didMount, setDidMount] = useState(false)
 
@@ -88,6 +88,7 @@ function CriarAnuncio() {
         });
 
         setEAN(ean);
+        setIdSubSubCategory(idsubsubcategory);
       }
 
     useEffect(()=>{
@@ -158,11 +159,43 @@ function CriarAnuncio() {
         let validDescription = await verifyDescription(formData.descricao);
         let validCategory = await verifyCategory(formData.categoria);
 
+        let product;
         let ad;
-        // Se todos os verifys forem OK, entra 
 
-        //cria produto
-        // cria anuncio
+
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK"){
+
+            let featuresDBproduct = {}; //Guardar as caracteristicas que são só do produto na tabela products(Estado, tamanho, ... ,ficam vazias)
+            let featuresDBad = {}; //Guardar todas as caracteristicas que são do anuncio na tabela ads(Estado, tamanho, ... ficam preenchidos)
+
+            //verificar se existe ean e se existir, se já existe na bd -> Sen não existir, adicionar
+            //Fazer get pelo EAN e depois post caso não haja
+
+            product = await postToDB("/products",{
+              EAN: EAN,
+              production_date: formData.data_producao,
+              id_subsubcategory: idsubsubcategory,
+              characteristics: featuresDBproduct
+            })
+
+            //Ir buscar o id do fornecedor
+            //let idSupplier = 
+
+            //ir buscar o id do produto de cima
+            //let idproduct = 
+
+            ad = await postToDB("/ads",{
+                title: formData.title,
+                price: formData.price,
+                description: formData.descricao,
+                extraCharacteristics: featuresDBad,
+                supplier_id: idSupplier,
+                product_id: idproduct,
+              })
+
+            
+        }
+
 
         let text = "Não foi possivel criar o produto\n";
         if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK"){

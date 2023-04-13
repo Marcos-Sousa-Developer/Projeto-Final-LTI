@@ -73,14 +73,12 @@ const Searchbar = () => {
                 let products = await getAllFromDB("/productsForSell",{
                     title: searchTextClear,
                 })
-                console.log(products)
                 if(products == "There is no ads in the database"){
                     //DAR MENSAGEM DE ERRO OU SUGERIR PROCURAR PELAS CATEGORIAS
                     alert(products)
                 } else {
                     //VAI PARA OUTRA PÁGINA ONDE MOSTRA OS PRODUTOS
                     //window.location.href = "/NOVAPAGINA?products=${products}`";
-                    //console.log(products)
     
                     //para ir buscar s produtos na nova pagina, fazer
                     //const urlParams = new URLSearchParams(window.location.search);
