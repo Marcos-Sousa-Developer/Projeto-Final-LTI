@@ -5,7 +5,7 @@ import product2 from "../../../assets/testproducts/cannon.png";
 import product3 from "../../../assets/testproducts/macbookpro.png";
 
 import { Link } from 'react-router-dom';
-import { FiShoppingCart} from 'react-icons/fi';
+import { FiShoppingCart, FiMinus, FiPlus} from 'react-icons/fi';
 import { Navbar, Footer } from '../../../components/index';
 import './ProductPage.css';
 
@@ -18,16 +18,16 @@ const ProductPage = () => {
     src: [
         product1,
         product2,
-        product3
+        product3,
     ],
-    description: "iPhone 14 Pro Max 64GB 2023, bla bla bla",
+    description: "Qui dolores omnis et quam enim qui quia mollitia aut ullam laudantium et voluptatibus fuga sit explicabo sequi et repudiandae veritatis. Est officiis optio non laboriosam velit et necessitatibus tempore sed aperiam doloribus.",
     caracteristics: [
       {
         features: [{Marca: 'iPhone', LocaldeProducao:'USA', Validade:'None', Garantia:'3 anos'}],
         sub_features: [{Processador: 'A14', MemoriaRam: '64GB'}]
       }
     ],
-    price: "999.9€"
+    price: "999,90€"
   }]
 
   //---------------------State to keep track of the first image source--------------------------
@@ -52,7 +52,7 @@ const ProductPage = () => {
     <>
         <Navbar></Navbar>
         <div className='app__product_page main__container'>
-          <p>Home - Categoria X - SubCategoria X - SubsubCategoria X</p>
+          <p className='app__product_page_path'>Home - Categoria X - SubCategoria X - SubsubCategoria X</p>
           <p className='app__product_page_content_title_mobile'>{product[0].title}</p>
           <div className='app__product_page_content'>
             <div className='app__product_page_content_images'>
@@ -74,10 +74,12 @@ const ProductPage = () => {
                     {product[0].description}
                   </div>
                   <div className='app__product_page_content_actions'>
-                    <div>
-
+                    <div className='app__product_page_content_actions_1'>
+                      <button><FiMinus></FiMinus></button>
+                      <input/>
+                      <button><FiPlus></FiPlus></button>
                     </div>
-                    <button className='main__action_btn'>Adicionar <FiShoppingCart></FiShoppingCart></button>
+                    <button className='main__action_btn app__product_page_content_actions_2'>Adicionar <FiShoppingCart></FiShoppingCart></button>
                   </div>
                 </div>
               </div>
@@ -96,12 +98,12 @@ const ProductPage = () => {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>{product[0].caracteristics[0].features[0].Marca}</td>
-                      <td>{product[0].caracteristics[0].features[0].LocaldeProducao}</td>
-                      <td>{product[0].caracteristics[0].features[0].Validade}</td>
-                      <td>{product[0].caracteristics[0].features[0].Garantia}</td>
-                      <td>{product[0].caracteristics[0].sub_features[0].Processador}</td>
-                      <td>{product[0].caracteristics[0].sub_features[0].MemoriaRam}</td>
+                      <td data-label='Marca'>{product[0].caracteristics[0].features[0].Marca}</td>
+                      <td data-label='LocaldeProducao'>{product[0].caracteristics[0].features[0].LocaldeProducao}</td>
+                      <td data-label='Validade'>{product[0].caracteristics[0].features[0].Validade}</td>
+                      <td data-label='Garantia'>{product[0].caracteristics[0].features[0].Garantia}</td>
+                      <td data-label='Processador'>{product[0].caracteristics[0].sub_features[0].Processador}</td>
+                      <td data-label='MemoriaRam'>{product[0].caracteristics[0].sub_features[0].MemoriaRam}</td>
                     </tr>
                   </tbody>
                 </table>

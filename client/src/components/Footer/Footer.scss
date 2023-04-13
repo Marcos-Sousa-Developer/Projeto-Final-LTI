@@ -18,13 +18,14 @@ body{
     //justify-self: center;
 
     h5 {
-        margin-bottom: 1.25rem;
+        margin-bottom: .75rem;
+        font-size: $normal_font;
     }
 
     &2 >*{
         display: block;
         line-height: 2rem;
-        font-size: 0.9rem;
+        font-size: $smaller-font;
         transition: 150ms all ease-in-out;
 
         &:hover{
