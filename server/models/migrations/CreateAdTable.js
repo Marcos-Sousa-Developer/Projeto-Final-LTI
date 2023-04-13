@@ -4,6 +4,8 @@ const statement = "CREATE TABLE ads ( " +
                   "id int NOT NULL AUTO_INCREMENT, " + 
                   "title varchar(255) NOT NULL, " +
                   "description varchar(255) NOT NULL, " + 
+                  "email varchar(255) NOT NULL, " +
+                  "mobile_number varchar(255) NOT NULL, " +
                   "extraCharacteristic varchar(1000) NOT NULL, " +
                   "status varchar(255) NOT NULL, " +
                   "price float NOT NULL, " +
