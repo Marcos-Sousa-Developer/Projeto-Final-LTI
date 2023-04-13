@@ -9,6 +9,7 @@ const statement = "CREATE TABLE products ( " +
                   "id_category int, " +
                   "id_production_unit int, " +
                   "status BOOLEAN DEFAULT 1, " +  
+                  "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "UNIQUE(EAN), " +
                   "PRIMARY KEY (id))";
 

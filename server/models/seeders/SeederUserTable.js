@@ -2,13 +2,13 @@ let pool = require('../../config/dbConfigLocal')
 
 const fake_user_data = require('../factories/FAKE_USER_DATA.json')
 
-const statement = "INSERT INTO users (name, email, user_type) VALUES ? "
+const statement = "INSERT INTO users (name, email, user_type, id_user_type) VALUES ? "
 
 let values = []
 
 fake_user_data.forEach(row => {
 
-    values.push([row.name, row.email, row.user_type])     
+    values.push([row.name, row.email, row.user_type, row.id_user_type])     
 });
 
 pool.query(statement, [values], function(error, result){

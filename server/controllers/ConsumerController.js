@@ -11,6 +11,7 @@ const getAllorSomeConsumers = async function (req, res) {
     let statement = "SELECT * FROM consumers";
 
     if(Object.keys(req.query).length !== 0) { 
+        statement += " WHERE "
 
         let params = {} 
 
@@ -24,7 +25,12 @@ const getAllorSomeConsumers = async function (req, res) {
 
         }
 
-        statement += " WHERE (created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+        if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+            if(Object.keys(params).length > 0){
+                statement += " AND ";
+            }
+        }
 
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
 
@@ -49,7 +55,7 @@ const getAllorSomeConsumers = async function (req, res) {
 
     let result = await dbConnection(statement)  
 
-    if (result === "error") {
+    if (result.includes("error")) {
         return res.status(500).json("Not possible to get all consumers");
     } else if (result.length < 1) {
         return res.send("There is no consumer in the database");
@@ -115,8 +121,9 @@ const insertConsumer = async function (req, res) {
                 req.query.postal_code, req.query.status, req.query.shopping_cart, 
                 req.query.total_orders, req.query.created_at];
 
-    const statement = "INSERT INTO consumers (uid, name, email, nif, mobile_number, continent, country, district, " +
-                    "city, town, address, postal_code, status, shopping_cart, total_orders, created_at) VALUES ?";
+    const statement = "INSERT INTO consumers (uid, name, email, nif, mobile_number, " +
+                    "continent, country, district, city, town, address, postal_code, " +
+                    "status, shopping_cart, total_orders, created_at) VALUES ?";
  
     let result = await dbConnection(statement, [data]);
 
