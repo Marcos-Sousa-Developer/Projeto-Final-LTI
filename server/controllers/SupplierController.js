@@ -22,7 +22,6 @@ const getAllorSomeSuppliers = async function (req, res) {
             if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
                 params[key] = value
             }
-
         }
 
         if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
