@@ -2,10 +2,11 @@ let pool = require('../../config/dbConfigLocal')
 
 const statement = "CREATE TABLE products ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
-                  "EAN BIGINT NOT NULL, " +
+                  "EAN BIGINT, " +
                   "name varchar(255) NOT NULL, " + 
                   "production_date DATE NOT NULL, " +
                   "description varchar(500) NOT NULL, " +
+                  "characteristics varchar(1000) NOT NULL, " +
                   "id_subsubcategory int, " +
                   "id_production_unit int, " +
                   "status BOOLEAN DEFAULT 1, " +  
