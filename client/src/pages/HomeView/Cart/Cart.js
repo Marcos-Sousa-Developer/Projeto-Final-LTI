@@ -14,11 +14,15 @@ import { useState } from 'react';
 
 const Cart = () => {
 
-  const [cookies] = useCookies(['cart']);
+  const [cookies, setCookie] = useCookies(['cart']);
   const [totalItems, setTotalItems] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
-  
 
+  const deleteAllCartItem = () => {
+    const prevValue =  {};
+    setCookie('cart', prevValue, { path: '/' });
+  }
+  
   useEffect(() => {
 
     if(cookies.cart){
@@ -49,7 +53,7 @@ const Cart = () => {
                   <FiArrowLeft></FiArrowLeft>
                   <p>Continuar a comprar</p>
                 </Link>
-                <button className='flex app__cart_before_content_btn'>
+                <button className='flex app__cart_before_content_btn' onClick={()=> deleteAllCartItem()}>
                   <FiTrash2></FiTrash2>
                   <p>Limpar carrinho</p>
                 </button>

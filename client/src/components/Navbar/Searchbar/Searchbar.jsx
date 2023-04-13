@@ -96,7 +96,13 @@ const Searchbar = () => {
             let product;
 
             if(validEAN == "OK"){
-                product = await getFromDB("/products/" + searchTextClear);
+
+                let params = {
+                  EAN: searchTextClear,
+                };
+    
+                product = await getAllFromDB("/products/", params);
+
                 if(product.length == 1){
                   const data = {EAN: product[0].EAN};
                   const queryString = new URLSearchParams(data).toString();
