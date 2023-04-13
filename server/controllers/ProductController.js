@@ -11,6 +11,7 @@ const getAllorSomeProducts = async function (req, res) {
     let statement = "SELECT * FROM products";
     
     if(Object.keys(req.query).length !== 0) { 
+        statement += " WHERE "
 
         let params = {} 
 
@@ -24,7 +25,12 @@ const getAllorSomeProducts = async function (req, res) {
 
         }
 
-        statement += " WHERE (created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+        if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+            if(Object.keys(params).length > 0){
+                statement += " AND ";
+            }
+        }
 
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
 
@@ -108,9 +114,12 @@ const deleteProductByID = async function (req, res) {
  */
 const insertProduct = async function (req, res) {
 
-    const data = [req.query.EAN, req.query.name, req.query.production_date, req.query.description, req.query.id_category, req.query.id_production_unit, req.query.status];
+    const data = [req.query.EAN, req.query.name, req.query.production_date, 
+                req.query.description, req.query.id_category, req.query.id_production_unit, 
+                req.query.status, req.query.created_at];
 
-    const statement = "INSERT INTO products (EAN, name, production_date, description, id_category, id_production_unit, status) VALUES ?";
+    const statement = "INSERT INTO products (EAN, name, production_date, description, " +
+                    "id_category, id_production_unit, status, created_at) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

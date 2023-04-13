@@ -9,6 +9,7 @@ const statement = "CREATE TABLE ads ( " +
                   "price float NOT NULL, " +
                   "supplier_id int, " +
                   "product_id int," +
+                  "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "PRIMARY KEY (id))";
 
 pool.query(statement, function(error, result) {

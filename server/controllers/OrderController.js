@@ -11,8 +11,7 @@ const getAllorSomeOrders = async function (req, res) {
     let statement = "SELECT * FROM orders";
     
     if(Object.keys(req.query).length !== 0) { 
-
-        console.log(req.query)
+        statement += " WHERE "
 
         let params = {} 
 
@@ -26,7 +25,12 @@ const getAllorSomeOrders = async function (req, res) {
 
         }
 
-        statement += " WHERE (order_date BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+        if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+            if(Object.keys(params).length > 0){
+                statement += " AND ";
+            }
+        }
 
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
 
@@ -38,30 +42,16 @@ const getAllorSomeOrders = async function (req, res) {
                 statement += " AND ";
             }
 
-            if(key != "total_price" && key != "total_products") {
-
-                statement += key;
-                statement += `='`;
-                statement += value; 
-                statement += `'` ;
-
-            }
-            else{
-
-                statement += key;
-                statement += `<='`;
-                statement += value; 
-                statement += `'` ;
-
-            }
+            statement += key;
+            statement += `='`;
+            statement += value; 
+            statement += `'` ;
 
             if(nextKey != undefined){
                 statement += ` AND ` ;
             }
         }
     }
-
-    console.log(statement)
 
     let result = await dbConnection(statement)  
 
@@ -124,9 +114,14 @@ const deleteOrderByID = async function (req, res) {
  */
 const insertOrder = async function (req, res) {
 
-    const data = [req.query.order_number, req.query.order_date, req.query.order_status, req.query.products_list, req.query.total, req.query.address, req.query.size, req.query.id_supplier_product, req.query.id_consumer, req.query.id_vehicle];
+    const data = [req.query.order_number, req.query.order_date, req.query.order_status, 
+                req.query.products_list, req.query.total, req.query.address, req.query.size, 
+                req.query.id_supplier_product, req.query.id_consumer, req.query.id_vehicle,
+                req.query.created_at];
 
-    const statement = "INSERT INTO orders (order_number, order_date, order_status, products_list, total, address, size, id_supplier_product, id_consumer, id_vehicle) VALUES ?";
+    const statement = "INSERT INTO orders (order_number, order_date, order_status, " +
+                    "products_list, total, address, size, id_supplier_product, " +
+                    "id_consumer, id_vehicle, created_at) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

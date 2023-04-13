@@ -12,6 +12,7 @@ const statement = "CREATE TABLE orders ( " +
                   "id_supplier_product int, " +
                   "id_consumer int, " +
                   "id_vehicle int, " +
+                  "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "UNIQUE (order_number), " +
                   "PRIMARY KEY (id))";
 

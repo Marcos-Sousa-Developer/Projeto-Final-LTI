@@ -11,6 +11,7 @@ const getAllorSomeVehicles = async function (req, res) {
     let statement = "SELECT * FROM vehicles";
     
     if(Object.keys(req.query).length !== 0) { 
+        statement += " WHERE "
 
         let params = {} 
 
@@ -24,7 +25,12 @@ const getAllorSomeVehicles = async function (req, res) {
 
         }
 
-        statement += " WHERE (created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+        if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+            if(Object.keys(params).length > 0){
+                statement += " AND ";
+            }
+        }
 
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
 
@@ -46,7 +52,6 @@ const getAllorSomeVehicles = async function (req, res) {
             }
         }
     }
-
 
     let result = await dbConnection(statement)  
 
@@ -109,9 +114,13 @@ const deleteVehicleByLicensePlate = async function (req, res) {
  */
 const insertVehicle = async function (req, res) {
 
-    const data = [req.query.license_plate, req.query.name, req.query.production_unit, req.query.status, req.query.capacity, req.query.orders_list, req.query.id_production_unit];
+    const data = [req.query.license_plate, req.query.name, req.query.production_unit, 
+                req.query.status, req.query.capacity, req.query.orders_list,
+                req.query.id_production_unit, req.query.created_at];
 
-    const statement = "INSERT INTO vehicles (license_plate, name, production_unit, status, capacity, orders_list, id_production_unit) VALUES ?";
+    const statement = "INSERT INTO vehicles (license_plate, name, production_unit, " +
+                    "status, capacity, orders_list, id_production_unit, created_at) " +
+                    "VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
