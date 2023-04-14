@@ -1,25 +1,41 @@
 import React, { useState } from 'react';
 import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { authentication as auth}  from '../../authentication'
+
 
 import './SignUp.css';
 import images from '../../assets/images';
 
 const SignUpC = () => {
 
+    const [name, setName] = useState(null) 
+    const [email, setEmail] = useState(null) 
+    const [password, setPassword] = useState(null) 
     const [showExtraInputs, setShowExtraInputs] = useState(false);
     const [selectedOption, setSelectedOption] = useState("");
+    const [error, setError] = useState(false) 
+    const [loading, setLoading] = useState(false) 
+
+    const navigate = useNavigate()
   
-    const handleOptionChange = (e) => {
-      setSelectedOption(e.target.value);
+    const handleOptionChange = (value) => {
+      setSelectedOption(value);
       setShowExtraInputs(true);
     };
   
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log("Form submitted");
-      console.log("Selected option:", selectedOption);
-      // Perform form submission logic here
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        let isActive = await auth.signUp(email,password,selectedOption,name)
+        if(isActive) {
+            setError(false)
+            navigate('/signin')
+            
+        }
+        else{
+            setError(true)
+        }
+        setLoading(false)
     };
 
     return (
@@ -36,9 +52,8 @@ const SignUpC = () => {
                                 <label>
                                     <input
                                         type="radio"
-                                        value="Comprador"
-                                        checked={selectedOption === "Comprador"}
-                                        onChange={handleOptionChange}
+                                        checked={selectedOption === "consumer"}
+                                        onChange={() => handleOptionChange("consumer")}
                                     />
                                     Comprador
                                 </label>
@@ -47,9 +62,8 @@ const SignUpC = () => {
                                 <label>
                                     <input
                                         type="radio"
-                                        value="Fornecedor"
-                                        checked={selectedOption === "Fornecedor"}
-                                        onChange={handleOptionChange}
+                                        checked={selectedOption === "supplier"}
+                                        onChange={() => handleOptionChange("supplier")}
                                     />
                                     Fornecedor
                                 </label>
@@ -57,14 +71,23 @@ const SignUpC = () => {
                             {showExtraInputs && (
                                 <>
                                     <div>
+                                        <p>Name</p>
+                                        <div className='app__SignUp_box11'>
+                                            <input
+                                                type="text"
+                                                required
+                                                onChange={(e) => setName(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
                                         <p>E-mail</p>
                                         <div className='app__SignUp_box11'>
                                             <FiMail fontSize={22} color='black'  aria-hidden="true"/>
                                             <input
-                                                name=""
-                                                id=""
                                                 type="text"
                                                 required
+                                                onChange={(e) => setEmail(e.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -73,16 +96,30 @@ const SignUpC = () => {
                                         <div className='app__SignUp_box11'>
                                             <FiLock fontSize={22} color='black'  aria-hidden="true"/>
                                             <input
-                                                name=""
-                                                id=""
                                                 type="password"
                                                 required
+                                                onChange={(e) => setPassword(e.target.value)}
                                             />
                                         </div>
                                     </div>
-                                    <div className='app__SignUp_box13'>
-                                        <button className='main__action_btn' type='submit' onClick={handleSubmit}>Registar</button>
-                                    </div>
+                                    {
+                                        error && ( <small style={{color:"red"}}>Falha ao registar, tente novo</small>)
+                                    }
+                                    {
+                                        loading ? 
+                                        (
+                                            <div className='app__SignUp_box13'>
+                                                <button className='main__action_btn'>Loading</button>
+                                            </div>       
+                                        )
+                                        :
+                                        (
+                                            <div className='app__SignUp_box13'>
+                                                <button className='main__action_btn' type='submit' onClick={handleSubmit}>Registar</button>
+                                            </div>                                        
+                                        )
+                                    }
+
                                 </>
                             )}
                         </form>

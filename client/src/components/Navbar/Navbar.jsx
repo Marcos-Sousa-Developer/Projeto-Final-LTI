@@ -136,13 +136,28 @@ const Navbar = () => {
 
             <div className='app__navbar_profile'>
 
-                <Link to="/signin" className="flex app__pointer app__navbar_links">
-                    <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
-                    <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
-                        <span className="profile_link">Conta</span>
-                        <p style={{fontSize: '12px', opacity: '80%'}}>Iniciar sessão</p>
-                    </div>
-                </Link>
+                {
+                    [undefined,null].includes(cookies.identification) ? (
+                        <Link to="/signin" className="flex app__pointer app__navbar_links">
+                            <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
+                            <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
+                                <span className="profile_link">Conta</span>
+                                <p style={{fontSize: '12px', opacity: '80%'}}>Iniciar sessão</p>
+                            </div>
+                        </Link>
+                    ) 
+                    :
+                    (
+                        <>
+                        <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
+                        <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
+                            <span className="profile_link">Conta</span>
+                            <p style={{fontSize: '12px', opacity: '80%'}}>Olá {cookies.identification}</p>
+                        </div>
+                        </>
+                    )
+                }
+
                     
                 <Link to="/cart" className="flex app__pointer app__navbar_links"  style={{marginRight:'0'}}>
                     <div className='app__navbar_profile_icon'>
