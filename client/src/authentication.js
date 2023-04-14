@@ -113,21 +113,22 @@ const signIn = async (email, password) => {
 
 };
 
+/**
+* register user
+* @param params //response from server
+* @returns: boolean if is registered
+* */
 const register = async (params) => {
 
-
   return await new Promise((resolve,reject) => {
-
 
     axios.post('/registerUser', null, {params})
       
     .then((response) => { 
-      console.log(response)
       if(response === null) {
         resolve(false)
       }
-      resolve(true)
-        
+      resolve(true) 
     })
   
     .catch((error) => {
@@ -136,15 +137,12 @@ const register = async (params) => {
 
 
   })
-
-
 } 
 
-  
 /**
 * Sign up user
-* @param {*} req //request from client
-* @param {*} res //response from server
+* @param email 
+* @param password 
 * @returns: boolean (is user created)
 * */
 const signUp = (email, password, user_type, name) => { 
@@ -174,6 +172,12 @@ const signUp = (email, password, user_type, name) => {
     });
 };
 
+/**
+* verified email of user
+* @param email 
+* @param code 
+* @returns: boolean if email is verified
+* */
 const verifyEmail = async (email, code) => {
 
   const userData = {
@@ -186,10 +190,8 @@ const verifyEmail = async (email, code) => {
   return await new Promise((resolve, reject) => {
     cognitoUser.confirmRegistration(code, true, (err, result) => {
       if (err) {
-        console.log(err);
         reject(false);
       } else {
-        console.log(result);
         resolve(true);
       }
     });

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { authentication as auth}  from '../../authentication'
-
-
 import './SignIn.css';
 import images from '../../assets/images';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const SignInC = () => {
+
+    const [cookies,setCookies] = useCookies(['userSession']);
 
     const [email, setEmail] = useState(null) 
 
@@ -21,6 +23,8 @@ const SignInC = () => {
 
     const [code, setCode] = useState(undefined)
 
+    const navigate = useNavigate();
+
     const handlerLogin = async (event) => {
         setError(false)
         setNotValidade(false)
@@ -28,8 +32,7 @@ const SignInC = () => {
         event.preventDefault(); 
         let isActive = await auth.signIn(email,password)
         if(isActive === true) {
-            location.reload()
-
+            window.location.href = "/";
         }
         else if(isActive === null) {
             setNotValidade(true)
@@ -54,6 +57,12 @@ const SignInC = () => {
         )
         
     } 
+
+    useEffect(() => {
+        if(cookies.userSession){
+            navigate('/');
+        }
+    },[])
 
     return (
     <>

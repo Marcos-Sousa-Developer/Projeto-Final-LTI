@@ -6,11 +6,6 @@ const jwt = require('../config/jwtConfig')
 //pass our user pool data to identify cognito user pool 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
-//Test purpose
-const emailTest = {
-  "test@outlook.com" : "Test User"
-}
-
 /**
  * Verify token from client
  * @param  client_result 
