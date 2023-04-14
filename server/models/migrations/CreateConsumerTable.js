@@ -6,15 +6,15 @@ const statement = "CREATE TABLE consumers ( " +
                   "uid varchar(100) NOT NULL, " + 
                   "name varchar(255) NOT NULL, " + 
                   "email varchar(255) NOT NULL, " +
-                  "nif varchar(255) NOT NULL, " +
-                  "mobile_number varchar(255) NOT NULL, " +
-                  "continent varchar(255) NOT NULL, " +
-                  "country varchar(255) NOT NULL, " + 
-                  "district varchar(255) NOT NULL, " +
-                  "city varchar(255) NOT NULL, " + 
-                  "town varchar(255) NOT NULL, " + 
-                  "address varchar(255) NOT NULL, " +
-                  "postal_code varchar(255) NOT NULL, " + 
+                  "nif varchar(255), " +
+                  "mobile_number varchar(255), " +
+                  "continent varchar(255), " +
+                  "country varchar(255), " + 
+                  "district varchar(255), " +
+                  "city varchar(255), " + 
+                  "town varchar(255), " + 
+                  "address varchar(255), " +
+                  "postal_code varchar(255), " + 
                   "status BOOLEAN NOT NULL default 1, " + 
                   "shopping_cart varchar(255), " +
                   "total_orders int NOT NULL DEFAULT 0, " + //add NOT NULL     Coloquei assim, em vez de encomendas recebidas e por receber, porque depois podemos ir ver ao status da encomenda
@@ -27,7 +27,7 @@ const trigger_insert = "CREATE TRIGGER add_consumer_to_userTable " +
                        "After INSERT ON consumers " + 
                        "FOR EACH ROW " + 
                        "BEGIN " + 
-                       "INSERT INTO users (name, email, user_type, id_user_type) VALUES (NEW.name, NEW.email, 'consumer', NEW.id); " +
+                       "INSERT INTO users (uid, name, email, user_type, id_user_type) VALUES (NEW.uid, NEW.name, NEW.email, 'consumer', NEW.id); " +
                        "END"    
                  
 //AFTER INSERT NEW CONSUMERS AUTOMATICALY INSERT ON USER TABLE
