@@ -61,8 +61,6 @@ const setCookie = (result,res) => {
   
   res.cookie("userSession", uid, {expires: dateExpire})
 
-  return [uid,dateExpire]
-
 }
 
 /**
@@ -88,8 +86,8 @@ const handlerSignIn = (authenticationData, userData,res) => {
 
       //if user is succeful authenticated
       onSuccess: (result) => {
-        let resp = setCookie(result,res)
-        resolve({uid: resp[0],active: true, dateExpire:resp[1]});
+        setCookie(result,res)
+        resolve(true);
         
       },
 
@@ -104,8 +102,8 @@ const handlerSignIn = (authenticationData, userData,res) => {
       newPasswordRequired: (userAttributes, requiredAttributes) => {
         cognitoUser.completeNewPasswordChallenge(password, [], {
           onSuccess: (result) => {
-            let resp = setCookie(result,res)
-            resolve({uid: resp[0],active: true, dateExpire:resp[1]});
+            setCookie(result,res)
+            resolve(true);
           },
           onFailure: (err) => {
             console.log(err)
