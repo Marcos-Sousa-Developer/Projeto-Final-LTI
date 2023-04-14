@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
+import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { authentication as auth}  from '../../authentication'
 import './SignIn.css';
@@ -77,7 +78,7 @@ const SignInC = () => {
                             <div>
                                 <p>E-mail</p>
                                 <div className='app__SignIn_box11'>
-                                    <FiMail fontSize={22} color='black'  aria-hidden="true"/>
+                                    <div><FiMail fontSize={22} color='black'  aria-hidden="true"/></div>
                                     <input
                                         type="text"
                                         onChange={(e)=>setEmail(e.target.value)}
@@ -88,14 +89,14 @@ const SignInC = () => {
                             <div>
                                 <p>Password</p>
                                 <div className='app__SignIn_box11'>
-                                    <FiLock fontSize={22} color='black'  aria-hidden="true"/>
+                                    <div><FiLock fontSize={22} color='black'  aria-hidden="true"/></div>
                                     <input
                                         type="password"
                                         onChange={(e)=>setPassword(e.target.value)}
                                         required
                                     />
                                 </div>
-                                <p>Esqueceu-se da password?</p>
+                                <div className='forgot_password'>Esqueceu-se da password?</div>
                             </div>
                             <div className='app__SignIn_box13'>
                             {
@@ -123,7 +124,7 @@ const SignInC = () => {
                                     <button className='main__action_btn' type='submit'>Login</button>
                                 )
                             }
-                            <p>Não tem conta? Registe-se <span><Link to="/signup" style={{color: "coral"}}>aqui</Link></span>.</p>
+                            <div className='register'>Não tem conta? Registe-se <span><Link to="/signup" style={{color: "coral"}}>aqui</Link></span>.</div>
                             </div>
                         </form>
                     </div>
@@ -132,15 +133,9 @@ const SignInC = () => {
 
                     </div>
                     <div className='app__SignIn_box3'>
-                            <button className='app__SignIn_box30 ButtonGoogle'>
-                                Google
-                            </button>
-                            <button className='app__SignIn_box30 ButtonFacebook'>
-                                Facebook
-                            </button>
-                            <button className='app__SignIn_box30 ButtonTwitter'>
-                                Twitter
-                            </button>
+                        <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='singInOptions' color='white' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google</p></button>
+                        <button className='app__SignIn_box30 ButtonFacebook'><BsFacebook className='singInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsFacebook><p>Facebook</p></button>
+                        <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='singInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter</p></button>
                     </div>
                 </div>    
         </div>

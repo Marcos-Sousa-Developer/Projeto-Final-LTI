@@ -325,7 +325,7 @@ function CriarAnuncio() {
 
 
             //Duvidas:
-            //Se um porduto não tiver sido verificado, o fornecedor pode criar outro?
+            //Se um produto não tiver sido verificado, o fornecedor pode criar outro?
 
             
 
