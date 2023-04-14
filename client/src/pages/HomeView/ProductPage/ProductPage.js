@@ -3,22 +3,43 @@ import React, {useState} from 'react';
 import product1 from "../../../assets/testproducts/Iphone.png";
 import product2 from "../../../assets/testproducts/cannon.png";
 import product3 from "../../../assets/testproducts/macbookpro.png";
+import product4 from "../../../assets/testproducts/jacket.png";
+import product5 from "../../../assets/testproducts/LEDS.png";
 
 import { Link } from 'react-router-dom';
 import { FiShoppingCart, FiMinus, FiPlus} from 'react-icons/fi';
 import { Navbar, Footer } from '../../../components/index';
+import { ProductSwiper } from './ProductSwiper';
 import './ProductPage.css';
 
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
+import { FreeMode, Navigation, Thumbs } from "swiper";
+
 const ProductPage = () => {
+
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+
 
   //---------------------------Data from the product--------------------------
 
   const product = [{
     title: "iPhone 14 Pro Max 64GB",
     src: [
-        product1,
-        product2,
-        product3,
+      product1,
+      product2,
+      product3,
+      product4,
+      product5,
     ],
     description: "Qui dolores omnis et quam enim qui quia mollitia aut ullam laudantium et voluptatibus fuga sit explicabo sequi et repudiandae veritatis. Est officiis optio non laboriosam velit et necessitatibus tempore sed aperiam doloribus.",
     caracteristics: [
@@ -55,20 +76,14 @@ const ProductPage = () => {
           <p className='app__product_page_path'>Home - Categoria X - SubCategoria X - SubsubCategoria X</p>
           <p className='app__product_page_content_title_mobile'>{product[0].title}</p>
           <div className='app__product_page_content'>
-            <div className='app__product_page_content_images'>
-              {images}
-            </div>
             <div className='app__product_page_content_info'>
               <div className='app__product_page_content_info_main'>
-                <div className='app__product_page_content_info_main_img'>
-                  <img src={firstImageSrc}></img>
-                </div>
-                <div className='app__product_page_content_info_main_img_mobile'>{images}</div>
+                <ProductSwiper src={product[0].src}></ProductSwiper>
                 <div className='app__product_page_content_header'>
                   <p className='app__product_page_content_title'>{product[0].title}</p>
                   <p className='app__product_page_content_price'>{product[0].price}</p>
                   <div className='app__product_page_content_supplier'>
-
+                    <p>Fornecedores</p>
                   </div>
                   <div className='app__product_page_content_description'>
                     {product[0].description}
