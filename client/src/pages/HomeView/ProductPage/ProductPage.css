@@ -113,7 +113,7 @@ img, picture {
   opacity: 1;
 }
 
-.app__product_page_content_info_main_img_mobile, .app__product_page_content_title_mobile {
+.app__product_page_content_title_mobile {
   display: none;
 }
 
@@ -130,15 +130,6 @@ img, picture {
   width: 95%;
   margin: 0 auto;
 }
-.app__product_page_content_images {
-  display: flex;
-  flex-direction: column;
-  margin-right: 2rem;
-}
-.app__product_page_content_images > * {
-  width: 175px;
-  margin-bottom: 1rem;
-}
 .app__product_page_content_info_main {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -146,13 +137,13 @@ img, picture {
   margin-bottom: 1rem;
 }
 .app__product_page_content_info_main_img {
-  width: 500px;
-  height: 500px;
+  width: 450px;
+  height: 100%;
   margin: 0 auto;
 }
 .app__product_page_content_info_main_img img {
-  max-width: 100%;
-  min-height: 100%;
+  max-width: 90%;
+  max-height: 90%;
 }
 .app__product_page_content_info_main .app__product_page_content_title {
   font-size: 24px;
@@ -208,20 +199,39 @@ img, picture {
 .app__product_page_content_info .app__product_page_content_actions_2 > * > * {
   color: white;
 }
+.app__product_page .app__product_page_bottom_imgs {
+  width: 100%;
+  margin: 1rem auto 0;
+}
+.app__product_page .app__product_page_bottom_imgs img {
+  width: 75px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+.app__product_page .app__product_page_bottom_imgs > * {
+  width: 70%;
+  justify-content: center;
+}
+.app__product_page .swiper-pagination {
+  background-color: transparent;
+}
+.app__product_page .swiper-pagination-bullet-active {
+  background: #EB5C1F;
+}
+.app__product_page .swiper-zoom-container img {
+  padding: 1rem;
+}
 
 @media screen and (max-width: 1250px) {
   .app__product_page_content {
     width: 100%;
   }
-  .app__product_page_content_images > * {
-    max-width: 50px;
-  }
   .app__product_page_content_info_main {
     gap: 2.5rem;
   }
   .app__product_page_content_info_main_img {
-    width: 350px;
-    height: 350px;
+    width: 400px;
+    height: 100%;
   }
 }
 @media screen and (max-width: 800px) {
@@ -234,14 +244,7 @@ img, picture {
   }
   .app__product_page_content_info_main_img {
     width: 450px;
-    height: 450px;
-  }
-  .app__product_page_content_info_main_img_mobile {
-    display: flex;
-  }
-  .app__product_page_content_info_main_img_mobile img {
-    max-width: 50px;
-    max-height: 50px;
+    height: 100%;
   }
   .app__product_page_content_info_characteristics table thead {
     display: none;
@@ -274,20 +277,20 @@ img, picture {
     font-weight: 500;
   }
 }
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 500px) {
   .app__product_page_content_info {
     width: 100%;
   }
   .app__product_page_content_info_main_img {
-    width: 100%;
-    height: 375px;
-    -o-object-fit: cover;
-       object-fit: cover;
+    max-width: 325px;
+    height: 100%;
     text-align: center;
     padding: 1rem;
   }
   .app__product_page_content_info_main_img img {
     max-width: 100%;
-    max-height: 80%;
+  }
+  .swiper-zoom-container img {
+    padding: 0;
   }
 }/*# sourceMappingURL=ProductPage.css.map */

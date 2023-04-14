@@ -1,7 +1,7 @@
 
 @import '../../../index.scss';
 
-.app__product_page_content_info_main_img_mobile, .app__product_page_content_title_mobile{
+.app__product_page_content_title_mobile{
     display: none;
 }
 
@@ -19,19 +19,7 @@
         width: 95%;
         margin: 0 auto;
 
-        &_images{
-            display: flex;
-            flex-direction: column;
-            margin-right: 2rem;
-
-            &>*{
-                width: 175px;
-                margin-bottom: 1rem;
-            }
-        }
-
         &_info{
-
             &_main{
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -39,13 +27,13 @@
                 margin-bottom: 1rem;
 
                 &_img{
-                    width: 500px;
-                    height: 500px;
+                    width: 450px;
+                    height: 100%;
                     margin: 0 auto;
 
                     img{
-                        max-width: 100%;
-                        min-height: 100%;
+                        max-width: 90%;
+                        max-height: 90%;
                     }
                 }
 
@@ -118,22 +106,46 @@
             }
         }
     }
+
+    .app__product_page_bottom_imgs{
+        width: 100%;
+        margin: 1rem auto 0;
+    
+        img{
+            width: 75px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+    
+        &>*{
+            width: 70%;
+            justify-content: center;
+        }
+    }
+    
+    .swiper-pagination{
+        background-color: transparent;
+
+        &-bullet-active{
+            background: $orange;
+        }
+    }
+    
+    .swiper-zoom-container img{
+        padding: 1rem;
+    }
 }
 
 @media screen and (max-width: 1250px) {
     .app__product_page_content{
         width: 100%;
 
-        &_images>*{
-            max-width: 50px;
-        }
-
         &_info_main{
             gap: 2.5rem;
 
             &_img{
-                width: 350px;
-                height: 350px;
+                width: 400px;
+                height: 100%;
             }
         }
     }
@@ -149,16 +161,7 @@
 
             &_img{
                 width: 450px;
-                height: 450px;
-
-                &_mobile{
-                    display: flex;
-            
-                    img{
-                        max-width: 50px;
-                        max-height: 50px;
-                    }
-                }
+                height: 100%;
             }
         }
 
@@ -203,21 +206,23 @@
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 500px) {
     .app__product_page_content_info{
         width: 100%;
 
         &_main_img{
-            width: 100%;
-            height: 375px;
-            object-fit: cover;
+            max-width: 325px;
+            height: 100%;
             text-align: center;
             padding: 1rem;
 
             img{
                 max-width: 100%;
-                max-height: 80%;
             }
         }
+    }
+
+    .swiper-zoom-container img{
+        padding: 0;
     }
 }
