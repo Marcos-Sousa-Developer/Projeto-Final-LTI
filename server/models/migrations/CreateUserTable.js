@@ -4,6 +4,7 @@ const statement = "SELECT * FROM users"
 
 const statement1 = "CREATE TABLE IF NOT EXISTS users ( " +
                    "id int NOT NULL AUTO_INCREMENT, " + 
+                   "uid varchar(100) NOT NULL, " +  
                    "name varchar(255) NOT NULL, " + 
                    "email varchar(255) NOT NULL, " +
                    "user_type varchar(255) NOT NULL, " +

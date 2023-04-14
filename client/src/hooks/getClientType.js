@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-function getClientType(url) { 
+function getClientType(params) { 
 
     return new Promise((resolve, reject) => {
         
-        axios.get(url).then((response) => {
+        axios.get('/userType',{params}).then((response) => {
 
             resolve(response.data)
 

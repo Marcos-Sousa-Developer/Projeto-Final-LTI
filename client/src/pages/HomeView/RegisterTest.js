@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
 import { authentication as auth}  from '../../authentication'
 
 function RegisterTest() {
@@ -7,7 +6,6 @@ function RegisterTest() {
 
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null) 
-  const navigate = useNavigate()
 
   const handleSetEmail = (event) => {
     setEmail(event.target.value)
@@ -18,7 +16,7 @@ function RegisterTest() {
   }
 
   const handlerCreate = async () => {
-     let isActive = await auth.signUp(email,password)
+     
      console.log(isActive)
   } 
 
