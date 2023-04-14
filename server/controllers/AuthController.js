@@ -41,8 +41,6 @@ const setCookie = (result,res) => {
 
   const username = result.getIdToken().payload['cognito:username']; 
 
-  console.log(username)
-
   const uid = jwt.encryptID(username)  
 
   let dateExpire = new Date(Date.now() + 7200000) //date now and more 30 minutes
