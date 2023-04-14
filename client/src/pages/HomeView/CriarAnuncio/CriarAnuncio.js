@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FiChevronRight, FiChevronLeft} from 'react-icons/fi';
+import postToDB from '../../../hooks/postToDB';
 import getFromDB from '../../../hooks/getFromDB';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import {teste} from '../../../utilities/teste';
@@ -126,8 +127,13 @@ function CriarAnuncio() {
         if(price == "" || price == null) {
             // O preço não pode ser nulo
             return "Deve de inserir um preço válido";
+        } else {
+        if(isNaN(price)){
+          // O preço tem de ser um numero
+          return "Deve de inserir um preço válido";
         }
         return "OK"
+        } 
     }
 
     async function verifyDescription(description){
@@ -144,10 +150,129 @@ function CriarAnuncio() {
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //não pode ser null
         if(category == "" || category == null) {
-            // A categoria não pode ser nulo
+            // A categoria não pode ser nula
             return "Deve de inserir uma categoria válida";
         }
         return "OK"
+    }
+
+    async function verifyEmail(email){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+      //não pode ser null
+      if(email == "" || email == null) {
+          // A categoria não pode ser nulo
+          return "Deve de inserir um email válido";
+      }else {
+        if(!email.includes("@")){
+          return "Deve de inserir um email válido";
+        }
+        let i = email.indexOf("@")
+        if(email[i+1] == undefined){
+          return "Deve de inserir um email válido";
+        }
+        return "OK"
+      }
+    }
+
+    async function verifyMobilePhone(mobile_number){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+      //não pode ser null
+      //tem de ter 9 lagarismos e o primeiro tem de ser 9
+      if(mobile_number == "" || mobile_number == null) {
+          // O número de telemóvel não pode ser nulo
+          return "Deve de inserir um número de telemóvel válido";
+      }else {
+        if(mobile_number.length != 9){
+          return "O número de telemóvel deve ter 9 dígitos";
+        }
+
+        for (var i = 0; i < mobile_number.length; i++) {
+          var digit = parseInt(mobile_number[i], 10);
+          if (isNaN(digit)) {
+            // O número de telemóvel deve conter apenas dígitos numéricos
+            return "O número de telemóvel deve conter apenas dígitos numéricos";
+          }
+        }
+
+        if(mobile_number[0] != "9"){
+          //O número de telemóvel deve de começar pelo dígito 9
+          return "O número de telemóvel deve de começar pelo dígito 9";
+        }
+      
+      return "OK"
+      }
+    }
+
+    async function verifyProductionDate(dateString){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+      //Não é null
+      //a data tem de ser mais antiga que a data atual
+
+      if(dateString == "" || dateString == null) {
+        // A data de produção não pode ser nula
+        return "Deve de inserir uma data de produção válida";
+      }
+
+      var date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        // A data de produção tem de ser válida
+        return "Deve de inserir uma data de produção válida";
+      }
+
+      var today = new Date();
+      if((date < today) == false){
+        //"A data de produção deve de ser anterior à data de hoje"
+        return "A data de produção deve de ser anterior ou igual à data de hoje";
+      } else {
+        return "OK";
+      }
+    }
+
+    async function verifyEAN(EAN){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+      //Não é null
+      //Não pode existir na bd ainda
+      //Tem 8 ou 13 algarismos e são todos numéricos
+
+      if(EAN == "" || EAN == null) {
+        // O EAN não pode ser nulo
+        return "Deve de inserir um EAN válido";
+      }
+
+      let product = await getFromDB("/products/" + EAN);
+      
+      if(product.length == 1){
+        return "O produto com o EAN inserido já se encontra criado";
+      }
+
+      if (EAN.length !== 8 && EAN.length !== 13) {
+        // O EAN deve ter 8 ou 13 dígitos
+        return "O EAN deve ter 8 ou 13 dígitos";
+      }
+      
+      var checksum = 0;
+      for (var i = 0; i < EAN.length - 1; i++) {
+        var digit = parseInt(EAN[i], 10);
+        if (isNaN(digit)) {
+          // O EAN deve conter apenas dígitos numéricos
+          return "O EAN deve conter apenas dígitos numéricos";
+        }
+        checksum += (i % 2 === 0) ? digit * 3 : digit;
+      }
+      
+      var lastDigit = parseInt(EAN[EAN.length - 1], 10);
+      if (isNaN(lastDigit)) {
+        // O EAN deve conter apenas dígitos numéricos
+        return "O EAN deve conter apenas dígitos numéricos";
+      } else {
+        return "OK";
+      }
+
+      //if(((10 - (checksum % 10)) === lastDigit) == true){
+      //  return "OK" ;
+      //} else{
+      //  return "EAN inválido";
+      //}
     }
 
     const submit = async () => {
@@ -158,31 +283,64 @@ function CriarAnuncio() {
         let validPrice = await verifyPrice(formData.preco);
         let validDescription = await verifyDescription(formData.descricao);
         let validCategory = await verifyCategory(formData.categoria);
+        let validEmail = await verifyEmail(formData.email);
+        let validMobilePhone = await verifyMobilePhone(formData.telemovel);
+        let validProductionDate = await verifyProductionDate(formData.data_producao);
+        let validEAN = null;
+        if(formData.search){
+          validEAN = await verifyEAN(EAN);
+        }
+
+        /*
+        console.log(validTitle);
+        console.log(validPrice);
+        console.log(validDescription);
+        console.log(validCategory);
+        console.log(validEmail);
+        console.log(validMobilePhone);
+        console.log(validProductionDate);
+        console.log(validEAN);
+        */
 
         let product;
         let ad;
 
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK"  && validProductionDate == "OK" && (validEAN == "OK" || validEAN == null)){
 
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK"){
-
-            let featuresDBproduct = {}; //Guardar as caracteristicas que são só do produto na tabela products(Estado, tamanho, ... ,ficam vazias)
+            let featuresDBproduct = {}; 
             let featuresDBad = {}; //Guardar todas as caracteristicas que são do anuncio na tabela ads(Estado, tamanho, ... ficam preenchidos)
 
-            //verificar se existe ean e se existir, se já existe na bd -> Sen não existir, adicionar
-            //Fazer get pelo EAN e depois post caso não haja
+            if(formData.sub_features != undefined){
+              featuresDBproduct = Object.assign({}, formData.features[0], formData.sub_features[0]); //Guardar as caracteristicas que são só do produto na tabela products(Estado, tamanho, ... ,ficam vazias)
+            }else{
+              featuresDBproduct = formData.features[0]
+            }
+
+            //verifica se o produto com o EAN dado existe
+            //Se existir e status for 1, quer dizer que já foi verificado então veriifica se os inputs são correspondentes (id_subsub, features, ...)
+              //Caso seja, só cria anuncio
+              //Caso não seja, dá um erro a dizer que o produto inserido não é válido e substitui pelo correto ??
+            //Se não existir, cria o produto
+            //Cria o anuncio
+
+
+            //Duvidas:
+            //Se um porduto não tiver sido verificado, o fornecedor pode criar outro?
+
+            
 
             product = await postToDB("/products",{
               EAN: EAN,
-              production_date: formData.data_producao,
+              production_date: formData.data_producao, //"2019-08-20"
               id_subsubcategory: idsubsubcategory,
-              characteristics: featuresDBproduct
+              characteristics: JSON.stringify(featuresDBproduct),
             })
 
             //Ir buscar o id do fornecedor
-            //let idSupplier = 
+            let idSupplier;
 
             //ir buscar o id do produto de cima
-            //let idproduct = 
+            let idproduct;
 
             ad = await postToDB("/ads",{
                 title: formData.title,
@@ -193,14 +351,12 @@ function CriarAnuncio() {
                 product_id: idproduct,
               })
 
-            
         }
 
-
-        let text = "Não foi possivel criar o produto\n";
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK"){
-            text = "OK"
-        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK"){
+        let text = "Não foi possível criar o produto\n";
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK"  && validProductionDate == "OK" && (validEAN == "OK" || validEAN == null)){
+          text = "OK"
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK"  || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
             if(validTitle != "OK" ){
               text += validTitle + "\n"
             }
@@ -212,6 +368,18 @@ function CriarAnuncio() {
             }
             if(validCategory != "OK" ){
               text += validCategory + "\n"
+            }
+            if(validEmail != "OK" ){
+              text += validEmail + "\n"
+            }
+            if(validMobilePhone != "OK" ){
+              text += validMobilePhone + "\n"
+            }
+            if(validProductionDate != "OK" ){
+              text += validProductionDate + "\n"
+            }
+            if(validEAN != "OK" && validEAN != null){
+              text += validEAN + "\n"
             }
           }
           alert(text)
