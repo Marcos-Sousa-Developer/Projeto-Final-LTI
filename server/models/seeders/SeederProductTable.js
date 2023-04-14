@@ -9,7 +9,7 @@ let values = []
 
 fake_product_data.forEach(row => {
 
-    values.push([row.EAN, row.production_date, row.characteristics, row.id_subsubcategory, 
+    values.push([row.EAN, row.production_date, row.characteristics ?? "{}", row.id_subsubcategory, 
                 row.id_production_unit, row.status, row.created_at])     
 });
 

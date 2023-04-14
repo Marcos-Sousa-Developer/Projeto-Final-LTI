@@ -9,7 +9,7 @@ let values = []
 
 fake_ads_data.forEach(row => {
 
-    values.push([row.title, row.description, row.email, row.mobile_number,row.extraCharacteristic, row.status, 
+    values.push([row.title, row.description, row.email ?? "not_null@gmail.com", row.mobile_number ?? "123456789",row.extraCharacteristic ?? "{}", row.status, 
                 row.price, row.supplier_id, row.product_id, row.created_at])     
 });
 
