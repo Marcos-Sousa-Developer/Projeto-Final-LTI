@@ -1,7 +1,6 @@
 import '../../index.css';
 import Home from './Home/Home'
 import Cart from './Cart/Cart';
-import RegisterTest from './RegisterTest';
 import ProductTest from './ProductTest';
 import ConsumerTest from './ConsumerTest';
 import SupplierTest from './SupplierTest';
@@ -20,7 +19,6 @@ import ProductPage from './ProductPage/ProductPage';
 export {
     Home,
     Cart,
-    RegisterTest,
     ConsumerTest,
     SupplierTest,
     SupplierPage,
