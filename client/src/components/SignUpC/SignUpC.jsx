@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { authentication as auth}  from '../../authentication'
-
-
 import './SignUp.css';
 import images from '../../assets/images';
+import { useCookies } from 'react-cookie';
 
 const SignUpC = () => {
+
+    const [cookies,setCookies] = useCookies(['userSession']);
 
     const [name, setName] = useState(null) 
     const [email, setEmail] = useState(null) 
@@ -37,6 +38,12 @@ const SignUpC = () => {
         }
         setLoading(false)
     };
+
+    useEffect(() => {
+        if(cookies.userSession){
+            navigate('/');
+        }
+    },[])
 
     return (
     <>

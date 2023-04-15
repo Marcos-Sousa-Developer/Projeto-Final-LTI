@@ -93,33 +93,8 @@ function App() {
             <Route path="/supplierTest" element={<SupplierTest />} />
           {/* ------------- */}
 
-          {
-            !userType ? 
-            (
-              <Route path="/signin" element={<SignIn />} />
-            )
-            :
-            (
-              <Route path="/signin" element={<Home />} />
-              
-            )
-            
-          }
-
-          {
-            !userType ? 
-            (
-              <Route path="/signup" element={<SignUp />} />
-            )
-            :
-            (
-              <Route path="/signup" element={<Home />} />
-              
-            )
-            
-          }
-          
-          
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
 
           <Route path="/category" element={<Category />} />
           <Route path="/produto" element={<ProductPage/>} />
