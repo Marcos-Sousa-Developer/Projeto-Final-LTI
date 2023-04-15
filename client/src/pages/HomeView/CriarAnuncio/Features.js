@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Features = ({formData, setFormData}) => {
-    console.log(formData.features)
+
     const isMarcaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Marca'));
     const isValidadeFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Validade'));
     const isLocaldeProducaoFeatureExist = formData.features.some(feature => feature.hasOwnProperty('LocaldeProducao'));
