@@ -1,50 +1,107 @@
 @import "../../index.scss";
 
 .app__SignUp{
-    margin: 2rem auto;
+    margin: 1rem auto;
 
     &_rectangle1{
         position: absolute;
         top: 0;
         right: 0;
-        width: 150px;
+        width: 100px;
         height: inherit;
     }
 
-    &_rectangle2{
-        position: absolute;
-        display: none;
-        bottom: 0;
-        left: 0;
+    &_content{
+        padding: 2rem 1rem 3rem;
+        width: 90%;
+        margin: 6rem auto 4rem;
+        border-radius: 10px;
+        box-shadow: 0px 4px 4px 0px #00000040;
+    }
+
+    &_userType{
+        display: flex;
+        justify-content: center;
+
+        .SignUp_option{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 0 1rem;
+            padding: .25rem .75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            border: $border;
+            transition: border .150s ease-in;
+
+            &:hover{
+                border: 3px solid rgba($color: $orange, $alpha: .81)
+            }
+
+            span{
+                color: #808080;
+            }
+
+            .dot{
+                height: 20px;
+                width: 20px;
+                background: #d9d9d9;
+                margin-right: .5rem;
+                border-radius: 50%;
+                position: relative;
+
+                &::before{
+                    position: absolute;
+                    content: "";
+                    top: 4px;
+                    left: 4px;
+                    width: 12px;
+                    height: 12px;
+                    background: rgba($color: $orange, $alpha: .8);
+                    border-radius: 50%;
+                    opacity: 0;
+                    transform: scale(1.5);
+                  }
+            }
+        }
+        input[type="radio"]{
+            display: none;
+        }
+        #Consumer_optionId:checked:checked ~ .Consumer_option, #Supplier_optionId:checked:checked ~ .Supplier_option{
+            border-color: rgba($color: $orange, $alpha: .8);
+            background: rgba($color: $orange, $alpha: .8);
+        }
+        #Consumer_optionId:checked:checked ~ .Consumer_option .dot, #Supplier_optionId:checked:checked ~ .Supplier_option .dot{
+            background: #fff;
+        }
+        #Consumer_optionId:checked:checked ~ .Consumer_option .dot::before, #Supplier_optionId:checked:checked ~ .Supplier_option .dot::before{
+            opacity: 1;
+            transform: scale(1);
+        }
+        #Consumer_optionId:checked:checked ~ .Consumer_option span, #Supplier_optionId:checked:checked ~ .Supplier_option span{
+            color: white;
+            background-color: transparent;
+        }
     }
 
     &_box{
-        padding: 3rem 1.5rem;
-        width: 90%;
-        margin: 6rem auto auto auto;
         display: grid;
         grid-template-columns: 2fr 1fr 2fr;
-        border-radius: 10px;
-        box-shadow: 0px 4px 4px 0px #00000040;
 
         & >*{
             padding: 2rem;
             align-self: center;
-            //justify-self: center;
         }
 
         input{
             outline: none;
             border: none;
+            width: 100%;
         }
 
         form p{
             margin-top: 1rem;
             margin-bottom: 0.05rem;
-        }
-
-        &1{
-
         }
 
         &2{
@@ -57,6 +114,14 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+
+            .singUpOptions{
+                margin-left: .25rem;
+                align-self: center;
+                path{
+                    color: white;
+                }
+            }
         }
     }
 
@@ -65,10 +130,16 @@
         border-radius: 10px;
         padding: .5rem .75rem;
         margin: 0;
+        display: flex;
+
+        svg{
+            margin-right: .75rem;
+        }
     }
 
-    &_box131{
+    &_box13{
         flex-direction: row;
+
         button{
             color:white;
             width: 45%;
@@ -81,13 +152,9 @@
 
         .buttonComprador{
             background-color: #EB5C1F;
-            //margin-left: 0.20rem;
-            //margin-right: 1rem;
         }
 
         .buttonVendedor{
-            //margin-left: 1rem;
-            //margin-right: 0.20rem;
             background-color: white;
             color: black;
             border: 3px solid #EEEEEE;
@@ -97,7 +164,6 @@
             display: flex;
             justify-content: space-around;
         }
-
    }
 
    &_box13{
@@ -115,44 +181,64 @@
 }
 
 .app__SignUp_box30{
-    color:white;
     width: 100%;
     border-radius: 10px;
     padding: .5rem 4rem;
     margin: 0; 
+    display: flex;
+    justify-content: center;
+
+    p{
+        color:white;
+        margin: 0 0 0 1rem;
+    }
 }
 
-.ButtonGoogle{
+.ButtonGoogle, .ButtonGoogle p{
     background-color: #DB4437;
 }
 
-.ButtonFacebook{
+.ButtonFacebook, .ButtonFacebook p{
     background-color: #4267B2;
-    margin-top:1rem;
 }
 
-.ButtonTwitter{
+.ButtonFacebook{margin-top:1rem;}
+
+.ButtonTwitter, .ButtonTwitter p{
     background-color: #1DA1F2;
-    margin-top:1rem;
 }
+
+.ButtonTwitter{margin-top:1rem;}
 
 @media screen and (min-width: 1450px){
-    .app__SignUp_box{
+    .app__SignIn_content{
         width: 80%;
     }
 }
 
-@media screen and (max-width: 900px){
-    .app__SignUp_box{
-        grid-template-columns: 1fr;
-        grid-template-rows: 2fr auto 1fr;
-        
+@media screen and (max-width: 1200px){
+    .app__SignUp_content{
+        width: 95%;
+
+        &>*{
+            padding: 1rem;
+        }
     }
 }
 
+@media screen and (max-width: 900px){
+    .app__SignUp_content{
+        width: 75%;
+    }
 
-@media screen and (max-width: 500px){
     .app__SignUp_box{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1.5fr auto 1fr;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .app__SignUp_content{
         width: 100%;
         padding: 0;
         border-radius: 0;

@@ -11,13 +11,6 @@
         height: inherit;
     }
 
-    &_rectangle2{
-        position: absolute;
-        display: none;
-        bottom: 0;
-        left: 0;
-    }
-
     &_box{
         padding: 2rem 1rem 3rem;
         width: 90%;
@@ -44,10 +37,6 @@
             margin-bottom: 0.05rem;
         }
 
-        &1{
-
-        }
-
         &2{
             p{
                 text-align: center;
@@ -60,12 +49,11 @@
             flex-direction: column;
             align-items: flex-start;
 
-            .singInOptions{
+            .signInOptions{
                 margin-left: .25rem;
                 align-self: center;
                 path{
                     color: white;
-                    //background-color: transparent;
                 }
             }
         }
@@ -102,7 +90,6 @@
     padding: .5rem 4rem;
     margin: 0; 
     display: flex;
-    //grid-template-columns: 1fr 1fr;
     justify-content: center;
 
     p{

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -114,29 +114,84 @@ img, picture {
 }
 
 .app__SignUp {
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 .app__SignUp_rectangle1 {
   position: absolute;
   top: 0;
   right: 0;
-  width: 150px;
+  width: 100px;
   height: inherit;
 }
-.app__SignUp_rectangle2 {
-  position: absolute;
-  display: none;
-  bottom: 0;
-  left: 0;
-}
-.app__SignUp_box {
-  padding: 3rem 1.5rem;
+.app__SignUp_content {
+  padding: 2rem 1rem 3rem;
   width: 90%;
-  margin: 6rem auto auto auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  margin: 6rem auto 4rem;
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+}
+.app__SignUp_userType {
+  display: flex;
+  justify-content: center;
+}
+.app__SignUp_userType .SignUp_option {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 1rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 3px solid #EEEEEE;
+  transition: border 0.15s ease-in;
+}
+.app__SignUp_userType .SignUp_option:hover {
+  border: 3px solid rgba(235, 92, 31, 0.81);
+}
+.app__SignUp_userType .SignUp_option span {
+  color: #808080;
+}
+.app__SignUp_userType .SignUp_option .dot {
+  height: 20px;
+  width: 20px;
+  background: #d9d9d9;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  position: relative;
+}
+.app__SignUp_userType .SignUp_option .dot::before {
+  position: absolute;
+  content: "";
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  background: rgba(235, 92, 31, 0.8);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.5);
+}
+.app__SignUp_userType input[type=radio] {
+  display: none;
+}
+.app__SignUp_userType #Consumer_optionId:checked:checked ~ .Consumer_option, .app__SignUp_userType #Supplier_optionId:checked:checked ~ .Supplier_option {
+  border-color: rgba(235, 92, 31, 0.8);
+  background: rgba(235, 92, 31, 0.8);
+}
+.app__SignUp_userType #Consumer_optionId:checked:checked ~ .Consumer_option .dot, .app__SignUp_userType #Supplier_optionId:checked:checked ~ .Supplier_option .dot {
+  background: #fff;
+}
+.app__SignUp_userType #Consumer_optionId:checked:checked ~ .Consumer_option .dot::before, .app__SignUp_userType #Supplier_optionId:checked:checked ~ .Supplier_option .dot::before {
+  opacity: 1;
+  transform: scale(1);
+}
+.app__SignUp_userType #Consumer_optionId:checked:checked ~ .Consumer_option span, .app__SignUp_userType #Supplier_optionId:checked:checked ~ .Supplier_option span {
+  color: white;
+  background-color: transparent;
+}
+.app__SignUp_box {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
 }
 .app__SignUp_box > * {
   padding: 2rem;
@@ -145,6 +200,7 @@ img, picture {
 .app__SignUp_box input {
   outline: none;
   border: none;
+  width: 100%;
 }
 .app__SignUp_box form p {
   margin-top: 1rem;
@@ -158,16 +214,27 @@ img, picture {
   flex-direction: column;
   align-items: flex-start;
 }
+.app__SignUp_box3 .singUpOptions {
+  margin-left: 0.25rem;
+  align-self: center;
+}
+.app__SignUp_box3 .singUpOptions path {
+  color: white;
+}
 .app__SignUp_box11 {
   border: 3px solid #EEEEEE;
   border-radius: 10px;
   padding: 0.5rem 0.75rem;
   margin: 0;
+  display: flex;
 }
-.app__SignUp_box131 {
+.app__SignUp_box11 svg {
+  margin-right: 0.75rem;
+}
+.app__SignUp_box13 {
   flex-direction: row;
 }
-.app__SignUp_box131 button {
+.app__SignUp_box13 button {
   color: white;
   width: 45%;
   background-color: rgba(235, 92, 31, 0.8);
@@ -176,15 +243,15 @@ img, picture {
   margin: 0;
   margin-top: 1rem;
 }
-.app__SignUp_box131 .buttonComprador {
+.app__SignUp_box13 .buttonComprador {
   background-color: #EB5C1F;
 }
-.app__SignUp_box131 .buttonVendedor {
+.app__SignUp_box13 .buttonVendedor {
   background-color: white;
   color: black;
   border: 3px solid #EEEEEE;
 }
-.app__SignUp_box131_Buttons {
+.app__SignUp_box13_Buttons {
   display: flex;
   justify-content: space-around;
 }
@@ -200,40 +267,62 @@ img, picture {
 }
 
 .app__SignUp_box30 {
-  color: white;
   width: 100%;
   border-radius: 10px;
   padding: 0.5rem 4rem;
   margin: 0;
+  display: flex;
+  justify-content: center;
+}
+.app__SignUp_box30 p {
+  color: white;
+  margin: 0 0 0 1rem;
 }
 
-.ButtonGoogle {
+.ButtonGoogle, .ButtonGoogle p {
   background-color: #DB4437;
 }
 
-.ButtonFacebook {
+.ButtonFacebook, .ButtonFacebook p {
   background-color: #4267B2;
+}
+
+.ButtonFacebook {
   margin-top: 1rem;
 }
 
-.ButtonTwitter {
+.ButtonTwitter, .ButtonTwitter p {
   background-color: #1DA1F2;
+}
+
+.ButtonTwitter {
   margin-top: 1rem;
 }
 
 @media screen and (min-width: 1450px) {
-  .app__SignUp_box {
+  .app__SignIn_content {
     width: 80%;
   }
 }
-@media screen and (max-width: 900px) {
-  .app__SignUp_box {
-    grid-template-columns: 1fr;
-    grid-template-rows: 2fr auto 1fr;
+@media screen and (max-width: 1200px) {
+  .app__SignUp_content {
+    width: 95%;
+  }
+  .app__SignUp_content > * {
+    padding: 1rem;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 900px) {
+  .app__SignUp_content {
+    width: 75%;
+  }
   .app__SignUp_box {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.5fr auto 1fr;
+  }
+}
+@media screen and (max-width: 550px) {
+  .app__SignUp_content {
     width: 100%;
     padding: 0;
     border-radius: 0;
