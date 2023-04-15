@@ -74,11 +74,66 @@ const GeneralInfo = ({ formData, setFormData }) => {
                                             type="radio" 
                                             name="CriarAnuncioRadio" 
                                             value={subsubcategory} 
-                                            onChange={(e) => {setFormData({...formData, 
-                                                categoria: category.name,
-                                                subcategoria: subcategory.name,
-                                                subsubcategoria: e.target.value,
-                                                features: category.features
+                                            onChange={(e) => {
+                                                const subcategoria = subcategory.name;
+                                                const subsubcategoria = e.target.value;
+                                                let sub_features = {};
+
+                                                if (subsubcategoria === "Alimentação") {
+                                                    sub_features = { Validade: ''};
+                                                }
+
+                                                if (subcategoria === "Calçado" || subcategoria === "Roupinhas"){
+                                                    sub_features = { Gender: ''};
+                                                }
+
+                                                if (subsubcategoria === "Móveis") {
+                                                    sub_features = { Largura: '', Comprimento: ''};
+                                                }
+
+                                                if (subsubcategoria === "Computadores") {
+                                                    sub_features = { Processador: '', MemoryRAM: '', OperatingSystem: '', StorageAmount: '', StorageType: '' };
+                                                }
+
+                                                if (subsubcategoria === "Tv" || subsubcategoria === "Projectores" || subsubcategoria === "Monitores" ){
+                                                    sub_features = {Resolution: '', ScreenSize: ''}
+                                                }
+
+                                                if (subsubcategoria === "Portáteis"){
+                                                    sub_features = {Processador: '', MemoryRAM: '', OperatingSystem: '', StorageAmount: '', StorageType: '', Resolution: '', ScreenSize: '' }
+                                                }
+
+                                                if (subsubcategoria === "Software"){
+                                                    sub_features = {SoftwareType: ''}
+                                                }
+
+                                                if (subsubcategoria === "Armazenamento" || subsubcategoria === "Servidores"){
+                                                    sub_features = {StorageAmount: ''}
+                                                }
+
+                                                if (subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos"){
+                                                    sub_features = {StorageType: '', StorageAmount: ''}
+                                                }
+
+                                                if (subsubcategoria === "Telemóveis" || subsubcategoria === "Tablets" ){
+                                                    sub_features = {OperatingSystem: ''}
+                                                }
+
+                                                if (subcategoria === "Roupa"){
+                                                    sub_features = {ClothingSize: ''}
+                                                }
+
+                                                if (subcategoria === "Calçado"){
+                                                    sub_features = {ShoeSize: ''}
+                                                }
+
+                                                setFormData({
+                                                    ...formData, 
+                                                    categoria: category.name,
+                                                    subcategoria: subcategoria,
+                                                    subsubcategoria: subsubcategoria,
+                                                    features: category.features,
+                                                    sub_features: [sub_features]
                                                 });
                                             }}
                                             onClick={toggleActiveModal}>

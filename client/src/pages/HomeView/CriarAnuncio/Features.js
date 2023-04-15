@@ -1,5 +1,7 @@
 import React from 'react';
 
+import FeatureInput from './FeatureInput';
+
 const Features = ({formData, setFormData}) => {
 
     const isMarcaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Marca'));
@@ -10,148 +12,79 @@ const Features = ({formData, setFormData}) => {
     const isClasseEnergeticaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('ClasseEnergetica'));
 
     return (
-        <>
-            {formData.features.map((feature, g) => (
-                <div key={g} className='app__anuncio_features'>
-                    {isMarcaFeatureExist && g === 0 ? 
-                        <>
-                            <div className='inputField'>
-                                <p>Marca:</p>
-                                <input 
-                                    type='text'
-                                    value={formData.features.find(feature => feature.Marca)?.Marca || ''}
-                                    onChange={(e) => {
-                                        const updatedFeature = {...formData.features[0]};
-                                        updatedFeature.Marca = e.target.value;
-                                        const updatedFeatures = [...formData.features];
-                                        updatedFeatures[0] = updatedFeature;
-                                        setFormData({ ...formData, features: updatedFeatures });
-                                    }}
-                                ></input>
-                            </div>
-                        </> 
-                    : 
-                        ""
-                    }
-
-                    {isValidadeFeatureExist ? 
-                        <>
-                            <div className='inputField'>
-                                <p>Validade:</p>
-                                <input 
-                                    type='date'
-                                    value={formData.features.find(feature => feature.Validade)?.Validade || ''}
-                                    onChange={(e) => {
-                                        const updatedFeature = {...formData.features[0]};
-                                        updatedFeature.Validade = e.target.value;
-                                        const updatedFeatures = [...formData.features];
-                                        updatedFeatures[0] = updatedFeature;
-                                        setFormData({ ...formData, features: updatedFeatures });
-                                    }}
-                                ></input>
-                            </div>
-                        </> 
-                    : 
-                        ""
-                    }
-
-                    {isLocaldeProducaoFeatureExist ? 
-                        <>
-                            <div className='inputField'>
-                                <p>Local de Produção:</p>
-                                <input 
-                                    type='text' 
-                                    value={formData.features.find(feature => feature.LocaldeProducao)?.LocaldeProducao || ''}
-                                    onChange={(e) => {
-                                        const updatedFeature = {...formData.features[0]};
-                                        updatedFeature.LocaldeProducao = e.target.value;
-                                        const updatedFeatures = [...formData.features];
-                                        updatedFeatures[0] = updatedFeature;
-                                        setFormData({ ...formData, features: updatedFeatures });
-                                    }}
-                                ></input>
-                            </div>
-                        </> 
-                    : 
-                        ""
-                    }
-
-                    {isEstadoFeatureExist ? 
-                        <>
-                            <div className='inputField'>
-                                <p>Estado:</p>
-                                <select 
-                                    value={formData.features[0].Estado || ''} 
-                                    onChange={(e) => {
-                                        const updatedFeature = {...formData.features[0]};
-                                        updatedFeature.Estado = e.target.value;
-                                        const updatedFeatures = [...formData.features];
-                                        updatedFeatures[0] = updatedFeature;
-                                        setFormData({ ...formData, features: updatedFeatures });
-                                    }}
-                                    >
-                                    <option value="">Escolher</option>
-                                    <option value="Novo">Novo</option>
-                                    <option value="Usado">Usado</option>
-                                </select>
-                            </div>
-                        </> 
-                    : 
-                        ""
-                    }
-
-                    {isGarantiaFeatureExist ? 
-                        <>
-                            <div className='inputField'>
-                                <p>Garantia:</p>
-                                <input 
-                                    type='text'
-                                    value={formData.features.find(feature => feature.Garantia)?.Garantia || ''}
-                                    onChange={(e) => {
-                                        const updatedFeature = {...formData.features[0]};
-                                        updatedFeature.Garantia = e.target.value;
-                                        const updatedFeatures = [...formData.features];
-                                        updatedFeatures[0] = updatedFeature;
-                                        setFormData({ ...formData, features: updatedFeatures });
-                                    }}
-                                ></input>
-                            </div>
-                        </> 
-                    : 
-                        ""
-                    }
-
-                    {isClasseEnergeticaFeatureExist ? 
-                        <>
-                            <div className='inputField'>
-                                <p>Classe Energética:</p>
-                                <select 
-                                    value={formData.features[0].ClasseEnergetica || ''} 
-                                    onChange={(e) => {
-                                        const updatedFeature = {...formData.features[0]};
-                                        updatedFeature.ClasseEnergetica = e.target.value;
-                                        const updatedFeatures = [...formData.features];
-                                        updatedFeatures[0] = updatedFeature;
-                                        setFormData({ ...formData, features: updatedFeatures });
-                                    }}
-                                    >
-                                    <option value="">Escolher</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                </select>
-                                </div>
-                        </> 
-                    : 
-                        ""
-                    }
-                </div>
-            ))}
-        </>
+        <div className='app__anuncio_features'>
+            {isMarcaFeatureExist ?                                 
+                <FeatureInput typeInput="text" featureName="Marca" featureTitle="Marca" formData={formData} setFormData={setFormData}/>
+            : 
+                ""
+            }
+            {isValidadeFeatureExist ? 
+                <FeatureInput typeInput="date" featureName="Validade" featureTitle="Validade" formData={formData} setFormData={setFormData}/>
+            : 
+                ""
+            }
+            {isLocaldeProducaoFeatureExist ? 
+                <FeatureInput typeInput="text" featureName="LocaldeProducao" featureTitle="Local de Produção" formData={formData} setFormData={setFormData}/>
+            : 
+                ""
+            }
+            {isEstadoFeatureExist ? 
+                <>
+                    <div className='inputField'>
+                        <p>Estado:</p>
+                        <select 
+                            value={formData.features[0].Estado || ''} 
+                            onChange={(e) => {
+                                const updatedFeature = {...formData.features[0]};
+                                updatedFeature.Estado = e.target.value;
+                                const updatedFeatures = [...formData.features];
+                                updatedFeatures[0] = updatedFeature;
+                                setFormData({ ...formData, features: updatedFeatures });
+                            }}
+                            >
+                            <option value="">Escolher</option>
+                            <option value="Novo">Novo</option>
+                            <option value="Usado">Usado</option>
+                        </select>
+                    </div>
+                </> 
+            : 
+                ""
+            }
+            {isGarantiaFeatureExist ? 
+                <FeatureInput typeInput="text" featureName="Garantia" featureTitle="Garantia" formData={formData} setFormData={setFormData}/>
+            : 
+                ""
+            }
+            {isClasseEnergeticaFeatureExist ? 
+                <>
+                    <div className='inputField'>
+                        <p>Classe Energética:</p>
+                        <select 
+                            value={formData.features[0].ClasseEnergetica || ''} 
+                            onChange={(e) => {
+                                const updatedFeature = {...formData.features[0]};
+                                updatedFeature.ClasseEnergetica = e.target.value;
+                                const updatedFeatures = [...formData.features];
+                                updatedFeatures[0] = updatedFeature;
+                                setFormData({ ...formData, features: updatedFeatures });
+                            }}
+                            >
+                            <option value="">Escolher</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                        </select>
+                    </div>
+                </> 
+            : 
+                ""
+            }
+        </div>
     )
 }
 
