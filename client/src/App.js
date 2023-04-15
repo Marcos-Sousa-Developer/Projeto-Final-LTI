@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     getUserType()
-  },[location])
+  },[location, cookies.identification])
 
   return (
     <>

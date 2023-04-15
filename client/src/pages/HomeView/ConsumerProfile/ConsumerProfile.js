@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import getFromDB from '../../../hooks/getFromDB';
 import putToDB from '../../../hooks/putToDB';
+import { useCookies } from "react-cookie";
 
 import {Navbar, Footer, SubHeading} from '../../../components/index';
 import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
@@ -9,7 +10,10 @@ import './ConsumerProfile.css';
 
 function ConsumerProfile() {
 
-  const [id, setID] = useState(2)         //IR BUSCAR O ID DO CONSUMER
+
+  const [cookies,setCookies] = useCookies(['userSession','identification']);
+
+  const [id, setID] = useState(null)        
   const [name, setName] = useState(null)
   const [email, setEmail] = useState(null)
   const [nif, setNif] = useState(null)
@@ -18,8 +22,11 @@ function ConsumerProfile() {
 
   const [didMount, setDidMount] = useState(false)
 
-  async function getConsumer(id){
-    let consumer = await getFromDB("/consumers/" + id)
+  async function getConsumer(){
+
+    let consumer = await getFromDB("/consumers", {uid: cookies.userSession})
+    
+    setID(consumer[0].id)
     setName(consumer[0].name)
     setEmail(consumer[0].email)
     setNif(consumer[0].nif)
@@ -29,7 +36,7 @@ function ConsumerProfile() {
   }
 
   useEffect(()=>{
-    getConsumer(id)
+    getConsumer()
   }, [])
 
   const handleSetName = (event) => {
@@ -128,6 +135,7 @@ function ConsumerProfile() {
       let text = "Não foi possivel alterar os dados\n";
       if(consumerUpdated == true){
           text = "Dados alterados"
+          location.reload();
           alert(text) 
       } else if(validName != "OK" || validEmail != "OK" || validNif != "OK" || validMobileNumber != "OK" || validAddress != "OK"){
           if(validName != "OK" ){

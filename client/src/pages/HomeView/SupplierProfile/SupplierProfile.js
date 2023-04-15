@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import getFromDB from '../../../hooks/getFromDB';
 import putToDB from '../../../hooks/putToDB';
+import { useCookies } from "react-cookie";
 
 import {Navbar, Footer, SubHeading} from '../../../components/index';
 import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
@@ -9,7 +10,9 @@ import './SupplierProfile.css';
 
 function SupplierProfile() {
 
-  const [id, setID] = useState(2)         //IR BUSCAR O ID DO SUPPLIER
+  const [cookies,setCookies] = useCookies(['userSession','identification']);
+
+  const [id, setID] = useState(null)       
   const [name, setName] = useState(null)
   const [email, setEmail] = useState(null)
   const [nif, setNif] = useState(null)
@@ -18,8 +21,13 @@ function SupplierProfile() {
 
   const [didMount, setDidMount] = useState(false)
 
-  async function getSupplier(id){
-    let supplier = await getFromDB("/suppliers/" + id)
+  async function getSupplier(){
+
+    let supplier = await getFromDB("/suppliers", {uid: cookies.userSession})
+
+    console.log(supplier)
+
+    setID(supplier[0].id)
     setName(supplier[0].name)
     setEmail(supplier[0].email)
     setNif(supplier[0].nif)
@@ -29,7 +37,7 @@ function SupplierProfile() {
   }
 
   useEffect(()=>{
-    getSupplier(id)
+    getSupplier()
   }, [])
 
   const handleSetName = (event) => {
