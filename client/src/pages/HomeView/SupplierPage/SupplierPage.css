@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -111,4 +111,116 @@ img, picture {
 }
 .main__action_btn:hover {
   opacity: 1;
+}
+
+.app__SupplierPage {
+  max-width: 1650px;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+  padding-top: 1%;
+}
+.app__SupplierPage_options ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.app__SupplierPage_options li {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+.app__SupplierPage_options li:last-child {
+  border-right: none;
+}
+.app__SupplierPage_options li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: none;
+}
+.app__SupplierPage_options li a:hover {
+  color: rgb(0, 0, 0);
+}
+.app__SupplierPage_boxes {
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 3fr 1.5fr;
+}
+.app__SupplierPage_boxesEsquerda2 {
+  margin-top: 1.75rem;
+}
+.app__SupplierPage_boxesEsquerda1Est {
+  padding: 6rem 0.5rem;
+  box-sizing: border-box;
+  margin-left: 0.25rem;
+  background: #FFFFFF;
+  border: 3px solid #EEEEEE;
+}
+.app__SupplierPage_boxesEsquerda1Ult {
+  padding: 6rem 0.5rem;
+  box-sizing: border-box;
+  margin-left: 0.25rem;
+  background: #FFFFFF;
+  border: 3px solid #EEEEEE;
+}
+.app__SupplierPage_boxesDireita {
+  margin-left: 1.75rem;
+}
+.app__SupplierPage_boxesDireita1Vend {
+  padding: 9rem 0.5rem;
+  box-sizing: border-box;
+  margin-left: 0.25rem;
+  background: #FFFFFF;
+  border: 3px solid #EEEEEE;
+}
+.app__SupplierPage_boxesDireita1Nmr {
+  margin: 1rem;
+  padding: 2rem 2rem;
+  text-align: center;
+}
+.app__SupplierPage_boxesDireita1Nmr1 {
+  display: inline-block;
+  padding: 0rem 1rem;
+  vertical-align: middle;
+}
+.app__SupplierPage_boxesDireita1Nmr1 mark.orange {
+  color: #EB5C1F;
+  font-size: 30px;
+  font-family: "Inter";
+  font-weight: 600;
+  line-height: 29px;
+}
+.app__SupplierPage_boxesDireita1Nmr2 {
+  display: inline-block;
+  padding: 0rem 1rem;
+  vertical-align: middle;
+}
+.app__SupplierPage_boxesDireita1Nmr2 mark.orange {
+  color: #EB5C1F;
+  font-size: 30px;
+  font-family: "Inter";
+  font-weight: 600;
+  line-height: 29px;
+}
+
+a.option {
+  border-right: 3px solid #EEEEEE;
+  padding-right: 10px;
+}
+
+.active {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+  .app__SupplierPage_box {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .app__SupplierPage_box_div {
+    margin: 0rem 1rem 0rem 1rem;
+  }
 }/*# sourceMappingURL=SupplierPage.css.map */
