@@ -1,3 +1,9 @@
+name: Deploy Development_test to GCP instance
+on:
+  push:
+    branches:
+      - dev
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
