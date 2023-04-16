@@ -23,7 +23,7 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: <${{ matrix.instance }}-ip>
+          host: ${{ matrix.instance }}
           username: "leticiaemarcos200001"
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
