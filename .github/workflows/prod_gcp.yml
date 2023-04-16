@@ -15,7 +15,7 @@ jobs:
 
       - name: deploy to host-1
         if: github.event.head_commit.message == 'deploy to host-1'
-        uses: appleboy/ssh-action@v0.3.0
+        uses: appleboy/ssh-action@master
         with:
           host: "34.175.52.109"
           username: ubuntu
@@ -28,7 +28,7 @@ jobs:
 
       - name: deploy to host-2
         if: github.event.head_commit.message == 'deploy to host-2'
-        uses: appleboy/ssh-action@v0.3.0
+        uses: appleboy/ssh-action@master
         with:
           host: "34.175.101.154"
           username: ubuntu
@@ -41,7 +41,7 @@ jobs:
 
       - name: deploy to host-3
         if: github.event.head_commit.message == 'deploy to host-3'
-        uses: appleboy/ssh-action@v0.3.0
+        uses: appleboy/ssh-action@master
         with:
           host: "34.175.211.215"
           username: ubuntu
