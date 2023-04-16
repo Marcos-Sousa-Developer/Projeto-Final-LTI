@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
-import { authentication as auth}  from '../../authentication'
-import './SignIn.css';
-import images from '../../assets/images';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+
+import { authentication as auth}  from '../../authentication'
+import images from '../../assets/images';
+import './SignIn.css';
 
 const SignInC = () => {
 
@@ -68,7 +68,6 @@ const SignInC = () => {
     return (
     <>
         <img className='app__SignIn_rectangle1' src={images.Rectangle1} alt="" />
-        <img className='app__SignIn_rectangle2' src={images.Rectangle2} alt="" />
         <div className='app__SignIn main__container'>
             <Link to='/'><FiArrowLeft></FiArrowLeft></Link>
             <h1 className=''>Sign In</h1>
@@ -133,9 +132,9 @@ const SignInC = () => {
 
                     </div>
                     <div className='app__SignIn_box3'>
-                        <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='singInOptions' color='white' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google</p></button>
-                        <button className='app__SignIn_box30 ButtonFacebook'><BsFacebook className='singInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsFacebook><p>Facebook</p></button>
-                        <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='singInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter</p></button>
+                        <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google</p></button>
+                        <button className='app__SignIn_box30 ButtonFacebook'><BsFacebook className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsFacebook><p>Facebook</p></button>
+                        <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter</p></button>
                     </div>
                 </div>    
         </div>

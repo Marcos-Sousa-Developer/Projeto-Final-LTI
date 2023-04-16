@@ -123,12 +123,6 @@ img, picture {
   width: 100px;
   height: inherit;
 }
-.app__SignIn_rectangle2 {
-  position: absolute;
-  display: none;
-  bottom: 0;
-  left: 0;
-}
 .app__SignIn_box {
   padding: 2rem 1rem 3rem;
   width: 90%;
@@ -160,11 +154,11 @@ img, picture {
   flex-direction: column;
   align-items: flex-start;
 }
-.app__SignIn_box3 .singInOptions {
+.app__SignIn_box3 .signInOptions {
   margin-left: 0.25rem;
   align-self: center;
 }
-.app__SignIn_box3 .singInOptions path {
+.app__SignIn_box3 .signInOptions path {
   color: white;
 }
 .app__SignIn_box11 {
