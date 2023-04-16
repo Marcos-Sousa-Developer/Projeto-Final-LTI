@@ -14,7 +14,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: deploy to host-1
-        if: github.event.head_commit.message == 'deploy to host-1'
         uses: appleboy/ssh-action@master
         with:
           host: "34.175.52.109"
@@ -27,7 +26,6 @@ jobs:
             git checkout prod
 
       - name: deploy to host-2
-        if: github.event.head_commit.message == 'deploy to host-2'
         uses: appleboy/ssh-action@master
         with:
           host: "34.175.101.154"
@@ -40,7 +38,6 @@ jobs:
             git checkout prod
 
       - name: deploy to host-3
-        if: github.event.head_commit.message == 'deploy to host-3'
         uses: appleboy/ssh-action@master
         with:
           host: "34.175.211.215"
