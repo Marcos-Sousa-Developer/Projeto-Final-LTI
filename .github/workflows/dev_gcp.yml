@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Configure gcloud CLI
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@v0
         with:
           project_id: greatergoods
           service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
