@@ -1,6 +1,6 @@
 import axios from 'axios'
 import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
-import poolData from "./config/poolCognitoConfig";
+import poolData from "./config/poolCognitoConfig"; 
 
 //pass our user pool data to identify cognito user pool 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
@@ -41,7 +41,9 @@ const serverVerifyLogin = async(email, password, result) => {
 * @returns: a user data and token
 * */
 const signIn = async (email, password) => { 
-  
+
+  try {
+
     const authenticationData = {
       Username: email,
       Password: password
@@ -83,9 +85,13 @@ const signIn = async (email, password) => {
         newPasswordRequired: (userAttributes, requiredAttributes) => {
           cognitoUser.completeNewPasswordChallenge(password, [], {
             onSuccess: (result) => {
-
-              resolve(result.getAccessToken().getJwtToken());
-            },
+              let params = {
+                accessToken: result.getAccessToken().getJwtToken(),
+                idToken: result.getIdToken().getJwtToken(), 
+                client_id: cognitoUser.pool.clientId
+            }
+            resolve( serverVerifyLogin(email, password, params))
+          },
             onFailure: (err) => {
                 reject(err);
             },
@@ -93,15 +99,53 @@ const signIn = async (email, password) => {
         }
       });
     }); 
-};
+
+  }
+
+  catch (error) {
+    if(error.name === "UserNotConfirmedException") {
+      return null
+    }
+    console.log(error)
+    return false
+  }
   
+
+};
+
+/**
+* register user
+* @param params //response from server
+* @returns: boolean if is registered
+* */
+const register = async (params) => {
+
+  return await new Promise((resolve,reject) => {
+
+    axios.post('/registerUser', null, {params})
+      
+    .then((response) => { 
+      if(response === null) {
+        resolve(false)
+      }
+      resolve(true) 
+    })
+  
+    .catch((error) => {
+        reject(error)
+    })
+
+
+  })
+} 
+
 /**
 * Sign up user
-* @param {*} req //request from client
-* @param {*} res //response from server
+* @param email 
+* @param password 
 * @returns: boolean (is user created)
 * */
-const signUp = (email, password) => { 
+const signUp = (email, password, user_type, name) => { 
   
     const attributeList = [];
   
@@ -120,11 +164,39 @@ const signUp = (email, password) => {
       userPool.signUp(email, password, attributeList, null, (err, result) => {
         if (err) {
           reject(err);
-        } else {
-          resolve(result.user);
+        } 
+        else {
+          resolve(register({uid: result.userSub, name: name, email: email, user_type: user_type}))
         }
       });
     });
 };
 
-export const authentication = {signIn, signUp}
+/**
+* verified email of user
+* @param email 
+* @param code 
+* @returns: boolean if email is verified
+* */
+const verifyEmail = async (email, code) => {
+
+  const userData = {
+    Username: email,
+    Pool: userPool,
+  };
+
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+  return await new Promise((resolve, reject) => {
+    cognitoUser.confirmRegistration(code, true, (err, result) => {
+      if (err) {
+        reject(false);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+
+}
+
+export const authentication = {signIn, signUp, verifyEmail}

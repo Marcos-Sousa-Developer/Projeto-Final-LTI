@@ -13,16 +13,6 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/api/users' , require('./api/ApiUsers'))
-app.use('/api/consumers' , require('./api/ApiConsumers'))
-app.use('/api/suppliers' , require('./api/ApiSuppliers'))
-app.use('/api/products' , require('./api/ApiProducts'))
-app.use('/api/categories' , require('./api/ApiCategories'))
-app.use('/api/subcategories' , require('./api/ApiSubcategories'))
-app.use('/api/orders' , require('./api/ApiOrders'))
-app.use('/api/vehicles' , require('./api/ApiVehicles'))
-app.use('/api/productionUnits' , require('./api/ApiProductionUnits'))
-
 /**
  * Api configuration, only for server
  */
@@ -31,14 +21,18 @@ const apiRouter = express.Router();
 //midleware for secure all api connections
 //apiRouter.use(authenticateUser)
 
-apiRouter.use('/users' , require('./api/ApiUsers'))
 apiRouter.use('/admins' , require('./api/ApiAdmins'))
-apiRouter.use('/consumers' , require('./api/ApiConsumers'))
-apiRouter.use('/suppliers' , require('./api/ApiSuppliers'))
-apiRouter.use('/products' , require('./api/ApiProducts'))
 apiRouter.use('/categories' , require('./api/ApiCategories'))
-apiRouter.use('/subcategories' , require('./api/ApiSubcategories'))
+apiRouter.use('/consumers' , require('./api/ApiConsumers'))
 apiRouter.use('/orderedProducts' , require('./api/ApiOrderedProducts'))
+apiRouter.use('/orders' , require('./api/ApiOrders'))
+apiRouter.use('/products' , require('./api/ApiProducts'))
+apiRouter.use('/productsForSell' , require('./api/ApiAds'))
+apiRouter.use('/api/productionUnits' , require('./api/ApiProductionUnits'))
+apiRouter.use('/subcategories' , require('./api/ApiSubCategories'))
+apiRouter.use('/subsubcategories' , require('./api/ApiSubSubCategories'))
+apiRouter.use('/api/suppliers' , require('./api/ApiSuppliers'))
+apiRouter.use('/api/users' , require('./api/ApiUsers'))
 apiRouter.use('/vehicles' , require('./api/ApiVehicles'))
 apiRouter.get('/', (req, res) => {
     res.send({ express: 'HELLO WORLD, YOU ARE CONNECTED TO THE API, PLEASE THE CHECK ENDPOINTS' });

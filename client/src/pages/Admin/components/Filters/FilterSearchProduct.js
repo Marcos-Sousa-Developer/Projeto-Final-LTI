@@ -54,7 +54,7 @@ function FilterSearchProduct() {
         EAN: EAN,
         name: name,
         category_name: category,
-        subcateogry_name: subcateogry,
+        subcategory_name: subcateogry,
         subsubcategory_name: subsubcategory,
         status: status,
         created_at_init: dateInit.includes("/") ? dateInit.substring(6,10) + '-' + dateInit.substring(3,5) + '-' + dateInit.substring(0,2) : dateInit,
@@ -177,7 +177,7 @@ function FilterSearchProduct() {
           </div>
 
           <div className="form-group col-xxl-4 mb-4">
-            <label>Nome ou iniciais</label>
+            <label>Nome</label>
             <input type="text" className="form-control" onChange={(e) => setName(e.target.value)}></input>
           </div>
 

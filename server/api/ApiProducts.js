@@ -5,16 +5,16 @@ const productController = require('../controllers/ProductController');
 //Get all products
 router.get('/', productController.getAllorSomeProducts)
 
-//Get product by ean
-router.get('/:EAN', productController.getProductByEAN)
+//Get product by id
+router.get('/:id', productController.getProductByID)
 
-//Delete product by ean
-router.delete('/:EAN', productController.deleteProductByEAN)
+//Delete product by id
+router.delete('/:id', productController.deleteProductByID)
 
 //Add product
 router.post('/', productController.insertProduct)
 
-//Update product by ean
-router.put('/:EAN', productController.updateProductByEAN) 
+//Update product by id
+router.put('/:id', productController.updateProductByID) 
 
 module.exports = router

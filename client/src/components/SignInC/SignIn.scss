@@ -7,21 +7,14 @@
         position: absolute;
         top: 0;
         right: 0;
-        width: 200px;
+        width: 100px;
         height: inherit;
     }
 
-    &_rectangle2{
-        position: absolute;
-        display: none;
-        bottom: 0;
-        left: 0;
-    }
-
     &_box{
-        padding: 3rem 1.5rem;
+        padding: 2rem 1rem 3rem;
         width: 90%;
-        margin: auto;
+        margin: 6rem auto 4rem;
         display: grid;
         grid-template-columns: 2fr 1fr 2fr;
         border-radius: 10px;
@@ -36,6 +29,7 @@
         input{
             outline: none;
             border: none;
+            width: 100%;
         }
 
         form p{
@@ -43,13 +37,10 @@
             margin-bottom: 0.05rem;
         }
 
-        &1{
-
-        }
-
         &2{
             p{
                 text-align: center;
+                margin: 0;
             }    
         }
 
@@ -57,6 +48,14 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+
+            .signInOptions{
+                margin-left: .25rem;
+                align-self: center;
+                path{
+                    color: white;
+                }
+            }
         }
     }
 
@@ -65,6 +64,11 @@
         border-radius: 10px;
         padding: .5rem .75rem;
         margin: 0;
+        display: flex;
+
+        svg{
+            margin-right: .75rem;
+        }
     }
 
    &_box13{
@@ -74,34 +78,52 @@
             background-color: #EB5C1F;
             border-radius: 10px;
             padding: .5rem .75rem;
-            margin: 0;
-            margin-top: 2rem;
-            margin-bottom: 0.75rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
         }
    }
 }
 
 .app__SignIn_box30{
-    color:white;
     width: 100%;
     border-radius: 10px;
     padding: .5rem 4rem;
     margin: 0; 
+    display: flex;
+    justify-content: center;
+
+    p{
+        color:white;
+        margin: 0 0 0 1rem;
+    }
 }
 
-.ButtonGoogle{
+.forgot_password{
+    margin: 0;
+    text-align: right;
+    font-size: $smaller_font;
+}
+
+.register{
+    margin: 0;
+    font-size: $smaller_font;
+}
+
+.ButtonGoogle, .ButtonGoogle p{
     background-color: #DB4437;
 }
 
-.ButtonFacebook{
+.ButtonFacebook, .ButtonFacebook p{
     background-color: #4267B2;
-    margin-top:1rem;
 }
 
-.ButtonTwitter{
+.ButtonFacebook{margin-top:1rem;}
+
+.ButtonTwitter, .ButtonTwitter p{
     background-color: #1DA1F2;
-    margin-top:1rem;
 }
+
+.ButtonTwitter{margin-top:1rem;}
 
 @media screen and (min-width: 1450px){
     .app__SignIn_box{
@@ -109,16 +131,26 @@
     }
 }
 
+@media screen and (max-width: 1200px){
+    .app__SignIn_box{
+        width: 95%;
+
+        &>*{
+            padding: 1rem;
+        }
+    }
+}
+
 @media screen and (max-width: 900px){
     .app__SignIn_box{
+        width: 75%;
         grid-template-columns: 1fr;
-        grid-template-rows: 2fr auto 1fr;
-        
+        grid-template-rows: 1.5fr auto 1fr;
     }
 }
 
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 550px){
     .app__SignIn_box{
         width: 100%;
         padding: 0;

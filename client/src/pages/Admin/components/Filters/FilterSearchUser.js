@@ -192,7 +192,7 @@ function FilterSearchUser({url,nameOfSearch,type}) {
           </div>
 
           <div className="form-group col-xxl-3 mb-3">
-            <label>Nome ou iniciais</label>
+            <label>Nome</label>
             <input type="text" className="form-control" onChange={(e) => setName(e.target.value)}></input>
           </div>
 

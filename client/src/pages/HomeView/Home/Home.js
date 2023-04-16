@@ -1,11 +1,14 @@
 import React from 'react';
-
+import { useCookies } from "react-cookie";
 import {Navbar, Footer, Product} from '../../../components/index';
 import { PRODUCTS } from '../../../assets/products';
 import images from '../../../assets/images';
 import './Home.css';
 
 function Home() {
+
+  const [cookies] = useCookies(['userSession','identification']);
+
 
   const handleClick = () => {
     const targetDiv = document.getElementById('comprar_div');

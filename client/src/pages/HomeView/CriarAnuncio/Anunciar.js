@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import {NavbarSupplier, Footer, SubHeading, Searchbar} from '../../../components/index';
-import './Anunciar.css';
+import './styles/Anunciar.css';
 
 const Anunciar = () => {
 
@@ -13,12 +13,13 @@ const Anunciar = () => {
         <div className='app__anunciar main__container'>
             <SubHeading title="Anunciar"></SubHeading>
             <div className='app__anunciar_content'>
-                <div>
-                    <p>Pesquisar anuncio já existente</p>
-                    <Searchbar></Searchbar>
+                <div className='app__anunciar_content_search'>
+                    <p>Pesquise um produto existente no nosso catálogo pelo EAN</p>
+                    <Searchbar placeholder="Teste"></Searchbar>
                 </div>
-                <div>
-                    <Link to='/anuncio'>Criar anuncio</Link>
+                <div className='app__anunciar_content_novo_anuncio'>
+                    <p>...ou crie um novo anúncio</p>
+                    <div><Link to='/anuncio' className='main__action_btn'>Criar anuncio</Link></div>
                 </div>
             </div>
         </div>

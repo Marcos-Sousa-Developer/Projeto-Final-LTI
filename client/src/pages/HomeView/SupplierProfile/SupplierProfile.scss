@@ -37,8 +37,12 @@
         }
     }
 
+    &_border {
+        border: 3.5px solid $light_gray;
+    }
+
     &_box{
-        border: 3.5px solid $light_gray; 
+        border-bottom: none;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
@@ -62,8 +66,16 @@
                     padding: 0.25rem 0.5rem;
                     font-size: large;
                 }
+
             }
-        }
+        } 
+    }
+
+    &_button {
+        margin: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 

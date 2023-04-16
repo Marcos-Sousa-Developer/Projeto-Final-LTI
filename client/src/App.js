@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation  } from "react-router-dom"; 
+import { Routes, Route, useLocation} from "react-router-dom"; 
 import RequireAuth from "./components/RequireAuth"
 import Dashboard from "./pages/Admin/Dashboard";
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
@@ -6,29 +6,37 @@ import Gerir_Consumidores from "./pages/Admin/Gerir_Consumidores";
 import Gerir_Fornecedores from "./pages/Admin/Gerir_Fornecedores";
 import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
 import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
+import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
+import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
+import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
-import {Home, LoginTest, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, RegisterTest, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage} from './pages/HomeView/index';
-import { ShopContextProvider } from "./context/ShopContextProvider";
+import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
 import Relatorios_Fornecedores from "./pages/Admin/Relatorios_Fornecedores";
 import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
 import LoadingPage from "./pages/LoadingPage";
 
+
 function App() {
 
   const [userType, setUserType] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [cookies] = useCookies(['userSession']);
+  const [cookies,setCookies] = useCookies(['userSession','identification']);
   const location = useLocation();
 
   const getUserType = async () => {
     setLoading(true)
     if(cookies.userSession){
-      let type = await getClientType('/userType')
+      let response = await getClientType({uid:cookies.userSession})  
+
+      let type = response[0]
+      let name = response[1]
+
+      setCookies('identification',name,{ path: '/' })
+
       setUserType(type)
     }
     setLoading(false)
@@ -39,8 +47,7 @@ function App() {
   },[location])
 
   return (
-    <ShopContextProvider>
-
+    <>
       {
 
         !loading ? (
@@ -55,6 +62,8 @@ function App() {
                 <Route exact path="gerir/consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
                 <Route exact path="gerir/fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
                 <Route exact path="gerir/produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
+                <Route exact path="gerir/anuncio" element={<RequireAuth><Gerir_Anuncio /></RequireAuth>} />
+                <Route exact path="gerir/encomendas" element={<RequireAuth><Gerir_Encomendas /></RequireAuth>} />
                 <Route exact path="gerir/transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />
                 <Route exact path="relatorios/consumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
                 <Route exact path="relatorios/fornecedores" element={<RequireAuth><Relatorios_Fornecedores /></RequireAuth>} />
@@ -79,13 +88,10 @@ function App() {
           }   
           
           {/*----- Only for testing ----- */}
-            <Route path="/loginTest" element={<LoginTest />} />
             <Route path="/productTest" element={<ProductTest />} />
-            <Route path="/registerTest" element={<RegisterTest />} />
             <Route path="/consumerTest" element={<ConsumerTest />} />
             <Route path="/supplierTest" element={<SupplierTest />} />
           {/* ------------- */}
-
 
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
@@ -114,7 +120,7 @@ function App() {
   }
 
       
-    </ShopContextProvider>
+    </>
 
   );
 }

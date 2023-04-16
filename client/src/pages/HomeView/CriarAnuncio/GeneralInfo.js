@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { FiX, FiChevronRight, FiChevronLeft, FiChevronDown } from 'react-icons/fi';
 
 import {teste} from '../../../utilities/teste';
-import "./CriarAnuncio.css";
+import Features from './Features';
+import SubFeatures from './SubFeatures';
+import "./styles/CriarAnuncio.css";
 
 const GeneralInfo = ({ formData, setFormData }) => {
 
@@ -20,9 +22,9 @@ const GeneralInfo = ({ formData, setFormData }) => {
 
         return (
             <div className='category_details'>
-                <div className='app__pointer category_details_header' style={{display: 'inline-flex', marginBottom:'2rem'}} onClick={onClick}>
-                    <button><FiChevronLeft fontSize={20} color="black" style={{marginRight:'1rem'}}></FiChevronLeft></button> 
-                    <p style={{margin:'0'}}>{category.name}</p>
+                <div className='app__pointer category_details_header' onClick={onClick}>
+                    <button><FiChevronLeft fontSize={20} color="black"></FiChevronLeft></button> 
+                    <p>{category.name}</p>
                 </div>
                 <div className='category_details_body'>
                     <div className='category_details_body_1'>
@@ -66,13 +68,74 @@ const GeneralInfo = ({ formData, setFormData }) => {
                                 subcategory.subsubcategories.map((subsubcategory, j) => (
                                     <li key={j}>
                                         <label className='app__pointer'>
-                                            <p>{subsubcategory}</p>
+                                            <p className='app__text_effect'>{subsubcategory}</p>
                                             <input 
                                             style={{display:'none'}}
                                             type="radio" 
                                             name="CriarAnuncioRadio" 
-                                            value={[category.name, subcategory.name, subsubcategory]} 
-                                            onChange={(e) => {setFormData({ ...formData, categoria: e.target.value })}}
+                                            value={subsubcategory} 
+                                            onChange={(e) => {
+                                                const subcategoria = subcategory.name;
+                                                const subsubcategoria = e.target.value;
+                                                let sub_features = {};
+
+                                                if (subsubcategoria === "Alimentação") {
+                                                    sub_features = { Validade: ''};
+                                                }
+
+                                                if (subcategoria === "Calçado" || subcategoria === "Roupinhas"){
+                                                    sub_features = { Gender: ''};
+                                                }
+
+                                                if (subsubcategoria === "Móveis") {
+                                                    sub_features = { Largura: '', Comprimento: ''};
+                                                }
+
+                                                if (subsubcategoria === "Computadores") {
+                                                    sub_features = { Processador: '', MemoryRAM: '', OperatingSystem: '', StorageAmount: '', StorageType: '' };
+                                                }
+
+                                                if (subsubcategoria === "Tv" || subsubcategoria === "Projectores" || subsubcategoria === "Monitores" ){
+                                                    sub_features = {Resolution: '', ScreenSize: ''}
+                                                }
+
+                                                if (subsubcategoria === "Portáteis"){
+                                                    sub_features = {Processador: '', MemoryRAM: '', OperatingSystem: '', StorageAmount: '', StorageType: '', Resolution: '', ScreenSize: '' }
+                                                }
+
+                                                if (subsubcategoria === "Software"){
+                                                    sub_features = {SoftwareType: ''}
+                                                }
+
+                                                if (subsubcategoria === "Armazenamento" || subsubcategoria === "Servidores"){
+                                                    sub_features = {StorageAmount: ''}
+                                                }
+
+                                                if (subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos"){
+                                                    sub_features = {StorageType: '', StorageAmount: ''}
+                                                }
+
+                                                if (subsubcategoria === "Telemóveis" || subsubcategoria === "Tablets" ){
+                                                    sub_features = {OperatingSystem: ''}
+                                                }
+
+                                                if (subcategoria === "Roupa"){
+                                                    sub_features = {ClothingSize: ''}
+                                                }
+
+                                                if (subcategoria === "Calçado"){
+                                                    sub_features = {ShoeSize: ''}
+                                                }
+
+                                                setFormData({
+                                                    ...formData, 
+                                                    categoria: category.name,
+                                                    subcategoria: subcategoria,
+                                                    subsubcategoria: subsubcategoria,
+                                                    features: category.features,
+                                                    sub_features: [sub_features]
+                                                });
+                                            }}
                                             onClick={toggleActiveModal}>
                                             </input> 
                                         </label>
@@ -106,7 +169,7 @@ const GeneralInfo = ({ formData, setFormData }) => {
             <div className={ `app__anuncio_modal ${className}` }>
                 <div className="app__anuncio_modal_content">
                     <div className="app__anuncio_modal_header">
-                        <p style={{margin: '4px', fontWeight:'bold'}}>{formData.categoria.length > 0 ? 'Categoria escolhida!' : 'Escolha uma categoria'}</p>
+                        <p>Escolha uma categoria</p>
                         <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
                     </div>
                     <div className="app__anuncio_modal_body">
@@ -128,7 +191,14 @@ const GeneralInfo = ({ formData, setFormData }) => {
         return(
             <div className='buttonToggleModal_area'>
                 <p className='app__pointer' id="modal-toggler" onClick={ props.onClick }> {formData.categoria.length > 0 ? 'Alterar ' : 'Escolher '}<FiChevronDown></FiChevronDown></p> 
-                <p className='buttonToggleModal_area_selected_category' style={{margin:'0'}}>{formData.categoria}</p>
+                <div className='buttonToggleModal_area_selected_category'>
+                    {formData.categoria.length > 0 && 
+                        <div>
+                            <span>{formData.categoria}</span>
+                            <p>{formData.subsubcategoria}</p>
+                        </div>
+                    }
+                </div>
             </div>
         )
     }
@@ -143,12 +213,12 @@ const GeneralInfo = ({ formData, setFormData }) => {
     const [activeModal, setActiveModal] = useState(false);
     const toggleActiveModal = () => setActiveModal(!activeModal);    
 
-
     return (
-    <div className='app__anuncio_content_generalInfo'>
+    <>
+        <div className='app__anuncio_content_generalInfo'>
             <div className='inputField'>
                 <p>Título</p>
-                <input type='text' value={formData.titulo} placeholder='título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
+                <input type='text' value={formData.titulo} placeholder='Título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
             </div>
             <div className='inputField'>
                 <p>Preço (€)</p>
@@ -156,11 +226,25 @@ const GeneralInfo = ({ formData, setFormData }) => {
             </div>
             <div className='app__anuncio_content_generalInfo_categoria'>
                 <p>Categoria</p>
-                <ButtonToggleModal onClick={toggleActiveModal}/>
-                <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
-                <Modal className={ activeModal ? 'activeModal' : null}/>
+                {formData.categoria != "" && formData.subcategoria != "" && formData.subsubcategoria != "" && formData.search ? 
+                
+                        <>
+                            <p>{formData.categoria}</p>
+                            <p>{formData.subcategoria}</p>
+                            <p>{formData.subsubcategoria}</p>
+                        </>
+                    :
+                        <>
+                            <ButtonToggleModal onClick={toggleActiveModal}/>
+                            <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
+                            <Modal className={ activeModal ? 'activeModal' : null}/>
+                        </>
+                } 
             </div>
-    </div>
+        </div>
+        <Features formData={formData} setFormData={setFormData}></Features>
+        <SubFeatures formData={formData} setFormData={setFormData}></SubFeatures>
+    </>
     )
 }
 

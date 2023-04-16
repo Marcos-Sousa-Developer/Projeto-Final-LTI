@@ -73,7 +73,7 @@ $overlay-bg:          hsla(0, 0%, 9%, 0.863);
     }
 
     &_category{
-      margin-bottom: .75rem;
+      margin-bottom: .25rem;
 
       &-title{
         display: flex;
@@ -109,6 +109,14 @@ $overlay-bg:          hsla(0, 0%, 9%, 0.863);
         max-height: 0;
         overflow: hidden;
         transition: $transition-sidebar;
+
+        li{
+          line-height: 2rem;
+
+          a{
+            font-size: $smaller_font;
+          }
+        }
       }
 
       .show{

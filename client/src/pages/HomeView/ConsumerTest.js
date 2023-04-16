@@ -29,13 +29,13 @@ function ConsumerTest() {
         setAddress(event.target.value)
     }
 
-    async function verifyName(name){
+    function verifyName(name){
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //podem ser null
         return "OK"
     }
 
-    async function verifyEmail(email){
+    function verifyEmail(email){
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //podem ser null
         //tem de ter um @
@@ -48,7 +48,7 @@ function ConsumerTest() {
         return "OK"
     }
 
-    async function verifyNif(nif){
+    function verifyNif(nif){
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //podem ser null
         //9 algarismos
@@ -69,14 +69,14 @@ function ConsumerTest() {
         return "OK"
     }
 
-    async function verifyMobileNumber(mobile_number){
+    function verifyMobileNumber(mobile_number){
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //podem ser null
         //9 algarismos ?? depende do código do pais 
         return "OK"
     }
 
-    async function verifyAddress(address){
+    function verifyAddress(address){
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //podem ser null
         return "OK"
@@ -93,11 +93,11 @@ function ConsumerTest() {
         console.log(mobile_number)
         console.log(address)
 
-        let validName = await verifyName(name);
-        let validEmail = await verifyEmail(email);
-        let validNif = await verifyNif(nif);
-        let validMobileNumber = await verifyMobileNumber(mobile_number);
-        let validAddress = await verifyAddress(address);
+        let validName = verifyName(name);
+        let validEmail = verifyEmail(email);
+        let validNif = verifyNif(nif);
+        let validMobileNumber = verifyMobileNumber(mobile_number);
+        let validAddress = verifyAddress(address);
 
         console.log(validName)
         console.log(validEmail)
@@ -152,7 +152,7 @@ function ConsumerTest() {
         <form action="" method="put">
             <input type="text" placeholder="Nome" value = {name ?? ""} name="name" onChange={handleSetName}></input><br></br>
             <input type="email" placeholder="Email" value = {email ?? ""} name="email" onChange={handleSetEmail}></input><br></br>
-            <input type="text" placeholder="Nif" value = {nif ?? ""} name="nif" onChange={handleSetNif}></input><br></br>
+            <input type="text" placeholder="NIF" value = {nif ?? ""} name="nif" onChange={handleSetNif}></input><br></br>
             <input type="tel" placeholder="Número de telemóvel" value = {mobile_number ?? ""} name="mobile_number" onChange={handleSetMobileNumber}></input><br></br>
             <input type="text" placeholder="Morada" value = {address ?? ""} name="address" onChange={handleSetAddress}></input><br></br>
         </form>

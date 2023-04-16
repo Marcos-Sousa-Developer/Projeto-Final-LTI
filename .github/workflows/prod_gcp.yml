@@ -1,0 +1,49 @@
+name: Deploy Production to GCP (multiple VMs)  Ubuntu LTS instances
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: deploy to host-1
+        uses: appleboy/ssh-action@master
+        with:
+          host: "34.175.52.109"
+          username: leticiaemarcos200001
+          key: ${{ secrets.HOST_1_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/leticiaemarcos200001/Projeto_Final_LTI
+            git pull origin prod
+            git checkout prod
+
+      - name: deploy to host-2
+        uses: appleboy/ssh-action@master
+        with:
+          host: "34.175.101.154"
+          username: leticiaemarcos200001
+          key: ${{ secrets.HOST_2_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/leticiaemarcos200001/Projeto_Final_LTI
+            git pull origin prod
+            git checkout prod
+
+      - name: deploy to host-3
+        uses: appleboy/ssh-action@master
+        with:
+          host: "34.175.211.215"
+          username: leticiaemarcos200001
+          key: ${{ secrets.HOST_3_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/leticiaemarcos200001/Projeto_Final_LTI
+            git pull origin prod
+            git checkout prod

@@ -11,6 +11,7 @@ const getAllorSomeSuppliers = async function (req, res) {
     let statement = "SELECT * FROM suppliers";
     
     if(Object.keys(req.query).length !== 0) { 
+        statement += " WHERE "
 
         let params = {} 
 
@@ -21,10 +22,14 @@ const getAllorSomeSuppliers = async function (req, res) {
             if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
                 params[key] = value
             }
-
         }
 
-        statement += " WHERE (created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+        if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+            if(Object.keys(params).length > 0){
+                statement += " AND ";
+            }
+        }
 
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
 
@@ -108,9 +113,16 @@ const deleteSupplierByID = async function (req, res) {
  */
 const insertSupplier = async function (req, res) {
 
-    const data = [req.query.uid, req.query.name, req.query.email, req.query.nif, req.query.mobile_number,req.query.address];
+    const data = [req.query.uid, req.query.name, req.query.email, req.query.nif, 
+                req.query.mobile_number, req.query.continent,
+                req.query.country, req.query.district,
+                req.query.city, req.query.town, req.query.address,
+                req.query.postal_code, req.query.status, req.query.products_list, 
+                req.query.orders, req.query.created_at];
 
-    const statement = "INSERT INTO suppliers (uid, name, email, nif, mobile_number, address) VALUES ?";
+    const statement = "INSERT INTO consumers (uid, name, email, nif, mobile_number, " +
+                    "continent, country, district, city, town, address, postal_code, " +
+                    "status, products_list, orders, created_at) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

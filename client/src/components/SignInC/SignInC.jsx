@@ -1,29 +1,86 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
-import './SignIn.css';
+import { authentication as auth}  from '../../authentication'
 import images from '../../assets/images';
+import './SignIn.css';
 
 const SignInC = () => {
+
+    const [cookies,setCookies] = useCookies(['userSession']);
+
+    const [email, setEmail] = useState(null) 
+
+    const [password, setPassword] = useState(null) 
+
+    const [loading, setLoading] = useState(false) 
+
+    const [notValidate, setNotValidade] = useState(false) 
+
+    const [error, setError] = useState(false) 
+
+    const [code, setCode] = useState(undefined)
+
+    const navigate = useNavigate();
+
+    const handlerLogin = async (event) => {
+        setError(false)
+        setNotValidade(false)
+        setLoading(true)
+        event.preventDefault(); 
+        let isActive = await auth.signIn(email,password)
+        if(isActive === true) {
+            window.location.href = "/";
+        }
+        else if(isActive === null) {
+            setNotValidade(true)
+        }
+        else{
+            setError(true)
+        }
+        setLoading(false)
+    }
+
+    const sendCode = async () => {
+
+        setNotValidade(false)
+
+        let isActive = await auth.verifyEmail(email,code);
+
+        if(isActive) {
+            location.reload()
+        }
+        else(
+            setNotValidade(true)
+        )
+        
+    } 
+
+    useEffect(() => {
+        if(cookies.userSession){
+            navigate('/');
+        }
+    },[])
+
     return (
     <>
         <img className='app__SignIn_rectangle1' src={images.Rectangle1} alt="" />
-        <img className='app__SignIn_rectangle2' src={images.Rectangle2} alt="" />
         <div className='app__SignIn main__container'>
             <Link to='/'><FiArrowLeft></FiArrowLeft></Link>
             <h1 className=''>Sign In</h1>
                 <div className='app__SignIn_box'>
                     <div className='app__SignIn_box1'>
-                        <form>
+                        <form onSubmit={handlerLogin}>
                             <div>
                                 <p>E-mail</p>
                                 <div className='app__SignIn_box11'>
-                                    <FiMail fontSize={22} color='black'  aria-hidden="true"/>
+                                    <div><FiMail fontSize={22} color='black'  aria-hidden="true"/></div>
                                     <input
-                                        name=""
-                                        id=""
                                         type="text"
+                                        onChange={(e)=>setEmail(e.target.value)}
                                         required
                                     />
                                 </div>
@@ -31,19 +88,42 @@ const SignInC = () => {
                             <div>
                                 <p>Password</p>
                                 <div className='app__SignIn_box11'>
-                                    <FiLock fontSize={22} color='black'  aria-hidden="true"/>
+                                    <div><FiLock fontSize={22} color='black'  aria-hidden="true"/></div>
                                     <input
-                                        name=""
-                                        id=""
                                         type="password"
+                                        onChange={(e)=>setPassword(e.target.value)}
                                         required
                                     />
                                 </div>
-                                <p>Esqueceu-se da password?</p>
+                                <div className='forgot_password'>Esqueceu-se da password?</div>
                             </div>
                             <div className='app__SignIn_box13'>
-                            <button className='main__action_btn' type='submit'>Login</button>
-                            <p>Não tem conta? Registe-se <span>aqui</span>.</p>
+                            {
+                                error && ( <small style={{color:"red"}}>Email ou Password incorreto</small>)
+                            }
+                            {
+                                notValidate && ( 
+                                    
+                                    <>
+                                    <small style={{color:"red"}}> Tens de confirmar o teu email</small>
+                                    <div className='app__SignIn_box11'>
+                                        <input type="text" placeholder='verificar code' onChange={(e) => setCode(e.target.value)}></input>
+                                    </div>
+                                    <button onClick={() => sendCode()}>Verificar code</button>
+                                    </>
+                                    )
+                            }
+                            {
+                                loading ? 
+                                (
+                                    <button className='main__action_btn'>Loading</button>
+                                )
+                                :
+                                (
+                                    <button className='main__action_btn' type='submit'>Login</button>
+                                )
+                            }
+                            <div className='register'>Não tem conta? Registe-se <span><Link to="/signup" style={{color: "coral"}}>aqui</Link></span>.</div>
                             </div>
                         </form>
                     </div>
@@ -52,15 +132,9 @@ const SignInC = () => {
 
                     </div>
                     <div className='app__SignIn_box3'>
-                            <button className='app__SignIn_box30 ButtonGoogle'>
-                                Google
-                            </button>
-                            <button className='app__SignIn_box30 ButtonFacebook'>
-                                Facebook
-                            </button>
-                            <button className='app__SignIn_box30 ButtonTwitter'>
-                                Twitter
-                            </button>
+                        <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google</p></button>
+                        <button className='app__SignIn_box30 ButtonFacebook'><BsFacebook className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsFacebook><p>Facebook</p></button>
+                        <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter</p></button>
                     </div>
                 </div>    
         </div>

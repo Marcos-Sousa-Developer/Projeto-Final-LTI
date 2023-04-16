@@ -64,6 +64,7 @@ function GetOrdersReports() {
                 mapKmData(response)  
                 mapLocationData(response)  
                 setError(false)
+                console.log(response)
             }
             catch(e) {
                 setError(true)
@@ -106,6 +107,8 @@ function GetOrdersReports() {
                 tableKmData['more than 1000 km'] +=1
             }
         })
+
+        console.log(tableKmData)
     }
 
         /**
@@ -116,25 +119,27 @@ function GetOrdersReports() {
 
         datas.map((data) => { 
 
-            if(data.sameLocation === 'freguesia') {
+            if( data.sameLocation.toLowerCase() === 'freguesia') {
                 tableLocationData['freguesia'] +=1
             }
-            else if(data.sameLocation === 'município') {
+            else if(data.sameLocation.toLowerCase() === 'município') {
                 tableLocationData['município'] +=1
             }
-            else if(data.sameLocation === 'distrito') {
+            else if(data.sameLocation.toLowerCase() === 'distrito') {
                 tableLocationData['distrito'] +=1
             }
-            else if(data.sameLocation === 'país') {
+            else if(data.sameLocation.toLowerCase() === 'país') {
                 tableLocationData['país'] +=1
             }
-            else if(data.sameLocation === 'continente') {
+            else if(data.sameLocation.toLowerCase() === 'continente') {
                 tableLocationData['continente'] +=1
             }
-            else if(data.sameLocation === 'mundo') {
+            else if(data.sameLocation.toLowerCase() === 'mundo') {
                 tableLocationData['mundo'] +=1
             }
         })
+
+        console.log(tableLocationData)
     }
 
   return (

@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import '../../../../index.scss';
 
 $transition-sidebar: all 350ms ease;
 $overlay-bg:        hsla(0, 0%, 10%, 0.85);
@@ -37,6 +37,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
             display: grid;
             grid-template-columns: 2fr auto 2fr;
             gap: 4rem;
+            margin-bottom: 1rem;
         }
 
         &_productInfo{
@@ -52,7 +53,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
         }
 
         .app__anuncio_image_sectionBtn{
-            margin-top: 1rem;
+            margin-right: 1rem;
             & >* >*{
                 transition: all 150ms ease-in;
             }
@@ -185,8 +186,19 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
     grid-template-columns: 1fr 2fr;
     gap: 3rem;
 
-    &_selected_category{
-        font-size: .75rem;
+    &_selected_category div{
+        display: flex;
+        flex-direction: column;
+
+        span{
+            font-size: $smaller_font;
+            font-weight: bold;
+        }
+
+        p{
+            font-size: $small_font;
+            margin: 0;
+        }
     }
 }
 
@@ -253,6 +265,11 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
         display: flex;
         justify-content: space-between;
         margin-bottom: 2rem;
+
+        p{
+            margin: 4px;
+            font-weight: bold;
+        }
     }
     
     &_body{
@@ -326,7 +343,21 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
         }
 
         .category_details{
-            .category_details_body{
+            &_header{
+                display: inline-flex;
+                margin-bottom: 1rem;
+                font-weight: 500;
+
+                button{
+                    margin-right: 1rem;
+                }
+
+                p{
+                    margin: 0;
+                }
+            }
+
+            &_body{
                 position: relative;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -354,7 +385,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
                 }
 
                 &_2 p{
-                    font-size: 14px;
+                    font-size: $smaller_font;
                     margin: 0;
                 }
             
@@ -363,7 +394,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
                     top: 0;
                 
                     &_content li p{
-                        padding-bottom: .5rem;
+                        margin-bottom: .5rem;
                     }
                 }
             }
@@ -374,6 +405,25 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
                 color:rgba(235, 92, 31, 0.8);
             }
         }
+    }
+}
+
+.app__anuncio_features{
+    margin-bottom: 1rem;
+}
+
+.app__anuncio_features, .app__anuncio_sub_features{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    gap: 0rem 2rem;
+
+    select{
+        width: 100%;
+        outline: none;
+        border: $border;
+        border-radius: 10px;
+        padding: 4px 8px;
+        cursor: pointer;
     }
 }
 
@@ -431,6 +481,11 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
         }
     }
 
+    .app__anuncio_features, .app__anuncio_sub_features{
+        grid-template-columns: repeat(auto-fit, 150px);
+        gap: .5rem 1rem;
+    }
+
     .buttonToggleModal_area{
         display: flex;
     }
@@ -477,6 +532,10 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
         grid-template-columns: 2fr 1fr;
     }
 
+    .app__anuncio_modal_body .category_details_body .subsubcategories_content li p {
+        margin-bottom: .25rem;
+    }
+
     .app__anuncio_modal{
         min-width: 20rem;
         min-height: 450px;
@@ -489,7 +548,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
                 grid-template-columns: 1.5fr 1fr;
 
                 &_1_sub p{
-                    font-size: 14px;
+                    font-size: $smaller_font;
                     margin: 0 .5rem 0 0;
                 }
 
@@ -502,7 +561,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
                 }
 
                 &_2 p{
-                    font-size: 12px;
+                    font-size: $small_font;
                 }
             }
         }

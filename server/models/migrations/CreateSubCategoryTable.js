@@ -5,7 +5,6 @@ const statement = "CREATE TABLE subcategories ( " +
                   "name varchar(255) NOT NULL, " + 
                   "characteristics varchar(1000) NOT NULL, " +
                   "id_category int, " +
-                  //"UNIQUE (name), " +
                   "PRIMARY KEY (id))"; 
 
 pool.query(statement, function(error, result) {

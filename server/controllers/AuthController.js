@@ -1,3 +1,4 @@
+let dbConnection = require('./DatabaseController') 
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const poolData = require('../config/poolCognitoConfig')
 const jwt = require('../config/jwtConfig')
@@ -17,6 +18,45 @@ const verifyTokens = async (client_result) => {
 }
 
 /**
+ * @param {*} result 
+ * @description set cookie for user
+ * @returns list with uid and expire date
+ */
+const setCookie = (result,res) => {
+
+  let act = {accessToken: result.getAccessToken().getJwtToken()}
+
+  let idt = {idToken: result.getIdToken().getJwtToken()}
+
+  let rft = {refreshToken: result.getRefreshToken().getJwtToken}
+
+  const accessToken = jwt.generateAccessToken(act)
+  const idToken = jwt.generateAccessToken(idt)
+  const refreshToken = jwt.generateAccessToken(rft) 
+
+  const username = result.getIdToken().payload['cognito:username']; 
+
+  const uid = jwt.encryptID(username)  
+
+  let dateExpire = new Date(Date.now() + 7200000) //date now and more 30 minutes
+
+  res.cookie("accessToken", accessToken, {
+    expires: dateExpire, 
+    httpOnly: true})
+
+  res.cookie("idToken", idToken, {
+    expires: dateExpire, 
+    httpOnly: true})
+  
+  res.cookie("refreshToken", refreshToken, {
+    expires: dateExpire,
+    httpOnly: true})
+  
+  res.cookie("userSession", uid, {expires: dateExpire})
+
+}
+
+/**
  * Handling user sign in
  * @param authenticationData
  * @param userData
@@ -24,7 +64,7 @@ const verifyTokens = async (client_result) => {
  * @param response
  * @returns newPromise with succes or fail
  */
-const handlerSignIn = (authenticationData, userData, client_result, res) => {
+const handlerSignIn = (authenticationData, userData,res) => {
 
   // that represents the authentication details of a user who is attempting to authenticate with Amazon Cognito
   const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
@@ -39,36 +79,8 @@ const handlerSignIn = (authenticationData, userData, client_result, res) => {
 
       //if user is succeful authenticated
       onSuccess: (result) => {
-
-        let act = {accessToken: result.getAccessToken().getJwtToken()}
-
-        let idt = {idToken: result.getAccessToken().getJwtToken()}
-
-        let rft = {refreshToken: result.getRefreshToken().getJwtToken}
-
-        const accessToken = jwt.generateAccessToken(act)
-        const idToken = jwt.generateAccessToken(idt)
-        const refreshToken = jwt.generateAccessToken(rft) 
-
-        const uid = jwt.encryptID(client_result.client_id)  
-
-        let dateExpire = new Date(Date.now() + 7200000) //date now and more 30 minutes
-
-        res.cookie("accessToken", accessToken, {
-          expires: dateExpire, 
-          httpOnly: true})
-
-        res.cookie("idToken", idToken, {
-          expires: dateExpire, 
-          httpOnly: true})
-        
-        res.cookie("refreshToken", refreshToken, {
-          expires: dateExpire,
-          httpOnly: true})
-        
-        res.cookie("userSession", uid, {expires: dateExpire})
-
-        resolve({uid: uid,active: true, dateExpire:dateExpire});
+        setCookie(result,res)
+        resolve(true);
         
       },
 
@@ -83,7 +95,8 @@ const handlerSignIn = (authenticationData, userData, client_result, res) => {
       newPasswordRequired: (userAttributes, requiredAttributes) => {
         cognitoUser.completeNewPasswordChallenge(password, [], {
           onSuccess: (result) => {
-            resolve(result.getAccessToken().getJwtToken());
+            setCookie(result,res)
+            resolve(true);
           },
           onFailure: (err) => {
             console.log(err)
@@ -123,7 +136,7 @@ const signIn = async (req, res) => {
 
     if(isValidTokens) {
 
-      let data = await handlerSignIn(authenticationData, userData, client_result, res)
+      let data = await handlerSignIn(authenticationData, userData, res)
       
       return res.send(data) 
     }
@@ -131,13 +144,57 @@ const signIn = async (req, res) => {
     return res.send(false); 
 };
 
+
+const registerUser = async (req,res) => {
+
+  let name = req.query.name
+  let email = req.query.email
+  let user_type = req.query.user_type
+  let uid = req.query.uid 
+
+  const statement = "INSERT INTO " +  user_type + "s (uid, name, email) VALUES ?"; 
+
+  let result = await dbConnection(statement, [[uid,name,email]]);
+
+  if (result === "error") {
+    return res.send(null);
+
+  }
+
+  return res.send("Consumer has been created");
+
+}
+
 /**
  * Verify user type
  * @params request from client
  * @return userType
  */
+
 const userType = (req, res) => { 
-  return res.send("supplier"); //Trocar para consumer se quiser ir 
+  return res.send("admin"); //Trocar para consumer se quiser ir 
+}
+const getUserType = async (req, res) => { 
+
+  try {
+
+    let uid_encrypt = req.query.uid
+
+    let uid_decrypt = jwt.decryptID(uid_encrypt) 
+
+    const statement = "SELECT * FROM users WHERE uid='"+uid_decrypt+"';"
+
+    let result = await dbConnection(statement) 
+
+    const user_type = result[0].user_type
+    const name = result[0].name.split(" ")[0]
+    
+    return res.send([user_type,name]);
+  }
+  catch(error) {
+      return res.send(null);
 }
 
-module.exports = {signIn, userType}
+}
+
+module.exports = {signIn, registerUser, getUserType}

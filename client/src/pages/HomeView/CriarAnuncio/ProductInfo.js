@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
-import { FiPlus, FiX, FiTrash2, FiChevronUp, FiChevronRight } from 'react-icons/fi';
+import { FiPlus, FiX, FiTrash2} from 'react-icons/fi';
 
-import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
-import { categories } from '../../../utilities/categorias';
-import "./CriarAnuncio.css";
+import "./styles/CriarAnuncio.css";
 
 const ProductInfo = ({ formData, setFormData }) => {
     
@@ -67,30 +65,26 @@ const ProductInfo = ({ formData, setFormData }) => {
                             })
                         }
                     </div>
-                    {selectedImages.length > 0 &&
-                        <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => setSelectedImages([])}>limpar tudo <FiTrash2></FiTrash2></span>
-                    }
+                    <div style={{display:'flex', marginTop:'1rem'}}>
+                        {selectedImages.length > 0 &&
+                            <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => setSelectedImages([])}>limpar tudo <FiTrash2></FiTrash2></span>
+                        }
+                        {selectedImages.length === 8 &&
+                            <p style={{margin: '.25rem 0 0 0', color: '#EB5C1F', fontSize:'12px'}}>Atingiu o limite de imagens!</p>
+                        }
+                    </div>
                 </div>
-                {selectedImages.length === 8 &&
-                    <p style={{margin: '0', color: '#EB5C1F'}}>Atingiu o limite de imagens!</p>
-                }
             </div>
             <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem'}}>
                 <div className='inputField'>
                     <p>Telemóvel</p>
-                    <input type='tel' required placeholder='912345678' onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
+                    <input type='tel' required onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
                 </div>
                 <div className='inputField'>
                     <p>Email</p>
-                    <input type='email' required placeholder='exemplo@gmail.com' onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
+                    <input type='email' required onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
                 </div> 
-            </div>
-            <div>
-                <p>Unidades de Produção</p>
-                <div>
-
-                </div>
-            </div>           
+            </div>         
         </div>
     )
 }

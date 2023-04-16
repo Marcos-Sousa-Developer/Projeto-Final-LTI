@@ -1,5 +1,15 @@
 let exec = require('child_process').exec;
 
+exec('node ./models/seeders/SeederAllAdminsTable.js',
+    function (error, stdout) {
+
+        console.log(stdout);
+
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+});
+
 exec('node ./models/seeders/SeederConsumerTable.js',
     function (error, stdout) {
 
@@ -30,7 +40,7 @@ exec('node ./models/seeders/SeederProductTable.js',
         }
 });
 
-exec('node ./models/seeders/SeederProductTable.js',
+exec('node ./models/seeders/SeederInventory.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -39,16 +49,6 @@ exec('node ./models/seeders/SeederProductTable.js',
              console.log('exec error: ' + error);
         }
 });
-
-/*exec('node ./models/seeders/SeederInventory.js',
-    function (error, stdout) {
-
-        console.log(stdout);
-
-        if (error !== null) {
-             console.log('exec error: ' + error);
-        }
-});*/
 
 
 //TODO
@@ -135,7 +135,7 @@ exec('node ./models/seeders/SeederOrderedProductTable.js',
 });
 
 
-/*exec('node ./models/seeders/SeedProductProductionUnitTable.js',
+exec('node ./models/seeders/SeederProductProductionUnitTable.js',
     function (error, stdout) {
 
         console.log(stdout);
@@ -143,4 +143,4 @@ exec('node ./models/seeders/SeederOrderedProductTable.js',
         if (error !== null) {
              console.log('exec error: ' + error);
         }
-});*/
+});

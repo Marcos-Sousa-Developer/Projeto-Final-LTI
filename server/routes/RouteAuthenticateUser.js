@@ -5,7 +5,9 @@ const authenticate = require('../controllers/AuthController');
 //Sign in user
 router.post('/signIn', authenticate.signIn) 
 
+router.post('/registerUser', authenticate.registerUser)
+
 //Verify user type
-router.get('/userType', authenticate.userType) 
+router.get('/userType', authenticate.getUserType) 
 
 module.exports = router
