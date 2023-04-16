@@ -7,6 +7,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # This is mandatory
+      contents: read # Setting the id-token permission will force you to specify all others permissions you need
+      pull-requests: write
 
     steps:
       - name: Checkout code
