@@ -17,6 +17,7 @@ jobs:
         with:
           host: "34.175.52.109"
           username: ubuntu
+          zone: 'europe-southwest1-a'
           key: ${{ secrets.HOST_1_SSH_PRIVATE_KEY }}
           port: 22
           script: |
@@ -29,6 +30,7 @@ jobs:
         with:
           host: "34.175.101.154"
           username: ubuntu
+          zone: 'europe-southwest1-a'
           key: ${{ secrets.HOST_2_SSH_PRIVATE_KEY }}
           port: 22
           script: |
@@ -41,6 +43,7 @@ jobs:
         with:
           host: "34.175.211.215"
           username: ubuntu
+          zone: 'europe-southwest1-a'
           key: ${{ secrets.HOST_3_SSH_PRIVATE_KEY }}
           port: 22
           script: |
