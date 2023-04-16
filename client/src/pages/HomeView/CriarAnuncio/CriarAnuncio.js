@@ -25,7 +25,7 @@ function CriarAnuncio() {
         titulo: "",
         preco: 0.00,
         descricao: "",
-        data_producao: "",
+        data_producao: new Date().toISOString().split('T')[0],
         categoria: "",
         subcategoria: "",
         subsubcategoria: "",
@@ -185,7 +185,6 @@ function CriarAnuncio() {
         if(mobile_number.length != 9){
           return "O número de telemóvel deve ter 9 dígitos";
         }
-
         for (var i = 0; i < mobile_number.length; i++) {
           var digit = parseInt(mobile_number[i], 10);
           if (isNaN(digit)) {
@@ -193,12 +192,10 @@ function CriarAnuncio() {
             return "O número de telemóvel deve conter apenas dígitos numéricos";
           }
         }
-
         if(mobile_number[0] != "9"){
           //O número de telemóvel deve de começar pelo dígito 9
           return "O número de telemóvel deve de começar pelo dígito 9";
         }
-      
       return "OK"
       }
     }
@@ -275,6 +272,32 @@ function CriarAnuncio() {
       //}
     }
 
+    async function verifyFeatures(features){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+      
+      if(features != undefined){
+        for (let feature in features) {
+            if(typeof features[feature] != "string"){
+              return "Deve de escolher uma opção no campo (" + feature + ") das características do produto";
+            }
+        }
+      }
+      return "OK"
+    }
+
+    async function verifySubFeatures(subFeatures){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+
+      if(subFeatures != undefined){
+        for (let feature in subFeatures) {
+            if(typeof subFeatures[feature] != "string"){
+              return "Deve de escolher uma opção no campo (" + feature + ") das características do produto";
+            }
+        }
+      }
+      return "OK"
+    }
+
     const submit = async () => {
 
         console.log(formData)
@@ -286,6 +309,9 @@ function CriarAnuncio() {
         let validEmail = await verifyEmail(formData.email);
         let validMobilePhone = await verifyMobilePhone(formData.telemovel);
         let validProductionDate = await verifyProductionDate(formData.data_producao);
+        let validFeature = await verifyFeatures(formData.features[0]);
+        let validSubFeature = await verifySubFeatures(formData.sub_features[0]);
+
         let validEAN = null;
         if(formData.search){
           validEAN = await verifyEAN(EAN);
@@ -300,34 +326,110 @@ function CriarAnuncio() {
         console.log(validMobilePhone);
         console.log(validProductionDate);
         console.log(validEAN);
+        console.log(validFeature);
+        console.log(validSubFeature);
         */
+        
+        //--------------TESTE--------------------
+
+        let ttP = {};
+        let ttA = {};
+
+        if(formData.features[0] != undefined){
+          for (let feature in formData.features[0]) {
+            ttA[feature] = formData.features[0][feature];
+            if(feature != "Local de Produção" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
+              ttP[feature] = formData.features[0][feature];
+            }
+          }
+        }
+
+        if(formData.sub_features[0] != undefined){
+          for (let feature in formData.sub_features[0]) {
+            ttA[feature] = formData.sub_features[0][feature];
+            if(feature != "Género" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
+              ttP[feature] = formData.sub_features[0][feature];
+            }
+          }
+        }
+
+        console.log(ttP)
+        console.log(ttA)
+
+
+
+        //if(EAN != null){
+          let params = {
+            EAN: "6843603708353",
+          };
+
+          let EANexist = await getAllFromDB("/products/", params);
+
+          if(EANexist == "There is no product in the database"){
+            //CRIA O PRODUTO
+            //CRIA O ANUNCIO
+          } else{
+            //verifica se os inputs são correspondentes (id_subsub, features, ...)
+              //Caso seja, só cria anuncio
+              //Caso não seja, dá um erro a dizer que o produto inserido não é válido e substitui pelo correto ??
+            //CRIA O ANUNCIO
+          } 
+
+          
+        //}
+
+        //------------------------------------------
 
         let product;
         let ad;
 
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK"  && validProductionDate == "OK" && (validEAN == "OK" || validEAN == null)){
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK"  && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" &&  (validEAN == "OK" || validEAN == null)){
 
             let featuresDBproduct = {}; 
-            let featuresDBad = {}; //Guardar todas as caracteristicas que são do anuncio na tabela ads(Estado, tamanho, ... ficam preenchidos)
+            let featuresDBad = {};
 
-            if(formData.sub_features != undefined){
-              featuresDBproduct = Object.assign({}, formData.features[0], formData.sub_features[0]); //Guardar as caracteristicas que são só do produto na tabela products(Estado, tamanho, ... ,ficam vazias)
-            }else{
-              featuresDBproduct = formData.features[0]
+            //adiciona as features
+            if(formData.features[0] != undefined){
+              for (let feature in formData.features[0]) {
+                featuresDBad[feature] = formData.features[0][feature];
+                if(feature != "Local de Produção" && feature != "Estado" && feature != "Garantia"){
+                  featuresDBproduct[feature] = formData.features[0][feature];
+                }
+              }
+            }
+
+            //adiciona as sub
+            //NAO ESTA A GUARDAR SUB NO FORM DATA (VERIFICAR)
+            if(formData.sub_features[0] != undefined){
+              for (let feature in formData.sub_features[0]) {
+                ttA[feature] = formData.sub_features[0][feature];
+                if(feature != "Género"){
+                  ttP[feature] = formData.sub_features[0][feature];
+                }
+              }
             }
 
             //verifica se o produto com o EAN dado existe
-            //Se existir e status for 1, quer dizer que já foi verificado então veriifica se os inputs são correspondentes (id_subsub, features, ...)
-              //Caso seja, só cria anuncio
-              //Caso não seja, dá um erro a dizer que o produto inserido não é válido e substitui pelo correto ??
-            //Se não existir, cria o produto
-            //Cria o anuncio
+            if(EAN != null){
+              let params = {
+                EAN: "6843603708353",
+              };
+
+              let EANexist = await getAllFromDB("/products/", params);
+
+              if(EANexist == "There is no product in the database"){
+                //CRIA O PRODUTO
+                //CRIA O ANUNCIO
+              } else{
+                //verifica se os inputs são correspondentes (id_subsub, features, ...)
+                  //Caso seja, só cria anuncio
+                  //Caso não seja, dá um erro a dizer que o produto inserido não é válido e substitui pelo correto ??
+                //CRIA O ANUNCIO
+              } 
+            }
 
 
-            //Duvidas:
-            //Se um produto não tiver sido verificado, o fornecedor pode criar outro?
-
-            
+            //ATÉ AQUI
 
             product = await postToDB("/products",{
               EAN: EAN,
@@ -343,8 +445,8 @@ function CriarAnuncio() {
             let idproduct;
 
             ad = await postToDB("/ads",{
-                title: formData.title,
-                price: formData.price,
+                title: formData.titulo,
+                price: formData.preco,
                 description: formData.descricao,
                 extraCharacteristics: featuresDBad,
                 supplier_id: idSupplier,
@@ -354,16 +456,22 @@ function CriarAnuncio() {
         }
 
         let text = "Não foi possível criar o produto\n";
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK"  && validProductionDate == "OK" && (validEAN == "OK" || validEAN == null)){
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && (validEAN == "OK" || validEAN == null)){
           text = "OK"
-        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK"  || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK"  || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
             if(validTitle != "OK" ){
               text += validTitle + "\n"
             }
             if(validPrice != "OK" ){
               text += validPrice + "\n"
             }
-            if (validDescription != "OK"){
+            if(validFeature != "OK" ){
+              text += validFeature + "\n"
+            }
+            if(validSubFeature != "OK" ){
+              text += validSubFeature + "\n"
+            }
+            if (validDescription != "OK" ){
               text += validDescription + "\n"
             }
             if(validCategory != "OK" ){
