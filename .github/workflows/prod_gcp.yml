@@ -1,4 +1,4 @@
-name: Deploy Production to GCP VMs
+name: Deploy Production to GCP VMs multiple Ubuntu LTS instances
 
 on:
   push:
@@ -9,23 +9,43 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        instance:
-          - "34.175.52.109"
-          - "34.175.101.154"
-          - "34.175.211.215"
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@master
+      - name: deploy to host-1
+        if: github.event.head_commit.message == 'deploy to host-1'
+        uses: appleboy/ssh-action@v0.3.0
         with:
-          host: ${{ matrix.instance }}
-          username: "leticiaemarcos200001"
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: "34.175.52.109"
+          username: ubuntu
+          key: ${{ secrets.HOST_1_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/leticiaemarcos200001/Projeto_Final_LTI
+            git pull origin prod
+            git checkout prod
+
+      - name: deploy to host-2
+        if: github.event.head_commit.message == 'deploy to host-2'
+        uses: appleboy/ssh-action@v0.3.0
+        with:
+          host: "34.175.101.154"
+          username: ubuntu
+          key: ${{ secrets.HOST_2_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/leticiaemarcos200001/Projeto_Final_LTI
+            git pull origin prod
+            git checkout prod
+
+      - name: deploy to host-3
+        if: github.event.head_commit.message == 'deploy to host-3'
+        uses: appleboy/ssh-action@v0.3.0
+        with:
+          host: "34.175.211.215"
+          username: ubuntu
+          key: ${{ secrets.HOST_3_SSH_PRIVATE_KEY }}
           port: 22
           script: |
             cd /home/leticiaemarcos200001/Projeto_Final_LTI
