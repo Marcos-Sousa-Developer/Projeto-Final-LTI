@@ -1,0 +1,33 @@
+name: Deploy Production to GCP VMs
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        instance:
+          - "34.175.52.109"
+          - "34.175.101.154"
+          - "34.175.211.215"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: <${{ matrix.instance }}-ip>
+          username: "leticiaemarcos200001"
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/leticiaemarcos200001/Projeto_Final_LTI
+            git pull origin prod
+            git checkout prod
