@@ -71,6 +71,9 @@
 # Yarn Integrity file
 */.yarn-integrity
 
-
 # next.js build output
 .next
+
+#ignore docker files
+docker-compose.yaml
+Dockerfile

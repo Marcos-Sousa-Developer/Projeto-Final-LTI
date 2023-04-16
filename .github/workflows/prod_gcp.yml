@@ -1,4 +1,4 @@
-name: Deploy Production to GCP VMs multiple Ubuntu LTS instances
+name: Deploy Production to GCP (multiple VMs)  Ubuntu LTS instances
 on:
   push:
     branches:
