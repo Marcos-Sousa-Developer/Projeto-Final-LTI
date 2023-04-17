@@ -125,12 +125,12 @@ const deleteAdByID = async function (req, res) {
 const insertAd = async function (req, res) {
 
     const data = [req.query.title, req.query.description, req.query.email, 
-                req.query.mobile_number, req.query.extraCharacteristics, req.query.status,
+                req.query.mobile_number, req.query.extraCharacteristic, req.query.status,
                 req.query.price, req.query.supplier_id, req.query.product_id, 
                 req.query.created_at];
 
     const statement = "INSERT INTO ads (title, description, email, mobile_number, " +
-                    "extraCharacteristics, status, price, supplier_id, product_id, " +
+                    "extraCharacteristic, status, price, supplier_id, product_id, " +
                     "created_at) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
