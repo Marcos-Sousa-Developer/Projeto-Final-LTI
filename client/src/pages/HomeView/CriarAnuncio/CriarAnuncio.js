@@ -386,7 +386,7 @@ function CriarAnuncio() {
             let idProduct = prod.insertId
 
             //CRIA O ANUNCIO
-            anu = await postToDB("/ads",{  //Verificar server.js 
+            anu = await postToDB("/ads",{ 
               title: formData.titulo,
               price: formData.preco,
               description: formData.descricao,

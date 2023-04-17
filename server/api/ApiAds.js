@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router(); 
-const productsForSellController = require('../controllers/AdsController');
+const adsController = require('../controllers/AdsController');
 
-//Get all admins
-router.get('/', productsForSellController.getAllorSomeAds)
+//Get all ads
+router.get('/', adsController.getAllorSomeAds)
+
+//Add ad
+router.post('/', adsController.insertAd)
 
 module.exports = router

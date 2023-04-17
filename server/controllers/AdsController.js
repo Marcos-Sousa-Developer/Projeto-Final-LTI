@@ -74,4 +74,28 @@ const getAllorSomeAds = async function (req, res) {
     return res.send(result)
 }
 
-module.exports = {getAllorSomeAds}
+/**
+ * Async function to insert ad and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const insertAd = async function (req, res) {
+
+    const data = [req.query.title, req.query.description, req.query.extraCharacteristics, 
+                  req.query.price, req.query.supplier_id, req.query.product_id];
+
+
+    const statement = "INSERT INTO ads (title, description, extraCharacteristics, " +
+                    "price, supplier_id, product_id) VALUES ?";
+
+    let result = await dbConnection(statement, [data]);
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to insert this ad");
+    }
+
+    return res.send(result);
+}
+
+module.exports = {getAllorSomeAds, insertAd}
