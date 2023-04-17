@@ -170,6 +170,10 @@ const registerUser = async (req,res) => {
  * @params request from client
  * @return userType
  */
+
+const userType = (req, res) => { 
+  return res.send("admin"); //Trocar para consumer se quiser ir 
+}
 const getUserType = async (req, res) => { 
 
   try {
@@ -190,6 +194,7 @@ const getUserType = async (req, res) => {
   catch(error) {
       return res.send(null);
 }
+
 }
 
 module.exports = {signIn, registerUser, getUserType}

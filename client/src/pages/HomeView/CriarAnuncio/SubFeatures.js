@@ -1,12 +1,8 @@
-import React from 'react'
+import React from 'react';
+
+import SubFeatureInput from './SubFeatureInput';
 
 const SubFeatures = ({formData, setFormData}) => {
-
-    const handleSubFeaturesChange = (index, field, value) => {
-        const updatedSubFeatures = [...formData.sub_features];
-        updatedSubFeatures[index][field] = value;
-        setFormData({ ...formData, sub_features: updatedSubFeatures });
-    };
 
     const subcategoria = formData.subcategoria;
     const subsubcategoria = formData.subsubcategoria;
@@ -15,22 +11,7 @@ const SubFeatures = ({formData, setFormData}) => {
         <div className='app__anuncio_sub_features'>
             {/*Validade da alimentação dos animais*/}
                 {subsubcategoria === "Alimentação" &&
-                    <>
-                        <div className='inputField'>
-                            <p>Validade:</p>
-                            <input 
-                                type="date"
-                                value={formData.sub_features.find(sub_feature => sub_feature.Validade)?.Validade || ''}
-                                onChange={(e) => {
-                                  const updatedSubFeature = {...formData.sub_features[0]};
-                                  updatedSubFeature.Validade = e.target.value;
-                                  const updatedSubFeatures = [...formData.sub_features];
-                                  updatedSubFeatures[0] = updatedSubFeature;
-                                  setFormData({ ...formData, sub_features: updatedSubFeatures });
-                                }}
-                            ></input>
-                        </div>
-                    </> 
+                    <SubFeatureInput typeInput="date" featureName="Validade" featureTitle="Validade" formData={formData} setFormData={setFormData}></SubFeatureInput>
                 }
             {/*Género do calçado e roupas dos bébés*/}
                 {subcategoria === "Calçado" || subcategoria === "Roupinhas" ?
@@ -59,53 +40,14 @@ const SubFeatures = ({formData, setFormData}) => {
             {/*Medidas dos móveis*/}
                 {subcategoria === "Móveis" &&
                     <>
-                        <div className='inputField'>
-                            <p>Largura:</p>
-                            <input 
-                                type="number"
-                                value={formData.sub_features.find(sub_feature => sub_feature.Largura)?.Largura || ''}
-                                onChange={(e) => {
-                                  const updatedSubFeature = {...formData.sub_features[0]};
-                                  updatedSubFeature.Largura = e.target.value;
-                                  const updatedSubFeatures = [...formData.sub_features];
-                                  updatedSubFeatures[0] = updatedSubFeature;
-                                  setFormData({ ...formData, sub_features: updatedSubFeatures });
-                                }}
-                            ></input>
-                        </div>
-                        <div className='inputField'>
-                            <p>Comprimento:</p>
-                            <input 
-                                type="number"
-                                value={formData.sub_features.find(sub_feature => sub_feature.Comprimento)?.Comprimento || ''}
-                                onChange={(e) => {
-                                  const updatedSubFeature = {...formData.sub_features[0]};
-                                  updatedSubFeature.Comprimento = e.target.value;
-                                  const updatedSubFeatures = [...formData.sub_features];
-                                  updatedSubFeatures[0] = updatedSubFeature;
-                                  setFormData({ ...formData, sub_features: updatedSubFeatures });
-                                }}
-                            ></input>
-                        </div>
+                        <SubFeatureInput typeInput="number" featureName="Largura" featureTitle="Largura" formData={formData} setFormData={setFormData}></SubFeatureInput>
+                        <SubFeatureInput typeInput="number" featureName="Comprimento" featureTitle="Comprimento" formData={formData} setFormData={setFormData}></SubFeatureInput>
                     </>
                 }
             {/*Especificações dos computadores*/}
                 {subsubcategoria === "Computadores" &&
                     <>
-                        <div className='inputField'>
-                            <p>Processador:</p>
-                            <input 
-                                type='text'
-                                value={formData.sub_features.find(sub_feature => sub_feature.Processador)?.Processador || ''}
-                                onChange={(e) => {
-                                  const updatedSubFeature = {...formData.sub_features[0]};
-                                  updatedSubFeature.Processador = e.target.value;
-                                  const updatedSubFeatures = [...formData.sub_features];
-                                  updatedSubFeatures[0] = updatedSubFeature;
-                                  setFormData({ ...formData, sub_features: updatedSubFeatures });
-                                }}
-                            ></input>
-                        </div>
+                        <SubFeatureInput typeInput="text" featureName="Processador" featureTitle="Processador" formData={formData} setFormData={setFormData}></SubFeatureInput>
                         <div className='inputField'>
                             <p>Memória RAM:</p>
                             <select  
@@ -239,22 +181,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 }
             {/*Especificações do Software*/}
                 {subsubcategoria === "Software"  &&
-                    <>
-                        <div className='inputField'>
-                            <p>Tipo de software:</p>
-                            <input
-                                type="text"
-                                value={formData.sub_features.find(sub_feature => sub_feature.Validade)?.Validade || ''}
-                                onChange={(e) => {
-                                  const updatedSubFeature = {...formData.sub_features[0]};
-                                  updatedSubFeature.Validade = e.target.value;
-                                  const updatedSubFeatures = [...formData.sub_features];
-                                  updatedSubFeatures[0] = updatedSubFeature;
-                                  setFormData({ ...formData, sub_features: updatedSubFeatures });
-                                }}                            
-                            ></input>
-                        </div>
-                    </>
+                    <SubFeatureInput typeInput="text" featureName="SoftwareType" featureTitle="SoftwareType" formData={formData} setFormData={setFormData}></SubFeatureInput>
                 }
             {/*Especificações do Armazenamento, Discos Externos, Internos, Servidores e Computadores*/}
                 {subsubcategoria === "Armazenamento" || subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos" || subsubcategoria === "Servidores" || subsubcategoria === "Computadores" ?
@@ -368,22 +295,7 @@ const SubFeatures = ({formData, setFormData}) => {
             }
             {/*Especificações do Calçado*/}
             {subcategoria === "Calçado"  &&
-                <>
-                    <div className='inputField'>
-                        <p>Tamanho:</p>
-                        <input
-                                type="number"
-                                value={formData.sub_features.find(sub_feature => sub_feature.ShowSize)?.ShowSize || ''}
-                                onChange={(e) => {
-                                  const updatedSubFeature = {...formData.sub_features[0]};
-                                  updatedSubFeature.ShowSize = e.target.value;
-                                  const updatedSubFeatures = [...formData.sub_features];
-                                  updatedSubFeatures[0] = updatedSubFeature;
-                                  setFormData({ ...formData, sub_features: updatedSubFeatures });
-                                }}                            
-                            ></input>
-                    </div>
-                </>
+                <SubFeatureInput typeInput="number" featureName="ShoeSize" featureTitle="ShoeSize" formData={formData} setFormData={setFormData}></SubFeatureInput>
             }
         </div>
     )

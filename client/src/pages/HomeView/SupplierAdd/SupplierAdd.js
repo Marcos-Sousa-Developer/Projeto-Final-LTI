@@ -1,9 +1,9 @@
 import React from 'react'
 
 import {NavbarSupplier, Footer, SubHeading, Searchbar} from '../../../components/index';
-import './SupplierPage.css';
+import './SupplierAdd.css';
 
-function SupplierPage() {
+function SupplierAdd() {
 
   return (
     <>
@@ -12,8 +12,8 @@ function SupplierPage() {
         <SubHeading title="Home"/>
         <div className='app__SupplierPage_options'>
               <ul>
-                <li><span></span><a className='option active app__text_effect' href="#">Home</a></li>
-                <li><span></span><a className='option app__text_effect' href="#">Anúncios</a></li>
+                <li><span></span><a className='option app__text_effect' href="#">Home</a></li>
+                <li><span></span><a className='option active app__text_effect' href="#">Anúncios</a></li>
                 <li><a className='app__text_effect' href="#">Vendas e Ordens</a></li>
               </ul>
         </div>
@@ -67,14 +67,11 @@ function SupplierPage() {
 
 
     </div>
-
-
-
-
+    
     <Footer></Footer>
     </>
   );
 
 }
 
-export default SupplierPage;
+export default SupplierAdd;

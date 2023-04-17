@@ -84,13 +84,7 @@ const ProductInfo = ({ formData, setFormData }) => {
                     <p>Email</p>
                     <input type='email' required onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
                 </div> 
-            </div>
-            <div>
-                <p>Unidades de Produção</p>
-                <div>
-
-                </div>
-            </div>           
+            </div>         
         </div>
     )
 }
