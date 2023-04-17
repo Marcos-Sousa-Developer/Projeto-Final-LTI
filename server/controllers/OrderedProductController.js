@@ -72,7 +72,7 @@ const getAllorSomeOrderedProducts = async function (req, res) {
     if (result === "error") {
         return res.status(500).json("Not possible to get all ordered products");
     } else if (result.length < 1) {
-        return res.send("There is no ordered products in the database");
+        return res.send("There is no ordered product in the database");
     }
     
     return res.send(result)

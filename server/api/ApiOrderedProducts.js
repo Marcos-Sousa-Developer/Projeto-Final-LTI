@@ -11,5 +11,4 @@ router.get('/:id', orderedProductController.getOrderedProductByID)
 //Add ordered product
 router.post('/', orderedProductController.insertOrderedProduct)
 
-
 module.exports = router

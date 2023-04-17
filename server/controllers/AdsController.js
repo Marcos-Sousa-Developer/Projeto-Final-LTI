@@ -68,7 +68,7 @@ const getAllorSomeAds = async function (req, res) {
     if (result === "error") {
         return res.status(500).json("Not possible to get all ads");
     } else if (result.length < 1) {
-        return res.send("There is no ads in the database");
+        return res.send("There is no ad in the database");
     }
     
     return res.send(result)
