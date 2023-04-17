@@ -22,6 +22,7 @@ const apiRouter = express.Router();
 //apiRouter.use(authenticateUser)
 
 apiRouter.use('/admins' , require('./api/ApiAdmins'))
+apiRouter.use('/ads' , require('./api/ApiAds'))
 apiRouter.use('/categories' , require('./api/ApiCategories'))
 apiRouter.use('/consumers' , require('./api/ApiConsumers'))
 apiRouter.use('/orderedProducts' , require('./api/ApiOrderedProducts'))
