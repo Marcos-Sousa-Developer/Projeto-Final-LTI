@@ -5,5 +5,11 @@ const orderedProductController = require('../controllers/OrderedProductControlle
 //Get all products ordered
 router.get('/', orderedProductController.getAllorSomeOrderedProducts)
 
+//Get ordered product by id
+router.get('/:id', orderedProductController.getOrderedProductByID)
+
+//Add ordered product
+router.post('/', orderedProductController.insertOrderedProduct)
+
 
 module.exports = router

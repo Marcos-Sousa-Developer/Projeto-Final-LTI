@@ -78,4 +78,52 @@ const getAllorSomeOrderedProducts = async function (req, res) {
     return res.send(result)
 }
 
-module.exports = {getAllorSomeOrderedProducts}
+/**
+ * Async function to get ordered product by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const getOrderedProductByID = async function (req, res) { 
+
+    const statement = "SELECT * FROM orderedProducts WHERE id = " + req.params.id
+
+    let result = await dbConnection(statement)  
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to get ordered product with id " + req.params.id);
+    } else if (result.length < 1) {
+        return res.send("Ordered product with id " + req.params.id + " does not exist in the database");
+    }
+    
+    return res.send(result)
+}
+
+/**
+ * Async function to insert consumer and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const insertOrderedProduct = async function (req, res) {
+
+    const data = [req.query.order_id, req.query.product_EAN, req.query.product_category, 
+                req.query.product_subcategory, req.query.product_subsubcategory, req.query.product_owner_id, 
+                req.query.product_buyer_id, req.query.product_location, req.query.buyer_location, 
+                req.query.orderDistance_km, req.query.sameLocation, req.query.price, req.query.created_at];
+
+    const statement = "INSERT INTO orderedProducts (order_id, product_EAN, product_category, " +    
+                    "product_subcategory, product_subsubcategory, product_owner_id, " +
+                    "product_buyer_id, product_location, buyer_location, orderDistance_km, sameLocation, " +
+                    "price, created_at) VALUES ?";
+ 
+    let result = await dbConnection(statement, [data]);
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to insert this ordered product");
+    }
+
+    return res.send("Ordered product has been created");
+}
+
+module.exports = {getAllorSomeOrderedProducts, getOrderedProductByID, insertOrderedProduct}
