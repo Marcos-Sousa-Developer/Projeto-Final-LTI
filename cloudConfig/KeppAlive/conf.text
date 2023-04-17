@@ -1,0 +1,17 @@
+--KEEP ALIVE CONFIGURATIONS
+
+sudo apt-get install keepalived
+
+nano keepalived.conf 
+
+-Look for keepAlive configurations-
+
+sudo useradd keepalived_script
+
+sudo systemctl reload keepalived
+
+sudo systemctl start keepalived
+
+sudo systemctl restart keepalived
+
+sudo systemctl status keepalived

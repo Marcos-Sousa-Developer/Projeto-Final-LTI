@@ -1,0 +1,31 @@
+# node version 
+FROM node:18.13.0  
+
+# Work from projeto_final_lti/client folder
+WORKDIR /app/client
+
+RUN apt-get update 
+
+#copy package.json file
+COPY package.json ./
+
+#copy yarn.lock file
+COPY yarn.lock ./
+
+#copy package-lock.json file
+COPY package-lock.json ./
+
+# install dependencies 
+RUN yarn install --production=true --frozen-lockfile --silent
+
+# copy all to projeto_final_lti/client
+COPY . ./
+
+# production mode
+RUN yarn build
+
+# install dependencies
+CMD ["yarn", "start"]
+
+EXPOSE 3000
+
