@@ -24,6 +24,7 @@ function CriarAnuncio() {
     const [idUser, setIDUser] = useState(null) //Ir buscar às cookies o ID do user       
 
     const [formData, setFormData] = useState({
+        EAN: "",
         titulo: "",
         preco: 0.00,
         descricao: "",
