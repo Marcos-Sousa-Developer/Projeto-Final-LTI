@@ -53,8 +53,6 @@ const getAllorSomeSuppliers = async function (req, res) {
         }
     }
 
-    console.log(statement)
-
     let result = await dbConnection(statement)  
 
     if (result.includes("error")) {

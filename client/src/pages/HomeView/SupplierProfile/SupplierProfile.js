@@ -23,7 +23,7 @@ function SupplierProfile() {
 
   async function getSupplier(){
 
-    let supplier = await getFromDB("/suppliers", {uid: cookies.userSession})
+    let supplier = await getFromDB("/api/suppliers", {uid: cookies.userSession})
 
     console.log(supplier)
 
@@ -72,7 +72,11 @@ function SupplierProfile() {
       //tem de ter um @
       
       if(email != null && email != ""){
-        if(!email.includes("@")){
+        let i = email.indexOf("@")
+        if(i == -1 || i == 0){
+          return "Deve de inserir um email válido";
+        }
+        if(email[i+1] == undefined){
           return "Deve de inserir um email válido";
         }
       }
@@ -103,6 +107,23 @@ function SupplierProfile() {
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
       //podem ser null
       //9 algarismos ?? depende do código do pais
+
+      if(mobile_number != null && mobile_number != ""){
+        if(mobile_number.length != 9){
+          return "O número de telemóvel deve ter 9 dígitos";
+        }
+        for (var i = 0; i < mobile_number.length; i++) {
+          var digit = parseInt(mobile_number[i], 10);
+          if (isNaN(digit)) {
+            // O número de telemóvel deve conter apenas dígitos numéricos
+            return "O número de telemóvel deve conter apenas dígitos numéricos";
+          }
+        }
+        if(mobile_number[0] != "9"){
+          //O número de telemóvel deve de começar pelo dígito 9
+          return "O número de telemóvel deve de começar pelo dígito 9";
+        }
+      }
       return "OK"
   }
 
@@ -124,7 +145,7 @@ function SupplierProfile() {
 
     if(!((name == null || name == "") && (email == null || email == "") && (nif == null || nif == "") && (mobile_number == null || mobile_number == "") && (address == null || address == ""))){
       if(validName == "OK" && validEmail == "OK" && validNif == "OK" && validMobileNumber == "OK" && validAddress == "OK" ){
-        supplierUpdated = await putToDB("/suppliers/" + id,{
+        supplierUpdated = await putToDB("/api/suppliers/" + id,{
           name: name,
           email: email,
           nif: nif,
