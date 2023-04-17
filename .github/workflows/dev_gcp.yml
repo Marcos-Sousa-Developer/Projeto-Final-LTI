@@ -15,7 +15,7 @@ jobs:
       - name: deploy to dev instance
         uses: appleboy/ssh-action@master
         with:
-          host: "34.175.165.242"
+          host: "34.155.197.74"
           username: leticiaemarcos200001
           key: ${{ secrets.HOST_DEV_SSH_PRIVATE_KEY }}
           port: 22
