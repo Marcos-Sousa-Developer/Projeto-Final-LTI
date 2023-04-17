@@ -1,0 +1,142 @@
+@import "../../../index.scss";
+
+.app__SupplierPage {
+    max-width: 1650px;
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+    padding-top: 1%;
+
+    &_options{
+        
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        li {
+            float: left;
+            padding-right: 10px;
+            padding-bottom: 10px;
+        }
+        
+        li:last-child {
+            border-right: none;
+        }
+        
+        li a {
+            display: block;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        li a:hover{
+            color: rgb(0, 0, 0);
+        }
+    }
+
+    &_boxes{
+        //padding: 3rem 1.5rem;
+        width: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 3fr 1.5fr;
+    }
+
+    &_boxesEsquerda2{
+        margin-top: 1.75rem;
+        
+    }
+
+    &_boxesEsquerda1Est{
+        padding: 6rem 0.5rem;
+        box-sizing: border-box;
+        margin-left: 0.25rem;
+        background: #FFFFFF;
+        border: 3px solid #EEEEEE;
+    }
+
+    &_boxesEsquerda1Ult{
+        padding: 6rem 0.5rem;
+        box-sizing: border-box;
+        margin-left: 0.25rem;
+        background: #FFFFFF;
+        border: 3px solid #EEEEEE;
+    }
+
+    &_boxesDireita{
+        margin-left: 1.75rem;
+        //margin-bottom: 2.5rem;
+    }
+
+    &_boxesDireita1Vend{
+        padding: 9rem 0.5rem;
+        box-sizing: border-box;
+        margin-left: 0.25rem;
+        background: #FFFFFF;
+        border: 3px solid #EEEEEE; 
+    }
+
+    &_boxesDireita1Nmr{
+        margin: 1rem;
+        padding: 2rem 2rem;
+        text-align: center;
+    }
+
+    &_boxesDireita1Nmr1{
+        display: inline-block;
+        padding: 0rem 1rem;
+        vertical-align: middle;
+
+        
+        mark.orange {
+            color:#EB5C1F;
+            font-size: 30px;
+            font-family: 'Inter';
+            font-weight: 600;
+            line-height: 29px;
+        }
+    }
+
+    &_boxesDireita1Nmr2{
+        display: inline-block;
+        padding:  0rem 1rem;
+        vertical-align: middle;
+
+        mark.orange {
+            color:#EB5C1F;
+            font-size: 30px;
+            font-family: 'Inter';
+            font-weight: 600;
+            line-height: 29px;
+        }
+    }
+}
+
+a.option{
+    border-right: 3px solid $light_gray; 
+    padding-right: 10px;
+}
+
+.active {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+
+    .app__SupplierPage {
+
+        &_box{
+
+            grid-template-columns: 1fr;
+            gap: 0;
+
+            &_div{
+                    margin: 0rem 1rem 0rem 1rem;
+            }
+        }
+    }
+}
