@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
+import { FiMail, FiLock, FiArrowLeft, FiUser } from 'react-icons/fi';
 import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -54,12 +54,11 @@ const SignUpC = () => {
             <Link to='/'><FiArrowLeft></FiArrowLeft></Link>
             <h1 className=''>Sign Up</h1>
                 <div className='app__SignUp_content'>
-                        <div>
-                            <Link to="/signin">Iniciar sessão</Link>
-                            {!showExtraInputs && (
-                                <p>Que utilizador vais ser?</p>
-                            )}
-                        </div>
+                    <div>
+                        {!showExtraInputs && (
+                            <p style={{textAlign:'center'}}>Que utilizador vais ser?</p>
+                        )}
+                    </div>
                     <div className='app__SignUp_userType'>
                         <input 
                             type="radio" 
@@ -89,6 +88,7 @@ const SignUpC = () => {
                                 <div>
                                     <p>Name</p>
                                     <div className='app__SignUp_box11'>
+                                        <FiUser fontSize={22} color='black' aria-hidden="true"></FiUser>
                                         <input
                                             type="text"
                                             required
@@ -99,7 +99,7 @@ const SignUpC = () => {
                                 <div>
                                     <p>E-mail</p>
                                     <div className='app__SignUp_box11'>
-                                        <FiMail fontSize={22} color='black'  aria-hidden="true"/>
+                                        <FiMail fontSize={22} color='black' aria-hidden="true"/>
                                         <input
                                             type="text"
                                             required
@@ -110,7 +110,7 @@ const SignUpC = () => {
                                 <div>
                                     <p>Password</p>
                                     <div className='app__SignUp_box11'>
-                                        <FiLock fontSize={22} color='black'  aria-hidden="true"/>
+                                        <FiLock fontSize={22} color='black' aria-hidden="true"/>
                                         <input
                                             type="password"
                                             required
@@ -147,6 +147,9 @@ const SignUpC = () => {
                         </div>      
                     </div>    
                     )}
+                    <div>
+                        <Link to="/signin" className='app__SignUp_content_signIn'>Iniciar sessão</Link>
+                    </div>
                 </div>
         </div>
     </>

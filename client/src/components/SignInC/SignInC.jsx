@@ -123,13 +123,12 @@ const SignInC = () => {
                                     <button className='main__action_btn' type='submit'>Login</button>
                                 )
                             }
-                            <div className='register'>Não tem conta? Registe-se <span><Link to="/signup" style={{color: "coral"}}>aqui</Link></span>.</div>
+                            <div className='register'>Não tem conta? Registe-se <span><Link to="/signup" >aqui</Link></span>.</div>
                             </div>
                         </form>
                     </div>
                     <div className='app__SignIn_box2'>
                         <p>or</p>    
-
                     </div>
                     <div className='app__SignIn_box3'>
                         <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google</p></button>
