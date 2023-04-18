@@ -15,3 +15,5 @@ sudo systemctl start keepalived
 sudo systemctl restart keepalived
 
 sudo systemctl status keepalived
+
+tcpdump -i <interface> -nn vrrp

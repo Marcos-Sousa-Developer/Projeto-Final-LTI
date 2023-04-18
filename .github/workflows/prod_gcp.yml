@@ -23,13 +23,13 @@ jobs:
             cd /home/leticiaemarcos200001/Projeto_Final_LTI
             git stash
             git config pull.rebase false
-            git pull origin prod
             git checkout prod
             git pull origin prod
             mv client/.env.prod client/.env
             mv server/.env.prod server/.env
             mv docker-compose.prod.yaml docker-compose.yaml 
             cd client
+            sudo npm install --global yarn
             yarn install
             cd ..
             cd server
@@ -48,13 +48,13 @@ jobs:
             cd /home/leticiaemarcos200001/Projeto_Final_LTI
             git stash
             git config pull.rebase false
-            git pull origin prod
             git checkout prod
             git pull origin prod
             mv client/.env.prod client/.env
             mv server/.env.prod server/.env
             mv docker-compose.prod.yaml docker-compose.yaml 
             cd client
+            sudo npm install --global yarn
             yarn install
             cd ..
             cd server
@@ -73,13 +73,13 @@ jobs:
             cd /home/leticiaemarcos200001/Projeto_Final_LTI
             git stash
             git config pull.rebase false
-            git pull origin prod
             git checkout prod
             git pull origin prod
             mv client/.env.prod client/.env
             mv server/.env.prod server/.env
             mv docker-compose.prod.yaml docker-compose.yaml 
             cd client
+            sudo npm install --global yarn
             yarn install
             cd ..
             cd server
