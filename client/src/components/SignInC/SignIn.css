@@ -204,6 +204,16 @@ img, picture {
   margin: 0;
   font-size: 14px;
 }
+.register span {
+  transition: all 50ms ease-in-out;
+}
+.register span > * {
+  color: rgba(235, 92, 31, 0.8);
+}
+.register span:hover {
+  color: #EB5C1F;
+  border-bottom: 3px solid rgba(235, 92, 31, 0.8);
+}
 
 .ButtonGoogle, .ButtonGoogle p {
   background-color: #DB4437;

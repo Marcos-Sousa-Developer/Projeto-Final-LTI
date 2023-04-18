@@ -12,23 +12,7 @@ import { Navbar, Footer } from '../../../components/index';
 import { ProductSwiper } from './ProductSwiper';
 import './ProductPage.css';
 
-
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-
-import { FreeMode, Navigation, Thumbs } from "swiper";
-
 const ProductPage = () => {
-
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-
 
   //---------------------------Data from the product--------------------------
 

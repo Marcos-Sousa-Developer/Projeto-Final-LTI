@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 
-import { FiArrowLeft, FiArrowRight} from 'react-icons/fi';
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -25,7 +23,7 @@ export const ProductSwiper = ({src}) => {
                 zoom={true}
                 loop={true}
                 spaceBetween={10}
-                thumbs={{ swiper: thumbsSwiper }}
+                thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
                 modules={[Zoom, FreeMode, Navigation, Thumbs]}
                 className="mySwiper2"
             >
