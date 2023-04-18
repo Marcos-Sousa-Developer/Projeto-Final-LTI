@@ -5,7 +5,9 @@ services:
 
   server:
     #catch docker file in server directory
-    build: ./server/Dockerfile.prod
+    build:
+      context: ./server
+      dockerfile: Dockerfile.prod
     #container name of server
     container_name: GreaterGoods_server
     #ports
@@ -17,7 +19,9 @@ services:
 
   client:
     #catch docker file in client directory
-    build: ./client/Dockerfile.prod
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
     #container name of client
     container_name: GreaterGoods_client
     #ports

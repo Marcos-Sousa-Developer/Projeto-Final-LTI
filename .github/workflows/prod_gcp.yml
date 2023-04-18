@@ -45,7 +45,9 @@ jobs:
           port: 22
           script: |
             cd /home/leticiaemarcos200001/Projeto_Final_LTI
-            git stash .
+            git stash
+            git config pull.rebase false
+            git pull origin prod
             git checkout prod
             git pull origin prod
             mv client/.env.prod client/.env
