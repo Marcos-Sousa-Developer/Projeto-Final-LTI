@@ -1,14 +1,27 @@
+#!/bin/bash
+set -e
 
-# Unassign peer's IP aliases. Try it until it's possible.
-gcloud compute instances delete-access-config load-balancer-1 --zone=europe-southwest1-a > /etc/keepalived/takeover.log 2>&1 
+if  /usr/bin/pgrep nginx > /dev/null
+then
+    exit 0
+else
 
-sleep 1
+    ip=$(curl -s ifconfig.me)
 
-# Assign IP aliases to me because now I am the MASTER!
-until gcloud compute instances add-access-config load-balancer-2 --zone=europe-southwest1-a --address=34.175.17.77 >> /etc/keepalived/takeover.log 2>&1; do
-echo "Instance not accessible during takeover. Retrying in 5 seconds..."
+    if [ "$ip" == "34.175.17.77" ]; then
 
-sleep 1 done
+        # Unassign peer's IP aliases. Try it until it's possible.
+        gcloud compute instances delete-access-config load-balancer-1 --zone=europe-southwest1-a --access-config-name='external-nat' --quiet >> /etc/keepalived/takeover.log 2>&1 &
+        sleep 5
 
-echo "I became the MASTER at: $(date)" >> /etc/keepalived/takeover.log
+        # Assign IP aliases to me because now I am the MASTER!
+        gcloud compute instances add-access-config load-balancer-2 --zone=europe-southwest1-a --access-config-name=external-nat --address=34.175.17.77 --quiet >> /etc/keepalived/takeover.log 2>&1 &
+        sleep 5
 
+        exit 1
+    else
+        echo "Port already changed" >> /etc/keepalived/takeover.log
+        
+        exit 1
+    fi
+fi

@@ -17,3 +17,7 @@ sudo systemctl restart keepalived
 sudo systemctl status keepalived
 
 tcpdump -i <interface> -nn vrrp
+
+sudo chmod +x /etc/keepalived/takeover.sh
+
+ip addr show dev ens4

@@ -12,13 +12,18 @@ create config file
 
 -Look for nginx configurations-
 
+sudo nginx -t
+
 sudo systemctl reload nginx
 
 sudo systemctl start nginx
 
-sudo systemctl restart nginx
+sudo systemctl reload nginx
 
 sudo systemctl status nginx
+
+sudo tail -f /var/log/nginx/access.log
+sudo tail -f /var/log/nginx/error.log
 
 
 

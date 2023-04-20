@@ -1,6 +1,12 @@
 # node version 
 FROM node:18.13.0  
 
+# Install serve globally
+RUN npm install -g serve@14.2.0
+
+# Install xsel
+RUN apt-get update && apt-get install -y xsel
+
 # Work from projeto_final_lti/client folder
 WORKDIR /app/client
 
@@ -16,7 +22,7 @@ COPY yarn.lock ./
 COPY package-lock.json ./
 
 # install dependencies 
-RUN yarn install --production=true --frozen-lockfile --silent
+RUN yarn install --frozen-lockfile --silent
 
 # copy all to projeto_final_lti/client
 COPY . ./
@@ -25,7 +31,7 @@ COPY . ./
 RUN yarn build
 
 # install dependencies
-CMD ["npx", "serve", "-s", "build"]
+CMD ["npx", "serve", "-s", "build", "--listen", "3000", "-n"]
 
 EXPOSE 3000
 
