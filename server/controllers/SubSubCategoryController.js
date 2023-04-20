@@ -93,9 +93,10 @@ const deleteSubSubCategoryByID = async function (req, res) {
  */
 const insertSubSubCategory = async function (req, res) {
 
-    const data = [req.query.name, req.query.characteristics, req.query.id_category];
+    const data = [req.query.name, req.query.characteristics, req.query.id_subcategory];
 
-    const statement = "INSERT INTO subsubcategories (name, characteristics, id_subcategory) VALUES ?";
+    const statement = "INSERT INTO subsubcategories (name, characteristics, id_subcategory) " +
+                    " VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

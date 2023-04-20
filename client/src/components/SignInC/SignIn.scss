@@ -107,6 +107,19 @@
 .register{
     margin: 0;
     font-size: $smaller_font;
+
+    span{
+        transition: all 50ms ease-in-out;
+
+        &>*{
+            color: rgba($color: $orange, $alpha: .8);
+        }
+
+        &:hover{
+            color: $orange;
+            border-bottom: 3px solid rgba($color: $orange, $alpha: .8);
+        }
+    }
 }
 
 .ButtonGoogle, .ButtonGoogle p{

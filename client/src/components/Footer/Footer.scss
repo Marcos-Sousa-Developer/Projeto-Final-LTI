@@ -15,8 +15,6 @@ body{
 }
 
 .app__support{
-    //justify-self: center;
-
     h5 {
         margin-bottom: .75rem;
         font-size: $normal_font;
@@ -36,7 +34,7 @@ body{
 
     &3 p{
         margin: 1.5rem 0 0 0;
-        font-size: 0.75rem;
+        font-size: $small-font;
     }
 }
 
@@ -52,10 +50,16 @@ body{
 @media screen and (max-width: 1000px) {
     .app__footer{
         padding: 1rem;
+    }
 
+    .app__support{
         h5 {
-            font-size: 1.25rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: .5rem;
+            font-size: $smaller_font;
+        }
+    
+        &2 >*, &3 p{
+            font-size: $small-font;
         }
     }
 }

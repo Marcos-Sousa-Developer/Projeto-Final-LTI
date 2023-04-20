@@ -1,0 +1,18 @@
+.app__modal_overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsla(0, 0%, 9%, 0.863);
+    z-index: 1000;
+}
+
+.app__modal_content{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem 4rem;
+    z-index: 1000;
+}

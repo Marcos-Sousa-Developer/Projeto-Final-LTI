@@ -3,7 +3,7 @@
 // Variables
 
 $transition-sidebar: all 350ms ease;
-$overlay-bg:          hsla(0, 0%, 9%, 0.863);
+$overlay-bg:        hsla(0, 0%, 9%, 0.863);
 
 // Button
 
@@ -124,6 +124,20 @@ $overlay-bg:          hsla(0, 0%, 9%, 0.863);
         max-height: 400px;
         margin-left: 1rem;
         transition: $transition-sidebar;
+      }
+    }
+
+    &_subcategory-title{
+      font-weight: 500;
+      color: black;
+      transition: color 150ms ease-in;
+      
+      span{
+        font-size: $smaller_font;
+      }
+
+      &:hover{
+        color: rgba($color: $orange, $alpha: .8)
       }
     }
   }

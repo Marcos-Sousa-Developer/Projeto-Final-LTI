@@ -211,4 +211,15 @@ img, picture {
   max-height: 400px;
   margin-left: 1rem;
   transition: all 350ms ease;
+}
+.app__sidebar_navs_subcategory-title {
+  font-weight: 500;
+  color: black;
+  transition: color 150ms ease-in;
+}
+.app__sidebar_navs_subcategory-title span {
+  font-size: 14px;
+}
+.app__sidebar_navs_subcategory-title:hover {
+  color: rgba(235, 92, 31, 0.8);
 }/*# sourceMappingURL=Sidebar.css.map */

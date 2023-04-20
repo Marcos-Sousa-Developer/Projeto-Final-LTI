@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import product1 from "../../../assets/testproducts/Iphone.png";
 import product2 from "../../../assets/testproducts/cannon.png";
@@ -12,23 +12,7 @@ import { Navbar, Footer } from '../../../components/index';
 import { ProductSwiper } from './ProductSwiper';
 import './ProductPage.css';
 
-
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-
-import { FreeMode, Navigation, Thumbs } from "swiper";
-
 const ProductPage = () => {
-
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-
 
   //---------------------------Data from the product--------------------------
 
@@ -50,24 +34,6 @@ const ProductPage = () => {
     ],
     price: "999,90€"
   }]
-
-  //---------------------State to keep track of the first image source--------------------------
-
-  const [firstImageSrc, setFirstImageSrc] = useState(product[0].src[0]);
-
-  //---------------------Array with images from the data of the product--------------------------
-
-  const images = product[0].src.map((src, index) => {
-    return (
-      <img 
-        className='app__pointer'
-        key={index} 
-        src={src} 
-        alt={`product image ${index + 2}`} 
-        onClick={() => setFirstImageSrc(src)}
-      />
-    );
-  });
 
   return (
     <>

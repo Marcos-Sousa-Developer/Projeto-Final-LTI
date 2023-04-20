@@ -227,6 +227,9 @@ img, picture {
 }
 
 @media screen and (max-width: 1200px) {
+  .app__cart_before_content_btn p {
+    font-size: 14px;
+  }
   .app__cartItem {
     grid-template-columns: 2fr 3fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -273,7 +276,7 @@ img, picture {
     margin: 1.5rem auto;
   }
   .app__cart_before_content_btn p {
-    font-size: 0.8rem;
+    font-size: 12px;
   }
   .app__cartItem {
     grid-template-columns: 1fr 2fr 1fr;

@@ -142,7 +142,7 @@ body {
 }
 .app__support3 p {
   margin: 1.5rem 0 0 0;
-  font-size: 0.75rem;
+  font-size: 12px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -157,8 +157,11 @@ body {
   .app__footer {
     padding: 1rem;
   }
-  .app__footer h5 {
-    font-size: 1.25rem;
-    margin-bottom: 1.25rem;
+  .app__support h5 {
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+  }
+  .app__support2 > *, .app__support3 p {
+    font-size: 12px;
   }
 }/*# sourceMappingURL=Footer.css.map */

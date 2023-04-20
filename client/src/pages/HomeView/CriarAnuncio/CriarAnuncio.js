@@ -24,6 +24,7 @@ function CriarAnuncio() {
     const [idUser, setIDUser] = useState(null) //Ir buscar às cookies o ID do user       
 
     const [formData, setFormData] = useState({
+        EAN: "",
         titulo: "",
         preco: 0.00,
         descricao: "",
@@ -386,7 +387,7 @@ function CriarAnuncio() {
             let idProduct = prod.insertId
 
             //CRIA O ANUNCIO
-            anu = await postToDB("/ads",{  //Verificar server.js 
+            anu = await postToDB("/ads",{ 
               title: formData.titulo,
               price: formData.preco,
               description: formData.descricao,

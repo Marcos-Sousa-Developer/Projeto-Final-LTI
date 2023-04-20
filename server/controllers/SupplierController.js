@@ -121,7 +121,7 @@ const insertSupplier = async function (req, res) {
                 req.query.postal_code, req.query.status, req.query.products_list, 
                 req.query.orders, req.query.created_at];
 
-    const statement = "INSERT INTO consumers (uid, name, email, nif, mobile_number, " +
+    const statement = "INSERT INTO suppliers (uid, name, email, nif, mobile_number, " +
                     "continent, country, district, city, town, address, postal_code, " +
                     "status, products_list, orders, created_at) VALUES ?";
 
