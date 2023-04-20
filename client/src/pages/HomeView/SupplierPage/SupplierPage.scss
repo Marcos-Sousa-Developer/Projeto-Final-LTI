@@ -91,13 +91,8 @@
         padding: 0rem 1rem;
         vertical-align: middle;
 
-        
-        mark.orange {
-            color:#EB5C1F;
-            font-size: 30px;
-            font-family: 'Inter';
-            font-weight: 600;
-            line-height: 29px;
+        .numeroLaranja{
+            color:$orange;
         }
     }
 
@@ -106,13 +101,9 @@
         padding:  0rem 1rem;
         vertical-align: middle;
 
-        mark.orange {
-            color:#EB5C1F;
-            font-size: 30px;
-            font-family: 'Inter';
-            font-weight: 600;
-            line-height: 29px;
-        }
+        
+
+      
     }
 }
 
@@ -127,16 +118,12 @@ a.option{
 
 @media screen and (max-width: 800px) {
 
-    .app__SupplierPage {
+    .app__SupplierPage_boxes{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
 
-        &_box{
-
-            grid-template-columns: 1fr;
-            gap: 0;
-
-            &_div{
-                    margin: 0rem 1rem 0rem 1rem;
-            }
-        }
+    .app__SupplierPage_boxesDireita {
+        margin-left: 0rem;
     }
 }

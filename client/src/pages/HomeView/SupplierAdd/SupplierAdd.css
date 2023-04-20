@@ -113,97 +113,59 @@ img, picture {
   opacity: 1;
 }
 
-.app__SupplierPage {
+.app__SupplierAdd {
   max-width: 1650px;
   width: 95%;
   margin: 0 auto;
   margin-bottom: 4rem;
   padding-top: 1%;
 }
-.app__SupplierPage_options ul {
+.app__SupplierAdd_options ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
-.app__SupplierPage_options li {
+.app__SupplierAdd_options li {
   float: left;
   padding-right: 10px;
   padding-bottom: 10px;
 }
-.app__SupplierPage_options li:last-child {
+.app__SupplierAdd_options li:last-child {
   border-right: none;
 }
-.app__SupplierPage_options li a {
+.app__SupplierAdd_options li a {
   display: block;
   color: rgb(0, 0, 0);
   text-align: center;
   text-decoration: none;
 }
-.app__SupplierPage_options li a:hover {
+.app__SupplierAdd_options li a:hover {
   color: rgb(0, 0, 0);
 }
-.app__SupplierPage_boxes {
-  width: 100%;
-  margin: auto;
+.app__SupplierAdd_Box {
+  border: 3px solid #EEEEEE;
+  padding: 2rem 6rem 3rem 6rem;
+  min-height: 400px;
   display: grid;
-  grid-template-columns: 3fr 1.5fr;
+  grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr;
 }
-.app__SupplierPage_boxesEsquerda2 {
-  margin-top: 1.75rem;
-}
-.app__SupplierPage_boxesEsquerda1Est {
-  padding: 6rem 0.5rem;
-  box-sizing: border-box;
-  margin-left: 0.25rem;
-  background: #FFFFFF;
-  border: 3px solid #EEEEEE;
-}
-.app__SupplierPage_boxesEsquerda1Ult {
-  padding: 6rem 0.5rem;
-  box-sizing: border-box;
-  margin-left: 0.25rem;
-  background: #FFFFFF;
-  border: 3px solid #EEEEEE;
-}
-.app__SupplierPage_boxesDireita {
-  margin-left: 1.75rem;
-}
-.app__SupplierPage_boxesDireita1Vend {
-  padding: 9rem 0.5rem;
-  box-sizing: border-box;
-  margin-left: 0.25rem;
-  background: #FFFFFF;
-  border: 3px solid #EEEEEE;
-}
-.app__SupplierPage_boxesDireita1Nmr {
-  margin: 1rem;
-  padding: 2rem 2rem;
+.app__SupplierAdd_Box table {
   text-align: center;
 }
-.app__SupplierPage_boxesDireita1Nmr1 {
-  display: inline-block;
-  padding: 0rem 1rem;
-  vertical-align: middle;
+.app__SupplierAdd_Box table thead tr th {
+  padding-bottom: 1.5rem;
 }
-.app__SupplierPage_boxesDireita1Nmr1 mark.orange {
-  color: #EB5C1F;
-  font-size: 30px;
-  font-family: "Inter";
-  font-weight: 600;
-  line-height: 29px;
+.app__SupplierAdd_Box table tbody tr td {
+  padding-bottom: 1.5rem;
 }
-.app__SupplierPage_boxesDireita1Nmr2 {
-  display: inline-block;
-  padding: 0rem 1rem;
-  vertical-align: middle;
+.app__SupplierAdd_Box_Image {
+  display: flex;
 }
-.app__SupplierPage_boxesDireita1Nmr2 mark.orange {
-  color: #EB5C1F;
-  font-size: 30px;
-  font-family: "Inter";
-  font-weight: 600;
-  line-height: 29px;
+.app__SupplierAdd_Box_Image img {
+  max-width: 200px;
+  max-height: auto;
+  margin-right: 1.5rem;
 }
 
 a.option {
