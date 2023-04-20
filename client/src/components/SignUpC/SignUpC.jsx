@@ -138,7 +138,7 @@ const SignUpC = () => {
                             </form>
                         </div>
                         <div className='app__SignUp_box2'>
-                            <p style={{margin: '0'}}>or</p>    
+                            <p style={{margin: '0'}}>ou</p>    
                         </div>
                         <div className='app__SignUp_box3'>
                             <button className='app__SignUp_box30 ButtonGoogle'><BsGoogle className='singUpOptions' color='white' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google</p></button>

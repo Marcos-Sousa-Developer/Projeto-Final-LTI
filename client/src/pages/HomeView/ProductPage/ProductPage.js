@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import product1 from "../../../assets/testproducts/Iphone.png";
 import product2 from "../../../assets/testproducts/cannon.png";
@@ -34,24 +34,6 @@ const ProductPage = () => {
     ],
     price: "999,90€"
   }]
-
-  //---------------------State to keep track of the first image source--------------------------
-
-  const [firstImageSrc, setFirstImageSrc] = useState(product[0].src[0]);
-
-  //---------------------Array with images from the data of the product--------------------------
-
-  const images = product[0].src.map((src, index) => {
-    return (
-      <img 
-        className='app__pointer'
-        key={index} 
-        src={src} 
-        alt={`product image ${index + 2}`} 
-        onClick={() => setFirstImageSrc(src)}
-      />
-    );
-  });
 
   return (
     <>

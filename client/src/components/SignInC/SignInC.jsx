@@ -128,7 +128,7 @@ const SignInC = () => {
                         </form>
                     </div>
                     <div className='app__SignIn_box2'>
-                        <p>or</p>    
+                        <p>ou</p>    
                     </div>
                     <div className='app__SignIn_box3'>
                         <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google</p></button>

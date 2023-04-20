@@ -143,6 +143,10 @@
 
 @media screen and (max-width: 1200px){
 
+    .app__cart_before_content_btn{
+        p{font-size: $smaller_font;}
+    }
+
     .app__cartItem{
         grid-template-columns: 2fr 3fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
@@ -199,7 +203,7 @@
         margin: 1.5rem auto;
 
         &_before_content_btn p{
-            font-size: .8rem;
+            font-size: $small-font;
         }
     }
 
