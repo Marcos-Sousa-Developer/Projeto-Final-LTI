@@ -32,6 +32,7 @@ function CriarAnuncio() {
         categoria: "",
         subcategoria: "",
         subsubcategoria: "",
+        id_subsubcategory: "",
         features: [],
         sub_features: [],
         email: "",
@@ -39,18 +40,15 @@ function CriarAnuncio() {
         search: false,
     });
 
-    const [EAN, setEAN] = useState(null);
-    const [idsubsubcategory, setIdSubSubCategory] = useState(null);
-
     const [didMount, setDidMount] = useState(false)
 
     async function getProduct(ean){
 
-        let params = {
-            EAN: EAN,
+        let paramsProd = {
+            EAN: ean,
           };
 
-        let product = await getAllFromDB("/products/", params);
+        let product = await getAllFromDB("/products/", paramsProd);
         let idsubsubcategory = product[0].id_subsubcategory;
 
         //IR BUSCAR O NOME DA CATEGORIA, SUB E SUBSUB
@@ -83,16 +81,15 @@ function CriarAnuncio() {
         });
 
         setFormData({
+            EAN: ean,
             search: true,
             categoria: categoriaNome,
             subcategoria: subCategoriaNome,
             subsubcategoria: subSubCategoriaNome,
             features: featuresEmpty,
             sub_features: subFeaturesEmpty,
+            id_subsubcategory: idsubsubcategory,
         });
-
-        setEAN(ean);
-        setIdSubSubCategory(idsubsubcategory);
       }
 
     useEffect(()=>{
@@ -249,15 +246,13 @@ function CriarAnuncio() {
         // O EAN deve ter 8 ou 13 dígitos
         return "O EAN deve ter 8 ou 13 dígitos";
       }
-      
-      var checksum = 0;
+
       for (var i = 0; i < EAN.length - 1; i++) {
         var digit = parseInt(EAN[i], 10);
         if (isNaN(digit)) {
           // O EAN deve conter apenas dígitos numéricos
           return "O EAN deve conter apenas dígitos numéricos";
         }
-        checksum += (i % 2 === 0) ? digit * 3 : digit;
       }
       
       var lastDigit = parseInt(EAN[EAN.length - 1], 10);
@@ -267,12 +262,6 @@ function CriarAnuncio() {
       } else {
         return "OK";
       }
-
-      //if(((10 - (checksum % 10)) === lastDigit) == true){
-      //  return "OK" ;
-      //} else{
-      //  return "EAN inválido";
-      //}
     }
 
     async function verifyFeatures(features){
@@ -300,6 +289,17 @@ function CriarAnuncio() {
       }
       return "OK"
     }
+    
+    async function getIdSubSubCategory(nameSubSubCategory){
+      let params = {
+        name: nameSubSubCategory,
+      };
+
+      let subSubCategory = await getAllFromDB("/subsubcategories/", params);
+
+      return subSubCategory[0].id;
+    }
+
 
     const submit = async () => {
 
@@ -313,104 +313,21 @@ function CriarAnuncio() {
         let validMobilePhone = await verifyMobilePhone(formData.telemovel);
         let validProductionDate = await verifyProductionDate(formData.data_producao);
         let validFeature = await verifyFeatures(formData.features[0]);
-        let validSubFeature = await verifySubFeatures(formData.sub_features[0]);
+        let validSubFeature = "OK";
+        if(formData.sub_features != undefined){
+          validSubFeature = await verifySubFeatures(formData.sub_features[0]);
+        }
 
         let validEAN = null;
         if(formData.search){
-          validEAN = await verifyEAN(EAN);
+          validEAN = await verifyEAN(formData.EAN);
         }
-
-        /*
-        console.log(validTitle);
-        console.log(validPrice);
-        console.log(validDescription);
-        console.log(validCategory);
-        console.log(validEmail);
-        console.log(validMobilePhone);
-        console.log(validProductionDate);
-        console.log(validEAN);
-        console.log(validFeature);
-        console.log(validSubFeature);
-        */
-        
-        //--------------TESTE---------------------------------------------------
-
-        let prod;
-        let anu;
-
-        let ttP = {};
-        let ttA = {};
-
-        if(formData.features[0] != undefined){
-          for (let feature in formData.features[0]) {
-            ttA[feature] = formData.features[0][feature];
-            if(feature != "Local de Produção" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
-              ttP[feature] = formData.features[0][feature];
-            }
-          }
-        }
-
-        if(formData.sub_features[0] != undefined){
-          for (let feature in formData.sub_features[0]) {
-            ttA[feature] = formData.sub_features[0][feature];
-            if(feature != "Género" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
-              ttP[feature] = formData.sub_features[0][feature];
-            }
-          }
-        }
-
-        console.log(ttP)
-        console.log(ttA)
-
-        //if(EAN != null){
-          let params = {
-            EAN: "6843603708343",
-          };
-
-          let EANexist = await getAllFromDB("/products/", params);
-
-          if(EANexist == "There is no product in the database"){
-            //CRIA O PRODUTO
-            console.log("entrou-2")
-            prod = await postToDB("/products",{
-              EAN: EAN,
-              production_date: formData.data_producao, //"2019-08-20"
-              id_subsubcategory: idsubsubcategory,
-              characteristics: JSON.stringify(ttP),
-            })
-
-
-            //Ir buscar o id do fornecedor
-            let idSupplier = idUser;
-
-            //ir buscar o id do produto de cima
-            let idProduct = prod.insertId
-
-            //CRIA O ANUNCIO
-            anu = await postToDB("/ads",{ 
-              title: formData.titulo,
-              price: formData.preco,
-              description: formData.descricao,
-              extraCharacteristics: ttA,
-              supplier_id: idSupplier,
-              product_id: idProduct,
-            })
-
-          } else{
-            //verifica se os inputs são correspondentes (id_subsub, features, ...)
-              //Caso seja, só cria anuncio
-              //Caso não seja, dá um erro a dizer que o produto inserido não é válido e substitui pelo correto ??
-            //CRIA O ANUNCIO
-          } 
-        //}
-
-        //----------------------------------------------------------
 
         let product;
         let ad;
 
         let text = "Não foi possível criar o produto\n";
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && (validEAN == "OK" || validEAN == null)){
+        //if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && (validEAN == "OK" || validEAN == null)){
 
             let featuresDBproduct = {}; 
             let featuresDBad = {};
@@ -419,27 +336,28 @@ function CriarAnuncio() {
             if(formData.features[0] != undefined){
               for (let feature in formData.features[0]) {
                 featuresDBad[feature] = formData.features[0][feature];
-                if(feature != "Local de Produção" && feature != "Estado" && feature != "Garantia"){
+                if(feature != "Local de Produção" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
                   featuresDBproduct[feature] = formData.features[0][feature];
                 }
               }
             }
 
             //adiciona as sub
-            //NAO ESTA A GUARDAR SUB NO FORM DATA (VERIFICAR)
-            if(formData.sub_features[0] != undefined){
+            if(formData.sub_features != undefined && formData.sub_features[0] != undefined){
               for (let feature in formData.sub_features[0]) {
-                ttA[feature] = formData.sub_features[0][feature];
-                if(feature != "Género"){
-                  ttP[feature] = formData.sub_features[0][feature];
+                featuresDBad[feature] = formData.sub_features[0][feature];
+                if(feature != "Género" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
+                  featuresDBproduct[feature] = formData.sub_features[0][feature];
                 }
               }
             }
 
-            //verifica se o produto com o EAN dado existe
-            if(EAN != null){
+            let idSubSubCategory = await getIdSubSubCategory(formData.subsubcategoria);
+
+            //Quando existe EAN
+            if(formData.EAN != null && formData.EAN != ""){
               let params = {
-                EAN: "6843603708353",
+                EAN: formData.EAN,
               };
 
               let EANexist = await getAllFromDB("/products/", params);
@@ -447,9 +365,10 @@ function CriarAnuncio() {
               if(EANexist == "There is no product in the database"){
                 //CRIA O PRODUTO
                 product = await postToDB("/products",{
-                  EAN: EAN,
-                  production_date: formData.data_producao, //"2019-08-20"
-                  id_subsubcategory: idsubsubcategory,
+                  EAN: formData.EAN,
+                  production_date: formData.data_producao,
+                  id_subsubcategory: idSubSubCategory,
+                  status: 0,
                   characteristics: JSON.stringify(featuresDBproduct),
                 })
 
@@ -457,35 +376,69 @@ function CriarAnuncio() {
                 let idSupplier = idUser;
 
                 //ir buscar o id do produto de cima
-                let idProduct = product.insertId;
+                let idProduct = product.insertId
 
                 //CRIA O ANUNCIO
-                ad = await postToDB("/ads",{
+                ad = await postToDB("/ads",{ 
                   title: formData.titulo,
-                  price: formData.preco,
                   description: formData.descricao,
-                  extraCharacteristics: featuresDBad,
+                  email: formData.email,
+                  mobile_number: formData.telemovel,
+                  extraCharacteristics: JSON.stringify(featuresDBad),
+                  status: "ativo",
+                  price: formData.preco,
                   supplier_id: idSupplier,
                   product_id: idProduct,
                 })
+              }else{
+                product = EANexist[0]
 
-              } else{
+                let features = JSON.parse(product.characteristics);
+                for(let feature in features){
+                  //console.log(features)
+                  //console.log(features[feature])
+                }
+                //console.log(formData.features[0])
+                //console.log(product.id_subsubcategory)
+                //console.log(idSubSubCategory)
+
                 //verifica se os inputs são correspondentes (id_subsub, features, ...)
                   //Caso seja, só cria anuncio
                   //Caso não seja, dá um erro a dizer que o produto inserido não é válido e substitui pelo correto ??
-                //CRIA O ANUNCIO
+                
               } 
+            } else {
+              //Quando não existe EAN
+              product = await postToDB("/products",{
+                production_date: formData.data_producao,
+                id_subsubcategory: idSubSubCategory,
+                status: 0,
+                characteristics: JSON.stringify(featuresDBproduct),
+              })
+    
+              //Ir buscar o id do fornecedor
+              let idSupplier = idUser;
+    
+              //ir buscar o id do produto de cima
+              let idProduct = product.insertId
+    
+              //CRIA O ANUNCIO
+              ad = await postToDB("/ads",{ 
+                title: formData.titulo,
+                description: formData.descricao,
+                email: formData.email,
+                mobile_number: formData.telemovel,
+                extraCharacteristics: JSON.stringify(featuresDBad),
+                status: "ativo",
+                price: formData.preco,
+                supplier_id: idSupplier,
+                product_id: idProduct,
+              })
             }
-
-
-            //ATÉ AQUI
-
-
+            
             //Verificar se fez os inputs 
             text = "Anuncio concluído"
-
-
-        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
+        //} else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
             if(validTitle != "OK" ){
               text += validTitle + "\n"
             }
@@ -516,7 +469,7 @@ function CriarAnuncio() {
             if(validEAN != "OK" && validEAN != null){
               text += validEAN + "\n"
             }
-          }
+          //}
           alert(text)
     }
 

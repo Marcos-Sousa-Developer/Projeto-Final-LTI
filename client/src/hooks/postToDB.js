@@ -5,8 +5,6 @@ async function postToDB(url, params) {
 
     let url_endpoint = API_URL+url
 
-    console.log(params)
-
     return await axios.post(url_endpoint, null, {params})
         .then((response) => {
             if(response.status == 200){

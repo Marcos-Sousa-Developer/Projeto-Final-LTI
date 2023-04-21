@@ -125,7 +125,7 @@ const deleteAdByID = async function (req, res) {
 const insertAd = async function (req, res) {
 
     const data = [req.query.title, req.query.description, req.query.email, 
-                req.query.mobile_number, req.query.extraCharacteristic, req.query.status,
+                req.query.mobile_number, req.query.extraCharacteristics, req.query.status,
                 req.query.price, req.query.supplier_id, req.query.product_id, 
                 req.query.created_at];
 

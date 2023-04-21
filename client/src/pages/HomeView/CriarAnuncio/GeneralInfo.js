@@ -127,6 +127,10 @@ const GeneralInfo = ({ formData, setFormData }) => {
                                                     sub_features = {ShoeSize: ''}
                                                 }
 
+                                                let params = {
+                                                    name: subsubcategoria,
+                                                };
+
                                                 setFormData({
                                                     ...formData, 
                                                     categoria: category.name,
