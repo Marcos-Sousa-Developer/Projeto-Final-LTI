@@ -4,7 +4,7 @@ import { FiArrowLeft, FiArrowRight, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import { PRODUCTS } from '../../../assets/products';
-import { Navbar, Footer, SubHeading } from '../../../components/index';
+import { Navbar, Footer, SubHeading, Modal } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import { CartItem } from './CartItem';
 import images from '../../../assets/images.js';
@@ -13,6 +13,9 @@ import './Cart.css';
 import { useState } from 'react';
 
 const Cart = () => {
+
+  const [isOpen, setIsOpen] = useState(false)
+
 
   const [cookies, setCookie] = useCookies(['cart']);
   const [totalItems, setTotalItems] = useState(0)
@@ -53,10 +56,15 @@ const Cart = () => {
                   <FiArrowLeft></FiArrowLeft>
                   <p>Continuar a comprar</p>
                 </Link>
-                <button className='flex app__cart_before_content_btn' onClick={()=> deleteAllCartItem()}>
+                <button className='flex app__cart_before_content_btn' onClick={() => setIsOpen(true)}>
                   <FiTrash2></FiTrash2>
                   <p>Limpar carrinho</p>
                 </button>
+                <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                  <p>Tem a certeza que deseja apagar os items do carrinho?</p>
+                  <button onClick={() => setIsOpen(false)}>Cancelar</button>
+                  <button onClick={() => deleteAllCartItem()}>Apagar tudo</button>
+                </Modal>
               </div>
             </div>
 

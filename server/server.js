@@ -22,17 +22,18 @@ const apiRouter = express.Router();
 //apiRouter.use(authenticateUser)
 
 apiRouter.use('/admins' , require('./api/ApiAdmins'))
+apiRouter.use('/ads' , require('./api/ApiAds'))
 apiRouter.use('/categories' , require('./api/ApiCategories'))
 apiRouter.use('/consumers' , require('./api/ApiConsumers'))
 apiRouter.use('/orderedProducts' , require('./api/ApiOrderedProducts'))
 apiRouter.use('/orders' , require('./api/ApiOrders'))
 apiRouter.use('/products' , require('./api/ApiProducts'))
 apiRouter.use('/productsForSell' , require('./api/ApiAds'))
-apiRouter.use('/api/productionUnits' , require('./api/ApiProductionUnits'))
+apiRouter.use('/productionUnits' , require('./api/ApiProductionUnits'))
 apiRouter.use('/subcategories' , require('./api/ApiSubCategories'))
 apiRouter.use('/subsubcategories' , require('./api/ApiSubSubCategories'))
-apiRouter.use('/api/suppliers' , require('./api/ApiSuppliers'))
-apiRouter.use('/api/users' , require('./api/ApiUsers'))
+apiRouter.use('/suppliers' , require('./api/ApiSuppliers'))
+apiRouter.use('/users' , require('./api/ApiUsers'))
 apiRouter.use('/vehicles' , require('./api/ApiVehicles'))
 apiRouter.get('/', (req, res) => {
     res.send({ express: 'HELLO WORLD, YOU ARE CONNECTED TO THE API, PLEASE THE CHECK ENDPOINTS' });

@@ -1,4 +1,6 @@
 let dbConnection = require('./DatabaseController')
+const jwt = require('../config/jwtConfig')
+
 
 /**
  * Async function to get all or some consumers and await from database response
@@ -38,8 +40,8 @@ const getAllorSomeConsumers = async function (req, res) {
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
 
-            if(i == 0){
-                statement += " AND ";
+            if(key == "uid"){
+                value = jwt.decryptID(value);
             }
 
             statement += key;
@@ -52,6 +54,7 @@ const getAllorSomeConsumers = async function (req, res) {
             }
         }
     }
+    console.log(statement)
 
     let result = await dbConnection(statement)  
 

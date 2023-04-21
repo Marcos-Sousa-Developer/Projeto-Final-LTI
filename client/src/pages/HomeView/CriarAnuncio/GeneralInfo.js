@@ -224,6 +224,10 @@ const GeneralInfo = ({ formData, setFormData }) => {
                 <p>Preço (€)</p>
                 <input type='number' value={formData.preco} step="0.01" min="0" required onChange={(e) => {setFormData({ ...formData, preco: e.target.value });}}/>
             </div>
+            <div className='inputField'>
+                <p>EAN</p>
+                <input type='text' value={formData.EAN} onChange={(e) => {setFormData({ ...formData, EAN: e.target.value });}}/>
+            </div>
             <div className='app__anuncio_content_generalInfo_categoria'>
                 <p>Categoria</p>
                 {formData.categoria != "" && formData.subcategoria != "" && formData.subsubcategoria != "" && formData.search ? 

@@ -21,7 +21,10 @@ function CriarAnuncio() {
     // Form step logic
     const [page, setPage] = useState(0);
 
+    const [idUser, setIDUser] = useState(null) //Ir buscar às cookies o ID do user       
+
     const [formData, setFormData] = useState({
+        EAN: "",
         titulo: "",
         preco: 0.00,
         descricao: "",
@@ -163,10 +166,10 @@ function CriarAnuncio() {
           // A categoria não pode ser nulo
           return "Deve de inserir um email válido";
       }else {
-        if(!email.includes("@")){
+        let i = email.indexOf("@")
+        if(i == -1 || i == 0){
           return "Deve de inserir um email válido";
         }
-        let i = email.indexOf("@")
         if(email[i+1] == undefined){
           return "Deve de inserir um email válido";
         }
@@ -330,7 +333,10 @@ function CriarAnuncio() {
         console.log(validSubFeature);
         */
         
-        //--------------TESTE--------------------
+        //--------------TESTE---------------------------------------------------
+
+        let prod;
+        let anu;
 
         let ttP = {};
         let ttA = {};
@@ -356,34 +362,55 @@ function CriarAnuncio() {
         console.log(ttP)
         console.log(ttA)
 
-
-
         //if(EAN != null){
           let params = {
-            EAN: "6843603708353",
+            EAN: "6843603708343",
           };
 
           let EANexist = await getAllFromDB("/products/", params);
 
           if(EANexist == "There is no product in the database"){
             //CRIA O PRODUTO
+            console.log("entrou-2")
+            prod = await postToDB("/products",{
+              EAN: EAN,
+              production_date: formData.data_producao, //"2019-08-20"
+              id_subsubcategory: idsubsubcategory,
+              characteristics: JSON.stringify(ttP),
+            })
+
+
+            //Ir buscar o id do fornecedor
+            let idSupplier = idUser;
+
+            //ir buscar o id do produto de cima
+            let idProduct = prod.insertId
+
             //CRIA O ANUNCIO
+            anu = await postToDB("/ads",{ 
+              title: formData.titulo,
+              price: formData.preco,
+              description: formData.descricao,
+              extraCharacteristics: ttA,
+              supplier_id: idSupplier,
+              product_id: idProduct,
+            })
+
           } else{
             //verifica se os inputs são correspondentes (id_subsub, features, ...)
               //Caso seja, só cria anuncio
               //Caso não seja, dá um erro a dizer que o produto inserido não é válido e substitui pelo correto ??
             //CRIA O ANUNCIO
           } 
-
-          
         //}
 
-        //------------------------------------------
+        //----------------------------------------------------------
 
         let product;
         let ad;
 
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK"  && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK"  && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" &&  (validEAN == "OK" || validEAN == null)){
+        let text = "Não foi possível criar o produto\n";
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && (validEAN == "OK" || validEAN == null)){
 
             let featuresDBproduct = {}; 
             let featuresDBad = {};
@@ -419,7 +446,29 @@ function CriarAnuncio() {
 
               if(EANexist == "There is no product in the database"){
                 //CRIA O PRODUTO
+                product = await postToDB("/products",{
+                  EAN: EAN,
+                  production_date: formData.data_producao, //"2019-08-20"
+                  id_subsubcategory: idsubsubcategory,
+                  characteristics: JSON.stringify(featuresDBproduct),
+                })
+
+                //Ir buscar o id do fornecedor
+                let idSupplier = idUser;
+
+                //ir buscar o id do produto de cima
+                let idProduct = product.insertId;
+
                 //CRIA O ANUNCIO
+                ad = await postToDB("/ads",{
+                  title: formData.titulo,
+                  price: formData.preco,
+                  description: formData.descricao,
+                  extraCharacteristics: featuresDBad,
+                  supplier_id: idSupplier,
+                  product_id: idProduct,
+                })
+
               } else{
                 //verifica se os inputs são correspondentes (id_subsub, features, ...)
                   //Caso seja, só cria anuncio
@@ -431,34 +480,12 @@ function CriarAnuncio() {
 
             //ATÉ AQUI
 
-            product = await postToDB("/products",{
-              EAN: EAN,
-              production_date: formData.data_producao, //"2019-08-20"
-              id_subsubcategory: idsubsubcategory,
-              characteristics: JSON.stringify(featuresDBproduct),
-            })
 
-            //Ir buscar o id do fornecedor
-            let idSupplier;
+            //Verificar se fez os inputs 
+            text = "Anuncio concluído"
 
-            //ir buscar o id do produto de cima
-            let idproduct;
 
-            ad = await postToDB("/ads",{
-                title: formData.titulo,
-                price: formData.preco,
-                description: formData.descricao,
-                extraCharacteristics: featuresDBad,
-                supplier_id: idSupplier,
-                product_id: idproduct,
-              })
-
-        }
-
-        let text = "Não foi possível criar o produto\n";
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && (validEAN == "OK" || validEAN == null)){
-          text = "OK"
-        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK"  || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
             if(validTitle != "OK" ){
               text += validTitle + "\n"
             }

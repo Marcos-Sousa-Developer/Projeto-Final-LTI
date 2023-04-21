@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import getFromDB from '../../../hooks/getFromDB';
 import putToDB from '../../../hooks/putToDB';
+import { useCookies } from "react-cookie";
 
 import {Navbar, Footer, SubHeading} from '../../../components/index';
 import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
@@ -9,7 +10,9 @@ import './SupplierProfile.css';
 
 function SupplierProfile() {
 
-  const [id, setID] = useState(2)         //IR BUSCAR O ID DO SUPPLIER
+  const [cookies,setCookies] = useCookies(['userSession','identification']);
+
+  const [id, setID] = useState(null)       
   const [name, setName] = useState(null)
   const [email, setEmail] = useState(null)
   const [nif, setNif] = useState(null)
@@ -18,8 +21,13 @@ function SupplierProfile() {
 
   const [didMount, setDidMount] = useState(false)
 
-  async function getSupplier(id){
-    let supplier = await getFromDB("/suppliers/" + id)
+  async function getSupplier(){
+
+    let supplier = await getFromDB("/api/suppliers", {uid: cookies.userSession})
+
+    console.log(supplier)
+
+    setID(supplier[0].id)
     setName(supplier[0].name)
     setEmail(supplier[0].email)
     setNif(supplier[0].nif)
@@ -29,7 +37,7 @@ function SupplierProfile() {
   }
 
   useEffect(()=>{
-    getSupplier(id)
+    getSupplier()
   }, [])
 
   const handleSetName = (event) => {
@@ -64,7 +72,11 @@ function SupplierProfile() {
       //tem de ter um @
       
       if(email != null && email != ""){
-        if(!email.includes("@")){
+        let i = email.indexOf("@")
+        if(i == -1 || i == 0){
+          return "Deve de inserir um email válido";
+        }
+        if(email[i+1] == undefined){
           return "Deve de inserir um email válido";
         }
       }
@@ -95,6 +107,23 @@ function SupplierProfile() {
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
       //podem ser null
       //9 algarismos ?? depende do código do pais
+
+      if(mobile_number != null && mobile_number != ""){
+        if(mobile_number.length != 9){
+          return "O número de telemóvel deve ter 9 dígitos";
+        }
+        for (var i = 0; i < mobile_number.length; i++) {
+          var digit = parseInt(mobile_number[i], 10);
+          if (isNaN(digit)) {
+            // O número de telemóvel deve conter apenas dígitos numéricos
+            return "O número de telemóvel deve conter apenas dígitos numéricos";
+          }
+        }
+        if(mobile_number[0] != "9"){
+          //O número de telemóvel deve de começar pelo dígito 9
+          return "O número de telemóvel deve de começar pelo dígito 9";
+        }
+      }
       return "OK"
   }
 
@@ -116,7 +145,7 @@ function SupplierProfile() {
 
     if(!((name == null || name == "") && (email == null || email == "") && (nif == null || nif == "") && (mobile_number == null || mobile_number == "") && (address == null || address == ""))){
       if(validName == "OK" && validEmail == "OK" && validNif == "OK" && validMobileNumber == "OK" && validAddress == "OK" ){
-        supplierUpdated = await putToDB("/suppliers/" + id,{
+        supplierUpdated = await putToDB("/api/suppliers/" + id,{
           name: name,
           email: email,
           nif: nif,

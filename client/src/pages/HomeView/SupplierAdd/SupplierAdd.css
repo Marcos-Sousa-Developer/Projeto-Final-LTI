@@ -113,55 +113,76 @@ img, picture {
   opacity: 1;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
+.app__SupplierAdd {
+  max-width: 1650px;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+  padding-top: 1%;
 }
-
-.app__footer {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: start;
-  padding: 1.25rem;
-  margin: auto auto 0;
-  border-top: 3px solid #EEEEEE;
+.app__SupplierAdd_options ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
-
-.app__support h5 {
-  margin-bottom: 0.75rem;
-  font-size: 16px;
+.app__SupplierAdd_options li {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
-.app__support2 > * {
+.app__SupplierAdd_options li:last-child {
+  border-right: none;
+}
+.app__SupplierAdd_options li a {
   display: block;
-  line-height: 2rem;
-  font-size: 14px;
-  transition: 150ms all ease-in-out;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: none;
 }
-.app__support2 > *:hover {
-  font-weight: 500;
-  color: #EB5C1F;
+.app__SupplierAdd_options li a:hover {
+  color: rgb(0, 0, 0);
 }
-.app__support3 p {
-  margin: 1.5rem 0 0 0;
-  font-size: 12px;
+.app__SupplierAdd_Box {
+  border: 3px solid #EEEEEE;
+  padding: 2rem 6rem 3rem 6rem;
+  min-height: 400px;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr;
+}
+.app__SupplierAdd_Box table {
+  text-align: center;
+}
+.app__SupplierAdd_Box table thead tr th {
+  padding-bottom: 1.5rem;
+}
+.app__SupplierAdd_Box table tbody tr td {
+  padding-bottom: 1.5rem;
+}
+.app__SupplierAdd_Box_Image {
+  display: flex;
+}
+.app__SupplierAdd_Box_Image img {
+  max-width: 200px;
+  max-height: auto;
+  margin-right: 1.5rem;
 }
 
-@media screen and (max-width: 1200px) {
-  .app__footer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    padding: 1rem 4rem;
-  }
+a.option {
+  border-right: 3px solid #EEEEEE;
+  padding-right: 10px;
 }
-@media screen and (max-width: 1000px) {
-  .app__footer {
-    padding: 1rem;
+
+.active {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+  .app__SupplierPage_box {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
-  .app__support h5 {
-    margin-bottom: 0.5rem;
-    font-size: 14px;
+  .app__SupplierPage_box_div {
+    margin: 0rem 1rem 0rem 1rem;
   }
-  .app__support2 > *, .app__support3 p {
-    font-size: 12px;
-  }
-}/*# sourceMappingURL=Footer.css.map */
+}/*# sourceMappingURL=SupplierAdd.css.map */

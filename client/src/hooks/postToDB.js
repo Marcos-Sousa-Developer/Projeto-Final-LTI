@@ -10,11 +10,11 @@ async function postToDB(url, params) {
     return await axios.post(url_endpoint, null, {params})
         .then((response) => {
             if(response.status == 200){
-                return true
+                return response.data
             }
         })
         .catch((error) => {
-            return false
+            return error
         })
 }
 

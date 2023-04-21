@@ -1,4 +1,5 @@
 let dbConnection = require('./DatabaseController')
+const jwt = require('../config/jwtConfig')
 
 /**
  * Async function to get all or some suppliers and await from database response
@@ -37,8 +38,8 @@ const getAllorSomeSuppliers = async function (req, res) {
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
 
-            if(i == 0){
-                statement += " AND ";
+            if(key == "uid"){
+                value = jwt.decryptID(value);
             }
 
             statement += key;
@@ -120,7 +121,7 @@ const insertSupplier = async function (req, res) {
                 req.query.postal_code, req.query.status, req.query.products_list, 
                 req.query.orders, req.query.created_at];
 
-    const statement = "INSERT INTO consumers (uid, name, email, nif, mobile_number, " +
+    const statement = "INSERT INTO suppliers (uid, name, email, nif, mobile_number, " +
                     "continent, country, district, city, town, address, postal_code, " +
                     "status, products_list, orders, created_at) VALUES ?";
 
