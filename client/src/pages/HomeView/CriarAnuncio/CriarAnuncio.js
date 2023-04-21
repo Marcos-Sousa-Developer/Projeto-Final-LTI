@@ -490,12 +490,6 @@ function CriarAnuncio() {
             <form onSubmit={() => {console.log(formData)}} className='app__anuncio_content' id='anuncio_form' style={{marginTop:'1rem'}}>
                 <p>{FormTitles[page]}</p>
                 <div className='app__anuncio_inputArea'>
-                    <div className='app__anuncio_progressBar'>
-                        <span>
-                            {/*page == 0 ? '50%' : '100%'*/}
-                        </span>
-                        <div style={{ width: page == 0 ? "50%"  : "100%" }}></div>
-                    </div>
                     {PageDisplay()}
                 </div>
                 <div className='app__anuncio_content_stepBtns' style={{ justifyContent: page == 0 ? "flex-end" : "space-between"}}>

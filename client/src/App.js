@@ -10,7 +10,7 @@ import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
-import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd} from './pages/HomeView/index';
+import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -99,6 +99,7 @@ function App() {
 
           <Route path="/category" element={<Category />} />
           <Route path="/produto" element={<ProductPage/>} />
+          <Route path="/produnit" element={<SupplierProdUnit/>} />
 
           {/* para dps meter dentro do supplier */}
           <Route path="/anuncio" element={<CriarAnuncio />} />

@@ -16,6 +16,7 @@ import Anunciar from './CriarAnuncio/Anunciar';
 import Category from './Category/Category';
 import ProductPage from './ProductPage/ProductPage';
 import SupplierAdd from './SupplierAdd/SupplierAdd';
+import SupplierProdUnit from './SupplierProdUnit/SupplierProdUnit';
 
 export {
     Home,
@@ -35,4 +36,5 @@ export {
     Category,
     ProductPage,
     SupplierAdd,
+    SupplierProdUnit,
 };

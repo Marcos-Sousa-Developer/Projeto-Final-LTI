@@ -148,13 +148,13 @@ const Navbar = () => {
                     ) 
                     :
                     (
-                        <>
-                        <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
-                        <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
-                            <span className="profile_link">Conta</span>
-                            <p style={{fontSize: '12px', opacity: '80%'}}>Olá {cookies.identification}</p>
-                        </div>
-                        </>
+                        <Link to="/supplier/profile" className="flex app__pointer app__navbar_links">
+                            <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
+                            <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
+                                <span className="profile_link">Conta</span>
+                                <p style={{fontSize: '12px', opacity: '80%'}}>Olá {cookies.identification}</p>
+                            </div>
+                        </Link>
                     )
                 }
 
