@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import BarOrderReports_km from '../BarReports/BarOrderReports_km'
 import BarOrderReports_location from '../BarReports/BarOrderReports_location'
 import getAllFromDB from '../../../../hooks/getAllFromDB'
@@ -152,11 +152,11 @@ function GetOrdersReports() {
                 <div className='col-xl-12'>
                     <div className='row'>
                         <div className='col-xl-6'>
-                            <BarOrderReports_km datas={tableKmData}></BarOrderReports_km>
+                            <BarOrderReports_km datas={tableKmData ?? {}}></BarOrderReports_km>
                         </div>
 
                         <div className='col-xl-6'>
-                            <BarOrderReports_location datas={tableLocationData}></BarOrderReports_location>
+                            <BarOrderReports_location datas={tableLocationData ?? {}}></BarOrderReports_location>
                         </div>
                     </div>
                 </div>

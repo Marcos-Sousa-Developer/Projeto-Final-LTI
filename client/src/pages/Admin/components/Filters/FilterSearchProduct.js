@@ -10,8 +10,8 @@ let datas = null
 
 function FilterSearchProduct() {
 
-    const [EAN,setEAN] = useState("")
-    const [name,setName] = useState("")
+    const [id,setid] = useState("")
+    const [title,setName] = useState("")
     const [category,setCategory] = useState("")
     const [subcateogry,setSubCategory] = useState("")
     const [subsubcategory,setSubSubCateogry] = useState("")
@@ -51,8 +51,8 @@ function FilterSearchProduct() {
   const getResponses = async () => {
 
     const params = {
-        EAN: EAN,
-        name: name,
+        id: id,
+        title: title,
         category_name: category,
         subcategory_name: subcateogry,
         subsubcategory_name: subsubcategory,
@@ -62,7 +62,7 @@ function FilterSearchProduct() {
     }
 
     setLoading(true)
-    let resp = await getAllFromDB('/products',params) 
+    let resp = await getAllFromDB('/ads',params) 
     try {
       setRow(resp)
       setError(false)
@@ -96,8 +96,8 @@ function FilterSearchProduct() {
       resp.map((r) => { 
       table.row.add(
         [ r.id,
-          r.EAN,
-          r.name,
+          r.id,
+          r.title,
           r.category_name, 
           r.subcategory_name,
           r.subsubcategory_name,
@@ -172,12 +172,12 @@ function FilterSearchProduct() {
 
         <div className="row">
           <div className="form-group col-xxl-4 mb-4">
-            <label>EAN</label>
-            <input type="text" className="form-control" onChange={(e) => setEAN(e.target.value)}></input>
+            <label>id</label>
+            <input type="text" className="form-control" onChange={(e) => setid(e.target.value)}></input>
           </div>
 
           <div className="form-group col-xxl-4 mb-4">
-            <label>Nome</label>
+            <label>Título</label>
             <input type="text" className="form-control" onChange={(e) => setName(e.target.value)}></input>
           </div>
 
@@ -191,17 +191,17 @@ function FilterSearchProduct() {
           </div>
 
           <div className="form-group col-xxl-4 mb-4">
-            <label>Nome da Categoria</label>
+            <label>Título da Categoria</label>
             <input type="text" className="form-control" onChange={(e) => setCategory(e.target.value)}></input>
           </div>
 
           <div className="form-group col-xxl-4 mb-4">
-            <label>Nome da Subcategoria</label>
+            <label>Título da Subcategoria</label>
             <input type="text" className="form-control" onChange={(e) => setSubCategory(e.target.value)}></input>
           </div>
 
           <div className="form-group col-xxl-4 mb-4">
-            <label>Nome da Sub de Subcategoria</label>
+            <label>Título da Sub de Subcategoria</label>
             <input type="text" className="form-control" onChange={(e) => setSubSubCateogry(e.target.value)}></input>
           </div>
 
@@ -248,8 +248,8 @@ function FilterSearchProduct() {
             <thead className="thead-dark">
               <tr>
                 <th scope="col">ID</th>
-                <th scope="col">EAN</th>
-                <th scope="col">Nome</th>
+                <th scope="col">id</th>
+                <th scope="col">Título</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Subcategoria</th>
                 <th scope="col">Sub Subcategoria</th>
