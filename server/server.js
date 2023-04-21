@@ -4,7 +4,7 @@ const express = require('express');
 const app = express(); 
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const port = process.env.DEVELOPMENT_PORT || 5000;  
+const port = process.env.DEVELOPMENT_PORT || process.env.PRODUCTION_PORT || 5000;  
 
 const cors = require("cors")
 

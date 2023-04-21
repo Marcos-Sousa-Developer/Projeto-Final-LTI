@@ -1,0 +1,28 @@
+--KEEP ALIVE CONFIGURATIONS
+
+sudo apt-get install keepalived
+
+nano keepalived.conf 
+
+-Look for keepAlive configurations-
+
+sudo useradd keepalived_script
+
+sudo systemctl reload keepalived
+
+sudo systemctl restart keepalived
+
+sudo systemctl start keepalived
+
+sudo systemctl status keepalived
+
+sudo systemctl stop keepalived
+
+
+sudo chmod -R 777 /home/keepalived_script/
+
+tcpdump -i <interface> -nn vrrp
+
+sudo chmod +x /etc/keepalived/takeover.sh
+
+ip addr show dev ens4

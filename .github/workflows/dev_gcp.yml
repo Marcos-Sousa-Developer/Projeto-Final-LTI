@@ -1,4 +1,4 @@
-name: Deploy Development_test to GCP instance
+name: Deploy Development to GCP Ubuntu LTS instances
 on:
   push:
     branches:
@@ -12,14 +12,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Configure gcloud CLI
-        uses: google-github-actions/setup-gcloud@master
+      - name: deploy to dev instance
+        uses: appleboy/ssh-action@master
         with:
-          project_id: greatergoods
-          service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-          export_default_credentials: true
-
-      - name: Deploy dev code to VM instance
-        uses: google-github-actions/gcloud@master
-        with:
-          args: compute ssh leticiaemarcos200001@app-server-instance-dev --command 'cd /home/leticiaemarcos200001/Projeto_Final_LTI && git pull origin dev && git checkout dev'
+          host: "34.155.197.74"
+          username: leticiaemarcos200001
+          key: ${{ secrets.HOST_DEV_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/leticiaemarcos200001/Projeto_Final_LTI
+            git checkout dev
+            git pull origin dev
+            cd client
+            yarn install
+            cd ..
+            cd server
+            npm install
+            cd ..
+            sudo docker compose up -d
+            

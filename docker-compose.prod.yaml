@@ -1,0 +1,35 @@
+#docker version
+version: "3.8"
+
+services: 
+
+  server:
+    #catch docker file in server directory
+    build:
+      context: ./server
+      dockerfile: Dockerfile.prod
+    #container name of server
+    container_name: GreaterGoods_server
+    #ports
+    ports:
+      - '5000:5000'
+
+  client:
+    #catch docker file in client directory
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    #container name of client
+    container_name: GreaterGoods_client
+    #ports
+    ports:
+      - '3000:3000'
+      
+    #open in interactive mode
+    #when you need to work on a project outside the Docker container
+    stdin_open: true
+    #when you need to work on a project inside the Docker container
+    tty: true
+    #dependecy before deploy
+    depends_on:
+        - server

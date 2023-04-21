@@ -26,7 +26,7 @@ function Gerir_Adminstradores() {
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <Link to="/admin"  >Home</Link>
+                <Link to="/admin">Home</Link>
               </li>
               <li className="breadcrumb-item active">Gerir Adminstradores</li>
             </ol>

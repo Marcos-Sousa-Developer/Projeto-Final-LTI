@@ -38,10 +38,6 @@ const getAllorSomeOrderedProducts = async function (req, res) {
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
 
-            if(i == 0){
-                statement += " AND ";
-            }
-
             if(key != "price") {
 
                 statement += key;
