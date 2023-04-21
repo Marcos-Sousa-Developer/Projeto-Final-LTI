@@ -26,6 +26,9 @@ const getAllorSomeProducts = async function (req, res) {
         
         if(req.query.created_at_init != undefined && req.query.created_at_final != undefined){
             statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+            if(Object.keys(params).length > 0){
+                statement += " AND ";
+            }
         }
 
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
@@ -33,10 +36,6 @@ const getAllorSomeProducts = async function (req, res) {
             let key = Object.keys(params)[i];
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
-            
-            if(i == 0 && req.query.created_at_init != undefined && req.query.created_at_final != undefined){
-                statement += " AND ";
-            }
 
             statement += key;
             statement += `='`;
