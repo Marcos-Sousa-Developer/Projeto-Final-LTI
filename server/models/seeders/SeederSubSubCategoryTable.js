@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfig')
+let pool = require('../config/getLocaldbConfig')
 
 const subsubcategory_data = require('../factories/SUBSUBCATEGORY_DATA.json')
 

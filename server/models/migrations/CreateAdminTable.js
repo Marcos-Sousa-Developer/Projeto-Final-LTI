@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfig')
+let pool = require('../config/getLocaldbConfig')
 const createUserTable = require('./CreateUserTable')
 
 const statement = "CREATE TABLE admins ( " +
