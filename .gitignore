@@ -74,5 +74,9 @@
 # next.js build output
 .next
 
-.env*
-package*
+client/.env
+client/.env*
+client/package*
+server/.env
+server/.env*
+server/package*
