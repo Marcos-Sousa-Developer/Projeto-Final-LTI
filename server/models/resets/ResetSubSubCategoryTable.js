@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfig')
+let pool = require('../config/getLocaldbConfig')
 
 const statement = "DELETE FROM subsubcategories";
 

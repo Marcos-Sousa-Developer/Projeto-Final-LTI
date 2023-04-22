@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfig')
+let pool = require('../config/getLocaldbConfig')
 
 const admin_data = require('../factories/ALL_ADMIS_DATA.json')
 
