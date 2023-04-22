@@ -2,12 +2,10 @@ let pool = require('../config/getLocaldbConfig')
 
 const statement = "CREATE TABLE productionUnits ( " +
                   "id int NOT NULL AUTO_INCREMENT, " + 
-                  "stock int NOT NULL, " + 
+                  "name varchar(255) NOT NULL, " +
                   "location varchar(255) NOT NULL, " + 
                   "capacity float NOT NULL, " +  
-                  "id_vehicle int, " +
                   "id_supplier int, " +
-                  "id_product int, " +
                   "PRIMARY KEY (id))";
 
 pool.query(statement, function(error, result) {
