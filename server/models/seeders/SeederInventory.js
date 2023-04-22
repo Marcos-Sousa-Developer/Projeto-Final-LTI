@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfigLocal')
+let pool = require('../../config/dbConfig')
 const util = require('util');
 
 const inventory = require('../factories/FAKE_INVENTORY.json')

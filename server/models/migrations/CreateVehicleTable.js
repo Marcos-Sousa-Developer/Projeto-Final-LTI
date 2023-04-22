@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfigLocal')
+let pool = require('../../config/dbConfig')
 
 const statement = "CREATE TABLE vehicles ( " +
                   "license_plate varchar(255) NOT NULL, " +

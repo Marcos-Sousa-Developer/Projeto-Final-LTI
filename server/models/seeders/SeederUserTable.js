@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfigLocal')
+let pool = require('../../config/dbConfig')
 
 const fake_user_data = require('../factories/FAKE_USER_DATA.json')
 
