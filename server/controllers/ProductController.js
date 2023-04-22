@@ -110,10 +110,10 @@ const deleteProductByID = async function (req, res) {
 const insertProduct = async function (req, res) {
 
     const data = [req.query.EAN, req.query.production_date, req.query.characteristics, 
-                req.query.id_subsubcategory, req.query.id_production_unit, req.query.status, req.query.created_at];
+                req.query.id_subsubcategory, req.query.status, req.query.created_at];
 
     const statement = "INSERT INTO products (EAN, production_date, characteristics, id_subsubcategory, " +
-                    "id_production_unit, status, created_at) VALUES ?";
+                    "status, created_at) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
