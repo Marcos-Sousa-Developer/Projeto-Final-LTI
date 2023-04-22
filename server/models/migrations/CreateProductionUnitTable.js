@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfigLocal')
+let pool = require('../../config/dbConfig')
 
 const statement = "CREATE TABLE productionUnits ( " +
                   "id int NOT NULL AUTO_INCREMENT, " + 

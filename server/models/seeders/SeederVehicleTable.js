@@ -1,4 +1,4 @@
-let pool = require('../../config/dbConfigLocal')
+let pool = require('../../config/dbConfig')
 
 const fake_vehicle_data = require('../factories/FAKE_VEHICLE_DATA.json')
 
