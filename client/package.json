@@ -44,5 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://your-ip-here:5000"
+  "proxy": "http://server:5000"
 }
