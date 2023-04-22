@@ -74,6 +74,5 @@
 # next.js build output
 .next
 
-#ignore docker files
-docker-compose.yaml
-Dockerfile
+.env*
+package*

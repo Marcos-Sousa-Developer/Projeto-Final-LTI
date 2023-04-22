@@ -44,5 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://172.17.0.1:5000"
+  "proxy": "http://your-internal-ip:5000"
 }
