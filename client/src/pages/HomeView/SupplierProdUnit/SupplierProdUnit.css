@@ -113,55 +113,25 @@ img, picture {
   opacity: 1;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
+.app__prod-unit {
+  margin: 1rem auto 2rem;
 }
-
-.app__footer {
+.app__prod-unit_add_new-unit {
   display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  padding: 1.25rem;
-  margin: auto auto 0;
-  border-top: 3px solid #EEEEEE;
 }
-
-.app__support h5 {
-  margin-bottom: 0.75rem;
+.app__prod-unit_add_new-unit button {
+  align-self: end;
+}
+.app__prod-unit_existing-units td, .app__prod-unit_existing-units th {
+  padding: 0 1rem;
+}
+.app__prod-unit_existing-units thead th {
   font-size: 16px;
-}
-.app__support2 > * {
-  display: block;
-  line-height: 2rem;
-  font-size: 14px;
-  transition: 150ms all ease-in-out;
-}
-.app__support2 > *:hover {
   font-weight: 500;
-  color: #EB5C1F;
 }
-.app__support3 p {
-  margin: 1.5rem 0 0 0;
-  font-size: 12px;
+.app__prod-unit_existing-units tbody td {
+  font-size: 14px;
 }
-
-@media screen and (max-width: 1200px) {
-  .app__footer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    padding: 1rem 4rem;
-  }
-}
-@media screen and (max-width: 1000px) {
-  .app__footer {
-    padding: 1rem;
-  }
-  .app__support h5 {
-    margin-bottom: 0.5rem;
-    font-size: 14px;
-  }
-  .app__support2 > *, .app__support3 p {
-    font-size: 12px;
-  }
-}/*# sourceMappingURL=Footer.css.map */
+.app__prod-unit_existing-units tbody td button {
+  margin: 0 0.5rem;
+}/*# sourceMappingURL=SupplierProdUnit.css.map */

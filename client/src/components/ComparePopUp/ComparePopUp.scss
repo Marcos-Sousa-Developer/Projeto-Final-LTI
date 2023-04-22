@@ -1,0 +1,26 @@
+@import "../../index.scss";
+
+.app__compare_pop-up{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+
+    &, div, div>*{
+        background-color: #141414;
+        color: white;
+    }
+
+    p{
+        margin: 0;
+    }
+
+    &_actions{
+        display: flex;
+        flex-direction: column;
+    }
+}
