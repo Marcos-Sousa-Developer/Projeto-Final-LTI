@@ -1,0 +1,32 @@
+@import '../../../index.scss';
+
+.app__prod-unit{
+    margin: 1rem auto 2rem;
+
+    &_add_new-unit{
+        display: flex;
+
+        button{
+            align-self: end;
+        }
+    }
+
+    &_existing-units{
+        td, th{
+            padding: 0 1rem;
+        }
+
+        thead th{
+            font-size: $normal_font;
+            font-weight: 500;
+        }
+
+        tbody td{
+            font-size: $smaller_font;
+
+            button{
+                margin: 0 .5rem;
+            }
+        }
+    }
+}

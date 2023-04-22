@@ -1,13 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { FiShoppingCart, FiRepeat} from 'react-icons/fi';
 import { PriceDisplay } from '../../utilities/formatCurrency';
 import './Product.css';
 import { useCookies } from 'react-cookie';
+import ComparePopUp from '../ComparePopUp/ComparePopUp';
 
 const Product = (props) => {
+    //comparador de produtos
+    const [openComparePopUp, setopenComparePopUp] = useState(false);
     
+    //product info
     const {id, productName, price, productImage} = props.data;
 
+    //cookies
     const [cookies, setCookie] = useCookies(['cart']);
 
     const addToCart = () => {
@@ -30,7 +35,11 @@ const Product = (props) => {
                             <FiShoppingCart></FiShoppingCart>
                             <span>Adicionar</span>
                         </button>
-                        <button><FiRepeat></FiRepeat></button>
+                        <button onClick={() => setopenComparePopUp(true)}><FiRepeat></FiRepeat><span>Comparar</span></button>
+                        <ComparePopUp 
+                            openComparePopUp={openComparePopUp} 
+                            onCloseComparePopUp={() => setopenComparePopUp(false)}
+                        ></ComparePopUp>
                     </div>
                 </div>
             </div>
