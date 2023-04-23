@@ -10,7 +10,7 @@ import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
-import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit} from './pages/HomeView/index';
+import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -105,6 +105,8 @@ function App() {
           <Route path="/anuncio" element={<CriarAnuncio />} />
           <Route path="/anunciar" element={<Anunciar />} />
           {/* --------------------------------- */}
+
+          <Route path="/comparador" element={<CompareProduct></CompareProduct>}/>
 
           <Route path="/FAQ" element={<FAQ />} />
           

@@ -17,6 +17,7 @@ import Category from './Category/Category';
 import ProductPage from './ProductPage/ProductPage';
 import SupplierAdd from './SupplierAdd/SupplierAdd';
 import SupplierProdUnit from './SupplierProdUnit/SupplierProdUnit';
+import CompareProduct from './CompareProduct/CompareProduct';
 
 export {
     Home,
@@ -37,4 +38,5 @@ export {
     ProductPage,
     SupplierAdd,
     SupplierProdUnit,
+    CompareProduct,
 };
