@@ -16,6 +16,9 @@ function Home() {
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   const addToSelectedProducts = (product) => {
+    if (selectedProducts.length >= 4) {
+      return;
+    }
     setSelectedProducts([...selectedProducts, product]);
   };
 

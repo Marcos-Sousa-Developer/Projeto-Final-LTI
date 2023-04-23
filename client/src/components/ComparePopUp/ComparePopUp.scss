@@ -8,7 +8,9 @@
 
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 1rem;
+    gap: 1rem;
 
     &, div, div>*{
         background-color: #141414;
@@ -17,6 +19,36 @@
 
     p{
         margin: 0;
+    }
+
+    &_selected-products{
+        display: flex;
+        
+        &>*{
+            margin: 0 .45rem;
+        }
+    }
+
+    &_product{
+        border: 1px dotted white;
+        position: relative;
+
+        img{
+            opacity: .7;
+        }
+
+        button >*{
+            background: transparent;
+            font-size: 25px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            &>*{
+                color: white;
+            }
+        }
     }
 
     &_actions{
