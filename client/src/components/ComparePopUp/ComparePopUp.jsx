@@ -23,7 +23,11 @@ const ComparePopUp = ({ selectedProducts, onCloseComparePopUp, removeFromSelecte
     return ReactDOM.createPortal(
       <>
         <div className='app__compare_pop-up'>
-          <div>
+          <div className='app__compare_pop-up_head'>
+            <p style={{ fontSize: '14px' }}>Comparador</p>
+            <p style={{ fontSize: '11px', opacity: '.8' }}>Escolha até 4 produtos</p>
+          </div>
+          <div className='app__compare_pop-up_head-mobile'>
             <p style={{ fontSize: '14px' }}>Comparador</p>
             <p style={{ fontSize: '11px', opacity: '.8' }}>Escolha até 4 produtos</p>
           </div>
@@ -44,8 +48,8 @@ const ComparePopUp = ({ selectedProducts, onCloseComparePopUp, removeFromSelecte
             ))}
           </div>
           <div className='app__compare_pop-up_actions'>
-            <button onClick={onGoToComparador}>Comparar<FiRepeat></FiRepeat></button>
-            <button onClick={onCloseComparePopUp} style={{ fontSize: '14px', opacity: '.8'}}>Limpar tudo</button>
+            <button className='app__compare_pop-up_actions_1' onClick={onGoToComparador}>Comparar <FiRepeat></FiRepeat></button>
+            <button className='app__compare_pop-up_actions_2' onClick={onCloseComparePopUp}>Limpar tudo</button>
           </div>
         </div>
       </>, document.getElementById('comparador')

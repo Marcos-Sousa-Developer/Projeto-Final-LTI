@@ -111,4 +111,12 @@ img, picture {
 }
 .main__action_btn:hover {
   opacity: 1;
+}
+
+.app__compare-product {
+  margin: 1rem auto 2rem;
+}
+.app__compare-product_content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }/*# sourceMappingURL=CompareProduct.css.map */
