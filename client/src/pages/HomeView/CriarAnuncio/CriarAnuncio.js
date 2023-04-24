@@ -72,13 +72,20 @@ function CriarAnuncio() {
         teste.map((category) => {  
         if (category.name === categoriaNome) {
             featuresEmpty = category.features;
-            category.subcategories.map((subcategory) => {
-                if (subcategory.name === subCategoriaNome) {
-                    subFeaturesEmpty = subcategory.features;
-                }
-            });
         }
         });
+
+        let prodFeatures = JSON.parse(product[0].characteristics);   
+
+        if (featuresEmpty != null) {
+          for(let feature in featuresEmpty[0]){
+              if(feature in prodFeatures){
+                featuresEmpty[0][feature] = prodFeatures[feature];
+              }
+          }
+        }
+
+        subFeaturesEmpty = prodFeatures
 
         setFormData({
             EAN: ean,
@@ -87,7 +94,7 @@ function CriarAnuncio() {
             subcategoria: subCategoriaNome,
             subsubcategoria: subSubCategoriaNome,
             features: featuresEmpty,
-            sub_features: subFeaturesEmpty,
+            sub_features: prodFeatures,
             id_subsubcategory: idsubsubcategory,
         });
       }
