@@ -13,14 +13,21 @@ const CompareProduct = () => {
   return (
     <>
       <Navbar></Navbar>
-      <div>
+      <div className='main__container app__compare-product'>
         <SubHeading title='Comparador'></SubHeading>
-        {products.map(product => {
-          if (product) {
-            return <div key={product.id}>{product.productName}</div>;
-          }
-          return null;
-        })}
+        <div className='app__compare-product_content'>
+          {products.map(product => {
+            if (product) {
+              return (
+                <div key={product.id}>
+                  <img src={product.productImage}/>
+                  <p>{product.productName}</p>
+                </div>
+              )
+            }
+            return null;
+          })}
+        </div>
       </div>
       <Footer></Footer>
     </>

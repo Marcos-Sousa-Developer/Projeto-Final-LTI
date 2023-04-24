@@ -154,6 +154,9 @@ img, picture {
   background: white;
   transform: translateX(-100%);
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .app__sidebar.active {
   transform: translateX(0%);
