@@ -1,26 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import {FiChevronRight, FiChevronLeft} from 'react-icons/fi';
+import {FiChevronRight, FiChevronLeft, FiX, FiChevronDown, FiPlus, FiTrash2 } from 'react-icons/fi';
+
 import postToDB from '../../../hooks/postToDB';
 import getFromDB from '../../../hooks/getFromDB';
 import getAllFromDB from '../../../hooks/getAllFromDB';
+
 import {teste} from '../../../utilities/teste';
 
-import {NavbarSupplier, Footer, SubHeading, InputField} from '../../../components/index';
-import GeneralInfo from './GeneralInfo';
-import ProductInfo from './ProductInfo';
-import { categorias, categories } from '../../../utilities/categorias';
+import {NavbarSupplier, Footer, SubHeading} from '../../../components/index';
+import Features from './Features';
+import SubFeatures from './SubFeatures';
 import "./styles/CriarAnuncio.css";
 import "../../../components/InputField/InputField.css";
 
 function CriarAnuncio() {
-    // Scroll to top on page change
-    const useEffectd = () => {
-        window.scrollTo(0, 0);
-    };
-
-    // Form step logic
-    const [page, setPage] = useState(0);
-
     const [idUser, setIDUser] = useState(null) //Ir buscar às cookies o ID do user       
 
     const [formData, setFormData] = useState({
@@ -479,6 +472,248 @@ function CriarAnuncio() {
           //}
           alert(text)
     }
+  
+    //-----------------------------------------------------------------------------  
+
+    //Categoria  
+    const Category = ({ category, onClick }) => {
+      return (
+        <div className='app__pointer' style={{marginBottom:'.75rem'}} onClick={() => onClick(category)}>
+          <a className='app__text_effect'>{category}</a>
+        </div>
+      );
+    };
+    //-----------------------------------------------------------------------------
+
+    //Detalhes da Categoria
+    const CategoryDetails = ({ category, onClick }) => {
+
+        const [clickedSubcategory, setClickedSubcategory] = useState(null);
+
+        return (
+            <div className='category_details'>
+                <div className='app__pointer category_details_header' onClick={onClick}>
+                    <button><FiChevronLeft fontSize={20} color="black"></FiChevronLeft></button> 
+                    <p>{category.name}</p>
+                </div>
+                <div className='category_details_body'>
+                    <div className='category_details_body_1'>
+                        {category.subcategories.map((subcategory, i) => (
+                            <li key={i}>
+                            <div>
+                                <div className={`app__pointer category_details_body_1_sub ${clickedSubcategory === i ? ' clickedSubcategory' : ''}`} onClick={() => setClickedSubcategory(i)}>
+                                    <p>{subcategory.name}</p>
+                                    <FiChevronRight className='ok'/>
+                                </div>
+                                {clickedSubcategory === i && (
+                                <div className='subsubcategories' style={{display:'none'}}>
+                                    <div className='subsubcategories_content'>
+                                    {subcategory.subsubcategories.map((subsubcategory, j) => (
+                                        <li key={j}>
+                                        <label className='app__pointer'>
+                                            <p style={{fontSize:'14px', margin: '0'}}>{subsubcategory}</p>
+                                            <input 
+                                            style={{display:'none'}}
+                                            type="radio" 
+                                            name="CriarAnuncioRadio" 
+                                            value={[category.name, subcategory.name, subsubcategory]} 
+                                            onChange={(e) => {setFormData({ ...formData, categoria: e.target.value })}}
+                                            onClick={toggleActiveModal}>
+                                            </input> 
+                                        </label>
+                                        </li>
+                                    ))}
+                                    </div>
+                                </div>
+                                )}
+                            </div>
+                            </li>
+                        ))}
+                    </div>
+                    <div className='category_details_body_2'>
+                        <div className='subsubcategories'>
+                            <div className='subsubcategories_content'>
+                            {category.subcategories.map((subcategory, i) => (
+                                clickedSubcategory === i && (
+                                subcategory.subsubcategories.map((subsubcategory, j) => (
+                                    <li key={j}>
+                                        <label className='app__pointer'>
+                                            <p className='app__text_effect'>{subsubcategory}</p>
+                                            <input 
+                                            style={{display:'none'}}
+                                            type="radio" 
+                                            name="CriarAnuncioRadio" 
+                                            value={subsubcategory} 
+                                            onChange={(e) => {
+                                                const subcategoria = subcategory.name;
+                                                const subsubcategoria = e.target.value;
+                                                let sub_features = {};
+
+                                                if (subsubcategoria === "Alimentação") {
+                                                    sub_features = { Validade: ''};
+                                                }
+
+                                                if (subcategoria === "Calçado" || subcategoria === "Roupinhas"){
+                                                    sub_features = { Gender: ''};
+                                                }
+
+                                                if (subsubcategoria === "Móveis") {
+                                                    sub_features = { Largura: '', Comprimento: ''};
+                                                }
+
+                                                if (subsubcategoria === "Computadores") {
+                                                    sub_features = { Processador: '', MemoryRAM: '', OperatingSystem: '', StorageAmount: '', StorageType: '' };
+                                                }
+
+                                                if (subsubcategoria === "Tv" || subsubcategoria === "Projectores" || subsubcategoria === "Monitores" ){
+                                                    sub_features = {Resolution: '', ScreenSize: ''}
+                                                }
+
+                                                if (subsubcategoria === "Portáteis"){
+                                                    sub_features = {Processador: '', MemoryRAM: '', OperatingSystem: '', StorageAmount: '', StorageType: '', Resolution: '', ScreenSize: '' }
+                                                }
+
+                                                if (subsubcategoria === "Software"){
+                                                    sub_features = {SoftwareType: ''}
+                                                }
+
+                                                if (subsubcategoria === "Armazenamento" || subsubcategoria === "Servidores"){
+                                                    sub_features = {StorageAmount: ''}
+                                                }
+
+                                                if (subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos"){
+                                                    sub_features = {StorageType: '', StorageAmount: ''}
+                                                }
+
+                                                if (subsubcategoria === "Telemóveis" || subsubcategoria === "Tablets" ){
+                                                    sub_features = {OperatingSystem: ''}
+                                                }
+
+                                                if (subcategoria === "Roupa"){
+                                                    sub_features = {ClothingSize: ''}
+                                                }
+
+                                                if (subcategoria === "Calçado"){
+                                                    sub_features = {ShoeSize: ''}
+                                                }
+
+                                                let params = {
+                                                    name: subsubcategoria,
+                                                };
+
+                                                setFormData({
+                                                    ...formData, 
+                                                    categoria: category.name,
+                                                    subcategoria: subcategoria,
+                                                    subsubcategoria: subsubcategoria,
+                                                    features: category.features,
+                                                    sub_features: [sub_features]
+                                                });
+                                            }}
+                                            onClick={toggleActiveModal}>
+                                            </input> 
+                                        </label>
+                                    </li>
+                                ))
+                                )
+                            ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+    //-----------------------------------------------------------------------------
+
+    //Modal
+    const Modal = ({ className }) => {
+        const [selectedModal, setSelectedModal] = useState(null);
+
+        const toggleModal = (i) =>{
+          if (selectedModal === i){
+            return setSelectedModal(null);
+          }
+          
+          setSelectedModal(i);
+        }
+
+        const [selectedCategory, setSelectedCategory] = useState(null);
+
+        return(
+            <div className={ `app__anuncio_modal ${className}` }>
+                <div className="app__anuncio_modal_content">
+                    <div className="app__anuncio_modal_header">
+                        <p>Escolha uma categoria</p>
+                        <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleActiveModal}></FiX>
+                    </div>
+                    <div className="app__anuncio_modal_body">
+                        {selectedCategory ? (
+                            <CategoryDetails category={selectedCategory} onClick={() => setSelectedCategory(null)}/>
+                        ) : (
+                            teste.map((category, index) => (
+                                <Category key={index} category={category.name} onClick={() => setSelectedCategory(category)}/>
+                            ))
+                        )}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    //-----------------------------------------------------------------------------
+
+    //Modal tooggle
+    const ButtonToggleModal = (props) => {
+        return(
+            <div className='buttonToggleModal_area'>
+                <p className='app__pointer' id="modal-toggler" onClick={ props.onClick }> {formData.categoria.length > 0 ? 'Alterar ' : 'Escolher '}<FiChevronDown></FiChevronDown></p> 
+                <div className='buttonToggleModal_area_selected_category'>
+                    {formData.categoria.length > 0 && 
+                        <div>
+                            <span>{formData.categoria}</span>
+                            <p>{formData.subsubcategoria}</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        )
+    }
+    //-----------------------------------------------------------------------------
+
+    //Modal overlay
+    const OverlayModal = ({ className, onClick}) => {
+        return(
+            <div className={ className } onClick={ onClick }></div>
+        )
+    }
+    //-----------------------------------------------------------------------------
+
+    //Para ativar o modal
+    const [activeModal, setActiveModal] = useState(false);
+    const toggleActiveModal = () => setActiveModal(!activeModal);
+    //-----------------------------------------------------------------------------   
+
+    //Descrição
+    const [text, setText] = useState('');
+    //-----------------------------------------------------------------------------
+
+    //Imagens
+    const [selectedImages, setSelectedImages] = useState([]);
+
+    const onSelectFile = (event) => {
+      const selectedFiles = event.target.files;
+      const selectedFilesArray = Array.from(selectedFiles);
+
+      const imagesArray = selectedFilesArray.map((file) => {
+        return URL.createObjectURL(file);
+      });
+
+      if (selectedImages.length + imagesArray.length <= 8) {
+        setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+      }
+      event.target.value = ""; // for bug in chrome
+    }
+    //-----------------------------------------------------------------------------
 
     return (
     <>
@@ -494,27 +729,113 @@ function CriarAnuncio() {
         <NavbarSupplier></NavbarSupplier>
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
-            <form onSubmit={() => {console.log(formData)}} className='app__anuncio_content' id='anuncio_form' style={{marginTop:'1rem'}}>
-                <p>{FormTitles[page]}</p>
-                <div className='app__anuncio_inputArea'>
-                    {PageDisplay()}
-                </div>
-                <div className='app__anuncio_content_stepBtns' style={{ justifyContent: page == 0 ? "flex-end" : "space-between"}}>
-                    {page == 0 ?
-                            <button type='button' onClick={() => {setPage((currPage) => currPage + 1); useEffectd()}} className='main__action_btn'>Continuar <FiChevronRight></FiChevronRight></button>
+            <form onSubmit={() => {console.log(formData)}}>
+              <div>
+                <div className='app__anuncio_content_generalInfo'>
+                  <div className='inputField'>
+                    <p>Título</p>
+                    <input type='text' value={formData.titulo} placeholder='Título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
+                  </div>
+                  <div className='inputField'>
+                    <p>Preço (€)</p>
+                    <input type='number' value={formData.preco} step="0.01" min="0" required onChange={(e) => {setFormData({ ...formData, preco: e.target.value });}}/>
+                  </div>
+                  <div className='inputField'>
+                    <p>EAN</p>
+                    <input type='text' value={formData.EAN} onChange={(e) => {setFormData({ ...formData, EAN: e.target.value });}}/>
+                  </div>
+                  <div className='app__anuncio_content_generalInfo_categoria'>
+                    <p>Categoria</p>
+                    {formData.categoria != "" && formData.subcategoria != "" && formData.subsubcategoria != "" && formData.search ? 
+                      <>
+                        <p>{formData.categoria}</p>
+                        <p>{formData.subcategoria}</p>
+                        <p>{formData.subsubcategoria}</p>
+                      </>
                     :
-                        <>
-                            <button type='button' onClick={() => {setPage((currPage) => currPage - 1); useEffectd(); }} className='main__action_btn'><FiChevronLeft></FiChevronLeft> Anterior</button>
-                            <button type='button' onClick={() => {submit()}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
-                            {/*colocar type SUBMIT*/}
-                        </>
+                      <>
+                        <ButtonToggleModal onClick={toggleActiveModal}/>
+                        <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
+                        <Modal className={ activeModal ? 'activeModal' : null}/>
+                      </>
                     } 
+                  </div>
                 </div>
+                <Features formData={formData} setFormData={setFormData}></Features>
+                <SubFeatures formData={formData} setFormData={setFormData}></SubFeatures>
+              </div>
+              <div>
+                <div className='app__anuncio_content_productInfo'>
+                  <div className='app__anuncio_description_section'>
+                      <p>Descrição</p>
+                      <textarea 
+                          style={{width:'100%', maxHeight: '170px', minHeight:'120px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
+                          form='anuncio_form' 
+                          maxLength="500" 
+                          placeholder='Indique alguns detalhes sobre o seu produto'
+                          onInput={(e) => {
+                              setText(e.target.value);
+                              setFormData({ ...formData, descricao: e.target.value })
+                          }}>
+                      </textarea>
+                      <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
+                  </div>
+                  <div className='app__anuncio_image_section'>
+                      <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span></p>
+                      <div className='app__anuncio_image_section-content'>
+                          <div className='app__anuncio_images_selected'>
+                              {selectedImages.length < 8 &&
+                                  <label className='app__anuncio_image_input app__pointer'>
+                                      <div>
+                                          <FiPlus style={{textAlign: 'center'}}></FiPlus>
+                                      </div>
+                                      <input type="file" accept="image/*" multiple onChange={onSelectFile}/>
+                                  </label>
+                              }
+                              {selectedImages &&
+                                  selectedImages.map((image, index)=>{
+                                      return(
+                                          <div key={image} className='app__anuncio_image_selected'>
+                                              <img src={image} alt='' className='app__anuncio_image_selected_img'/>
+                                              <FiX className='app__anuncio_image_selected_deleteBtn app__pointer' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}></FiX>
+                                          </div>
+                                      )
+                                  })
+                              }
+                          </div>
+                          <div style={{display:'flex', marginTop:'1rem'}}>
+                              {selectedImages.length > 0 &&
+                                  <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => setSelectedImages([])}>limpar tudo <FiTrash2></FiTrash2></span>
+                              }
+                              {selectedImages.length === 8 &&
+                                  <p style={{margin: '.25rem 0 0 0', color: '#EB5C1F', fontSize:'12px'}}>Atingiu o limite de imagens!</p>
+                              }
+                          </div>
+                      </div>
+                  </div>     
+                </div>
+              </div>
+              <div style={{display: 'flex'}}>
+                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem'}}>
+                  <div className='inputField'>
+                      <p>Telemóvel</p>
+                      <input type='tel' required onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
+                  </div>
+                  <div className='inputField'>
+                      <p>Email</p>
+                      <input type='email' required onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
+                  </div> 
+                </div>    
+                <div>
+                  <p>Unidade Produção</p>
+                </div>
+              </div>
+              <button type='button' onClick={() => {submit()}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
             </form>
         </div>
         <Footer></Footer>
         </>
-        )
+      )
     }
     </>
   );
