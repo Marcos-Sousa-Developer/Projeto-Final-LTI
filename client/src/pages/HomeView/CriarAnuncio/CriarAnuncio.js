@@ -60,12 +60,12 @@ function CriarAnuncio() {
         //IR BUSCAR AS FEATURES
 
         let featuresEmpty = null;
-        let subFeaturesEmpty = null;
+        let subFeaturesEmpty = {};
 
         teste.map((category) => {  
-        if (category.name === categoriaNome) {
-            featuresEmpty = category.features;
-        }
+          if (category.name === categoriaNome) {
+              featuresEmpty = category.features;
+          }
         });
 
         let prodFeatures = JSON.parse(product[0].characteristics);   
@@ -78,7 +78,7 @@ function CriarAnuncio() {
           }
         }
 
-        subFeaturesEmpty = prodFeatures
+        subFeaturesEmpty[0] = prodFeatures;
 
         setFormData({
             EAN: ean,
@@ -327,7 +327,7 @@ function CriarAnuncio() {
         let ad;
 
         let text = "Não foi possível criar o produto\n";
-        //if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && (validEAN == "OK" || validEAN == null)){
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && (validEAN == "OK" || validEAN == null)){
 
             let featuresDBproduct = {}; 
             let featuresDBad = {};
@@ -345,7 +345,10 @@ function CriarAnuncio() {
             //adiciona as sub
             if(formData.sub_features != undefined && formData.sub_features[0] != undefined){
               for (let feature in formData.sub_features[0]) {
+                //console.log(feature)
+                //console.log(formData.sub_features)
                 featuresDBad[feature] = formData.sub_features[0][feature];
+                
                 if(feature != "Género" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
                   featuresDBproduct[feature] = formData.sub_features[0][feature];
                 }
@@ -438,7 +441,7 @@ function CriarAnuncio() {
             
             //Verificar se fez os inputs 
             text = "Anuncio concluído"
-        //} else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
             if(validTitle != "OK" ){
               text += validTitle + "\n"
             }
@@ -469,7 +472,7 @@ function CriarAnuncio() {
             if(validEAN != "OK" && validEAN != null){
               text += validEAN + "\n"
             }
-          //}
+          }
           alert(text)
     }
   

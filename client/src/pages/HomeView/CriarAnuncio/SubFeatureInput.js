@@ -6,7 +6,7 @@ const SubFeatureInput = ({ typeInput, featureName, featureTitle, formData, setFo
   let subFeature  = null;
   let subFeatureValue = null;
   if(subFeaturesKeys.length == 1 && subFeaturesKeys[0] == "0") {
-    subFeature = formData.sub_features.find(sub_feature => sub_feature[featureName]);
+    subFeature = formData.sub_features[0][featureName];
     subFeatureValue = subFeature ? subFeature[featureName] : '';
   }
   if(subFeaturesKeys.length >= 2) {
@@ -15,11 +15,9 @@ const SubFeatureInput = ({ typeInput, featureName, featureTitle, formData, setFo
   }
 
   const handleInputChange = (e) => {
-    const updatedSubFeature = { ...formData.sub_features[0] };
-    updatedSubFeature[featureName] = e.target.value;
-    const updatedSubFeatures = [...formData.sub_features];
-    updatedSubFeatures[0] = updatedSubFeature;
-    setFormData({ ...formData, sub_features: updatedSubFeatures });
+    const updatedSubFeature = { ...formData.sub_features };
+    updatedSubFeature[0][featureName] = e.target.value;
+    setFormData({ ...formData, sub_features: updatedSubFeature });
   };
 
   return (

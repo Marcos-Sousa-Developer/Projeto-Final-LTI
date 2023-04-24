@@ -22,7 +22,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.Gender = e.target.value;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
                                 value={formData.sub_features?.Gender || ""}
                             >
@@ -50,7 +50,7 @@ const SubFeatures = ({formData, setFormData}) => {
                             <p>Memória RAM:</p>
                             <select
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features };
+                                    const updatedFeature = { ...formData.sub_features }
                                     updatedFeature.MemoryRAM = e.target.value;
                                     setFormData({ ...formData, sub_features: updatedFeature });
                                 }
@@ -58,7 +58,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                 value={formData.sub_features?.MemoryRAM || ""}
                             >
                                 <option value="">Escolher</option>
-                                <option selected value="1GB">1GB</option>
+                                <option value="1GB">1GB</option>
                                 <option value="2GB">2GB</option>
                                 <option value="4GB">4GB</option>
                                 <option value="8GB">8GB</option>
@@ -73,7 +73,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.OperatingSystem = e.target.value;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
                                 value={formData.sub_features?.OperatingSystem || ""}
                             >
@@ -94,7 +94,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.Resolution = e.target.value;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
                                 value={formData.sub_features?.Resolution || ""}
                             >
@@ -120,7 +120,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.ScreenSize = e.target.value;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
                                 value={formData.sub_features?.ScreenSize || ""}
                             >
@@ -148,7 +148,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.ScreenSize = e.target.value;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
                                 value={formData.sub_features?.ScreenSize || ""}
                             >
@@ -181,7 +181,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.StorageAmount = e.target.value;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
                                 value={formData.sub_features?.StorageAmount || ""}
                             >
@@ -212,7 +212,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.StorageType = e.target.value;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
                                 value={formData.sub_features?.StorageType || ""}
                             >
@@ -234,7 +234,7 @@ const SubFeatures = ({formData, setFormData}) => {
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.OperatingSystem = e.target.value;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
                                 value={formData.sub_features?.OperatingSystem || ""}
                             >
@@ -260,7 +260,7 @@ const SubFeatures = ({formData, setFormData}) => {
                             onChange={(e) => {
                                 const updatedFeature = { ...formData.sub_features };
                                 updatedFeature.ClothingSize = e.target.value;
-                                setFormData({ ...formData, sub_features: updatedFeatures });
+                                setFormData({ ...formData, sub_features: updatedFeature });
                             }}
                             value={formData.sub_features?.ClothingSize || ""}
                         >
