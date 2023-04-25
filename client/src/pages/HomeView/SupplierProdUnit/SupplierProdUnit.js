@@ -137,27 +137,42 @@ const SupplierProdUnit = () => {
                                 {editingIndex === index && (
                                     <tr>
                                         <td colSpan="3">
-                                            <form onSubmit={(event) => {
-                                            event.preventDefault();
-                                            handleEditProductionUnit(index, {
-                                                name: event.target.name.value,
-                                                location: event.target.location.value
-                                            });
-                                            }}>
-                                            <label>
-                                                Nome:
-                                                <input type="text" name="name" defaultValue={productionUnit.name} />
-                                            </label>
-                                            <label>
-                                                Localização:
-                                                <input type="text" name="location" defaultValue={productionUnit.location} />
-                                            </label>
-                                            <label>
-                                                Capacidade:
-                                                <input type="text" name="capacity" defaultValue={productionUnit.capacity} />
-                                            </label>
-                                            <button type="submit" className='main__action_btn'>Guardar</button>
-                                            <button type="button" className='main__action_btn' onClick={() => setEditingIndex(null)}>Cancel</button>
+                                            <form 
+                                                style={{display: 'flex'}}
+                                                onSubmit={(event) => {
+                                                    event.preventDefault();
+                                                    handleEditProductionUnit(index, {
+                                                        name: event.target.name.value,
+                                                        location: event.target.location.value,
+                                                        capacity: event.target.capacity.value,
+                                                    });
+                                                }}>
+                                                <div className='inputField'>
+                                                    <p>Nome:</p>
+                                                    <input                         
+                                                        type="text"
+                                                        name="name"
+                                                        defaultValue={newProductionUnit.name}
+                                                    />
+                                                </div> 
+                                                <div className='inputField'>
+                                                    <p>Localização:</p>
+                                                    <input                         
+                                                        type="text"
+                                                        name="location"
+                                                        defaultValue={newProductionUnit.location}
+                                                    />
+                                                </div> 
+                                                <div className='inputField'>
+                                                    <p>Capacidade:</p>
+                                                    <input                         
+                                                        type="text"
+                                                        name="capacity"
+                                                        defaultValue={newProductionUnit.capacity}
+                                                    />
+                                                </div> 
+                                                <button style={{alignSelf: 'end'}} type="submit" className='main__action_btn'>Guardar</button>
+                                                <button style={{alignSelf: 'end'}} type="button" className='main__action_btn' onClick={() => setEditingIndex(null)}>Cancelar</button>
                                             </form>
                                         </td>
                                     </tr>

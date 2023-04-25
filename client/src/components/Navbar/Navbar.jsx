@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
 import { Link } from 'react-router-dom';
-import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight, FiChevronLeft, FiRepeat } from 'react-icons/fi';
 
 import images from '../../assets/images.js';
 import { teste } from '../../utilities/teste.js'
@@ -75,6 +75,10 @@ const Navbar = () => {
                         )}
                     </ul>
                 </div>
+            </div>
+            <div>
+                <hr></hr>
+                <a href='/comparador'>Comparador <FiRepeat></FiRepeat></a>
             </div>
           </div>
         )

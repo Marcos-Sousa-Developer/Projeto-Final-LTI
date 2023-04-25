@@ -53,6 +53,9 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
   background: white;
   transform: translateX(-100%);
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &.active{
     transform: translateX(0%);

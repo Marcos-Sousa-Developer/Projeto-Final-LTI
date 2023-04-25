@@ -19,14 +19,12 @@ const SubFeatures = ({formData, setFormData}) => {
                         <div className='inputField'>
                             <p>Género:</p>
                             <select  
-                                value={formData.sub_features[0]?.Gender || ""}
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features[0] };
+                                    const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.Gender = e.target.value;
-                                    const updatedFeatures = [...formData.sub_features];
-                                    updatedFeatures[0] = updatedFeature;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
+                                value={formData.sub_features?.Gender || ""}
                             >
                                 <option value="">Escolher</option>
                                 <option value="Menino">Menino</option>
@@ -50,15 +48,14 @@ const SubFeatures = ({formData, setFormData}) => {
                         <SubFeatureInput typeInput="text" featureName="Processador" featureTitle="Processador" formData={formData} setFormData={setFormData}></SubFeatureInput>
                         <div className='inputField'>
                             <p>Memória RAM:</p>
-                            <select  
-                                value={formData.sub_features[0]?.MemoryRAM || ""}
+                            <select
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features[0] };
+                                    const updatedFeature = { ...formData.sub_features }
                                     updatedFeature.MemoryRAM = e.target.value;
-                                    const updatedFeatures = [...formData.sub_features];
-                                    updatedFeatures[0] = updatedFeature;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
-                                }}
+                                    setFormData({ ...formData, sub_features: updatedFeature });
+                                }
+                                }
+                                value={formData.sub_features?.MemoryRAM || ""}
                             >
                                 <option value="">Escolher</option>
                                 <option value="1GB">1GB</option>
@@ -73,14 +70,12 @@ const SubFeatures = ({formData, setFormData}) => {
                         <div className='inputField'>
                             <p>Sistema operativo:</p>
                             <select  
-                                value={formData.sub_features[0]?.OperatingSystem || ""}
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features[0] };
+                                    const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.OperatingSystem = e.target.value;
-                                    const updatedFeatures = [...formData.sub_features];
-                                    updatedFeatures[0] = updatedFeature;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
+                                value={formData.sub_features?.OperatingSystem || ""}
                             >
                                 <option value="">Escolher</option>
                                 <option value="Microsoft Windows">Microsoft Windows</option>
@@ -96,14 +91,12 @@ const SubFeatures = ({formData, setFormData}) => {
                         <div className='inputField'>
                             <p>Resolução:</p>
                             <select  
-                                value={formData.sub_features[0]?.Resolution || ""}
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features[0] };
+                                    const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.Resolution = e.target.value;
-                                    const updatedFeatures = [...formData.sub_features];
-                                    updatedFeatures[0] = updatedFeature;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
+                                value={formData.sub_features?.Resolution || ""}
                             >
                                 <option value="">Escolher</option>
                                 <option value="1920x1080 (Full HD)">1920x1080 (Full HD)</option>
@@ -124,14 +117,12 @@ const SubFeatures = ({formData, setFormData}) => {
                         <div className='inputField'>
                             <p>Tamanho de ecrã:</p>
                             <select  
-                                value={formData.sub_features[0]?.ScreenSize || ""}
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features[0] };
+                                    const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.ScreenSize = e.target.value;
-                                    const updatedFeatures = [...formData.sub_features];
-                                    updatedFeatures[0] = updatedFeature;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
+                                value={formData.sub_features?.ScreenSize || ""}
                             >
                                 <option value="">Escolher</option>
                                 <option value="-21''">-21''</option>
@@ -154,14 +145,12 @@ const SubFeatures = ({formData, setFormData}) => {
                         <div className='inputField'>
                             <p>Tamanho de ecrã:</p>
                             <select  
-                                value={formData.sub_features[0]?.ScreenSize || ""}
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features[0] };
+                                    const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.ScreenSize = e.target.value;
-                                    const updatedFeatures = [...formData.sub_features];
-                                    updatedFeatures[0] = updatedFeature;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
+                                value={formData.sub_features?.ScreenSize || ""}
                             >
                                 <option value="">Escolher</option>
                                 <option value="-27''">-27''</option>
@@ -189,14 +178,12 @@ const SubFeatures = ({formData, setFormData}) => {
                         <div className='inputField'>
                             <p  style={{margin:'0 0 6px 0', fontSize:'14px'}}>Capacidade de armazenamento:</p>
                             <select  
-                                value={formData.sub_features[0]?.StorageAmount || ""}
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features[0] };
+                                    const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.StorageAmount = e.target.value;
-                                    const updatedFeatures = [...formData.sub_features];
-                                    updatedFeatures[0] = updatedFeature;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
+                                value={formData.sub_features?.StorageAmount || ""}
                             >
                                 <option value="">Escolher</option>
                                 <option value="120GB">120GB</option>
@@ -222,14 +209,12 @@ const SubFeatures = ({formData, setFormData}) => {
                         <div className='inputField'>
                             <p style={{fontSize:'15px'}}>Tipo de armazenamento:</p>
                             <select  
-                                value={formData.sub_features[0]?.StorageType || ""}
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features[0] };
+                                    const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.StorageType = e.target.value;
-                                    const updatedFeatures = [...formData.sub_features];
-                                    updatedFeatures[0] = updatedFeature;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
+                                value={formData.sub_features?.StorageType || ""}
                             >
                                 <option value="">Escolher</option>
                                 <option value="SSD">SSD</option>
@@ -246,14 +231,12 @@ const SubFeatures = ({formData, setFormData}) => {
                         <div>
                             <p>Sistema operativo:</p>
                             <select 
-                                value={formData.sub_features[0]?.OperatingSystem || ""}
                                 onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features[0] };
+                                    const updatedFeature = { ...formData.sub_features };
                                     updatedFeature.OperatingSystem = e.target.value;
-                                    const updatedFeatures = [...formData.sub_features];
-                                    updatedFeatures[0] = updatedFeature;
-                                    setFormData({ ...formData, sub_features: updatedFeatures });
+                                    setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
+                                value={formData.sub_features?.OperatingSystem || ""}
                             >
                                 <option value="">Escolher</option>
                                 <option value="Android">Android</option>
@@ -274,14 +257,12 @@ const SubFeatures = ({formData, setFormData}) => {
                     <div className='inputField'>
                         <p>Tamanho:</p>
                         <select 
-                            value={formData.sub_features[0]?.ClothingSize || ""}
                             onChange={(e) => {
-                                const updatedFeature = { ...formData.sub_features[0] };
+                                const updatedFeature = { ...formData.sub_features };
                                 updatedFeature.ClothingSize = e.target.value;
-                                const updatedFeatures = [...formData.sub_features];
-                                updatedFeatures[0] = updatedFeature;
-                                setFormData({ ...formData, sub_features: updatedFeatures });
+                                setFormData({ ...formData, sub_features: updatedFeature });
                             }}
+                            value={formData.sub_features?.ClothingSize || ""}
                         >
                             <option value="">Escolher</option>
                             <option value="S">S</option>

@@ -1,5 +1,10 @@
 @import '../../../index.scss';
 
-.app__compare_product{
-    
+.app__compare-product{
+    margin: 1rem auto 2rem;
+
+    &_content{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }
