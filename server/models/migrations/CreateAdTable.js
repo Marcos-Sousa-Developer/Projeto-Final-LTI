@@ -9,6 +9,7 @@ const statement = "CREATE TABLE ads ( " +
                   "extraCharacteristic varchar(1000) NOT NULL, " +
                   "status varchar(255) NOT NULL, " +
                   "price float NOT NULL, " +
+                  "production_date DATE NOT NULL, " +
                   "supplier_id int, " +
                   "product_id int," +
                   "created_at DATE DEFAULT (CURRENT_DATE), " +

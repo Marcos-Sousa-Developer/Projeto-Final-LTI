@@ -2,7 +2,7 @@ let pool = require('../config/getLocaldbConfig')
 
 const fake_product_data = require('../factories/FAKE_PRODUCT_DATA.json')
 
-const statement = "INSERT INTO products (EAN, production_date, characteristics, id_subsubcategory, " +
+const statement = "INSERT INTO products (EAN, characteristics, id_subsubcategory, " +
                 "status, created_at) VALUES ? "
 
 let values = []
