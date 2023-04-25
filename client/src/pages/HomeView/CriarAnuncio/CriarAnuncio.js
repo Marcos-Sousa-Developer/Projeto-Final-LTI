@@ -4,6 +4,7 @@ import {FiChevronRight, FiChevronLeft, FiX, FiChevronDown, FiPlus, FiTrash2 } fr
 import postToDB from '../../../hooks/postToDB';
 import getFromDB from '../../../hooks/getFromDB';
 import getAllFromDB from '../../../hooks/getAllFromDB';
+import putToDB from '../../../hooks/putToDB';
 
 import {teste} from '../../../utilities/teste';
 
@@ -341,16 +342,12 @@ function CriarAnuncio() {
                 }
               }
             }
-
             //adiciona as sub
-            if(formData.sub_features != undefined && formData.sub_features[0] != undefined){
-              for (let feature in formData.sub_features[0]) {
-                //console.log(feature)
-                //console.log(formData.sub_features)
-                featuresDBad[feature] = formData.sub_features[0][feature];
-                
+            if(formData.sub_features != undefined){
+              for (let feature in formData.sub_features) {
+                featuresDBad[feature] = formData.sub_features[feature];
                 if(feature != "Género" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
-                  featuresDBproduct[feature] = formData.sub_features[0][feature];
+                  featuresDBproduct[feature] = formData.sub_features[feature];
                 }
               }
             }
@@ -364,6 +361,9 @@ function CriarAnuncio() {
               };
 
               let EANexist = await getAllFromDB("/products/", params);
+              
+              //Ir buscar o id do fornecedor
+              let idSupplier = idUser;
 
               if(EANexist == "There is no product in the database"){
                 //CRIA O PRODUTO
@@ -374,9 +374,6 @@ function CriarAnuncio() {
                   status: 0,
                   characteristics: JSON.stringify(featuresDBproduct),
                 })
-
-                //Ir buscar o id do fornecedor
-                let idSupplier = idUser;
 
                 //ir buscar o id do produto de cima
                 let idProduct = product.insertId
@@ -395,20 +392,35 @@ function CriarAnuncio() {
                 })
               }else{
                 product = EANexist[0]
-
-                let features = JSON.parse(product.characteristics);
-                for(let feature in features){
-                  //console.log(features)
-                  //console.log(features[feature])
+                let prodCharacStart = JSON.parse(product.characteristics)
+                let prodCharacEnd = featuresDBproduct
+                let update = false;
+                for(let feature in prodCharacStart){
+                  if(prodCharacStart[feature] != prodCharacEnd[feature]){
+                    update = true;
+                  }
                 }
-                //console.log(formData.features[0])
-                //console.log(product.id_subsubcategory)
-                //console.log(idSubSubCategory)
+                if(update == true){
+                  product = await putToDB("/products/" + product.id,{
+                    EAN: formData.EAN,
+                    production_date: formData.data_producao,
+                    id_subsubcategory: idSubSubCategory,
+                    status: 0,
+                    characteristics: JSON.stringify(featuresDBproduct),
+                  })
+                }
 
-                //verifica se os inputs são correspondentes (id_subsub, features, ...)
-                  //Caso seja, só cria anuncio
-                  //Caso não seja, dá um erro a dizer que o produto inserido não é válido e substitui pelo correto ??
-                
+                ad = await postToDB("/ads",{ 
+                  title: formData.titulo,
+                  description: formData.descricao,
+                  email: formData.email,
+                  mobile_number: formData.telemovel,
+                  extraCharacteristics: JSON.stringify(featuresDBad),
+                  status: "ativo",
+                  price: formData.preco,
+                  supplier_id: idSupplier,
+                  product_id: product.id,
+                })
               } 
             } else {
               //Quando não existe EAN
@@ -472,8 +484,8 @@ function CriarAnuncio() {
             if(validEAN != "OK" && validEAN != null){
               text += validEAN + "\n"
             }
-          }
-          alert(text)
+        }
+        alert(text)
     }
   
     //-----------------------------------------------------------------------------  
@@ -782,6 +794,10 @@ function CriarAnuncio() {
                           }}>
                       </textarea>
                       <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
+                  </div>
+                  <div className='inputField'>
+                    <p>Data de Produção</p>
+                    <input type='date' value={formData.data_producao || ""} onChange={(e) => {setFormData({ ...formData, data_producao: e.target.value });}}/>
                   </div>
                   <div className='app__anuncio_image_section'>
                       <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span></p>
