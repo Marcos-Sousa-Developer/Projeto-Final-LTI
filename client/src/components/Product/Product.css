@@ -15,6 +15,11 @@
   background: #EB5C1F;
 }
 
+.pagination-btns {
+  display: flex;
+  justify-content: center;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
