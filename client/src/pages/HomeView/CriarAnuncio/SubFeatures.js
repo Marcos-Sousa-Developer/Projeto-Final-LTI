@@ -176,7 +176,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Armazenamento" || subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos" || subsubcategoria === "Servidores" || subsubcategoria === "Computadores" ?
                     <>
                         <div className='inputField'>
-                            <p  style={{margin:'0 0 6px 0', fontSize:'14px'}}>Capacidade de armazenamento:</p>
+                            <p  style={{fontSize:'15px'}}>Cap. de armazenamento:</p>
                             <select  
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };

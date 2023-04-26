@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { FiShoppingCart, FiMinus, FiPlus} from 'react-icons/fi';
 
 import product1 from "../../../assets/testproducts/Iphone.png";
 import product2 from "../../../assets/testproducts/cannon.png";
@@ -6,13 +8,18 @@ import product3 from "../../../assets/testproducts/macbookpro.png";
 import product4 from "../../../assets/testproducts/jacket.png";
 import product5 from "../../../assets/testproducts/LEDS.png";
 
-import { Link } from 'react-router-dom';
-import { FiShoppingCart, FiMinus, FiPlus} from 'react-icons/fi';
-import { Navbar, Footer } from '../../../components/index';
+import { Navbar, Footer, SnackBar } from '../../../components/index';
 import { ProductSwiper } from './ProductSwiper';
 import './ProductPage.css';
 
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
+
 const ProductPage = () => {
+
+  const snackbarRef = useRef(null);
 
   //---------------------------Data from the product--------------------------
 
@@ -60,7 +67,18 @@ const ProductPage = () => {
                       <input/>
                       <button><FiPlus></FiPlus></button>
                     </div>
-                    <button className='main__action_btn app__product_page_content_actions_2'>Adicionar <FiShoppingCart></FiShoppingCart></button>
+                    <button 
+                      className='main__action_btn app__product_page_content_actions_2'         
+                      onClick={() => {
+                        snackbarRef.current.show();
+                      }}>Adicionar <FiShoppingCart></FiShoppingCart>
+                    </button>
+
+                    <SnackBar
+                      ref={snackbarRef}
+                      message="Produto adicionado ao carrinho"
+                      type={SnackbarType.success}
+                    />
                   </div>
                 </div>
               </div>

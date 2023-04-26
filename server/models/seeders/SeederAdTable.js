@@ -3,7 +3,7 @@ let pool = require('../config/getLocaldbConfig')
 const fake_ads_data = require('../factories/FAKE_ADS_DATA.json')
 
 const statement = "INSERT INTO ads (title, description, email, mobile_number, extraCharacteristic, status, " +
-                "price, supplier_id, product_id, created_at) VALUES ? "
+                "price, production_date, supplier_id, product_id, created_at) VALUES ? "
 
 let values = [] 
 

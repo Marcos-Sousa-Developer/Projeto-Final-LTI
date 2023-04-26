@@ -17,7 +17,4 @@ router.post('/', adsController.insertAd)
 //Update ad by id
 router.put('/:id', adsController.updateAdByID) 
 
-//Add ad
-router.post('/', adsController.insertAd)
-
 module.exports = router

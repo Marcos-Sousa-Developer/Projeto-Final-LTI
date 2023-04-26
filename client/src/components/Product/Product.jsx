@@ -33,7 +33,7 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts }
               <PriceDisplay className='product_price' price={price} />
             </div>
             <div className='product_action_section'>
-              <button style={{ marginRight: '0.25rem' }} onClick={addToCart}><FiShoppingCart></FiShoppingCart><span>Adicionar</span></button>
+              {/*<button style={{ marginRight: '0.25rem' }} onClick={addToCart}><FiShoppingCart></FiShoppingCart><span>Adicionar</span></button>*/}
 
               {selectedProducts.some((p) => p.id === id) ? (
                 <button onClick={handleRemoveFromCompare}><FiRepeat></FiRepeat><span>Remover</span></button>

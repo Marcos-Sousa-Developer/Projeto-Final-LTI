@@ -52,7 +52,8 @@ const ComparePopUp = ({ selectedProducts, onCloseComparePopUp, removeFromSelecte
             <button className='app__compare_pop-up_actions_2' onClick={onCloseComparePopUp}>Limpar tudo</button>
           </div>
         </div>
-      </>, document.getElementById('comparador')
+      </>, 
+      document.getElementById('comparador')
     );
 };
 
