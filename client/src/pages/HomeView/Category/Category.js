@@ -9,6 +9,9 @@ import './Category.css';
 
 const Category = () => {
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const data = urlParams.get("products");
+
 
   return (
     <>

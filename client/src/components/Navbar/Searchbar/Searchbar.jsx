@@ -73,14 +73,17 @@ const Searchbar = () => {
                 let products = await getAllFromDB("/productsForSell",{
                     title: searchTextClear,
                 })
-                if(products == "There is no ads in the database"){
+                if(products == "There is no ad in the database"){
                     //DAR MENSAGEM DE ERRO OU SUGERIR PROCURAR PELAS CATEGORIAS
                     alert(products)
                 } else {
                     //VAI PARA OUTRA PÁGINA ONDE MOSTRA OS PRODUTOS
-                    //window.location.href = "/NOVAPAGINA?products=${products}`";
+
+                    const data = {products: products};
+                    const queryString = new URLSearchParams(data).toString();
+                    window.location.href = `/pesquisa?${queryString}`;
     
-                    //para ir buscar s produtos na nova pagina, fazer
+                    //para ir buscar os produtos na nova pagina, fazer
                     //const urlParams = new URLSearchParams(window.location.search);
                     //const data = urlParams.get("products");
                 }
