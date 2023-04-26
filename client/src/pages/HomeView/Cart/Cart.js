@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Cookies, useCookies } from 'react-cookie';
 import { FiArrowLeft, FiArrowRight, FiTrash2 } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { PRODUCTS } from '../../../assets/products';
 import { Navbar, Footer, SubHeading, Modal } from '../../../components/index';
@@ -11,19 +11,29 @@ import images from '../../../assets/images.js';
 
 import './Cart.css';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Cart = () => {
 
   const [isOpen, setIsOpen] = useState(false);
-
-
+  const [loading, setLoading] = useState(false)
   const [cookies, setCookie] = useCookies(['cart']);
   const [totalItems, setTotalItems] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
 
+  const navigate = useNavigate();
+
   const deleteAllCartItem = () => {
     const prevValue =  {};
     setCookie('cart', prevValue, { path: '/' });
+  }
+
+  const goToCheckout = async () => {
+    setLoading(true)
+    const response = await axios.post('/create-checkout-session');
+    window.location.href = response.data;
+
+    setLoading(false)
   }
   
   useEffect(() => {
@@ -82,7 +92,11 @@ const Cart = () => {
                 <p>Nº de Items: {totalItems}</p>
                 <p>SubTotal: {0}</p>
                 <p>Total: <PriceDisplay className='product_price' price={totalAmount} /></p>
-                <button className='main__action_btn app__cart_checkout_btn' >Checkout</button>
+                {
+                  !loading ?  <button className='main__action_btn app__cart_checkout_btn' type="submit" onClick={() => goToCheckout()}>Checkout</button>
+                  :
+                  <button className='main__action_btn app__cart_checkout_btn'>Loading</button>
+                }
               </div>
             </div>
           </>

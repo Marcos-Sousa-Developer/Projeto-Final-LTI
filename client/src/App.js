@@ -18,6 +18,7 @@ import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
 import Relatorios_Fornecedores from "./pages/Admin/Relatorios_Fornecedores";
 import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
 import LoadingPage from "./pages/LoadingPage";
+import Checkout from "./pages/HomeView/Checkout/Checkout";
 
 
 function App() {
@@ -112,6 +113,7 @@ function App() {
           
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<NotFound />} />
 
         </Routes>
