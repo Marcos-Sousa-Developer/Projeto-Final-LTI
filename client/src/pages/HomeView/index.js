@@ -18,6 +18,7 @@ import ProductPage from './ProductPage/ProductPage';
 import SupplierAdd from './SupplierAdd/SupplierAdd';
 import SupplierProdUnit from './SupplierProdUnit/SupplierProdUnit';
 import CompareProduct from './CompareProduct/CompareProduct';
+import SupplierSell from './SupplierSell/SupplierSell';
 
 export {
     Home,
@@ -39,4 +40,5 @@ export {
     SupplierAdd,
     SupplierProdUnit,
     CompareProduct,
+    SupplierSell,
 };

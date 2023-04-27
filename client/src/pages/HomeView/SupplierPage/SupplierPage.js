@@ -44,7 +44,7 @@ function SupplierPage() {
                 </div>
                 <div className='app__SupplierPage_boxesDireita1Nmr2'>
                   <p>Este mês</p>
-                  <p><mark class="orange">43</mark> vendas</p>
+                  <p><span className='numeroLaranja'>43</span> vendas</p>
                 </div>
               </div>
               <p>Vendas Recentes</p>
