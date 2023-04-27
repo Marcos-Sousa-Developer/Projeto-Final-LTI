@@ -98,7 +98,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
 
-          <Route path="/category" element={<Category />} />
+          <Route path="/pesquisa" element={<Category />} />
           <Route path="/produto" element={<ProductPage/>} />
           <Route path="/produnit" element={<SupplierProdUnit/>} />
 

@@ -102,16 +102,6 @@ function CriarAnuncio() {
         setDidMount(true)
     }, [])
 
-    const FormTitles = ["Detalhes do Produto", "Detalhes do Anúncio"];
-
-    const PageDisplay = () => {
-      if (page === 0) {
-        return <GeneralInfo formData={formData} setFormData={setFormData} />;
-      } else {
-        return <ProductInfo formData={formData} setFormData={setFormData} />;
-      }
-    };
-
     async function verifyTitle(title){
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //não pode ser null
@@ -518,7 +508,7 @@ function CriarAnuncio() {
                             <div>
                                 <div className={`app__pointer category_details_body_1_sub ${clickedSubcategory === i ? ' clickedSubcategory' : ''}`} onClick={() => setClickedSubcategory(i)}>
                                     <p>{subcategory.name}</p>
-                                    <FiChevronRight className='ok'/>
+                                    <FiChevronRight className='subcategory_advance'/>
                                 </div>
                                 {clickedSubcategory === i && (
                                 <div className='subsubcategories' style={{display:'none'}}>
@@ -745,42 +735,52 @@ function CriarAnuncio() {
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
             <form onSubmit={() => {console.log(formData)}}>
-              <div>
-                <div className='app__anuncio_content_generalInfo'>
+              <div className='app__anuncio_produto'>
+                <p className='title'>Produto</p>
+                <div className='app__anuncio_produto_content'>
+                  <div className='produto_info'>
+                    <div className='inputField'>
+                      <p>EAN</p>
+                      <input type='text' value={formData.EAN} onChange={(e) => {setFormData({ ...formData, EAN: e.target.value });}}/>
+                    </div>
+                    <div className='app__anuncio_produto_content_categoria'>
+                      <p>Categoria</p>
+                      {formData.categoria != "" && formData.subcategoria != "" && formData.subsubcategoria != "" && formData.search ? 
+                        <>
+                          <p>{formData.categoria}</p>
+                          <p>{formData.subcategoria}</p>
+                          <p>{formData.subsubcategoria}</p>
+                        </>
+                      :
+                        <>
+                          <ButtonToggleModal onClick={toggleActiveModal}/>
+                          <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
+                          <Modal className={ activeModal ? 'activeModal' : null}/>
+                        </>
+                      } 
+                    </div>
+                  </div>
+                  <Features formData={formData} setFormData={setFormData}></Features>
+                  <SubFeatures formData={formData} setFormData={setFormData}></SubFeatures>
+                </div>
+              </div>
+              <div className='app__anuncio_anuncio'>
+                <p className='title'>Anúncio</p>
+                <div className='app__anuncio_anuncio_content'>
                   <div className='inputField'>
                     <p>Título</p>
                     <input type='text' value={formData.titulo} placeholder='Título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
                   </div>
-                  <div className='inputField'>
-                    <p>Preço (€)</p>
-                    <input type='number' value={formData.preco} step="0.01" min="0" required onChange={(e) => {setFormData({ ...formData, preco: e.target.value });}}/>
+                  <div className='' style={{display: 'flex'}}>
+                    <div className='inputField'>
+                      <p>Preço (€)</p>
+                      <input type='number' value={formData.preco} step="0.01" min="0" required onChange={(e) => {setFormData({ ...formData, preco: e.target.value });}}/>
+                    </div>
+                    <div className='inputField' style={{marginLeft:'2rem'}}>
+                      <p>Data de Produção</p>
+                      <input type='date' value={formData.data_producao || ""} onChange={(e) => {setFormData({ ...formData, data_producao: e.target.value });}}/>
+                    </div>
                   </div>
-                  <div className='inputField'>
-                    <p>EAN</p>
-                    <input type='text' value={formData.EAN} onChange={(e) => {setFormData({ ...formData, EAN: e.target.value });}}/>
-                  </div>
-                  <div className='app__anuncio_content_generalInfo_categoria'>
-                    <p>Categoria</p>
-                    {formData.categoria != "" && formData.subcategoria != "" && formData.subsubcategoria != "" && formData.search ? 
-                      <>
-                        <p>{formData.categoria}</p>
-                        <p>{formData.subcategoria}</p>
-                        <p>{formData.subsubcategoria}</p>
-                      </>
-                    :
-                      <>
-                        <ButtonToggleModal onClick={toggleActiveModal}/>
-                        <OverlayModal className={ activeModal ? 'overlayModal activeModal' : 'overlayModal'} onClick={toggleActiveModal}/>
-                        <Modal className={ activeModal ? 'activeModal' : null}/>
-                      </>
-                    } 
-                  </div>
-                </div>
-                <Features formData={formData} setFormData={setFormData}></Features>
-                <SubFeatures formData={formData} setFormData={setFormData}></SubFeatures>
-              </div>
-              <div>
-                <div className='app__anuncio_content_productInfo'>
                   <div className='app__anuncio_description_section'>
                       <p>Descrição</p>
                       <textarea 
@@ -794,10 +794,6 @@ function CriarAnuncio() {
                           }}>
                       </textarea>
                       <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
-                  </div>
-                  <div className='inputField'>
-                    <p>Data de Produção</p>
-                    <input type='date' value={formData.data_producao || ""} onChange={(e) => {setFormData({ ...formData, data_producao: e.target.value });}}/>
                   </div>
                   <div className='app__anuncio_image_section'>
                       <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span></p>
@@ -834,22 +830,30 @@ function CriarAnuncio() {
                   </div>     
                 </div>
               </div>
-              <div style={{display: 'flex'}}>
-                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem'}}>
-                  <div className='inputField'>
-                      <p>Telemóvel</p>
-                      <input type='tel' required onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
+              <div className='app__anuncio_supplier-prodUnit'>
+                <div className='app__anuncio_supplier'>
+                  <p className='title'>Anunciante</p>
+                  <div className='app__anuncio_supplier_content'>
+                    <div className='inputField'>
+                        <p>Telemóvel</p>
+                        <input type='tel' required onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
+                    </div>
+                    <div className='inputField'>
+                        <p>Email</p>
+                        <input type='email' required onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
+                    </div> 
                   </div>
-                  <div className='inputField'>
-                      <p>Email</p>
-                      <input type='email' required onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
-                  </div> 
                 </div>    
-                <div>
-                  <p>Unidade Produção</p>
+                <div className='app__anuncio_prodUnit'>
+                  <p className='title'>Unidade Produção</p>
+                  <div className='app__anuncio_prodUnit_content'>
+
+                  </div>
                 </div>
               </div>
-              <button type='button' onClick={() => {submit()}} className='main__action_btn'>Publicar <FiChevronRight></FiChevronRight></button>
+              <div style={{textAlign: 'right'}}>
+                <button type='button' onClick={() => {submit()}} className='main__action_btn app__anuncio_submit_btn'>Publicar <FiChevronRight></FiChevronRight></button>
+              </div>
             </form>
         </div>
         <Footer></Footer>

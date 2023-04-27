@@ -3,10 +3,46 @@
   left: 50%;
   top: 5%;
   transform: translate(-50%, -50%);
-  width: 350px;
-  height: 60px;
-  border-radius: 8px;
+  min-width: 350px;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   text-align: center;
+}
+
+.snackbar .symbol {
+  flex: 10%;
+}
+
+.snackbar .message {
+  flex: 90%;
+  text-align: start;
+  font-weight: bold;
+}
+
+#showSnackBar {
+  visibility: visible;
+  animation: fadeInSnackBar 0.5s, fadeOutSnackBar 0.5s 2.7s;
+}
+
+#hideSnackBar {
+  visibility: hidden;
+}
+
+@keyframes fadeInSnackBar {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOutSnackBar {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }/*# sourceMappingURL=SnackBar.css.map */
