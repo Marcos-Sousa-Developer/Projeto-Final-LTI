@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import { Cookies, useCookies } from 'react-cookie';
 import { FiArrowLeft, FiArrowRight, FiTrash2 } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
@@ -29,11 +29,19 @@ const Cart = () => {
   }
 
   const goToCheckout = async () => {
-    setLoading(true)
-    const response = await axios.post('/create-checkout-session');
-    window.location.href = response.data;
 
-    setLoading(false)
+    const params = {}
+    for (const item in cookies.cart) {
+      const quantity = cookies.cart[item][0]
+      const price = cookies.cart[item][1]
+      const name = cookies.cart[item][2]
+
+      params[item] = {price: price, quantity: quantity, name:name, image:"http://localhost:3000/static/media/Iphone.87f6c2f48f7e15ed845b.png"}
+    }
+    
+    const response = await axios.post('/create-checkout-session', null, {params});
+    window.location = response.data
+    
   }
   
   useEffect(() => {

@@ -11,7 +11,7 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts }
   
     const addToCart = () => {
       const prevValue = cookies.cart || {};
-      prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, price];
+      prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, price, productName, productImage];
       setCookie('cart', prevValue, { path: '/' });
     };
   
