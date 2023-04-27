@@ -70,7 +70,7 @@ const Searchbar = () => {
 
         if(window.location.pathname === "/"){
             if(!searchTextClear.length == 0){
-                let products = await getAllFromDB("/productsForSell",{
+                let products = await getAllFromDB("/ads",{
                     title: searchTextClear,
                 })
                 if(products == "There is no ad in the database"){
@@ -78,14 +78,9 @@ const Searchbar = () => {
                     alert(products)
                 } else {
                     //VAI PARA OUTRA PÁGINA ONDE MOSTRA OS PRODUTOS
-
-                    const data = {products: products};
+                    const data = {searchName: searchTextClear};
                     const queryString = new URLSearchParams(data).toString();
                     window.location.href = `/pesquisa?${queryString}`;
-    
-                    //para ir buscar os produtos na nova pagina, fazer
-                    //const urlParams = new URLSearchParams(window.location.search);
-                    //const data = urlParams.get("products");
                 }
             }
         }
