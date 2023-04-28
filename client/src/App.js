@@ -13,33 +13,37 @@ import Settings from "./pages/Admin/Settings";
 import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
 import Relatorios_Fornecedores from "./pages/Admin/Relatorios_Fornecedores";
 import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
 import LoadingPage from "./pages/LoadingPage";
 import Checkout from "./pages/HomeView/Checkout/Checkout";
+import { useCookies } from "react-cookie";
 
 
 function App() {
 
   const [userType, setUserType] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [cookies,setCookies] = useCookies(['userSession','identification']);
-  const location = useLocation();
+  const location = useLocation(); 
+  const [cookies,setCookies] = useCookies()
 
   const getUserType = async () => {
+
     setLoading(true)
-    if(cookies.userSession){
-      let response = await getClientType({uid:cookies.userSession})  
+
+    let response = await getClientType()   
+
+    if(response) {
 
       let type = response[0]
       let name = response[1]
 
+      setUserType(type)
       setCookies('identification',name,{ path: '/' })
 
-      setUserType(type)
     }
+    
     setLoading(false)
   }
 

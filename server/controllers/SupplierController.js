@@ -39,7 +39,8 @@ const getAllorSomeSuppliers = async function (req, res) {
             let nextKey = Object.keys(params)[i+1];
 
             if(key == "uid"){
-                value = jwt.decryptID(value);
+                const uid_encrypt = req.cookies.userSession;
+                value = jwt.decryptID(uid_encrypt);
             }
 
             statement += key;
