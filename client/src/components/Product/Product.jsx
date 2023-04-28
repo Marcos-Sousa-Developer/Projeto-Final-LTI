@@ -5,13 +5,14 @@ import './Product.css';
 import { useCookies } from 'react-cookie';
 
 const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts }) => {
-    const { id, productName, price, productImage } = data;
+    //const { id, productName, price, productImage } = data;
+    const { id, title, price } = data;
 
     const [cookies, setCookie] = useCookies(['cart']);
   
     const addToCart = () => {
       const prevValue = cookies.cart || {};
-      prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, price];
+      prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, price, productName, productImage];
       setCookie('cart', prevValue, { path: '/' });
     };
   
@@ -26,20 +27,20 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts }
     return (
       <>
         <div className='product'>
-          <div><img className='product_img' src={productImage} /></div>
+          {/*<div><img className='product_img' src={productImage} /></div>*/}
           <div className='product_description'>
             <div>
-              <p>{productName}</p>
+              <p>{title}</p>
               <PriceDisplay className='product_price' price={price} />
             </div>
             <div className='product_action_section'>
-              <button style={{ marginRight: '0.25rem' }} onClick={addToCart}><FiShoppingCart></FiShoppingCart><span>Adicionar</span></button>
+              {/*<button style={{ marginRight: '0.25rem' }} onClick={addToCart}><FiShoppingCart></FiShoppingCart><span>Adicionar</span></button>*/}
 
-              {selectedProducts.some((p) => p.id === id) ? (
+              {/*selectedProducts.some((p) => p.id === id) ? (
                 <button onClick={handleRemoveFromCompare}><FiRepeat></FiRepeat><span>Remover</span></button>
               ) : (
                 <button onClick={handleAddToCompare}><FiRepeat></FiRepeat><span>Comparar</span></button>
-              )}
+              )*/}
             </div>
           </div>
         </div>

@@ -1,9 +1,11 @@
 import { useCookies } from 'react-cookie';
+import getClientType from './getClientType';
 
-export const authContext = () => {
-    const [cookies] = useCookies(['userSession']);
-
-    if(!cookies.userSession){
+export const authContext = async () => {
+    
+    let response = await getClientType()   
+    
+    if(response) {
         return false
     }
     return true

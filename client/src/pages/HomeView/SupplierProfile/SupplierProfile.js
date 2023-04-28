@@ -10,8 +10,6 @@ import './SupplierProfile.css';
 
 function SupplierProfile() {
 
-  const [cookies,setCookies] = useCookies(['userSession','identification']);
-
   const [id, setID] = useState(null)       
   const [name, setName] = useState(null)
   const [email, setEmail] = useState(null)
@@ -23,7 +21,7 @@ function SupplierProfile() {
 
   async function getSupplier(){
 
-    let supplier = await getFromDB("/api/suppliers", {uid: cookies.userSession})
+    let supplier = await getFromDB("/api/suppliers", {uid: true})
 
     console.log(supplier)
 

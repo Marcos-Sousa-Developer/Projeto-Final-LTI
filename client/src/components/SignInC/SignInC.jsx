@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-
 import { authentication as auth}  from '../../authentication'
 import images from '../../assets/images';
+import getClientType from '../../hooks/getClientType';
 import './SignIn.css';
 
 const SignInC = () => {
-
-    const [cookies,setCookies] = useCookies(['userSession']);
 
     const [email, setEmail] = useState(null) 
 
@@ -59,10 +56,15 @@ const SignInC = () => {
         
     } 
 
-    useEffect(() => {
-        if(cookies.userSession){
+    const getUserType = async () => {
+        let response = await getClientType()
+        if(response) {
             navigate('/');
         }
+    }
+
+    useEffect(() => {
+        getUserType()
     },[])
 
     return (

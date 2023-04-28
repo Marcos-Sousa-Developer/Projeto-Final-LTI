@@ -52,7 +52,9 @@ const setCookie = (result,res) => {
     expires: dateExpire,
     httpOnly: true})
   
-  res.cookie("userSession", uid, {expires: dateExpire})
+  res.cookie("userSession", uid, {
+    expires: dateExpire,
+    httpOnly: true})
 
 }
 
@@ -170,15 +172,11 @@ const registerUser = async (req,res) => {
  * @params request from client
  * @return userType
  */
-
-const userType = (req, res) => { 
-  return res.send("admin"); //Trocar para consumer se quiser ir 
-}
 const getUserType = async (req, res) => { 
 
   try {
 
-    let uid_encrypt = req.query.uid
+    const uid_encrypt = req.cookies.userSession;
 
     let uid_decrypt = jwt.decryptID(uid_encrypt) 
 
@@ -192,7 +190,7 @@ const getUserType = async (req, res) => {
     return res.send([user_type,name]);
   }
   catch(error) {
-      return res.send(null);
+      return res.send(false);
 }
 
 }

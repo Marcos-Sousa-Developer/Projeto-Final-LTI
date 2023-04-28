@@ -4,7 +4,9 @@ function getClientType(params) {
 
     return new Promise((resolve, reject) => {
         
-        axios.get('/userType',{params}).then((response) => {
+        axios.get('/userType',{params, withCredentials: true})
+        
+        .then((response) => {
 
             resolve(response.data)
 

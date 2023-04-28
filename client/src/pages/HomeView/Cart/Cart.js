@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { Cookies, useCookies } from 'react-cookie';
-import { FiArrowLeft, FiArrowRight, FiTrash2 } from 'react-icons/fi';
+import React, { useEffect} from 'react';
+import { useCookies } from 'react-cookie';
+import { FiArrowLeft, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import { PRODUCTS } from '../../../assets/products';
@@ -11,12 +11,12 @@ import images from '../../../assets/images.js';
 
 import './Cart.css';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Cart = () => {
 
   const [isOpen, setIsOpen] = useState(false);
-
-
+  const [loading, setLoading] = useState(false)
   const [cookies, setCookie] = useCookies(['cart']);
   const [totalItems, setTotalItems] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
@@ -24,6 +24,22 @@ const Cart = () => {
   const deleteAllCartItem = () => {
     const prevValue =  {};
     setCookie('cart', prevValue, { path: '/' });
+  }
+
+  const goToCheckout = async () => {
+
+    const params = {}
+    for (const item in cookies.cart) {
+      const quantity = cookies.cart[item][0]
+      const price = cookies.cart[item][1]
+      const name = cookies.cart[item][2]
+
+      params[item] = {price: price, quantity: quantity, name:name, image:"http://localhost:3000/static/media/Iphone.87f6c2f48f7e15ed845b.png"}
+    }
+    
+    const response = await axios.post('/create-checkout-session', null, {params});
+    window.location = response.data
+    
   }
   
   useEffect(() => {
@@ -82,7 +98,11 @@ const Cart = () => {
                 <p>Nº de Items: {totalItems}</p>
                 <p>SubTotal: {0}</p>
                 <p>Total: <PriceDisplay className='product_price' price={totalAmount} /></p>
-                <button className='main__action_btn app__cart_checkout_btn' >Checkout</button>
+                {
+                  !loading ?  <button className='main__action_btn app__cart_checkout_btn' type="submit" onClick={() => goToCheckout()}>Checkout</button>
+                  :
+                  <button className='main__action_btn app__cart_checkout_btn'>Loading</button>
+                }
               </div>
             </div>
           </>

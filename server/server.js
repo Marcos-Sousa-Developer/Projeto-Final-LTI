@@ -28,10 +28,9 @@ apiRouter.use('/consumers' , require('./api/ApiConsumers'))
 apiRouter.use('/orderedProducts' , require('./api/ApiOrderedProducts'))
 apiRouter.use('/orders' , require('./api/ApiOrders'))
 apiRouter.use('/products' , require('./api/ApiProducts'))
-apiRouter.use('/productsForSell' , require('./api/ApiAds'))
 apiRouter.use('/productionUnits' , require('./api/ApiProductionUnits'))
 apiRouter.use('/subcategories' , require('./api/ApiSubCategories'))
-apiRouter.use('/subsubcategories' , require('./api/ApiSubSubCategories'))
+//apiRouter.use('/subsubcategories' , require('./api/ApiSubSubCategories'))
 apiRouter.use('/suppliers' , require('./api/ApiSuppliers'))
 apiRouter.use('/users' , require('./api/ApiUsers'))
 apiRouter.use('/vehicles' , require('./api/ApiVehicles'))
@@ -45,6 +44,8 @@ apiRouter.get('/', (req, res) => {
 const clientRouter = express.Router(); 
 
 clientRouter.use('/',require('./routes/RouteAuthenticateUser'))
+clientRouter.use('/',require('./routes/RoutePaymentOrder'))
+
 
 //connect app with routers 
 app.use('/api',apiRouter)

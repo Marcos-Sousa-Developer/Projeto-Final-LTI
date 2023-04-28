@@ -10,35 +10,40 @@ import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
-import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct} from './pages/HomeView/index';
+import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
 import Relatorios_Fornecedores from "./pages/Admin/Relatorios_Fornecedores";
 import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
 import LoadingPage from "./pages/LoadingPage";
+import Checkout from "./pages/HomeView/Checkout/Checkout";
+import { useCookies } from "react-cookie";
 
 
 function App() {
 
   const [userType, setUserType] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [cookies,setCookies] = useCookies(['userSession','identification']);
-  const location = useLocation();
+  const location = useLocation(); 
+  const [cookies,setCookies] = useCookies()
 
   const getUserType = async () => {
+
     setLoading(true)
-    if(cookies.userSession){
-      let response = await getClientType({uid:cookies.userSession})  
+
+    let response = await getClientType()   
+
+    if(response) {
 
       let type = response[0]
       let name = response[1]
 
+      setUserType(type)
       setCookies('identification',name,{ path: '/' })
 
-      setUserType(type)
     }
+    
     setLoading(false)
   }
 
@@ -79,6 +84,8 @@ function App() {
               <Route path="supplier">
                 <Route index element={ <RequireAuth><SupplierPage /></RequireAuth> }/>
                 <Route exact path="Add" element={<RequireAuth><SupplierAdd /></RequireAuth>} />
+                <Route exact path="Sell" element={<RequireAuth><SupplierSell /></RequireAuth>} />
+
                 <Route exact path="profile" element={<RequireAuth><SupplierProfile /></RequireAuth>} />
               </Route>
             )
@@ -97,7 +104,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
 
-          <Route path="/category" element={<Category />} />
+          <Route path="/pesquisa" element={<Category />} />
           <Route path="/produto" element={<ProductPage/>} />
           <Route path="/produnit" element={<SupplierProdUnit/>} />
 
@@ -112,6 +119,7 @@ function App() {
           
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<NotFound />} />
 
         </Routes>

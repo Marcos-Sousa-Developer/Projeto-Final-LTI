@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import getFromDB from '../../../hooks/getFromDB';
 import putToDB from '../../../hooks/putToDB';
-import { useCookies } from "react-cookie";
-
 import {Navbar, Footer, SubHeading} from '../../../components/index';
 import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
 import { BiIdCard } from 'react-icons/bi';
@@ -10,8 +8,6 @@ import './ConsumerProfile.css';
 
 function ConsumerProfile() {
 
-
-  const [cookies,setCookies] = useCookies(['userSession','identification']);
 
   const [id, setID] = useState(null)        
   const [name, setName] = useState(null)
@@ -24,7 +20,7 @@ function ConsumerProfile() {
 
   async function getConsumer(){
 
-    let consumer = await getFromDB("/consumers", {uid: cookies.userSession})
+    let consumer = await getFromDB("/consumers", {uid: true})
     
     setID(consumer[0].id)
     setName(consumer[0].name)

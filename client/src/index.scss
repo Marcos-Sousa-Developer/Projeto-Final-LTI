@@ -37,6 +37,32 @@ $border: 3px solid $light_gray;
   background: #EB5C1F;
 }
 
+//pagination
+
+.paginationBttns {
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: .2rem .5rem;
+  margin: .25rem;
+  cursor: pointer;
+  box-sizing:content-box;
+}
+
+.paginationBttns a:hover {
+  color: $orange;
+}
+
+.paginationActive {
+  color: $orange;
+}
+
+.paginationDisabled a {
+  opacity: 0;
+}
+
 //basic stuff
 
 *{

@@ -70,19 +70,17 @@ const Searchbar = () => {
 
         if(window.location.pathname === "/"){
             if(!searchTextClear.length == 0){
-                let products = await getAllFromDB("/productsForSell",{
+                let products = await getAllFromDB("/ads",{
                     title: searchTextClear,
                 })
-                if(products == "There is no ads in the database"){
+                if(products == "There is no ad in the database"){
                     //DAR MENSAGEM DE ERRO OU SUGERIR PROCURAR PELAS CATEGORIAS
                     alert(products)
                 } else {
                     //VAI PARA OUTRA PÁGINA ONDE MOSTRA OS PRODUTOS
-                    //window.location.href = "/NOVAPAGINA?products=${products}`";
-    
-                    //para ir buscar s produtos na nova pagina, fazer
-                    //const urlParams = new URLSearchParams(window.location.search);
-                    //const data = urlParams.get("products");
+                    const data = {searchName: searchTextClear};
+                    const queryString = new URLSearchParams(data).toString();
+                    window.location.href = `/pesquisa?${queryString}`;
                 }
             }
         }

@@ -188,11 +188,16 @@ img, picture {
 }
 .app__SupplierPage_boxesDireita1Nmr1 .numeroLaranja {
   color: #EB5C1F;
+  font-size: 27px;
 }
 .app__SupplierPage_boxesDireita1Nmr2 {
   display: inline-block;
   padding: 0rem 1rem;
   vertical-align: middle;
+}
+.app__SupplierPage_boxesDireita1Nmr2 .numeroLaranja {
+  color: #EB5C1F;
+  font-size: 27px;
 }
 
 a.option {
