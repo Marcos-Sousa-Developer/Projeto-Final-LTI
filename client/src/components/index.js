@@ -9,6 +9,7 @@ import Product from './Product/Product';
 import SubHeading from './SubHeading/SubHeading';
 import InputField from './InputField/InputField';
 import ComparePopUp from './ComparePopUp/ComparePopUp';
+import SnackBar from './SnackBarNotification/SnackBar';
 
 export {
   Navbar,
@@ -22,4 +23,5 @@ export {
   SubHeading,
   InputField,
   ComparePopUp,
+  SnackBar,
 };
