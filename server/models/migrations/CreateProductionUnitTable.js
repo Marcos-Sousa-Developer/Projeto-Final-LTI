@@ -5,7 +5,8 @@ const statement = "CREATE TABLE productionUnits ( " +
                   "name varchar(255) NOT NULL, " +
                   "location varchar(255) NOT NULL, " + 
                   "capacity float NOT NULL, " +  
-                  "id_supplier int, " +
+                  "uid_supplier varchar(100) NOT NULL, " +                  
+                  "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "PRIMARY KEY (id))";
 
 pool.query(statement, function(error, result) {

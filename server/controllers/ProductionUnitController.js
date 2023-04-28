@@ -1,4 +1,5 @@
 let dbConnection = require('./DatabaseController')
+const jwt = require('../config/jwtConfig')
 
 /**
  * Async function to get all or some production units and await from database response
@@ -10,23 +11,43 @@ const getAllorSomeProductionUnits = async function (req, res) {
 
     let statement = "SELECT * FROM productionUnits";
     
-    if(Object.keys(req.query).length !== 0) {
+    if(Object.keys(req.query).length !== 0) { 
         statement += " WHERE "
+
+        let params = {} 
 
         for(let i = 0 ; i < Object.keys(req.query).length; i++) {
             let key = Object.keys(req.query)[i];
             let value = Object.values(req.query)[i]
-            let nextKey = Object.keys(req.query)[i+1];
-            let nextValue = Object.values(req.query)[i+1]
-            
-            if(value != ""){
-                statement += key;
-                statement += `='`;
-                statement += value; 
-                statement += `'` ;
+
+            if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
+                params[key] = value
             }
-    
-            if(nextKey != undefined && nextValue != ""){
+        }
+
+        if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+            if(Object.keys(params).length > 0){
+                statement += " AND ";
+            }
+        }
+
+        for(let i = 0 ; i < Object.keys(params).length; i++) { 
+
+            let key = Object.keys(params)[i];
+            let value = Object.values(params)[i]
+            let nextKey = Object.keys(params)[i+1];
+
+            if(key == "uid_supplier"){
+                value = jwt.decryptID(value);
+            }
+
+            statement += key;
+            statement += `='`;
+            statement += value; 
+            statement += `'` ;
+
+            if(nextKey != undefined){
                 statement += ` AND ` ;
             }
         }
@@ -94,10 +115,10 @@ const deleteProductionUnitByID = async function (req, res) {
 const insertProductionUnit = async function (req, res) {
 
     const data = [req.query.name, req.query.location, req.query.capacity, 
-                req.query.id_supplier];
+                jwt.decryptID(req.query.uid_supplier)];
 
     const statement = "INSERT INTO productionUnits (name, location, capacity, " +
-                    "id_supplier) VALUES ?";
+                    "uid_supplier) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
