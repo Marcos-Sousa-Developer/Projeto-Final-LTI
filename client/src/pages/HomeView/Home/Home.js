@@ -3,8 +3,6 @@ import {Navbar, Footer, Product, ComparePopUp} from '../../../components/index';
 import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 import ReactPaginate from "react-paginate";
 import { PRODUCTS } from '../../../assets/products';
-
-import {Navbar, Footer, Product, ComparePopUp} from '../../../components/index';
 import images from '../../../assets/images';
 import './Home.css';
 

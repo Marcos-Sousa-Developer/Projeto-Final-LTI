@@ -1,7 +1,7 @@
 import React, { useEffect} from 'react';
-import { Cookies, useCookies } from 'react-cookie';
-import { FiArrowLeft, FiArrowRight, FiTrash2 } from 'react-icons/fi';
-import { Link, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { FiArrowLeft, FiTrash2 } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 import { PRODUCTS } from '../../../assets/products';
 import { Navbar, Footer, SubHeading, Modal } from '../../../components/index';
@@ -20,8 +20,6 @@ const Cart = () => {
   const [cookies, setCookie] = useCookies(['cart']);
   const [totalItems, setTotalItems] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
-
-  const navigate = useNavigate();
 
   const deleteAllCartItem = () => {
     const prevValue =  {};
