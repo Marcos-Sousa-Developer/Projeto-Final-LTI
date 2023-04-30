@@ -3,7 +3,7 @@ import API_URL from '../config/serverConnect'
 
 async function putToDB(url, params) {
 
-    let url_endpoint = API_URL+url
+    let url_endpoint = API_URL + url
 
     return await axios.put(url_endpoint, null, {params})
         .then((response) => {

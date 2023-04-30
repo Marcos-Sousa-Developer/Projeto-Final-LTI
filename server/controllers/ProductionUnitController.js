@@ -39,9 +39,9 @@ const getAllorSomeProductionUnits = async function (req, res) {
             let nextKey = Object.keys(params)[i+1];
 
             if(key == "uid_supplier"){
-                value = jwt.decryptID(value);
+                const uid_encrypt = req.cookies.userSession;
+                value = jwt.decryptID(uid_encrypt);
             }
-
             statement += key;
             statement += `='`;
             statement += value; 
@@ -115,7 +115,7 @@ const deleteProductionUnitByID = async function (req, res) {
 const insertProductionUnit = async function (req, res) {
 
     const data = [req.query.name, req.query.location, req.query.capacity, 
-                jwt.decryptID(req.query.uid_supplier)];
+                jwt.decryptID(req.cookies.userSession)];
 
     const statement = "INSERT INTO productionUnits (name, location, capacity, " +
                     "uid_supplier) VALUES ?";

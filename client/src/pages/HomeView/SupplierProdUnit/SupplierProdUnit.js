@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FiEdit3, FiTrash2 } from 'react-icons/fi';
-import getFromDB from '../../../hooks/getFromDB';
 import postToDB from '../../../hooks/postToDB';
 import deleteToDB from '../../../hooks/deleteToDB';
 import getAllFromDB from '../../../hooks/getAllFromDB';
-import { useCookies } from 'react-cookie';
 
 import { Navbar, Footer, Modal, SubHeading } from '../../../components/index';
 import './SupplierProdUnit.css';
@@ -15,54 +13,18 @@ const SupplierProdUnit = () => {
     const [editingIndex, setEditingIndex] = useState(null);
     const [modalOpen, setModalOpen] = useState([]);
     const [didMount, setDidMount] = useState(false)
-    const [cookies, setCookies] = useCookies(['userSession', 'identification']);
-    const [id, setID] = useState(null)       
-
-    async function getSupplierProductionUnit(){
-
-        let supplierProductionUnit = await getFromDB("/productionUnits", {uid_supplier: cookies.userSession})
-        
-        setID(supplierProductionUnit[0].id)
-      }
 
     async function getProductionUnit(){
-        let prodsUnitGet = await getAllFromDB("/productionUnits", {uid_supplier: cookies.userSession,})
-
-        setProductionUnits(prevState => [...prodsUnitGet])
+        let prodsUnitGet = await getAllFromDB("/productionUnits", {uid_supplier: true})
+        console.log(prodsUnitGet)
+        if(typeof prodsUnitGet != "string") {
+            setProductionUnits(prevState => [...prodsUnitGet])
+        }
     }
-
-    //Aparecer no loading da página
-    useEffect(()=>{
-        getProductionUnit()
-        setDidMount(true)
-        getSupplierProductionUnit()
-    }, [])
 
     function handleNewProductionUnitChange(event) {
       const { name, value } = event.target;
       setNewProductionUnit(prevState => ({ ...prevState, [name]: value }));
-    }
-  
-    function handleDeleteProductionUnit(index) {
-      // Set the corresponding element of the modalOpen array to true
-      setModalOpen(prevState => {
-        const newState = [...prevState];
-        newState[index] = true;
-        return newState;
-      });
-    }
-
-    function handleConfirmDeleteProductionUnit(index) {
-      // Create a new array with the production unit at the given index removed
-      const updatedProductionUnits = productionUnits.filter((_, i) => i !== index);
-      // Update the state with the new array
-      setProductionUnits(updatedProductionUnits);
-      // Set the corresponding element of the modalOpen array back to false
-      setModalOpen(prevState => {
-        const newState = [...prevState];
-        newState[index] = false;
-        return newState;
-      });
     }
   
     function handleEditProductionUnit(index, updatedProductionUnit) {
@@ -76,13 +38,13 @@ const SupplierProdUnit = () => {
       setEditingIndex(null);
     }
 
-    const submit = async () => {
+    const submitInsert = async () => {
         //CRIA O PRODUCTION UNIT
         let prodUnitPost = await postToDB("/productionUnits",{
             name: newProductionUnit.name,
             location: newProductionUnit.location,
             capacity: newProductionUnit.capacity,
-            uid_supplier: cookies.userSession,
+            uid_supplier: true,
         })
 
         // Add the new production unit to the list of production units stored in state
@@ -93,9 +55,17 @@ const SupplierProdUnit = () => {
         setModalOpen(prevState => [...prevState, false]);
     }
 
-    const submitDelete = async () => {
-
+    const submitDelete = async (index) => {
+        //APAGA O PRODUCTION UNIT
+        await deleteToDB("/productionUnits/" + index)
+        location.reload()
     }
+
+    //Aparecer no loading da página
+    useEffect(()=>{
+        getProductionUnit()
+        setDidMount(true)
+    }, [])
 
     return (
     <>
@@ -116,6 +86,7 @@ const SupplierProdUnit = () => {
                         <p>Nome:</p>
                         <input                         
                             type="text"
+                            placeholder="Nome"
                             name="name"
                             value={newProductionUnit.name}
                             onChange={handleNewProductionUnitChange}
@@ -125,6 +96,7 @@ const SupplierProdUnit = () => {
                         <p>Localização:</p>
                         <input                         
                             type="text"
+                            placeholder="Localização"
                             name="location"
                             value={newProductionUnit.location}
                             onChange={handleNewProductionUnitChange}
@@ -134,12 +106,13 @@ const SupplierProdUnit = () => {
                         <p>Capacidade:</p>
                         <input                         
                             type="text"
+                            placeholder="Capacidade"
                             name="capacity"
                             value={newProductionUnit.capacity}
                             onChange={handleNewProductionUnitChange}
                         />
                     </div> 
-                    <button onClick={() => submit()} className='main__action_btn'>Adicionar</button>
+                    <button onClick={() => submitInsert()} className='main__action_btn'>Adicionar</button>
                 </form>
                 {productionUnits.length > 0 && (
                     <>
@@ -178,7 +151,7 @@ const SupplierProdUnit = () => {
                                             newState[index] = false;
                                             return newState;
                                             })}>Cancelar</button>
-                                            <button onClick={() => submitDelete(index)}>Apagar</button>
+                                            <button onClick={() => submitDelete(productionUnit.id)}>Apagar</button>
                                         </Modal>
                                     </td>
                                 </tr>

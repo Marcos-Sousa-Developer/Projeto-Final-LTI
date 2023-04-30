@@ -5,9 +5,8 @@ export const authContext = async () => {
     
     let response = await getClientType()   
     
-    if(response) {
+    if (response) {
         return false
     }
     return true
 }
-

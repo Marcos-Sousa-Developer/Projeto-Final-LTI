@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation} from "react-router-dom"; 
+import { Routes, Route, useLocation} from "react-router-dom";
 import RequireAuth from "./components/RequireAuth"
 import Dashboard from "./pages/Admin/Dashboard";
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
@@ -86,6 +86,7 @@ function App() {
                 <Route exact path="Add" element={<RequireAuth><SupplierAdd /></RequireAuth>} />
                 <Route exact path="Sell" element={<RequireAuth><SupplierSell /></RequireAuth>} />
 
+                <Route exact path="produnit" element={<SupplierProdUnit/>} />
                 <Route exact path="profile" element={<RequireAuth><SupplierProfile /></RequireAuth>} />
               </Route>
             )
@@ -106,7 +107,6 @@ function App() {
 
           <Route path="/pesquisa" element={<Category />} />
           <Route path="/produto" element={<ProductPage/>} />
-          <Route path="/produnit" element={<SupplierProdUnit/>} />
 
           {/* para dps meter dentro do supplier */}
           <Route path="/anuncio" element={<CriarAnuncio />} />
