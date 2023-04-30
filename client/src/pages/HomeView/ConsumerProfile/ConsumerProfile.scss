@@ -3,8 +3,7 @@
 .app__ConsumerProfile {
     max-width: 1650px;
     width: 95%;
-    margin: 0 auto;
-    padding-top: 3%;
+    margin: 1rem auto 2rem;
 
     &_options{
 
@@ -37,20 +36,19 @@
         }
     }
 
-    &_border {
-        border: 3.5px solid $light_gray;
-    }
-
     &_box{
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
+        border: 3.5px solid $light_gray;
+        margin-bottom: 2rem;
 
         input{
             border: none;
             outline: none;
-            width: 92%;
-            margin-left: 2%;
+            width: 100%;
+            margin-left: .5rem;
+            font-size: $normal_font;
         }
 
         &_div {
@@ -64,16 +62,16 @@
                     border-radius: 10px;
                     padding: 0.25rem 0.5rem;
                     font-size: large;
+                    display: flex;
+                    align-items: center;
                 }
             }
         }
     }
 
     &_button {
-        margin: 1rem;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: start;
     }
 }
 
