@@ -15,6 +15,30 @@
   background: #EB5C1F;
 }
 
+.paginationBttns {
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 0.2rem 0.5rem;
+  margin: 0.25rem;
+  cursor: pointer;
+  box-sizing: content-box;
+}
+
+.paginationBttns a:hover {
+  color: #EB5C1F;
+}
+
+.paginationActive {
+  color: #EB5C1F;
+}
+
+.paginationDisabled a {
+  opacity: 0;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -126,7 +150,7 @@ img, picture {
 .app__SignIn_box {
   padding: 2rem 1rem 3rem;
   width: 90%;
-  margin: 6rem auto 4rem;
+  margin: 4rem auto 4rem;
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   border-radius: 10px;

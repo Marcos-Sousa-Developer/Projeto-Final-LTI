@@ -54,8 +54,8 @@ const SignUpC = () => {
         <img className='app__SignUp_rectangle1' src={images.Rectangle1} alt="" />
         <div className='app__SignUp main__container'>
             <Link to='/'><FiArrowLeft></FiArrowLeft></Link>
-            <h1 className=''>Sign Up</h1>
-                <div className='app__SignUp_content'>
+            <h3 className=''>Criar Conta</h3>
+                <div className={`app__SignUp_content ${showExtraInputs ? 'app__SignUp_content_shadow' : ''}`}>
                     <div>
                         {!showExtraInputs && (
                             <p style={{textAlign:'center'}}>Que utilizador vais ser?</p>
@@ -88,7 +88,7 @@ const SignUpC = () => {
                         <div className='app__SignUp_box1'>
                             <form>
                                 <div>
-                                    <p>Name</p>
+                                    <p>Nome</p>
                                     <div className='app__SignUp_box11'>
                                         <FiUser fontSize={22} color='black' aria-hidden="true"></FiUser>
                                         <input

@@ -41,7 +41,7 @@
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
         border: 3.5px solid $light_gray;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
 
         input{
             border: none;
@@ -73,15 +73,25 @@
         display: flex;
         justify-content: start;
     }
-}
 
-a.option{
-    border-right: 3px solid $light_gray; 
-    padding-right: 10px;
+    &_password-checks{
+        margin: 0;
+        padding: 0;
+        font-size: $smaller_font;
+        margin-top: 1rem;
+
+        &_symbol-success>*>*{
+            color: rgb(107, 209, 34);
+        }
+
+        &_symbol-fail>*>*{
+            color: rgb(226, 14, 14);
+        }
+    }
 }
 
 .active {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 800px) {
@@ -96,6 +106,10 @@ a.option{
             &_div{
                     margin: 0rem 1rem 0rem 1rem;
             }
+        }
+
+        &_password-checks{
+            font-size: $small_font;
         }
     }
 }

@@ -170,7 +170,7 @@ img, picture {
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   border: 3.5px solid #EEEEEE;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .app__ConsumerProfile_box input {
   border: none;
@@ -197,14 +197,21 @@ img, picture {
   display: flex;
   justify-content: start;
 }
-
-a.option {
-  border-right: 3px solid #EEEEEE;
-  padding-right: 10px;
+.app__ConsumerProfile_password-checks {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  margin-top: 1rem;
+}
+.app__ConsumerProfile_password-checks_symbol-success > * > * {
+  color: rgb(107, 209, 34);
+}
+.app__ConsumerProfile_password-checks_symbol-fail > * > * {
+  color: rgb(226, 14, 14);
 }
 
 .active {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 800px) {
@@ -214,5 +221,8 @@ a.option {
   }
   .app__ConsumerProfile_box_div {
     margin: 0rem 1rem 0rem 1rem;
+  }
+  .app__ConsumerProfile_password-checks {
+    font-size: 12px;
   }
 }/*# sourceMappingURL=ConsumerProfile.css.map */

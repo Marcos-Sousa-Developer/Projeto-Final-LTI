@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
+import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin, FiCheck, FiX} from 'react-icons/fi';
+import { BiIdCard } from 'react-icons/bi';
+
 import getFromDB from '../../../hooks/getFromDB';
 import putToDB from '../../../hooks/putToDB';
-import {Navbar, Footer, SubHeading, SnackBar} from '../../../components/index';
-import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
-import { BiIdCard } from 'react-icons/bi';
+
+import {Navbar, Footer, SubHeading, SnackBar, Modal} from '../../../components/index';
 import './ConsumerProfile.css';
 
 const SnackbarType = {
@@ -12,10 +14,13 @@ const SnackbarType = {
 };
 
 function ConsumerProfile() {
+  //---------------------Modal---------------
+  const [isOpen, setIsOpen] = useState(false);
 
   //-------------------SnackBar--------------
   const snackbarRef = useRef(null);
   const [snackbarType, setSnackbarType] = useState(SnackbarType.success);
+
   //-----------------------------------------
 
   const [id, setID] = useState(null)        
@@ -199,6 +204,7 @@ function ConsumerProfile() {
   };
 
   const passwordMatch = password === confirmPassword;
+
   //-------------------------------------------------------------------------
   return (
     <>
@@ -221,7 +227,7 @@ function ConsumerProfile() {
             }
             type={snackbarType}
           />
-      <div className='app__ConsumerProfile'>   {/*este div tem de ser um form*/}
+      <div className='app__ConsumerProfile'>   {/*este div tem de ser um form secalhar*/}
         <SubHeading title="Conta"/>
         <div className='app__ConsumerProfile_options'>
           <ul>
@@ -276,7 +282,7 @@ function ConsumerProfile() {
           <div className='app__ConsumerProfile_box'>
             <div className='app__ConsumerProfile_box_div'>
               <div className='app__ConsumerProfile_box_div_row'>
-                Palavra-passe
+                Password
                 <div className='app__ConsumerProfile_box_div_row_input'>
                   <FiLock></FiLock>
                   <input
@@ -286,32 +292,58 @@ function ConsumerProfile() {
                     onChange={handlePasswordChange}
                   />
                 </div>
-                <ul>
+                <ul className='app__ConsumerProfile_password-checks'>
                   <li>
-                    Password tem de ter pelo menos 8 caracteres:{" "}
-                    {isEightCharLong ? "✅" : "❌"}
+                    {isEightCharLong ? 
+                        ''
+                      : 
+                      <>
+                        <div>Mínimo de 8 caracteres de comprimento: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
                   </li>
                   <li>
-                    Password tem de ter pelo menos 1 número: {hasNumber ? "✅" : "❌"}
+                    {hasNumber ? 
+                        ''
+                      : 
+                      <>
+                        <div>Contém pelo menos 1 número: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
                   </li>
                   <li>
-                    Password tem de ter pelo menos uma letra pequena:{" "}
-                    {hasLowerCase ? "✅" : "❌"}
+                    {hasLowerCase ? 
+                        ''
+                      : 
+                      <>
+                        <div>Contém pelo menos 1 letra minúscula: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
                   </li>
                   <li>
-                    Password tem de ter pelo menos uma letra grande:{" "}
-                    {hasUpperCase ? "✅" : "❌"}
+                    {hasUpperCase ? 
+                      ''
+                    : 
+                      <>
+                        <div>Contém pelo menos 1 letra maiúscula: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
                   </li>
                   <li>
-                    Password tem de ter pelo menos um caracter especial:{" "}
-                    {hasSpecialChar ? "✅" : "❌"}
+                    {hasSpecialChar ? 
+                      ''
+                    : 
+                      <>
+                        <div>Contém pelo menos 1 caractere especial: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
                   </li>
                 </ul>
               </div>
             </div>
             <div className='app__ConsumerProfile_box_div'>
               <div className='app__ConsumerProfile_box_div_row'>
-                  Confirmar palavra-passe
+                  Confirmar Password
                   <div className='app__ConsumerProfile_box_div_row_input'>
                     <FiLock></FiLock>
                     <input
@@ -322,16 +354,25 @@ function ConsumerProfile() {
                     />
                   </div>
                   {passwordMatch ? (
-                    <p style={{ color: "green" }}>Passwords match ✅</p>
+                    <div className='app__ConsumerProfile_password-checks'>
+                      <span className='app__ConsumerProfile_password-checks_symbol-success'>Passwords correspondem: <FiCheck fontSize={20}></FiCheck></span>
+                    </div>
                   ) : (
-                    <p style={{ color: "red" }}>Passwords do not match ❌</p>
+                    <div className='app__ConsumerProfile_password-checks'>
+                      <span className='app__ConsumerProfile_password-checks_symbol-fail'>Passwords não correspondem: <FiX fontSize={20}></FiX></span>
+                    </div>
                   )}
               </div>
             </div>  
           </div>
         </div>
         <div className="app__ConsumerProfile_button">
-        <button type="submit" onClick={() => submit()} className='main__action_btn'>Guardar</button>
+          <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
+          <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+            <p>Tem a certeza que deseja alterar os dados da sua conta?</p>
+            <button onClick={() => setIsOpen(false)}>Cancelar</button>
+            <button onClick={() => { submit(); setIsOpen(false); }}>Guardar</button>
+          </Modal>
         </div>
       </div>
       <Footer></Footer>
