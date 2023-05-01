@@ -12,7 +12,6 @@ const SnackbarType = {
 };
 
 function ConsumerProfile() {
-
   //-------------------SnackBar--------------
   const snackbarRef = useRef(null);
   const [snackbarType, setSnackbarType] = useState(SnackbarType.success);

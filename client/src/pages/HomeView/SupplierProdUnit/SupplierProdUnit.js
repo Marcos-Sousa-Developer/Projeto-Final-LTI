@@ -16,7 +16,6 @@ const SupplierProdUnit = () => {
 
     async function getProductionUnit(){
         let prodsUnitGet = await getAllFromDB("/productionUnits", {uid_supplier: true})
-        console.log(prodsUnitGet)
         if(typeof prodsUnitGet != "string") {
             setProductionUnits(prevState => [...prodsUnitGet])
         }

@@ -10,7 +10,7 @@ const statement = "CREATE TABLE orders ( " +
                   "address varchar(255) NOT NULL, " +
                   "size float NOT NULL, " +
                   "id_supplier_product int, " +
-                  "id_consumer int, " +
+                  "uid_consumer varchar(100) NOT NULL, " +
                   "id_vehicle int, " +
                   "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "UNIQUE (order_number), " +
