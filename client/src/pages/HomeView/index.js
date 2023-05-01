@@ -19,6 +19,7 @@ import SupplierAdd from './SupplierAdd/SupplierAdd';
 import SupplierProdUnit from './SupplierProdUnit/SupplierProdUnit';
 import CompareProduct from './CompareProduct/CompareProduct';
 import SupplierSell from './SupplierSell/SupplierSell';
+import ConsumerOrdersHistory from './ConsumerOrdersHistory/ConsumerOrdersHistory'
 
 
 export {
@@ -42,4 +43,5 @@ export {
     SupplierProdUnit,
     CompareProduct,
     SupplierSell,
+    ConsumerOrdersHistory,
 };

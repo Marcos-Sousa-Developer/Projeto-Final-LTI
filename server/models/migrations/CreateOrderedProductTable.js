@@ -7,8 +7,8 @@ const statement = "CREATE TABLE orderedProducts ( " +
                   "product_category varchar(255) NOT NULL, " +
                   "product_subcategory varchar(255) NOT NULL, " +
                   "product_subsubcategory varchar(255) NOT NULL, " +
-                  "product_owner_id int NOT NULL, " +
-                  "product_buyer_id int NOT NULL, " +
+                  "product_owner_uid int NOT NULL, " +
+                  "product_buyer_uid int NOT NULL, " +
                   "product_location varchar(255) NOT NULL, " +
                   "buyer_location varchar(255) NOT NULL, " +
                   "orderDistance_km varchar(255) NOT NULL, " +
