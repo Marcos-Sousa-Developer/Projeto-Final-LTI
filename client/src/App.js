@@ -10,7 +10,7 @@ import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
-import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell} from './pages/HomeView/index';
+import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
@@ -82,7 +82,7 @@ function App() {
           {userType == "supplier" &&
             (
               <Route path="supplier">
-                <Route index element={ <RequireAuth><SupplierPage /></RequireAuth> }/>
+                <Route index element={ <RequireAuth><SupplierPage /></RequireAuth>}/>
                 <Route exact path="Add" element={<RequireAuth><SupplierAdd /></RequireAuth>} />
                 <Route exact path="Sell" element={<RequireAuth><SupplierSell /></RequireAuth>} />
 
@@ -93,7 +93,12 @@ function App() {
           }
 
           {userType == "consumer" && 
-            (<Route path="/consumer" element={<RequireAuth><ConsumerProfile /></RequireAuth>} />)
+            (
+              <Route path="consumer">                
+                <Route exact path="ordersHistory" element={<RequireAuth><ConsumerOrdersHistory/></RequireAuth>} />                
+                <Route exact path="profile" element={<RequireAuth><ConsumerProfile/></RequireAuth>} />
+              </Route>
+            )
           }   
           
           {/*----- Only for testing ----- */}

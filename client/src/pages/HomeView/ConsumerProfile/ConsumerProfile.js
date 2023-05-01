@@ -7,8 +7,6 @@ import { BiIdCard } from 'react-icons/bi';
 import './ConsumerProfile.css';
 
 function ConsumerProfile() {
-
-
   const [id, setID] = useState(null)        
   const [name, setName] = useState(null)
   const [email, setEmail] = useState(null)
