@@ -15,6 +15,30 @@
   background: #EB5C1F;
 }
 
+.paginationBttns {
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 0.2rem 0.5rem;
+  margin: 0.25rem;
+  cursor: pointer;
+  box-sizing: content-box;
+}
+
+.paginationBttns a:hover {
+  color: #EB5C1F;
+}
+
+.paginationActive {
+  color: #EB5C1F;
+}
+
+.paginationDisabled a {
+  opacity: 0;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -116,8 +140,7 @@ img, picture {
 .app__ConsumerProfile {
   max-width: 1650px;
   width: 95%;
-  margin: 0 auto;
-  padding-top: 3%;
+  margin: 1rem auto 2rem;
 }
 .app__ConsumerProfile_options ul {
   list-style-type: none;
@@ -142,19 +165,19 @@ img, picture {
 .app__ConsumerProfile_options li a:hover {
   color: rgb(0, 0, 0);
 }
-.app__ConsumerProfile_border {
-  border: 3.5px solid #EEEEEE;
-}
 .app__ConsumerProfile_box {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  border: 3.5px solid #EEEEEE;
+  margin-bottom: 1rem;
 }
 .app__ConsumerProfile_box input {
   border: none;
   outline: none;
-  width: 92%;
-  margin-left: 2%;
+  width: 100%;
+  margin-left: 0.5rem;
+  font-size: 16px;
 }
 .app__ConsumerProfile_box_div {
   margin: 1rem 1.5rem;
@@ -167,21 +190,28 @@ img, picture {
   border-radius: 10px;
   padding: 0.25rem 0.5rem;
   font-size: large;
-}
-.app__ConsumerProfile_button {
-  margin: 1rem;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
-
-a.option {
-  border-right: 3px solid #EEEEEE;
-  padding-right: 10px;
+.app__ConsumerProfile_button {
+  display: flex;
+  justify-content: start;
+}
+.app__ConsumerProfile_password-checks {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  margin-top: 1rem;
+}
+.app__ConsumerProfile_password-checks_symbol-success > * > * {
+  color: rgb(107, 209, 34);
+}
+.app__ConsumerProfile_password-checks_symbol-fail > * > * {
+  color: rgb(226, 14, 14);
 }
 
 .active {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 800px) {
@@ -191,5 +221,8 @@ a.option {
   }
   .app__ConsumerProfile_box_div {
     margin: 0rem 1rem 0rem 1rem;
+  }
+  .app__ConsumerProfile_password-checks {
+    font-size: 12px;
   }
 }/*# sourceMappingURL=ConsumerProfile.css.map */

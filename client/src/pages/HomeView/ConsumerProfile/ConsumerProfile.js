@@ -1,13 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin, FiCheck, FiX} from 'react-icons/fi';
+import { BiIdCard } from 'react-icons/bi';
+
 import getFromDB from '../../../hooks/getFromDB';
 import putToDB from '../../../hooks/putToDB';
-import {Navbar, Footer, SubHeading} from '../../../components/index';
-import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
-import { BiIdCard } from 'react-icons/bi';
+
+import {Navbar, Footer, SubHeading, SnackBar, Modal} from '../../../components/index';
 import './ConsumerProfile.css';
 
-function ConsumerProfile() {
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
 
+function ConsumerProfile() {
+  //---------------------Modal---------------
+  const [isOpen, setIsOpen] = useState(false);
+
+  //-------------------SnackBar--------------
+  const snackbarRef = useRef(null);
+  const [snackbarType, setSnackbarType] = useState(SnackbarType.success);
+
+  //-----------------------------------------
 
   const [id, setID] = useState(null)        
   const [name, setName] = useState(null)
@@ -126,15 +140,21 @@ function ConsumerProfile() {
           mobile_number: mobile_number,
           address: address,
         })
-      }    
+      } 
 
-      let text = "Não foi possivel alterar os dados\n";
+      //let text = "Não foi possivel alterar os dados\n";
       if(consumerUpdated == true){
-          text = "Dados alterados"
+          /*text = "Dados alterados"
           location.reload();
-          alert(text) 
+          alert(text)*/
+
+
+          //console.log("sucesso");
+          setSnackbarType(SnackbarType.success);
+          snackbarRef.current.show();
+          //location.reload();
       } else if(validName != "OK" || validEmail != "OK" || validNif != "OK" || validMobileNumber != "OK" || validAddress != "OK"){
-          if(validName != "OK" ){
+          /*if(validName != "OK" ){
             text += validName + "\n"
           }
           if(validEmail != "OK" ){
@@ -149,12 +169,43 @@ function ConsumerProfile() {
           if(validAddress != "OK" ){
               text += validAddress + "\n"
           }
-          alert(text) 
+          alert(text) */
+
+
+          //console.log("insucesso");
+          setSnackbarType(SnackbarType.fail);
+          snackbarRef.current.show();
+          //location.reload();
       } 
     }
   }
+  //-------------------Password Checker------------------------
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [isEightCharLong, setIsEightCharLong] = useState(false);
+  const [hasNumber, setHasNumber] = useState(false);
+  const [hasLowerCase, setHasLowerCase] = useState(false);
+  const [hasUpperCase, setHasUpperCase] = useState(false);
+  const [hasSpecialChar, setHasSpecialChar] = useState(false);
 
+  const handlePasswordChange = (event) => {
+    const inputPassword = event.target.value;
+    setPassword(inputPassword);
+    setIsEightCharLong(inputPassword.length >= 8);
+    setHasNumber(/\d/.test(inputPassword));
+    setHasLowerCase(/[a-z]/.test(inputPassword));
+    setHasUpperCase(/[A-Z]/.test(inputPassword));
+    setHasSpecialChar(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/.test(inputPassword));
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+  };
+
+  const passwordMatch = password === confirmPassword;
+
+  //-------------------------------------------------------------------------
   return (
     <>
     {
@@ -167,7 +218,16 @@ function ConsumerProfile() {
       (
       <>
       <Navbar></Navbar>
-      <div className='app__ConsumerProfile'>   
+          <SnackBar
+            ref={snackbarRef}
+            message={
+              snackbarType === SnackbarType.success
+                ? "Alterações guardadas"
+                : "Dados incorretos"
+            }
+            type={snackbarType}
+          />
+      <div className='app__ConsumerProfile'>   {/*este div tem de ser um form secalhar*/}
         <SubHeading title="Conta"/>
         <div className='app__ConsumerProfile_options'>
           <ul>
@@ -176,6 +236,7 @@ function ConsumerProfile() {
           </ul>
         </div>
         <div className='app__ConsumerProfile_border'>
+          <p>Dados da Minha Conta</p>
           <div className='app__ConsumerProfile_box'>
             <div className='app__ConsumerProfile_box_div'>
               <div className='app__ConsumerProfile_box_div_row'>
@@ -217,29 +278,101 @@ function ConsumerProfile() {
               </div>
             </div>
           </div>
+          <p>Alterar Password</p>
           <div className='app__ConsumerProfile_box'>
             <div className='app__ConsumerProfile_box_div'>
               <div className='app__ConsumerProfile_box_div_row'>
-                Palavra-passe
+                Password
                 <div className='app__ConsumerProfile_box_div_row_input'>
                   <FiLock></FiLock>
-                  <input></input>
+                  <input
+                    id="password-input"
+                    type="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
                 </div>
+                <ul className='app__ConsumerProfile_password-checks'>
+                  <li>
+                    {isEightCharLong ? 
+                        ''
+                      : 
+                      <>
+                        <div>Mínimo de 8 caracteres de comprimento: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
+                  </li>
+                  <li>
+                    {hasNumber ? 
+                        ''
+                      : 
+                      <>
+                        <div>Contém pelo menos 1 número: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
+                  </li>
+                  <li>
+                    {hasLowerCase ? 
+                        ''
+                      : 
+                      <>
+                        <div>Contém pelo menos 1 letra minúscula: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
+                  </li>
+                  <li>
+                    {hasUpperCase ? 
+                      ''
+                    : 
+                      <>
+                        <div>Contém pelo menos 1 letra maiúscula: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
+                  </li>
+                  <li>
+                    {hasSpecialChar ? 
+                      ''
+                    : 
+                      <>
+                        <div>Contém pelo menos 1 caractere especial: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                      </>
+                    }
+                  </li>
+                </ul>
               </div>
             </div>
             <div className='app__ConsumerProfile_box_div'>
               <div className='app__ConsumerProfile_box_div_row'>
-                  Confirmar palavra-passe
+                  Confirmar Password
                   <div className='app__ConsumerProfile_box_div_row_input'>
                     <FiLock></FiLock>
-                    <input></input>
+                    <input
+                      id="confirm-password-input"
+                      type="password"
+                      value={confirmPassword}
+                      onChange={handleConfirmPasswordChange}
+                    />
                   </div>
+                  {passwordMatch ? (
+                    <div className='app__ConsumerProfile_password-checks'>
+                      <span className='app__ConsumerProfile_password-checks_symbol-success'>Passwords correspondem: <FiCheck fontSize={20}></FiCheck></span>
+                    </div>
+                  ) : (
+                    <div className='app__ConsumerProfile_password-checks'>
+                      <span className='app__ConsumerProfile_password-checks_symbol-fail'>Passwords não correspondem: <FiX fontSize={20}></FiX></span>
+                    </div>
+                  )}
               </div>
             </div>  
           </div>
         </div>
         <div className="app__ConsumerProfile_button">
-        <button type="submit" onClick={() => submit()} className='main__action_btn'>Guardar</button>
+          <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
+          <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+            <p>Tem a certeza que deseja alterar os dados da sua conta?</p>
+            <button onClick={() => setIsOpen(false)}>Cancelar</button>
+            <button onClick={() => { submit(); setIsOpen(false); }}>Guardar</button>
+          </Modal>
         </div>
       </div>
       <Footer></Footer>

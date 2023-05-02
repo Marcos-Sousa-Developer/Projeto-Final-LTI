@@ -1,4 +1,5 @@
 let dbConnection = require('./DatabaseController')
+const jwt = require('../config/jwtConfig')
 
 /**
  * Async function to get all or some ordered products and await from database response
@@ -38,30 +39,28 @@ const getAllorSomeOrderedProducts = async function (req, res) {
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
 
-            if(key != "price") {
-
-                statement += key;
-                statement += `='`;
-                statement += value; 
-                statement += `'` ;
-
-            }
-            else{
-
+            if (key == "uid_consumer" || key == "uid_supplier"){
+                const uid_encrypt = req.cookies.userSession;
+                value = jwt.decryptID(uid_encrypt);                
+            } 
+            else if (key == "price"){
                 statement += key;
                 statement += `<='`;
                 statement += value; 
                 statement += `'` ;
-
             }
-
+            else {
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
 
             if(nextKey != undefined){
                 statement += ` AND ` ;
             }
         }
     }
-
 
     let result = await dbConnection(statement)  
 
@@ -104,13 +103,13 @@ const getOrderedProductByID = async function (req, res) {
 const insertOrderedProduct = async function (req, res) {
 
     const data = [req.query.order_id, req.query.product_EAN, req.query.product_category, 
-                req.query.product_subcategory, req.query.product_subsubcategory, req.query.product_owner_id, 
-                req.query.product_buyer_id, req.query.product_location, req.query.buyer_location, 
+                req.query.product_subcategory, req.query.product_subsubcategory, req.query.product_owner_uid, 
+                req.query.product_buyer_uid, req.query.product_location, req.query.buyer_location, 
                 req.query.orderDistance_km, req.query.sameLocation, req.query.price, req.query.created_at];
 
     const statement = "INSERT INTO orderedProducts (order_id, product_EAN, product_category, " +    
-                    "product_subcategory, product_subsubcategory, product_owner_id, " +
-                    "product_buyer_id, product_location, buyer_location, orderDistance_km, sameLocation, " +
+                    "product_subcategory, product_subsubcategory, product_owner_uid, " +
+                    "product_buyer_uid, product_location, buyer_location, orderDistance_km, sameLocation, " +
                     "price, created_at) VALUES ?";
  
     let result = await dbConnection(statement, [data]);

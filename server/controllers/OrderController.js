@@ -1,4 +1,5 @@
 let dbConnection = require('./DatabaseController')
+const jwt = require('../config/jwtConfig')
 
 /**
  * Async function to get all or some orders and await from database response
@@ -22,7 +23,6 @@ const getAllorSomeOrders = async function (req, res) {
             if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
                 params[key] = value
             }
-
         }
 
         if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
@@ -38,10 +38,10 @@ const getAllorSomeOrders = async function (req, res) {
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
 
-            if(i == 0){
-                statement += " AND ";
+            if(key == "uid_consumer"){
+                const uid_encrypt = req.cookies.userSession;
+                value = jwt.decryptID(uid_encrypt);                
             }
-
             statement += key;
             statement += `='`;
             statement += value; 
@@ -116,12 +116,12 @@ const insertOrder = async function (req, res) {
 
     const data = [req.query.order_number, req.query.order_date, req.query.order_status, 
                 req.query.products_list, req.query.total, req.query.address, req.query.size, 
-                req.query.id_supplier_product, req.query.id_consumer, req.query.id_vehicle,
+                req.query.id_supplier_product, req.query.uid_consumer, req.query.id_vehicle,
                 req.query.created_at];
 
     const statement = "INSERT INTO orders (order_number, order_date, order_status, " +
                     "products_list, total, address, size, id_supplier_product, " +
-                    "id_consumer, id_vehicle, created_at) VALUES ?";
+                    "uid_consumer, id_vehicle, created_at) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

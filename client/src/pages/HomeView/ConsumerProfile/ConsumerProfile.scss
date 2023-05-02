@@ -3,8 +3,7 @@
 .app__ConsumerProfile {
     max-width: 1650px;
     width: 95%;
-    margin: 0 auto;
-    padding-top: 3%;
+    margin: 1rem auto 2rem;
 
     &_options{
 
@@ -37,20 +36,19 @@
         }
     }
 
-    &_border {
-        border: 3.5px solid $light_gray;
-    }
-
     &_box{
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
+        border: 3.5px solid $light_gray;
+        margin-bottom: 1rem;
 
         input{
             border: none;
             outline: none;
-            width: 92%;
-            margin-left: 2%;
+            width: 100%;
+            margin-left: .5rem;
+            font-size: $normal_font;
         }
 
         &_div {
@@ -64,26 +62,36 @@
                     border-radius: 10px;
                     padding: 0.25rem 0.5rem;
                     font-size: large;
+                    display: flex;
+                    align-items: center;
                 }
             }
         }
     }
 
     &_button {
-        margin: 1rem;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: start;
+    }
+
+    &_password-checks{
+        margin: 0;
+        padding: 0;
+        font-size: $smaller_font;
+        margin-top: 1rem;
+
+        &_symbol-success>*>*{
+            color: rgb(107, 209, 34);
+        }
+
+        &_symbol-fail>*>*{
+            color: rgb(226, 14, 14);
+        }
     }
 }
 
-a.option{
-    border-right: 3px solid $light_gray; 
-    padding-right: 10px;
-}
-
 .active {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 800px) {
@@ -98,6 +106,10 @@ a.option{
             &_div{
                     margin: 0rem 1rem 0rem 1rem;
             }
+        }
+
+        &_password-checks{
+            font-size: $small_font;
         }
     }
 }

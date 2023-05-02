@@ -22,10 +22,13 @@ const Category = () => {
     setAds(adsDB);
     adsDB.map( async (ad) => {
       let product = await getAllFromDB("/products/" + ad.product_id)
+      console.log(product)
       let subSubCategory = await getFromDB("/subsubcategories/" + product[0].id_subsubcategory);
-      let subCategory = await getFromDB("/subcategories/" + subSubCategory[0].id_subcategory)
+      console.log(subSubCategory)
+      let subCategory = await getFromDB("/subcategories/" + subSubCategory[0].id_subcategory);
+      console.log(subCategory)
       let category = await getFromDB("/categories/" + subCategory[0].id_category); 
-
+      console.log(category)
       //fazer um map pelas categories, caso haja alguma category com o id igual, adiciona
 
       //pesquisar como se atualiza um valor que já esta dentro do array
@@ -58,7 +61,7 @@ const Category = () => {
         if(categoryMap.id == category[0].id){
           categories["quantity"] += 1;
         } else {
-          categoryMap["quantity"] = 0;
+          categories["quantity"] = 0;
         }  
       })
       setCategories( array => [...array, category[0]])
@@ -121,6 +124,7 @@ const Category = () => {
             </div>
             <div className='products'>
               {/*Inserir as categorias do lado esquerdo como botão*/} 
+              {console.log(categories)}
               {cleanCategories(categories).map((category) => { 
                   return ( 
                     <button key={category.id}>{category.name} ({category.count})</button> 

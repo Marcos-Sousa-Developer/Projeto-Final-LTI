@@ -72,7 +72,7 @@ const SignInC = () => {
         <img className='app__SignIn_rectangle1' src={images.Rectangle1} alt="" />
         <div className='app__SignIn main__container'>
             <Link to='/'><FiArrowLeft></FiArrowLeft></Link>
-            <h1 className=''>Sign In</h1>
+            <h3 className=''>Iniciar Sessão</h3>
                 <div className='app__SignIn_box'>
                     <div className='app__SignIn_box1'>
                         <form onSubmit={handlerLogin}>

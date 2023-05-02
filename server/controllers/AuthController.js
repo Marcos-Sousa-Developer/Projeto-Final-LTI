@@ -175,7 +175,6 @@ const registerUser = async (req,res) => {
 const getUserType = async (req, res) => { 
 
   try {
-
     const uid_encrypt = req.cookies.userSession;
 
     let uid_decrypt = jwt.decryptID(uid_encrypt) 
@@ -186,11 +185,11 @@ const getUserType = async (req, res) => {
 
     const user_type = result[0].user_type
     const name = result[0].name.split(" ")[0]
-    
+
     return res.send([user_type,name]);
   }
   catch(error) {
-      return res.send(false);
+    return res.send(false);
 }
 
 }

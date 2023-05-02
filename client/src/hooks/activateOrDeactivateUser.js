@@ -1,13 +1,11 @@
 import axios from 'axios' 
 import API_URL from '../config/serverConnect'
 
-
 const activateOrDeactivateUser = async (url, status) => { 
 
     let url_endpoint = API_URL+url
 
     let params = {
-
       account_status : status
     }
     

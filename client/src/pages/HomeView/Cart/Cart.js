@@ -14,8 +14,10 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const Cart = () => {
-
+  //---------------------Modal---------------------
   const [isOpen, setIsOpen] = useState(false);
+  //------------------------------------------------
+
   const [loading, setLoading] = useState(false)
   const [cookies, setCookie] = useCookies(['cart']);
   const [totalItems, setTotalItems] = useState(0)

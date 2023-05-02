@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import getFromDB from '../../../hooks/getFromDB';
 import putToDB from '../../../hooks/putToDB';
-import { useCookies } from "react-cookie";
 
 import {Navbar, Footer, SubHeading} from '../../../components/index';
 import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
@@ -21,7 +20,7 @@ function SupplierProfile() {
 
   async function getSupplier(){
 
-    let supplier = await getFromDB("/api/suppliers", {uid: true})
+    let supplier = await getFromDB("/suppliers", {uid: true})
 
     console.log(supplier)
 
