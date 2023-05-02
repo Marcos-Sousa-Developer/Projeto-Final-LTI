@@ -23,7 +23,6 @@ const getAllorSomeOrderedProducts = async function (req, res) {
             if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
                 params[key] = value
             }
-
         }
 
         if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
@@ -39,10 +38,14 @@ const getAllorSomeOrderedProducts = async function (req, res) {
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
 
-            if (key == "uid_consumer" || key == "uid_supplier"){
+            if(key == "product_owner_uid"){
                 const uid_encrypt = req.cookies.userSession;
-                value = jwt.decryptID(uid_encrypt);                
-            } 
+                value = jwt.decryptID(uid_encrypt);         
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
             else if (key == "price"){
                 statement += key;
                 statement += `<='`;
