@@ -4,7 +4,7 @@ const fake_supplier_data = require('../factories/FAKE_SUPPLIER_DATA.json')
 
 const statement = "INSERT INTO suppliers (uid, name, email, nif, mobile_number, " +
                 "continent, country, district, city, town, address, postal_code, " +
-                "status, products_list, orders, created_at) VALUES ? "
+                "status, products_list, orders) VALUES ? "
 
 let values = []
 
@@ -15,8 +15,7 @@ fake_supplier_data.forEach(row => {
                 row.country,row.district,
                 row.city, row.town, row.address,
                 row.postal_code, row.status, 
-                row.products_list, row.orders, 
-                row.created_at])     
+                row.products_list, row.orders])     
 });
 
 pool.query(statement, [values], function(error, result){
