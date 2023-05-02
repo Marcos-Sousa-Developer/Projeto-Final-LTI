@@ -40,7 +40,7 @@ const getAllorSomeOrders = async function (req, res) {
 
             if(key == "uid_consumer"){
                 const uid_encrypt = req.cookies.userSession;
-                value = jwt.decryptID(uid_encrypt);                
+                value = jwt.decryptID(uid_encrypt);         
             }
             statement += key;
             statement += `='`;

@@ -3,22 +3,22 @@ import { FiPlusCircle } from 'react-icons/fi';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import { Navbar, Footer, Modal, SubHeading } from '../../../components/index';
-import './ConsumerOrdersHistory.css';
+import './SupplierOrdersHistory.css';
 
-const ConsumerOrdersHistory = () => {
-    const [ordersHistory, setConsumerOrder] = useState([]);
+const SupplierOrdersHistory = () => {
+    const [ordersHistory, setSupplierOrder] = useState([]);
     const [modalOpen, setModalOpen] = useState([]);
 
-    async function getConsumerOrder(){
-        let consumerOrdersGet = await getAllFromDB("/orders", {uid_consumer: true})
-        if(typeof consumerOrdersGet != "string") {
-            setConsumerOrder(prevState => [...consumerOrdersGet])
-        }
+    async function getSupplierOrder(){
+      let supplierOrdersGet = await getAllFromDB("/orderedProducts", {product_owner_uid: true})
+      if(typeof supplierOrdersGet != "string") {
+          setSupplierOrder(prevState => [...supplierOrdersGet])
+      }
     }
 
     //Aparecer no loading da página
     useEffect(()=>{
-        getConsumerOrder()
+        getSupplierOrder()
     }, [])
 
     return (
@@ -31,39 +31,39 @@ const ConsumerOrdersHistory = () => {
             <table className='app__prod-unit_existing-units'>
               <thead>
                 <tr>
-                  <th>Número da encomenda</th>
-                  <th>Data da encomenda</th>
-                  <th>Estado da encomenda</th>
-                  <th>Lista de Produtos</th>
-                  <th>Morada</th>
-                  <th>Total €</th>
-                  <th>Tamanho</th>
+                  <th>EAN</th>
+                  <th></th>
+                  <th>Localização do produto</th>
+                  <th>Localização do comprador</th>
+                  <th>Distância da encomenda</th>
+                  <th>Preço</th>
                 </tr>
               </thead>
               <tbody>
                 {ordersHistory.map((orderHistory, index) => (
                   <React.Fragment key={index}>
                     <tr>
-                      <td>{orderHistory.order_number}</td>
-                      <td>{orderHistory.order_date}</td>
-                      <td>{orderHistory.order_status}</td>
+                      <td>{orderHistory.product_EAN}</td>
                       <td>
                         <button onClick={() => setModalOpen(prevState => {
                           const newState = [...prevState];
                           newState[index] = true;
                           return newState;
-                        })}>Ver produtos</button>
+                        })}><FiPlusCircle></FiPlusCircle></button>
                         <Modal open={modalOpen[index]} onClose={() => setModalOpen(prevState => {
                           const newState = [...prevState];
                           newState[index] = false;
                           return newState;
                         })}>
-                          <p>Produto: </p>
+                          <p>Categoria: {orderHistory.product_category}</p>
+                          <p>Subcategoria: {orderHistory.product_subcategory}</p>
+                          <p>Subsubcategoria: {orderHistory.product_subsubcategory}</p>
                         </Modal>
-                      </td> 
-                      <td>{orderHistory.address}</td>
-                      <td>{orderHistory.total}</td>
-                      <td>{orderHistory.size}</td>
+                      </td>
+                      <td>{orderHistory.product_location}</td>
+                      <td>{orderHistory.buyer_location}</td>
+                      <td>{orderHistory.orderDistance_km}</td>
+                      <td>{orderHistory.price}</td>
                     </tr>
                   </React.Fragment>
                 ))}
@@ -77,4 +77,4 @@ const ConsumerOrdersHistory = () => {
   )
 }
 
-export default ConsumerOrdersHistory;
+export default SupplierOrdersHistory;
