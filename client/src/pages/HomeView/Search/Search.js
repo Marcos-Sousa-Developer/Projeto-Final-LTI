@@ -7,9 +7,9 @@ import images from '../../../assets/images.js';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import getFromDB from '../../../hooks/getFromDB';
 
-import './Category.css';
+import './Search.css';
 
-const Category = () => {
+const Search = () => {
 
   const [ads, setAds] = useState([])
   const [categories, setCategories] = useState([])
@@ -129,4 +129,4 @@ const Category = () => {
   );
 }
 
-export default Category
+export default Search

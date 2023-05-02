@@ -1,0 +1,71 @@
+@import '../../../index.scss';
+
+.app__Category{
+    margin: 3rem auto;
+
+    h5{
+        text-align: center;
+        margin: .5rem 0 0 0;
+    }
+
+
+    &_Grid{
+        padding: 3rem 1.5rem;
+        width: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1.5fr 5fr;
+        //border-radius: 10px;
+        //box-shadow: 0px 4px 4px 0px #00000040;
+    }
+
+    &_Grid_Esquerda{
+        box-sizing: border-box;
+        p{
+            margin-left: 0.25rem;
+        }
+        
+        background: #FFFFFF;
+        border: 3px solid #EEEEEE;
+        margin-right: 1rem;
+        
+    }
+
+    &_Grid_Direita{
+        p{
+            padding: 1rem 0.5rem;
+            box-sizing: border-box;
+            margin-left: 0.25rem;
+            background: #FFFFFF;
+            border: 3px solid #EEEEEE;
+            //margin-right: 1rem;
+        }
+     
+        
+        
+    }
+}
+
+
+@media screen and (max-width: 1200px){
+
+    
+    .app__Category_Grid{
+            width: 80%;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .app__Category_Grid{
+        grid-template-columns: 1fr 1fr;
+        //grid-template-rows: 2fr 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .app__Category_Grid{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+}

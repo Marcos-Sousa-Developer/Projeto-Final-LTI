@@ -20,6 +20,7 @@ import SupplierProdUnit from './SupplierProdUnit/SupplierProdUnit';
 import CompareProduct from './CompareProduct/CompareProduct';
 import SupplierSell from './SupplierSell/SupplierSell';
 import ConsumerOrdersHistory from './ConsumerOrdersHistory/ConsumerOrdersHistory'
+import Search from './Search/Search';
 
 
 export {
@@ -44,4 +45,5 @@ export {
     CompareProduct,
     SupplierSell,
     ConsumerOrdersHistory,
+    Search,
 };

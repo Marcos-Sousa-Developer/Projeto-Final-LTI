@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart, FiMinus, FiPlus} from 'react-icons/fi';
 
@@ -11,6 +11,10 @@ import product5 from "../../../assets/testproducts/LEDS.png";
 import { Navbar, Footer, SnackBar } from '../../../components/index';
 import { ProductSwiper } from './ProductSwiper';
 import './ProductPage.css';
+import LoadingPage from '../../LoadingPage.js'
+
+import getAllFromDB from '../../../hooks/getAllFromDB';
+import getFromDB from '../../../hooks/getFromDB';
 
 const SnackbarType = {
   success: "success",
@@ -20,11 +24,10 @@ const SnackbarType = {
 const ProductPage = () => {
 
   const snackbarRef = useRef(null);
-
-  //---------------------------Data from the product--------------------------
-
-  const product = [{
-    title: "iPhone 14 Pro Max 64GB",
+  const [path, setPath] = useState(null)
+  const [suppliers, setSuppliers] = useState([]) //id dos anuncios com o product_id igual ao id do produto
+  const [adData, setAdData] = useState({
+    title: "",
     src: [
       product1,
       product2,
@@ -32,34 +35,82 @@ const ProductPage = () => {
       product4,
       product5,
     ],
-    description: "Qui dolores omnis et quam enim qui quia mollitia aut ullam laudantium et voluptatibus fuga sit explicabo sequi et repudiandae veritatis. Est officiis optio non laboriosam velit et necessitatibus tempore sed aperiam doloribus.",
-    caracteristics: [
-      {
-        features: [{Marca: 'iPhone', LocaldeProducao:'USA', Validade:'None', Garantia:'3 anos'}],
-        sub_features: [{Processador: 'A14', MemoriaRam: '64GB'}]
-      }
-    ],
-    price: "999,90€"
-  }]
+    description: "",
+    caracteristics: [],
+    price: "",
+  });
+
+  const [didMount, setDidMount] = useState(false)
+
+  async function getAndSetProduct(idAd){
+
+    let ad = await getAllFromDB("/ads", {id: idAd})
+    let product = await getAllFromDB("/products/" + ad[0].product_id)
+    let subSubCategory = await getFromDB("/subsubcategories/" + product[0].id_subsubcategory);
+    let subCategory = await getFromDB("/subcategories/" + subSubCategory[0].id_subcategory);
+    let category = await getFromDB("/categories/" + subCategory[0].id_category); 
+    setPath("Home - " + category[0].name + " - " + subCategory[0].name + " - " + subSubCategory[0].name)
+    setAdData({
+      title: ad[0].title,
+      src: [
+        product1,
+        product2,
+        product3,
+        product4,
+        product5,
+      ],
+      description: ad[0].description,
+      caracteristics: JSON.parse(ad[0].extraCharacteristic),
+      price: ad[0].price,
+    });
+    let ads = await getAllFromDB("/ads", {product_id: ad[0].product_id})
+    let idsAds = []
+    ads.map( async (ad) => {
+      idsAds.push(ad.id)
+    })
+    setSuppliers(idsAds)
+  }
+
+  useEffect(()=>{ 
+    setDidMount(false)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idAd = urlParams.get("id");
+    if(idAd != null){
+      getAndSetProduct(idAd)
+    }
+    setDidMount(true)
+  }, [])
+
+  //---------------------------Data from the product--------------------------
 
   return (
     <>
+    {
+      didMount == false ? (
+        <>
+          <LoadingPage></LoadingPage>
+        </>
+      )
+      :
+      (
+      <>
         <Navbar></Navbar>
         <div className='app__product_page main__container'>
-          <p className='app__product_page_path'>Home - Categoria X - SubCategoria X - SubsubCategoria X</p>
-          <p className='app__product_page_content_title_mobile'>{product[0].title}</p>
+          <p className='app__product_page_path'>{path}</p>
+          <p className='app__product_page_content_title_mobile'>{adData.title}</p>
           <div className='app__product_page_content'>
             <div className='app__product_page_content_info'>
               <div className='app__product_page_content_info_main'>
-                <ProductSwiper src={product[0].src}></ProductSwiper>
+                <ProductSwiper src={adData.src}></ProductSwiper>
                 <div className='app__product_page_content_header'>
-                  <p className='app__product_page_content_title'>{product[0].title}</p>
-                  <p className='app__product_page_content_price'>{product[0].price}</p>
+                  <p className='app__product_page_content_title'>{adData.title}</p>
+                  <p className='app__product_page_content_price'>{adData.price}</p>
                   <div className='app__product_page_content_supplier'>
                     <p>Fornecedores</p>
+                    <p>+ {suppliers.length -1 } fornecedores </p>
                   </div>
                   <div className='app__product_page_content_description'>
-                    {product[0].description}
+                    {adData.description}
                   </div>
                   <div className='app__product_page_content_actions'>
                     <div className='app__product_page_content_actions_1'>
@@ -87,22 +138,24 @@ const ProductPage = () => {
                 <table>
                   <thead>
                     <tr>
-                      <th>Marca</th>
+                      <th>Caracteristicas</th>
+                      {/*<th>Marca</th>
                       <th>LocaldeProducao</th>
                       <th>Validade</th>
                       <th>Garantia</th>
                       <th>Processador</th>
-                      <th>MemoriaRam</th>
+                      <th>MemoriaRam</th>*/}
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td data-label='Marca'>{product[0].caracteristics[0].features[0].Marca}</td>
-                      <td data-label='LocaldeProducao'>{product[0].caracteristics[0].features[0].LocaldeProducao}</td>
-                      <td data-label='Validade'>{product[0].caracteristics[0].features[0].Validade}</td>
-                      <td data-label='Garantia'>{product[0].caracteristics[0].features[0].Garantia}</td>
-                      <td data-label='Processador'>{product[0].caracteristics[0].sub_features[0].Processador}</td>
-                      <td data-label='MemoriaRam'>{product[0].caracteristics[0].sub_features[0].MemoriaRam}</td>
+                      <td data-label='Caracteristicas'>{adData.caracteristics[0]}</td>
+                      {/*<td data-label='Marca'>{adData.caracteristics[0].features[0].Marca}</td>
+                      <td data-label='LocaldeProducao'>{adData.caracteristics[0].features[0].LocaldeProducao}</td>
+                      <td data-label='Validade'>{adData.caracteristics[0].features[0].Validade}</td>
+                      <td data-label='Garantia'>{adData.caracteristics[0].features[0].Garantia}</td>
+                      <td data-label='Processador'>{adData.caracteristics[0].sub_features[0].Processador}</td>
+                      <td data-label='MemoriaRam'>{adData.caracteristics[0].sub_features[0].MemoriaRam}</td>*/}
                     </tr>
                   </tbody>
                 </table>
@@ -111,6 +164,9 @@ const ProductPage = () => {
           </div>
         </div>
         <Footer></Footer>
+        </>
+      )
+    }
     </>
   );
 }

@@ -68,7 +68,9 @@ const Searchbar = () => {
 
         let searchTextClear = searchText.trim();
 
-        if(window.location.pathname === "/"){
+        console.log(window.location.pathname);
+
+        if(window.location.pathname === "/" || window.location.pathname === "/pesquisa"){
             if(!searchTextClear.length == 0){
                 let products = await getAllFromDB("/ads",{
                     title: searchTextClear,
