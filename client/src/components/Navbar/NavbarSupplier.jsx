@@ -9,14 +9,14 @@ const NavbarSupplier = () => {
   return (
     <>
         <div className='app__navbarSupplier main__container'>
-            <Link to='/'><img src={images.logo} alt="" className=""/></Link>
+            <Link to='/supplier'><img src={images.logo} alt="" className=""/></Link>
 
-            <div className='app__navbar_profile'>
+            <div className='app__navbarSupplier_profile'>
 
-                <Link to="/signin" className="flex app__pointer app__navbar_links">
+                <Link to="/supplier/profile" className="flex app__pointer app__navbar_links">
                     <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
 
-                    <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
+                    <div className="app__navbarSupplier_profile_account" style={{margin: '0 .75rem'}}>
                         <span className="profile_link">Conta</span>
                         <p style={{fontSize: '12px', opacity: '80%'}}>Iniciar sessão</p>
                     </div>

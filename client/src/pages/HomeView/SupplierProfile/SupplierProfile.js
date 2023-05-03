@@ -1,13 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
+import { BiIdCard } from 'react-icons/bi';
+
 import getFromDB from '../../../hooks/getFromDB';
 import putToDB from '../../../hooks/putToDB';
 
-import {Navbar, Footer, SubHeading} from '../../../components/index';
-import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
-import { BiIdCard } from 'react-icons/bi';
+import {NavbarSupplier, Footer, SubHeading, SnackBar, Modal} from '../../../components/index';
 import './SupplierProfile.css';
+import LoadingPage from '../../LoadingPage';
+
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
 
 function SupplierProfile() {
+  //---------------------Modal---------------
+  const [isOpen, setIsOpen] = useState(false);
+
+  //-------------------SnackBar--------------
+  const snackbarRef = useRef(null);
+  const [snackbarType, setSnackbarType] = useState(SnackbarType.success);
+
+  //-----------------------------------------
 
   const [id, setID] = useState(null)       
   const [name, setName] = useState(null)
@@ -151,12 +166,12 @@ function SupplierProfile() {
         })
       }    
 
-      let text = "Não foi possivel alterar os dados\n";
+      //let text = "Não foi possivel alterar os dados\n";
       if(supplierUpdated == true){
-          text = "Dados alterados"
-          alert(text) 
+          setSnackbarType(SnackbarType.success);
+          snackbarRef.current.show();
       } else if(validName != "OK" || validEmail != "OK" || validNif != "OK" || validMobileNumber != "OK" || validAddress != "OK"){
-          if(validName != "OK" ){
+          /*if(validName != "OK" ){
             text += validName + "\n"
           }
           if(validEmail != "OK" ){
@@ -171,24 +186,61 @@ function SupplierProfile() {
           if(validAddress != "OK" ){
               text += validAddress + "\n"
           }
-          alert(text) 
+          alert(text) */
+          setSnackbarType(SnackbarType.fail);
+          snackbarRef.current.show();
       } 
     }
   }
+
+    //-------------------Password Checker------------------------
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
   
+    const [isEightCharLong, setIsEightCharLong] = useState(false);
+    const [hasNumber, setHasNumber] = useState(false);
+    const [hasLowerCase, setHasLowerCase] = useState(false);
+    const [hasUpperCase, setHasUpperCase] = useState(false);
+    const [hasSpecialChar, setHasSpecialChar] = useState(false);
+  
+    const handlePasswordChange = (event) => {
+      const inputPassword = event.target.value;
+      setPassword(inputPassword);
+      setIsEightCharLong(inputPassword.length >= 8);
+      setHasNumber(/\d/.test(inputPassword));
+      setHasLowerCase(/[a-z]/.test(inputPassword));
+      setHasUpperCase(/[A-Z]/.test(inputPassword));
+      setHasSpecialChar(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/.test(inputPassword));
+    };
+  
+    const handleConfirmPasswordChange = (event) => {
+      setConfirmPassword(event.target.value);
+    };
+  
+    const passwordMatch = password === confirmPassword;
+  //-------------------------------------------------------------------------
 
   return (
     <>
     {
       didMount == false ? (
         <>
-          Loading
+          <LoadingPage></LoadingPage>
         </>
       )
       :
       (
       <>
-      <Navbar></Navbar>
+        <NavbarSupplier></NavbarSupplier>
+        <SnackBar
+          ref={snackbarRef}
+          message={
+            snackbarType === SnackbarType.success
+              ? "Alterações guardadas"
+              : "Dados incorretos"
+          }
+          type={snackbarType}
+        />
         <div className='app__SupplierProfile'>   
           <SubHeading title="Conta"/>
           <div className='app__SupplierProfile_options'>

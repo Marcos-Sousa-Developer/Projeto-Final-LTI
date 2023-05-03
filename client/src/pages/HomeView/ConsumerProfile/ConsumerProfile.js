@@ -219,15 +219,15 @@ function ConsumerProfile() {
       (
       <>
       <Navbar></Navbar>
-          <SnackBar
-            ref={snackbarRef}
-            message={
-              snackbarType === SnackbarType.success
-                ? "Alterações guardadas"
-                : "Dados incorretos"
-            }
-            type={snackbarType}
-          />
+      <SnackBar
+        ref={snackbarRef}
+        message={
+          snackbarType === SnackbarType.success
+            ? "Alterações guardadas"
+            : "Dados incorretos"
+        }
+        type={snackbarType}
+      />
       <div className='app__ConsumerProfile main__container'>   {/*este div tem de ser um form secalhar*/}
         <SubHeading title="Conta"/>
         <div className='app__ConsumerProfile_options'>
