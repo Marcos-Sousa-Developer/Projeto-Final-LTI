@@ -6,9 +6,8 @@
     //position: fixed;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-
     margin: 0 auto;
-    padding: 2rem 0 2rem 0;
+    padding: 1.5rem 0 1.5rem 0;
     border-bottom: 3px solid $light_gray;
 
     /*
@@ -175,19 +174,87 @@
 //Supplier
 
 .app__navbarSupplier{
-    margin: 1rem auto;
+    margin: 0 auto;
+    padding: 1.5rem 0 1.5rem 0;
     display: flex;
     justify-content: space-between;
+    border-bottom: 3px solid $light_gray;
+
+    &_profile{
+        display: flex;
+        justify-content: flex-end;
+
+        p{
+            margin: 0;
+        }
+
+        &_account{
+            margin: 0.75rem;
+        }
+
+        &_icon{
+            position: relative;
+        }
+
+        .profile_link{
+            color: black;
+            position: relative;
+            border-bottom-width: 0%;
+            transition: color .3s cubic-bezier(0.25, 1, 0.5, 1);
+
+            &::before{
+                content: '';
+                position: absolute;
+                border-radius: 100vmax;
+                bottom: -1px;
+                right: 0;
+                width: 0;
+                height: 3px;
+                background-color: $orange;
+                transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+        }
+
+        .app__navbar_links:hover .profile_link{
+            color: $orange;
+        }
+
+        .app__navbar_links:hover .profile_link::before{
+            left: 0;
+            right: auto;
+            width: 100%;
+        }
+        .profile_icon{
+            margin-left: 1rem;
+
+            & >*{
+                color: black;
+                transition: color .125s ease-in-out;
+            }
+        }
+        .app__navbar_links:hover .profile_icon >*{
+            color: $orange;
+        }
+    }
 
     .app__navbarSupplier_btn{
-        background-color: $orange;
-        padding: 1rem;
+        background-color: rgba($color: $orange, $alpha: .8);
+        padding: .5rem 1rem;
         border-radius: 4rem;
         color: white;
         height: 80%;
         margin-left: .5rem;
-    }
+        align-self: center;
+        transition: all 200ms ease-in-out;
 
+        &:hover{
+            background-color: $orange;
+        }
+    }
 }
 
-
+@media screen and (max-width: 700px) {
+    .app__navbarSupplier_profile_account {
+        display: none;
+    }
+}

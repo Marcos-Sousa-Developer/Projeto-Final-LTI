@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FiPlusCircle } from 'react-icons/fi';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
-import { Navbar, Footer, Modal, SubHeading } from '../../../components/index';
+import { NavbarSupplier, Footer, Modal, SubHeading } from '../../../components/index';
 import './SupplierOrdersHistory.css';
 
 const SupplierOrdersHistory = () => {
@@ -23,7 +23,7 @@ const SupplierOrdersHistory = () => {
 
     return (
     <>
-    <Navbar></Navbar>
+    <NavbarSupplier></NavbarSupplier>
     <div className='app__prod-unit main__container'>
       <SubHeading title="Histórico de encomendas"/>
         {ordersHistory.length > 0 && (
