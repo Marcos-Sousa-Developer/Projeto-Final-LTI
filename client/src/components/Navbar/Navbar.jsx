@@ -68,6 +68,8 @@ const Navbar = () => {
                                                     <a className='app__text_effect app__pointer' onClick={() => setSelectedSubCategory(subcategory)}>{subcategory.name}</a>
                                                 </li> 
                                             ))}
+                                            {console.log(category)}
+                                            <li><a className='app__text_effect app__pointer'>Ver tudo</a></li>
                                         </div>
                                     </div>
                                 );

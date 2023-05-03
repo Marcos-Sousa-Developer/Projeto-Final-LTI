@@ -109,7 +109,7 @@ const ProductPage = () => {
                     <p>Vendido por: X</p>
                     <p>Meter alguma info sobre o fornecedor: distância, por exemplo</p>
                     <p>Fornecedores</p>
-                    <Link to="/market-place">+ {suppliers.length -1 } fornecedores </Link>
+                    <Link to={`/market-place?${new URLSearchParams({products: suppliers}).toString()}`}>+ {suppliers.length -1 } fornecedores </Link>
                   </div>
                   <div className='app__product_page_content_description'>
                     {adData.description}
@@ -140,9 +140,8 @@ const ProductPage = () => {
                 <table>
                   <thead>
                     <tr>
-                      <th>Caracteristicas</th>
-                      {/*<th>Marca</th>
-                      <th>LocaldeProducao</th>
+                      {<th>Marca</th>
+                      /*<th>LocaldeProducao</th>
                       <th>Validade</th>
                       <th>Garantia</th>
                       <th>Processador</th>
@@ -151,9 +150,9 @@ const ProductPage = () => {
                   </thead>
                   <tbody>
                     <tr>
-                      <td data-label='Caracteristicas'>{adData.caracteristics[0]}</td>
-                      {/*<td data-label='Marca'>{adData.caracteristics[0].features[0].Marca}</td>
-                      <td data-label='LocaldeProducao'>{adData.caracteristics[0].features[0].LocaldeProducao}</td>
+                      {console.log(adData.caracteristics)}
+                      {<td data-label='Marca'>{adData.caracteristics.toString()}</td>
+                      /*<td data-label='LocaldeProducao'>{adData.caracteristics[0].features[0].LocaldeProducao}</td>
                       <td data-label='Validade'>{adData.caracteristics[0].features[0].Validade}</td>
                       <td data-label='Garantia'>{adData.caracteristics[0].features[0].Garantia}</td>
                       <td data-label='Processador'>{adData.caracteristics[0].sub_features[0].Processador}</td>

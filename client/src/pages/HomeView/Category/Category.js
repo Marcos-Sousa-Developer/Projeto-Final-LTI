@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { PRODUCTS } from '../../../assets/products';
-import { Navbar, Footer, Product } from '../../../components/index';
+import { Navbar, Footer, Product, SubHeading } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import images from '../../../assets/images.js';
 import getAllFromDB from '../../../hooks/getAllFromDB';
@@ -15,7 +15,7 @@ const Category = () => {
   const [categories, setCategories] = useState([])
   const [searchName, setSearchName] = useState(null)
   const [category, setCategory] = useState(null)
-  const [path, setPath] = useState("Home")
+  const [path, setPath] = useState(null)
 
   const [didMount, setDidMount] = useState(false)
 
@@ -35,8 +35,9 @@ const Category = () => {
   }  
   
   async function getAndSetProductsSearchCategory(searchName, categoryName){
-
-    setPath('Home > ' + categoryName +' > Pesquisa');
+    setPath(<>
+      <a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a>
+    </>);
     let adsDB = await getAllFromDB("/ads", {title: searchName})
     console.log(adsDB)
     let adsCategory = []
@@ -69,6 +70,12 @@ const Category = () => {
       setSearchName(searchName);
       setCategory(category);
       getAndSetProductsSearchCategory(searchName, category);
+    }
+    if(searchName == null && category != null && subCategory == null && subSubCategory == null){
+      setCategory(category);
+      setPath(<>
+        <a href="/">Home</a> {'>'} <a href={"/categoria?category="+ category}> {category}</a>
+      </>);
     }
     setDidMount(true)
   }, [])
@@ -112,7 +119,12 @@ const Category = () => {
       <div className='app__Category main__container'>
         <div className='app__Category_Caminho'>
         <p> {path} </p>
-        <h2><strong>Pesquisa por "{searchName}"</strong></h2>
+        {console.log(category)}
+        {searchName != null ? (
+          <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
+          ) : (
+            <SubHeading title = {category}></SubHeading>
+        )} 
         </div>
         <div className='app__Category_Grid main__container'>
           <div className='app__Category_Grid_Esquerda'>
