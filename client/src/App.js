@@ -116,6 +116,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/pesquisa" element={<Search />} />
+          <Route path="/categoria" element={<Category />} />
           <Route path="/produto" element={<ProductPage/>} />
           <Route path="/market-place" element={<MarketPlace/>} />
           <Route path="/comparador" element={<CompareProduct></CompareProduct>}/>
