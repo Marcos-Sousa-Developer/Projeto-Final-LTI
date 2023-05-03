@@ -80,9 +80,10 @@ const SupplierProdUnit = () => {
             <NavbarSupplier></NavbarSupplier>
             <div className='app__prod-unit main__container'>
                 <SubHeading title="Unidade Produção"/>
-                <div>
-                    <p>Criar Unidade Produção</p>
-                    <form className='app__prod-unit_add_new-unit'>
+                <div className='app__prod-unit_content'>
+                <div className='app__prod-unit_add_new-unit'>
+                    <p className='app__prod-unit_add_new-unit_title'>Criar Unidade Produção</p>
+                    <form className='app__prod-unit_add_new-unit_content'>
                         <div className='inputField'>
                             <p>Nome:</p>
                             <input                         
@@ -113,13 +114,15 @@ const SupplierProdUnit = () => {
                                 onChange={handleNewProductionUnitChange}
                             />
                         </div> 
-                        <button onClick={() => submitInsert()} className='main__action_btn'>Adicionar</button>
+                        <div style={{marginTop: '1.5rem'}}>
+                            <button onClick={() => submitInsert()} className='main__action_btn'>Adicionar</button>
+                        </div>
                     </form>
                 </div>
                 {productionUnits.length > 0 && (
-                    <div>
-                        <p>Unidades Produção</p>
-                        <table className='app__prod-unit_existing-units'>
+                    <div className='app__prod-unit_existing-units'>
+                        <p className='app__prod-unit_existing-units_title'>Unidades Produção</p>
+                        <table className='app__prod-unit_existing-units_content'>
                             <thead>
                                 <tr>
                                     <th>Nome</th>
@@ -135,7 +138,8 @@ const SupplierProdUnit = () => {
                                     <td>{productionUnit.name}</td>
                                     <td>{productionUnit.location}</td>
                                     <td>{productionUnit.capacity}</td>
-                                    <td>
+                                    <td style={{padding:'0'}}>
+                                        <div style={{display:'flex'}}>
                                         <button onClick={() => setEditingIndex(index)}><FiEdit3></FiEdit3></button>
                                         <button onClick={() => setModalOpen(prevState => {
                                             const newState = [...prevState];
@@ -155,6 +159,7 @@ const SupplierProdUnit = () => {
                                             })}>Cancelar</button>
                                             <button onClick={() => submitDelete(productionUnit.id)}>Apagar</button>
                                         </Modal>
+                                        </div>
                                     </td>
                                 </tr>
                                 {editingIndex === index && (
@@ -206,6 +211,7 @@ const SupplierProdUnit = () => {
                         </table>
                     </div>
                 )}
+                </div>
             </div>
             <Footer></Footer>
         </>
