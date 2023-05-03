@@ -70,7 +70,7 @@ const Searchbar = () => {
 
         console.log(window.location.pathname);
 
-        if(window.location.pathname === "/" || window.location.pathname === "/pesquisa"){
+        if(window.location.pathname === "/" || window.location.pathname === "/pesquisa" || window.location.pathname === "/produto" || window.location.pathname === "/categoria"){
             if(!searchTextClear.length == 0){
                 let products = await getAllFromDB("/ads",{
                     title: searchTextClear,

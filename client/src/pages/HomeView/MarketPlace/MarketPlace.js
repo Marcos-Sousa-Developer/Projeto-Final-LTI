@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import { Navbar, Footer, SnackBar } from '../../../components/index';
 import './MarketPlace.css'
 
 const MarketPlace = () => {
+    const [suppliers, setSuppliers] = useState([])
+
+    useEffect(()=>{ 
+        const urlParams = new URLSearchParams(window.location.search);
+        const suppliers = urlParams.get("products");
+        console.log(suppliers)
+        setSuppliers(suppliers)
+    })
+
+    //Nome de cada supplier (mesmo que tenha o mesmo produto duas vezes)
+    //Preço de cada produto
+
   return (
     <>
         <Navbar></Navbar>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { PRODUCTS } from '../../../assets/products';
-import { Navbar, Footer, Product } from '../../../components/index';
+import { Navbar, Footer, Product, SubHeading } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import images from '../../../assets/images.js';
 import getAllFromDB from '../../../hooks/getAllFromDB';
@@ -14,13 +14,10 @@ const Search = () => {
   const [ads, setAds] = useState([])
   const [categories, setCategories] = useState([])
   const [searchName, setSearchName] = useState(null)
-  const [path, setPath] = useState("Home")
 
   const [didMount, setDidMount] = useState(false)
 
   async function getAndSetProducts(searchName){
-
-    setPath('Home > Pesquisa');
     let adsDB = await getAllFromDB("/ads", {title: searchName})
     setAds(adsDB);
     adsDB.map( async (ad) => {
@@ -72,6 +69,12 @@ const Search = () => {
     return newCategories2
   }
 
+  function sendToCategories(categoryName) {
+    const data = {category: categoryName, searchName: searchName};
+    const queryString = new URLSearchParams(data).toString();
+    window.location.href = `/categoria?${queryString}`;
+  }
+
   return (
     <>
     {
@@ -86,8 +89,7 @@ const Search = () => {
       <Navbar></Navbar>
       <div className='app__Category main__container'>
         <div className='app__Category_Caminho'>
-        <p> {path} </p>
-        <h2><strong>Pesquisa por "{searchName}"</strong></h2>
+        <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
         </div>
         <div className='app__Category_Grid main__container'>
           <div className='app__Category_Grid_Esquerda'>
@@ -98,7 +100,7 @@ const Search = () => {
               {/*Inserir as categorias do lado esquerdo como botão*/} 
               {cleanCategories(categories).map((category) => { 
                   return ( 
-                    <button key={category.id}>{category.name} ({category.count})</button> 
+                    <button key={category.id} onClick={() => (sendToCategories(category.name))}>{category.name} ({category.count})</button>
                   );
                 })}
             </div> 
