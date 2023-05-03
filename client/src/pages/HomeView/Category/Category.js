@@ -14,11 +14,12 @@ const Category = () => {
   const [ads, setAds] = useState([])
   const [categories, setCategories] = useState([])
   const [searchName, setSearchName] = useState(null)
+  const [category, setCategory] = useState(null)
   const [path, setPath] = useState("Home")
 
   const [didMount, setDidMount] = useState(false)
 
-  async function getAndSetProducts(searchName){
+  async function getAndSetProductsSearch(searchName){
 
     setPath('Home > Pesquisa');
     let adsDB = await getAllFromDB("/ads", {title: searchName})
@@ -31,8 +32,28 @@ const Category = () => {
 
       setCategories( array => [...array, category[0]])
     })
-  }   
+  }  
+  
+  async function getAndSetProductsSearchCategory(searchName, categoryName){
 
+    setPath('Home > ' + categoryName +' > Pesquisa');
+    let adsDB = await getAllFromDB("/ads", {title: searchName})
+    console.log(adsDB)
+    let adsCategory = []
+    adsDB.map( async (ad) => {
+      let productAd = await getAllFromDB("/products/" + ad.product_id)
+      let subSubCategoryAd = await getFromDB("/subsubcategories/" + productAd[0].id_subsubcategory);
+      let subCategoryAd = await getFromDB("/subcategories/" + subSubCategoryAd[0].id_subcategory);
+      let categoryAd = await getFromDB("/categories/" + subCategoryAd[0].id_category); 
+
+      if(categoryAd[0].name == categoryName){
+        adsCategory.push(ad) 
+      }
+      setCategories( array => [...array, subCategoryAd[0]])
+    })
+    setAds(adsCategory);
+  }
+ 
   useEffect(()=>{ 
     setDidMount(false)
     const urlParams = new URLSearchParams(window.location.search);
@@ -42,9 +63,13 @@ const Category = () => {
     const subSubCategory = urlParams.get("subSubCategory");
     if(searchName != null && category == null && subCategory == null && subSubCategory == null){
       setSearchName(searchName);
-      getAndSetProducts(searchName);
+      getAndSetProductsSearch(searchName);
     }
-
+    if(searchName != null && category != null && subCategory == null && subSubCategory == null){
+      setSearchName(searchName);
+      setCategory(category);
+      getAndSetProductsSearchCategory(searchName, category);
+    }
     setDidMount(true)
   }, [])
 

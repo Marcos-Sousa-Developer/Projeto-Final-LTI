@@ -66,7 +66,7 @@ const Navbar = () => {
                                             {category.subcategories.map(subcategory => (
                                                 <li key={subcategory.name}>
                                                     <a className='app__text_effect app__pointer' onClick={() => setSelectedSubCategory(subcategory)}>{subcategory.name}</a>
-                                                </li>
+                                                </li> 
                                             ))}
                                         </div>
                                     </div>

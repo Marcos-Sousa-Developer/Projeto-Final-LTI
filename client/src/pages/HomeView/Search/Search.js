@@ -72,6 +72,12 @@ const Search = () => {
     return newCategories2
   }
 
+  function sendToCategories(categoryName) {
+    const data = {category: categoryName, searchName: searchName};
+    const queryString = new URLSearchParams(data).toString();
+    window.location.href = `/categoria?${queryString}`;
+  }
+
   return (
     <>
     {
@@ -98,7 +104,7 @@ const Search = () => {
               {/*Inserir as categorias do lado esquerdo como botão*/} 
               {cleanCategories(categories).map((category) => { 
                   return ( 
-                    <button key={category.id}>{category.name} ({category.count})</button> 
+                    <button key={category.id} onClick={() => (sendToCategories(category.name))}>{category.name} ({category.count})</button>
                   );
                 })}
             </div> 
