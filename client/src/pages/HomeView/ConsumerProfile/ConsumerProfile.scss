@@ -1,15 +1,13 @@
 @import "../../../index.scss";
 
 .app__ConsumerProfile {
-    max-width: 1650px;
-    width: 95%;
     margin: 1rem auto 2rem;
 
     &_options{
 
         ul {
             list-style-type: none;
-            margin: 0;
+            margin: 1rem 0 0 0;
             padding: 0;
             overflow: hidden;
         }
@@ -18,6 +16,11 @@
             float: left;
             padding-right: 10px;
             padding-bottom: 10px;
+
+            .active {
+                font-weight: bold;
+                color: rgba($color: $orange, $alpha: .8);
+            }
         }
         
         li:last-child {
@@ -26,20 +29,20 @@
         
         li a {
             display: block;
-            color: rgb(0, 0, 0);
             text-align: center;
             text-decoration: none;
+            font-size: $bigger_font;
         }
         
         li a:hover{
-            color: rgb(0, 0, 0);
+            color: rgba($color: $orange, $alpha: .8);
         }
     }
 
     &_box{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        gap: 2rem;
         border: 3.5px solid $light_gray;
         margin-bottom: 1rem;
 
@@ -52,7 +55,7 @@
         }
 
         &_div {
-            margin: 1rem 1.5rem;
+            margin: .5rem 1.5rem .5rem;
 
             &_row {
                 margin: 1rem 0rem;
@@ -88,10 +91,6 @@
             color: rgb(226, 14, 14);
         }
     }
-}
-
-.active {
-    font-weight: 500;
 }
 
 @media screen and (max-width: 800px) {

@@ -7,6 +7,7 @@ import putToDB from '../../../hooks/putToDB';
 
 import {Navbar, Footer, SubHeading, SnackBar, Modal} from '../../../components/index';
 import './ConsumerProfile.css';
+import LoadingPage from '../../LoadingPage';
 
 const SnackbarType = {
   success: "success",
@@ -211,7 +212,7 @@ function ConsumerProfile() {
     {
       didMount == false ? (
         <>
-          Loading
+          <LoadingPage></LoadingPage>
         </>
       )
       :
@@ -227,7 +228,7 @@ function ConsumerProfile() {
             }
             type={snackbarType}
           />
-      <div className='app__ConsumerProfile'>   {/*este div tem de ser um form secalhar*/}
+      <div className='app__ConsumerProfile main__container'>   {/*este div tem de ser um form secalhar*/}
         <SubHeading title="Conta"/>
         <div className='app__ConsumerProfile_options'>
           <ul>

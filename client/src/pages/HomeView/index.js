@@ -19,9 +19,10 @@ import SupplierAdd from './SupplierAdd/SupplierAdd';
 import SupplierProdUnit from './SupplierProdUnit/SupplierProdUnit';
 import CompareProduct from './CompareProduct/CompareProduct';
 import SupplierSell from './SupplierSell/SupplierSell';
-import ConsumerOrdersHistory from './ConsumerOrdersHistory/ConsumerOrdersHistory'
+import ConsumerOrdersHistory from './ConsumerOrdersHistory/ConsumerOrdersHistory';
 import Search from './Search/Search';
-import SupplierOrdersHistory from './SupplierOrdersHistory/SupplierOrdersHistory'
+import SupplierOrdersHistory from './SupplierOrdersHistory/SupplierOrdersHistory';
+import MarketPlace from './MarketPlace/MarketPlace';
 
 export {
     Home,
@@ -47,4 +48,5 @@ export {
     ConsumerOrdersHistory,
     Search,
     SupplierOrdersHistory,
+    MarketPlace,
 };

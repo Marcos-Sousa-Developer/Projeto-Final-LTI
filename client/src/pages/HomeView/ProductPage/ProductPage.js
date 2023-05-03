@@ -106,8 +106,10 @@ const ProductPage = () => {
                   <p className='app__product_page_content_title'>{adData.title}</p>
                   <p className='app__product_page_content_price'>{adData.price}</p>
                   <div className='app__product_page_content_supplier'>
+                    <p>Vendido por: X</p>
+                    <p>Meter alguma info sobre o fornecedor: distância, por exemplo</p>
                     <p>Fornecedores</p>
-                    <p>+ {suppliers.length -1 } fornecedores </p>
+                    <Link to="/market-place">+ {suppliers.length -1 } fornecedores </Link>
                   </div>
                   <div className='app__product_page_content_description'>
                     {adData.description}
