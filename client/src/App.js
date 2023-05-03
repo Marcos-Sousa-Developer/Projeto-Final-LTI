@@ -86,6 +86,8 @@ function App() {
                 <Route exact path="Sell" element={<RequireAuth><SupplierSell /></RequireAuth>} />
                 <Route exact path="produnit" element={<RequireAuth><SupplierProdUnit/></RequireAuth>} />
                 <Route exact path="profile" element={<RequireAuth><SupplierProfile /></RequireAuth>} />
+                <Route exact path="anuncio" element={<RequireAuth><CriarAnuncio /></RequireAuth>} />
+                <Route exact path="anunciar" element={<RequireAuth><Anunciar /></RequireAuth>} />
               </Route>
             )
           }
@@ -106,8 +108,6 @@ function App() {
           {/* ---------------------------- */}
 
           {/* para dps meter dentro do supplier */}
-          <Route path="/anuncio" element={<CriarAnuncio />} />
-          <Route path="/anunciar" element={<Anunciar />} />
           <Route path="/SupplierOrdersHistory" element={<SupplierOrdersHistory />} />
           {/* --------------------------------- */}
 

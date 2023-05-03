@@ -19,7 +19,7 @@ const Anunciar = () => {
                 </div>
                 <div className='app__anunciar_content_novo_anuncio'>
                     <p>...ou crie um novo anúncio</p>
-                    <div><Link to='/anuncio' className='main__action_btn'>Criar anuncio</Link></div>
+                    <div><Link to='/supplier/anuncio' className='main__action_btn'>Criar anuncio</Link></div>
                 </div>
             </div>
         </div>

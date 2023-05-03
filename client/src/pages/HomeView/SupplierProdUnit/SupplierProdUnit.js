@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FiEdit3, FiTrash2 } from 'react-icons/fi';
+
 import postToDB from '../../../hooks/postToDB';
 import deleteToDB from '../../../hooks/deleteToDB';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
-import { Navbar, Footer, Modal, SubHeading } from '../../../components/index';
+import { NavbarSupplier, Footer, Modal, SubHeading } from '../../../components/index';
+import LoadingPage from '../../LoadingPage';
 import './SupplierProdUnit.css';
 
 const SupplierProdUnit = () => {
@@ -70,51 +72,52 @@ const SupplierProdUnit = () => {
     <>
     {
         didMount == false ? (
-            <>
-            Loading
-            </>
+            <LoadingPage></LoadingPage>
         )
         :
         (
         <>
-            <Navbar></Navbar>
+            <NavbarSupplier></NavbarSupplier>
             <div className='app__prod-unit main__container'>
                 <SubHeading title="Unidade Produção"/>
-                <form className='app__prod-unit_add_new-unit'>
-                    <div className='inputField'>
-                        <p>Nome:</p>
-                        <input                         
-                            type="text"
-                            placeholder="Nome"
-                            name="name"
-                            value={newProductionUnit.name}
-                            onChange={handleNewProductionUnitChange}
-                        />
-                    </div> 
-                    <div className='inputField'>
-                        <p>Localização:</p>
-                        <input                         
-                            type="text"
-                            placeholder="Localização"
-                            name="location"
-                            value={newProductionUnit.location}
-                            onChange={handleNewProductionUnitChange}
-                        />
-                    </div> 
-                    <div className='inputField'>
-                        <p>Capacidade:</p>
-                        <input                         
-                            type="text"
-                            placeholder="Capacidade"
-                            name="capacity"
-                            value={newProductionUnit.capacity}
-                            onChange={handleNewProductionUnitChange}
-                        />
-                    </div> 
-                    <button onClick={() => submitInsert()} className='main__action_btn'>Adicionar</button>
-                </form>
+                <div>
+                    <p>Criar Unidade Produção</p>
+                    <form className='app__prod-unit_add_new-unit'>
+                        <div className='inputField'>
+                            <p>Nome:</p>
+                            <input                         
+                                type="text"
+                                placeholder="Nome"
+                                name="name"
+                                value={newProductionUnit.name}
+                                onChange={handleNewProductionUnitChange}
+                            />
+                        </div> 
+                        <div className='inputField'>
+                            <p>Localização:</p>
+                            <input                         
+                                type="text"
+                                placeholder="Localização"
+                                name="location"
+                                value={newProductionUnit.location}
+                                onChange={handleNewProductionUnitChange}
+                            />
+                        </div> 
+                        <div className='inputField'>
+                            <p>Capacidade:</p>
+                            <input                         
+                                type="text"
+                                placeholder="Capacidade"
+                                name="capacity"
+                                value={newProductionUnit.capacity}
+                                onChange={handleNewProductionUnitChange}
+                            />
+                        </div> 
+                        <button onClick={() => submitInsert()} className='main__action_btn'>Adicionar</button>
+                    </form>
+                </div>
                 {productionUnits.length > 0 && (
-                    <>
+                    <div>
                         <p>Unidades Produção</p>
                         <table className='app__prod-unit_existing-units'>
                             <thead>
@@ -201,7 +204,7 @@ const SupplierProdUnit = () => {
                             ))}
                             </tbody>
                         </table>
-                    </>
+                    </div>
                 )}
             </div>
             <Footer></Footer>
