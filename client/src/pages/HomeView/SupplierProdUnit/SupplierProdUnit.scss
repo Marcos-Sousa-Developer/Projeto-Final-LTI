@@ -3,30 +3,93 @@
 .app__prod-unit{
     margin: 1rem auto 2rem;
 
-    &_add_new-unit{
-        display: flex;
+    &_content{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 3rem;
+    }
 
-        button{
-            align-self: end;
+    &_add_new-unit{
+        margin-top: 2rem;
+        padding-right:4rem;
+
+        &_title{
+            margin: 0;
+            font-size: $bigger_font;
+            font-weight: 500;
+        }
+
+        &_content{
+
         }
     }
 
     &_existing-units{
-        td, th{
-            padding: 0 1rem;
-        }
+        margin-top: 2rem;
 
-        thead th{
-            font-size: $normal_font;
+        &_title{
+            font-size: $bigger_font;
             font-weight: 500;
         }
 
-        tbody td{
-            font-size: $smaller_font;
-
-            button{
-                margin: 0 .5rem;
+        &_content{
+            td, th{
+                padding: .5rem 3rem .5rem 0;
             }
+    
+            thead th{
+                font-size: $normal_font;
+                font-weight: 500;
+            }
+    
+            tbody td{
+    
+                button{
+                    margin: 0 .5rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1450px) {
+    .app__prod-unit{
+        &_add_new-unit{
+            padding-right: 6rem;
+        }
+        
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .app__prod-unit{
+        &_add_new-unit{
+            padding-right: 2rem;
+        }
+        
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .app__prod-unit{
+        &_add_new-unit{
+            padding-right: 0;
+        }
+        
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .app__prod-unit{
+        &_content{
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        &_add_new-unit_content{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0 2rem;
         }
     }
 }
