@@ -108,7 +108,7 @@ const ProductPage = () => {
                   <div className='app__product_page_content_supplier'>
                     <p>Vendido por: X</p>
                     <p>Meter alguma info sobre o fornecedor: distância, por exemplo</p>
-                    <p>Fornecedores</p>
+                    <p>Fornecedores</p> {/* REVER QUANDO NÃO HA MAIS NENHUM FORNECEDOR, ESTÁ A APARECER -1*/}
                     <Link to={`/market-place?${new URLSearchParams({products: suppliers}).toString()}`}>+ {suppliers.length -1 } fornecedores </Link>
                   </div>
                   <div className='app__product_page_content_description'>
@@ -140,23 +140,22 @@ const ProductPage = () => {
                 <table>
                   <thead>
                     <tr>
-                      {<th>Marca</th>
-                      /*<th>LocaldeProducao</th>
-                      <th>Validade</th>
-                      <th>Garantia</th>
-                      <th>Processador</th>
-                      <th>MemoriaRam</th>*/}
+                    {Object.keys(adData.caracteristics).map((key) => {
+                      return (
+                        <th>{key}</th>
+                      );
+                      })}
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      {console.log(adData.caracteristics)}
-                      {<td data-label='Marca'>{adData.caracteristics.toString()}</td>
-                      /*<td data-label='LocaldeProducao'>{adData.caracteristics[0].features[0].LocaldeProducao}</td>
-                      <td data-label='Validade'>{adData.caracteristics[0].features[0].Validade}</td>
-                      <td data-label='Garantia'>{adData.caracteristics[0].features[0].Garantia}</td>
-                      <td data-label='Processador'>{adData.caracteristics[0].sub_features[0].Processador}</td>
-                      <td data-label='MemoriaRam'>{adData.caracteristics[0].sub_features[0].MemoriaRam}</td>*/}
+                    {Object.keys(adData.caracteristics).map((key) => {
+                      const value = adData.caracteristics[key];
+                      {console.log(value)}
+                      return (
+                        <td data-label={key}>{value}</td>
+                      );
+                      })}
                     </tr>
                   </tbody>
                 </table>
