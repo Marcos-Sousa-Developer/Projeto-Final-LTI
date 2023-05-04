@@ -75,6 +75,10 @@
     &_button {
         display: flex;
         justify-content: start;
+        
+        &>*{
+            margin-right: 1rem;
+        }
     }
 
     &_password-checks{

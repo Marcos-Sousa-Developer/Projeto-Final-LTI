@@ -137,6 +137,18 @@ img, picture {
   opacity: 1;
 }
 
+@media screen and (max-width: 700px) {
+  .main__action_btn {
+    padding: 6px 40px;
+    border-radius: 10px;
+    opacity: 0.8;
+    font-size: 14px;
+    transition: all 200ms ease-in-out;
+  }
+  .main__action_btn:hover {
+    opacity: 1;
+  }
+}
 .app__prod-unit {
   margin: 1rem auto 2rem;
 }

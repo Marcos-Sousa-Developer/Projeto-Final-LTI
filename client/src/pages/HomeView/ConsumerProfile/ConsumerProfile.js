@@ -374,6 +374,7 @@ function ConsumerProfile() {
             <button onClick={() => setIsOpen(false)}>Cancelar</button>
             <button onClick={() => { submit(); setIsOpen(false); }}>Guardar</button>
           </Modal>
+          <button type="button" className='main__negative_action_btn'>Log Out</button>
         </div>
       </div>
       <Footer></Footer>
