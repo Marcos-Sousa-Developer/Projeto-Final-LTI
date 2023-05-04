@@ -15,6 +15,8 @@ const Category = () => {
   const [categories, setCategories] = useState([])
   const [searchName, setSearchName] = useState(null)
   const [category, setCategory] = useState(null)
+  const [subCategory, setSubCategory] = useState(null)
+  const [subSubCategory, setsubSubCategory] = useState(null)
   const [path, setPath] = useState(null)
 
   const [didMount, setDidMount] = useState(false)
@@ -38,8 +40,8 @@ const Category = () => {
     setPath(<>
       <a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a>
     </>);
+    setCategory(categoryName);
     let adsDB = await getAllFromDB("/ads", {title: searchName})
-    console.log(adsDB)
     let adsCategory = []
     adsDB.map( async (ad) => {
       let productAd = await getAllFromDB("/products/" + ad.product_id)
@@ -49,8 +51,8 @@ const Category = () => {
 
       if(categoryAd[0].name == categoryName){
         adsCategory.push(ad) 
+        setCategories( array => [...array, subCategoryAd[0]])
       }
-      setCategories( array => [...array, subCategoryAd[0]])
     })
     setAds(adsCategory);
   }
@@ -59,23 +61,43 @@ const Category = () => {
     setDidMount(false)
     const urlParams = new URLSearchParams(window.location.search);
     const searchName = urlParams.get("searchName");
-    const category = urlParams.get("category");
-    const subCategory = urlParams.get("subCategory");
-    const subSubCategory = urlParams.get("subSubCategory");
-    if(searchName != null && category == null && subCategory == null && subSubCategory == null){
+    const categoryName = urlParams.get("category");
+    const subCategoryName = urlParams.get("subCategory");
+    const subSubCategoryName = urlParams.get("subSubCategory");
+    if(searchName != null && categoryName == null && subCategoryName == null && subSubCategoryName == null){
+      //Procurar todos os produtos com o nome da pesquisa
       setSearchName(searchName);
       getAndSetProductsSearch(searchName);
     }
-    if(searchName != null && category != null && subCategory == null && subSubCategory == null){
+    if(searchName != null && categoryName != null && subCategoryName == null && subSubCategoryName == null){
+      //Procurar todos os produtos da categoria com o nome da pesquisa
       setSearchName(searchName);
-      setCategory(category);
-      getAndSetProductsSearchCategory(searchName, category);
+      setCategory(categoryName);
+      getAndSetProductsSearchCategory(searchName, categoryName);
     }
-    if(searchName == null && category != null && subCategory == null && subSubCategory == null){
-      setCategory(category);
+    if(searchName != null && categoryName != null && subCategoryName != null && subSubCategoryName == null){
+      //Procurar todos os produtos da subcategoria com o nome da pesquisa
+      console.log("subcategoria com o nome da pesquisa")
+    }
+    if(searchName != null && categoryName != null && subCategoryName != null && subSubCategoryName != null){
+      //Procurar todos os produtos da subsubcategoria com o nome da pesquisa
+      console.log("subsubcategoria com o nome da pesquisa")
+    }
+    if(searchName == null && categoryName != null && subCategoryName == null && subSubCategoryName == null){
+      //Procurar todos os produtos da categoria
+      setCategory(categoryName);
       setPath(<>
         <a href="/">Home</a> {'>'} <a href={"/categoria?category="+ category}> {category}</a>
       </>);
+      console.log("categoria")
+    }
+    if(searchName == null && categoryName != null && subCategoryName != null && subSubCategoryName == null){
+      //Procurar todos os produtos da subcategoria
+      console.log("subcategoria")
+    }
+    if(searchName == null && categoryName != null && subCategoryName != null && subSubCategoryName != null){
+      //Procurar todos os produtos da subsubcategoria
+      console.log("subsubcategoria")
     }
     setDidMount(true)
   }, [])
@@ -104,6 +126,19 @@ const Category = () => {
     return newCategories2
   }
 
+  function sendToCategories(categoryName) {
+    console.log(searchName)
+    console.log(category)
+    console.log(subCategory)
+    if(searchName != null && category != null && subCategory == null){
+      console.log("cat")
+      //SELECIONA SUBCATEGORIA
+      const data = {category: category, subCategory: categoryName, searchName: searchName};
+      const queryString = new URLSearchParams(data).toString();
+      window.location.href = `/categoria?${queryString}`;
+    } 
+  }
+
   return (
     <>
     {
@@ -119,7 +154,6 @@ const Category = () => {
       <div className='app__Category main__container'>
         <div className='app__Category_Caminho'>
         <p> {path} </p>
-        {console.log(category)}
         {searchName != null ? (
           <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
           ) : (
@@ -134,9 +168,9 @@ const Category = () => {
             <div className='products'>
               {/*Inserir as categorias do lado esquerdo como botão*/} 
               {cleanCategories(categories).map((category) => { 
-                  return ( 
-                    <button key={category.id}>{category.name} ({category.count})</button> 
-                  );
+                return (
+                  <button key={category.id} onClick={() => (sendToCategories(category.name))}>{category.name} ({category.count})</button>
+                )
                 })}
             </div> 
           </div> 

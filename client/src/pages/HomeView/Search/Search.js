@@ -13,7 +13,7 @@ const Search = () => {
 
   const [ads, setAds] = useState([])
   const [categories, setCategories] = useState([])
-  const [searchName, setSearchName] = useState(null)
+  const [searchName, setSearchName] = useState(null)  
 
   const [didMount, setDidMount] = useState(false)
 
