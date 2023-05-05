@@ -87,16 +87,28 @@ const Category = () => {
       //Procurar todos os produtos da categoria
       setCategory(categoryName);
       setPath(<>
-        <a href="/">Home</a> {'>'} <a href={"/categoria?category="+ category}> {category}</a>
+        <a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a>
       </>);
+      
       console.log("categoria")
     }
     if(searchName == null && categoryName != null && subCategoryName != null && subSubCategoryName == null){
       //Procurar todos os produtos da subcategoria
+      setCategory(categoryName);
+      setSubCategory(subCategoryName);
+      setPath(<>
+        <a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a>
+      </>);
       console.log("subcategoria")
     }
     if(searchName == null && categoryName != null && subCategoryName != null && subSubCategoryName != null){
       //Procurar todos os produtos da subsubcategoria
+      setCategory(categoryName);
+      setSubCategory(subCategoryName);
+      setsubSubCategory(subSubCategoryName);
+      setPath(<>
+        <a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName + "&subSubCategory=" + subSubCategoryName }> {subSubCategoryName}</a>
+      </>);
       console.log("subsubcategoria")
     }
     setDidMount(true)
@@ -130,7 +142,8 @@ const Category = () => {
     console.log(searchName)
     console.log(category)
     console.log(subCategory)
-    if(searchName != null && category != null && subCategory == null){
+    console.log(subSubCategory)
+    if(searchName != null && category != null && subCategory == null && subSubCategory == null){
       console.log("cat")
       //SELECIONA SUBCATEGORIA
       const data = {category: category, subCategory: categoryName, searchName: searchName};
