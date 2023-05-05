@@ -37,11 +37,6 @@ const Category = () => {
   }  
   
   async function getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName){
-    console.log(searchName)
-    console.log(categoryName)
-    console.log(subCategoryName)
-    console.log(subSubCategoryName)
-    
     let adsDB;
     if(searchName == null){
       adsDB = await getAllFromDB("/ads")
@@ -58,20 +53,20 @@ const Category = () => {
       if(categoryName != null && categoryAd[0].name == categoryName && subCategoryName == null && subSubCategoryName == null){
         //Coloca os produtos da categoria 
         adsCategory.push(ad) 
-        setCategories( array => [...array, subCategoryAd[0]])
+        setCategories(array => [...array, subCategoryAd[0]])
       }
       if(categoryName != null && subCategoryName != null && subCategoryAd[0].name == subCategoryName && subSubCategoryName == null){
         //Coloca os produtos da subcategoria 
         adsCategory.push(ad) 
-        setCategories( array => [...array, subSubCategoryAd[0]])
+        setCategories(array => [...array, subSubCategoryAd[0]])
       }
       if(categoryName != null && subCategoryName != null && subSubCategoryName != null && subSubCategoryAd[0].name == subSubCategoryName){
         //Coloca os produtos da subsubcategoria 
         adsCategory.push(ad) 
+        setCategories(array => [...array])
       }
-      
+      console.log(adsCategory)
     })
-    console.log(adsCategory)
     setAds(adsCategory);
   }
  
@@ -219,9 +214,8 @@ const Category = () => {
             </div>
             <div className='products'>
               {/*Inserir as categorias do lado esquerdo como botão*/} 
-
               {categories.length === 0 ? (
-                <p>No categories found.</p>
+                <p>No categories</p>
               ) : (
                 cleanCategories(categories).map((category) => (
                   <button
@@ -239,6 +233,7 @@ const Category = () => {
             <p>Filtros</p>
             </div>
             <div className='products'>  
+            {console.log(ads)}
               {ads.map((ad) => {
               return (
                 <div onClick={() => (
