@@ -114,7 +114,7 @@ const SupplierProdUnit = () => {
                                 onChange={handleNewProductionUnitChange}
                             />
                         </div> 
-                        <div style={{marginTop: '1.5rem'}}>
+                        <div style={{marginTop: '3rem'}}>
                             <button onClick={() => submitInsert()} className='main__action_btn'>Adicionar</button>
                         </div>
                     </form>

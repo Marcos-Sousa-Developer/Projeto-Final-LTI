@@ -62,6 +62,9 @@ const getAllorSomeOrderedProducts = async function (req, res) {
             if(nextKey != undefined){
                 statement += ` AND ` ;
             }
+            else {
+                statement += ` ORDER BY created_at ASC `;
+            }
         }
     }
 
