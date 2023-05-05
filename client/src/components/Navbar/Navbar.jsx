@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
-import { Link } from 'react-router-dom';
+import { Link, UNSAFE_LocationContext } from 'react-router-dom';
 import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight, FiChevronLeft, FiRepeat } from 'react-icons/fi';
 
 import images from '../../assets/images.js';
@@ -15,7 +15,18 @@ const Navbar = () => {
 
     //---------------------------SideBar--------------------------
 
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+
+    function setCategories(category, subCategory){
+        if(category != null && subCategory == null){
+            setSelectedCategory(category);
+        }
+        if(category != null && subCategory != null){
+            setSelectedCategory(category);
+            setSelectedSubCategory(subCategory);
+        }
+    }
 
     const SubsubCategory = ({ subcategory, onClick }) => {
         return (
@@ -24,10 +35,10 @@ const Navbar = () => {
                 <FiChevronLeft></FiChevronLeft>    
                 Voltar atrás
             </div>
-            <a className='app__pointer app__sidebar_navs_subcategory-title'>{subcategory.name} <span>(ver tudo)</span></a>
+            <a className='app__pointer app__sidebar_navs_subcategory-title' onClick={() => window.location.href = `/categoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name}).toString()}`}>{subcategory.name} <span>(ver tudo)</span></a>
             <div style={{marginLeft:'.75rem'}}>
                 {subcategory.subsubcategories.map((subsubcategory, i) => {
-                    return <li style={{lineHeight:'2rem'}}><a key={i} className='app__text_effect app__pointer' style={{fontSize:'14px'}}>{subsubcategory}</a></li>
+                    return <li style={{lineHeight:'2rem'}}><a key={i} className='app__text_effect app__pointer' style={{fontSize:'14px'}} onClick={() => window.location.href = `/categoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name, subSubCategory: subsubcategory}).toString()}`}>{subsubcategory}</a></li>
                 })}
             </div>
           </div>
@@ -44,7 +55,6 @@ const Navbar = () => {
           
           setSelected(i);
         }
-
         return(
           <div className={ `app__sidebar ${className}` }>
             <div className="app__sidebar_content">
@@ -65,10 +75,10 @@ const Navbar = () => {
                                         <div className={selected === i ? 'app__sidebar_navs_category-content show' : 'app__sidebar_navs_category-content'}>
                                             {category.subcategories.map(subcategory => (
                                                 <li key={subcategory.name}>
-                                                    <a className='app__text_effect app__pointer' onClick={() => setSelectedSubCategory(subcategory)}>{subcategory.name}</a>
+                                                    <a className='app__text_effect app__pointer' onClick={() => setCategories(category, subcategory)}>{subcategory.name}</a>
                                                 </li> 
                                             ))}
-                                            <li><a className='app__text_effect app__pointer'>Ver tudo</a></li>
+                                            <li><a className='app__text_effect app__pointer' onClick={() => window.location.href = `/categoria?${new URLSearchParams({category: category.name}).toString()}`}>Ver tudo</a></li>
                                         </div>
                                     </div>
                                 );
