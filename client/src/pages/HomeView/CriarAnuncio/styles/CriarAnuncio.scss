@@ -35,7 +35,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
             .produto_info{
                 display: grid;
                 grid-template-columns: auto 1fr;
-                gap: 4rem;
+                gap: 2rem;
             }
         }
     }
@@ -438,7 +438,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
             gap: 1rem 2rem;
             
             .produto_info{
-                gap: 2rem;
+                gap: 1rem;
             }
         }
     }

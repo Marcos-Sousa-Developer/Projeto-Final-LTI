@@ -243,14 +243,7 @@ function SupplierProfile() {
         />
         <div className='app__SupplierProfile main__container'>   {/*este div tem de ser um form secalhar*/}
           <SubHeading title="Conta"/>
-          <div className='app__SupplierProfile_options'>
-            <ul>
-              <li><a className='option active app__text_effect' href="#">Dados Pessoais</a></li>
-              <li><a className='app__text_effect' style={{marginRight:'1rem'}} href="#">Anúncios</a></li>
-              <li><a className='app__text_effect' href="#">Vendidos</a></li>
-            </ul>
-          </div>
-          <div className='app__SupplierProfile_border'>
+          <div className='app__SupplierProfile_content'>
             <p>Dados da Minha Conta</p>
             <div className='app__SupplierProfile_box'>
               <div className='app__SupplierProfile_box_div'>

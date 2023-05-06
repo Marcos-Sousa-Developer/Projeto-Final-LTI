@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { FiMail, FiLock, FiArrowLeft, FiUser } from 'react-icons/fi';
+import { FiMail, FiLock, FiArrowLeft, FiUser, FiHome } from 'react-icons/fi';
 import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import getClientType from '../../hooks/getClientType';
@@ -53,7 +53,7 @@ const SignUpC = () => {
     <>
         <img className='app__SignUp_rectangle1' src={images.Rectangle1} alt="" />
         <div className='app__SignUp main__container'>
-            <Link to='/'><FiArrowLeft></FiArrowLeft></Link>
+            <Link to='/signin'><FiArrowLeft></FiArrowLeft></Link><Link style={{marginLeft:'1rem'}} to='/'><FiHome></FiHome></Link>
             <h3 className=''>Criar Conta</h3>
                 <div className={`app__SignUp_content ${showExtraInputs ? 'app__SignUp_content_shadow' : ''}`}>
                     <div>
@@ -84,6 +84,7 @@ const SignUpC = () => {
                         </label>
                     </div>
                     {showExtraInputs && (
+                    <>
                     <div className='app__SignUp_box'>
                         <div className='app__SignUp_box1'>
                             <form>
@@ -147,11 +148,12 @@ const SignUpC = () => {
                             <button className='app__SignUp_box30 ButtonFacebook'><BsFacebook className='singUpOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsFacebook><p>Facebook</p></button>
                             <button className='app__SignUp_box30 ButtonTwitter'><BsTwitter className='singUpOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter</p></button>
                         </div>      
-                    </div>    
-                    )}
+                    </div>   
                     <div>
                         <Link to="/signin" className='app__SignUp_content_signIn'>Iniciar sessão</Link>
                     </div>
+                    </> 
+                    )}
                 </div>
         </div>
     </>

@@ -9,7 +9,7 @@ const NavbarSupplier = () => {
   return (
     <>
         <div className='app__navbarSupplier main__container'>
-            <Link to='/supplier'><img src={images.logo} alt="" className=""/></Link>
+            <Link to='/supplier'><img src={images.logo} alt="" className="app__logo"/></Link>
 
             <div className='app__navbarSupplier_profile'>
 

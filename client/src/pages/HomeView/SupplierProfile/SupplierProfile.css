@@ -161,32 +161,8 @@ img, picture {
 .app__SupplierProfile {
   margin: 1rem auto 2rem;
 }
-.app__SupplierProfile_options ul {
-  list-style-type: none;
-  margin: 1rem 0 0 0;
-  padding: 0;
-  overflow: hidden;
-}
-.app__SupplierProfile_options li {
-  float: left;
-  padding-right: 10px;
-  padding-bottom: 10px;
-}
-.app__SupplierProfile_options li .active {
-  font-weight: bold;
-  color: rgba(235, 92, 31, 0.8);
-}
-.app__SupplierProfile_options li:last-child {
-  border-right: none;
-}
-.app__SupplierProfile_options li a {
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  font-size: 18px;
-}
-.app__SupplierProfile_options li a:hover {
-  color: rgba(235, 92, 31, 0.8);
+.app__SupplierProfile_content {
+  margin-top: 1rem;
 }
 .app__SupplierProfile_box {
   display: grid;

@@ -137,6 +137,27 @@ img, picture {
   opacity: 1;
 }
 
+.main__negative_action_btn {
+  opacity: 0.8;
+  color: black;
+  border: 2px solid black;
+  padding: 8px 50px;
+  border-radius: 15px;
+  transition: all 200ms ease-in-out;
+}
+.main__negative_action_btn:hover {
+  opacity: 1;
+  color: #EB5C1F;
+  border: 2px solid #EB5C1F;
+}
+
+@media screen and (max-width: 700px) {
+  .main__action_btn, .main__negative_action_btn {
+    padding: 6px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
 .app__SignUp {
   margin: 1rem auto;
 }
@@ -150,7 +171,7 @@ img, picture {
 .app__SignUp_content {
   padding: 2rem 1rem 2rem;
   width: 90%;
-  margin: 4rem auto 4rem;
+  margin: 6rem auto 4rem;
   border-radius: 10px;
 }
 .app__SignUp_content_shadow {

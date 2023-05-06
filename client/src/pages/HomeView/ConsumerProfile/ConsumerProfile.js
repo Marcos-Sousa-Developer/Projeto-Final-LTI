@@ -232,8 +232,8 @@ function ConsumerProfile() {
         <SubHeading title="Conta"/>
         <div className='app__ConsumerProfile_options'>
           <ul>
-            <li><span></span><a className='option active app__text_effect' href="#">Dados Pessoais</a></li>
-            <li><a className='app__text_effect' href="#">Encomendas</a></li>
+            <li><span></span><a className='option active app__text_effect' href="profile">Dados Pessoais</a></li>
+            <li><a className='app__text_effect' href="ordersHistory">Encomendas</a></li>
           </ul>
         </div>
         <div className='app__ConsumerProfile_border'>

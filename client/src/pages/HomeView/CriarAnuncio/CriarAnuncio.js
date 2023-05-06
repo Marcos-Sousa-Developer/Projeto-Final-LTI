@@ -753,7 +753,7 @@ function CriarAnuncio() {
                       <input type='text' value={formData.EAN} onChange={(e) => {setFormData({ ...formData, EAN: e.target.value });}}/>
                     </div>
                     <div className='app__anuncio_produto_content_categoria'>
-                      <p>Categoria</p>
+                      <p>Categoria *</p>
                       {formData.categoria != "" && formData.subcategoria != "" && formData.subsubcategoria != "" && formData.search ? 
                         <>
                           <p>{formData.categoria}</p>
@@ -777,12 +777,12 @@ function CriarAnuncio() {
                 <p className='title'>Anúncio</p>
                 <div className='app__anuncio_anuncio_content'>
                   <div className='inputField'>
-                    <p>Título</p>
+                    <p>Título *</p>
                     <input type='text' value={formData.titulo} placeholder='Título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
                   </div>
                   <div className='' style={{display: 'flex'}}>
                     <div className='inputField'>
-                      <p>Preço (€)</p>
+                      <p>Preço (€) *</p>
                       <input type='number' value={formData.preco} step="0.01" min="0" required onChange={(e) => {setFormData({ ...formData, preco: e.target.value });}}/>
                     </div>
                     <div className='inputField' style={{marginLeft:'2rem'}}>
@@ -791,7 +791,7 @@ function CriarAnuncio() {
                     </div>
                   </div>
                   <div className='app__anuncio_description_section'>
-                      <p>Descrição</p>
+                      <p style={{marginTop:'1rem'}}>Descrição *</p>
                       <textarea 
                           style={{width:'100%', maxHeight: '170px', minHeight:'120px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
                           form='anuncio_form' 
@@ -805,7 +805,7 @@ function CriarAnuncio() {
                       <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
                   </div>
                   <div className='app__anuncio_image_section'>
-                      <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span></p>
+                      <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span> *</p>
                       <div className='app__anuncio_image_section-content'>
                           <div className='app__anuncio_images_selected'>
                               {selectedImages.length < 8 &&
@@ -856,7 +856,7 @@ function CriarAnuncio() {
                 <div className='app__anuncio_prodUnit'>
                   <p className='title'>Unidade Produção</p>
                   <div className='app__anuncio_prodUnit_content'>
-                    {productionUnits.length > 0 && (
+                    {/*productionUnits.length > 0 && (
                       <>
                         <table className='app__prod-unit_existing-units'>
                           <thead>
@@ -875,7 +875,36 @@ function CriarAnuncio() {
                           </tbody>
                         </table>
                       </>
-                    )}
+                    )*/}
+
+                    {/* exemplo */}
+
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Ativar</th>
+                          <th>Quantidade</th>
+                          <th>Nome</th>
+                          <th>Localização</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><input type="checkbox"></input></td>
+                          <td><input type="number"></input></td>
+                          <td>Product Name</td>
+                          <td>Product Location</td>
+                        </tr>
+                        <tr>
+                          <td><input type="checkbox"></input></td>
+                          <td><input type="number"></input></td>
+                          <td>Product Name 2</td>
+                          <td>Product Location 2</td>
+                        </tr>
+                       </tbody> 
+                    </table>
+
+
                   </div>
                 </div>
               </div>

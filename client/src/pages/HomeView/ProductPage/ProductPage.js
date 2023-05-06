@@ -22,8 +22,9 @@ const SnackbarType = {
 };
 
 const ProductPage = () => {
-
+  //-------------------SnackBar--------------
   const snackbarRef = useRef(null);
+  //-----------------------------------------
   const [path, setPath] = useState(null)
   const [suppliers, setSuppliers] = useState([]) //id dos anuncios com o product_id igual ao id do produto
   const [adData, setAdData] = useState({

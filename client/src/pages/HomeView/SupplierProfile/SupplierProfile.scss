@@ -3,40 +3,8 @@
 .app__SupplierProfile {
     margin: 1rem auto 2rem;
 
-    &_options{
-
-        ul {
-            list-style-type: none;
-            margin: 1rem 0 0 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        
-        li {
-            float: left;
-            padding-right: 10px;
-            padding-bottom: 10px;
-
-            .active {
-                font-weight: bold;
-                color: rgba($color: $orange, $alpha: .8);
-            }
-        }
-        
-        li:last-child {
-            border-right: none;
-        }
-        
-        li a {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            font-size: $bigger_font;
-        }
-        
-        li a:hover{
-            color: rgba($color: $orange, $alpha: .8);
-        }
+    &_content{
+        margin-top: 1rem;
     }
 
     &_box{
