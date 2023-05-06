@@ -16,6 +16,7 @@ import "../../../components/InputField/InputField.css";
 
 function CriarAnuncio() {
     const [idUser, setIDUser] = useState(null) //Ir buscar às cookies o ID do user       
+    const [ordersHistory, setSupplierOrder] = useState([]);
 
     const [formData, setFormData] = useState({
         EAN: "",
@@ -35,6 +36,13 @@ function CriarAnuncio() {
     });
 
     const [didMount, setDidMount] = useState(false)
+
+    async function getSupplierOrder(){
+      let supplierOrdersGet = await getAllFromDB("/productionUnits")
+      if (typeof supplierOrdersGet != "string") {
+          setSupplierOrder(prevState => [...supplierOrdersGet])
+      }
+    }
 
     async function getProduct(ean){
 
@@ -100,6 +108,7 @@ function CriarAnuncio() {
             getProduct(ean)
         }
         setDidMount(true)
+        getSupplierOrder()
     }, [])
 
     async function verifyTitle(title){
@@ -847,7 +856,26 @@ function CriarAnuncio() {
                 <div className='app__anuncio_prodUnit'>
                   <p className='title'>Unidade Produção</p>
                   <div className='app__anuncio_prodUnit_content'>
-
+                    {ordersHistory.length > 0 && (
+                      <>
+                        <table className='app__prod-unit_existing-units'>
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {ordersHistory.map((orderHistory, index) => (
+                              <React.Fragment key={index}>
+                                <tr>
+                                  <td>{orderHistory.name}</td>
+                                </tr>
+                              </React.Fragment>
+                            ))}
+                          </tbody>
+                        </table>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
