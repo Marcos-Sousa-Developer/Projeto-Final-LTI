@@ -16,7 +16,7 @@ import "../../../components/InputField/InputField.css";
 
 function CriarAnuncio() {
     const [idUser, setIDUser] = useState(null) //Ir buscar às cookies o ID do user       
-    const [ordersHistory, setSupplierOrder] = useState([]);
+    const [productionUnits, setProductionUnit] = useState([]);
 
     const [formData, setFormData] = useState({
         EAN: "",
@@ -40,7 +40,7 @@ function CriarAnuncio() {
     async function getSupplierOrder(){
       let supplierOrdersGet = await getAllFromDB("/productionUnits")
       if (typeof supplierOrdersGet != "string") {
-          setSupplierOrder(prevState => [...supplierOrdersGet])
+          setProductionUnit(prevState => [...supplierOrdersGet])
       }
     }
 
@@ -856,7 +856,7 @@ function CriarAnuncio() {
                 <div className='app__anuncio_prodUnit'>
                   <p className='title'>Unidade Produção</p>
                   <div className='app__anuncio_prodUnit_content'>
-                    {ordersHistory.length > 0 && (
+                    {productionUnits.length > 0 && (
                       <>
                         <table className='app__prod-unit_existing-units'>
                           <thead>
@@ -865,10 +865,10 @@ function CriarAnuncio() {
                             </tr>
                           </thead>
                           <tbody>
-                            {ordersHistory.map((orderHistory, index) => (
+                            {productionUnits.map((productionUnit, index) => (
                               <React.Fragment key={index}>
                                 <tr>
-                                  <td>{orderHistory.name}</td>
+                                  <td>{productionUnit.name}</td>
                                 </tr>
                               </React.Fragment>
                             ))}
