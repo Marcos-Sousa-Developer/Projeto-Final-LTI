@@ -50,6 +50,12 @@
             }
         }
     }
+
+    .editing_prod-unit_content{
+        .inputField{
+            margin-right: 1rem;
+        }
+    }
 }
 
 @media screen and (min-width: 1450px) {
@@ -67,6 +73,9 @@
             padding-right: 2rem;
         }
         
+        table{
+            width: 100%;
+        }
     }
 }
 
@@ -90,6 +99,37 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 0 2rem;
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .app__prod-unit_existing-units_content{
+        th{
+            display: none;
+        }
+
+        tr{
+            position: relative;
+        }
+
+        td{
+            display: block;
+
+            &::before{
+                content: attr(data-cell);
+                font-weight: 500;
+            }
+
+            &:nth-child(3){
+                padding-bottom: 1rem;
+            }
+        }
+
+        .actions{
+            position: absolute;
+            right: 0;
+            top: 0;
         }
     }
 }

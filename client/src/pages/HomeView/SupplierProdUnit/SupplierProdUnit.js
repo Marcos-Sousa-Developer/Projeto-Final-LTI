@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiEdit3, FiTrash2 } from 'react-icons/fi';
+import { FiEdit3, FiTrash2, FiX, FiCheck } from 'react-icons/fi';
 
 import postToDB from '../../../hooks/postToDB';
 import deleteToDB from '../../../hooks/deleteToDB';
@@ -134,77 +134,78 @@ const SupplierProdUnit = () => {
                             <tbody>
                             {productionUnits.map((productionUnit, index) => (
                                 <React.Fragment key={index}>
-                                <tr>
-                                    <td>{productionUnit.name}</td>
-                                    <td>{productionUnit.location}</td>
-                                    <td>{productionUnit.capacity}</td>
-                                    <td style={{padding:'0'}}>
-                                        <div style={{display:'flex'}}>
-                                        <button onClick={() => setEditingIndex(index)}><FiEdit3></FiEdit3></button>
-                                        <button onClick={() => setModalOpen(prevState => {
-                                            const newState = [...prevState];
-                                            newState[index] = true;
-                                            return newState;
-                                        })}><FiTrash2></FiTrash2></button>
-                                        <Modal open={modalOpen[index]} onClose={() => setModalOpen(prevState => {
-                                            const newState = [...prevState];
-                                            newState[index] = false;
-                                            return newState;
-                                        })}>
-                                            <p>Tem a certeza que quer apagar esta unidade de produção?</p>
-                                            <button onClick={() => setModalOpen(prevState => {
-                                            const newState = [...prevState];
-                                            newState[index] = false;
-                                            return newState;
-                                            })}>Cancelar</button>
-                                            <button onClick={() => submitDelete(productionUnit.id)}>Apagar</button>
-                                        </Modal>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {editingIndex === index && (
-                                    <tr>
-                                        <td colSpan="3">
-                                            <form 
-                                                style={{display: 'flex'}}
-                                                onSubmit={(event) => {
-                                                    event.preventDefault();
-                                                    handleEditProductionUnit(index, {
-                                                        name: event.target.name.value,
-                                                        location: event.target.location.value,
-                                                        capacity: event.target.capacity.value,
-                                                    });
-                                                }}>
-                                                <div className='inputField'>
-                                                    <p>Nome:</p>
-                                                    <input                         
-                                                        type="text"
-                                                        name="name"
-                                                        defaultValue={newProductionUnit.name}
-                                                    />
-                                                </div> 
-                                                <div className='inputField'>
-                                                    <p>Localização:</p>
-                                                    <input                         
-                                                        type="text"
-                                                        name="location"
-                                                        defaultValue={newProductionUnit.location}
-                                                    />
-                                                </div> 
-                                                <div className='inputField'>
-                                                    <p>Capacidade:</p>
-                                                    <input                         
-                                                        type="text"
-                                                        name="capacity"
-                                                        defaultValue={newProductionUnit.capacity}
-                                                    />
-                                                </div> 
-                                                <button style={{alignSelf: 'end'}} type="submit" className='main__action_btn'>Guardar</button>
-                                                <button style={{alignSelf: 'end'}} type="button" className='main__action_btn' onClick={() => setEditingIndex(null)}>Cancelar</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                )}
+                                    {editingIndex === index ? (
+                                        <tr className='editing_prod-unit_content'>
+                                            <td colSpan={4} style={{paddingRight:'0'}}>
+                                                <form 
+                                                    style={{display: 'flex'}}
+                                                    onSubmit={(event) => {
+                                                        event.preventDefault();
+                                                        handleEditProductionUnit(index, {
+                                                            name: event.target.name.value,
+                                                            location: event.target.location.value,
+                                                            capacity: event.target.capacity.value,
+                                                        });
+                                                    }}>
+                                                    <div className='inputField'>
+                                                        <input                         
+                                                            type="text"
+                                                            name="name"
+                                                            defaultValue={productionUnits[index].name}
+                                                        />
+                                                    </div> 
+                                                    <div className='inputField'>
+                                                        <input                         
+                                                            type="text"
+                                                            name="location"
+                                                            defaultValue={productionUnits[index].location}
+                                                        />
+                                                    </div> 
+                                                    <div className='inputField'>
+                                                        <input                         
+                                                            type="text"
+                                                            name="capacity"
+                                                            defaultValue={productionUnits[index].capacity}
+                                                        />
+                                                    </div> 
+                                                    <div style={{display:'flex', alignItems:'center'}}>
+                                                        <button type="submit"><FiCheck></FiCheck></button>
+                                                        <button type="button" onClick={() => setEditingIndex(null)}><FiX></FiX></button>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    ) : (
+                                        <tr>
+                                            <td data-cell='Nome: '>{productionUnit.name}</td>
+                                            <td data-cell='Localização: '>{productionUnit.location}</td>
+                                            <td data-cell='Capacidade: '>{productionUnit.capacity}</td>
+                                            <td className='actions' style={{paddingRight:'0'}}>
+                                                <div style={{display:'flex'}}>
+                                                    <button onClick={() => setEditingIndex(index)}><FiEdit3></FiEdit3></button>
+                                                    <button onClick={() => setModalOpen(prevState => {
+                                                        const newState = [...prevState];
+                                                        newState[index] = true;
+                                                        return newState;
+                                                    })}><FiTrash2></FiTrash2></button>
+                                                    <Modal open={modalOpen[index]} onClose={() => setModalOpen(prevState => {
+                                                        const newState = [...prevState];
+                                                        newState[index] = false;
+                                                        return newState;
+                                                    })}>
+                                                        <p>Tem a certeza que quer apagar esta unidade de produção?</p>
+                                                        <button onClick={() => 
+                                                            setModalOpen(prevState => {
+                                                                const newState = [...prevState];
+                                                                newState[index] = false;
+                                                                return newState;
+                                                            })}>Cancelar</button>
+                                                        <button onClick={() => submitDelete(productionUnit.id)}>Apagar</button>
+                                                    </Modal>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )}
                                 </React.Fragment>
                             ))}
                             </tbody>
