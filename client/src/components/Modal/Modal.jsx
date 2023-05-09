@@ -12,7 +12,7 @@ function Modal({ open, children, onClose }) {
         <>
             <div className='app__modal_overlay'></div>
             <div className='app__modal_content'>
-                <button onClick={onClose}><FiX></FiX></button>
+                <button className='app__modal_content_closeBtn' onClick={onClose}><FiX></FiX></button>
                 {children}
             </div>
         </>, document.getElementById('portal')

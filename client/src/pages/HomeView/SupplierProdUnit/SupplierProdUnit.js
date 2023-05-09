@@ -10,10 +10,13 @@ import LoadingPage from '../../LoadingPage';
 import './SupplierProdUnit.css';
 
 const SupplierProdUnit = () => {
+    //--------------Modal------------
+    const [modalOpen, setModalOpen] = useState([]);
+    //-------------------------------
+
     const [productionUnits, setProductionUnits] = useState([]);
     const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', capacity: '' });
     const [editingIndex, setEditingIndex] = useState(null);
-    const [modalOpen, setModalOpen] = useState([]);
     const [didMount, setDidMount] = useState(false)
 
     async function getProductionUnit(){
@@ -114,7 +117,7 @@ const SupplierProdUnit = () => {
                                 onChange={handleNewProductionUnitChange}
                             />
                         </div> 
-                        <div style={{marginTop: '3rem'}}>
+                        <div className='app__prod-unit_add_new-unit_actions'>
                             <button onClick={() => submitInsert()} className='main__action_btn'>Adicionar</button>
                         </div>
                     </form>
@@ -193,14 +196,20 @@ const SupplierProdUnit = () => {
                                                         newState[index] = false;
                                                         return newState;
                                                     })}>
-                                                        <p>Tem a certeza que quer apagar esta unidade de produção?</p>
-                                                        <button onClick={() => 
-                                                            setModalOpen(prevState => {
-                                                                const newState = [...prevState];
-                                                                newState[index] = false;
-                                                                return newState;
-                                                            })}>Cancelar</button>
-                                                        <button onClick={() => submitDelete(productionUnit.id)}>Apagar</button>
+                                                        <p style={{fontSize:'18px'}}>Tem a certeza que quer apagar esta unidade de produção?</p>
+                                                        <div className='teste' style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                                                            <button 
+                                                                className='main__action_btn' 
+                                                                onClick={() => 
+                                                                    setModalOpen(prevState => {
+                                                                        const newState = [...prevState];
+                                                                        newState[index] = false;
+                                                                        return newState;
+                                                                    })}>Cancelar</button>
+                                                            <button 
+                                                                className='main__negative_action_btn' 
+                                                                onClick={() => submitDelete(productionUnit.id)}>Apagar</button>
+                                                        </div>
                                                     </Modal>
                                                 </div>
                                             </td>

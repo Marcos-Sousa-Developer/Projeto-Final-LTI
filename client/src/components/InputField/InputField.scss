@@ -13,5 +13,10 @@
         padding: 0.25rem 0.5rem;
         width: 100%;
         font-size: $smaller_font;
+        transition: all 100ms ease-in;
+
+        &:focus{
+            border: 3px solid rgba($color: $orange, $alpha: .8);
+        }
     }
 }
