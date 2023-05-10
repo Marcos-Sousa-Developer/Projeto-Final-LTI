@@ -46,93 +46,99 @@ const Category = () => {
     let adsCategory = []
     adsDB.map( async (ad) => {
       let productAd = await getAllFromDB("/products/" + ad.product_id)
-      let subSubCategoryAd = await getFromDB("/subsubcategories/" + productAd[0].id_subsubcategory);
-      let subCategoryAd = await getFromDB("/subcategories/" + subSubCategoryAd[0].id_subcategory);
-      let categoryAd = await getFromDB("/categories/" + subCategoryAd[0].id_category); 
-
-      if(categoryName != null && categoryAd[0].name == categoryName && subCategoryName == null && subSubCategoryName == null){
-        //Coloca os produtos da categoria 
-        adsCategory.push(ad) 
-        setCategories(array => [...array, subCategoryAd[0]])
+      if( productAd[0].id_subsubcategory != undefined){
+        let subSubCategoryAd = await getFromDB("/subsubcategories/" + productAd[0].id_subsubcategory);
+        if( subSubCategoryAd[0].id_subcategory != undefined){
+          let subCategoryAd = await getFromDB("/subcategories/" + subSubCategoryAd[0].id_subcategory);
+          let categoryAd = await getFromDB("/categories/" + subCategoryAd[0].id_category); 
+    
+          if(categoryName != null && categoryAd[0].name == categoryName && subCategoryName == null && subSubCategoryName == null){
+            //Coloca os produtos da categoria 
+            adsCategory.push(ad) 
+            setCategories(array => [...array, subCategoryAd[0]])
+          }
+          if(categoryName != null && subCategoryName != null && subCategoryAd[0].name == subCategoryName && subSubCategoryName == null){
+            //Coloca os produtos da subcategoria 
+            adsCategory.push(ad) 
+            setCategories(array => [...array, subSubCategoryAd[0]])
+          }
+          if(categoryName != null && subCategoryName != null && subSubCategoryName != null && subSubCategoryAd[0].name == subSubCategoryName){
+            //Coloca os produtos da subsubcategoria 
+            adsCategory.push(ad) 
+            setCategories(array => [...array])
+          }
+        }
       }
-      if(categoryName != null && subCategoryName != null && subCategoryAd[0].name == subCategoryName && subSubCategoryName == null){
-        //Coloca os produtos da subcategoria 
-        adsCategory.push(ad) 
-        setCategories(array => [...array, subSubCategoryAd[0]])
-      }
-      if(categoryName != null && subCategoryName != null && subSubCategoryName != null && subSubCategoryAd[0].name == subSubCategoryName){
-        //Coloca os produtos da subsubcategoria 
-        adsCategory.push(ad) 
-        setCategories(array => [...array])
-      }
-      console.log(adsCategory)
     })
     setAds(adsCategory);
   }
  
   useEffect(()=>{ 
     setDidMount(false)
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchName = urlParams.get("searchName");
-    const categoryName = urlParams.get("category");
-    const subCategoryName = urlParams.get("subCategory");
-    const subSubCategoryName = urlParams.get("subSubCategory");
-    if(searchName != null && categoryName == null && subCategoryName == null && subSubCategoryName == null){
-      //Procurar todos os produtos com o nome da pesquisa
-      setSearchName(searchName);
-      getAndSetProductsSearch(searchName);
+    async function run(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchName = urlParams.get("searchName");
+      const categoryName = urlParams.get("category");
+      const subCategoryName = urlParams.get("subCategory");
+      const subSubCategoryName = urlParams.get("subSubCategory");
+      if(searchName != null && categoryName == null && subCategoryName == null && subSubCategoryName == null){
+        //Procurar todos os produtos com o nome da pesquisa
+        setSearchName(searchName);
+        await getAndSetProductsSearch(searchName);
+      }
+      if(searchName != null && categoryName != null && subCategoryName == null && subSubCategoryName == null){
+        //Procurar todos os produtos da categoria com o nome da pesquisa
+        setSearchName(searchName);
+        setCategory(categoryName);
+        setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a></>);
+        await getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
+      }
+      if(searchName != null && categoryName != null && subCategoryName != null && subSubCategoryName == null){
+        //Procurar todos os produtos da subcategoria com o nome da pesquisa
+        setSearchName(searchName);
+        setCategory(categoryName);
+        setSubCategory(subCategoryName);
+        setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a></>);
+        await getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
+        console.log("subcategoria com o nome da pesquisa")
+      }
+      if(searchName != null && categoryName != null && subCategoryName != null && subSubCategoryName != null){
+        //Procurar todos os produtos da subsubcategoria com o nome da pesquisa
+        setSearchName(searchName);
+        setCategory(categoryName);
+        setSubCategory(subCategoryName);
+        setsubSubCategory(subSubCategoryName);
+        setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName + "&subSubCategory=" + subSubCategoryName }> {subSubCategoryName}</a></>);
+        await getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
+        console.log("subsubcategoria com o nome da pesquisa")
+      }
+      if(searchName == null && categoryName != null && subCategoryName == null && subSubCategoryName == null){
+        //Procurar todos os produtos da categoria
+        setCategory(categoryName);
+        setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a></>);
+        await getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
+        console.log("categoria")
+      }
+      if(searchName == null && categoryName != null && subCategoryName != null && subSubCategoryName == null){
+        //Procurar todos os produtos da subcategoria
+        setCategory(categoryName);
+        setSubCategory(subCategoryName);
+        setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a></>);
+        await getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
+        console.log("subcategoria")
+      }
+      if(searchName == null && categoryName != null && subCategoryName != null && subSubCategoryName != null){
+        //Procurar todos os produtos da subsubcategoria
+        setCategory(categoryName);
+        setSubCategory(subCategoryName);
+        setsubSubCategory(subSubCategoryName);
+        setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName + "&subSubCategory=" + subSubCategoryName }> {subSubCategoryName}</a></>);
+        await getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
+        console.log("subsubcategoria")
+      }
+      setDidMount(true)
     }
-    if(searchName != null && categoryName != null && subCategoryName == null && subSubCategoryName == null){
-      //Procurar todos os produtos da categoria com o nome da pesquisa
-      setSearchName(searchName);
-      setCategory(categoryName);
-      setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a></>);
-      getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
-    }
-    if(searchName != null && categoryName != null && subCategoryName != null && subSubCategoryName == null){
-      //Procurar todos os produtos da subcategoria com o nome da pesquisa
-      setSearchName(searchName);
-      setCategory(categoryName);
-      setSubCategory(subCategoryName);
-      setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a></>);
-      getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
-      console.log("subcategoria com o nome da pesquisa")
-    }
-    if(searchName != null && categoryName != null && subCategoryName != null && subSubCategoryName != null){
-      //Procurar todos os produtos da subsubcategoria com o nome da pesquisa
-      setSearchName(searchName);
-      setCategory(categoryName);
-      setSubCategory(subCategoryName);
-      setsubSubCategory(subSubCategoryName);
-      setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName + "&subSubCategory=" + subSubCategoryName }> {subSubCategoryName}</a></>);
-      getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
-      console.log("subsubcategoria com o nome da pesquisa")
-    }
-    if(searchName == null && categoryName != null && subCategoryName == null && subSubCategoryName == null){
-      //Procurar todos os produtos da categoria
-      setCategory(categoryName);
-      setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a></>);
-      getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
-      console.log("categoria")
-    }
-    if(searchName == null && categoryName != null && subCategoryName != null && subSubCategoryName == null){
-      //Procurar todos os produtos da subcategoria
-      setCategory(categoryName);
-      setSubCategory(subCategoryName);
-      setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a></>);
-      getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
-      console.log("subcategoria")
-    }
-    if(searchName == null && categoryName != null && subCategoryName != null && subSubCategoryName != null){
-      //Procurar todos os produtos da subsubcategoria
-      setCategory(categoryName);
-      setSubCategory(subCategoryName);
-      setsubSubCategory(subSubCategoryName);
-      setPath(<><a href="/">Home</a> {'>'} <a href={"/categoria?category="+ categoryName}> {categoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName }> {subCategoryName}</a> {'>'} <a href={"/categoria?category="+ categoryName + "&subCategory="+ subCategoryName + "&subSubCategory=" + subSubCategoryName }> {subSubCategoryName}</a></>);
-      getAndSetProductsSearchCategory(searchName, categoryName, subCategoryName, subSubCategoryName);
-      console.log("subsubcategoria")
-    }
-    setDidMount(true)
+    run();
   }, [])
 
   function cleanCategories(oldCategories) {
@@ -214,6 +220,7 @@ const Category = () => {
             </div>
             <div className='products'>
               {/*Inserir as categorias do lado esquerdo como botão*/} 
+              {console.log(categories)}
               {categories.length === 0 ? (
                 <p>No categories</p>
               ) : (
@@ -233,7 +240,6 @@ const Category = () => {
             <p>Filtros</p>
             </div>
             <div className='products'>  
-            {console.log(ads)}
               {ads.map((ad) => {
               return (
                 <div onClick={() => (
