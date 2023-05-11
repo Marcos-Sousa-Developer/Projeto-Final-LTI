@@ -82,6 +82,7 @@ const SignInC = () => {
     <>
         <img className='app__SignIn_rectangle1' src={images.Rectangle1} alt="" />
         <div className='app__SignIn main__container'>
+            <div style={{width: '100%'}}>
             <Link to='/'><FiHome></FiHome></Link>
             <h3 className=''>Iniciar Sessão</h3>
                 <div className='app__SignIn_box'>
@@ -159,6 +160,7 @@ const SignInC = () => {
                         <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter</p></button>
                     </div>
                 </div>    
+            </div>
         </div>
     </>
     )

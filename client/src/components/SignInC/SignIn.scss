@@ -2,6 +2,9 @@
 
 .app__SignIn{
     margin: 1rem auto;
+    min-height: calc(100vh - 220px);
+    display: flex;
+    align-items: center;
 
     &_rectangle1{
         position: absolute;

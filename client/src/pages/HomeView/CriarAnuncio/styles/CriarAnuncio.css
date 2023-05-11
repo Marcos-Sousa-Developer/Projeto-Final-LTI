@@ -141,9 +141,10 @@ img, picture {
   opacity: 0.8;
   color: black;
   border: 2px solid black;
-  padding: 8px 50px;
+  padding: 6px 50px;
   border-radius: 15px;
   transition: all 200ms ease-in-out;
+  box-sizing: border-box;
 }
 .main__negative_action_btn:hover {
   opacity: 1;
@@ -152,8 +153,13 @@ img, picture {
 }
 
 @media screen and (max-width: 700px) {
-  .main__action_btn, .main__negative_action_btn {
+  .main__action_btn {
     padding: 6px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .main__negative_action_btn {
+    padding: 4px 40px;
     border-radius: 10px;
     font-size: 14px;
   }
@@ -273,6 +279,13 @@ img, picture {
 .app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content {
   border: 3px solid #EEEEEE;
   padding: 1rem 2rem 2rem 2rem;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content table thead th {
+  font-size: 16px;
+  font-weight: 500;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content table td, .app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content table th {
+  padding: 0.5rem 1.5rem 0.5rem 0;
 }
 
 .buttonToggleModal_area {

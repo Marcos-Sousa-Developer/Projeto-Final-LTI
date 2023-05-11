@@ -166,6 +166,9 @@ img, picture {
 }
 .app__SignIn {
   margin: 1rem auto;
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
 }
 .app__SignIn_rectangle1 {
   position: absolute;

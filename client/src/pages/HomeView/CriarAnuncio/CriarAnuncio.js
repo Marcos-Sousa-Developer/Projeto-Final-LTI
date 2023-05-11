@@ -882,7 +882,7 @@ function CriarAnuncio() {
                     <table>
                       <thead>
                         <tr>
-                          <th>Ativar</th>
+                          <th></th>
                           <th>Quantidade</th>
                           <th>Nome</th>
                           <th>Localização</th>
@@ -891,13 +891,13 @@ function CriarAnuncio() {
                       <tbody>
                         <tr>
                           <td><input type="checkbox"></input></td>
-                          <td><input type="number"></input></td>
+                          <td><div className='inputField'><input type="number"></input></div></td>
                           <td>Product Name</td>
                           <td>Product Location</td>
                         </tr>
                         <tr>
                           <td><input type="checkbox"></input></td>
-                          <td><input type="number"></input></td>
+                          <td><div className='inputField'><input type="number"></input></div></td>
                           <td>Product Name 2</td>
                           <td>Product Location 2</td>
                         </tr>
