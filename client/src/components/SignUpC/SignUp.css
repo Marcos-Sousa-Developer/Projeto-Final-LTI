@@ -166,6 +166,9 @@ img, picture {
 }
 .app__SignUp {
   margin: 1rem auto;
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
 }
 .app__SignUp_rectangle1 {
   position: absolute;
@@ -177,7 +180,7 @@ img, picture {
 .app__SignUp_content {
   padding: 2rem 1rem 2rem;
   width: 90%;
-  margin: 6rem auto 4rem;
+  margin: 4rem auto;
   border-radius: 10px;
 }
 .app__SignUp_content_shadow {

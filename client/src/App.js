@@ -10,7 +10,7 @@ import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
-import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory, Search, SupplierOrdersHistory, MarketPlace} from './pages/HomeView/index';
+import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory, Search, SupplierOrdersHistory, MarketPlace, SupplierTransportUnit} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
@@ -81,13 +81,15 @@ function App() {
           {userType == "supplier" &&
             (
               <Route path="supplier">
-                <Route index element={ <RequireAuth><SupplierPage /></RequireAuth>}/>
-                <Route exact path="Add" element={<RequireAuth><SupplierAdd /></RequireAuth>} />
-                <Route exact path="Sell" element={<RequireAuth><SupplierSell /></RequireAuth>} />
+                <Route index element={ <RequireAuth><SupplierPage/></RequireAuth>}/>
+                <Route exact path="profile" element={<RequireAuth><SupplierProfile/></RequireAuth>} />
+                <Route exact path="anuncio" element={<RequireAuth><CriarAnuncio/></RequireAuth>} />
+                <Route exact path="anunciar" element={<RequireAuth><Anunciar/></RequireAuth>} />
+                <Route exact path="add" element={<RequireAuth><SupplierAdd/></RequireAuth>} />
+                <Route exact path="sell" element={<RequireAuth><SupplierSell/></RequireAuth>} />
+                <Route exact path="encomendas" element={<RequireAuth><SupplierOrdersHistory/></RequireAuth>} />
                 <Route exact path="produnit" element={<RequireAuth><SupplierProdUnit/></RequireAuth>} />
-                <Route exact path="profile" element={<RequireAuth><SupplierProfile /></RequireAuth>} />
-                <Route exact path="anuncio" element={<RequireAuth><CriarAnuncio /></RequireAuth>} />
-                <Route exact path="anunciar" element={<RequireAuth><Anunciar /></RequireAuth>} />
+                <Route exact path="transpunit" element={<RequireAuth><SupplierTransportUnit/></RequireAuth>} />
               </Route>
             )
           }
@@ -107,16 +109,12 @@ function App() {
             <Route path="/supplierTest" element={<SupplierTest />} />
           {/* ---------------------------- */}
 
-          {/* para dps meter dentro do supplier */}
-          <Route path="/SupplierOrdersHistory" element={<SupplierOrdersHistory />} />
-          {/* --------------------------------- */}
-
           {/*---------for not logged in users--------*/}
-          <Route path="/" element={<Home />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/pesquisa" element={<Search />} />
-          <Route path="/categoria" element={<Category />} />
+          <Route path="/" element={<Home/>} />
+          <Route path="/signin" element={<SignIn/>} />
+          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/pesquisa" element={<Search/>} />
+          <Route path="/categoria" element={<Category/>} />
           <Route path="/produto" element={<ProductPage/>} />
           <Route path="/market-place" element={<MarketPlace/>} />
           <Route path="/comparador" element={<CompareProduct></CompareProduct>}/>

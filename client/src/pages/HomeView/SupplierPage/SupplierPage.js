@@ -7,7 +7,7 @@ import getAllFromDB from '../../../hooks/getAllFromDB';
 
 function SupplierPage() { 
 
-  const [isLoading, setLoading] = useState(false) 
+  const [isLoading, setLoading] = useState(false); 
 
   const [datas, setDatas] = useState({})
 
@@ -89,23 +89,21 @@ function SupplierPage() {
 
   return (
     <>
-    {
-      isLoading ? 
-      
+    {isLoading ? 
       <LoadingPage></LoadingPage>
-
-      :
-
+    :
       <>
         <NavbarSupplier></NavbarSupplier>
-        <div className='app__SupplierPage'>   
+        <div className='app__SupplierPage main__container'>   
           <SubHeading title="Home"/>
           <div className='app__SupplierPage_options'>
-                <ul>
-                  <li><span></span><a className='option active app__text_effect' href="#">Home</a></li>
-                  <li><span></span><a className='option app__text_effect' href="#">Anúncios</a></li>
-                  <li><a className='app__text_effect' href="#">Vendas e Ordens</a></li>
-                </ul>
+            <ul>
+              <li><span></span><a className='option active app__text_effect' href="supplier/">Home</a></li>
+              <li><span></span><a className='option app__text_effect' href="supplier/add">Anúncios</a></li>
+              <li><a className='option app__text_effect' href="supplier/sell">Vendas e Ordens</a></li>
+              <li><a className='option app__text_effect' href="supplier/produnit">Unidade Produção</a></li>
+              <li><a className='option app__text_effect' href="supplier/transpunit">Veículos Transporte</a></li>
+            </ul>
           </div>
           <div className='app__SupplierPage_boxes'>
             <div className='app__SupplierPage_boxesEsquerda'>
@@ -154,9 +152,9 @@ function SupplierPage() {
             </div>
           </div>
         </div>
+        <Footer></Footer>
       </>
-    }
-    <Footer></Footer>
+      }
     </>
   );
 
