@@ -795,7 +795,7 @@ function CriarAnuncio() {
                       <textarea 
                           style={{width:'100%', maxHeight: '170px', minHeight:'120px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
                           form='anuncio_form' 
-                          maxLength="500" 
+                          maxLength="600" 
                           placeholder='Indique alguns detalhes sobre o seu produto'
                           onInput={(e) => {
                               setText(e.target.value);
@@ -878,7 +878,6 @@ function CriarAnuncio() {
                     )*/}
 
                     {/* exemplo */}
-
                     <table>
                       <thead>
                         <tr>
@@ -890,21 +889,29 @@ function CriarAnuncio() {
                       </thead>
                       <tbody>
                         <tr>
-                          <td><input type="checkbox"></input></td>
+                          <td>
+                              <label class="app__anuncio_prodUnit_checkbox">
+                                <input type="checkbox"></input>
+                                <span class="prodUnit_checkmark"></span>
+                              </label>
+                          </td>
                           <td><div className='inputField'><input type="number"></input></div></td>
                           <td>Product Name</td>
                           <td>Product Location</td>
                         </tr>
                         <tr>
-                          <td><input type="checkbox"></input></td>
+                          <td>
+                              <label class="app__anuncio_prodUnit_checkbox">
+                                <input type="checkbox"></input>
+                                <span class="prodUnit_checkmark"></span>
+                              </label>
+                          </td>
                           <td><div className='inputField'><input type="number"></input></div></td>
                           <td>Product Name 2</td>
                           <td>Product Location 2</td>
                         </tr>
                        </tbody> 
                     </table>
-
-
                   </div>
                 </div>
               </div>

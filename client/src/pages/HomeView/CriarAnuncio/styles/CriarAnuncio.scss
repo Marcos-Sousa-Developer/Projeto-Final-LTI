@@ -148,6 +148,50 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
                         padding: .5rem 1.5rem .5rem 0;
                     }
                 }
+
+                .app__anuncio_prodUnit_checkbox{
+                    display: block;
+                    position: relative;
+                    cursor: pointer;
+                    user-select: none;
+                    
+                    input {
+                        position: absolute;
+                        opacity: 0;
+                        cursor: pointer;
+                        height: 0;
+                        width: 0;
+                    }
+
+                    .prodUnit_checkmark {
+                        display: block;
+                        height: 35px;
+                        width: 35px;
+                        border: $border;
+                        border-radius: 10px;
+                    }
+
+                    input:checked .prodUnit_checkmark {
+                        background-color: $orange;
+                    }
+
+                    input:checked ~ .prodUnit_checkmark:after {
+                        display: block;
+                    }
+
+                    .prodUnit_checkmark:after {
+                        content: "";
+                        position: absolute;
+                        display: none;
+                        left: 15px;
+                        top: 10px;
+                        width: 7px;
+                        height: 14px;
+                        border: solid $orange;
+                        border-width: 0 3px 3px 0;
+                        transform: rotate(45deg);
+                    }
+                }
             }
         }
     }

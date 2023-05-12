@@ -223,8 +223,8 @@ function ConsumerProfile() {
         ref={snackbarRef}
         message={
           snackbarType === SnackbarType.success
-            ? "Alterações guardadas"
-            : "Dados incorretos"
+            ? "Os dados foram guardados"
+            : "Não foi possível alterar os dados"
         }
         type={snackbarType}
       />
@@ -293,53 +293,55 @@ function ConsumerProfile() {
                     onChange={handlePasswordChange}
                   />
                 </div>
-                <ul className='app__ConsumerProfile_password-checks'>
-                  <li>
-                    {isEightCharLong ? 
+                { password && (
+                  <ul className='app__ConsumerProfile_password-checks'>
+                    <li>
+                      {isEightCharLong ? 
+                          ''
+                        : 
+                        <>
+                          <div>Mínimo de 8 caracteres de comprimento: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                        </>
+                      }
+                    </li>
+                    <li>
+                      {hasNumber ? 
+                          ''
+                        : 
+                        <>
+                          <div>Contém pelo menos 1 número: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                        </>
+                      }
+                    </li>
+                    <li>
+                      {hasLowerCase ? 
+                          ''
+                        : 
+                        <>
+                          <div>Contém pelo menos 1 letra minúscula: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                        </>
+                      }
+                    </li>
+                    <li>
+                      {hasUpperCase ? 
                         ''
                       : 
-                      <>
-                        <div>Mínimo de 8 caracteres de comprimento: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                      </>
-                    }
-                  </li>
-                  <li>
-                    {hasNumber ? 
+                        <>
+                          <div>Contém pelo menos 1 letra maiúscula: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                        </>
+                      }
+                    </li>
+                    <li>
+                      {hasSpecialChar ? 
                         ''
                       : 
-                      <>
-                        <div>Contém pelo menos 1 número: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                      </>
-                    }
-                  </li>
-                  <li>
-                    {hasLowerCase ? 
-                        ''
-                      : 
-                      <>
-                        <div>Contém pelo menos 1 letra minúscula: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                      </>
-                    }
-                  </li>
-                  <li>
-                    {hasUpperCase ? 
-                      ''
-                    : 
-                      <>
-                        <div>Contém pelo menos 1 letra maiúscula: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                      </>
-                    }
-                  </li>
-                  <li>
-                    {hasSpecialChar ? 
-                      ''
-                    : 
-                      <>
-                        <div>Contém pelo menos 1 caractere especial: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                      </>
-                    }
-                  </li>
-                </ul>
+                        <>
+                          <div>Contém pelo menos 1 caractere especial: <span className='app__ConsumerProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                        </>
+                      }
+                    </li>
+                  </ul>
+                )}
               </div>
             </div>
             <div className='app__ConsumerProfile_box_div'>
@@ -354,7 +356,7 @@ function ConsumerProfile() {
                       onChange={handleConfirmPasswordChange}
                     />
                   </div>
-                  {passwordMatch ? (
+                  {(password !== "" || confirmPassword !== "") && (passwordMatch ? (
                     <div className='app__ConsumerProfile_password-checks'>
                       <span className='app__ConsumerProfile_password-checks_symbol-success'>Passwords correspondem: <FiCheck fontSize={20}></FiCheck></span>
                     </div>
@@ -362,7 +364,7 @@ function ConsumerProfile() {
                     <div className='app__ConsumerProfile_password-checks'>
                       <span className='app__ConsumerProfile_password-checks_symbol-fail'>Passwords não correspondem: <FiX fontSize={20}></FiX></span>
                     </div>
-                  )}
+                  ))}
               </div>
             </div>  
           </div>
