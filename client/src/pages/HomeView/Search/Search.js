@@ -9,71 +9,59 @@ import getFromDB from '../../../hooks/getFromDB';
 
 import './Search.css';
 
+let categories = {}
+const itemsPerPage = 20; // Number of items per page
+let currentItems = [];
+let startIndex = 0;
+let endIndex = 0;
+
 const Search = () => {
 
+  const [searchName, setSearchName] = useState([])
   const [ads, setAds] = useState([])
-  const [categories, setCategories] = useState([])
-  const [searchName, setSearchName] = useState(null)  
-
   const [didMount, setDidMount] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1);
 
-  async function getAndSetProducts(searchName){
-    let adsDB = await getAllFromDB("/ads", {title: searchName})
+  const goToPage = (page) => {
+    setCurrentPage(page);
+    startIndex = (page - 1) * 20;
+    endIndex = Math.min(startIndex + itemsPerPage, ads.length);
+    currentItems = ads.slice(startIndex, endIndex);
+  };
+
+
+  async function getAndSetProducts(title){
+    let adsDB = await getAllFromDB("/ads", {title: title})
     setAds(adsDB);
-    adsDB.map( async (ad) => {
-      let product = await getAllFromDB("/products/" + ad.product_id)
-      let subSubCategory = await getFromDB("/subsubcategories/" + product[0].id_subsubcategory);
-      let subCategory = await getFromDB("/subcategories/" + subSubCategory[0].id_subcategory);
-      let category = await getFromDB("/categories/" + subCategory[0].id_category); 
+    startIndex = (currentPage - 1) * 20;
+    endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
+    currentItems = adsDB.slice(startIndex, endIndex);
+    adsDB.map( (ad) => {  
+      
+      categories[ad.category_name] != undefined ? categories[ad.category_name] +=1 : categories[ad.category_name]=0
 
-      setCategories( array => [...array, category[0]])
     })
   }   
-
-  useEffect(()=>{ 
-    setDidMount(false)
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchName = urlParams.get("searchName");
-    const category = urlParams.get("category");
-    const subCategory = urlParams.get("subCategory");
-    const subSubCategory = urlParams.get("subSubCategory");
-    if(searchName != null && category == null && subCategory == null && subSubCategory == null){
-      setSearchName(searchName);
-      getAndSetProducts(searchName);
-    }
-
-    setDidMount(true)
-  }, [])
-
-  function cleanCategories(oldCategories) {
-    const countObj = {};
-    oldCategories.forEach((item) => {
-      const key = JSON.stringify(item);
-      countObj[key] = (countObj[key] || 0) + 1;
-    });
-
-    const newCategories1 = oldCategories.map((item) => {
-      const key = JSON.stringify(item);
-      return {...item,count: countObj[key]};
-    });
-    
-
-    const newCategories2 = newCategories1.filter((item, index) => {
-      return (
-        index === newCategories1.findIndex((obj) => {
-          return JSON.stringify(obj) === JSON.stringify(item);
-        })
-      );
-    });
-
-    return newCategories2
-  }
 
   function sendToCategories(categoryName) {
     const data = {category: categoryName, searchName: searchName};
     const queryString = new URLSearchParams(data).toString();
     window.location.href = `/categoria?${queryString}`;
   }
+
+    useEffect(()=>{ 
+      setDidMount(false)
+
+      const execute = async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const title = urlParams.get("searchName");
+        await getAndSetProducts(title)
+        setSearchName(title)
+        setDidMount(true)
+      }
+      execute()
+          
+  }, [])
 
   return (
     <>
@@ -94,13 +82,13 @@ const Search = () => {
         <div className='app__Category_Grid main__container'>
           <div className='app__Category_Grid_Esquerda'>
             <div>
-              <p>Categoria</p>
+              <p>Categorias</p>
             </div>
             <div className='products'>
               {/*Inserir as categorias do lado esquerdo como botão*/} 
-              {cleanCategories(categories).map((category) => { 
+              {Object.keys(categories).map((category_name) => { 
                   return ( 
-                    <button key={category.id} onClick={() => (sendToCategories(category.name))}>{category.name} ({category.count})</button>
+                    <button key={category_name} onClick={() => sendToCategories(category_name) }> {category_name} ({categories[category_name]})</button>
                   );
                 })}
             </div> 
@@ -109,16 +97,33 @@ const Search = () => {
             <div>
             <p>Filtros</p>
             </div>
-            <div className='products'>  
-              {ads.map((ad) => {
-              return (
-                <div onClick={() => (
-                    window.location.href = `/produto?${new URLSearchParams({id: ad.id}).toString()}`
-                )}>
-                  <Product key={ad.id} data={ad} /> 
-                </div>
-              );
-              })}
+            <div className='products'> 
+            {currentItems.map((ad) => (
+              <div
+                key={ad.id}
+                onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
+              >
+                <Product key={ad.id} data={ad} /> 
+              </div>
+            ))}
+
+              {/* Pagination */}
+            <div>
+              {Array(Math.ceil(ads.length / itemsPerPage))
+                .fill()
+                .map((_, index) => (
+                  <>
+                  <button
+                    key={index + 1}
+                    onClick={() => goToPage(index + 1)}
+                    disabled={currentPage === index + 1}
+                  >
+                    {index + 1}
+                  </button>
+                  &nbsp;
+                  </>
+                ))}
+            </div>
             </div>
           </div> 
         </div>

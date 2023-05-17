@@ -1,47 +1,44 @@
 import React, { useEffect, useState } from 'react';
 
-import { PRODUCTS } from '../../../assets/products';
 import { Navbar, Footer, Product, SubHeading } from '../../../components/index';
-import { PriceDisplay } from '../../../utilities/formatCurrency';
-import images from '../../../assets/images.js';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
-import './Category.css';
 
-let subcategories = {}
+let subsubcategories = {}
 const itemsPerPage = 20; // Number of items per page
 let currentItems = [];
 let startIndex = 0;
 let endIndex = 0;
 
 
-const Category = () => {
+const SubCategory = () => {
 
   const [ads, setAds] = useState([])
   const [searchName, setSearchName] = useState(null)
   const [categoryName, setCategoryName] = useState("")
+  const [subCategoryName, setSubCategoryName] = useState("")
   const [path, setPath] = useState(null)
   const [currentPage, setCurrentPage] = useState(1);
+
+
   const [didMount, setDidMount] = useState(false)
 
-  async function getSubCategoriesbySearchName(categoryName, searchName){
-    setPath('Home > ' + categoryName + " > pesquisa: '" + searchName + "'");
-    let adsDB = await getAllFromDB("/ads", {title: searchName, category_name: categoryName})
+  async function getSubSubCategoriesbySearchName(subCategoryName, searchName){
+    let adsDB = await getAllFromDB("/ads", {title: searchName, subcategory_name: subCategoryName})
     setAds(adsDB)
     adsDB.map( (ad) => {  
-      subcategories[ad.subcategory_name] != undefined ? subcategories[ad.subcategory_name] +=1 : subcategories[ad.subcategory_name]=0
+        subsubcategories[ad.subsubcategory_name] != undefined ? subsubcategories[ad.subsubcategory_name] +=1 : subsubcategories[ad.subsubcategory_name]=0
     })
     startIndex = (currentPage - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
     currentItems = adsDB.slice(startIndex, endIndex);
   }
 
-  async function getSubCategories(categoryName){
-    setPath('Home > ' + categoryName );
-    let adsDB = await getAllFromDB("/ads", {category_name: categoryName})
+  async function getSubSubCategories(subCategoryName){
+    let adsDB = await getAllFromDB("/ads", {subcategory_name: subCategoryName})
     setAds(adsDB)
     adsDB.map( (ad) => {  
-      subcategories[ad.subcategory_name] != undefined ? subcategories[ad.subcategory_name] +=1 : subcategories[ad.subcategory_name]=0
+        subsubcategories[ad.subsubcategory_name] != undefined ? subsubcategories[ad.subsubcategory_name] +=1 : subsubcategories[ad.subsubcategory_name]=0
     })
     startIndex = (currentPage - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
@@ -55,12 +52,12 @@ const Category = () => {
     currentItems = ads.slice(startIndex, endIndex);
   };
 
-  function sendToSubcategories(subcategoryName) {
+  function sendToSubSubcategories(subsubCategoryName) {
 
     //SELECIONA SUBCATEGORIA COM PESQUISA
-    const data = searchName!==null ? {category: categoryName, subCategory: subcategoryName, searchName: searchName } : {category: categoryName, subCategory: subcategoryName} ;
+    const data = searchName!==null ? {category: categoryName, subCategory: subCategoryName, subsubCategory: subsubCategoryName, searchName: searchName } : {category: categoryName, subCategory: subCategoryName, subsubCategory: subsubCategoryName} ;
     const queryString = new URLSearchParams(data).toString();
-    window.location.href = `/subcategoria?${queryString}`;
+    window.location.href = `/subsubcategoria?${queryString}`;
     
   }
 
@@ -71,18 +68,22 @@ const Category = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const searchName = urlParams.get("searchName");
       const categoryName = urlParams.get("category");
-
-      //Procurar todos os produtos de uma subcategoria apartir da categoria com o nome da pesquisa
-      if(searchName != null && categoryName != null){
+      const subCategoryName = urlParams.get("subCategory");
+      //Procurar todos os produtos de uma subsubcategoria apartir da subcategoria com o nome da pesquisa
+      if(searchName != null && subCategoryName != null){
         setCategoryName(categoryName)
+        setSubCategoryName(subCategoryName)
         setSearchName(searchName);
-        await getSubCategoriesbySearchName(categoryName, searchName);
+        await getSubSubCategoriesbySearchName(subCategoryName,searchName);
+        setPath('Home > ' + categoryName + ' > ' + subCategoryName + " > pesquisa: '" + searchName + "'");
         setDidMount(true)
       }
       //Procurar todos os produtos de uma subcategoria a partir da categoria
       else {
         setCategoryName(categoryName)
-        await getSubCategories(categoryName)
+        setSubCategoryName(subCategoryName)
+        await getSubSubCategories(subCategoryName)
+        setPath('Home > ' + categoryName + ' > ' + subCategoryName );
         setDidMount(true)
       }
       
@@ -108,19 +109,19 @@ const Category = () => {
         {searchName != null ? (
           <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
           ) : (
-            <SubHeading title = {categoryName}></SubHeading>
+            <SubHeading title = {subCategoryName}></SubHeading>
         )} 
         </div>
         <div className='app__Category_Grid main__container'>
           <div className='app__Category_Grid_Esquerda'>
             <div>
-              <p>Categoria -> {categoryName}</p>
+              <p>SubCategoria -> {subCategoryName}</p>
             </div>
             <div className='products'>
                {/*Inserir as subcategorias do lado esquerdo como botão*/} 
-               {Object.keys(subcategories).map((subcategory_name) => { 
+               {Object.keys(subsubcategories).map((subsubcategory_name) => { 
                   return ( 
-                    <button key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</button>
+                    <button key={subsubcategory_name} onClick={() => sendToSubSubcategories(subsubcategory_name) }> {subsubcategory_name} ({subsubcategories[subsubcategory_name]})</button>
                   );
                 })}
             </div> 
@@ -167,4 +168,4 @@ const Category = () => {
   );
 }
 
-export default Category
+export default SubCategory

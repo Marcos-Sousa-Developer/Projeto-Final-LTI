@@ -35,10 +35,10 @@ const Navbar = () => {
                 <FiChevronLeft></FiChevronLeft>    
                 Voltar atrás
             </div>
-            <a className='app__pointer app__sidebar_navs_subcategory-title' onClick={() => window.location.href = `/categoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name}).toString()}`}>{subcategory.name} <span>(ver tudo)</span></a>
+            <a className='app__pointer app__sidebar_navs_subcategory-title' onClick={() => window.location.href = `/subcategoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name}).toString()}`}>{subcategory.name} <span>(ver tudo)</span></a>
             <div style={{marginLeft:'.75rem'}}>
                 {subcategory.subsubcategories.map((subsubcategory, i) => {
-                    return <li style={{lineHeight:'2rem'}}><a key={i} className='app__text_effect app__pointer' style={{fontSize:'14px'}} onClick={() => window.location.href = `/categoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name, subSubCategory: subsubcategory}).toString()}`}>{subsubcategory}</a></li>
+                    return <li style={{lineHeight:'2rem'}}><a key={i} className='app__text_effect app__pointer' style={{fontSize:'14px'}} onClick={() => window.location.href = `/subsubcategoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name, subsubCategory: subsubcategory}).toString()}`}>{subsubcategory}</a></li>
                 })}
             </div>
           </div>

@@ -19,6 +19,8 @@ import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
 import LoadingPage from "./pages/LoadingPage";
 import Checkout from "./pages/HomeView/Checkout/Checkout";
 import { useCookies } from "react-cookie";
+import SubCategory from "./pages/HomeView/SubCategory/SubCategory";
+import SubSubCategory from "./pages/HomeView/SubSubCategory/SubSubCategory";
 
 
 function App() {
@@ -115,6 +117,8 @@ function App() {
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/pesquisa" element={<Search/>} />
           <Route path="/categoria" element={<Category/>} />
+          <Route path="/subcategoria" element={<SubCategory/>} />
+          <Route path="/subsubcategoria" element={<SubSubCategory/>} />
           <Route path="/produto" element={<ProductPage/>} />
           <Route path="/market-place" element={<MarketPlace/>} />
           <Route path="/comparador" element={<CompareProduct></CompareProduct>}/>

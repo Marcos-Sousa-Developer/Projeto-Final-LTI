@@ -68,24 +68,21 @@ const Searchbar = () => {
 
         let searchTextClear = searchText.trim();
 
-        console.log(window.location.pathname);
-
-        if(window.location.pathname === "/" || window.location.pathname === "/pesquisa" || window.location.pathname === "/produto" || window.location.pathname === "/categoria"){
-            if(!searchTextClear.length == 0){
-                let products = await getAllFromDB("/ads",{
-                    title: searchTextClear,
-                })
-                if(products == "There is no ad in the database"){
-                    //DAR MENSAGEM DE ERRO OU SUGERIR PROCURAR PELAS CATEGORIAS
-                    alert(products)
-                } else {
-                    //VAI PARA OUTRA PÁGINA ONDE MOSTRA OS PRODUTOS
-                    const data = {searchName: searchTextClear};
-                    const queryString = new URLSearchParams(data).toString();
-                    window.location.href = `/pesquisa?${queryString}`;
-                }
+        if(!searchTextClear.length == 0){
+            let products = await getAllFromDB("/ads",{
+                title: searchTextClear,
+            })
+            if(products == "There is no ad in the database"){
+                //DAR MENSAGEM DE ERRO OU SUGERIR PROCURAR PELAS CATEGORIAS
+                alert(products)
+            } else {
+                //VAI PARA OUTRA PÁGINA ONDE MOSTRA OS PRODUTOS
+                const data = {searchName: searchTextClear};
+                const queryString = new URLSearchParams(data).toString();
+                window.location.href = `/pesquisa?${queryString}`;
             }
         }
+        
         if(window.location.pathname === "/anunciar"){
             document.getElementsByName('searchText')[0].placeholder='new text for email';
             //verificar o EAN
