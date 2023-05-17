@@ -194,4 +194,21 @@ const getUserType = async (req, res) => {
 
 }
 
-module.exports = {signIn, registerUser, getUserType}
+const logout = async (req, res) => { 
+
+  try {
+    res.clearCookie('refreshToken', { httpOnly: true, path: '/' });
+    res.clearCookie('identification', { httpOnly: true, path: '/' });
+    res.clearCookie('idToken', { httpOnly: true, path: '/' });
+    res.clearCookie('userSession', { httpOnly: true, path: '/' });
+    res.clearCookie('accessToken', { httpOnly: true, path: '/' });
+    res.status(200).send('LogOut');
+  }
+  catch (error) {
+    res.status(500);
+  }
+
+
+}
+
+module.exports = {signIn, registerUser, getUserType, logout}

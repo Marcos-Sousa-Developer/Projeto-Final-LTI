@@ -8,6 +8,7 @@ import putToDB from '../../../hooks/putToDB';
 import {Navbar, Footer, SubHeading, SnackBar, Modal} from '../../../components/index';
 import './ConsumerProfile.css';
 import LoadingPage from '../../LoadingPage';
+import logOut from '../../../hooks/logOut';
 
 const SnackbarType = {
   success: "success",
@@ -376,7 +377,7 @@ function ConsumerProfile() {
             <button onClick={() => setIsOpen(false)}>Cancelar</button>
             <button onClick={() => { submit(); setIsOpen(false); }}>Guardar</button>
           </Modal>
-          <button type="button" className='main__negative_action_btn'>Log Out</button>
+          <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
         </div>
       </div>
       <Footer></Footer>
