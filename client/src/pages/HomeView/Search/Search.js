@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 import { PRODUCTS } from '../../../assets/products';
-import { Navbar, Footer, Product, SubHeading } from '../../../components/index';
-import { PriceDisplay } from '../../../utilities/formatCurrency';
+import { Navbar, Footer, Product, SubHeading, ComparePopUp } from '../../../components/index';
 import images from '../../../assets/images.js';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import getFromDB from '../../../hooks/getFromDB';
 
 import './Search.css';
+import LoadingPage from '../../LoadingPage';
 
 let categories = {}
 const itemsPerPage = 20; // Number of items per page
@@ -63,52 +63,69 @@ const Search = () => {
           
   }, [])
 
+
+    //-----------------------------------------------------------
+
+    const [selectedProducts, setSelectedProducts] = useState([]);
+
+    const addToSelectedProducts = (product) => {
+      if (selectedProducts.length >= 4) {
+        return;
+      }
+      setSelectedProducts([...selectedProducts, product]);
+    };
+  
+    const removeFromSelectedProducts = (product) => {
+      setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
+    };
+    //-----------------------------------------------------------
+
   return (
     <>
     {
       didMount == false ? (
-        <>
-          Loading
-        </>
+        <LoadingPage></LoadingPage>
       )
       :
       (
       <>
       <Navbar></Navbar>
-      <div className='app__Category main__container'>
-        <div className='app__Category_Caminho'>
+      <div className='app__Search main__container'>
+        <div className='app__Search_Caminho'>
         <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
         </div>
-        <div className='app__Category_Grid main__container'>
-          <div className='app__Category_Grid_Esquerda'>
-            <div>
+        <div className='app__Search_Grid'>
+          <div className='app__Search_Grid_Esquerda'>
               <p>Categorias</p>
-            </div>
-            <div className='products'>
-              {/*Inserir as categorias do lado esquerdo como botão*/} 
-              {Object.keys(categories).map((category_name) => { 
+            <div className='app__Search_filter_content'>
+              <ul>
+                {Object.keys(categories).map((category_name) => { 
                   return ( 
-                    <button key={category_name} onClick={() => sendToCategories(category_name) }> {category_name} ({categories[category_name]})</button>
+                    <li>
+                      <a className='app__pointer app__text_effect' key={category_name} onClick={() => sendToCategories(category_name) }> {category_name} ({categories[category_name]})</a>
+                    </li>
                   );
                 })}
+              </ul>
             </div> 
           </div> 
-          <div className='app__Category_Grid_Direita'>
-            <div>
-            <p>Filtros</p>
+          <div className='app__Search_Grid_Direita'>
+            <div className=''>
+              <p>Filtros</p>
             </div>
             <div className='products'> 
-            {currentItems.map((ad) => (
-              <div
-                key={ad.id}
-                onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
-              >
-                <Product key={ad.id} data={ad} /> 
-              </div>
-            ))}
-
-              {/* Pagination */}
-            <div>
+              {currentItems.map((ad) => (
+                <Product 
+                  key={ad.id} 
+                  data={ad} 
+                  selectedProducts={selectedProducts}
+                  onAddToCompare={addToSelectedProducts}
+                  onRemoveFromCompare={removeFromSelectedProducts}
+                  onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
+                /> 
+              ))}
+            </div>
+            <div className="app__Search_pagination">
               {Array(Math.ceil(ads.length / itemsPerPage))
                 .fill()
                 .map((_, index) => (
@@ -124,10 +141,14 @@ const Search = () => {
                   </>
                 ))}
             </div>
-            </div>
           </div> 
         </div>
       </div>
+      <ComparePopUp
+        selectedProducts={selectedProducts}
+        onCloseComparePopUp={() => setSelectedProducts([])}
+        removeFromSelectedProducts={removeFromSelectedProducts}
+      />
       <Footer></Footer>
       </>
       )
