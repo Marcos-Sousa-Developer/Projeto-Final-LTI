@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {Navbar, Footer, Product, ComparePopUp} from '../../../components/index';
 import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 import ReactPaginate from "react-paginate";
+
+import {Navbar, Footer, Product, ComparePopUp} from '../../../components/index';
 import { PRODUCTS } from '../../../assets/products';
 import images from '../../../assets/images';
 import './Home.css';
