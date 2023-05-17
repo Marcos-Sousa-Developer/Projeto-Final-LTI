@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
 import { PRODUCTS } from '../../../assets/products';
-import { Navbar, Footer, Product, SubHeading } from '../../../components/index';
-import { PriceDisplay } from '../../../utilities/formatCurrency';
+import { Navbar, Footer, Product, SubHeading, ComparePopUp } from '../../../components/index';
 import images from '../../../assets/images.js';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import './Category.css';
+import LoadingPage from '../../LoadingPage';
 
 let subcategories = {}
 const itemsPerPage = 20; // Number of items per page
 let currentItems = [];
 let startIndex = 0;
 let endIndex = 0;
-
 
 const Category = () => {
 
@@ -90,12 +89,28 @@ const Category = () => {
     run();
   }, [])
 
+    //-----------------------------------------------------------
+
+      const [selectedProducts, setSelectedProducts] = useState([]);
+
+      const addToSelectedProducts = (product) => {
+        if (selectedProducts.length >= 4) {
+          return;
+        }
+        setSelectedProducts([...selectedProducts, product]);
+      };
+    
+      const removeFromSelectedProducts = (product) => {
+        setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
+      };
+    //-----------------------------------------------------------
+
   return (
     <>
     {
       didMount == false ? (
         <>
-          Loading
+          <LoadingPage></LoadingPage>
         </>
       )
       :
@@ -111,36 +126,38 @@ const Category = () => {
             <SubHeading title = {categoryName}></SubHeading>
         )} 
         </div>
-        <div className='app__Category_Grid main__container'>
+        <div className='app__Category_Grid'>
           <div className='app__Category_Grid_Esquerda'>
-            <div>
-              <p>Categoria -> {categoryName}</p>
-            </div>
-            <div className='products'>
-               {/*Inserir as subcategorias do lado esquerdo como botão*/} 
+            <p>Categoria - {categoryName}</p>
+            <div className='app__Category_filter_content'>
+              <ul>
                {Object.keys(subcategories).map((subcategory_name) => { 
                   return ( 
-                    <button key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</button>
+                    <li>
+                      <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
+                    </li>
                   );
                 })}
+              </ul>
             </div> 
           </div> 
           <div className='app__Category_Grid_Direita'>
             <div>
-            <p>Filtros</p>
+              <p>Filtros</p>
             </div>
             <div className='products'>  
             {currentItems.map((ad) => (
-              <div
-                key={ad.id}
-                onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
-              >
-                <Product key={ad.id} data={ad} /> 
-              </div>
-            ))}
+                <Product 
+                  key={ad.id} 
+                  data={ad} 
+                  selectedProducts={selectedProducts}
+                  onAddToCompare={addToSelectedProducts}
+                  onRemoveFromCompare={removeFromSelectedProducts}
+                  onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
+                /> 
+              ))}
             </div>
-            {/* Pagination */}
-           <div>
+            <div className="app__Category_pagination">
               {Array(Math.ceil(ads.length / itemsPerPage))
                 .fill()
                 .map((_, index) => (
@@ -159,6 +176,11 @@ const Category = () => {
           </div> 
         </div>
       </div>
+      <ComparePopUp
+        selectedProducts={selectedProducts}
+        onCloseComparePopUp={() => setSelectedProducts([])}
+        removeFromSelectedProducts={removeFromSelectedProducts}
+      />
       <Footer></Footer>
       </>
       )

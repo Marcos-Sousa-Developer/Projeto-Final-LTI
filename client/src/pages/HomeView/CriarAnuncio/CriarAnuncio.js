@@ -33,15 +33,29 @@ function CriarAnuncio() {
         email: "",
         telemovel: "",
         search: false,
+        prodUnit: {},
     });
 
     const [didMount, setDidMount] = useState(false)
 
-    async function getSupplierOrder(){
-      let supplierOrdersGet = await getAllFromDB("/productionUnits")
-      if (typeof supplierOrdersGet != "string") {
-          setProductionUnit(prevState => [...supplierOrdersGet])
+    async function getSupplierProdUnit(){
+      let paramsProdUnit = {
+        uid_supplier: 1,
+      };
+      let supplierProdUnits = await getAllFromDB("/productionUnits", paramsProdUnit)
+
+      if (typeof supplierProdUnits != "string") {
+          setProductionUnit(prevState => [...supplierProdUnits])
       }
+      const newProdUnitKeys = [];
+      supplierProdUnits.map((prodUnit) => {  
+        newProdUnitKeys.push(prodUnit.name)
+      }); 
+      const newProdUnit = {};
+      newProdUnitKeys.forEach((key) => {
+        newProdUnit[key] = 0; 
+      });
+      setFormData({ ...formData, prodUnit: newProdUnit })
     }
 
     async function getProduct(ean){
@@ -108,7 +122,7 @@ function CriarAnuncio() {
             getProduct(ean)
         }
         setDidMount(true)
-        getSupplierOrder()
+        getSupplierProdUnit()
     }, [])
 
     async function verifyTitle(title){
@@ -289,6 +303,19 @@ function CriarAnuncio() {
       }
       return "OK"
     }
+
+    async function verifyFeatures(features){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+      
+      if(features != undefined){
+        for (let feature in features) {
+            if(typeof features[feature] != "string"){
+              return "Deve de escolher uma opção no campo (" + feature + ") das características do produto";
+            }
+        }
+      }
+      return "OK"
+    }
     
     async function getIdSubSubCategory(nameSubSubCategory){
       let params = {
@@ -303,7 +330,7 @@ function CriarAnuncio() {
 
     const submit = async () => {
 
-        console.log(formData)
+      console.log(formData.prodUnit)
 
         let validTitle = await verifyTitle(formData.titulo);
         let validPrice = await verifyPrice(formData.preco);
@@ -888,28 +915,22 @@ function CriarAnuncio() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                      {productionUnits.map((productionUnit) => { 
+                        return ( 
+                          <tr>
                           <td>
                               <label class="app__anuncio_prodUnit_checkbox">
                                 <input type="checkbox"></input>
                                 <span class="prodUnit_checkmark"></span>
                               </label>
                           </td>
-                          <td><div className='inputField'><input type="number"></input></div></td>
-                          <td>Product Name</td>
-                          <td>Product Location</td>
+                           {console.log(formData.prodUnit)}
+                          <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: e.target.value  }})}}></input></div></td>
+                          <td>{productionUnit.name}</td>
+                          <td>{productionUnit.location}</td>
                         </tr>
-                        <tr>
-                          <td>
-                              <label class="app__anuncio_prodUnit_checkbox">
-                                <input type="checkbox"></input>
-                                <span class="prodUnit_checkmark"></span>
-                              </label>
-                          </td>
-                          <td><div className='inputField'><input type="number"></input></div></td>
-                          <td>Product Name 2</td>
-                          <td>Product Location 2</td>
-                        </tr>
+                        );
+                      })}
                        </tbody> 
                     </table>
                   </div>

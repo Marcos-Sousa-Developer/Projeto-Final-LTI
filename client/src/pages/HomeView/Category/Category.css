@@ -137,50 +137,56 @@ img, picture {
   opacity: 1;
 }
 
-.app__Category {
-  margin: 3rem auto;
-}
-.app__Category h5 {
-  text-align: center;
-  margin: 0.5rem 0 0 0;
-}
-.app__Category_Grid {
-  padding: 3rem 1.5rem;
-  width: 100%;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1.5fr 5fr;
-}
-.app__Category_Grid_Esquerda {
+.main__negative_action_btn {
+  opacity: 0.8;
+  color: black;
+  border: 2px solid black;
+  padding: 6px 50px;
+  border-radius: 15px;
+  transition: all 200ms ease-in-out;
   box-sizing: border-box;
-  background: #FFFFFF;
-  border: 3px solid #EEEEEE;
-  margin-right: 1rem;
 }
-.app__Category_Grid_Esquerda p {
-  margin-left: 0.25rem;
-}
-.app__Category_Grid_Direita p {
-  padding: 1rem 0.5rem;
-  box-sizing: border-box;
-  margin-left: 0.25rem;
-  background: #FFFFFF;
-  border: 3px solid #EEEEEE;
+.main__negative_action_btn:hover {
+  opacity: 1;
+  color: #EB5C1F;
+  border: 2px solid #EB5C1F;
 }
 
-@media screen and (max-width: 1200px) {
-  .app__Category_Grid {
-    width: 80%;
+@media screen and (max-width: 700px) {
+  .main__action_btn {
+    padding: 6px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .main__negative_action_btn {
+    padding: 4px 40px;
+    border-radius: 10px;
+    font-size: 14px;
   }
 }
-@media screen and (max-width: 800px) {
-  .app__Category_Grid {
-    grid-template-columns: 1fr 1fr;
-  }
+.app__Category {
+  margin: 1rem auto;
 }
-@media screen and (max-width: 600px) {
-  .app__Category_Grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
+.app__Category_Grid {
+  display: grid;
+  grid-template-columns: 1.5fr 5fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.app__Category_Grid_Esquerda {
+  border: 3px solid #EEEEEE;
+  padding: 1rem 2rem;
+  align-self: baseline;
+}
+.app__Category_Grid_Esquerda .app__Category_filter_content ul {
+  padding: 0;
+}
+.app__Category_Grid_Esquerda .app__Category_filter_content li {
+  line-height: 2rem;
+}
+.app__Category_Grid_Esquerda .app__Category_filter_content li a {
+  font-size: 14px;
+}
+.app__Category_Grid_Direita .app__Category_pagination {
+  text-align: center;
 }/*# sourceMappingURL=Category.css.map */

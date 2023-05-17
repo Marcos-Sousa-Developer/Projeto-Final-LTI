@@ -4,7 +4,7 @@ import { PriceDisplay } from '../../utilities/formatCurrency';
 import './Product.css';
 import { useCookies } from 'react-cookie';
 
-const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts }) => {
+const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts, onClick }) => {
     //const { id, productName, price, productImage } = data;
     const { id, title, price } = data;
 
@@ -12,7 +12,7 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts }
   
     const addToCart = () => {
       const prevValue = cookies.cart || {};
-      prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, price, productName, productImage];
+      prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, price, title];
       setCookie('cart', prevValue, { path: '/' });
     };
   
@@ -30,17 +30,17 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts }
           {/*<div><img className='product_img' src={productImage} /></div>*/}
           <div className='product_description'>
             <div>
-              <p>{title}</p>
+              <p className="app__pointer" onClick={onClick}>{title}</p>
               <PriceDisplay className='product_price' price={price} />
             </div>
             <div className='product_action_section'>
               {/*<button style={{ marginRight: '0.25rem' }} onClick={addToCart}><FiShoppingCart></FiShoppingCart><span>Adicionar</span></button>*/}
 
-              {/*selectedProducts.some((p) => p.id === id) ? (
+              {selectedProducts.some((p) => p.id === id) ? (
                 <button onClick={handleRemoveFromCompare}><FiRepeat></FiRepeat><span>Remover</span></button>
               ) : (
                 <button onClick={handleAddToCompare}><FiRepeat></FiRepeat><span>Comparar</span></button>
-              )*/}
+              )}
             </div>
           </div>
         </div>
