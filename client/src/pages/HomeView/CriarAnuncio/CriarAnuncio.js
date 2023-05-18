@@ -904,25 +904,32 @@ function CriarAnuncio() {
                 <div className='app__anuncio_prodUnit'>
                   <p className='title'>Unidade Produção</p>
                   <div className='app__anuncio_prodUnit_content'>
-                    {/*productionUnits.length > 0 && (
+                    {productionUnits.length > 0 && (
                       <>
                         <table className='app__prod-unit_existing-units'>
                           <thead>
                             <tr>
-                              <th>Name</th>
+                              <th>Ativar</th>
+                              <th>Quantidade</th>
+                              <th>Nome</th>
+                              <th>Localização</th>
                             </tr>
                           </thead>
                           <tbody>
                             {productionUnits.map((productionUnit, index) => (
                               <React.Fragment key={index}>
                                 <tr>
+                                  <td><input type="checkbox"></input></td>
+                                  <td><input type="number"></input></td>
                                   <td>{productionUnit.name}</td>
+                                  <td>{productionUnit.location}</td>
                                 </tr>
                               </React.Fragment>
                             ))}
                           </tbody>
                         </table>
                       </>
+<<<<<<< HEAD
                     )*/}
 
                     {/* exemplo */}
@@ -953,6 +960,9 @@ function CriarAnuncio() {
                       })}
                        </tbody> 
                     </table>
+=======
+                    )}
+>>>>>>> miguel
                   </div>
                 </div>
               </div>
