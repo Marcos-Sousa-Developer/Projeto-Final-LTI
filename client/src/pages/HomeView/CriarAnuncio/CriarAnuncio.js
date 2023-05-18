@@ -478,6 +478,19 @@ function CriarAnuncio() {
               })
             }
             
+
+
+            let ad = await postToDB("/ads",{ 
+              title: formData.titulo,
+              description: formData.descricao,
+              email: formData.email,
+              mobile_number: formData.telemovel,
+              extraCharacteristics: JSON.stringify(featuresDBad),
+              status: "ativo",
+              price: formData.preco,
+              supplier_id: idSupplier,
+              product_id: idProduct,
+            })
             //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
             //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
             // SE CONSEGUIR ADICIONAR TODOS ADICIONA
