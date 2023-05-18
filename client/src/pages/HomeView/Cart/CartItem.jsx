@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { FiX, FiPlus, FiMinus } from 'react-icons/fi';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import './Cart.css';
 
-export const CartItem = (props) => {
+export const CartItem = (props) => { 
+
+    console.log(props.data)
     
-    const {id, productName, price, productImage} = props.data;
+    const {id, title, price, productImage} = props.data; 
 
     const [cookies, setCookie] = useCookies(['cart']);
 
     const removeFromCart = () => {
         const prevValue = cookies.cart || {};
-        prevValue[id] = [prevValue[id][0] - 1 > 0 ? prevValue[id][0] - 1 : 1, price];
+        prevValue[id] = [prevValue[id][0] - 1 > 0 ? prevValue[id][0] - 1 : 1, price, title, props.data];
         setCookie('cart', prevValue, { path: '/' });
           
     }
@@ -22,14 +24,14 @@ export const CartItem = (props) => {
   
         let parsedValue = parseInt(value)
         if (!isNaN(parsedValue)) {
-            prevValue[id] = [parsedValue, price];
+            prevValue[id] = [parsedValue, price, title, props.data];
             setCookie('cart', prevValue, { path: '/' });
         }
     }
 
     const addToCart = () => {
         const prevValue = cookies.cart || {};
-        prevValue[id] = [prevValue[id][0]+ 1, price];
+        prevValue[id] = [prevValue[id][0]+ 1, price, title, props.data];
         setCookie('cart', prevValue, { path: '/' });
     }
 
@@ -43,7 +45,7 @@ export const CartItem = (props) => {
         <div className='app__cartItem'>
             <img src={productImage} alt="" />
             <div className='app__cartItem_description'>
-                <p>{productName}</p>
+                <p>{title}</p>
                 
             </div>
             <div className='app__cartItem_actions_1'>

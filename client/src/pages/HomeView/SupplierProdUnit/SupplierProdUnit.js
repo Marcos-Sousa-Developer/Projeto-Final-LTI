@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiEdit3, FiTrash2, FiX, FiCheck } from 'react-icons/fi';
 
+import putToDB from '../../../hooks/putToDB';
 import postToDB from '../../../hooks/postToDB';
 import deleteToDB from '../../../hooks/deleteToDB';
 import getAllFromDB from '../../../hooks/getAllFromDB';
@@ -31,13 +32,20 @@ const SupplierProdUnit = () => {
       setNewProductionUnit(prevState => ({ ...prevState, [name]: value }));
     }
   
-    function handleEditProductionUnit(index, updatedProductionUnit) {
+    async function handleEditProductionUnit(index, updatedProductionUnit) {
       // Create a new array with the production unit at the given index replaced with the updated production unit
       const updatedProductionUnits = productionUnits.map((productionUnit, i) =>
         i === index ? updatedProductionUnit : productionUnit
       );
       // Update the state with the new array
       setProductionUnits(updatedProductionUnits);
+      
+      let prodUnitPut = await putToDB("/productionUnits/" + updatedProductionUnits[index].id,{
+        name: updatedProductionUnits[index].name,
+        location: updatedProductionUnits[index].location,
+        capacity: updatedProductionUnits[index].capacity
+    })
+
       // Clear the editing index
       setEditingIndex(null);
     }
@@ -145,6 +153,7 @@ const SupplierProdUnit = () => {
                                                     onSubmit={(event) => {
                                                         event.preventDefault();
                                                         handleEditProductionUnit(index, {
+                                                            id: productionUnit.id,
                                                             name: event.target.name.value,
                                                             location: event.target.location.value,
                                                             capacity: event.target.capacity.value,
@@ -197,7 +206,7 @@ const SupplierProdUnit = () => {
                                                         return newState;
                                                     })}>
                                                         <p style={{fontSize:'18px'}}>Tem a certeza que quer apagar esta unidade de produção?</p>
-                                                        <div className='teste' style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                                                        <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
                                                             <button 
                                                                 className='main__action_btn' 
                                                                 onClick={() => 
@@ -213,6 +222,7 @@ const SupplierProdUnit = () => {
                                                     </Modal>
                                                 </div>
                                             </td>
+                                            <td data-cell='Produtos: '><button>Ver produtos</button></td>
                                         </tr>
                                     )}
                                 </React.Fragment>

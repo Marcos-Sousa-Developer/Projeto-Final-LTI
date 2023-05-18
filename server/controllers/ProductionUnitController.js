@@ -160,6 +160,8 @@ const updateProductionUnitByID = async function (req, res) {
 
     statement += ` WHERE id='${parseInt(req.params.id)}';`;
 
+    console.log(statement)
+
     let result = await dbConnection(statement);
 
     if (result === "error") {

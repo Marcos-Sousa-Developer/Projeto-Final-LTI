@@ -4,8 +4,8 @@ const statement = "CREATE TABLE productProductionUnits ( " +
                   "id int NOT NULL AUTO_INCREMENT, " + 
                   "quantity int NOT NULL, " + 
                   "fee float NOT NULL, " +
-                  "productionUnit_id int, " + 
-                  "ad_id int, " + 
+                  "productionUnit_id int NOT NULL, " + 
+                  "ad_id int NOT NULL, " + 
                   "PRIMARY KEY (id))";
 
 pool.query(statement, function(error, result) {

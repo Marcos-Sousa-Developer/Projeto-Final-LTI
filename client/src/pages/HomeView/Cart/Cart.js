@@ -45,7 +45,6 @@ const Cart = () => {
   }
   
   useEffect(() => {
-
     if(cookies.cart){
       let total= 0;
       let totalI = 0;
@@ -88,11 +87,11 @@ const Cart = () => {
 
             <div className='app__cart_content'>
               <div className='app__cart_subcontent'>
-                {PRODUCTS.map((product) => {
-                  if(![0,undefined].includes(cookies.cart[product.id]) ){
-                    return <CartItem data={product}></CartItem>
-                  }
+
+                {Object.keys(cookies.cart).map((key) => {
+                    return <CartItem data={cookies.cart[key][3]}></CartItem>
                 })}
+
               </div>
 
               <div className='app__cart_checkout_area'>

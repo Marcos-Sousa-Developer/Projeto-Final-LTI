@@ -477,11 +477,26 @@ function CriarAnuncio() {
                 product_id: idProduct,
               })
             }
-            
+          
+            let idAd = ad.insertId
+
+            let i = 0;
+            Object.entries(formData.prodUnit).forEach(async ([key, value]) => {
+              if(value[1] == true){
+                let productProductionUnit = await postToDB("/productProductionUnits",{ 
+                  quantity: value[1],
+                  fee: 0,
+                  productionUnit_id: productionUnits[i].id,
+                  ad_id: idAd,
+                })
+              }
+              i++;
+            });
+
             //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
             //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
-            // SE CONSEGUIR ADICIONAR TODOS ADICIONA
-            // SE NÃO, DÁ UM ALERT
+            //SE CONSEGUIR ADICIONAR TODOS ADICIONA
+            //SE NÃO, DÁ UM ALERT
 
             text = "Anuncio concluído"
         } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || validProdUnit != "OK" || (validEAN != "OK" && validEAN != null)){
@@ -896,22 +911,27 @@ function CriarAnuncio() {
                         <table className='app__prod-unit_existing-units'>
                           <thead>
                             <tr>
-                              <th>Name</th>
+                              <th>Ativar</th>
+                              <th>Quantidade</th>
+                              <th>Nome</th>
+                              <th>Localização</th>
                             </tr>
                           </thead>
                           <tbody>
                             {productionUnits.map((productionUnit, index) => (
                               <React.Fragment key={index}>
                                 <tr>
+                                  <td><input type="checkbox"></input></td>
+                                  <td><input type="number"></input></td>
                                   <td>{productionUnit.name}</td>
+                                  <td>{productionUnit.location}</td>
                                 </tr>
                               </React.Fragment>
                             ))}
                           </tbody>
                         </table>
                       </>
-                    )*/}
-
+                    )}
                     {/* exemplo */}
                     <table>
                       <thead>

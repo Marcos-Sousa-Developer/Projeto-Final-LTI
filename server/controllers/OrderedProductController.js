@@ -108,13 +108,14 @@ const getOrderedProductByID = async function (req, res) {
  */
 const insertOrderedProduct = async function (req, res) {
 
-    const data = [req.query.order_id, req.query.product_EAN, req.query.product_category, 
-                req.query.product_subcategory, req.query.product_subsubcategory, req.query.product_owner_uid, 
+    const data = [req.query.order_id, req.query.ad_id, req.query.product_category, 
+                req.query.product_subcategory, req.query.product_subsubcategory, 
+                req.query.order_status, req.query.product_owner_uid, 
                 req.query.product_buyer_uid, req.query.product_location, req.query.buyer_location, 
                 req.query.orderDistance_km, req.query.sameLocation, req.query.price, req.query.created_at];
 
-    const statement = "INSERT INTO orderedProducts (order_id, product_EAN, product_category, " +    
-                    "product_subcategory, product_subsubcategory, product_owner_uid, " +
+    const statement = "INSERT INTO orderedProducts (order_id, ad_id, product_category, " +    
+                    "product_subcategory, product_subsubcategory, order_status, product_owner_uid, " +
                     "product_buyer_uid, product_location, buyer_location, orderDistance_km, sameLocation, " +
                     "price, created_at) VALUES ?";
  

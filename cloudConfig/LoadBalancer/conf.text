@@ -29,6 +29,11 @@ sudo tail -f /var/log/nginx/access.log
 sudo tail -f /var/log/nginx/error.log
 
 
+//certbot
+sudo apt-get -y install certbot python3-certbot-nginx 
+certbot --nginx
+
+
 
 
 

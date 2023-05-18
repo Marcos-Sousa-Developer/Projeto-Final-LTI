@@ -33,6 +33,24 @@
     &_Grid_Direita{
         .app__Search_pagination{
             text-align: center;
+
+            &_actionBtn{
+
+            }
+
+            &_currentPage{
+                color: $orange;
+                font-weight: bold;
+            }
+
+            &_pages{
+                padding: .25rem .5rem;
+                transition: color 100ms ease-in;
+
+                &:hover{
+                    color: rgba($color: $orange, $alpha: .8);
+                }
+            }
         }
     }
 }
