@@ -23,13 +23,12 @@ const SnackbarType = {
 };
 
 const ProductPage = () => {
-  //-------------------SnackBar--------------
   const snackbarRef = useRef(null);
-  //-----------------------------------------
-
+  const [cookies, setCookie] = useCookies(['cart']);
   const [path, setPath] = useState(null)
   const [suppliers, setSuppliers] = useState([]) //id dos anuncios com o product_id igual ao id do produto
   const [adData, setAdData] = useState({
+    dataComplete: {},
     title: "",
     src: [
       product1,
@@ -49,11 +48,15 @@ const ProductPage = () => {
 
     let ad = await getAllFromDB("/ads", {id: idAd})
     let product = await getAllFromDB("/products/" + ad[0].product_id)
-    let subSubCategory = await getFromDB("/subsubcategories/" + product[0].id_subsubcategory);
-    let subCategory = await getFromDB("/subcategories/" + subSubCategory[0].id_subcategory);
-    let category = await getFromDB("/categories/" + subCategory[0].id_category); 
-    setPath("Home - " + category[0].name + " - " + subCategory[0].name + " - " + subSubCategory[0].name)
+    setPath("Home - " + ad[0].category_name + " - " + ad[0].subcategory_name + " - " + ad[0].subsubcategory_name)
+    let car = []
+    try {
+      car = JSON.parse(ad[0].extraCharacteristic) 
+    } catch (error) {
+ 
+    }
     setAdData({
+      dataComplete: ad[0],
       title: ad[0].title,
       src: [
         product1,
@@ -63,36 +66,39 @@ const ProductPage = () => {
         product5,
       ],
       description: ad[0].description,
-      caracteristics: JSON.parse(ad[0].extraCharacteristic),
+
+      caracteristics: car,
       price: ad[0].price,
     });
     let ads = await getAllFromDB("/ads", {product_id: ad[0].product_id})
     let idsAds = []
-    ads.map( async (ad) => {
+    ads.map( (ad) => {
       idsAds.push(ad.id)
     })
     setSuppliers(idsAds)
   }
-
-  useEffect(()=>{ 
-    setDidMount(false)
-    const urlParams = new URLSearchParams(window.location.search);
-    const idAd = urlParams.get("id");
-    if(idAd != null){
-      getAndSetProduct(idAd)
-    }
-    setDidMount(true)
-  }, []);
-
-  //----------------------------------------------------------
-
-  const [cookies, setCookie] = useCookies(['cart']);
   
   const addToCart = () => {
+    let id = adData.dataComplete.id
     const prevValue = cookies.cart || {};
-    prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, adData.price, adData.title];
+    prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, adData.price, adData.title, adData.dataComplete];
     setCookie('cart', prevValue, { path: '/' });
   };
+
+
+  useEffect(()=>{ 
+    setDidMount(false) 
+    async function run() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const idAd = urlParams.get("id");
+      if(idAd != null){
+       await getAndSetProduct(idAd)
+      }
+      setDidMount(true)
+    }
+    run()
+
+  }, []);
 
   return (
     <>

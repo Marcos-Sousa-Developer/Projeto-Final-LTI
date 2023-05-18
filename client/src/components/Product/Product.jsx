@@ -12,11 +12,11 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts, 
 
     const [cookies, setCookie] = useCookies(['cart']);
   
-    const addToCart = () => {
+    /*const addToCart = () => {
       const prevValue = cookies.cart || {};
       prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, price, title];
       setCookie('cart', prevValue, { path: '/' });
-    };
+    };*/
   
     const handleAddToCompare = () => {
       onAddToCompare(data);

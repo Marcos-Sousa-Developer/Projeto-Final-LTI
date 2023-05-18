@@ -19,8 +19,7 @@ const SubCategory = () => {
   const [subCategoryName, setSubCategoryName] = useState("")
   const [path, setPath] = useState(null)
   const [currentPage, setCurrentPage] = useState(1);
-
-
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const [didMount, setDidMount] = useState(false)
 
   async function getSubSubCategoriesbySearchName(subCategoryName, searchName){
@@ -60,6 +59,18 @@ const SubCategory = () => {
     window.location.href = `/subsubcategoria?${queryString}`;
     
   }
+
+
+      const addToSelectedProducts = (product) => {
+        if (selectedProducts.length >= 4) {
+          return;
+        }
+        setSelectedProducts([...selectedProducts, product]);
+      };
+    
+      const removeFromSelectedProducts = (product) => {
+        setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
+      };
 
   useEffect(()=>{ 
     setDidMount(false)
@@ -132,12 +143,14 @@ const SubCategory = () => {
             </div>
             <div className='products'>  
             {currentItems.map((ad) => (
-              <div
-                key={ad.id}
-                onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
-              >
-                <Product key={ad.id} data={ad} /> 
-              </div>
+                <Product 
+                  key={ad.id} 
+                  data={ad} 
+                  selectedProducts={selectedProducts}
+                  onAddToCompare={addToSelectedProducts}
+                  onRemoveFromCompare={removeFromSelectedProducts}
+                  onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
+                />
             ))}
             </div>
             {/* Pagination */}
