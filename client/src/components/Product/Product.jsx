@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
-import { FiShoppingCart, FiRepeat} from 'react-icons/fi';
+import { FiRepeat} from 'react-icons/fi';
+import { useCookies } from 'react-cookie';
+
 import { PriceDisplay } from '../../utilities/formatCurrency';
 import './Product.css';
-import { useCookies } from 'react-cookie';
+import exampleImage from '../../assets/testproducts/boxedwater2.jpg';
 
 const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts, onClick }) => {
     //const { id, productName, price, productImage } = data;
@@ -27,7 +29,7 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts, 
     return (
       <>
         <div className='product'>
-          {/*<div><img className='product_img' src={productImage} /></div>*/}
+          <div><img className='product_img' src={exampleImage} /></div>
           <div className='product_description'>
             <div>
               <p className="app__pointer" onClick={onClick}>{title}</p>

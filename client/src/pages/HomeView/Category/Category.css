@@ -189,4 +189,15 @@ img, picture {
 }
 .app__Category_Grid_Direita .app__Category_pagination {
   text-align: center;
+}
+.app__Category_Grid_Direita .app__Category_pagination_currentPage {
+  color: #EB5C1F;
+  font-weight: bold;
+}
+.app__Category_Grid_Direita .app__Category_pagination_pages {
+  padding: 0 0.5rem;
+  transition: color 100ms ease-in;
+}
+.app__Category_Grid_Direita .app__Category_pagination_pages:hover {
+  color: rgba(235, 92, 31, 0.8);
 }/*# sourceMappingURL=Category.css.map */

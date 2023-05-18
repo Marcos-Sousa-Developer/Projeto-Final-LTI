@@ -53,7 +53,7 @@ function CriarAnuncio() {
       }); 
       const newProdUnit = {};
       newProdUnitKeys.forEach((key) => {
-        newProdUnit[key] = 0; 
+        newProdUnit[key] = [0, false]; 
       });
       setFormData({ ...formData, prodUnit: newProdUnit })
     }
@@ -304,14 +304,16 @@ function CriarAnuncio() {
       return "OK"
     }
 
-    async function verifyFeatures(features){
+    async function verifyProdUnits(prodUnits){
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
-      
-      if(features != undefined){
-        for (let feature in features) {
-            if(typeof features[feature] != "string"){
-              return "Deve de escolher uma opção no campo (" + feature + ") das características do produto";
+
+      if(prodUnits != undefined){
+        for (let prodUnit in prodUnits) {
+          if(prodUnits[prodUnit][1] == true){
+            if(prodUnits[prodUnit][0] <= 0){
+              return "Deve de inserir uma quantidade válida"
             }
+          }
         }
       }
       return "OK"
@@ -330,8 +332,6 @@ function CriarAnuncio() {
 
     const submit = async () => {
 
-      console.log(formData.prodUnit)
-
         let validTitle = await verifyTitle(formData.titulo);
         let validPrice = await verifyPrice(formData.preco);
         let validDescription = await verifyDescription(formData.descricao);
@@ -344,7 +344,8 @@ function CriarAnuncio() {
         if(formData.sub_features != undefined){
           validSubFeature = await verifySubFeatures(formData.sub_features[0]);
         }
-
+        let validProdUnit = await verifyProdUnits(formData.prodUnit);
+        
         let validEAN = null;
         if(formData.search){
           validEAN = await verifyEAN(formData.EAN);
@@ -354,7 +355,7 @@ function CriarAnuncio() {
         let ad;
 
         let text = "Não foi possível criar o produto\n";
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && (validEAN == "OK" || validEAN == null)){
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && validProdUnit =="OK" && (validEAN == "OK" || validEAN == null)){
 
             let featuresDBproduct = {}; 
             let featuresDBad = {};
@@ -477,9 +478,13 @@ function CriarAnuncio() {
               })
             }
             
-            //Verificar se fez os inputs 
+            //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
+            //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
+            // SE CONSEGUIR ADICIONAR TODOS ADICIONA
+            // SE NÃO, DÁ UM ALERT
+
             text = "Anuncio concluído"
-        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || validProdUnit != "OK" || (validEAN != "OK" && validEAN != null)){
             if(validTitle != "OK" ){
               text += validTitle + "\n"
             }
@@ -506,6 +511,9 @@ function CriarAnuncio() {
             }
             if(validProductionDate != "OK" ){
               text += validProductionDate + "\n"
+            }
+            if(validProdUnit != "OK"){
+              text += validProdUnit + "\n"
             }
             if(validEAN != "OK" && validEAN != null){
               text += validEAN + "\n"
@@ -920,12 +928,11 @@ function CriarAnuncio() {
                           <tr>
                           <td>
                               <label class="app__anuncio_prodUnit_checkbox">
-                                <input type="checkbox"></input>
+                                <input type="checkbox" onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [formData.prodUnit[productionUnit.name][0], e.target.checked] }})}}></input>
                                 <span class="prodUnit_checkmark"></span>
                               </label>
                           </td>
-                           {console.log(formData.prodUnit)}
-                          <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: e.target.value  }})}}></input></div></td>
+                          <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [e.target.value, formData.prodUnit[productionUnit.name][1]] }})}}></input></div></td>
                           <td>{productionUnit.name}</td>
                           <td>{productionUnit.location}</td>
                         </tr>

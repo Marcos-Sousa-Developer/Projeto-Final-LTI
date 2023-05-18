@@ -197,7 +197,7 @@ const SupplierProdUnit = () => {
                                                         return newState;
                                                     })}>
                                                         <p style={{fontSize:'18px'}}>Tem a certeza que quer apagar esta unidade de produção?</p>
-                                                        <div className='teste' style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                                                        <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
                                                             <button 
                                                                 className='main__action_btn' 
                                                                 onClick={() => 
