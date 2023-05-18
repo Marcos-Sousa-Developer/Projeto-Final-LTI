@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import { FiShoppingCart, FiMinus, FiPlus} from 'react-icons/fi';
 
 import product1 from "../../../assets/testproducts/Iphone.png";
@@ -25,6 +26,7 @@ const ProductPage = () => {
   //-------------------SnackBar--------------
   const snackbarRef = useRef(null);
   //-----------------------------------------
+
   const [path, setPath] = useState(null)
   const [suppliers, setSuppliers] = useState([]) //id dos anuncios com o product_id igual ao id do produto
   const [adData, setAdData] = useState({
@@ -80,9 +82,17 @@ const ProductPage = () => {
       getAndSetProduct(idAd)
     }
     setDidMount(true)
-  }, [])
+  }, []);
 
-  //---------------------------Data from the product--------------------------
+  //----------------------------------------------------------
+
+  const [cookies, setCookie] = useCookies(['cart']);
+  
+  const addToCart = () => {
+    const prevValue = cookies.cart || {};
+    prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, adData.price, adData.title];
+    setCookie('cart', prevValue, { path: '/' });
+  };
 
   return (
     <>
@@ -124,7 +134,7 @@ const ProductPage = () => {
                     <button 
                       className='main__action_btn app__product_page_content_actions_2'         
                       onClick={() => {
-                        snackbarRef.current.show();
+                        snackbarRef.current.show(); addToCart()
                       }}>Adicionar <FiShoppingCart></FiShoppingCart>
                     </button>
 

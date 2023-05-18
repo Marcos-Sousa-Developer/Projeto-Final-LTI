@@ -373,9 +373,11 @@ function ConsumerProfile() {
         <div className="app__ConsumerProfile_button">
           <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
           <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-            <p>Tem a certeza que deseja alterar os dados da sua conta?</p>
-            <button onClick={() => setIsOpen(false)}>Cancelar</button>
-            <button onClick={() => { submit(); setIsOpen(false); }}>Guardar</button>
+            <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os dados da sua conta?</p>
+            <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+              <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
+              <button className='main__negative_action_btn' onClick={() => { submit(); setIsOpen(false)}}>Guardar</button>
+            </div>
           </Modal>
           <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
         </div>
