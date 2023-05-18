@@ -38,7 +38,7 @@ function CriarAnuncio() {
     const [didMount, setDidMount] = useState(false)
 
     async function getSupplierOrder(){
-      let supplierOrdersGet = await getAllFromDB("/productionUnits")
+      let supplierOrdersGet = await getAllFromDB("/productionUnits", {uid_supplier: true})
       if (typeof supplierOrdersGet != "string") {
           setProductionUnit(prevState => [...supplierOrdersGet])
       }
@@ -856,55 +856,32 @@ function CriarAnuncio() {
                 <div className='app__anuncio_prodUnit'>
                   <p className='title'>Unidade Produção</p>
                   <div className='app__anuncio_prodUnit_content'>
-                    {/*productionUnits.length > 0 && (
+                    {productionUnits.length > 0 && (
                       <>
                         <table className='app__prod-unit_existing-units'>
                           <thead>
                             <tr>
-                              <th>Name</th>
+                              <th>Ativar</th>
+                              <th>Quantidade</th>
+                              <th>Nome</th>
+                              <th>Localização</th>
                             </tr>
                           </thead>
                           <tbody>
                             {productionUnits.map((productionUnit, index) => (
                               <React.Fragment key={index}>
                                 <tr>
+                                  <td><input type="checkbox"></input></td>
+                                  <td><input type="number"></input></td>
                                   <td>{productionUnit.name}</td>
+                                  <td>{productionUnit.location}</td>
                                 </tr>
                               </React.Fragment>
                             ))}
                           </tbody>
                         </table>
                       </>
-                    )*/}
-
-                    {/* exemplo */}
-
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Ativar</th>
-                          <th>Quantidade</th>
-                          <th>Nome</th>
-                          <th>Localização</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td><input type="checkbox"></input></td>
-                          <td><input type="number"></input></td>
-                          <td>Product Name</td>
-                          <td>Product Location</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox"></input></td>
-                          <td><input type="number"></input></td>
-                          <td>Product Name 2</td>
-                          <td>Product Location 2</td>
-                        </tr>
-                       </tbody> 
-                    </table>
-
-
+                    )}
                   </div>
                 </div>
               </div>

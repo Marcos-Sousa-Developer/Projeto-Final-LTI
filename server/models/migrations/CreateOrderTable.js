@@ -4,7 +4,6 @@ const statement = "CREATE TABLE orders ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
                   "order_number bigint NOT NULL, " +
                   "order_date DATE NOT NULL, " +
-                  "order_status varchar(255) NOT NULL, " +
                   "products_list varchar(255), " +
                   "total float NOT NULL, " +
                   "address varchar(255) NOT NULL, " +

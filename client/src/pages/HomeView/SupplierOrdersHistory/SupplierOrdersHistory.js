@@ -31,19 +31,18 @@ const SupplierOrdersHistory = () => {
             <table className='app__prod-unit_existing-units'>
               <thead>
                 <tr>
-                  <th>EAN</th>
+                  <th>Número da encomenda</th>
                   <th></th>
-                  <th>Localização do produto</th>
                   <th>Localização do comprador</th>
-                  <th>Distância da encomenda</th>
-                  <th>Preço</th>
+                  <th>Total €</th>
+                  <th>Estado</th>
                 </tr>
               </thead>
               <tbody>
                 {ordersHistory.map((orderHistory, index) => (
                   <React.Fragment key={index}>
                     <tr>
-                      <td>{orderHistory.product_EAN}</td>
+                      <td>{orderHistory.order_id}</td>
                       <td>
                         <button onClick={() => setModalOpen(prevState => {
                           const newState = [...prevState];
@@ -60,10 +59,9 @@ const SupplierOrdersHistory = () => {
                           <p>Subsubcategoria: {orderHistory.product_subsubcategory}</p>
                         </Modal>
                       </td>
-                      <td>{orderHistory.product_location}</td>
                       <td>{orderHistory.buyer_location}</td>
-                      <td>{orderHistory.orderDistance_km}</td>
-                      <td>{orderHistory.price}</td>
+                      <td>{orderHistory.price}</td>                      
+                      <td>{orderHistory.order_status}</td>
                     </tr>
                   </React.Fragment>
                 ))}
