@@ -1,0 +1,106 @@
+@import "../../../index.scss";
+
+.app__ConsumerHistory {
+    max-width: 1650px;
+    width: 95%;
+    margin: 1rem auto 2rem;
+
+    &_options{
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        li {
+            float: left;
+            padding-right: 10px;
+            padding-bottom: 10px;
+        }
+        
+        li:last-child {
+            border-right: none;
+        }
+        
+        li a {
+            display: block;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        li a:hover{
+            color: rgb(0, 0, 0);
+        }
+    }
+
+    &_Orders{
+        //height:70%;
+        border: $border;
+        //display:inline-flex;
+        //width: 100%;
+        //display: block;
+
+      
+
+        tbody td {
+            
+            //display: block;
+            //text-align: left;
+            //margin-bottom:1.5rem;
+        }
+    
+        
+        tbody tr {
+            margin-right: 10rem;
+            //display: block;
+            margin-bottom: 1.5em;
+        }
+    }
+
+    &_button {
+        //display: flex;
+        justify-content: start;
+    }
+
+    &_password-checks{
+        margin: 0;
+        padding: 0;
+        font-size: $smaller_font;
+        margin-top: 1rem;
+
+        &_symbol-success>*>*{
+            color: rgb(107, 209, 34);
+        }
+
+        &_symbol-fail>*>*{
+            color: rgb(226, 14, 14);
+        }
+    }
+}
+
+.active {
+    font-weight: 500;
+}
+
+@media screen and (max-width: 800px) {
+
+    .app__ConsumerProfile {
+
+        &_box{
+
+            grid-template-columns: 1fr;
+            gap: 0;
+
+            &_div{
+                    margin: 0rem 1rem 0rem 1rem;
+            }
+        }
+
+        &_password-checks{
+            font-size: $small_font;
+        }
+    }
+}

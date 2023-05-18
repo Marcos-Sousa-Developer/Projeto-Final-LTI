@@ -26,6 +26,7 @@ const ConsumerOrdersHistory = () => {
     <Navbar></Navbar>
     <div className='app__prod-unit main__container'>
       <SubHeading title="Histórico de encomendas"/>
+      <div className='app__ConsumerHistory_Orders'>
         {ordersHistory.length > 0 && (
           <>
             <table className='app__prod-unit_existing-units'>
@@ -71,6 +72,7 @@ const ConsumerOrdersHistory = () => {
             </table>
           </>
         )}
+        </div>
       </div>
     <Footer></Footer>
     </>
