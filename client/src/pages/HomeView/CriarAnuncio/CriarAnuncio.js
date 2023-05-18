@@ -477,24 +477,26 @@ function CriarAnuncio() {
                 product_id: idProduct,
               })
             }
-            
+          
+            let idAd = ad.insertId
 
+            let i = 0;
+            Object.entries(formData.prodUnit).forEach(async ([key, value]) => {
+              if(value[1] == true){
+                let productProductionUnit = await postToDB("/productProductionUnits",{ 
+                  quantity: value[1],
+                  fee: 0,
+                  productionUnit_id: productionUnits[i].id,
+                  ad_id: idAd,
+                })
+              }
+              i++;
+            });
 
-            let ad = await postToDB("/ads",{ 
-              title: formData.titulo,
-              description: formData.descricao,
-              email: formData.email,
-              mobile_number: formData.telemovel,
-              extraCharacteristics: JSON.stringify(featuresDBad),
-              status: "ativo",
-              price: formData.preco,
-              supplier_id: idSupplier,
-              product_id: idProduct,
-            })
             //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
             //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
-            // SE CONSEGUIR ADICIONAR TODOS ADICIONA
-            // SE NÃO, DÁ UM ALERT
+            //SE CONSEGUIR ADICIONAR TODOS ADICIONA
+            //SE NÃO, DÁ UM ALERT
 
             text = "Anuncio concluído"
         } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || validProdUnit != "OK" || (validEAN != "OK" && validEAN != null)){
@@ -904,7 +906,7 @@ function CriarAnuncio() {
                 <div className='app__anuncio_prodUnit'>
                   <p className='title'>Unidade Produção</p>
                   <div className='app__anuncio_prodUnit_content'>
-                    {productionUnits.length > 0 && (
+                    {/*productionUnits.length > 0 && (
                       <>
                         <table className='app__prod-unit_existing-units'>
                           <thead>
@@ -929,9 +931,7 @@ function CriarAnuncio() {
                           </tbody>
                         </table>
                       </>
-<<<<<<< HEAD
-                    )*/}
-
+                    )}
                     {/* exemplo */}
                     <table>
                       <thead>
@@ -960,9 +960,6 @@ function CriarAnuncio() {
                       })}
                        </tbody> 
                     </table>
-=======
-                    )}
->>>>>>> miguel
                   </div>
                 </div>
               </div>
