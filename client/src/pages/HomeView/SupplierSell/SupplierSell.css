@@ -193,8 +193,7 @@ img, picture {
 }
 
 a.option {
-  border-right: 3px solid #EEEEEE;
-  padding-right: 10px;
+  margin-right: 1rem;
 }
 
 .active {

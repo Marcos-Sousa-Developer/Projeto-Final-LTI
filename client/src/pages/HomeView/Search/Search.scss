@@ -1,0 +1,56 @@
+@import '../../../index.scss';
+
+.app__Search{
+    margin: 1rem auto;
+
+    &_Grid{
+        display: grid;
+        grid-template-columns: 1.5fr 5fr;
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+
+    &_Grid_Esquerda{
+        border: $border;
+        padding: 1rem 2rem;
+        align-self: baseline;
+
+        .app__Search_filter_content{
+            ul{
+                padding: 0;
+            }
+
+            li{
+                line-height: 2rem;
+
+                a{
+                    font-size: $smaller_font;
+                }
+            }
+        }
+    }
+
+    &_Grid_Direita{
+        .app__Search_pagination{
+            text-align: center;
+        }
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .app__Search_Grid{
+
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .app__Search_Grid{
+
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .app__Search_Grid{
+
+    }
+}

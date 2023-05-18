@@ -39,38 +39,36 @@
     }
 
     &_Box{
-            border: $border;
-            padding: 2rem 6rem 3rem 6rem;
-            min-height: 400px;
-            display:grid;
-            grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr;
+        border: $border;
+        padding: 2rem 6rem 3rem 6rem;
+        min-height: 400px;
+        display:grid;
+        grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr;
 
-            table{
-                text-align: center;
-
-                thead tr th{
-                    padding-bottom: 1.5rem;
-                }
-
-                tbody tr td{
-                    padding-bottom: 1.5rem;
-                }
+        table{
+            text-align: center;
+            thead tr th{
+                padding-bottom: 1.5rem;
             }
-           &_Image{
-                    display:flex;
-                    
-                    img{
-                        max-width: 200px;
-                        max-height: auto;
-                        margin-right: 1.5rem;
-                    }
-           }
+            tbody tr td{
+                padding-bottom: 1.5rem;
+            }
+        }
+
+        &_Image{
+            display:flex;
+            
+            img{
+                max-width: 200px;
+                max-height: auto;
+                margin-right: 1.5rem;
+            }
+        }
     }
 }
 
 a.option{
-    border-right: 3px solid $light_gray; 
-    padding-right: 10px;
+    margin-right: 1rem;
 }
 
 .active {
@@ -82,12 +80,11 @@ a.option{
     .app__SupplierPage {
 
         &_box{
-
             grid-template-columns: 1fr;
             gap: 0;
 
             &_div{
-                    margin: 0rem 1rem 0rem 1rem;
+                margin: 0rem 1rem 0rem 1rem;
             }
         }
     }

@@ -11,7 +11,10 @@ const statement = "CREATE TABLE ads ( " +
                   "price float NOT NULL, " +
                   "production_date DATE NOT NULL, " +
                   "supplier_id int, " +
-                  "product_id int," +
+                  "product_id int, " +
+                  "category_name varchar(255) NOT NULL, " +
+                  "subcategory_name varchar(255) NOT NULL, " +
+                  "subsubcategory_name varchar(255) NOT NULL, " +
                   "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "PRIMARY KEY (id))";
 

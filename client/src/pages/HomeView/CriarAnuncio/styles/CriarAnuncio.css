@@ -137,6 +137,33 @@ img, picture {
   opacity: 1;
 }
 
+.main__negative_action_btn {
+  opacity: 0.8;
+  color: black;
+  border: 2px solid black;
+  padding: 6px 50px;
+  border-radius: 15px;
+  transition: all 200ms ease-in-out;
+  box-sizing: border-box;
+}
+.main__negative_action_btn:hover {
+  opacity: 1;
+  color: #EB5C1F;
+  border: 2px solid #EB5C1F;
+}
+
+@media screen and (max-width: 700px) {
+  .main__action_btn {
+    padding: 6px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .main__negative_action_btn {
+    padding: 4px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
 .app__anuncio {
   margin: 1rem auto 2rem;
 }
@@ -163,7 +190,7 @@ img, picture {
 .app__anuncio_produto_content .produto_info {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 4rem;
+  gap: 2rem;
 }
 .app__anuncio_anuncio {
   margin: 1rem 0;
@@ -252,6 +279,53 @@ img, picture {
 .app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content {
   border: 3px solid #EEEEEE;
   padding: 1rem 2rem 2rem 2rem;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content table thead th {
+  font-size: 16px;
+  font-weight: 500;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content table td, .app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content table th {
+  padding: 0.5rem 1.5rem 0.5rem 0;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content .app__anuncio_prodUnit_checkbox {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content .app__anuncio_prodUnit_checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content .app__anuncio_prodUnit_checkbox .prodUnit_checkmark {
+  display: block;
+  height: 35px;
+  width: 35px;
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content .app__anuncio_prodUnit_checkbox input:checked .prodUnit_checkmark {
+  background-color: #EB5C1F;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content .app__anuncio_prodUnit_checkbox input:checked ~ .prodUnit_checkmark:after {
+  display: block;
+}
+.app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content .app__anuncio_prodUnit_checkbox .prodUnit_checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 15px;
+  top: 10px;
+  width: 7px;
+  height: 14px;
+  border: solid #EB5C1F;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
 }
 
 .buttonToggleModal_area {
@@ -493,7 +567,7 @@ img, picture {
     gap: 1rem 2rem;
   }
   .app__anuncio_produto_content .produto_info {
-    gap: 2rem;
+    gap: 1rem;
   }
   .app__anuncio_anuncio_content {
     grid-template-columns: 1fr;

@@ -10,7 +10,7 @@ import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
-import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory, SupplierOrdersHistory} from './pages/HomeView/index';
+import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory, Search, SupplierOrdersHistory, MarketPlace, SupplierTransportUnit} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
@@ -19,6 +19,8 @@ import Relatorios_Encomendas from "./pages/Admin/Relatorios_Encomendas";
 import LoadingPage from "./pages/LoadingPage";
 import Checkout from "./pages/HomeView/Checkout/Checkout";
 import { useCookies } from "react-cookie";
+import SubCategory from "./pages/HomeView/SubCategory/SubCategory";
+import SubSubCategory from "./pages/HomeView/SubSubCategory/SubSubCategory";
 
 
 function App() {
@@ -78,16 +80,18 @@ function App() {
             )
           }
 
-
           {userType == "supplier" &&
             (
               <Route path="supplier">
-                <Route index element={ <RequireAuth><SupplierPage /></RequireAuth>}/>
-                <Route exact path="Add" element={<RequireAuth><SupplierAdd /></RequireAuth>} />
-                <Route exact path="Sell" element={<RequireAuth><SupplierSell /></RequireAuth>} />
-
-                <Route exact path="produnit" element={<SupplierProdUnit/>} />
-                <Route exact path="profile" element={<RequireAuth><SupplierProfile /></RequireAuth>} />
+                <Route index element={ <RequireAuth><SupplierPage/></RequireAuth>}/>
+                <Route exact path="profile" element={<RequireAuth><SupplierProfile/></RequireAuth>} />
+                <Route exact path="anuncio" element={<RequireAuth><CriarAnuncio/></RequireAuth>} />
+                <Route exact path="anunciar" element={<RequireAuth><Anunciar/></RequireAuth>} />
+                <Route exact path="add" element={<RequireAuth><SupplierAdd/></RequireAuth>} />
+                <Route exact path="sell" element={<RequireAuth><SupplierSell/></RequireAuth>} />
+                <Route exact path="encomendas" element={<RequireAuth><SupplierOrdersHistory/></RequireAuth>} />
+                <Route exact path="produnit" element={<RequireAuth><SupplierProdUnit/></RequireAuth>} />
+                <Route exact path="transpunit" element={<RequireAuth><SupplierTransportUnit/></RequireAuth>} />
               </Route>
             )
           }
@@ -105,41 +109,30 @@ function App() {
             <Route path="/productTest" element={<ProductTest />} />
             <Route path="/consumerTest" element={<ConsumerTest />} />
             <Route path="/supplierTest" element={<SupplierTest />} />
-          {/* ------------- */}
+          {/* ---------------------------- */}
 
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-
-          <Route path="/pesquisa" element={<Category />} />
+          {/*---------for not logged in users--------*/}
+          <Route path="/" element={<Home/>} />
+          <Route path="/signin" element={<SignIn/>} />
+          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/pesquisa" element={<Search/>} />
+          <Route path="/categoria" element={<Category/>} />
+          <Route path="/subcategoria" element={<SubCategory/>} />
+          <Route path="/subsubcategoria" element={<SubSubCategory/>} />
           <Route path="/produto" element={<ProductPage/>} />
-
-          {/* para dps meter dentro do supplier */}
-          <Route path="/anuncio" element={<CriarAnuncio />} />
-          <Route path="/anunciar" element={<Anunciar />} />
-          <Route path="/SupplierOrdersHistory" element={<SupplierOrdersHistory />} />
-          {/* --------------------------------- */}
-
+          <Route path="/market-place" element={<MarketPlace/>} />
           <Route path="/comparador" element={<CompareProduct></CompareProduct>}/>
-
           <Route path="/FAQ" element={<FAQ />} />
-          
-          <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<NotFound />} />
-
+          {/* ------------------------------------- */}
         </Routes>
         )
-
         : 
-
         <LoadingPage></LoadingPage>
-
-  }
-
-      
+      }
     </>
-
   );
 }
 

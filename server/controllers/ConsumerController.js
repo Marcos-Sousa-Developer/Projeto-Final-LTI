@@ -55,7 +55,6 @@ const getAllorSomeConsumers = async function (req, res) {
             }
         }
     }
-    console.log(statement)
 
     let result = await dbConnection(statement)  
 

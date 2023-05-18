@@ -137,6 +137,33 @@ img, picture {
   opacity: 1;
 }
 
+.main__negative_action_btn {
+  opacity: 0.8;
+  color: black;
+  border: 2px solid black;
+  padding: 6px 50px;
+  border-radius: 15px;
+  transition: all 200ms ease-in-out;
+  box-sizing: border-box;
+}
+.main__negative_action_btn:hover {
+  opacity: 1;
+  color: #EB5C1F;
+  border: 2px solid #EB5C1F;
+}
+
+@media screen and (max-width: 700px) {
+  .main__action_btn {
+    padding: 6px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .main__negative_action_btn {
+    padding: 4px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
 .inputField p {
   margin: 1rem 0 0.5rem;
 }
@@ -147,4 +174,8 @@ img, picture {
   padding: 0.25rem 0.5rem;
   width: 100%;
   font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
 }/*# sourceMappingURL=InputField.css.map */

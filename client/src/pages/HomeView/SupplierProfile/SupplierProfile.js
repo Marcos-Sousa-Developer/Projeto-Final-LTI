@@ -1,13 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin, FiCheck, FiX} from 'react-icons/fi';
+import { BiIdCard } from 'react-icons/bi';
+
 import getFromDB from '../../../hooks/getFromDB';
 import putToDB from '../../../hooks/putToDB';
 
-import {Navbar, Footer, SubHeading} from '../../../components/index';
-import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin} from 'react-icons/fi';
-import { BiIdCard } from 'react-icons/bi';
+import {NavbarSupplier, Footer, SubHeading, SnackBar, Modal} from '../../../components/index';
 import './SupplierProfile.css';
+import LoadingPage from '../../LoadingPage';
+import logOut from '../../../hooks/logOut';
+
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
 
 function SupplierProfile() {
+  //---------------------Modal---------------
+  const [isOpen, setIsOpen] = useState(false);
+
+  //-------------------SnackBar--------------
+  const snackbarRef = useRef(null);
+  const [snackbarType, setSnackbarType] = useState(SnackbarType.success);
+
+  //-----------------------------------------
 
   const [id, setID] = useState(null)       
   const [name, setName] = useState(null)
@@ -151,12 +167,12 @@ function SupplierProfile() {
         })
       }    
 
-      let text = "Não foi possivel alterar os dados\n";
+      //let text = "Não foi possivel alterar os dados\n";
       if(supplierUpdated == true){
-          text = "Dados alterados"
-          alert(text) 
+          setSnackbarType(SnackbarType.success);
+          snackbarRef.current.show();
       } else if(validName != "OK" || validEmail != "OK" || validNif != "OK" || validMobileNumber != "OK" || validAddress != "OK"){
-          if(validName != "OK" ){
+          /*if(validName != "OK" ){
             text += validName + "\n"
           }
           if(validEmail != "OK" ){
@@ -171,34 +187,65 @@ function SupplierProfile() {
           if(validAddress != "OK" ){
               text += validAddress + "\n"
           }
-          alert(text) 
+          alert(text) */
+          setSnackbarType(SnackbarType.fail);
+          snackbarRef.current.show();
       } 
     }
   }
+
+    //-------------------Password Checker------------------------
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
   
+    const [isEightCharLong, setIsEightCharLong] = useState(false);
+    const [hasNumber, setHasNumber] = useState(false);
+    const [hasLowerCase, setHasLowerCase] = useState(false);
+    const [hasUpperCase, setHasUpperCase] = useState(false);
+    const [hasSpecialChar, setHasSpecialChar] = useState(false);
+  
+    const handlePasswordChange = (event) => {
+      const inputPassword = event.target.value;
+      setPassword(inputPassword);
+      setIsEightCharLong(inputPassword.length >= 8);
+      setHasNumber(/\d/.test(inputPassword));
+      setHasLowerCase(/[a-z]/.test(inputPassword));
+      setHasUpperCase(/[A-Z]/.test(inputPassword));
+      setHasSpecialChar(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/.test(inputPassword));
+    };
+  
+    const handleConfirmPasswordChange = (event) => {
+      setConfirmPassword(event.target.value);
+    };
+  
+    const passwordMatch = password === confirmPassword;
+  //-------------------------------------------------------------------------
 
   return (
     <>
     {
       didMount == false ? (
         <>
-          Loading
+          <LoadingPage></LoadingPage>
         </>
       )
       :
       (
       <>
-      <Navbar></Navbar>
-        <div className='app__SupplierProfile'>   
+        <NavbarSupplier></NavbarSupplier>
+        <SnackBar
+          ref={snackbarRef}
+          message={
+            snackbarType === SnackbarType.success
+              ? "Os dados foram guardados"
+              : "Não foi possível alterar os dados"
+          }
+          type={snackbarType}
+        />
+        <div className='app__SupplierProfile main__container'>   {/*este div tem de ser um form secalhar*/}
           <SubHeading title="Conta"/>
-          <div className='app__SupplierProfile_options'>
-            <ul>
-              <li><span></span><a className='option active app__text_effect' href="#">Dados Pessoais</a></li>
-              <li><span></span><a className='option app__text_effect' href="#">Vendidos</a></li>
-              <li><a className='app__text_effect' href="#">Anúncios</a></li>
-            </ul>
-          </div>
-          <div className='app__SupplierProfile_border'>
+          <div className='app__SupplierProfile_content'>
+            <p>Dados da Minha Conta</p>
             <div className='app__SupplierProfile_box'>
               <div className='app__SupplierProfile_box_div'>
                 <div className='app__SupplierProfile_box_div_row'>
@@ -211,16 +258,16 @@ function SupplierProfile() {
                 <div className='app__SupplierProfile_box_div_row'>
                   Telemóvel
                   <div className='app__SupplierProfile_box_div_row_input'>
-                      <FiSmartphone></FiSmartphone>
-                      <input type="tel" placeholder="Número de telemóvel" value = {mobile_number ?? ""} name="mobile_number" onChange={handleSetMobileNumber}></input>
+                    <FiSmartphone></FiSmartphone>
+                    <input type="tel" placeholder="Número de telemóvel" value = {mobile_number ?? ""} name="mobile_number" onChange={handleSetMobileNumber}></input>
                   </div>
                 </div>
                 <div className='app__SupplierProfile_box_div_row'>
                   Morada
                   <div className='app__SupplierProfile_box_div_row_input'>
-                      <FiMapPin></FiMapPin>
-                      <input type="text" placeholder="Morada" value = {address ?? ""} name="address" onChange={handleSetAddress}></input>
-                    </div>
+                    <FiMapPin></FiMapPin>
+                    <input type="text" placeholder="Morada" value = {address ?? ""} name="address" onChange={handleSetAddress}></input>
+                  </div>
                 </div>
               </div>
               <div className='app__SupplierProfile_box_div'>
@@ -240,38 +287,100 @@ function SupplierProfile() {
                 </div>
               </div>
             </div>
+            <p>Alterar Password</p>
             <div className='app__SupplierProfile_box'>
               <div className='app__SupplierProfile_box_div'>
                 <div className='app__SupplierProfile_box_div_row'>
-                  Palavra-passe
+                  Nova Password
                   <div className='app__SupplierProfile_box_div_row_input'>
                     <FiLock></FiLock>
-                    <input></input>
+                    <input
+                      id="password-input"
+                      type="password"
+                      value={password}
+                      onChange={handlePasswordChange}
+                    />
                   </div>
+                  { password && (
+                      <ul className='app__SupplierProfile_password-checks'>
+                        <li>
+                          {isEightCharLong ? 
+                              ''
+                            : 
+                              <div>Mínimo de 8 caracteres de comprimento: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                          }
+                        </li>
+                        <li>
+                          {hasNumber ? 
+                              ''
+                            : 
+                              <div>Contém pelo menos 1 número: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                          }
+                        </li>
+                        <li>
+                          {hasLowerCase ? 
+                              ''
+                            : 
+                              <div>Contém pelo menos 1 letra minúscula: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                          }
+                        </li>
+                        <li>
+                          {hasUpperCase ? 
+                            ''
+                          : 
+                            <div>Contém pelo menos 1 letra maiúscula: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                          }
+                        </li>
+                        <li>
+                          {hasSpecialChar ? 
+                            ''
+                          : 
+                            <div>Contém pelo menos 1 caractere especial: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                          }
+                        </li>
+                      </ul>
+                  )}
                 </div>
               </div>
               <div className='app__SupplierProfile_box_div'>
                 <div className='app__SupplierProfile_box_div_row'>
-                  Confirmar palavra-passe
-                  <div className='app__SupplierProfile_box_div_row_input'>
-                    <FiLock></FiLock>
-                    <input></input>
-                  </div>
+                    Confirmar Nova Password
+                    <div className='app__SupplierProfile_box_div_row_input'>
+                      <FiLock></FiLock>
+                      <input
+                        id="confirm-password-input"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={handleConfirmPasswordChange}
+                      />
+                    </div>
+                    {(password !== "" || confirmPassword !== "") && (passwordMatch ? (
+                      ""
+                    ) : (
+                      <div className='app__SupplierProfile_password-checks'>
+                        <span className='app__SupplierProfile_password-checks_symbol-fail'>Passwords não correspondem: <FiX fontSize={20}></FiX></span>
+                      </div>
+                    ))}
                 </div>
-              </div>
+              </div>  
             </div>
           </div>
           <div className="app__SupplierProfile_button">
-            <button type="submit" onClick={() => submit()} className='main__action_btn'>Guardar</button>
+            <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
+            <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+              <p>Tem a certeza que deseja alterar os dados da sua conta?</p>
+              <button onClick={() => setIsOpen(false)}>Cancelar</button>
+              <button onClick={() => { submit(); setIsOpen(false); }}>Guardar</button>
+            </Modal>
+            <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
           </div>
         </div>
         <Footer></Footer>
         </>
-      )
-    }
+        )
+      }
     </>
   );
-
 }
 
 export default SupplierProfile;

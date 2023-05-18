@@ -1,61 +1,29 @@
 @import "../../../index.scss";
 
 .app__SupplierProfile {
-    max-width: 1650px;
-    width: 95%;
-    margin: 0 auto;
-    padding-top: 3%;
+    margin: 1rem auto 2rem;
 
-    &_options{
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        
-        li {
-            float: left;
-            padding-right: 10px;
-            padding-bottom: 10px;
-        }
-        
-        li:last-child {
-            border-right: none;
-        }
-        
-        li a {
-            display: block;
-            color: rgb(0, 0, 0);
-            text-align: center;
-            text-decoration: none;
-        }
-        
-        li a:hover{
-            color: rgb(0, 0, 0);
-        }
-    }
-
-    &_border {
-        border: 3.5px solid $light_gray;
+    &_content{
+        margin-top: 1rem;
     }
 
     &_box{
-        border-bottom: none;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        gap: 2rem;
+        border: 3.5px solid $light_gray;
+        margin-bottom: 1rem;
 
         input{
             border: none;
             outline: none;
-            width: 92%;
-            margin-left: 2%;
+            width: 100%;
+            margin-left: .5rem;
+            font-size: $normal_font;
         }
 
         &_div {
-            margin: 1rem 1.5rem;
+            margin: .5rem 1.5rem .5rem;
 
             &_row {
                 margin: 1rem 0rem;
@@ -65,27 +33,36 @@
                     border-radius: 10px;
                     padding: 0.25rem 0.5rem;
                     font-size: large;
+                    display: flex;
+                    align-items: center;
                 }
-
             }
-        } 
+        }
     }
 
     &_button {
-        margin: 1rem;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: start;
+        
+        &>*{
+            margin-right: 1rem;
+        }
     }
-}
 
-a.option{
-    border-right: 3px solid $light_gray; 
-    padding-right: 10px;
-}
+    &_password-checks{
+        margin: 0;
+        padding: 0;
+        font-size: $smaller_font;
+        margin-top: 1rem;
 
-.active {
-    font-weight: bold;
+        &_symbol-success>*>*{
+            color: rgb(107, 209, 34);
+        }
+
+        &_symbol-fail>*>*{
+            color: rgb(226, 14, 14);
+        }
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -100,6 +77,10 @@ a.option{
             &_div{
                     margin: 0rem 1rem 0rem 1rem;
             }
+        }
+
+        &_password-checks{
+            font-size: $small_font;
         }
     }
 }

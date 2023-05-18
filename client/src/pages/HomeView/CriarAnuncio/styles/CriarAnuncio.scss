@@ -35,7 +35,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
             .produto_info{
                 display: grid;
                 grid-template-columns: auto 1fr;
-                gap: 4rem;
+                gap: 2rem;
             }
         }
     }
@@ -137,6 +137,61 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
             &_content{
                 border: $border;
                 padding: 1rem 2rem 2rem 2rem;
+
+                table{
+                    thead th{
+                        font-size: $normal_font;
+                        font-weight: 500;
+                    }
+
+                    td, th{
+                        padding: .5rem 1.5rem .5rem 0;
+                    }
+                }
+
+                .app__anuncio_prodUnit_checkbox{
+                    display: block;
+                    position: relative;
+                    cursor: pointer;
+                    user-select: none;
+                    
+                    input {
+                        position: absolute;
+                        opacity: 0;
+                        cursor: pointer;
+                        height: 0;
+                        width: 0;
+                    }
+
+                    .prodUnit_checkmark {
+                        display: block;
+                        height: 35px;
+                        width: 35px;
+                        border: $border;
+                        border-radius: 10px;
+                    }
+
+                    input:checked .prodUnit_checkmark {
+                        background-color: $orange;
+                    }
+
+                    input:checked ~ .prodUnit_checkmark:after {
+                        display: block;
+                    }
+
+                    .prodUnit_checkmark:after {
+                        content: "";
+                        position: absolute;
+                        display: none;
+                        left: 15px;
+                        top: 10px;
+                        width: 7px;
+                        height: 14px;
+                        border: solid $orange;
+                        border-width: 0 3px 3px 0;
+                        transform: rotate(45deg);
+                    }
+                }
             }
         }
     }
@@ -438,7 +493,7 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
             gap: 1rem 2rem;
             
             .produto_info{
-                gap: 2rem;
+                gap: 1rem;
             }
         }
     }

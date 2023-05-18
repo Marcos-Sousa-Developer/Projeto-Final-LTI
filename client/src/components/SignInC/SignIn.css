@@ -137,8 +137,38 @@ img, picture {
   opacity: 1;
 }
 
+.main__negative_action_btn {
+  opacity: 0.8;
+  color: black;
+  border: 2px solid black;
+  padding: 6px 50px;
+  border-radius: 15px;
+  transition: all 200ms ease-in-out;
+  box-sizing: border-box;
+}
+.main__negative_action_btn:hover {
+  opacity: 1;
+  color: #EB5C1F;
+  border: 2px solid #EB5C1F;
+}
+
+@media screen and (max-width: 700px) {
+  .main__action_btn {
+    padding: 6px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .main__negative_action_btn {
+    padding: 4px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
 .app__SignIn {
   margin: 1rem auto;
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
 }
 .app__SignIn_rectangle1 {
   position: absolute;
@@ -150,7 +180,7 @@ img, picture {
 .app__SignIn_box {
   padding: 2rem 1rem 3rem;
   width: 90%;
-  margin: 4rem auto 4rem;
+  margin: 4rem auto;
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   border-radius: 10px;
@@ -266,6 +296,7 @@ img, picture {
 }
 @media screen and (max-width: 1200px) {
   .app__SignIn_box {
+    margin: 4rem auto 4rem;
     width: 95%;
   }
   .app__SignIn_box > * {
@@ -284,6 +315,7 @@ img, picture {
     width: 100%;
     padding: 0;
     border-radius: 0;
+    margin: 1rem auto 2rem;
     box-shadow: 0px 0px 0px 0px #fff;
   }
 }/*# sourceMappingURL=SignIn.css.map */

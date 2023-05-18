@@ -16,6 +16,7 @@ import "../../../components/InputField/InputField.css";
 
 function CriarAnuncio() {
     const [idUser, setIDUser] = useState(null) //Ir buscar às cookies o ID do user       
+    const [productionUnits, setProductionUnit] = useState([]);
 
     const [formData, setFormData] = useState({
         EAN: "",
@@ -32,9 +33,30 @@ function CriarAnuncio() {
         email: "",
         telemovel: "",
         search: false,
+        prodUnit: {},
     });
 
     const [didMount, setDidMount] = useState(false)
+
+    async function getSupplierProdUnit(){
+      let paramsProdUnit = {
+        uid_supplier: 1,
+      };
+      let supplierProdUnits = await getAllFromDB("/productionUnits", paramsProdUnit)
+
+      if (typeof supplierProdUnits != "string") {
+          setProductionUnit(prevState => [...supplierProdUnits])
+      }
+      const newProdUnitKeys = [];
+      supplierProdUnits.map((prodUnit) => {  
+        newProdUnitKeys.push(prodUnit.name)
+      }); 
+      const newProdUnit = {};
+      newProdUnitKeys.forEach((key) => {
+        newProdUnit[key] = [0, false]; 
+      });
+      setFormData({ ...formData, prodUnit: newProdUnit })
+    }
 
     async function getProduct(ean){
 
@@ -100,6 +122,7 @@ function CriarAnuncio() {
             getProduct(ean)
         }
         setDidMount(true)
+        getSupplierProdUnit()
     }, [])
 
     async function verifyTitle(title){
@@ -280,6 +303,21 @@ function CriarAnuncio() {
       }
       return "OK"
     }
+
+    async function verifyProdUnits(prodUnits){
+      //Retorna OK se estiver tudo bem, se não, retorna o erro 
+
+      if(prodUnits != undefined){
+        for (let prodUnit in prodUnits) {
+          if(prodUnits[prodUnit][1] == true){
+            if(prodUnits[prodUnit][0] <= 0){
+              return "Deve de inserir uma quantidade válida"
+            }
+          }
+        }
+      }
+      return "OK"
+    }
     
     async function getIdSubSubCategory(nameSubSubCategory){
       let params = {
@@ -294,8 +332,6 @@ function CriarAnuncio() {
 
     const submit = async () => {
 
-        console.log(formData)
-
         let validTitle = await verifyTitle(formData.titulo);
         let validPrice = await verifyPrice(formData.preco);
         let validDescription = await verifyDescription(formData.descricao);
@@ -308,7 +344,8 @@ function CriarAnuncio() {
         if(formData.sub_features != undefined){
           validSubFeature = await verifySubFeatures(formData.sub_features[0]);
         }
-
+        let validProdUnit = await verifyProdUnits(formData.prodUnit);
+        
         let validEAN = null;
         if(formData.search){
           validEAN = await verifyEAN(formData.EAN);
@@ -318,7 +355,7 @@ function CriarAnuncio() {
         let ad;
 
         let text = "Não foi possível criar o produto\n";
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && (validEAN == "OK" || validEAN == null)){
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && validProdUnit =="OK" && (validEAN == "OK" || validEAN == null)){
 
             let featuresDBproduct = {}; 
             let featuresDBad = {};
@@ -441,9 +478,13 @@ function CriarAnuncio() {
               })
             }
             
-            //Verificar se fez os inputs 
+            //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
+            //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
+            // SE CONSEGUIR ADICIONAR TODOS ADICIONA
+            // SE NÃO, DÁ UM ALERT
+
             text = "Anuncio concluído"
-        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || (validEAN != "OK" && validEAN != null)){
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || validProdUnit != "OK" || (validEAN != "OK" && validEAN != null)){
             if(validTitle != "OK" ){
               text += validTitle + "\n"
             }
@@ -470,6 +511,9 @@ function CriarAnuncio() {
             }
             if(validProductionDate != "OK" ){
               text += validProductionDate + "\n"
+            }
+            if(validProdUnit != "OK"){
+              text += validProdUnit + "\n"
             }
             if(validEAN != "OK" && validEAN != null){
               text += validEAN + "\n"
@@ -744,7 +788,7 @@ function CriarAnuncio() {
                       <input type='text' value={formData.EAN} onChange={(e) => {setFormData({ ...formData, EAN: e.target.value });}}/>
                     </div>
                     <div className='app__anuncio_produto_content_categoria'>
-                      <p>Categoria</p>
+                      <p>Categoria *</p>
                       {formData.categoria != "" && formData.subcategoria != "" && formData.subsubcategoria != "" && formData.search ? 
                         <>
                           <p>{formData.categoria}</p>
@@ -768,12 +812,12 @@ function CriarAnuncio() {
                 <p className='title'>Anúncio</p>
                 <div className='app__anuncio_anuncio_content'>
                   <div className='inputField'>
-                    <p>Título</p>
+                    <p>Título *</p>
                     <input type='text' value={formData.titulo} placeholder='Título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
                   </div>
                   <div className='' style={{display: 'flex'}}>
                     <div className='inputField'>
-                      <p>Preço (€)</p>
+                      <p>Preço (€) *</p>
                       <input type='number' value={formData.preco} step="0.01" min="0" required onChange={(e) => {setFormData({ ...formData, preco: e.target.value });}}/>
                     </div>
                     <div className='inputField' style={{marginLeft:'2rem'}}>
@@ -782,11 +826,11 @@ function CriarAnuncio() {
                     </div>
                   </div>
                   <div className='app__anuncio_description_section'>
-                      <p>Descrição</p>
+                      <p style={{marginTop:'1rem'}}>Descrição *</p>
                       <textarea 
                           style={{width:'100%', maxHeight: '170px', minHeight:'120px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
                           form='anuncio_form' 
-                          maxLength="500" 
+                          maxLength="600" 
                           placeholder='Indique alguns detalhes sobre o seu produto'
                           onInput={(e) => {
                               setText(e.target.value);
@@ -796,7 +840,7 @@ function CriarAnuncio() {
                       <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
                   </div>
                   <div className='app__anuncio_image_section'>
-                      <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span></p>
+                      <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span> *</p>
                       <div className='app__anuncio_image_section-content'>
                           <div className='app__anuncio_images_selected'>
                               {selectedImages.length < 8 &&
@@ -847,7 +891,55 @@ function CriarAnuncio() {
                 <div className='app__anuncio_prodUnit'>
                   <p className='title'>Unidade Produção</p>
                   <div className='app__anuncio_prodUnit_content'>
+                    {/*productionUnits.length > 0 && (
+                      <>
+                        <table className='app__prod-unit_existing-units'>
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {productionUnits.map((productionUnit, index) => (
+                              <React.Fragment key={index}>
+                                <tr>
+                                  <td>{productionUnit.name}</td>
+                                </tr>
+                              </React.Fragment>
+                            ))}
+                          </tbody>
+                        </table>
+                      </>
+                    )*/}
 
+                    {/* exemplo */}
+                    <table>
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Quantidade</th>
+                          <th>Nome</th>
+                          <th>Localização</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {productionUnits.map((productionUnit) => { 
+                        return ( 
+                          <tr>
+                          <td>
+                              <label class="app__anuncio_prodUnit_checkbox">
+                                <input type="checkbox" onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [formData.prodUnit[productionUnit.name][0], e.target.checked] }})}}></input>
+                                <span class="prodUnit_checkmark"></span>
+                              </label>
+                          </td>
+                          <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [e.target.value, formData.prodUnit[productionUnit.name][1]] }})}}></input></div></td>
+                          <td>{productionUnit.name}</td>
+                          <td>{productionUnit.location}</td>
+                        </tr>
+                        );
+                      })}
+                       </tbody> 
+                    </table>
                   </div>
                 </div>
               </div>

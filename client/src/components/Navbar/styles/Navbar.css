@@ -141,7 +141,7 @@ img, picture {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   margin: 0 auto;
-  padding: 2rem 0 2rem 0;
+  padding: 1.5rem 0 1.5rem 0;
   border-bottom: 3px solid #EEEEEE;
   /*
   & > * > *{
@@ -277,15 +277,76 @@ img, picture {
   }
 }
 .app__navbarSupplier {
-  margin: 1rem auto;
+  margin: 0 auto;
+  padding: 1.5rem 0 1.5rem 0;
   display: flex;
   justify-content: space-between;
+  border-bottom: 3px solid #EEEEEE;
+}
+.app__navbarSupplier_profile {
+  display: flex;
+  justify-content: flex-end;
+}
+.app__navbarSupplier_profile p {
+  margin: 0;
+}
+.app__navbarSupplier_profile_account {
+  margin: 0.75rem;
+}
+.app__navbarSupplier_profile_icon {
+  position: relative;
+}
+.app__navbarSupplier_profile .profile_link {
+  color: black;
+  position: relative;
+  border-bottom-width: 0%;
+  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.app__navbarSupplier_profile .profile_link::before {
+  content: "";
+  position: absolute;
+  border-radius: 100vmax;
+  bottom: -1px;
+  right: 0;
+  width: 0;
+  height: 3px;
+  background-color: #EB5C1F;
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.app__navbarSupplier_profile .app__navbar_links:hover .profile_link {
+  color: #EB5C1F;
+}
+.app__navbarSupplier_profile .app__navbar_links:hover .profile_link::before {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
+.app__navbarSupplier_profile .profile_icon {
+  margin-left: 1rem;
+}
+.app__navbarSupplier_profile .profile_icon > * {
+  color: black;
+  transition: color 0.125s ease-in-out;
+}
+.app__navbarSupplier_profile .app__navbar_links:hover .profile_icon > * {
+  color: #EB5C1F;
 }
 .app__navbarSupplier .app__navbarSupplier_btn {
-  background-color: #EB5C1F;
-  padding: 1rem;
+  background-color: rgba(235, 92, 31, 0.8);
+  padding: 0.5rem 1rem;
   border-radius: 4rem;
   color: white;
   height: 80%;
   margin-left: 0.5rem;
+  align-self: center;
+  transition: all 200ms ease-in-out;
+}
+.app__navbarSupplier .app__navbarSupplier_btn:hover {
+  background-color: #EB5C1F;
+}
+
+@media screen and (max-width: 700px) {
+  .app__navbarSupplier_profile_account {
+    display: none;
+  }
 }/*# sourceMappingURL=Navbar.css.map */

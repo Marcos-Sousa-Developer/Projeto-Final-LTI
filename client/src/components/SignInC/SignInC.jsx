@@ -1,13 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
+import React, { useEffect, useState, useRef } from 'react';
+import { FiMail, FiLock, FiHome } from 'react-icons/fi';
 import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { authentication as auth}  from '../../authentication'
+
 import images from '../../assets/images';
 import getClientType from '../../hooks/getClientType';
+import SnackBar from '../SnackBarNotification/SnackBar';
 import './SignIn.css';
 
+const SnackbarType = {
+    success: "success",
+    fail: "fail",
+};
+
 const SignInC = () => {
+    //-------------------SnackBar--------------
+    const snackbarRef = useRef(null);
+    //-----------------------------------------
 
     const [email, setEmail] = useState(null) 
 
@@ -71,7 +82,8 @@ const SignInC = () => {
     <>
         <img className='app__SignIn_rectangle1' src={images.Rectangle1} alt="" />
         <div className='app__SignIn main__container'>
-            <Link to='/'><FiArrowLeft></FiArrowLeft></Link>
+            <div style={{width: '100%'}}>
+            <Link to='/'><FiHome></FiHome></Link>
             <h3 className=''>Iniciar Sessão</h3>
                 <div className='app__SignIn_box'>
                     <div className='app__SignIn_box1'>
@@ -101,7 +113,17 @@ const SignInC = () => {
                             </div>
                             <div className='app__SignIn_box13'>
                             {
-                                error && ( <small style={{color:"red"}}>Email ou Password incorreto</small>)
+                                error && ( 
+                                <>
+                                    {/*snackbarRef.current.show()*/}
+                                    <small style={{color:"red"}}>Email ou Password incorretos.</small>
+                                    <SnackBar
+                                        ref={snackbarRef}
+                                        message="Email ou Password incorretos."
+                                        type={SnackbarType.success}
+                                    />
+                                </>
+                                )
                             }
                             {
                                 notValidate && ( 
@@ -138,6 +160,7 @@ const SignInC = () => {
                         <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter</p></button>
                     </div>
                 </div>    
+            </div>
         </div>
     </>
     )

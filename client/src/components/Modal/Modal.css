@@ -15,4 +15,21 @@
   transform: translate(-50%, -50%);
   padding: 2rem 4rem;
   z-index: 1000;
+}
+.app__modal_content_closeBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
+}
+
+@media (max-width: 1200px) {
+  .app__modal_content {
+    padding: 2rem;
+  }
+}
+@media (max-width: 400px) {
+  .app__modal_content {
+    padding: 1.5rem;
+  }
 }/*# sourceMappingURL=Modal.css.map */

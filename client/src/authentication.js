@@ -24,7 +24,8 @@ const serverVerifyLogin = async(email, password, result) => {
         
         axios.post('/signIn', null, {params: params})
     
-        .then((response) => { 
+        .then((response) => {
+            localStorage.clear();
             resolve(response.data)
         })
         
@@ -72,6 +73,7 @@ const signIn = async (email, password) => {
               idToken: result.getIdToken().getJwtToken(), 
               client_id: cognitoUser.pool.clientId
           }
+          localStorage.clear();
           resolve( serverVerifyLogin(email, password, params))
         },
   
@@ -90,6 +92,7 @@ const signIn = async (email, password) => {
                 idToken: result.getIdToken().getJwtToken(), 
                 client_id: cognitoUser.pool.clientId
             }
+            localStorage.clear();
             resolve( serverVerifyLogin(email, password, params))
           },
             onFailure: (err) => {
@@ -125,10 +128,12 @@ const register = async (params) => {
     axios.post('/registerUser', null, {params})
       
     .then((response) => { 
+      localStorage.clear();
       if(response === null) {
         resolve(false)
       }
       resolve(true) 
+
     })
   
     .catch((error) => {
@@ -192,6 +197,7 @@ const verifyEmail = async (email, code) => {
       if (err) {
         reject(false);
       } else {
+        localStorage.clear();
         resolve(true);
       }
     });

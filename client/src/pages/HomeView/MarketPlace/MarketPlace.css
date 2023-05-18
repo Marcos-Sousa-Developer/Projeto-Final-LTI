@@ -1,0 +1,7 @@
+.app__market_place {
+  margin: 1rem auto 2rem;
+}
+.app__market_place_content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}/*# sourceMappingURL=MarketPlace.css.map */

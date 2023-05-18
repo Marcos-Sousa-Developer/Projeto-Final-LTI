@@ -4,20 +4,28 @@
     margin: 1rem auto 2rem;
 
     &_content{
-        margin-top: 1rem;
-        border: $border;
-        padding: 2rem 6rem 3rem 6rem;
+        margin-top: 5%;
         display: flex;
         justify-content: space-around;
 
         &_search{
             max-width: 34rem;
-            p{width: 75%;font-size: $big_font;}
+
+            p{
+                font-size: 30px;
+            }
+        }
+
+        &_or{
+            align-self: center;
         }
 
         &_novo_anuncio{
-            p{margin-bottom: 2rem;font-size: $bigger_font;}
             align-self: center;
+            p{
+                font-size: $bigger_font;
+            }
+
             div{
                 text-align: center;
             }
@@ -26,9 +34,14 @@
     }
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1000px) {
     .app__anunciar_content{
-        padding: 2rem 4rem 3rem 4rem;
         justify-content: space-between;
+        &_search{
+            max-width: 30rem;
+            p{
+                font-size: $big_font;
+            }
+        }
     }
 }

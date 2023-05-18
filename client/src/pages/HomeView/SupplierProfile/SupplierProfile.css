@@ -137,52 +137,49 @@ img, picture {
   opacity: 1;
 }
 
+.main__negative_action_btn {
+  opacity: 0.8;
+  color: black;
+  border: 2px solid black;
+  padding: 8px 50px;
+  border-radius: 15px;
+  transition: all 200ms ease-in-out;
+}
+.main__negative_action_btn:hover {
+  opacity: 1;
+  color: #EB5C1F;
+  border: 2px solid #EB5C1F;
+}
+
+@media screen and (max-width: 700px) {
+  .main__action_btn, .main__negative_action_btn {
+    padding: 6px 40px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
 .app__SupplierProfile {
-  max-width: 1650px;
-  width: 95%;
-  margin: 0 auto;
-  padding-top: 3%;
+  margin: 1rem auto 2rem;
 }
-.app__SupplierProfile_options ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-.app__SupplierProfile_options li {
-  float: left;
-  padding-right: 10px;
-  padding-bottom: 10px;
-}
-.app__SupplierProfile_options li:last-child {
-  border-right: none;
-}
-.app__SupplierProfile_options li a {
-  display: block;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  text-decoration: none;
-}
-.app__SupplierProfile_options li a:hover {
-  color: rgb(0, 0, 0);
-}
-.app__SupplierProfile_border {
-  border: 3.5px solid #EEEEEE;
+.app__SupplierProfile_content {
+  margin-top: 1rem;
 }
 .app__SupplierProfile_box {
-  border-bottom: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 2rem;
+  border: 3.5px solid #EEEEEE;
+  margin-bottom: 1rem;
 }
 .app__SupplierProfile_box input {
   border: none;
   outline: none;
-  width: 92%;
-  margin-left: 2%;
+  width: 100%;
+  margin-left: 0.5rem;
+  font-size: 16px;
 }
 .app__SupplierProfile_box_div {
-  margin: 1rem 1.5rem;
+  margin: 0.5rem 1.5rem 0.5rem;
 }
 .app__SupplierProfile_box_div_row {
   margin: 1rem 0rem;
@@ -192,21 +189,27 @@ img, picture {
   border-radius: 10px;
   padding: 0.25rem 0.5rem;
   font-size: large;
-}
-.app__SupplierProfile_button {
-  margin: 1rem;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
-
-a.option {
-  border-right: 3px solid #EEEEEE;
-  padding-right: 10px;
+.app__SupplierProfile_button {
+  display: flex;
+  justify-content: start;
 }
-
-.active {
-  font-weight: bold;
+.app__SupplierProfile_button > * {
+  margin-right: 1rem;
+}
+.app__SupplierProfile_password-checks {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  margin-top: 1rem;
+}
+.app__SupplierProfile_password-checks_symbol-success > * > * {
+  color: rgb(107, 209, 34);
+}
+.app__SupplierProfile_password-checks_symbol-fail > * > * {
+  color: rgb(226, 14, 14);
 }
 
 @media screen and (max-width: 800px) {
@@ -216,5 +219,8 @@ a.option {
   }
   .app__SupplierProfile_box_div {
     margin: 0rem 1rem 0rem 1rem;
+  }
+  .app__SupplierProfile_password-checks {
+    font-size: 12px;
   }
 }/*# sourceMappingURL=SupplierProfile.css.map */

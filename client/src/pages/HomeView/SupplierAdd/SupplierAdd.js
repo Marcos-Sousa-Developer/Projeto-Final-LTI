@@ -38,45 +38,39 @@ function SupplierAdd() {
     <div className='app__SupplierAdd'>   
         <SubHeading title="Home"/>
         <div className='app__SupplierAdd_options'>
-              <ul>
-                <li><span></span><a className='option app__text_effect' href="#">Home</a></li>
-                <li><span></span><a className='option active app__text_effect' href="#">Anúncios</a></li>
-                <li><a className='app__text_effect' href="#">Vendas e Ordens</a></li>
-              </ul>
+          <ul>
+            <li><span></span><a className='option app__text_effect' href="#">Home</a></li>
+            <li><span></span><a className='option active app__text_effect' href="#">Anúncios</a></li>
+            <li><a className='app__text_effect' href="#">Vendas e Ordens</a></li>
+          </ul>
         </div>
-
         <div className='app__SupplierAdd_Box'>
-        <table>
-    <thead>
-    <tr>
-      <th>Produto</th>
-      <th>Preço</th>
-      <th>Unidades</th>
-      <th>Data de criação</th>
-        </tr>
-    </thead>
-    <tbody>
-        {products.map((product) => (
-        <tr key={product.title}>
-            <td>
-            <div className='app__SupplierAdd_Box_Image'>
-            <img src={product.src} alt={product.title}/>
-            {product.title}
-            </div></td>
-            <td>{product.price}</td>            
-            <td>{product.units}</td>
-            <td>{product.creation}</td>
-
-        </tr>
-        ))}
-        </tbody>
-    </table>
-        
+          <table>
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Unidades</th>
+                <th>Data de criação</th>
+              </tr>
+            </thead>
+            <tbody>
+                {products.map((product) => (
+                <tr key={product.title}>
+                  <td>
+                  <div className='app__SupplierAdd_Box_Image'>
+                  <img src={product.src} alt={product.title}/>
+                  {product.title}
+                  </div></td>
+                  <td>{product.price}</td>            
+                  <td>{product.units}</td>
+                  <td>{product.creation}</td>
+                </tr>
+                ))}
+                </tbody>
+          </table>
         </div>
-
-
     </div>
-    
     <Footer></Footer>
     </>
   );
