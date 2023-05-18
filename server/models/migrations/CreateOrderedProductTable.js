@@ -2,11 +2,12 @@ let pool = require('../config/getLocaldbConfig')
 
 const statement = "CREATE TABLE orderedProducts ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
-                  "order_id int NOT NULL, " +
-                  "product_EAN BIGINT NOT NULL, " +
+                  "order_id bigint NOT NULL, " +
+                  "ad_id int NOT NULL, " +
                   "product_category varchar(255) NOT NULL, " +
                   "product_subcategory varchar(255) NOT NULL, " +
-                  "product_subsubcategory varchar(255) NOT NULL, " +
+                  "product_subsubcategory varchar(255) NOT NULL, " +                  
+                  "order_status varchar(255) NOT NULL, " +
                   "product_owner_uid varchar(100) NOT NULL, " +
                   "product_buyer_uid varchar(100) NOT NULL, " +
                   "product_location varchar(255) NOT NULL, " +

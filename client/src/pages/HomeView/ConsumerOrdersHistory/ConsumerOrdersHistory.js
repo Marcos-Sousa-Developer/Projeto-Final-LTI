@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { FiPlusCircle } from 'react-icons/fi';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import { Navbar, Footer, Modal, SubHeading } from '../../../components/index';
@@ -15,7 +14,7 @@ const ConsumerOrdersHistory = () => {
             setConsumerOrder(prevState => [...consumerOrdersGet])
         }
     }
-
+    
     //Aparecer no loading da página
     useEffect(()=>{
         getConsumerOrder()
@@ -32,12 +31,10 @@ const ConsumerOrdersHistory = () => {
               <thead>
                 <tr>
                   <th>Número da encomenda</th>
-                  <th>Data da encomenda</th>
-                  <th>Estado da encomenda</th>
                   <th>Lista de Produtos</th>
+                  <th>Data da encomenda</th>
                   <th>Morada</th>
-                  <th>Total €</th>
-                  <th>Tamanho</th>
+                  <th>Total €</th>                  
                 </tr>
               </thead>
               <tbody>
@@ -45,8 +42,6 @@ const ConsumerOrdersHistory = () => {
                   <React.Fragment key={index}>
                     <tr>
                       <td>{orderHistory.order_number}</td>
-                      <td>{orderHistory.order_date}</td>
-                      <td>{orderHistory.order_status}</td>
                       <td>
                         <button onClick={() => setModalOpen(prevState => {
                           const newState = [...prevState];
@@ -61,9 +56,10 @@ const ConsumerOrdersHistory = () => {
                           <p>Produto: </p>
                         </Modal>
                       </td> 
+                      <td>{orderHistory.order_date}</td>
                       <td>{orderHistory.address}</td>
                       <td>{orderHistory.total}</td>
-                      <td>{orderHistory.size}</td>
+                      <td>{orderHistory.order_status}</td>
                     </tr>
                   </React.Fragment>
                 ))}
