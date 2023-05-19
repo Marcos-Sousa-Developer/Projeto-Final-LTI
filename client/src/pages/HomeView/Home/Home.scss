@@ -4,10 +4,8 @@
     margin: 2rem auto;
     border: 3px solid $light_gray;
     padding: 2rem;
-
     display: flex;
     justify-content: space-around;
-
     position: relative;
 
     img{
@@ -34,11 +32,9 @@
 }
 
 .products{
-    //width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
-
     margin: 2rem auto 3rem;
 }
 
@@ -68,7 +64,6 @@
     .products{
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 1rem;
-
         margin: 1rem auto 2rem;
     }
 }

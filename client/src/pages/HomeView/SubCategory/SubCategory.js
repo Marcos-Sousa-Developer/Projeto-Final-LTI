@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 
-import { Navbar, Footer, Product, SubHeading } from '../../../components/index';
+import { Navbar, Footer, Product, SubHeading, ComparePopUp } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
+
+import './SubCategory.css';
+import LoadingPage from '../../LoadingPage';
 
 
 let subsubcategories = {}
@@ -9,7 +13,6 @@ const itemsPerPage = 20; // Number of items per page
 let currentItems = [];
 let startIndex = 0;
 let endIndex = 0;
-
 
 const SubCategory = () => {
 
@@ -60,17 +63,63 @@ const SubCategory = () => {
     
   }
 
+  //Comparador
+  const addToSelectedProducts = (product) => {
+    if (selectedProducts.length >= 4) {
+      return;
+    }
+    setSelectedProducts([...selectedProducts, product]);
+  };
+  const removeFromSelectedProducts = (product) => {
+    setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
+  };
 
-      const addToSelectedProducts = (product) => {
-        if (selectedProducts.length >= 4) {
-          return;
-        }
-        setSelectedProducts([...selectedProducts, product]);
-      };
-    
-      const removeFromSelectedProducts = (product) => {
-        setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
-      };
+  //Paginação
+  const totalPages = Math.ceil(ads.length / itemsPerPage);
+  const MAX_PAGES = 5;
+  
+  let pagination;
+  
+  if (totalPages <= MAX_PAGES) {
+    pagination = Array.from({ length: totalPages }, (_, index) => index + 1);
+  } else {
+    if (currentPage <= 2) {
+      pagination = [
+        1,
+        2,
+        '...',
+        totalPages - 1,
+        totalPages
+      ];
+    } else if (currentPage >= totalPages - 1) {
+      if(currentPage == totalPages - 1){
+        pagination = [
+          1,
+          2,
+          '...',
+          currentPage,
+          currentPage + 1,
+        ];
+      }else{
+        pagination = [
+          1,
+          2,
+          '...',
+          currentPage - 1,
+          currentPage,
+        ];
+      }
+    } else {
+      pagination = [
+        1,
+        '...',
+        currentPage,
+        '...',
+        totalPages
+      ];
+    }
+  }
+
 
   useEffect(()=>{ 
     setDidMount(false)
@@ -106,40 +155,39 @@ const SubCategory = () => {
     <>
     {
       didMount == false ? (
-        <>
-          Loading
-        </>
+        <LoadingPage></LoadingPage>
       )
       :
       (
       <>
       <Navbar></Navbar>
-      <div className='app__Category main__container'>
-        <div className='app__Category_Caminho'>
-        <p> {path} </p>
-        {searchName != null ? (
-          <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
-          ) : (
-            <SubHeading title = {subCategoryName}></SubHeading>
-        )} 
+      <div className='app__SubCategory main__container'>
+        <div className='app__SubCategory_Caminho'>
+          <p> {path} </p>
+          {searchName != null ? (
+            <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
+            ) : (
+              <SubHeading title = {subCategoryName}></SubHeading>
+          )} 
         </div>
-        <div className='app__Category_Grid main__container'>
-          <div className='app__Category_Grid_Esquerda'>
-            <div>
-              <p>SubCategoria -> {subCategoryName}</p>
+        <div className='app__SubCategory_Grid'>
+          <div className='app__SubCategory_Grid_Esquerda'>
+            <p>SubCategoria - {subCategoryName}</p>
+            <div className='app__SubCategory_filter_content'>
+              <ul>
+                {Object.keys(subsubcategories).map((subsubcategory_name) => { 
+                    return ( 
+                      <li>
+                        <a key={subsubcategory_name} onClick={() => sendToSubSubcategories(subsubcategory_name) }> {subsubcategory_name} ({subsubcategories[subsubcategory_name]})</a>
+                      </li>
+                    );
+                  })}
+              </ul>
             </div>
-            <div className='products'>
-               {/*Inserir as subcategorias do lado esquerdo como botão*/} 
-               {Object.keys(subsubcategories).map((subsubcategory_name) => { 
-                  return ( 
-                    <button key={subsubcategory_name} onClick={() => sendToSubSubcategories(subsubcategory_name) }> {subsubcategory_name} ({subsubcategories[subsubcategory_name]})</button>
-                  );
-                })}
-            </div> 
           </div> 
-          <div className='app__Category_Grid_Direita'>
+          <div className='app__SubCategory_Grid_Direita'>
             <div>
-            <p>Filtros</p>
+              <p>Filtros</p>
             </div>
             <div className='products'>  
             {currentItems.map((ad) => (
@@ -153,26 +201,36 @@ const SubCategory = () => {
                 />
             ))}
             </div>
-            {/* Pagination */}
-           <div>
-              {Array(Math.ceil(ads.length / itemsPerPage))
-                .fill()
-                .map((_, index) => (
-                  <>
+            <div className="app__SubCategory_pagination">
+                <button
+                  onClick={() => goToPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className='app__SubCategory_pagination_actionBtn'
+                ><FiChevronLeft></FiChevronLeft></button>
+
+                {pagination.map((page, index) => (
                   <button
-                    key={index + 1}
-                    onClick={() => goToPage(index + 1)}
-                    disabled={currentPage === index + 1}
-                  >
-                    {index + 1}
-                  </button>
-                  &nbsp;
-                  </>
+                    key={index}
+                    onClick={() => typeof page === 'number' && goToPage(page)}
+                    disabled={currentPage === page || typeof page !== 'number'}
+                    className={`app__SubCategory_pagination_pages ${currentPage === page ? 'app__SubCategory_pagination_currentPage' : ''}`}
+                  >{typeof page === 'number' ? page : ` ${page} `}</button>
                 ))}
+
+                <button
+                  onClick={() => goToPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className='app__SubCategory_pagination_actionBtn'
+                ><FiChevronRight></FiChevronRight></button>
             </div>
           </div> 
         </div>
       </div>
+      <ComparePopUp
+        selectedProducts={selectedProducts}
+        onCloseComparePopUp={() => setSelectedProducts([])}
+        removeFromSelectedProducts={removeFromSelectedProducts}
+      />
       <Footer></Footer>
       </>
       )

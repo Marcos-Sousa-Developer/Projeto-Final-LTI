@@ -10,6 +10,7 @@ import product4 from "../../../assets/testproducts/jacket.png";
 import product5 from "../../../assets/testproducts/LEDS.png";
 
 import { Navbar, Footer, SnackBar } from '../../../components/index';
+import { PriceDisplay } from '../../../utilities/formatCurrency';
 import { ProductSwiper } from './ProductSwiper';
 import './ProductPage.css';
 import LoadingPage from '../../LoadingPage.js'
@@ -121,7 +122,7 @@ const ProductPage = () => {
                 <ProductSwiper src={adData.src}></ProductSwiper>
                 <div className='app__product_page_content_header'>
                   <p className='app__product_page_content_title'>{adData.title}</p>
-                  <p className='app__product_page_content_price'>{adData.price}</p>
+                  <PriceDisplay className='product_price' price={adData.price} />
                   <div className='app__product_page_content_supplier'>
                     <p>Vendido por: X</p>
                     <p>Meter alguma info sobre o fornecedor: distância, por exemplo</p>

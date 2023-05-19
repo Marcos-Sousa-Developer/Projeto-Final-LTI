@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   text-align: center;
+  z-index: 1000;
 }
 
 .snackbar .symbol {

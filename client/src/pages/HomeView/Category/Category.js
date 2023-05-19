@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 
-import { PRODUCTS } from '../../../assets/products';
 import { Navbar, Footer, Product, SubHeading, ComparePopUp } from '../../../components/index';
-import images from '../../../assets/images.js';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import './Category.css';
 import LoadingPage from '../../LoadingPage';
+
 
 let subcategories = {}
 const itemsPerPage = 20; // Number of items per page
@@ -154,9 +153,7 @@ const Category = () => {
     <>
     {
       didMount == false ? (
-        <>
-          <LoadingPage></LoadingPage>
-        </>
+        <LoadingPage></LoadingPage>
       )
       :
       (
@@ -164,12 +161,12 @@ const Category = () => {
       <Navbar></Navbar>
       <div className='app__Category main__container'>
         <div className='app__Category_Caminho'>
-        <p> {path} </p>
-        {searchName != null ? (
-          <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
-          ) : (
-            <SubHeading title = {categoryName}></SubHeading>
-        )} 
+          <p> {path} </p>
+          {searchName != null ? (
+            <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
+            ) : (
+              <SubHeading title = {categoryName}></SubHeading>
+          )} 
         </div>
         <div className='app__Category_Grid'>
           <div className='app__Category_Grid_Esquerda'>

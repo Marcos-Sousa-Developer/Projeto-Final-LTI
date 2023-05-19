@@ -164,78 +164,40 @@ img, picture {
     font-size: 14px;
   }
 }
-.app__home {
-  margin: 2rem auto;
-  border: 3px solid #EEEEEE;
-  padding: 2rem;
-  display: flex;
-  justify-content: space-around;
-  position: relative;
+.app__SubCategory {
+  margin: 1rem auto;
 }
-.app__home img {
-  height: 225px;
-}
-.app__home .rectangle1 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100px;
-}
-.app__home .rectangle2 {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 75px;
-}
-.app__home_text h2, .app__home p {
-  width: 80%;
-}
-
-.products {
+.app__SubCategory_Grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem auto 3rem;
+  grid-template-columns: 1.5fr 5fr;
+  gap: 2rem;
+  margin-top: 1rem;
 }
-
-@media screen and (max-width: 1200px) {
-  .app__home img {
-    height: 200px;
-  }
-  .app__home_text h2 {
-    font-size: 1.5rem;
-  }
-  .app__home .rectangle2 {
-    height: 50px;
-  }
+.app__SubCategory_Grid_Esquerda {
+  border: 3px solid #EEEEEE;
+  padding: 1rem 2rem;
+  align-self: baseline;
 }
-@media screen and (max-width: 800px) {
-  .app__home img {
-    height: 170px;
-  }
-  .products {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    margin: 1rem auto 2rem;
-  }
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content ul {
+  padding: 0;
 }
-@media screen and (max-width: 650px) {
-  .app__home {
-    margin: 1rem auto;
-  }
-  .app__home img {
-    display: none;
-  }
-  .app__home_text h2, .app__home p {
-    width: 95%;
-  }
-  .products {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-  }
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content li {
+  line-height: 2rem;
 }
-@media screen and (max-width: 450px) {
-  .app__home {
-    padding: 1rem;
-  }
-}/*# sourceMappingURL=Home.css.map */
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content li a {
+  font-size: 14px;
+}
+.app__SubCategory_Grid_Direita .app__SubCategory_pagination {
+  text-align: center;
+}
+.app__SubCategory_Grid_Direita .app__SubCategory_pagination_currentPage {
+  color: #EB5C1F;
+  font-weight: bold;
+}
+.app__SubCategory_Grid_Direita .app__SubCategory_pagination_pages {
+  padding: 0 0.5rem;
+  transition: color 100ms ease-in;
+}
+.app__SubCategory_Grid_Direita .app__SubCategory_pagination_pages:hover {
+  color: rgba(235, 92, 31, 0.8);
+}/*# sourceMappingURL=SubCategory.css.map */

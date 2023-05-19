@@ -3,7 +3,6 @@ import { useCookies } from 'react-cookie';
 import { FiArrowLeft, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-import { PRODUCTS } from '../../../assets/products';
 import { Navbar, Footer, SubHeading, Modal } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import { CartItem } from './CartItem';
@@ -16,6 +15,7 @@ import axios from 'axios';
 const Cart = () => {
   //---------------------Modal---------------------
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
   //------------------------------------------------
 
   const [loading, setLoading] = useState(false)
@@ -79,8 +79,8 @@ const Cart = () => {
                 </button>
                 <Modal open={isOpen} onClose={() => setIsOpen(false)}>
                   <p>Tem a certeza que deseja apagar os items do carrinho?</p>
-                  <button onClick={() => setIsOpen(false)}>Cancelar</button>
-                  <button onClick={() => deleteAllCartItem()}>Apagar tudo</button>
+                  <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
+                  <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()}>Apagar tudo</button>
                 </Modal>
               </div>
             </div>
@@ -100,7 +100,17 @@ const Cart = () => {
                 <p>SubTotal: {0}</p>
                 <p>Total: <PriceDisplay className='product_price' price={totalAmount} /></p>
                 {
-                  !loading ?  <button className='main__action_btn app__cart_checkout_btn' type="submit" onClick={() => goToCheckout()}>Checkout</button>
+                  !loading ?  
+                    <>
+                      <button className='main__action_btn app__cart_checkout_btn' type="submit" onClick={() => setIsOpen2(true)}>
+                        Checkout
+                      </button>
+                      <Modal open={isOpen2} onClose={() => setIsOpen2(false)}>
+                        <p>Confirmar Informações de Encomenda</p>
+                        <button className='main__action_btn' onClick={() => setIsOpen2(false)}>Cancelar</button>
+                        <button className='main__negative_action_btn' onClick={() => goToCheckout()}>Checkout</button>
+                      </Modal>
+                    </>
                   :
                   <button className='main__action_btn app__cart_checkout_btn'>Loading</button>
                 }

@@ -13,44 +13,7 @@ function Home() {
     const targetDiv = document.getElementById('comprar_div');
     targetDiv.scrollIntoView({ behavior: 'smooth' });
   };
-  //-----------------------------------------------------------
 
-  const [selectedProducts, setSelectedProducts] = useState([]);
-
-  const addToSelectedProducts = (product) => {
-    if (selectedProducts.length >= 4) {
-      return;
-    }
-    setSelectedProducts([...selectedProducts, product]);
-  };
-
-  const removeFromSelectedProducts = (product) => {
-    setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
-  };
-  //-----------------------------------------------------------
-
-  const [pageNumber, setPageNumber] = useState(0);
-
-  const productsPerPage = 8;
-  const pagesVisited = pageNumber * productsPerPage
-
-  const displayProducts = PRODUCTS.slice(pagesVisited, pagesVisited + productsPerPage).map(product =>{
-    return (
-      <Product
-        key={product.id}
-        data={product}
-        selectedProducts={selectedProducts}
-        onAddToCompare={addToSelectedProducts}
-        onRemoveFromCompare={removeFromSelectedProducts}
-      />
-    )
-  })
-
-  const pageCount = Math.ceil(PRODUCTS.length / productsPerPage);
-
-  const changePage = ({selected}) => {
-    setPageNumber(selected);
-  }
   //-----------------------------------------------------------
 
   return (
@@ -67,28 +30,10 @@ function Home() {
         <img className='rectangle1' src={images.Rectangle1}></img>
         <img className='rectangle2' src={images.Rectangle2}></img>
         <img src={images.shopping_app}></img>
+        <div>
+
+        </div>
       </div>
-      <div className='products main__container' id='comprar_div'>
-        {displayProducts}
-      </div>
-      <div>
-        <ReactPaginate 
-          previousLabel={<FiChevronLeft></FiChevronLeft>}
-          nextLabel={<FiChevronRight></FiChevronRight>}
-          pageCount={pageCount}
-          onPageChange={changePage}
-          containerClassName='paginationBttns'
-          previousLinkClassName='pagination-previousPage-btn'
-          nextLinkClassName='pagination-nextPage-btn'
-          disabledClassName='paginationDisabled'
-          activeClassName='paginationActive'
-        />
-      </div>
-      <ComparePopUp
-        selectedProducts={selectedProducts}
-        onCloseComparePopUp={() => setSelectedProducts([])}
-        removeFromSelectedProducts={removeFromSelectedProducts}
-      />
       <Footer></Footer>
     </>
   );

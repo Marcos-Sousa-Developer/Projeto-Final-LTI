@@ -10,7 +10,7 @@ import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
 import Settings from "./pages/Admin/Settings";
-import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory, Search, SupplierOrdersHistory, MarketPlace, SupplierTransportUnit} from './pages/HomeView/index';
+import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory, Search, SupplierOrdersHistory, MarketPlace} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
@@ -91,7 +91,6 @@ function App() {
                 <Route exact path="sell" element={<RequireAuth><SupplierSell/></RequireAuth>} />
                 <Route exact path="encomendas" element={<RequireAuth><SupplierOrdersHistory/></RequireAuth>} />
                 <Route exact path="produnit" element={<RequireAuth><SupplierProdUnit/></RequireAuth>} />
-                <Route exact path="transpunit" element={<RequireAuth><SupplierTransportUnit/></RequireAuth>} />
               </Route>
             )
           }
