@@ -18,6 +18,7 @@ const SupplierProdUnit = () => {
     const [productionUnits, setProductionUnits] = useState([]);
     const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', capacity: '' });
     const [editingIndex, setEditingIndex] = useState(null);
+    const [watchProductsIndex, setWatchProductsIndex] = useState([false, '']);
     const [didMount, setDidMount] = useState(false)
 
     async function getProductionUnit(){
@@ -222,7 +223,10 @@ const SupplierProdUnit = () => {
                                                     </Modal>
                                                 </div>
                                             </td>
-                                            <td data-cell='Produtos: '><button>Ver produtos</button></td>
+                                            <td data-cell='Produtos: '><button onClick={() => setWatchProductsIndex([true, index])} >Ver produtos</button></td>
+                                            {watchProductsIndex[0] === true && watchProductsIndex[1] === index  ? (
+                                                <p>{index}</p>
+                                            ) : null}
                                         </tr>
                                     )}
                                 </React.Fragment>
