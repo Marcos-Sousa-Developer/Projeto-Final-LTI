@@ -19,11 +19,10 @@ const SupplierOrdersHistory = () => {
 
     async function getAd(data){
       let lista = []
-      data.map(async(orderHistory) => {
+      for (const orderHistory of data) {
         let adGet = await getAllFromDB("/ads/" + orderHistory.ad_id)
-        lista.push([orderHistory, adGet[0].title])
-        console.log(12312)
-      })
+        lista = [...lista, { order: orderHistory, ad_name: adGet[0].title }];
+      }
       setSupplierOrder(lista)
     }
 
@@ -38,10 +37,6 @@ const SupplierOrdersHistory = () => {
       run()
     }, [])
 
-    function test(oi) {
-      console.log(Object.keys(oi))
-    }
-
     return (
     <>
     {
@@ -50,28 +45,27 @@ const SupplierOrdersHistory = () => {
       <NavbarSupplier></NavbarSupplier>
       <div className='app__prod-unit main__container'>
         <SubHeading title="Histórico de encomendas"/>
-        <button onClick={() => {console.log(ordersHistory)}}>QWEWQEQWE</button>
           {ordersHistory.length > 0 && (
             <>
               <table className='app__prod-unit_existing-units'>
                 <thead>
                   <tr>
-                    <th>Número da encomenda</th>
-                    <th>Nome do produto</th>
-                    <th>Localização do comprador</th>
-                    <th>Total €</th>
-                    <th>Estado</th>
+                    <th>Número da encomenda</th>&nbsp;&nbsp;
+                    <th>Nome do produto</th>&nbsp;&nbsp;
+                    <th>Localização do comprador</th>&nbsp;&nbsp;
+                    <th>Total €</th>&nbsp;&nbsp;
+                    <th>Estado</th>&nbsp;&nbsp;
                   </tr>
                 </thead>
                 <tbody>
                   {ordersHistory.map((orderHistory) => (
                     <React.Fragment key={orderHistory.id}>
                       <tr>
-                        <td>{orderHistory.order_id}</td>
-                        <td>{test(orderHistory)??"ok"}</td>
-                        <td>{orderHistory.buyer_location}</td>
-                        <td>{orderHistory.price}</td>                      
-                        <td>{orderHistory.order_status}</td>
+                        <td>{orderHistory.order.order_id}</td> &nbsp;
+                        <td>{orderHistory.ad_name}</td>&nbsp;&nbsp;
+                        <td>{orderHistory.order.buyer_location}</td>&nbsp;&nbsp;
+                        <td>{orderHistory.order.price}</td>  &nbsp; &nbsp;                   
+                        <td>{orderHistory.order.order_status}</td>&nbsp;&nbsp;
                       </tr>
                     </React.Fragment>
                   ))}
