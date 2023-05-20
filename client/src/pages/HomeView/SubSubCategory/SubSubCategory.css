@@ -170,12 +170,12 @@ img, picture {
 .app__SubSubCategory_Grid {
   display: grid;
   grid-template-columns: 1.5fr 5fr;
-  gap: 2rem;
+  gap: 1.5rem;
   margin-top: 1rem;
 }
 .app__SubSubCategory_Grid_Esquerda {
   border: 3px solid #EEEEEE;
-  padding: 1rem 2rem;
+  padding: 1rem;
   align-self: baseline;
 }
 .app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content ul {

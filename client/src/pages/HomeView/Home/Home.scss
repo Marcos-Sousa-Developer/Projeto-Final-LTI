@@ -35,7 +35,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
-    margin: 2rem auto 3rem;
+    margin: 0 auto 1.5rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -64,7 +64,7 @@
     .products{
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 1rem;
-        margin: 1rem auto 2rem;
+        margin: 0 auto 1rem;
     }
 }
 

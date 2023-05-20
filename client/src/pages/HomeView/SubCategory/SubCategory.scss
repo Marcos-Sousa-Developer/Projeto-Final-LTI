@@ -6,13 +6,13 @@
     &_Grid{
         display: grid;
         grid-template-columns: 1.5fr 5fr;
-        gap: 2rem;
+        gap: 1.5rem;
         margin-top: 1rem;
     }
 
     &_Grid_Esquerda{
         border: $border;
-        padding: 1rem 2rem;
+        padding: 1rem;
         align-self: baseline;
 
         .app__SubCategory_filter_content{
@@ -31,6 +31,9 @@
     }
 
     &_Grid_Direita{    
+        .app__SubCategory_mobile_filter_content{
+            display: none;
+        }
         .app__SubCategory_pagination{
             text-align: center;
 
@@ -56,17 +59,20 @@
 }
 
 
-@media screen and (max-width: 1200px){
-    .app__SubCategory_Grid{
-    }
-}
+@media screen and (max-width: 1050px){
+    .app__SubCategory{
+        &_Grid{
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
 
-@media screen and (max-width: 800px) {
-    .app__SubCategory_Grid{
-    }
-}
+        .app__SubCategory_mobile_filter_content{
+            display: block;
+        }
 
-@media screen and (max-width: 600px) {
-    .app__SubCategory_Grid{
+        &_Grid_Esquerda{
+            display: none;
+        }
     }
 }

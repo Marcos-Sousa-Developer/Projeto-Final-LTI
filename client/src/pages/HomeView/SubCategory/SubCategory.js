@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 
-import { Navbar, Footer, Product, SubHeading, ComparePopUp } from '../../../components/index';
+import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import './SubCategory.css';
@@ -16,6 +16,7 @@ let endIndex = 0;
 
 const SubCategory = () => {
 
+  const [isOpen, setIsOpen] = useState(false);  //modal
   const [ads, setAds] = useState([])
   const [searchName, setSearchName] = useState(null)
   const [categoryName, setCategoryName] = useState("")
@@ -172,8 +173,10 @@ const SubCategory = () => {
         </div>
         <div className='app__SubCategory_Grid'>
           <div className='app__SubCategory_Grid_Esquerda'>
-            <p>SubCategoria - {subCategoryName}</p>
+            <p>FILTROS</p>
             <div className='app__SubCategory_filter_content'>
+              <p>SubCategoria</p>
+              <hr></hr>
               <ul>
                 {Object.keys(subsubcategories).map((subsubcategory_name) => { 
                     return ( 
@@ -186,8 +189,24 @@ const SubCategory = () => {
             </div>
           </div> 
           <div className='app__SubCategory_Grid_Direita'>
-            <div>
-              <p>Filtros</p>
+            <div className='app__SubCategory_mobile_filter_content'>
+              <button className='main_action_btn' onClick={() => setIsOpen(true)}>Filtros</button>
+              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                <p>Filtros</p>
+                <div>
+                  <p>SubCategoria</p>
+                  <ul>
+                    {Object.keys(subsubcategories).map((subsubcategory_name) => { 
+                        return ( 
+                          <li>
+                            <a key={subsubcategory_name} onClick={() => sendToSubSubcategories(subsubcategory_name) }> {subsubcategory_name} ({subsubcategories[subsubcategory_name]})</a>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
+                <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()}>Aplicar</button>
+              </Modal>
             </div>
             <div className='products'>  
             {currentItems.map((ad) => (

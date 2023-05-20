@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FiEdit3, FiTrash2, FiX, FiCheck } from 'react-icons/fi';
 
 import putToDB from '../../../hooks/putToDB';
@@ -6,18 +6,23 @@ import postToDB from '../../../hooks/postToDB';
 import deleteToDB from '../../../hooks/deleteToDB';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
-import { NavbarSupplier, Footer, Modal, SubHeading } from '../../../components/index';
+import { NavbarSupplier, Footer, Modal, SubHeading, SnackBar } from '../../../components/index';
 import LoadingPage from '../../LoadingPage';
 import './SupplierProdUnit.css';
 
-const SupplierProdUnit = () => {
-    //--------------Modal------------
-    const [modalOpen, setModalOpen] = useState([]);
-    //-------------------------------
+const SnackbarType = {
+    success: "success",
+    fail: "fail",
+};
 
+const SupplierProdUnit = () => {
+    const [modalOpen, setModalOpen] = useState([]); //modal1
+    const [modalOpen2, setModalOpen2] = useState([]); //modal2
+    const snackbarRef = useRef(null);
+    const snackbarRef2 = useRef(null);
     const [productionUnits, setProductionUnits] = useState([]);
     const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', capacity: '' });
-    const [editingIndex, setEditingIndex] = useState(null);
+    //const [editingIndex, setEditingIndex] = useState(null);
     const [watchProductsIndex, setWatchProductsIndex] = useState([false, '']);
     const [didMount, setDidMount] = useState(false)
 
@@ -47,8 +52,6 @@ const SupplierProdUnit = () => {
         capacity: updatedProductionUnits[index].capacity
     })
 
-      // Clear the editing index
-      setEditingIndex(null);
     }
 
     const submitInsert = async () => {
@@ -74,11 +77,21 @@ const SupplierProdUnit = () => {
         location.reload()
     }
 
+    async function handleCriarUnidade() {
+        submitInsert();
+        snackbarRef.current.show();
+    }
+
+    async function handleEliminarUnidade(index){
+        submitDelete(index);
+        snackbarRef2.current.show();
+    }
+
     //Aparecer no loading da página
     useEffect(()=>{
         getProductionUnit()
         setDidMount(true)
-    }, [])
+    }, []);
 
     return (
     <>
@@ -127,7 +140,12 @@ const SupplierProdUnit = () => {
                             />
                         </div> 
                         <div className='app__prod-unit_add_new-unit_actions'>
-                            <button onClick={() => submitInsert()} className='main__action_btn'>Adicionar</button>
+                            <button onClick={handleCriarUnidade} className='main__action_btn'>Adicionar</button>
+                            <SnackBar
+                                ref={snackbarRef}
+                                message="Unidade Produção criada!"
+                                type={SnackbarType.success}
+                            />
                         </div>
                     </form>
                 </div>
@@ -145,10 +163,22 @@ const SupplierProdUnit = () => {
                             </thead>
                             <tbody>
                             {productionUnits.map((productionUnit, index) => (
-                                <React.Fragment key={index}>
-                                    {editingIndex === index ? (
-                                        <tr className='editing_prod-unit_content'>
-                                            <td colSpan={4} style={{paddingRight:'0'}}>
+                                <tr key={index}>
+                                    <td data-cell='Nome: '>{productionUnit.name}</td>
+                                    <td data-cell='Localização: '>{productionUnit.location}</td>
+                                    <td data-cell='Capacidade: '>{productionUnit.capacity}</td>
+                                    <td className='actions' style={{paddingRight:'0'}}>
+                                        <div style={{display:'flex'}}>
+                                            <button onClick={() => setModalOpen2(prevState => {
+                                                const newState = [...prevState];
+                                                newState[index] = true;
+                                                return newState;
+                                            })}><FiEdit3></FiEdit3></button>
+                                            <Modal open={modalOpen2[index]} onClose={() => setModalOpen2(prevState => {
+                                                const newState = [...prevState];
+                                                newState[index] = false;
+                                                return newState;
+                                            })}>
                                                 <form 
                                                     style={{display: 'flex'}}
                                                     onSubmit={(event) => {
@@ -161,75 +191,84 @@ const SupplierProdUnit = () => {
                                                         });
                                                     }}>
                                                     <div className='inputField'>
+                                                        <p>Nome:</p>
                                                         <input                         
                                                             type="text"
+                                                            placeholder="Nome"
                                                             name="name"
                                                             defaultValue={productionUnits[index].name}
                                                         />
                                                     </div> 
                                                     <div className='inputField'>
+                                                        <p>Localidade:</p>
                                                         <input                         
                                                             type="text"
+                                                            placeholder="Localidade"
                                                             name="location"
                                                             defaultValue={productionUnits[index].location}
                                                         />
                                                     </div> 
                                                     <div className='inputField'>
+                                                        <p>Capacidade:</p>
                                                         <input                         
                                                             type="text"
+                                                            placeholder="Capacidade"
                                                             name="capacity"
                                                             defaultValue={productionUnits[index].capacity}
                                                         />
                                                     </div> 
-                                                    <div style={{display:'flex', alignItems:'center'}}>
-                                                        <button type="submit"><FiCheck></FiCheck></button>
-                                                        <button type="button" onClick={() => setEditingIndex(null)}><FiX></FiX></button>
+                                                    <div>
+                                                        <button 
+                                                            className='main__action_btn' 
+                                                            onClick={() => 
+                                                                setModalOpen2(prevState => {
+                                                                    const newState = [...prevState];
+                                                                    newState[index] = false;
+                                                                    return newState;
+                                                                })}>Cancelar</button>
+                                                        <button 
+                                                            className='main__negative_action_btn' 
+                                                            type="submit">Guardar</button>
                                                     </div>
                                                 </form>
-                                            </td>
-                                        </tr>
-                                    ) : (
-                                        <tr>
-                                            <td data-cell='Nome: '>{productionUnit.name}</td>
-                                            <td data-cell='Localização: '>{productionUnit.location}</td>
-                                            <td data-cell='Capacidade: '>{productionUnit.capacity}</td>
-                                            <td className='actions' style={{paddingRight:'0'}}>
-                                                <div style={{display:'flex'}}>
-                                                    <button onClick={() => setEditingIndex(index)}><FiEdit3></FiEdit3></button>
-                                                    <button onClick={() => setModalOpen(prevState => {
-                                                        const newState = [...prevState];
-                                                        newState[index] = true;
-                                                        return newState;
-                                                    })}><FiTrash2></FiTrash2></button>
-                                                    <Modal open={modalOpen[index]} onClose={() => setModalOpen(prevState => {
-                                                        const newState = [...prevState];
-                                                        newState[index] = false;
-                                                        return newState;
-                                                    })}>
-                                                        <p style={{fontSize:'18px'}}>Tem a certeza que quer apagar esta unidade de produção?</p>
-                                                        <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
-                                                            <button 
-                                                                className='main__action_btn' 
-                                                                onClick={() => 
-                                                                    setModalOpen(prevState => {
-                                                                        const newState = [...prevState];
-                                                                        newState[index] = false;
-                                                                        return newState;
-                                                                    })}>Cancelar</button>
-                                                            <button 
-                                                                className='main__negative_action_btn' 
-                                                                onClick={() => submitDelete(productionUnit.id)}>Apagar</button>
-                                                        </div>
-                                                    </Modal>
+                                            </Modal>
+                                            <button onClick={() => setModalOpen(prevState => {
+                                                const newState = [...prevState];
+                                                newState[index] = true;
+                                                return newState;
+                                            })}><FiTrash2></FiTrash2></button>
+                                            <Modal open={modalOpen[index]} onClose={() => setModalOpen(prevState => {
+                                                const newState = [...prevState];
+                                                newState[index] = false;
+                                                return newState;
+                                            })}>
+                                                <p style={{fontSize:'18px'}}>Tem a certeza que quer apagar esta unidade de produção?</p>
+                                                <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                                                    <button 
+                                                        className='main__action_btn' 
+                                                        onClick={() => 
+                                                            setModalOpen(prevState => {
+                                                                const newState = [...prevState];
+                                                                newState[index] = false;
+                                                                return newState;
+                                                            })}>Cancelar</button>
+                                                    <button 
+                                                        className='main__negative_action_btn' 
+                                                        onClick={() => handleEliminarUnidade(productionUnit.id)}>Apagar</button>
+                                                    <SnackBar
+                                                        ref={snackbarRef2}
+                                                        message="Unidade Produção eliminada!"
+                                                        type={SnackbarType.success}
+                                                    />
                                                 </div>
-                                            </td>
-                                            <td data-cell='Produtos: '><button onClick={() => setWatchProductsIndex([true, index])} >Ver produtos</button></td>
-                                            {watchProductsIndex[0] === true && watchProductsIndex[1] === index  ? (
-                                                <p>{index}</p>
-                                            ) : null}
-                                        </tr>
-                                    )}
-                                </React.Fragment>
+                                            </Modal>
+                                        </div>
+                                    </td>
+                                    <td data-cell='Produtos: '><button onClick={() => setWatchProductsIndex([true, index])} >Ver produtos</button></td>
+                                    {watchProductsIndex[0] === true && watchProductsIndex[1] === index  ? (
+                                        <p>{index}</p>
+                                    ) : null}
+                                </tr>
                             ))}
                             </tbody>
                         </table>

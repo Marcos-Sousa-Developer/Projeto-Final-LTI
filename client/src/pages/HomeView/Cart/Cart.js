@@ -106,9 +106,13 @@ const Cart = () => {
                         Checkout
                       </button>
                       <Modal open={isOpen2} onClose={() => setIsOpen2(false)}>
-                        <p>Confirmar Informações de Encomenda</p>
+                        <p>Informações de Encomenda</p>
+                        <div>
+                          <p>Morada</p>
+                          <p>Email</p>
+                        </div>
                         <button className='main__action_btn' onClick={() => setIsOpen2(false)}>Cancelar</button>
-                        <button className='main__negative_action_btn' onClick={() => goToCheckout()}>Checkout</button>
+                        <button className='main__negative_action_btn' onClick={() => goToCheckout()}>Pagamento</button>
                       </Modal>
                     </>
                   :

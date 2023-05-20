@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 
-import { Navbar, Footer, Product, SubHeading, ComparePopUp } from '../../../components/index';
+import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import './Category.css';
@@ -16,12 +16,13 @@ let endIndex = 0;
 
 const Category = () => {
 
-  const [ads, setAds] = useState([])
-  const [searchName, setSearchName] = useState(null)
-  const [categoryName, setCategoryName] = useState("")
-  const [path, setPath] = useState(null)
+  const [isOpen, setIsOpen] = useState(false);  //modal
+  const [ads, setAds] = useState([]);
+  const [searchName, setSearchName] = useState(null);
+  const [categoryName, setCategoryName] = useState("");
+  const [path, setPath] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [didMount, setDidMount] = useState(false)
+  const [didMount, setDidMount] = useState(false);
 
   async function getSubCategoriesbySearchName(categoryName, searchName){
     setPath('Home > ' + categoryName + " > pesquisa: '" + searchName + "'");
@@ -170,8 +171,10 @@ const Category = () => {
         </div>
         <div className='app__Category_Grid'>
           <div className='app__Category_Grid_Esquerda'>
-            <p>Categoria - {categoryName}</p>
+            <p>FILTROS</p>
             <div className='app__Category_filter_content'>
+              <p style={{margin: '0'}}>Categoria</p>
+              <hr></hr>
               <ul>
                {Object.keys(subcategories).map((subcategory_name) => { 
                   return ( 
@@ -184,8 +187,27 @@ const Category = () => {
             </div> 
           </div> 
           <div className='app__Category_Grid_Direita'>
-            <div>
-              <p>Filtros</p>
+            <div className='app__Category_mobile_filter_content'>
+              <button className='main_action_btn' onClick={() => setIsOpen(true)}>Filtros</button>
+              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                <p>Filtros</p>
+                <div>
+                  <p>SubCategoria</p>
+                  <ul>
+                    {Object.keys(subcategories).map((subcategory_name) => { 
+                      return ( 
+                      <li>
+                        <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
+                      </li>
+                      );
+                     })}
+                  </ul>
+                </div>
+                <div>
+
+                </div>
+                <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()     }>Aplicar</button>
+              </Modal>
             </div>
             <div className='products'>  
             {currentItems.map((ad) => (
