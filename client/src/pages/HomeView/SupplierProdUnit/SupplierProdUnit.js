@@ -20,6 +20,7 @@ const SupplierProdUnit = () => {
     const [modalOpen2, setModalOpen2] = useState([]); //modal2
     const snackbarRef = useRef(null);
     const snackbarRef2 = useRef(null);
+    const snackbarRef3 = useRef(null);
     const [productionUnits, setProductionUnits] = useState([]);
     const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', capacity: '' });
     //const [editingIndex, setEditingIndex] = useState(null);
@@ -179,8 +180,8 @@ const SupplierProdUnit = () => {
                                                 newState[index] = false;
                                                 return newState;
                                             })}>
+                                                <p style={{fontSize:'18px'}}>Editar Unidade</p>
                                                 <form 
-                                                    style={{display: 'flex'}}
                                                     onSubmit={(event) => {
                                                         event.preventDefault();
                                                         handleEditProductionUnit(index, {
@@ -189,7 +190,18 @@ const SupplierProdUnit = () => {
                                                             location: event.target.location.value,
                                                             capacity: event.target.capacity.value,
                                                         });
+                                                        setModalOpen2(prevState => {
+                                                            const newState = [...prevState];
+                                                            newState[index] = false;
+                                                            return newState;
+                                                        });
+                                                        snackbarRef3.current.show();
                                                     }}>
+                                                    <SnackBar
+                                                        ref={snackbarRef3}
+                                                        message="Unidade Produção alterada!"
+                                                        type={SnackbarType.success}
+                                                    />
                                                     <div className='inputField'>
                                                         <p>Nome:</p>
                                                         <input                         
@@ -217,7 +229,7 @@ const SupplierProdUnit = () => {
                                                             defaultValue={productionUnits[index].capacity}
                                                         />
                                                     </div> 
-                                                    <div>
+                                                    <div style={{display:'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop:'2rem'}}>
                                                         <button 
                                                             className='main__action_btn' 
                                                             onClick={() => 
@@ -264,7 +276,7 @@ const SupplierProdUnit = () => {
                                             </Modal>
                                         </div>
                                     </td>
-                                    <td data-cell='Produtos: '><button onClick={() => setWatchProductsIndex([true, index])} >Ver produtos</button></td>
+                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={() => setWatchProductsIndex([true, index])} >Ver produtos</button></td>
                                     {watchProductsIndex[0] === true && watchProductsIndex[1] === index  ? (
                                         <p>{index}</p>
                                     ) : null}

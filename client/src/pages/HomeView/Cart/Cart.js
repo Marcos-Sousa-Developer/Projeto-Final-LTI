@@ -106,13 +106,55 @@ const Cart = () => {
                         Checkout
                       </button>
                       <Modal open={isOpen2} onClose={() => setIsOpen2(false)}>
-                        <p>Informações de Encomenda</p>
+                        <p style={{fontSize: '18px'}}>Informações de Encomenda</p>
                         <div>
-                          <p>Morada</p>
-                          <p>Email</p>
+                          <div className='inputField'>
+                            <p>Email:</p>
+                            <input                         
+                                type="text"
+                                placeholder="Email"
+                                name="email"
+                            />
+                          </div>
+                          <div className='inputField'>
+                            <p>NIF:</p>
+                            <input                         
+                                type="number"
+                                placeholder="NIF"
+                                name="NIF"
+                            />
+                          </div>
+                          <div className='inputField'>
+                            <p>Morada:</p>
+                            <input                         
+                                type="text"
+                                placeholder="Morada"
+                                name="morada"
+                            />
+                          </div> 
+                          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
+                            <div className='inputField'>
+                              <p>Cidade:</p>
+                              <input                         
+                                  type="text"
+                                  placeholder="Cidade"
+                                  name="cidade"
+                              />
+                            </div> 
+                            <div className='inputField'>
+                              <p>Cód. Postal:</p>
+                              <input                         
+                                  type="text"
+                                  placeholder="Cód. Postal"
+                                  name="codigoPostal"
+                              />
+                            </div>
+                          </div>
                         </div>
-                        <button className='main__action_btn' onClick={() => setIsOpen2(false)}>Cancelar</button>
-                        <button className='main__negative_action_btn' onClick={() => goToCheckout()}>Pagamento</button>
+                        <div style={{display:'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop:'2rem'}}>
+                          <button className='main__action_btn' onClick={() => setIsOpen2(false)}>Cancelar</button>
+                          <button className='main__negative_action_btn' onClick={() => goToCheckout()}>Pagamento</button>
+                        </div>
                       </Modal>
                     </>
                   :

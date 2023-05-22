@@ -21,7 +21,7 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts, 
     return (
       <>
         <div className='product'>
-          <div onClick={onClick}>
+          <div className="app__pointer" onClick={onClick}>
             <img className='product_img' src={exampleImage} />
           </div>
           <div className='product_description'>

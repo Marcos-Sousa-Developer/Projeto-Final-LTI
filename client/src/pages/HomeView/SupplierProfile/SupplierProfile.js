@@ -263,10 +263,10 @@ function SupplierProfile() {
                   </div>
                 </div>
                 <div className='app__SupplierProfile_box_div_row'>
-                  Morada
+                  NIF
                   <div className='app__SupplierProfile_box_div_row_input'>
-                    <FiMapPin></FiMapPin>
-                    <input type="text" placeholder="Morada" value = {address ?? ""} name="address" onChange={handleSetAddress}></input>
+                    <BiIdCard></BiIdCard>
+                    <input type="text" placeholder="NIF" value = {nif ?? ""} name="nif" onChange={handleSetNif}></input>
                   </div>
                 </div>
               </div>
@@ -279,10 +279,26 @@ function SupplierProfile() {
                   </div>
                 </div>
                 <div className='app__SupplierProfile_box_div_row'>
-                  NIF
+                  Morada
                   <div className='app__SupplierProfile_box_div_row_input'>
-                    <BiIdCard></BiIdCard>
-                    <input type="text" placeholder="NIF" value = {nif ?? ""} name="nif" onChange={handleSetNif}></input>
+                    <FiMapPin></FiMapPin>
+                    <input type="text" placeholder="Morada" value = {address ?? ""} name="address" onChange={handleSetAddress}></input>
+                  </div>
+                </div>
+                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}} className='app__SupplierProfile_box_div_row'>
+                  <div>
+                    Cidade
+                    <div className='app__SupplierProfile_box_div_row_input'>
+                      <FiMapPin></FiMapPin>
+                      <input type="text" placeholder="Cidade"></input>
+                    </div>
+                  </div>
+                  <div>
+                    Cód. Postal
+                    <div className='app__SupplierProfile_box_div_row_input'>
+                      <FiMapPin></FiMapPin>
+                      <input type="text" placeholder="Cód. Postal"></input>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -368,7 +384,10 @@ function SupplierProfile() {
           <div className="app__SupplierProfile_button">
             <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
             <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-              <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os dados da sua conta?</p>
+              <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os seus dados?</p>
+              <div className='inputField' style={{marginTop:'2rem', textAlign:'center'}}>
+                <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password'></input>
+              </div> 
               <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
                 <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
                 <button className='main__negative_action_btn' onClick={() => { submit(); setIsOpen(false)}}>Guardar</button>

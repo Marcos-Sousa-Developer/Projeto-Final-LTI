@@ -906,33 +906,6 @@ function CriarAnuncio() {
                 <div className='app__anuncio_prodUnit'>
                   <p className='title'>Unidade Produção</p>
                   <div className='app__anuncio_prodUnit_content'>
-                    {/*productionUnits.length > 0 && (
-                      <>
-                        <table className='app__prod-unit_existing-units'>
-                          <thead>
-                            <tr>
-                              <th>Ativar</th>
-                              <th>Quantidade</th>
-                              <th>Nome</th>
-                              <th>Localização</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {productionUnits.map((productionUnit, index) => (
-                              <React.Fragment key={index}>
-                                <tr>
-                                  <td><input type="checkbox"></input></td>
-                                  <td><input type="number"></input></td>
-                                  <td>{productionUnit.name}</td>
-                                  <td>{productionUnit.location}</td>
-                                </tr>
-                              </React.Fragment>
-                            ))}
-                          </tbody>
-                        </table>
-                      </>
-                    )}
-                    {/* exemplo */}
                     <table>
                       <thead>
                         <tr>
@@ -946,12 +919,12 @@ function CriarAnuncio() {
                       {productionUnits.map((productionUnit) => { 
                         return ( 
                           <tr>
-                          <td>
+                          {/*<td>
                               <label class="app__anuncio_prodUnit_checkbox">
                                 <input type="checkbox" onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [formData.prodUnit[productionUnit.name][0], e.target.checked] }})}}></input>
                                 <span class="prodUnit_checkmark"></span>
                               </label>
-                          </td>
+                          </td>*/}
                           <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [e.target.value, formData.prodUnit[productionUnit.name][1]] }})}}></input></div></td>
                           <td>{productionUnit.name}</td>
                           <td>{productionUnit.location}</td>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft, FiChevronDown, FiChevronUp} from 'react-icons/fi';
 
 import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
@@ -17,6 +17,8 @@ let endIndex = 0;
 const Category = () => {
 
   const [isOpen, setIsOpen] = useState(false);  //modal
+  const [filterCategory, setFilterCategory] = useState(false);
+  const [filterPrice, setFilterPrice] = useState(false);
   const [ads, setAds] = useState([]);
   const [searchName, setSearchName] = useState(null);
   const [categoryName, setCategoryName] = useState("");
@@ -48,6 +50,8 @@ const Category = () => {
     currentItems = adsDB.slice(startIndex, endIndex);
   }
 
+  //Paginação
+
   const goToPage = (page) => {
     setCurrentPage(page);
     startIndex = (page - 1) * 20;
@@ -63,6 +67,79 @@ const Category = () => {
     window.location.href = `/subcategoria?${queryString}`;
     
   }
+
+  //Comparador de Produtos
+
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  const addToSelectedProducts = (product) => {
+    if (selectedProducts.length >= 4) {
+      return;
+    }
+    setSelectedProducts([...selectedProducts, product]);
+  };
+  
+  const removeFromSelectedProducts = (product) => {
+    setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
+  };
+
+  //Formatação da Paginação
+
+  const totalPages = Math.ceil(ads.length / itemsPerPage);
+  const MAX_PAGES = 5;
+    
+  let pagination;
+    
+  if (totalPages <= MAX_PAGES) {
+    pagination = Array.from({ length: totalPages }, (_, index) => index + 1);
+  } else {
+    if (currentPage <= 2) {
+      pagination = [
+        1,
+        2,
+        '...',
+        totalPages - 1,
+        totalPages
+      ];
+    } else if (currentPage >= totalPages - 1) {
+      if(currentPage == totalPages - 1){
+        pagination = [
+          1,
+          2,
+          '...',
+          currentPage,
+          currentPage + 1,
+        ];
+      }else{
+        pagination = [
+          1,
+          2,
+          '...',
+          currentPage - 1,
+          currentPage,
+        ];
+      }
+    } else {
+      pagination = [
+        1,
+        '...',
+        currentPage,
+        '...',
+        totalPages
+      ];
+    }
+  }
+
+  //Filter accordions
+
+  const toggleFilterCategory = () =>{
+    return setFilterCategory(!filterCategory);
+  }
+  const toggleFilterPrice = () =>{
+    return setFilterPrice(!filterPrice);
+  }
+
+  //UseEffect
 
   useEffect(()=>{ 
     setDidMount(false)
@@ -90,66 +167,6 @@ const Category = () => {
     run();
   }, [])
 
-    //-----------------------------------------------------------
-
-      const [selectedProducts, setSelectedProducts] = useState([]);
-
-      const addToSelectedProducts = (product) => {
-        if (selectedProducts.length >= 4) {
-          return;
-        }
-        setSelectedProducts([...selectedProducts, product]);
-      };
-    
-      const removeFromSelectedProducts = (product) => {
-        setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
-      };
-    //----------------------------------------------------------
-    const totalPages = Math.ceil(ads.length / itemsPerPage);
-    const MAX_PAGES = 5;
-    
-    let pagination;
-    
-    if (totalPages <= MAX_PAGES) {
-      pagination = Array.from({ length: totalPages }, (_, index) => index + 1);
-    } else {
-      if (currentPage <= 2) {
-        pagination = [
-          1,
-          2,
-          '...',
-          totalPages - 1,
-          totalPages
-        ];
-      } else if (currentPage >= totalPages - 1) {
-        if(currentPage == totalPages - 1){
-          pagination = [
-            1,
-            2,
-            '...',
-            currentPage,
-            currentPage + 1,
-          ];
-        }else{
-          pagination = [
-            1,
-            2,
-            '...',
-            currentPage - 1,
-            currentPage,
-          ];
-        }
-      } else {
-        pagination = [
-          1,
-          '...',
-          currentPage,
-          '...',
-          totalPages
-        ];
-      }
-    }
-
   return (
     <>
     {
@@ -173,9 +190,25 @@ const Category = () => {
           <div className='app__Category_Grid_Esquerda'>
             <p>FILTROS</p>
             <div className='app__Category_filter_content'>
-              <p style={{margin: '0'}}>Categoria</p>
-              <hr></hr>
-              <ul>
+              <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterCategory}>
+                <p style={{margin: '0'}}>Categoria</p>
+                <span>{filterCategory ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+              </div>
+              <ul className={filterCategory ? "hideFilter showFilter" : "hideFilter"}>
+               {Object.keys(subcategories).map((subcategory_name) => { 
+                  return ( 
+                    <li>
+                      <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
+                    </li>
+                  );
+                })}
+              </ul>
+              
+              <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterPrice}>
+                <p style={{margin: '0'}}>Preço</p>
+                <span>{filterPrice ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+              </div>
+              <ul className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
                {Object.keys(subcategories).map((subcategory_name) => { 
                   return ( 
                     <li>
