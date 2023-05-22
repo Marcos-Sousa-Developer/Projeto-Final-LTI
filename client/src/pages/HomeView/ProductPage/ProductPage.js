@@ -86,6 +86,16 @@ const ProductPage = () => {
     setCookie('cart', prevValue, { path: '/' });
   };
 
+  const updateCartItemCount = (value) => {
+    let id = adData.dataComplete.id
+    const prevValue = cookies.cart || {};
+
+    let parsedValue = parseInt(value)
+    if (!isNaN(parsedValue)) {
+        prevValue[id] = [parsedValue, adData.price, adData.title, adData.dataComplete];
+        setCookie('cart', prevValue, { path: '/' });
+    }
+  }
 
   useEffect(()=>{ 
     setDidMount(false) 
@@ -135,7 +145,7 @@ const ProductPage = () => {
                   <div className='app__product_page_content_actions'>
                     <div className='app__product_page_content_actions_1'>
                       <button><FiMinus></FiMinus></button>
-                      <input/>
+                      <input />
                       <button><FiPlus></FiPlus></button>
                     </div>
                     <button 

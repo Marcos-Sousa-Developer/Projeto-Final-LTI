@@ -909,7 +909,6 @@ function CriarAnuncio() {
                     <table>
                       <thead>
                         <tr>
-                          <th></th>
                           <th>Quantidade</th>
                           <th>Nome</th>
                           <th>Localização</th>
@@ -924,7 +923,7 @@ function CriarAnuncio() {
                                 <input type="checkbox" onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [formData.prodUnit[productionUnit.name][0], e.target.checked] }})}}></input>
                                 <span class="prodUnit_checkmark"></span>
                               </label>
-                          </td>*/}
+                        </td>*/}
                           <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [e.target.value, formData.prodUnit[productionUnit.name][1]] }})}}></input></div></td>
                           <td>{productionUnit.name}</td>
                           <td>{productionUnit.location}</td>

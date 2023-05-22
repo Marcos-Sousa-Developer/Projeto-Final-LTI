@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft, FiChevronUp} from 'react-icons/fi';
 
-import { PRODUCTS } from '../../../assets/products';
-import { Navbar, Footer, Product, SubHeading, ComparePopUp } from '../../../components/index';
-import images from '../../../assets/images.js';
+import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import getFromDB from '../../../hooks/getFromDB';
 
@@ -18,10 +16,15 @@ let endIndex = 0;
 
 const Search = () => {
 
+  const [isOpen, setIsOpen] = useState(false);  //modal
+  const [filterCategory, setFilterCategory] = useState(false);
+  const [filterPrice, setFilterPrice] = useState(false);
   const [searchName, setSearchName] = useState([])
   const [ads, setAds] = useState([])
   const [didMount, setDidMount] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
+
+  //Paginação
 
   const goToPage = (page) => {
     setCurrentPage(page);
@@ -30,7 +33,7 @@ const Search = () => {
     currentItems = ads.slice(startIndex, endIndex);
   };
 
-
+  //Categories get and set
   async function getAndSetProducts(title){
     let adsDB = await getAllFromDB("/ads", {title: title})
     setAds(adsDB);
@@ -50,80 +53,93 @@ const Search = () => {
     window.location.href = `/categoria?${queryString}`;
   }
 
-    useEffect(()=>{ 
-      setDidMount(false)
+  //Comparador de Produtos
 
-      const execute = async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const title = urlParams.get("searchName");
-        await getAndSetProducts(title)
-        setSearchName(title)
-        setDidMount(true)
-      }
-      execute()
-          
-  }, [])
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
-
-    //-----------------------------------------------------------
-
-    const [selectedProducts, setSelectedProducts] = useState([]);
-
-    const addToSelectedProducts = (product) => {
-      if (selectedProducts.length >= 4) {
-        return;
-      }
-      setSelectedProducts([...selectedProducts, product]);
-    };
+  const addToSelectedProducts = (product) => {
+    if (selectedProducts.length >= 4) {
+      return;
+    }
+    setSelectedProducts([...selectedProducts, product]);
+  };
   
-    const removeFromSelectedProducts = (product) => {
-      setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
-    };
-    //-----------------------------------------------------------
-    const totalPages = Math.ceil(ads.length / itemsPerPage);
-    const MAX_PAGES = 5;
+  const removeFromSelectedProducts = (product) => {
+    setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
+  };
+
+  //Formatação da Paginação
+
+  const totalPages = Math.ceil(ads.length / itemsPerPage);
+  const MAX_PAGES = 5;
+  
+  let pagination;
     
-    let pagination;
-    
-    if (totalPages <= MAX_PAGES) {
-      pagination = Array.from({ length: totalPages }, (_, index) => index + 1);
-    } else {
-      if (currentPage <= 2) {
+  if (totalPages <= MAX_PAGES) {
+    pagination = Array.from({ length: totalPages }, (_, index) => index + 1);
+  } else {
+    if (currentPage <= 2) {
+      pagination = [
+        1,
+        2,
+        '...',
+        totalPages - 1,
+        totalPages
+      ];
+    } else if (currentPage >= totalPages - 1) {
+      if(currentPage == totalPages - 1){
         pagination = [
           1,
           2,
           '...',
-          totalPages - 1,
-          totalPages
+          currentPage,
+          currentPage + 1,
         ];
-      } else if (currentPage >= totalPages - 1) {
-        if(currentPage == totalPages - 1){
-          pagination = [
-            1,
-            2,
-            '...',
-            currentPage,
-            currentPage + 1,
-          ];
-        }else{
-          pagination = [
-            1,
-            2,
-            '...',
-            currentPage - 1,
-            currentPage,
-          ];
-        }
-      } else {
+      }else{
         pagination = [
           1,
+          2,
           '...',
+          currentPage - 1,
           currentPage,
-          '...',
-          totalPages
         ];
       }
+    } else {
+      pagination = [
+        1,
+        '...',
+        currentPage,
+        '...',
+        totalPages
+      ];
     }
+  }
+
+  //Filter accordions
+
+  const toggleFilterCategory = () =>{
+    return setFilterCategory(!filterCategory);
+  }
+  const toggleFilterPrice = () =>{
+    return setFilterPrice(!filterPrice);
+  }
+
+  //useEffect
+
+  useEffect(()=>{ 
+    setDidMount(false)
+
+    const execute = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const title = urlParams.get("searchName");
+      await getAndSetProducts(title)
+      setSearchName(title)
+      setDidMount(true)
+    }
+    execute()
+        
+  }, [])
+
   return (
     <>
     {
@@ -140,22 +156,47 @@ const Search = () => {
         </div>
         <div className='app__Search_Grid'>
           <div className='app__Search_Grid_Esquerda'>
-              <p>Categorias</p>
+            <p>FILTROS</p>
             <div className='app__Search_filter_content'>
-              <ul>
-                {Object.keys(categories).map((category_name) => { 
-                  return ( 
-                    <li>
-                      <a className='app__pointer app__text_effect' key={category_name} onClick={() => sendToCategories(category_name) }> {category_name} ({categories[category_name]})</a>
-                    </li>
-                  );
-                })}
-              </ul>
+              <div className='app__Search_filter_unit'>
+                <div className='app__pointer app__Search_filter_content_title' onClick={toggleFilterCategory}>
+                  <p style={{margin: '0'}}>Categoria</p>
+                  <span>{filterCategory ? <FiChevronUp className='app__Search_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Search_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <ul className={filterCategory ? "hideFilter showFilter" : "hideFilter"}>
+                  {Object.keys(categories).map((category_name) => { 
+                    return ( 
+                      <li>
+                        <a className='app__pointer app__text_effect' key={category_name} onClick={() => sendToCategories(category_name) }> {category_name} ({categories[category_name]})</a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div> 
           </div> 
           <div className='app__Search_Grid_Direita'>
-            <div className=''>
-              <p>Filtros</p>
+           <div className='app__Search_mobile_filter_content'>
+              <button className='main__action_btn' onClick={() => setIsOpen(true)}>FILTROS</button>
+              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                <p>Filtros</p>
+                <div>
+                  <p>SubCategoria</p>
+                  <ul>
+                    {Object.keys(categories).map((category_name) => { 
+                      return ( 
+                        <li>
+                          <a className='app__pointer app__text_effect' key={category_name} onClick={() => sendToCategories(category_name) }> {category_name} ({categories[category_name]})</a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div>
+
+                </div>
+                <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()     }>Aplicar</button>
+              </Modal>
             </div>
             <div className='products'> 
               {currentItems.map((ad) => (

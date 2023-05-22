@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FiChevronRight, FiChevronLeft, FiChevronDown, FiChevronUp} from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft, FiChevronUp} from 'react-icons/fi';
 
 import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
@@ -190,38 +190,41 @@ const Category = () => {
           <div className='app__Category_Grid_Esquerda'>
             <p>FILTROS</p>
             <div className='app__Category_filter_content'>
-              <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterCategory}>
-                <p style={{margin: '0'}}>Categoria</p>
-                <span>{filterCategory ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+              <div className='app__Category_filter_unit'>
+                <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterCategory}>
+                  <p style={{margin: '0'}}>Categoria</p>
+                  <span>{filterCategory ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <ul className={filterCategory ? "hideFilter showFilter" : "hideFilter"}>
+                {Object.keys(subcategories).map((subcategory_name) => { 
+                    return ( 
+                      <li>
+                        <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
-              <ul className={filterCategory ? "hideFilter showFilter" : "hideFilter"}>
-               {Object.keys(subcategories).map((subcategory_name) => { 
-                  return ( 
-                    <li>
-                      <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
-                    </li>
-                  );
-                })}
-              </ul>
-              
-              <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterPrice}>
-                <p style={{margin: '0'}}>Preço</p>
-                <span>{filterPrice ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+              <div className='app__Category_filter_unit'>
+                <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterPrice}>
+                  <p style={{margin: '0'}}>Preço</p>
+                  <span>{filterPrice ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <ul className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
+                {Object.keys(subcategories).map((subcategory_name) => { 
+                    return ( 
+                      <li>
+                        <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
-              <ul className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
-               {Object.keys(subcategories).map((subcategory_name) => { 
-                  return ( 
-                    <li>
-                      <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
-                    </li>
-                  );
-                })}
-              </ul>
             </div> 
           </div> 
           <div className='app__Category_Grid_Direita'>
             <div className='app__Category_mobile_filter_content'>
-              <button className='main_action_btn' onClick={() => setIsOpen(true)}>Filtros</button>
+              <button className='main__action_btn' onClick={() => setIsOpen(true)}>FILTROS</button>
               <Modal open={isOpen} onClose={() => setIsOpen(false)}>
                 <p>Filtros</p>
                 <div>
