@@ -46,6 +46,14 @@ const getAllorSomeOrderedProducts = async function (req, res) {
                 statement += value; 
                 statement += `'` ;
             }
+            else if (key == "product_buyer_uid"){
+                const uid_encrypt = req.cookies.userSession;
+                value = jwt.decryptID(uid_encrypt);  
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+            }
             else if (key == "price"){
                 statement += key;
                 statement += `<='`;

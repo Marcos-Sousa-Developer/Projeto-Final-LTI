@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FiPlusCircle } from 'react-icons/fi';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
-import { NavbarSupplier, Footer, Modal, SubHeading } from '../../../components/index';
+import { NavbarSupplier, Footer, SubHeading } from '../../../components/index';
 import './SupplierOrdersHistory.css';
 
 const SupplierOrdersHistory = () => {
@@ -12,9 +11,9 @@ const SupplierOrdersHistory = () => {
     async function getSupplierOrder(){
       let supplierOrdersGet = await getAllFromDB("/orderedProducts", {product_owner_uid: true})
       if(typeof supplierOrdersGet != "string") {
-          //setSupplierOrder(prevState => [...supplierOrdersGet])
-          return supplierOrdersGet
+        return supplierOrdersGet
       }
+      return []
     }
 
     async function getAd(data){
