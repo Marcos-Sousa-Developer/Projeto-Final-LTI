@@ -125,11 +125,11 @@ const insertAd = async function (req, res) {
     const data = [req.query.title, req.query.description, req.query.email, 
                 req.query.mobile_number, req.query.extraCharacteristics, req.query.status,
                 req.query.price, req.query.production_date, req.query.supplier_id, req.query.product_id, 
-                req.query.created_at];
+                req.query.created_at, req.query.category_name, req.query.subcategory_name, req.query.subsubcategory_name];
 
     const statement = "INSERT INTO ads (title, description, email, mobile_number, " +
                     "extraCharacteristic, status, price, production_date, supplier_id, product_id, " +
-                    "created_at) VALUES ?";
+                    "created_at, category_name, subcategory_name, subsubcategory_name) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

@@ -23,8 +23,10 @@ const SupplierProdUnit = () => {
     const snackbarRef3 = useRef(null);
     const [productionUnits, setProductionUnits] = useState([]);
     const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', capacity: '' });
-    //const [editingIndex, setEditingIndex] = useState(null);
     const [watchProductsIndex, setWatchProductsIndex] = useState([false, '']);
+    const [productsProductionUnits, setProductsProductionUnits] = useState({});
+    const [adsProductionUnits, setAdsProductionUnits] = useState({});
+    const [searchProd, setSearchProd] = useState([]);
     const [didMount, setDidMount] = useState(false)
 
     async function getProductionUnit(){
@@ -32,6 +34,13 @@ const SupplierProdUnit = () => {
         if(typeof prodsUnitGet != "string") {
             setProductionUnits(prevState => [...prodsUnitGet])
         }
+    }
+
+    async function getProduct(productionUnit_id, index){
+        setSearchProd((prevArray) => [...prevArray, index]);
+        setWatchProductsIndex([!watchProductsIndex[0], index])
+        let productsProductionUnit = await getAllFromDB("/productProductionUnits", {productionUnit_id: productionUnit_id });
+        setProductsProductionUnits((prevDict) => ({ ...prevDict, [index]: productsProductionUnit }))
     }
 
     function handleNewProductionUnitChange(event) {
@@ -52,7 +61,6 @@ const SupplierProdUnit = () => {
         location: updatedProductionUnits[index].location,
         capacity: updatedProductionUnits[index].capacity
     })
-
     }
 
     const submitInsert = async () => {
@@ -276,10 +284,17 @@ const SupplierProdUnit = () => {
                                             </Modal>
                                         </div>
                                     </td>
-                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={() => setWatchProductsIndex([true, index])} >Ver produtos</button></td>
-                                    {watchProductsIndex[0] === true && watchProductsIndex[1] === index  ? (
-                                        <p>{index}</p>
-                                    ) : null}
+                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={async () => getProduct(productionUnit.id, index)} >Ver produtos</button></td>
+
+                                    {(searchProd.includes(index) && productsProductionUnits[index] != undefined && watchProductsIndex[0] && watchProductsIndex[1] == index) && (
+                                        <div>
+                                            {productsProductionUnits[index].map((product) => (
+                                                <><p>{product.title}</p>
+                                                <p>{product.price}</p>
+                                                <p>{product.quantity}</p></>
+                                            ))}
+                                        </div>
+                                        )}                                
                                 </tr>
                             ))}
                             </tbody>

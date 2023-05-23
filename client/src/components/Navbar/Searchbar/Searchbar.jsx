@@ -83,7 +83,7 @@ const Searchbar = () => {
             }
         }
         
-        if(window.location.pathname === "/anunciar"){
+        if(window.location.pathname === "/supplier/anunciar"){
             document.getElementsByName('searchText')[0].placeholder='new text for email';
             //verificar o EAN
             let validEAN = await verifyEAN(searchTextClear);
@@ -101,7 +101,7 @@ const Searchbar = () => {
                 if(product.length == 1){
                   const data = {EAN: product[0].EAN};
                   const queryString = new URLSearchParams(data).toString();
-                  window.location.href = `/anuncio?${queryString}`;
+                  window.location.href = `/supplier/anuncio?${queryString}`;
                 } else {
                   alert(product)
                 }

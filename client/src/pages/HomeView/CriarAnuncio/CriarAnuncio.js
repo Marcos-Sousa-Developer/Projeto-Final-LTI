@@ -15,7 +15,7 @@ import "./styles/CriarAnuncio.css";
 import "../../../components/InputField/InputField.css";
 
 function CriarAnuncio() {
-    const [idUser, setIDUser] = useState(null) //Ir buscar às cookies o ID do user       
+    const [idUser, setIDUser] = useState(1001) //Ir buscar às cookies o ID do user       
     const [productionUnits, setProductionUnit] = useState([]);
 
     const [formData, setFormData] = useState({
@@ -53,7 +53,7 @@ function CriarAnuncio() {
       }); 
       const newProdUnit = {};
       newProdUnitKeys.forEach((key) => {
-        newProdUnit[key] = [0, false]; 
+        newProdUnit[key] = '';
       });
       setFormData({ ...formData, prodUnit: newProdUnit })
     }
@@ -244,11 +244,7 @@ function CriarAnuncio() {
       //Não é null
       //Não pode existir na bd ainda
       //Tem 8 ou 13 algarismos e são todos numéricos
-
-      if(EAN == "" || EAN == null) {
-        // O EAN não pode ser nulo
-        return "Deve de inserir um EAN válido";
-      }
+      console.log(EAN)
 
       let product = await getFromDB("/products/" + EAN);
       
@@ -276,6 +272,7 @@ function CriarAnuncio() {
       } else {
         return "OK";
       }
+      
     }
 
     async function verifyFeatures(features){
@@ -308,12 +305,18 @@ function CriarAnuncio() {
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
 
       if(prodUnits != undefined){
+        let i = 0;
         for (let prodUnit in prodUnits) {
-          if(prodUnits[prodUnit][1] == true){
-            if(prodUnits[prodUnit][0] <= 0){
+          if(prodUnits[prodUnit] != ''){
+            if(prodUnits[prodUnit] <= 0){
               return "Deve de inserir uma quantidade válida"
             }
+          } else {
+            i++;
           }
+        }
+        if(i == Object.keys(prodUnits).length){
+          return "Deve de inserir o produto em pelo menos uma unidade de produção"
         }
       }
       return "OK"
@@ -331,7 +334,10 @@ function CriarAnuncio() {
 
 
     const submit = async () => {
-
+        let validEAN = "OK";
+        if(formData.EAN != "" && formData.EAN != null) {
+          validEAN = await verifyEAN(formData.EAN);
+        }
         let validTitle = await verifyTitle(formData.titulo);
         let validPrice = await verifyPrice(formData.preco);
         let validDescription = await verifyDescription(formData.descricao);
@@ -345,17 +351,12 @@ function CriarAnuncio() {
           validSubFeature = await verifySubFeatures(formData.sub_features[0]);
         }
         let validProdUnit = await verifyProdUnits(formData.prodUnit);
-        
-        let validEAN = null;
-        if(formData.search){
-          validEAN = await verifyEAN(formData.EAN);
-        }
 
         let product;
         let ad;
 
         let text = "Não foi possível criar o produto\n";
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && validProdUnit =="OK" && (validEAN == "OK" || validEAN == null)){
+        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && validProdUnit =="OK" && validEAN == "OK"){
 
             let featuresDBproduct = {}; 
             let featuresDBad = {};
@@ -396,7 +397,6 @@ function CriarAnuncio() {
                 //CRIA O PRODUTO
                 product = await postToDB("/products",{
                   EAN: formData.EAN,
-                  production_date: formData.data_producao,
                   id_subsubcategory: idSubSubCategory,
                   status: 0,
                   characteristics: JSON.stringify(featuresDBproduct),
@@ -404,7 +404,6 @@ function CriarAnuncio() {
 
                 //ir buscar o id do produto de cima
                 let idProduct = product.insertId
-
                 //CRIA O ANUNCIO
                 ad = await postToDB("/ads",{ 
                   title: formData.titulo,
@@ -413,9 +412,14 @@ function CriarAnuncio() {
                   mobile_number: formData.telemovel,
                   extraCharacteristics: JSON.stringify(featuresDBad),
                   status: "ativo",
+                  production_date: formData.data_producao,
                   price: formData.preco,
                   supplier_id: idSupplier,
                   product_id: idProduct,
+                  created_at: new Date().toISOString().split('T')[0],
+                  category_name: formData.categoria,
+                  subcategory_name: formData.subcategoria,
+                  subsubcategory_name: formData.subsubcategoria,
                 })
               }else{
                 product = EANexist[0]
@@ -430,7 +434,6 @@ function CriarAnuncio() {
                 if(update == true){
                   product = await putToDB("/products/" + product.id,{
                     EAN: formData.EAN,
-                    production_date: formData.data_producao,
                     id_subsubcategory: idSubSubCategory,
                     status: 0,
                     characteristics: JSON.stringify(featuresDBproduct),
@@ -444,15 +447,19 @@ function CriarAnuncio() {
                   mobile_number: formData.telemovel,
                   extraCharacteristics: JSON.stringify(featuresDBad),
                   status: "ativo",
+                  production_date: formData.data_producao,
                   price: formData.preco,
                   supplier_id: idSupplier,
                   product_id: product.id,
+                  created_at: new Date().toISOString().split('T')[0],
+                  category_name: formData.categoria,
+                  subcategory_name: formData.subcategoria,
+                  subsubcategory_name: formData.subsubcategoria,
                 })
               } 
             } else {
               //Quando não existe EAN
               product = await postToDB("/products",{
-                production_date: formData.data_producao,
                 id_subsubcategory: idSubSubCategory,
                 status: 0,
                 characteristics: JSON.stringify(featuresDBproduct),
@@ -472,9 +479,14 @@ function CriarAnuncio() {
                 mobile_number: formData.telemovel,
                 extraCharacteristics: JSON.stringify(featuresDBad),
                 status: "ativo",
+                production_date: formData.data_producao,
                 price: formData.preco,
                 supplier_id: idSupplier,
                 product_id: idProduct,
+                created_at: new Date().toISOString().split('T')[0],
+                category_name: formData.categoria,
+                subcategory_name: formData.subcategoria,
+                subsubcategory_name: formData.subsubcategoria,
               })
             }
           
@@ -482,12 +494,14 @@ function CriarAnuncio() {
 
             let i = 0;
             Object.entries(formData.prodUnit).forEach(async ([key, value]) => {
-              if(value[1] == true){
+              if(value > 0){
                 let productProductionUnit = await postToDB("/productProductionUnits",{ 
-                  quantity: value[1],
+                  quantity: value,
                   fee: 0,
                   productionUnit_id: productionUnits[i].id,
                   ad_id: idAd,
+                  title: formData.titulo,
+                  price: formData.preco,
                 })
               }
               i++;
@@ -499,7 +513,10 @@ function CriarAnuncio() {
             //SE NÃO, DÁ UM ALERT
 
             text = "Anuncio concluído"
-        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || validProdUnit != "OK" || (validEAN != "OK" && validEAN != null)){
+        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || validProdUnit != "OK" || validEAN != "OK"){
+            if(validEAN != "OK"){
+              text += validEAN + "\n"
+            }  
             if(validTitle != "OK" ){
               text += validTitle + "\n"
             }
@@ -529,9 +546,6 @@ function CriarAnuncio() {
             }
             if(validProdUnit != "OK"){
               text += validProdUnit + "\n"
-            }
-            if(validEAN != "OK" && validEAN != null){
-              text += validEAN + "\n"
             }
         }
         alert(text)
@@ -918,13 +932,7 @@ function CriarAnuncio() {
                       {productionUnits.map((productionUnit) => { 
                         return ( 
                           <tr>
-                          {/*<td>
-                              <label class="app__anuncio_prodUnit_checkbox">
-                                <input type="checkbox" onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [formData.prodUnit[productionUnit.name][0], e.target.checked] }})}}></input>
-                                <span class="prodUnit_checkmark"></span>
-                              </label>
-                        </td>*/}
-                          <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: [e.target.value, formData.prodUnit[productionUnit.name][1]] }})}}></input></div></td>
+                          <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: e.target.value }})}}></input></div></td>
                           <td>{productionUnit.name}</td>
                           <td>{productionUnit.location}</td>
                         </tr>

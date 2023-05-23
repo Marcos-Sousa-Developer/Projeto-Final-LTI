@@ -7,7 +7,7 @@ const statement = "CREATE TABLE ads ( " +
                   "email varchar(255) NOT NULL, " +
                   "mobile_number varchar(255) NOT NULL, " +
                   "extraCharacteristic varchar(1000) NOT NULL, " +
-                  "status boolean NOT NULL, " +
+                  "status varchar(255) NOT NULL, " +
                   "price float NOT NULL, " +
                   "production_date DATE NOT NULL, " +
                   "supplier_id int, " +
