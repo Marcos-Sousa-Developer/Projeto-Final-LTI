@@ -8,32 +8,27 @@ import getAllFromDB from '../../../hooks/getAllFromDB';
 
 const MarketPlace = () => {
     const [suppliers, setSuppliers] = useState([])
-    const [suppliersName, setSuppliersName] = useState([])
-    const [productPrice, setSuppliersPrice] = useState([])
+    const [ads, setAds] = useState([])
 
-    async function getSuppliers(suppliersIds){
+    async function getAds(productId){
 
-        let suppliersNameTemp = []
-        let productPriceTemp = []
-
-        for (let i = 0; i < suppliersIds.length; i++) {
-            let ad = await getAllFromDB("/ads/" + suppliersIds[i]);
-            productPriceTemp.push(ad[0].price)
-            let supplierId = ad[0].supplier_id
-            let supplier = await getAllFromDB("/suppliers/" + supplierId);
-            suppliersNameTemp.push(supplier[0].name)
-          }
-        setSuppliersName(suppliersNameTemp)
-        setSuppliersPrice(productPriceTemp)
+        let ads = await getAllFromDB("/ads", {product_id: productId})
+        setAds(ads)
+        let suppliers = [];
+        await Promise.all(ads.map(async (ad) => {
+            let supplier = await getAllFromDB("/suppliers", { id: ad.supplier_id });
+            suppliers.push(supplier[0]);
+        }));
+        setSuppliers(suppliers)
     }
 
     useEffect(()=>{ 
         const urlParams = new URLSearchParams(window.location.search);
-        const suppliersSearch = urlParams.get("products");
-        let suppliers = suppliersSearch.split(",").map(Number);
-        setSuppliers(suppliers)
-        getSuppliers(suppliers)
+        const id_product = urlParams.get("id");
+        getAds(id_product)
     }, [])
+
+
 
     //Nome de cada supplier (mesmo que tenha o mesmo produto duas vezes)
     //Preço de cada produto
@@ -50,6 +45,14 @@ const MarketPlace = () => {
                     Info do produto (imagem, nome)
                 </div>
                 <div>
+                    {ads.map((key) => {
+                        return<p key={key}>{key.title} {key.price}</p>;
+                    })}
+
+                    {suppliers.map((element, index) => (
+                        <p key={element + index}>{element.name}</p>
+                    ))}
+                    
                     Um map aqui que cria um elemento dentro de uma lista para cada fornecedor com info do mesmo.
                 </div>
             </div>

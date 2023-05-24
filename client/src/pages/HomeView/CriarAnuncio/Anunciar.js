@@ -15,7 +15,7 @@ const Anunciar = () => {
             <div className='app__anunciar_content'>
                 <div className='app__anunciar_content_search'>
                     <p>Pesquise um produto existente no nosso catálogo pelo EAN</p>
-                    <Searchbar placeholder="Teste"></Searchbar>
+                    <Searchbar></Searchbar>
                 </div>
                 <div style={{textAlign:'center'}} className='app__anunciar_content_novo_anuncio'>
                     <p>...ou crie um novo anúncio</p>

@@ -6,6 +6,8 @@ const statement = "CREATE TABLE productProductionUnits ( " +
                   "fee float NOT NULL, " +
                   "productionUnit_id int NOT NULL, " + 
                   "ad_id int NOT NULL, " + 
+                  "title varchar(255) NOT NULL, " +                 
+                  "price float NOT NULL, " +
                   "PRIMARY KEY (id))";
 
 pool.query(statement, function(error, result) {

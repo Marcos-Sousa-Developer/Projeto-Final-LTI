@@ -28,6 +28,8 @@ const ProductPage = () => {
   const [cookies, setCookie] = useCookies(['cart']);
   const [path, setPath] = useState(null)
   const [suppliers, setSuppliers] = useState([]) //id dos anuncios com o product_id igual ao id do produto
+  const [supplierProd, setSupplierProd] = useState(null) 
+  const [idProduct, setIdProduct] = useState(null) 
   const [adData, setAdData] = useState({
     dataComplete: {},
     title: "",
@@ -48,7 +50,7 @@ const ProductPage = () => {
   async function getAndSetProduct(idAd){
 
     let ad = await getAllFromDB("/ads", {id: idAd})
-    let product = await getAllFromDB("/products/" + ad[0].product_id)
+    setIdProduct(ad[0].product_id)
     setPath("Home - " + ad[0].category_name + " - " + ad[0].subcategory_name + " - " + ad[0].subsubcategory_name)
     let car = []
     try {
@@ -67,8 +69,7 @@ const ProductPage = () => {
         product5,
       ],
       description: ad[0].description,
-
-      caracteristics: car,
+      caracteristics: JSON.parse(ad[0].extraCharacteristic),
       price: ad[0].price,
     });
     let ads = await getAllFromDB("/ads", {product_id: ad[0].product_id})
@@ -77,6 +78,9 @@ const ProductPage = () => {
       idsAds.push(ad.id)
     })
     setSuppliers(idsAds)
+
+    let supplier = await getAllFromDB("/suppliers", {id: ad[0].supplier_id})
+    setSupplierProd(supplier[0])
   }
   
   const addToCart = () => {
@@ -134,10 +138,9 @@ const ProductPage = () => {
                   <p className='app__product_page_content_title'>{adData.title}</p>
                   <PriceDisplay className='product_price' price={adData.price} />
                   <div className='app__product_page_content_supplier'>
-                    <p>Vendido por: X</p>
-                    <p>Meter alguma info sobre o fornecedor: distância, por exemplo</p>
-                    <p>Fornecedores</p> {/* REVER QUANDO NÃO HA MAIS NENHUM FORNECEDOR, ESTÁ A APARECER -1*/}
-                    <Link to={`/market-place?${new URLSearchParams({products: suppliers}).toString()}`}>+ {suppliers.length -1 } fornecedores </Link>
+                    <p>Vendido por: {supplierProd.name}</p>
+                    <p>Morada: {supplierProd.address}, {supplierProd.city}</p>
+                    <Link to={`/market-place?${new URLSearchParams({id: idProduct}).toString()}`}>+ {suppliers.length -1 } anúncios deste produto </Link>
                   </div>
                   <div className='app__product_page_content_description'>
                     {adData.description}
@@ -169,20 +172,15 @@ const ProductPage = () => {
                   <thead>
                     <tr>
                     {Object.keys(adData.caracteristics).map((key) => {
-                      return (
-                        <th>{key}</th>
-                      );
-                      })}
+                      return key !== "0" && <th key={key}>{key}</th>;
+                    })}
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                     {Object.keys(adData.caracteristics).map((key) => {
                       const value = adData.caracteristics[key];
-                      {console.log(value)}
-                      return (
-                        <td data-label={key}>{value}</td>
-                      );
+                        return key !== "0" && <td data-label={key}>{value}</td>;
                       })}
                     </tr>
                   </tbody>
