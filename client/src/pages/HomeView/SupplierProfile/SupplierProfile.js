@@ -10,6 +10,7 @@ import './SupplierProfile.css';
 import LoadingPage from '../../LoadingPage';
 import logOut from '../../../hooks/logOut';
 import SupplierBar from '../SupplierBar/SupplierBar';
+import axios from 'axios';
 
 const SnackbarType = {
   success: "success",
@@ -18,7 +19,10 @@ const SnackbarType = {
 
 function SupplierProfile() {
   //---------------------Modal---------------
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); 
+
+  const [error, setError] = useState(false); 
+
 
   //-------------------SnackBar--------------
   const snackbarRef = useRef(null);
@@ -72,16 +76,38 @@ function SupplierProfile() {
       setMobileNumber(event.target.value)
   }
 
-  const handleSetCity = (event) => {
-    setCity(event.target.value)
+  const handleSetCity = (value) => {
+    setCity(value)
   }
 
-  const handleSetAddress = (event) => {
-      setAddress(event.target.value)
+  const handleSetAddress = (value) => {
+      setAddress(value)
   }
 
-  const handleSetPostalCode = (event) => {
+  const [sent, setSent] = useState(false)
+
+  const handleSetPostalCode = async (event) => { 
     setPostalCode(event.target.value)
+    console.log(event.target.value)
+    await axios.get('https://json.geoapi.pt/cp/'+event.target.value) 
+    .then((response) => { 
+      console.log(response)
+      setError(false)
+      let distrito = response.data.Distrito
+      let concelho = response.data.Concelho
+      let localidade = response.data.Localidade
+      let morada = response.data.partes[0]["Artéria"]
+      console.log(morada)
+      handleSetCity(concelho)
+      handleSetAddress(morada)
+      setPostalCode(event.target.value)
+    })
+    .catch((error) => {
+      console.log(error)
+      console.log("ok")
+      setError(true)
+    })
+    
   }
 
   function verifyName(name){
@@ -158,6 +184,8 @@ function SupplierProfile() {
   }
 
   const submit = async () => {
+
+    setSent(true)
 
     let validName = verifyName(name);
     let validEmail = verifyEmail(email);
@@ -295,24 +323,29 @@ function SupplierProfile() {
                 </div>
                 <div className='app__SupplierProfile_box_div_row'>
                   Morada
-                  <div className='app__SupplierProfile_box_div_row_input'>
+                  <div className='app__SupplierProfile_box_div_row_input' style={{opacity: "0.4"}}>
                     <FiMapPin></FiMapPin>
-                    <input type="text" placeholder="Morada" value = {address ?? ""} name="address" onChange={handleSetAddress}></input>
+                    <input type="text" placeholder="Morada" value = {address ?? ""} name="address" disabled={sent}></input>
                   </div>
                 </div>
                 <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}} className='app__SupplierProfile_box_div_row'>
                   <div>
                     Cidade
-                    <div className='app__SupplierProfile_box_div_row_input'>
+                    <div className='app__SupplierProfile_box_div_row_input' style={{opacity: "0.4"}}>
                       <FiMapPin></FiMapPin>
-                      <input type="text" placeholder="Cidade" value = {city ?? ""} name="city" onChange={handleSetCity}></input>
+                      <input type="text" placeholder="Cidade" value = {city ?? ""} name="city" disabled={sent}></input>
                     </div>
                   </div>
                   <div>
                     Cód. Postal
                     <div className='app__SupplierProfile_box_div_row_input'>
+                    
                       <FiMapPin></FiMapPin>
                       <input type="text" placeholder="Cód. Postal" value = {postalCode ?? ""} name="postalCode" onChange={handleSetPostalCode}></input>
+                      {
+                        error && (<small style={{color:"red"}}>error</small>)
+                      }
+                      
                     </div>
                   </div>
                 </div>
@@ -397,7 +430,15 @@ function SupplierProfile() {
             </div>
           </div>
           <div className="app__SupplierProfile_button">
-            <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
+          {
+            !error ? <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button> 
+            : 
+            <>
+            <small style={{color:"red"}}>Corrija os erros</small>
+            <button type="submit" className='main__action_btn' disabled>Guardar</button> 
+            </>
+          }
+            
             <Modal open={isOpen} onClose={() => setIsOpen(false)}>
               <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os seus dados?</p>
               <div className='inputField' style={{marginTop:'2rem', textAlign:'center'}}>

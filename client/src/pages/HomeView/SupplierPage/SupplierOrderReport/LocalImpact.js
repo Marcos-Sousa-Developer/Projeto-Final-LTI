@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import {Chart as ChartJS, CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend,} from 'chart.js';
+import {Chart as ChartJS,CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend,} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
   
   ChartJS.register(CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend);
 
-  const labels = ['jan.','fev.', 'mar.', 'abr.', 'maio.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'];
+  const labels = ['freguesia', 'município', 'distrito', 'país', 'continente', 'mundo'];
 
   const options = {
     responsive: true,
@@ -14,7 +14,7 @@ import { Bar } from 'react-chartjs-2';
       },
       title: {
         display: true,
-        text: 'Minhas vendas mensais',
+        text: 'Distribuição dos produtos encomendados pela proximidade (localização) entre consumidores e fornecedores',
       },
     },
   };
@@ -23,13 +23,13 @@ import { Bar } from 'react-chartjs-2';
     labels,
     datasets: [
       {
-        label: 'Distribuição mensal dos produto vendidos',
-        data: labels.map((label) =>  0),
+        label: 'Distribuição dos produtos encomendados',
+        data: labels.map((label) => 0),
       }
     ],
   };
 
-function OrderStats({datas}) { 
+function LocalImpact({datas}) { 
 
   const [show, setShow] = useState(false)
 
@@ -41,7 +41,7 @@ function OrderStats({datas}) {
       labels,
       datasets: [
         {
-          label: 'Distribuição mensal dos produto vendidos',
+          label: 'Distribuição dos produtos encomendados por localização',
           data: labels.map((label) => datas[label] ?? 0),
           backgroundColor: 'coral',
         }
@@ -51,6 +51,7 @@ function OrderStats({datas}) {
   }
 
   useEffect(() => {
+
     if(datas !== {}) {
       setData()
     }
@@ -61,11 +62,10 @@ function OrderStats({datas}) {
         {
           show &&  <Bar options={options} data={data} />
         }
-        
         <br></br>
         <hr></hr>
     </div>
   )
 }
 
-export default  OrderStats
+export default  LocalImpact
