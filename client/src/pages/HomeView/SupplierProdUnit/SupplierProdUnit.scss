@@ -35,8 +35,13 @@
         }
 
         &_content{
+            border: $border;
+            th{
+                background-color: $light_gray;
+            }
+
             td, th{
-                padding: .5rem 3rem .5rem 0;
+                padding: .5rem 3rem .5rem .25rem;
             }
     
             thead th{
@@ -54,6 +59,12 @@
             .products_format{
                 font-weight: 500;
                 font-size: $smaller_font;
+            }
+
+            .inner-table{
+                th, td{
+                    padding: .25rem 1.5rem .25rem .25rem;
+                }
             }
         }
     }

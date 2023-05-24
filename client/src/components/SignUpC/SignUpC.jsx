@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { FiMail, FiLock, FiArrowLeft, FiUser, FiHome } from 'react-icons/fi';
+import { FiMail, FiLock, FiArrowLeft, FiUser, FiHome, FiX } from 'react-icons/fi';
 import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import getClientType from '../../hooks/getClientType';
@@ -44,6 +44,30 @@ const SignUpC = () => {
             navigate('/');
         }
     }
+
+    //Password Checker
+
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    const [isEightCharLong, setIsEightCharLong] = useState(false);
+    const [hasNumber, setHasNumber] = useState(false);
+    const [hasLowerCase, setHasLowerCase] = useState(false);
+    const [hasUpperCase, setHasUpperCase] = useState(false);
+    const [hasSpecialChar, setHasSpecialChar] = useState(false);
+
+    const handlePasswordChange = (event) => {
+        const inputPassword = event.target.value;
+        setPassword(inputPassword);
+        setIsEightCharLong(inputPassword.length >= 8);
+        setHasNumber(/\d/.test(inputPassword));
+        setHasLowerCase(/[a-z]/.test(inputPassword));
+        setHasUpperCase(/[A-Z]/.test(inputPassword));
+        setHasSpecialChar(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/.test(inputPassword));
+    };
+
+    const handleConfirmPasswordChange = (event) => {
+        setConfirmPassword(event.target.value);
+    };
 
     useEffect(() => {
         getUserType()
@@ -115,10 +139,59 @@ const SignUpC = () => {
                                             <input
                                                 type="password"
                                                 required
-                                                onChange={(e) => setPassword(e.target.value)}
+                                                onChange={handlePasswordChange}
                                             />
                                         </div>
                                     </div>
+                                    { password && (
+                                        <ul className='app__ConsumerProfile_password-checks'>
+                                            <li>
+                                            {isEightCharLong ? 
+                                                ''
+                                                : 
+                                                <>
+                                                    <div>Mínimo de 8 caracteres de comprimento: <span><FiX fontSize={20}></FiX></span></div>
+                                                </>
+                                            }
+                                            </li>
+                                            <li>
+                                            {hasNumber ? 
+                                                ''
+                                                : 
+                                                <>
+                                                    <div>Contém pelo menos 1 número: <span><FiX fontSize={20}></FiX></span></div>
+                                                </>
+                                            }
+                                            </li>
+                                            <li>
+                                            {hasLowerCase ? 
+                                                ''
+                                                : 
+                                                <>
+                                                    <div>Contém pelo menos 1 letra minúscula: <span><FiX fontSize={20}></FiX></span></div>
+                                                </>
+                                            }
+                                            </li>
+                                            <li>
+                                            {hasUpperCase ? 
+                                                ''
+                                            : 
+                                                <>
+                                                    <div>Contém pelo menos 1 letra maiúscula: <span><FiX fontSize={20}></FiX></span></div>
+                                                </>
+                                            }
+                                            </li>
+                                            <li>
+                                            {hasSpecialChar ? 
+                                                ''
+                                            : 
+                                                <>
+                                                    <div>Contém pelo menos 1 caractere especial: <span><FiX fontSize={20}></FiX></span></div>
+                                                </>
+                                            }
+                                            </li>
+                                        </ul>
+                                    )}
                                     {
                                         error && ( <small style={{color:"red"}}>Falha ao registar, tente novo</small>)
                                     }

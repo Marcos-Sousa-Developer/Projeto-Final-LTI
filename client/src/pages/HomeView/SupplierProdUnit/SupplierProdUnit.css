@@ -191,8 +191,14 @@ img, picture {
   font-size: 18px;
   font-weight: 500;
 }
+.app__prod-unit_existing-units_content {
+  border: 3px solid #EEEEEE;
+}
+.app__prod-unit_existing-units_content th {
+  background-color: #EEEEEE;
+}
 .app__prod-unit_existing-units_content td, .app__prod-unit_existing-units_content th {
-  padding: 0.5rem 3rem 0.5rem 0;
+  padding: 0.5rem 3rem 0.5rem 0.25rem;
 }
 .app__prod-unit_existing-units_content thead th {
   font-size: 16px;
@@ -204,6 +210,9 @@ img, picture {
 .app__prod-unit_existing-units_content .products_format {
   font-weight: 500;
   font-size: 14px;
+}
+.app__prod-unit_existing-units_content .inner-table th, .app__prod-unit_existing-units_content .inner-table td {
+  padding: 0.25rem 1.5rem 0.25rem 0.25rem;
 }
 .app__prod-unit .editing_prod-unit_content .inputField {
   margin-right: 1rem;
