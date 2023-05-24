@@ -201,6 +201,10 @@ img, picture {
 .app__prod-unit_existing-units_content tbody td button {
   margin: 0 0.5rem;
 }
+.app__prod-unit_existing-units_content .products_format {
+  font-weight: 500;
+  font-size: 14px;
+}
 .app__prod-unit .editing_prod-unit_content .inputField {
   margin-right: 1rem;
 }
@@ -259,5 +263,11 @@ img, picture {
     position: absolute;
     right: 0;
     top: 0;
+  }
+  .app__prod-unit_existing-units_content .products_format_mobile {
+    padding: 0.5rem 3rem 0.5rem 1rem;
+  }
+  .app__prod-unit_existing-units_content .products_format_mobile_head {
+    display: none;
   }
 }/*# sourceMappingURL=SupplierProdUnit.css.map */

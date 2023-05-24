@@ -51,6 +51,10 @@
                 }
             }
 
+            .products_format{
+                font-weight: 500;
+                font-size: $smaller_font;
+            }
         }
     }
 
@@ -137,6 +141,14 @@
             position: absolute;
             right: 0;
             top: 0;
+        }
+
+        .products_format_mobile{
+            padding: 0.5rem 3rem 0.5rem 1rem;
+        }
+
+        .products_format_mobile_head{
+            display: none;
         }
     }
 }
