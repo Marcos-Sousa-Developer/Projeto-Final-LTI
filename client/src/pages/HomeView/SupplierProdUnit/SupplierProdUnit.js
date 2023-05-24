@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FiEdit3, FiTrash2, FiX, FiCheck } from 'react-icons/fi';
+import { FiEdit3, FiTrash2, FiX, FiCheck, FiChevronDown } from 'react-icons/fi';
 
 import putToDB from '../../../hooks/putToDB';
 import postToDB from '../../../hooks/postToDB';
@@ -7,6 +7,7 @@ import deleteToDB from '../../../hooks/deleteToDB';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import { NavbarSupplier, Footer, Modal, SubHeading, SnackBar } from '../../../components/index';
+import { PriceDisplay } from '../../../utilities/formatCurrency';
 import LoadingPage from '../../LoadingPage';
 import './SupplierProdUnit.css';
 
@@ -18,9 +19,11 @@ const SnackbarType = {
 const SupplierProdUnit = () => {
     const [modalOpen, setModalOpen] = useState([]); //modal1
     const [modalOpen2, setModalOpen2] = useState([]); //modal2
+    const [modalOpen3, setModalOpen3] = useState([]); //modal3
     const snackbarRef = useRef(null);
     const snackbarRef2 = useRef(null);
     const snackbarRef3 = useRef(null);
+    const snackbarRef4 = useRef(null);
     const [productionUnits, setProductionUnits] = useState([]);
     const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', capacity: '' });
     const [watchProductsIndex, setWatchProductsIndex] = useState([false, '']);
@@ -138,6 +141,22 @@ const SupplierProdUnit = () => {
                                 onChange={handleNewProductionUnitChange}
                             />
                         </div> 
+                        <div style={{display:'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
+                            <div className='inputField'>
+                                <p>Cidade:</p>
+                                <input                         
+                                    type="text"
+                                    placeholder="Cidade"
+                                />
+                            </div> 
+                            <div className='inputField'>
+                                <p>Cód. Postal:</p>
+                                <input                         
+                                    type="text"
+                                    placeholder="Cód. Postal"
+                                />
+                            </div> 
+                        </div>
                         <div className='inputField'>
                             <p>Capacidade:</p>
                             <input                         
@@ -172,6 +191,7 @@ const SupplierProdUnit = () => {
                             </thead>
                             <tbody>
                             {productionUnits.map((productionUnit, index) => (
+                                <>
                                 <tr key={index}>
                                     <td data-cell='Nome: '>{productionUnit.name}</td>
                                     <td data-cell='Localização: '>{productionUnit.location}</td>
@@ -228,6 +248,22 @@ const SupplierProdUnit = () => {
                                                             defaultValue={productionUnits[index].location}
                                                         />
                                                     </div> 
+                                                    <div style={{display:'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
+                                                        <div className='inputField'>
+                                                            <p>Cidade:</p>
+                                                            <input                         
+                                                                type="text"
+                                                                placeholder="Cidade"
+                                                            />
+                                                        </div> 
+                                                        <div className='inputField'>
+                                                            <p>Cód. Postal:</p>
+                                                            <input                         
+                                                                type="text"
+                                                                placeholder="Cód. Postal"
+                                                            />
+                                                        </div> 
+                                                    </div>
                                                     <div className='inputField'>
                                                         <p>Capacidade:</p>
                                                         <input                         
@@ -284,18 +320,69 @@ const SupplierProdUnit = () => {
                                             </Modal>
                                         </div>
                                     </td>
-                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={async () => getProduct(productionUnit.id, index)} >Ver produtos</button></td>
-
-                                    {(searchProd.includes(index) && productsProductionUnits[index] != undefined && watchProductsIndex[0] && watchProductsIndex[1] == index) && (
-                                        <div>
-                                            {productsProductionUnits[index].map((product) => (
-                                                <><p>{product.title}</p>
-                                                <p>{product.price}</p>
-                                                <p>{product.quantity}</p></>
-                                            ))}
-                                        </div>
-                                        )}                                
+                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={async () => getProduct(productionUnit.id, index)} ><FiChevronDown></FiChevronDown></button></td>                            
                                 </tr>
+                                {(searchProd.includes(index) && productsProductionUnits[index] != undefined && watchProductsIndex[0] && watchProductsIndex[1] == index) && (
+                                    <>
+                                        <tr>
+                                            <td className='products_format products_format_mobile_head' style={{padding: '0.5rem 3rem 0.5rem 1rem'}}>Titulo</td>
+                                            <td className='products_format products_format_mobile_head'>Preço</td>
+                                            <td className='products_format products_format_mobile_head'>Quant.</td>
+                                            <td className='products_format products_format_mobile_head' style={{paddingRight: '0'}}></td>
+                                        </tr>
+                                        {productsProductionUnits[index].map((product, idx) => (
+                                            <tr>
+                                                <td data-cell='Título: ' className='products_format_mobile' style={{ fontSize: '14px', padding: '0.5rem 3rem 0.5rem 1rem'}}>{product.title}</td>
+                                                <td data-cell='Preço: ' className='products_format_mobile' style={{ fontSize: '14px'}}>{product.price} €</td>
+                                                <td data-cell='Quant.: ' className='products_format_mobile' style={{ fontSize: '14px'}}>{product.quantity}</td>
+                                                <td className='products_format_mobile' style={{paddingRight: '0'}}>
+                                                    <div>
+                                                        <button onClick={() => setModalOpen3(prevState => {
+                                                            const newState = [...prevState];
+                                                            newState[idx] = true;
+                                                            return newState;
+                                                        })}><FiEdit3></FiEdit3></button>
+                                                        <Modal open={modalOpen3[idx]} onClose={() => setModalOpen3(prevState => {
+                                                            const newState = [...prevState];
+                                                            newState[idx] = false;
+                                                            return newState;
+                                                        })}>
+                                                           <p style={{fontSize:'18px'}}>Editar produto</p>
+                                                           <div className='inputField'>
+                                                                <p>Capacidade:</p>
+                                                                <input                         
+                                                                    type="text"
+                                                                    placeholder="Quantidade"
+                                                                    name="quantity"
+                                                                />
+                                                            </div> 
+                                                           <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                                                                <button 
+                                                                    className='main__action_btn' 
+                                                                    onClick={() => 
+                                                                        setModalOpen3(prevState => {
+                                                                            const newState = [...prevState];
+                                                                            newState[idx] = false;
+                                                                            return newState;
+                                                                        })}>Cancelar</button>
+                                                                <button 
+                                                                    className='main__negative_action_btn' 
+                                                                    >Guardar</button>
+                                                                <SnackBar
+                                                                    ref={snackbarRef3}
+                                                                    message="Unidade Produção eliminada!"
+                                                                    type={SnackbarType.success}
+                                                                />
+                                                            </div>
+                                                        </Modal>
+                                                        <button><FiTrash2></FiTrash2></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </>
+                                )}    
+                                </>
                             ))}
                             </tbody>
                         </table>
