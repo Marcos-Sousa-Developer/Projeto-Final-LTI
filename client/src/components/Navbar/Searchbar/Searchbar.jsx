@@ -68,7 +68,33 @@ const Searchbar = () => {
 
         let searchTextClear = searchText.trim();
 
-        if(!searchTextClear.length == 0){
+        if(window.location.pathname === "/supplier/anunciar"){
+          document.getElementsByName('searchText')[0].placeholder='new text for email';
+          //verificar o EAN
+          let validEAN = await verifyEAN(searchTextClear);
+
+          let product;
+
+          if(validEAN == "OK"){
+
+              let params = {
+                EAN: searchTextClear,
+              };
+  
+              product = await getAllFromDB("/products/", params);
+
+              if(product.length == 1){
+                const data = {EAN: product[0].EAN};
+                const queryString = new URLSearchParams(data).toString();
+                window.location.href = `/supplier/anuncio?${queryString}`;
+              } else {
+                alert(product)
+              }
+          }else {
+            alert(validEAN)
+          }
+        } else {
+          if(!searchTextClear.length == 0){
             let products = await getAllFromDB("/ads",{
                 title: searchTextClear,
             })
@@ -81,34 +107,9 @@ const Searchbar = () => {
                 const queryString = new URLSearchParams(data).toString();
                 window.location.href = `/pesquisa?${queryString}`;
             }
-        }
+        }}
+
         
-        if(window.location.pathname === "/supplier/anunciar"){
-            document.getElementsByName('searchText')[0].placeholder='new text for email';
-            //verificar o EAN
-            let validEAN = await verifyEAN(searchTextClear);
-
-            let product;
-
-            if(validEAN == "OK"){
-
-                let params = {
-                  EAN: searchTextClear,
-                };
-    
-                product = await getAllFromDB("/products/", params);
-
-                if(product.length == 1){
-                  const data = {EAN: product[0].EAN};
-                  const queryString = new URLSearchParams(data).toString();
-                  window.location.href = `/supplier/anuncio?${queryString}`;
-                } else {
-                  alert(product)
-                }
-            }else {
-              alert(validEAN)
-            }
-        }
     }
 
     return (

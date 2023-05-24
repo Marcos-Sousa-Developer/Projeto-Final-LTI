@@ -15,7 +15,7 @@ import "./styles/CriarAnuncio.css";
 import "../../../components/InputField/InputField.css";
 
 function CriarAnuncio() {
-    const [idUser, setIDUser] = useState(1001) //Ir buscar às cookies o ID do user       
+      
     const [productionUnits, setProductionUnit] = useState([]);
 
     const [formData, setFormData] = useState({
@@ -38,11 +38,12 @@ function CriarAnuncio() {
 
     const [didMount, setDidMount] = useState(false)
 
+
+    
+
     async function getSupplierProdUnit(){
-      let paramsProdUnit = {
-        uid_supplier: 1,
-      };
-      let supplierProdUnits = await getAllFromDB("/productionUnits", paramsProdUnit)
+   
+      let supplierProdUnits = await getAllFromDB("/productionUnits", {uid_supplier: true})
 
       if (typeof supplierProdUnits != "string") {
           setProductionUnit(prevState => [...supplierProdUnits])
@@ -55,7 +56,14 @@ function CriarAnuncio() {
       newProdUnitKeys.forEach((key) => {
         newProdUnit[key] = '';
       });
-      setFormData({ ...formData, prodUnit: newProdUnit })
+
+
+      let supplier = await getFromDB("/suppliers",  {uid: true});
+
+      setFormData({ ...formData, 
+        prodUnit: newProdUnit,
+        email: supplier[0].email,
+        telemovel: supplier[0].mobile_number })
     }
 
     async function getProduct(ean){
@@ -64,7 +72,7 @@ function CriarAnuncio() {
             EAN: ean,
           };
 
-        let product = await getAllFromDB("/products/", paramsProd);
+        let product = await getAllFromDB("/products", paramsProd);
         let idsubsubcategory = product[0].id_subsubcategory;
 
         //IR BUSCAR O NOME DA CATEGORIA, SUB E SUBSUB
@@ -112,17 +120,18 @@ function CriarAnuncio() {
             features: featuresEmpty,
             sub_features: prodFeatures,
             id_subsubcategory: idsubsubcategory,
+            data_producao: new Date().toISOString().split('T')[0],
         });
-      }
+    }
 
     useEffect(()=>{
         let url = new URL(window.location)
         let ean = url.searchParams.get("EAN")
         if (ean != null){
-            getProduct(ean)
+          getProduct(ean)
         }
-        setDidMount(true)
         getSupplierProdUnit()
+        setDidMount(true)
     }, [])
 
     async function verifyTitle(title){
@@ -244,7 +253,6 @@ function CriarAnuncio() {
       //Não é null
       //Não pode existir na bd ainda
       //Tem 8 ou 13 algarismos e são todos numéricos
-      console.log(EAN)
 
       let product = await getFromDB("/products/" + EAN);
       
@@ -334,6 +342,10 @@ function CriarAnuncio() {
 
 
     const submit = async () => {
+
+      let supplier = await getAllFromDB("/suppliers", {uid: true})
+      let idUser = supplier[0].id;
+
         let validEAN = "OK";
         if(formData.EAN != "" && formData.EAN != null) {
           validEAN = await verifyEAN(formData.EAN);
@@ -389,9 +401,7 @@ function CriarAnuncio() {
               };
 
               let EANexist = await getAllFromDB("/products/", params);
-              
-              //Ir buscar o id do fornecedor
-              let idSupplier = idUser;
+
 
               if(EANexist == "There is no product in the database"){
                 //CRIA O PRODUTO
@@ -414,7 +424,7 @@ function CriarAnuncio() {
                   status: "ativo",
                   production_date: formData.data_producao,
                   price: formData.preco,
-                  supplier_id: idSupplier,
+                  supplier_id: idUser,
                   product_id: idProduct,
                   created_at: new Date().toISOString().split('T')[0],
                   category_name: formData.categoria,
@@ -423,6 +433,9 @@ function CriarAnuncio() {
                 })
               }else{
                 product = EANexist[0]
+
+                let idProduct = product.id;
+
                 let prodCharacStart = JSON.parse(product.characteristics)
                 let prodCharacEnd = featuresDBproduct
                 let update = false;
@@ -449,8 +462,8 @@ function CriarAnuncio() {
                   status: "ativo",
                   production_date: formData.data_producao,
                   price: formData.preco,
-                  supplier_id: idSupplier,
-                  product_id: product.id,
+                  supplier_id: idUser,
+                  product_id: idProduct,
                   created_at: new Date().toISOString().split('T')[0],
                   category_name: formData.categoria,
                   subcategory_name: formData.subcategoria,
@@ -465,9 +478,6 @@ function CriarAnuncio() {
                 characteristics: JSON.stringify(featuresDBproduct),
               })
     
-              //Ir buscar o id do fornecedor
-              let idSupplier = idUser;
-    
               //ir buscar o id do produto de cima
               let idProduct = product.insertId
     
@@ -481,7 +491,7 @@ function CriarAnuncio() {
                 status: "ativo",
                 production_date: formData.data_producao,
                 price: formData.preco,
-                supplier_id: idSupplier,
+                supplier_id: idUser,
                 product_id: idProduct,
                 created_at: new Date().toISOString().split('T')[0],
                 category_name: formData.categoria,
@@ -492,20 +502,21 @@ function CriarAnuncio() {
           
             let idAd = ad.insertId
 
-            let i = 0;
-            Object.entries(formData.prodUnit).forEach(async ([key, value]) => {
-              if(value > 0){
-                let productProductionUnit = await postToDB("/productProductionUnits",{ 
+            console.log(productionUnits)
+
+            for (let i = 0; i < Object.entries(formData.prodUnit).length; i++) {
+              const [key, value] = Object.entries(formData.prodUnit)[i];
+              if (value > 0) {
+                let productProductionUnit = await postToDB("/productProductionUnits", {
                   quantity: value,
                   fee: 0,
                   productionUnit_id: productionUnits[i].id,
                   ad_id: idAd,
                   title: formData.titulo,
                   price: formData.preco,
-                })
+                });
               }
-              i++;
-            });
+            }
 
             //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
             //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
@@ -908,12 +919,12 @@ function CriarAnuncio() {
                   <p className='title'>Anunciante</p>
                   <div className='app__anuncio_supplier_content'>
                     <div className='inputField'>
-                        <p>Telemóvel</p>
-                        <input type='tel' required onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
+                        <p>Telemóvel *</p>
+                        <input type='tel' required value = {formData.telemovel} onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
                     </div>
                     <div className='inputField'>
-                        <p>Email</p>
-                        <input type='email' required onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
+                        <p>Email *</p>
+                        <input type='email' required value = {formData.email} onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
                     </div> 
                   </div>
                 </div>    
