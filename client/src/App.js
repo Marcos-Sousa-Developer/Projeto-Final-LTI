@@ -98,7 +98,7 @@ function App() {
           {userType == "consumer" && 
             (
               <Route path="consumer">                
-                <Route exact path="ordersHistory" element={<RequireAuth><ConsumerOrdersHistory/></RequireAuth>} />                
+                <Route exact path="encomendas" element={<RequireAuth><ConsumerOrdersHistory/></RequireAuth>} />                
                 <Route exact path="profile" element={<RequireAuth><ConsumerProfile/></RequireAuth>} />
               </Route>
             )
