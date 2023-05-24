@@ -48,6 +48,7 @@ const ConsumerOrdersHistory = () => {
                       <td>{orderHistory.order_number}</td>
                       <td>{orderHistory.order_date}</td>
                       <td>{orderHistory.order_status}</td>
+
                       <td>
                         <button onClick={() => setModalOpen(prevState => {
                           const newState = [...prevState];
@@ -62,6 +63,7 @@ const ConsumerOrdersHistory = () => {
                           <p>Produto: </p>
                         </Modal>
                       </td> 
+                      
                       <td>{orderHistory.address}</td>
                       <td>{orderHistory.total}</td>
                       <td>{orderHistory.size}</td>

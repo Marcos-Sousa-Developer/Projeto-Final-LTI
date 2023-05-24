@@ -194,10 +194,12 @@ img, picture {
 }
 .app__ConsumerHistory_Orders {
   border: 3px solid #EEEEEE;
+  min-height: 400px;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr 1fr;
 }
-.app__ConsumerHistory_Orders tbody tr {
-  margin-right: 10rem;
-  margin-bottom: 1.5em;
+.app__ConsumerHistory_Orders table {
+  text-align: center;
 }
 .app__ConsumerHistory_button {
   justify-content: start;
