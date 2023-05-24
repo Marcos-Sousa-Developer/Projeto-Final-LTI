@@ -13,6 +13,7 @@ import Features from './Features';
 import SubFeatures from './SubFeatures';
 import "./styles/CriarAnuncio.css";
 import "../../../components/InputField/InputField.css";
+import SupplierBar from '../SupplierBar/SupplierBar';
 
 function CriarAnuncio() {
       
@@ -815,6 +816,8 @@ function CriarAnuncio() {
         <NavbarSupplier></NavbarSupplier>
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
+            <br></br>
+            <SupplierBar></SupplierBar>
             <form onSubmit={() => {console.log(formData)}}>
               <div className='app__anuncio_produto'>
                 <p className='title'>Produto</p>

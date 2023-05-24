@@ -6,6 +6,7 @@ import product3 from "../../../assets/testproducts/macbookpro.png";
 
 import {NavbarSupplier, Footer, SubHeading, Searchbar} from '../../../components/index';
 import './SupplierSell.css';
+import SupplierBar from '../SupplierBar/SupplierBar';
 
 function SupplierSell() {
 
@@ -40,13 +41,7 @@ function SupplierSell() {
     <NavbarSupplier></NavbarSupplier>
     <div className='app__SupplierSell'>   
         <SubHeading title="Home"/>
-        <div className='app__SupplierSell_options'>
-              <ul>
-                <li><span></span><a className='option app__text_effect' href="#">Home</a></li>
-                <li><span></span><a className='option  app__text_effect' href="#">Anúncios</a></li>
-                <li><a className='option active app__text_effect' href="#">Vendas e Ordens</a></li>
-              </ul>
-        </div>
+        <SupplierBar></SupplierBar>
 
         <div className='app__SupplierSell_Box'>
         <table>

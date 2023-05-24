@@ -9,6 +9,7 @@ import {NavbarSupplier, Footer, SubHeading, SnackBar, Modal} from '../../../comp
 import './SupplierProfile.css';
 import LoadingPage from '../../LoadingPage';
 import logOut from '../../../hooks/logOut';
+import SupplierBar from '../SupplierBar/SupplierBar';
 
 const SnackbarType = {
   success: "success",
@@ -256,6 +257,8 @@ function SupplierProfile() {
         />
         <div className='app__SupplierProfile main__container'>   {/*este div tem de ser um form secalhar*/}
           <SubHeading title="Conta"/>
+          <br></br>
+          <SupplierBar></SupplierBar>
           <div className='app__SupplierProfile_content'>
             <p>Dados da Minha Conta</p>
             <div className='app__SupplierProfile_box'>

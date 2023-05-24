@@ -10,6 +10,7 @@ import { NavbarSupplier, Footer, Modal, SubHeading, SnackBar } from '../../../co
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import LoadingPage from '../../LoadingPage';
 import './SupplierProdUnit.css';
+import SupplierBar from '../SupplierBar/SupplierBar';
 
 const SnackbarType = {
     success: "success",
@@ -116,6 +117,7 @@ const SupplierProdUnit = () => {
         <>
             <NavbarSupplier></NavbarSupplier>
             <div className='app__prod-unit main__container'>
+                <SupplierBar></SupplierBar>
                 <SubHeading title="Unidade Produção"/>
                 <div className='app__prod-unit_content'>
                 <div className='app__prod-unit_add_new-unit'>

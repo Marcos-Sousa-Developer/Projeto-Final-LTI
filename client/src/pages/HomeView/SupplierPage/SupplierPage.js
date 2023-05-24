@@ -4,6 +4,7 @@ import './SupplierPage.css';
 import LoadingPage from '../../LoadingPage';
 import OrderStats from './SupplierOrderReport/OrderStats';
 import getAllFromDB from '../../../hooks/getAllFromDB'; 
+import SupplierBar from '../SupplierBar/SupplierBar';
 
 function SupplierPage() { 
 
@@ -96,15 +97,7 @@ function SupplierPage() {
         <NavbarSupplier></NavbarSupplier>
         <div className='app__SupplierPage main__container'>   
           <SubHeading title="Home"/>
-          <div className='app__SupplierPage_options'>
-            <ul>
-              <li><span></span><a className='option active app__text_effect' href="supplier/">Home</a></li>
-              <li><span></span><a className='option app__text_effect' href="supplier/add">Anúncios</a></li>
-              <li><a className='option app__text_effect' href="supplier/sell">Vendas e Ordens</a></li>
-              <li><a className='option app__text_effect' href="supplier/produnit">Unidade Produção</a></li>
-              <li><a className='option app__text_effect' href="supplier/transpunit">Veículos Transporte</a></li>
-            </ul>
-          </div>
+          <SupplierBar></SupplierBar>
           <div className='app__SupplierPage_boxes'>
             <div className='app__SupplierPage_boxesEsquerda'>
               <div className='app__SupplierPage_boxesEsquerda1'>

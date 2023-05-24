@@ -5,6 +5,7 @@ import { PriceDisplay } from '../../../utilities/formatCurrency';
 
 import {NavbarSupplier, Footer, SubHeading} from '../../../components/index';
 import './SupplierAdd.css';
+import SupplierBar from '../SupplierBar/SupplierBar';
 
 function SupplierAdd() {
 
@@ -29,13 +30,20 @@ function SupplierAdd() {
     let supplier = await getAllFromDB("/suppliers", {uid: true})
     let idUser = supplier[0].id;
 
-    let ads = await getAllFromDB("/ads", {supplier_id: idUser})
-    ads.map(async (ad) => (
-      ad.created_at = await changeDateFormat(ad.created_at),
-      ad.price = await formatPrice(ad.price)
-    ))
-    setAds(ads);
-  }
+    let ads = await getAllFromDB("/ads", {supplier_id: idUser}) 
+    try {
+      ads.map(async (ad) => (
+        ad.created_at = await changeDateFormat(ad.created_at),
+        ad.price = await formatPrice(ad.price)
+      )) 
+     setAds(ads );
+    }
+    catch(error) {
+      setAds([] );
+    }
+
+    
+  } 
 
   useEffect(()=>{
     getProducts()
@@ -56,13 +64,8 @@ function SupplierAdd() {
         <NavbarSupplier></NavbarSupplier>
         <div className='app__SupplierAdd'>   
             <SubHeading title="Home"/>
-            <div className='app__SupplierAdd_options'>
-              <ul>
-                <li><span></span><a className='option app__text_effect' href="#">Home</a></li>
-                <li><span></span><a className='option active app__text_effect' href="#">Anúncios</a></li>
-                <li><a className='app__text_effect' href="#">Vendas e Ordens</a></li>
-              </ul>
-            </div>
+            <br></br>
+            <SupplierBar></SupplierBar>
             <div className='app__SupplierAdd_Box'>
               <table>
                 <thead>
