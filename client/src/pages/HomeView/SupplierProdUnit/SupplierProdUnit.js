@@ -189,6 +189,7 @@ const SupplierProdUnit = () => {
                                     <th>Localização</th>
                                     <th>Capacidade</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -322,66 +323,77 @@ const SupplierProdUnit = () => {
                                             </Modal>
                                         </div>
                                     </td>
-                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={async () => getProduct(productionUnit.id, index)} ><FiChevronDown></FiChevronDown></button></td>                            
+                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={async () => getProduct(productionUnit.id, index)} >Ver Produtos <FiChevronDown></FiChevronDown></button></td>                            
                                 </tr>
                                 {(searchProd.includes(index) && productsProductionUnits[index] != undefined && watchProductsIndex[0] && watchProductsIndex[1] == index) && (
                                     <>
+                                        <p style={{margin:'.5rem 0 0.25rem 2.5rem', fontWeight:'500'}}>Produtos</p>
                                         <tr>
-                                            <td className='products_format products_format_mobile_head' style={{padding: '0.5rem 3rem 0.5rem 1rem'}}>Titulo</td>
-                                            <td className='products_format products_format_mobile_head'>Preço</td>
-                                            <td className='products_format products_format_mobile_head'>Quant.</td>
-                                            <td className='products_format products_format_mobile_head' style={{paddingRight: '0'}}></td>
+                                            <td colSpan={5} style={{padding: '0 0 1rem 2.5rem'}}>
+                                            <table className='inner-table' style={{width: '100%'}}>
+                                                <thead>
+                                                    <tr>
+                                                        <th style={{ fontSize: '14px'}}>Titulo</th>
+                                                        <th style={{ fontSize: '14px'}}>Preço</th>
+                                                        <th style={{ fontSize: '14px'}}>Quant.</th>
+                                                        <th style={{padding: '.25rem 0 .25rem 0'}}></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {productsProductionUnits[index].map((product, idx) => (
+                                                        <tr>
+                                                            <td data-cell='Título: ' style={{ fontSize: '14px'}}>{product.title}</td>
+                                                            <td data-cell='Preço: ' style={{ fontSize: '14px'}}>{product.price} €</td>
+                                                            <td data-cell='Quant.: ' style={{ fontSize: '14px'}}>{product.quantity}</td>
+                                                            <td style={{padding: '.25rem 0 .25rem 0'}}>
+                                                                <div>
+                                                                    <button onClick={() => setModalOpen3(prevState => {
+                                                                        const newState = [...prevState];
+                                                                        newState[idx] = true;
+                                                                        return newState;
+                                                                    })}><FiEdit3></FiEdit3></button>
+                                                                    <Modal open={modalOpen3[idx]} onClose={() => setModalOpen3(prevState => {
+                                                                        const newState = [...prevState];
+                                                                        newState[idx] = false;
+                                                                        return newState;
+                                                                    })}>
+                                                                    <p style={{fontSize:'18px'}}>Editar produto</p>
+                                                                    <div className='inputField'>
+                                                                            <p>Quantidade:</p>
+                                                                            <input                         
+                                                                                type="text"
+                                                                                placeholder="Quantidade"
+                                                                                name="quantity"
+                                                                            />
+                                                                        </div> 
+                                                                    <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                                                                            <button 
+                                                                                className='main__action_btn' 
+                                                                                onClick={() => 
+                                                                                    setModalOpen3(prevState => {
+                                                                                        const newState = [...prevState];
+                                                                                        newState[idx] = false;
+                                                                                        return newState;
+                                                                                    })}>Cancelar</button>
+                                                                            <button 
+                                                                                className='main__negative_action_btn' 
+                                                                                >Guardar</button>
+                                                                            <SnackBar
+                                                                                ref={snackbarRef3}
+                                                                                message="Unidade Produção eliminada!"
+                                                                                type={SnackbarType.success}
+                                                                            />
+                                                                        </div>
+                                                                    </Modal>
+                                                                    <button><FiTrash2></FiTrash2></button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                            </td>
                                         </tr>
-                                        {productsProductionUnits[index].map((product, idx) => (
-                                            <tr>
-                                                <td data-cell='Título: ' className='products_format_mobile' style={{ fontSize: '14px', padding: '0.5rem 3rem 0.5rem 1rem'}}>{product.title}</td>
-                                                <td data-cell='Preço: ' className='products_format_mobile' style={{ fontSize: '14px'}}>{product.price} €</td>
-                                                <td data-cell='Quant.: ' className='products_format_mobile' style={{ fontSize: '14px'}}>{product.quantity}</td>
-                                                <td className='products_format_mobile' style={{paddingRight: '0'}}>
-                                                    <div>
-                                                        <button onClick={() => setModalOpen3(prevState => {
-                                                            const newState = [...prevState];
-                                                            newState[idx] = true;
-                                                            return newState;
-                                                        })}><FiEdit3></FiEdit3></button>
-                                                        <Modal open={modalOpen3[idx]} onClose={() => setModalOpen3(prevState => {
-                                                            const newState = [...prevState];
-                                                            newState[idx] = false;
-                                                            return newState;
-                                                        })}>
-                                                           <p style={{fontSize:'18px'}}>Editar produto</p>
-                                                           <div className='inputField'>
-                                                                <p>Capacidade:</p>
-                                                                <input                         
-                                                                    type="text"
-                                                                    placeholder="Quantidade"
-                                                                    name="quantity"
-                                                                />
-                                                            </div> 
-                                                           <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
-                                                                <button 
-                                                                    className='main__action_btn' 
-                                                                    onClick={() => 
-                                                                        setModalOpen3(prevState => {
-                                                                            const newState = [...prevState];
-                                                                            newState[idx] = false;
-                                                                            return newState;
-                                                                        })}>Cancelar</button>
-                                                                <button 
-                                                                    className='main__negative_action_btn' 
-                                                                    >Guardar</button>
-                                                                <SnackBar
-                                                                    ref={snackbarRef3}
-                                                                    message="Unidade Produção eliminada!"
-                                                                    type={SnackbarType.success}
-                                                                />
-                                                            </div>
-                                                        </Modal>
-                                                        <button><FiTrash2></FiTrash2></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
                                     </>
                                 )}    
                                 </>
