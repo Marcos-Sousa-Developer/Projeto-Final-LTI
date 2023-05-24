@@ -37,26 +37,24 @@
     }
 
     &_Orders{
-        //height:70%;
-        border: $border;
-        //display:inline-flex;
-        //width: 100%;
-        //display: block;
-
       
+        border: $border;
+        //padding: 1rem 1rem 1rem 1rem;
+        min-height: 400px;
+        display:grid;
+        grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr 1fr;
 
-        tbody td {
-            
-            //display: block;
-            //text-align: left;
-            //margin-bottom:1.5rem;
-        }
-    
-        
-        tbody tr {
-            margin-right: 10rem;
-            //display: block;
-            margin-bottom: 1.5em;
+        table{
+            text-align: center;
+
+            thead tr th{
+                //padding-bottom: 0.1rem;
+                
+            }
+
+            tbody tr td{
+                //padding-bottom: 0.1rem;
+            }
         }
     }
 

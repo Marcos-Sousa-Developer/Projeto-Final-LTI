@@ -2,14 +2,13 @@ let pool = require('../config/getLocaldbConfig')
 
 const fake_productProductionUnit_data = require('../factories/FAKE_PRODUCTPRODUCTIONUNIT_DATA.json')
 
-const statement = "INSERT INTO productProductionUnits (quantity, fee, productionUnit_id, " +
-                "ad_id) VALUES ? "
+const statement = "INSERT INTO productProductionUnits (quantity, fee, productionUnit_id, ad_id, title, price) VALUES ? "
 
 let values = []
 
 fake_productProductionUnit_data.forEach(row => {
 
-    values.push([row.quantity, row.fee, row.productionUnit_id, row.ad_id])     
+    values.push([row.quantity, row.fee, row.productionUnit_id, row.ad_id, "teste titulo", 100])     
 });
 
 pool.query(statement, [values], function(error, result){

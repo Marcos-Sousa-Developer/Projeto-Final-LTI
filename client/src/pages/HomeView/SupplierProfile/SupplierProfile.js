@@ -30,7 +30,9 @@ function SupplierProfile() {
   const [email, setEmail] = useState(null)
   const [nif, setNif] = useState(null)
   const [mobile_number, setMobileNumber] = useState(null)
+  const [city, setCity] = useState(null)
   const [address, setAddress] = useState(null)
+  const [postalCode, setPostalCode] = useState(null)
 
   const [didMount, setDidMount] = useState(false)
 
@@ -38,14 +40,14 @@ function SupplierProfile() {
 
     let supplier = await getFromDB("/suppliers", {uid: true})
 
-    console.log(supplier)
-
     setID(supplier[0].id)
     setName(supplier[0].name)
     setEmail(supplier[0].email)
     setNif(supplier[0].nif)
     setMobileNumber(supplier[0].mobile_number)
+    setCity(supplier[0].city)
     setAddress(supplier[0].address)
+    setPostalCode(supplier[0].postal_code)
     setDidMount(true)
   }
 
@@ -69,8 +71,16 @@ function SupplierProfile() {
       setMobileNumber(event.target.value)
   }
 
+  const handleSetCity = (event) => {
+    setCity(event.target.value)
+  }
+
   const handleSetAddress = (event) => {
       setAddress(event.target.value)
+  }
+
+  const handleSetPostalCode = (event) => {
+    setPostalCode(event.target.value)
   }
 
   function verifyName(name){
@@ -158,12 +168,14 @@ function SupplierProfile() {
 
     if(!((name == null || name == "") && (email == null || email == "") && (nif == null || nif == "") && (mobile_number == null || mobile_number == "") && (address == null || address == ""))){
       if(validName == "OK" && validEmail == "OK" && validNif == "OK" && validMobileNumber == "OK" && validAddress == "OK" ){
-        supplierUpdated = await putToDB("/api/suppliers/" + id,{
+        supplierUpdated = await putToDB("/suppliers/" + id,{
           name: name,
           email: email,
           nif: nif,
           mobile_number: mobile_number,
+          city: city,
           address: address,
+          postal_code: postalCode,
         })
       }    
 
@@ -290,14 +302,14 @@ function SupplierProfile() {
                     Cidade
                     <div className='app__SupplierProfile_box_div_row_input'>
                       <FiMapPin></FiMapPin>
-                      <input type="text" placeholder="Cidade"></input>
+                      <input type="text" placeholder="Cidade" value = {city ?? ""} name="city" onChange={handleSetCity}></input>
                     </div>
                   </div>
                   <div>
                     Cód. Postal
                     <div className='app__SupplierProfile_box_div_row_input'>
                       <FiMapPin></FiMapPin>
-                      <input type="text" placeholder="Cód. Postal"></input>
+                      <input type="text" placeholder="Cód. Postal" value = {postalCode ?? ""} name="postalCode" onChange={handleSetPostalCode}></input>
                     </div>
                   </div>
                 </div>
