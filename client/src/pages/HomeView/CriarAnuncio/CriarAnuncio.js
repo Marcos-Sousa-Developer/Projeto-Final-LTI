@@ -38,9 +38,6 @@ function CriarAnuncio() {
 
     const [didMount, setDidMount] = useState(false)
 
-
-    
-
     async function getSupplierProdUnit(){
    
       let supplierProdUnits = await getAllFromDB("/productionUnits", {uid_supplier: true})
@@ -965,7 +962,6 @@ function CriarAnuncio() {
     }
     </>
   );
-
 }
 
 export default CriarAnuncio

@@ -1,80 +1,101 @@
-import React from 'react'
+import React, {useState, useEffect}  from 'react'
 
-import product1 from "../../../assets/testproducts/Iphone.png";
-import product2 from "../../../assets/testproducts/cannon.png";
-import product3 from "../../../assets/testproducts/macbookpro.png";
+import getAllFromDB from '../../../hooks/getAllFromDB';
+import { PriceDisplay } from '../../../utilities/formatCurrency';
 
-import {NavbarSupplier, Footer, SubHeading, Searchbar} from '../../../components/index';
+import {NavbarSupplier, Footer, SubHeading} from '../../../components/index';
 import './SupplierAdd.css';
 
 function SupplierAdd() {
 
-    const products = [{
-        title: "iPhone 14 Pro Max 64GB",
-        src: product1,
-        creation: "11/09/2020",
-        units: 2,
-        price: "999,90€"
-      },
-      {
-        title: "Canon Amg gx7",
-        src: product2,
-        creation: "11/09/2018",
-        units: 6,
-        price: "599,90€"
-      },
-      {
-        title: "MacBook Pro Max",
-        src: product3,
-        creation: "11/09/2019",
-        units: 1,
-        price: "1999,90€"
-      }
-    ]
+  const [ads, setAds] = useState([]);
+  const [didMount, setDidMount] = useState(false)
+
+  async function changeDateFormat(date){
+    const parts = date.split(/-|T/);
+    return `${parts[2]}-${parts[1]}-${parts[0]}`
+  }
+
+  async function formatPrice(price) {
+    const formattedPrice = new Intl.NumberFormat('de-DE', {
+      style: 'currency',
+      currency: 'EUR',
+    }).format(price);
+    return formattedPrice;
+  }
+
+  async function getProducts(){
+
+    let supplier = await getAllFromDB("/suppliers", {uid: true})
+    let idUser = supplier[0].id;
+
+    let ads = await getAllFromDB("/ads", {supplier_id: idUser})
+    ads.map(async (ad) => (
+      ad.created_at = await changeDateFormat(ad.created_at),
+      ad.price = await formatPrice(ad.price)
+    ))
+    setAds(ads);
+  }
+
+  useEffect(()=>{
+    getProducts()
+    setDidMount(true)
+}, [])
 
   return (
     <>
-    <NavbarSupplier></NavbarSupplier>
-    <div className='app__SupplierAdd'>   
-        <SubHeading title="Home"/>
-        <div className='app__SupplierAdd_options'>
-          <ul>
-            <li><span></span><a className='option app__text_effect' href="#">Home</a></li>
-            <li><span></span><a className='option active app__text_effect' href="#">Anúncios</a></li>
-            <li><a className='app__text_effect' href="#">Vendas e Ordens</a></li>
-          </ul>
+    {
+      didMount == false ? (
+        <>
+          Loading
+        </>
+      )
+      :
+      (
+      <>
+        <NavbarSupplier></NavbarSupplier>
+        <div className='app__SupplierAdd'>   
+            <SubHeading title="Home"/>
+            <div className='app__SupplierAdd_options'>
+              <ul>
+                <li><span></span><a className='option app__text_effect' href="#">Home</a></li>
+                <li><span></span><a className='option active app__text_effect' href="#">Anúncios</a></li>
+                <li><a className='app__text_effect' href="#">Vendas e Ordens</a></li>
+              </ul>
+            </div>
+            <div className='app__SupplierAdd_Box'>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Unidades</th>
+                    <th>Data de criação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {ads.map((ad) => (
+                    <tr key={ad.title}>
+                      {/*<td><div className='app__SupplierAdd_Box_Image'>
+                      <img src={product.src} alt={product.title}/>
+                      {ad.title}
+                      </div></td>*/}
+                      <td>{ad.title}</td>
+                      <td>{ad.price}</td>            
+                      <td>{ad.units}</td>
+                      <td>{ad.created_at}</td>
+                    </tr>
+                    ))}
+                    </tbody>
+              </table>
+            </div>
         </div>
-        <div className='app__SupplierAdd_Box'>
-          <table>
-            <thead>
-              <tr>
-                <th>Produto</th>
-                <th>Preço</th>
-                <th>Unidades</th>
-                <th>Data de criação</th>
-              </tr>
-            </thead>
-            <tbody>
-                {products.map((product) => (
-                <tr key={product.title}>
-                  <td>
-                  <div className='app__SupplierAdd_Box_Image'>
-                  <img src={product.src} alt={product.title}/>
-                  {product.title}
-                  </div></td>
-                  <td>{product.price}</td>            
-                  <td>{product.units}</td>
-                  <td>{product.creation}</td>
-                </tr>
-                ))}
-                </tbody>
-          </table>
-        </div>
-    </div>
-    <Footer></Footer>
+        <Footer></Footer>
+      </>
+      )
+    }
     </>
   );
-
 }
 
 export default SupplierAdd;

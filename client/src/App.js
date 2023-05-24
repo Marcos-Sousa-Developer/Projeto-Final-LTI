@@ -103,6 +103,23 @@ function App() {
               </Route>
             )
           }   
+
+          {userType != "supplier" && 
+            (     
+              <>           
+                <Route path="/" element={<Home/>} />
+                <Route path="/pesquisa" element={<Search/>} />
+                <Route path="/categoria" element={<Category/>} />
+                <Route path="/subcategoria" element={<SubCategory/>} />
+                <Route path="/subsubcategoria" element={<SubSubCategory/>} />
+                <Route path="/produto" element={<ProductPage/>} />
+                <Route path="/market-place" element={<MarketPlace/>} />
+                <Route path="/comparador" element={<CompareProduct></CompareProduct>}/>
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+              </>
+            )
+          }
           
           {/*----- Only for testing ----- */}
             <Route path="/productTest" element={<ProductTest />} />
@@ -111,19 +128,9 @@ function App() {
           {/* ---------------------------- */}
 
           {/*---------for not logged in users--------*/}
-          <Route path="/" element={<Home/>} />
           <Route path="/signin" element={<SignIn/>} />
           <Route path="/signup" element={<SignUp/>} />
-          <Route path="/pesquisa" element={<Search/>} />
-          <Route path="/categoria" element={<Category/>} />
-          <Route path="/subcategoria" element={<SubCategory/>} />
-          <Route path="/subsubcategoria" element={<SubSubCategory/>} />
-          <Route path="/produto" element={<ProductPage/>} />
-          <Route path="/market-place" element={<MarketPlace/>} />
-          <Route path="/comparador" element={<CompareProduct></CompareProduct>}/>
           <Route path="/FAQ" element={<FAQ />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<NotFound />} />
           {/* ------------------------------------- */}
         </Routes>

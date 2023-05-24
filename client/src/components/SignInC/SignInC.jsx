@@ -33,6 +33,16 @@ const SignInC = () => {
     const [code, setCode] = useState(undefined)
 
     const navigate = useNavigate();
+  
+    const getUserType = async () => {
+  
+      let response = await getClientType()  
+      let type;
+      if(response) {
+        type = response[0]
+      }
+      return type
+    }
 
     const handlerLogin = async (event) => {
         setError(false)
@@ -41,7 +51,12 @@ const SignInC = () => {
         event.preventDefault(); 
         let isActive = await auth.signIn(email,password)
         if(isActive === true) {
-            window.location.href = "/";
+            let userType = await getUserType();
+            if(userType == 'supplier'){
+                window.location.href = "/supplier";
+            } else {
+                window.location.href = "/";
+            }
         }
         else if(isActive === null) {
             setNotValidade(true)
@@ -67,15 +82,19 @@ const SignInC = () => {
         
     } 
 
-    const getUserType = async () => {
+    const getUserTypeInitial = async () => {
         let response = await getClientType()
         if(response) {
-            navigate('/');
+            if(response[0] == 'supplier'){
+                navigate('/supplier');
+            } else {
+                navigate('/');
+            }
         }
     }
 
     useEffect(() => {
-        getUserType()
+        getUserTypeInitial()
     },[])
 
     return (
