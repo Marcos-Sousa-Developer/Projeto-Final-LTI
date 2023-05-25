@@ -2,19 +2,19 @@ import React, { useEffect, useState, useMemo } from 'react'
 import {NavbarSupplier, Footer, SubHeading, Searchbar} from '../../../components/index';
 import './SupplierPage.css';
 import LoadingPage from '../../LoadingPage';
-import OrderStats from './SupplierOrderReport/OrderStats';
 import getAllFromDB from '../../../hooks/getAllFromDB'; 
 import SupplierBar from '../SupplierBar/SupplierBar';
+import LocalImpact from './SupplierOrderReport/LocalImpact';
+
+let tableLocationData = {}
 
 function SupplierPage() { 
 
   const [isLoading, setLoading] = useState(false); 
 
-  const [datas, setDatas] = useState({})
-
   const [saleToday, setSaleToday] = useState(0)
-  const [saleMonth, setSaleMonth] = useState(0) 
-
+  const [saleMonth, setSaleMonth] = useState(0)   
+  
   const [fiveSells, setFiveSells] = useState([])
 
   const getThisDay = () => {
@@ -24,52 +24,63 @@ function SupplierPage() {
     const day = today.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
+
   
-  const createData = (values) => { 
+  const createData = (datas) => { 
 
     const thismonth = new Date().getMonth()+1; 
     const today = getThisDay()
 
-    let months = {
-      1:'jan.', 2:'fev.', 3:'mar.', 4:'abr.', 
-      5:'maio.', 6:'jun.', 7:'jul.', 8:'ago.', 9:'set.', 
-      10:'out.', 11:'nov.', 12:'dez.'
+    tableLocationData = {
+      'freguesia':0, 
+      'município':0, 
+      'distrito':0, 
+      'país':0, 
+      'continente':0, 
+      'mundo':0
     }
 
-    let data = {'jan.':0,'fev.':0, 'mar.':0, 'abr.':0, 
-            'maio.':0, 'jun.':0, 'jul.':0, 'ago.':0, 'set.':0, 
-            'out.':0, 'nov.':0, 'dez.':0} 
+    for (const data of datas) {
 
-            for (const value of values) {
+      if( data.sameLocation.toLowerCase() === 'freguesia') {
+        tableLocationData['freguesia'] +=1
+      }
+      else if(data.sameLocation.toLowerCase() === 'município') {
+          tableLocationData['município'] +=1
+      }
+      else if(data.sameLocation.toLowerCase() === 'distrito') {
+          tableLocationData['distrito'] +=1
+      }
+      else if(data.sameLocation.toLowerCase() === 'país') {
+          tableLocationData['país'] +=1
+      }
+      else if(data.sameLocation.toLowerCase() === 'continente') {
+          tableLocationData['continente'] +=1
+      }
+      else if(data.sameLocation.toLowerCase() === 'mundo') {
+          tableLocationData['mundo'] +=1
+      }
 
-              const date = new Date(value.created_at);
-              const isoDateString = date.toISOString();
-              const month = isoDateString.substring(6, 7); 
+      const date = new Date(data.created_at);
+      const isoDateString = date.toISOString();
+      const month = isoDateString.substring(6, 7); 
 
-              if (thismonth == month) {
-                setSaleMonth((prev) => prev + 1)
-              }
+      if (thismonth == month) {
+        setSaleMonth((prev) => prev + 1)
+      }
 
-              if (today == isoDateString.substring(0, 10)) {
-                setSaleToday((prev) => prev + 1)
-              }
+      if (today == isoDateString.substring(0, 10)) {
+        setSaleToday((prev) => prev + 1)
+      }
 
-
-              data[months[month]] +=1
-              
-            } 
-    setDatas(data)
-
-
+    }
   }
 
 
   const getMySells = async () => {
 
     const response = await getAllFromDB('/orderedProducts',{
-      product_owner_uid: true,
-      created_at_init: new Date().getFullYear()+'-01-01',
-      created_at_final: new Date().getFullYear()+'-12-31'
+      product_owner_uid: true
     })
      
     setFiveSells(response.slice(0, 5) );
@@ -80,7 +91,6 @@ function SupplierPage() {
 
   useEffect( () => {
     setLoading(true)
-    let data = {}
     async function getData() {
       await getMySells()
       setLoading(false)
@@ -101,11 +111,11 @@ function SupplierPage() {
           <div className='app__SupplierPage_boxes'>
             <div className='app__SupplierPage_boxesEsquerda'>
               <div className='app__SupplierPage_boxesEsquerda1'>
-                <p>Estatísticas</p>
+                <p><strong>Impacto Local</strong></p>
                 <div className='app__SupplierPage_boxesEsquerda1Est'>
-                  { datas === {} ? <div>loading</div> : <OrderStats datas={datas}></OrderStats>}
-                  <button onClick={() => console.log(datas)}>Exportar dados</button>
+                  { tableLocationData === {} ? <div>loading</div> : <LocalImpact datas={tableLocationData}></LocalImpact>}
                 </div>
+                <br></br>
 
               </div>
               <div className='app__SupplierPage_boxesEsquerda2'>

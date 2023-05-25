@@ -69,7 +69,7 @@ const ProductPage = () => {
         product5,
       ],
       description: ad[0].description,
-      caracteristics: JSON.parse(ad[0].extraCharacteristic),
+      caracteristics:  car,
       price: ad[0].price,
     });
     let ads = await getAllFromDB("/ads", {product_id: ad[0].product_id})

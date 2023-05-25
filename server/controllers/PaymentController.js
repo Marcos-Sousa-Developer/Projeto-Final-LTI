@@ -1,19 +1,23 @@
+let dbConnection = require('./DatabaseController')
 const path = require('path');
 require("dotenv").config({ path: path.resolve(__dirname, '..', '.env') });
+const jwt = require('../config/jwtConfig')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const YOUR_DOMAIN = 'http://localhost:3000';
 
-const payOrder = async function(req, res) {
+const payOrder = async function(req, res) { 
+    const uid_encrypt = req.cookies.userSession;
+    value = jwt.decryptID(uid_encrypt);
+    let statement = "SELECT email FROM consumers WHERE uid="+ `'`+value+`'`;
+    let result = await dbConnection(statement)
+    let emailUser = result[0].email
 
     content = []
 
-
     const items = req.query
 
-    for (item in items){ 
-
-      console.log(items[item].name)
+    for (const item in items){ 
         
         const data = {
           price_data: 
@@ -31,8 +35,6 @@ const payOrder = async function(req, res) {
         content.push(data)
     }
 
-    console.log(content)
-
     const session = await stripe.checkout.sessions.create({
       shipping_options: [
         {
@@ -48,12 +50,12 @@ const payOrder = async function(req, res) {
         },
       ],
       line_items: content,
-      customer_email: 'xeyor87126@saeoil.com',
+      customer_email: emailUser,
       mode: 'payment',
       success_url: `${YOUR_DOMAIN}?success=true`,
       cancel_url: `${YOUR_DOMAIN}?canceled=true`,
       locale: 'pt'
-    });
+    }); 
 
     res.send(session.url);
 
