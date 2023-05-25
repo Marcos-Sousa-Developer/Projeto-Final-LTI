@@ -65,14 +65,16 @@
             }
         }
     }
-}
 
-a.option{
-    margin-right: 1rem;
-}
-
-.active {
-    font-weight: bold;
+    a.option{
+        margin-right: 1rem;
+    }
+        
+    .active {
+        font-weight: bold;
+        color: rgba($color: $orange, $alpha: .8);
+    }
+    
 }
 
 @media screen and (max-width: 800px) {

@@ -10,7 +10,6 @@
     }
 
     &_add_new-unit{
-        margin-top: 2rem;
         padding-right:4rem;
 
         &_title{
@@ -27,7 +26,6 @@
     }
 
     &_existing-units{
-        margin-top: 2rem;
 
         &_title{
             font-size: $bigger_font;
@@ -74,6 +72,16 @@
             margin-right: 1rem;
         }
     }
+
+    a.option{
+        margin-right: 1rem;
+    }
+        
+    .active {
+        font-weight: bold;
+        color: rgba($color: $orange, $alpha: .8);
+    }
+    
 }
 
 @media screen and (min-width: 1450px) {
@@ -97,24 +105,20 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
-    .app__prod-unit{
-        &_add_new-unit{
-            padding-right: 0;
-        }
-    }
-}
-
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1050px) {
     .app__prod-unit{
         &_content{
             grid-template-columns: 1fr;
             gap: 0;
         }
 
+        &_add_new-unit{
+            padding-right: 0;
+        }
+
         &_add_new-unit_content{
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
             gap: 0 2rem;
 
             .app__prod-unit_add_new-unit_actions {
@@ -125,10 +129,28 @@
     }
 }
 
+@media (max-width: 800px) {
+    .app__prod-unit_existing-units_content td, .app__prod-unit_existing-units_content th{
+        padding: .5rem 1rem .5rem .25rem;
+    }
+}
+
 @media (max-width: 650px) {
     .app__prod-unit_existing-units_content{
         th{
             display: none;
+        }
+
+        th, td{
+            padding: .125rem 1rem .125rem .25rem;
+        }
+
+        .tdtop{
+            padding-top: .5rem;
+        }
+
+        .tdbottom{
+            padding-bottom: .5rem;
         }
 
         tr{
@@ -150,8 +172,27 @@
 
         .actions{
             position: absolute;
-            right: 0;
+            right: 4px;
             top: 0;
+        }
+
+        .produtos_bold{
+            button{
+                margin-left: 0;
+                font-weight: 500;
+            }
+        }
+
+        .inner-table{
+            tr{
+                position: relative;
+            }
+
+            .product_actions{
+                position: absolute;
+                right: 4px;
+                top: 0;
+            }
         }
 
         .products_format_mobile{

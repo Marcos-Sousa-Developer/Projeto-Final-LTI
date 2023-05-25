@@ -47,8 +47,6 @@ const SignUpC = () => {
 
     //Password Checker
 
-    const [confirmPassword, setConfirmPassword] = useState("");
-
     const [isEightCharLong, setIsEightCharLong] = useState(false);
     const [hasNumber, setHasNumber] = useState(false);
     const [hasLowerCase, setHasLowerCase] = useState(false);
@@ -63,10 +61,6 @@ const SignUpC = () => {
         setHasLowerCase(/[a-z]/.test(inputPassword));
         setHasUpperCase(/[A-Z]/.test(inputPassword));
         setHasSpecialChar(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/.test(inputPassword));
-    };
-
-    const handleConfirmPasswordChange = (event) => {
-        setConfirmPassword(event.target.value);
     };
 
     useEffect(() => {

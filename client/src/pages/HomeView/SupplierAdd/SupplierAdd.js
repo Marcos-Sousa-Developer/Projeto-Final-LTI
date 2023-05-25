@@ -3,6 +3,7 @@ import React, {useState, useEffect}  from 'react'
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 
+import LoadingPage from '../../LoadingPage';
 import {NavbarSupplier, Footer, SubHeading} from '../../../components/index';
 import './SupplierAdd.css';
 import SupplierBar from '../../../components/SupplierBar/SupplierBar';
@@ -52,17 +53,14 @@ function SupplierAdd() {
     <>
     {
       didMount == false ? (
-        <>
-          Loading
-        </>
+        <LoadingPage></LoadingPage>
       )
       :
       (
       <>
         <NavbarSupplier></NavbarSupplier>
         <div className='app__SupplierAdd'>   
-            <SubHeading title="Home"/>
-            <br></br>
+            <SubHeading title="Anúncios"/>
             <SupplierBar active2='active'></SupplierBar>
             <div className='app__SupplierAdd_Box'>
               <table>

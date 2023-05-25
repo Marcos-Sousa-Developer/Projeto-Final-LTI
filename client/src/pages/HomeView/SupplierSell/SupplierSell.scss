@@ -39,41 +39,41 @@
     }
 
     &_Box{
-            border: $border;
-            padding: 2rem 6rem 3rem 6rem;
-            min-height: 400px;
-            display:grid;
-            grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr;
+        border: $border;
+        padding: 2rem 6rem 3rem 6rem;
+        min-height: 400px;
+        display:grid;
+        grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr;
 
-            table{
-                text-align: center;
-
-                thead tr th{
-                    padding-bottom: 1.5rem;
-                }
-
-                tbody tr td{
-                    padding-bottom: 1.5rem;
-                }
+        table{
+            text-align: center;
+            thead tr th{
+                padding-bottom: 1.5rem;
             }
-           &_Image{
-                    display:flex;
-                    
-                    img{
-                        max-width: 200px;
-                        max-height: auto;
-                        margin-right: 1.5rem;
-                    }
-           }
+            tbody tr td{
+                padding-bottom: 1.5rem;
+            }
+        }
+
+        &_Image{
+            display:flex;
+                 
+            img{
+                max-width: 200px;
+                max-height: auto;
+                margin-right: 1.5rem;
+            }
+        }
     }
-}
 
-a.option{
-    margin-right: 1rem;
-}
-
-.active {
-    font-weight: bold;
+    a.option{
+        margin-right: 1rem;
+    }
+        
+    .active {
+        font-weight: bold;
+        color: rgba($color: $orange, $alpha: .8);
+    }  
 }
 
 @media screen and (max-width: 800px) {

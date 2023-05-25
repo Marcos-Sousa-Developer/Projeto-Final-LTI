@@ -40,7 +40,7 @@ function SupplierSell() {
     <>
     <NavbarSupplier></NavbarSupplier>
     <div className='app__SupplierSell'>   
-        <SubHeading title="Home"/>
+        <SubHeading title="Encomendas"/>
         <SupplierBar active3='active'></SupplierBar>
 
         <div className='app__SupplierSell_Box'>

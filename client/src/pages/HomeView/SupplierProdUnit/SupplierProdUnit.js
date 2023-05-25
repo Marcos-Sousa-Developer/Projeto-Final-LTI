@@ -239,7 +239,7 @@ const SupplierProdUnit = () => {
                             {productionUnits.map((productionUnit, index) => (
                                 <>
                                 <tr key={index}>
-                                    <td data-cell='Nome: '>{productionUnit.name}</td>
+                                    <td data-cell='Nome: ' className='tdtop'>{productionUnit.name}</td>
                                     <td data-cell='Localização: '>{productionUnit.location}</td>
                                     <td data-cell='Capacidade: '>{productionUnit.capacity}</td>
                                     <td className='actions' style={{paddingRight:'0'}}>
@@ -350,7 +350,7 @@ const SupplierProdUnit = () => {
                                                 newState[index] = false;
                                                 return newState;
                                             })}>
-                                                <p style={{fontSize:'18px'}}>Tem a certeza que quer apagar esta unidade de produção?</p>
+                                                <p style={{fontSize:'18px', textAlign: 'center'}}>Tem a certeza que quer apagar esta unidade de produção?</p>
                                                 <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
                                                     <button 
                                                         className='main__action_btn' 
@@ -372,18 +372,18 @@ const SupplierProdUnit = () => {
                                             </Modal>
                                         </div>
                                     </td>
-                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={async () => setIndex(index)}>Ver Produtos<FiChevronDown></FiChevronDown></button></td>                            
+                                    <td className='produtos_bold tdbottom' style={{paddingRight:'0'}}><button onClick={async () => setIndex(index)}>Ver Produtos <FiChevronDown></FiChevronDown></button></td>                            
                                 </tr>
                                 {(searchProd.includes(index) && watchProductsIndex[0] && watchProductsIndex[1] == index) && (
                                     productsProductionUnits[index] == undefined ? (
                                         <tr>
-                                            <p>Esta unidade de produção ainda não tem produtos</p>
+                                            <td colSpan={5} style={{textAlign:'center', fontSize: '14px'}}>Esta unidade de produção ainda não tem produtos</td>
                                         </tr>
                                     ):(
                                         <>
-                                        <p style={{margin:'.5rem 0 0.25rem 2.5rem', fontWeight:'500'}}>Produtos</p>
+                                        {/*<p style={{margin:'.5rem 0 0.25rem 2.5rem', fontWeight:'500'}}>Produtos</p>*/}
                                         <tr>
-                                            <td colSpan={5} style={{padding: '0 0 1rem 2.5rem'}}>
+                                            <td colSpan={5} style={{padding: '0 0 1rem 2.5rem', marginRight: '1rem'}}>
                                             <table className='inner-table' style={{width: '100%'}}>
                                                 <thead>
                                                     <tr>
@@ -400,7 +400,7 @@ const SupplierProdUnit = () => {
                                                             <td data-cell='Título: ' style={{ fontSize: '14px'}}>{product.title}</td>
                                                             <td data-cell='Preço: ' style={{ fontSize: '14px'}}>{product.price} €</td>
                                                             <td data-cell='Quant.: ' style={{ fontSize: '14px'}}>{product.quantity}</td>
-                                                            <td style={{padding: '.25rem 0 .25rem 0'}}>
+                                                            <td className='product_actions' style={{padding: '.25rem 0 .25rem 0'}}>
                                                                     <button 
                                                                     onClick={() => {
                                                                         setModalOpen3(prevState => {
@@ -462,7 +462,7 @@ const SupplierProdUnit = () => {
                                                                         newState[index] = false;
                                                                         return newState;
                                                                     })}>
-                                                                        <p style={{fontSize:'18px'}}>Tem a certeza que quer apagar o produto desta unidade de produção?</p>
+                                                                        <p style={{fontSize:'18px', textAlign: 'center'}}>Tem a certeza que quer apagar o produto desta unidade de produção?</p>
                                                                         <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
                                                                             <button 
                                                                                 className='main__action_btn' 
