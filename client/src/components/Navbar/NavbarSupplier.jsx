@@ -19,7 +19,7 @@ const NavbarSupplier = () => {
                 {
                     [undefined,null].includes(cookies.identification) ? (
                         <Link to="/signin" className="flex app__pointer app__navbar_links">
-                            <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
+                            <FiUser fontSize={28} color="black" className='profile_icon'></FiUser>
         
                             <div className="app__navbarSupplier_profile_account" style={{margin: '0 .75rem'}}>
                                 <span className="profile_link">Conta</span>
@@ -30,7 +30,7 @@ const NavbarSupplier = () => {
                     :
                     (
                         <Link to="/supplier/profile" className="flex app__pointer app__navbar_links">
-                            <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
+                            <FiUser fontSize={28} color="black" className='profile_icon'></FiUser>
         
                             <div className="app__navbarSupplier_profile_account" style={{margin: '0 .75rem'}}>
                                 <span className="profile_link">Conta</span>

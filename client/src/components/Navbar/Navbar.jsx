@@ -59,7 +59,7 @@ const Navbar = () => {
           <div className={ `app__sidebar ${className}` }>
             <div className="app__sidebar_content">
                 <img src={images.logo} alt="" />
-                <FiX fontSize={30} color="black" className='app__pointer app__icon_effect' onClick={toggleSidebar}></FiX>
+                <FiX fontSize={28} color="black" className='app__pointer app__icon_effect' onClick={toggleSidebar}></FiX>
                 <div className="app__sidebar_navs">
                     <ul>
                         {selectedSubCategory ? (
@@ -100,7 +100,7 @@ const Navbar = () => {
     const ButtonToggle = (props) => {
         return(
             <FiAlignLeft  
-                fontSize={30} 
+                fontSize={28} 
                 color="black" 
                 className='app__pointer app__icon_effect' 
                 id="sidebar-toggler" 
@@ -154,7 +154,7 @@ const Navbar = () => {
                 {
                     [undefined,null].includes(cookies.identification) ? (
                         <Link to="/signin" className="flex app__pointer app__navbar_links">
-                            <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
+                            <FiUser fontSize={28} color="black" className='profile_icon'></FiUser>
                             <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
                                 <span className="profile_link">Conta</span>
                                 <p style={{fontSize: '12px', opacity: '80%'}}>Iniciar sessão</p>
@@ -164,7 +164,7 @@ const Navbar = () => {
                     :
                     (
                         <Link to="/consumer/profile" className="flex app__pointer app__navbar_links">
-                            <FiUser fontSize={30} color="black" className='profile_icon'></FiUser>
+                            <FiUser fontSize={28} color="black" className='profile_icon'></FiUser>
                             <div className="app__navbar_profile_account" style={{margin: '0 .75rem'}}>
                                 <span className="profile_link">Conta</span>
                                 <p style={{fontSize: '12px', opacity: '80%'}}>Olá {cookies.identification}</p>
@@ -176,7 +176,7 @@ const Navbar = () => {
                     
                 <Link to="/cart" className="flex app__pointer app__navbar_links"  style={{marginRight:'0'}}>
                     <div className='app__navbar_profile_icon'>
-                        <FiShoppingCart fontSize={30} color="black" className='profile_icon'></FiShoppingCart>
+                        <FiShoppingCart fontSize={28} color="black" className='profile_icon'></FiShoppingCart>
                         {totalCartItems > 0 ? (
                             <p className='app__navbar_cartItems'>{totalCartItems}</p>
                         ) : (
