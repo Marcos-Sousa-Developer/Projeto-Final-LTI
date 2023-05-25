@@ -5,8 +5,6 @@ import { PriceDisplay } from '../../../utilities/formatCurrency';
 import './Cart.css';
 
 export const CartItem = (props) => { 
-
-    console.log(props.data)
     
     const {id, title, price, productImage} = props.data; 
 
