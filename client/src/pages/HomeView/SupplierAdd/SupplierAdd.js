@@ -41,8 +41,6 @@ function SupplierAdd() {
     catch(error) {
       setAds([] );
     }
-
-    
   } 
 
   useEffect(()=>{

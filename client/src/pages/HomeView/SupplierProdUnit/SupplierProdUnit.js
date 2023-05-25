@@ -26,32 +26,45 @@ const SupplierProdUnit = () => {
     const snackbarRef3 = useRef(null);
     const snackbarRef4 = useRef(null);
     const [productionUnits, setProductionUnits] = useState([]);
-    const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', capacity: '' });
+    const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', city: '', postal_code: '', capacity: '' });
     const [watchProductsIndex, setWatchProductsIndex] = useState([false, '']);
     const [productsProductionUnits, setProductsProductionUnits] = useState({});
-    const [adsProductionUnits, setAdsProductionUnits] = useState({});
     const [searchProd, setSearchProd] = useState([]);
     const [didMount, setDidMount] = useState(false)
+
+    const [quantity, setQuantity] = useState(0);
+
+    const handleSetQuantity = (event) => {
+        setQuantity(event.target.value)
+      }
 
     async function getProductionUnit(){
         let prodsUnitGet = await getAllFromDB("/productionUnits", {uid_supplier: true})
         if(typeof prodsUnitGet != "string") {
             setProductionUnits(prevState => [...prodsUnitGet])
         }
+        prodsUnitGet.map((productionUnit, index) => (
+            getProduct(productionUnit.id, index)
+        ))
     }
 
     async function getProduct(productionUnit_id, index){
+        let productsProductionUnit = await getAllFromDB("/productProductionUnits", {productionUnit_id: productionUnit_id });
+        if(productsProductionUnit != 'There is no product production unit in the database'){
+            setProductsProductionUnits((prevDict) => ({ ...prevDict, [index]: productsProductionUnit }))
+        } 
+    }
+
+    function setIndex(index){
         setSearchProd((prevArray) => [...prevArray, index]);
         setWatchProductsIndex([!watchProductsIndex[0], index])
-        let productsProductionUnit = await getAllFromDB("/productProductionUnits", {productionUnit_id: productionUnit_id });
-        setProductsProductionUnits((prevDict) => ({ ...prevDict, [index]: productsProductionUnit }))
     }
 
     function handleNewProductionUnitChange(event) {
       const { name, value } = event.target;
       setNewProductionUnit(prevState => ({ ...prevState, [name]: value }));
     }
-  
+
     async function handleEditProductionUnit(index, updatedProductionUnit) {
       // Create a new array with the production unit at the given index replaced with the updated production unit
       const updatedProductionUnits = productionUnits.map((productionUnit, i) =>
@@ -63,15 +76,27 @@ const SupplierProdUnit = () => {
       let prodUnitPut = await putToDB("/productionUnits/" + updatedProductionUnits[index].id,{
         name: updatedProductionUnits[index].name,
         location: updatedProductionUnits[index].location,
+        city: updatedProductionUnits[index].city,
+        postal_code: updatedProductionUnits[index].postal_code,
         capacity: updatedProductionUnits[index].capacity
     })
     }
+
+    async function handleEditProductProductionUnit(index, quantityProd) {
+        if(quantity != null){
+        let productProdUnitPut = await putToDB("/productProductionUnits/" + index,{
+                quantity: quantityProd
+            })
+        }
+      }
 
     const submitInsert = async () => {
         //CRIA O PRODUCTION UNIT
         let prodUnitPost = await postToDB("/productionUnits",{
             name: newProductionUnit.name,
             location: newProductionUnit.location,
+            city: newProductionUnit.city,
+            postal_code: newProductionUnit.postal_code,
             capacity: newProductionUnit.capacity,
             uid_supplier: true,
         })
@@ -79,14 +104,21 @@ const SupplierProdUnit = () => {
         // Add the new production unit to the list of production units stored in state
         setProductionUnits(prevState => [...prevState, newProductionUnit]);
         // Reset the form fields
-        setNewProductionUnit({ name: '', location: '', capacity: '' });
+        setNewProductionUnit({ name: '', location: '', city: '', postal_code: '', capacity: '' });
         // Add a new element to the modalOpen array
         setModalOpen(prevState => [...prevState, false]);
     }
 
-    const submitDelete = async (index) => {
+    const submitDeleteProdUnit = async (index) => {
         //APAGA O PRODUCTION UNIT
         await deleteToDB("/productionUnits/" + index)
+        location.reload()
+    }
+
+    const submitDeleteProduct = async (prodUnitID, productID) => {
+        //APAGA O PRODUTO DA PRODUCTION UNIT
+        let productProdUnit = await getAllFromDB("/productProductionUnits", {productionUnit_id: prodUnitID, ad_id: productID})
+        await deleteToDB("/productProductionUnits/" + productProdUnit[0].id)
         location.reload()
     }
 
@@ -96,7 +128,12 @@ const SupplierProdUnit = () => {
     }
 
     async function handleEliminarUnidade(index){
-        submitDelete(index);
+        submitDeleteProdUnit(index);
+        snackbarRef2.current.show();
+    }
+
+    async function handleEliminarProduto(prodUnitID, productID){
+        submitDeleteProduct(prodUnitID, productID);
         snackbarRef2.current.show();
     }
 
@@ -149,6 +186,9 @@ const SupplierProdUnit = () => {
                                 <input                         
                                     type="text"
                                     placeholder="Cidade"
+                                    name="city"
+                                    value={newProductionUnit.city}
+                                    onChange={handleNewProductionUnitChange}
                                 />
                             </div> 
                             <div className='inputField'>
@@ -156,13 +196,16 @@ const SupplierProdUnit = () => {
                                 <input                         
                                     type="text"
                                     placeholder="Cód. Postal"
+                                    name="postal_code"
+                                    value={newProductionUnit.postal_code}
+                                    onChange={handleNewProductionUnitChange}
                                 />
                             </div> 
                         </div>
                         <div className='inputField'>
                             <p>Capacidade:</p>
                             <input                         
-                                type="text"
+                                type="number"
                                 placeholder="Capacidade"
                                 name="capacity"
                                 value={newProductionUnit.capacity}
@@ -219,6 +262,8 @@ const SupplierProdUnit = () => {
                                                             id: productionUnit.id,
                                                             name: event.target.name.value,
                                                             location: event.target.location.value,
+                                                            city: event.target.city.value,
+                                                            postal_code: event.target.postal_code.value,
                                                             capacity: event.target.capacity.value,
                                                         });
                                                         setModalOpen2(prevState => {
@@ -257,6 +302,8 @@ const SupplierProdUnit = () => {
                                                             <input                         
                                                                 type="text"
                                                                 placeholder="Cidade"
+                                                                name="city"
+                                                                defaultValue={productionUnits[index].city}
                                                             />
                                                         </div> 
                                                         <div className='inputField'>
@@ -264,13 +311,15 @@ const SupplierProdUnit = () => {
                                                             <input                         
                                                                 type="text"
                                                                 placeholder="Cód. Postal"
+                                                                name="postal_code"
+                                                                defaultValue={productionUnits[index].postal_code}
                                                             />
                                                         </div> 
                                                     </div>
                                                     <div className='inputField'>
                                                         <p>Capacidade:</p>
                                                         <input                         
-                                                            type="text"
+                                                            type="number"
                                                             placeholder="Capacidade"
                                                             name="capacity"
                                                             defaultValue={productionUnits[index].capacity}
@@ -323,17 +372,22 @@ const SupplierProdUnit = () => {
                                             </Modal>
                                         </div>
                                     </td>
-                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={async () => getProduct(productionUnit.id, index)} >Ver Produtos <FiChevronDown></FiChevronDown></button></td>                            
+                                    <td style={{paddingRight:'0'}} data-cell='Produtos: '><button onClick={async () => setIndex(index)}>Ver Produtos<FiChevronDown></FiChevronDown></button></td>                            
                                 </tr>
-                                {(searchProd.includes(index) && productsProductionUnits[index] != undefined && watchProductsIndex[0] && watchProductsIndex[1] == index) && (
-                                    <>
+                                {(searchProd.includes(index) && watchProductsIndex[0] && watchProductsIndex[1] == index) && (
+                                    productsProductionUnits[index] == undefined ? (
+                                        <tr>
+                                            <p>Esta unidade de produção ainda não tem produtos</p>
+                                        </tr>
+                                    ):(
+                                        <>
                                         <p style={{margin:'.5rem 0 0.25rem 2.5rem', fontWeight:'500'}}>Produtos</p>
                                         <tr>
                                             <td colSpan={5} style={{padding: '0 0 1rem 2.5rem'}}>
                                             <table className='inner-table' style={{width: '100%'}}>
                                                 <thead>
                                                     <tr>
-                                                        <th style={{ fontSize: '14px'}}>Titulo</th>
+                                                        <th style={{ fontSize: '14px'}}>Título</th>
                                                         <th style={{ fontSize: '14px'}}>Preço</th>
                                                         <th style={{ fontSize: '14px'}}>Quant.</th>
                                                         <th style={{padding: '.25rem 0 .25rem 0'}}></th>
@@ -341,17 +395,20 @@ const SupplierProdUnit = () => {
                                                 </thead>
                                                 <tbody>
                                                     {productsProductionUnits[index].map((product, idx) => (
+                                                        //setQuantity(product.quantity),
                                                         <tr>
                                                             <td data-cell='Título: ' style={{ fontSize: '14px'}}>{product.title}</td>
                                                             <td data-cell='Preço: ' style={{ fontSize: '14px'}}>{product.price} €</td>
                                                             <td data-cell='Quant.: ' style={{ fontSize: '14px'}}>{product.quantity}</td>
                                                             <td style={{padding: '.25rem 0 .25rem 0'}}>
-                                                                <div>
-                                                                    <button onClick={() => setModalOpen3(prevState => {
+                                                                    <button 
+                                                                    onClick={() => {
+                                                                        setModalOpen3(prevState => {
                                                                         const newState = [...prevState];
                                                                         newState[idx] = true;
                                                                         return newState;
-                                                                    })}><FiEdit3></FiEdit3></button>
+                                                                    })
+                                                                    setQuantity(product.quantity)}}><FiEdit3></FiEdit3></button>
                                                                     <Modal open={modalOpen3[idx]} onClose={() => setModalOpen3(prevState => {
                                                                         const newState = [...prevState];
                                                                         newState[idx] = false;
@@ -361,9 +418,11 @@ const SupplierProdUnit = () => {
                                                                     <div className='inputField'>
                                                                             <p>Quantidade:</p>
                                                                             <input                         
-                                                                                type="text"
+                                                                                type="number"
                                                                                 placeholder="Quantidade"
                                                                                 name="quantity"
+                                                                                defaultValue={quantity}
+                                                                                onChange={handleSetQuantity}
                                                                             />
                                                                         </div> 
                                                                     <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
@@ -375,9 +434,17 @@ const SupplierProdUnit = () => {
                                                                                         newState[idx] = false;
                                                                                         return newState;
                                                                                     })}>Cancelar</button>
-                                                                            <button 
-                                                                                className='main__negative_action_btn' 
-                                                                                >Guardar</button>
+                                                                            <button className='main__negative_action_btn' type="submit"
+                                                                                onClick={(event) => {
+                                                                                event.preventDefault();
+                                                                                handleEditProductProductionUnit(product.id, quantity)
+                                                                                setModalOpen3(prevState => {
+                                                                                        const newState = [...prevState];
+                                                                                        newState[idx] = false;
+                                                                                        return newState;
+                                                                                })
+                                                                                product.quantity=quantity}
+                                                                                }>Guardar</button>
                                                                             <SnackBar
                                                                                 ref={snackbarRef3}
                                                                                 message="Unidade Produção eliminada!"
@@ -385,8 +452,36 @@ const SupplierProdUnit = () => {
                                                                             />
                                                                         </div>
                                                                     </Modal>
-                                                                    <button><FiTrash2></FiTrash2></button>
-                                                                </div>
+                                                                    <button onClick={() => setModalOpen(prevState => {
+                                                                        const newState = [...prevState];
+                                                                        newState[index] = true;
+                                                                        return newState;
+                                                                    })}><FiTrash2></FiTrash2></button>
+                                                                    <Modal open={modalOpen[index]} onClose={() => setModalOpen(prevState => {
+                                                                        const newState = [...prevState];
+                                                                        newState[index] = false;
+                                                                        return newState;
+                                                                    })}>
+                                                                        <p style={{fontSize:'18px'}}>Tem a certeza que quer apagar o produto desta unidade de produção?</p>
+                                                                        <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                                                                            <button 
+                                                                                className='main__action_btn' 
+                                                                                onClick={() => 
+                                                                                    setModalOpen(prevState => {
+                                                                                        const newState = [...prevState];
+                                                                                        newState[index] = false;
+                                                                                        return newState;
+                                                                                    })}>Cancelar</button>
+                                                                            <button 
+                                                                                className='main__negative_action_btn' 
+                                                                                onClick={() => handleEliminarProduto(productionUnit.id, product.id)}>Apagar</button>
+                                                                            <SnackBar
+                                                                                ref={snackbarRef2}
+                                                                                message="Unidade Produção eliminada!"
+                                                                                type={SnackbarType.success}
+                                                                            />
+                                                                        </div>
+                                                                    </Modal>
                                                             </td>
                                                         </tr>
                                                     ))}
@@ -395,6 +490,7 @@ const SupplierProdUnit = () => {
                                             </td>
                                         </tr>
                                     </>
+                                    ) 
                                 )}    
                                 </>
                             ))}

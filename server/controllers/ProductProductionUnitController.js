@@ -75,6 +75,8 @@ const deleteProductProductionUnitByID = async function (req, res) {
 
     const statement = "DELETE FROM productProductionUnits WHERE id = " + req.params.id
 
+    console.log(statement)
+
     let result = await dbConnection(statement)
 
     if (result === "error") {
