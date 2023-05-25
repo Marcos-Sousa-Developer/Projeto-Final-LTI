@@ -3,7 +3,7 @@ import {NavbarSupplier, Footer, SubHeading, Searchbar} from '../../../components
 import './SupplierPage.css';
 import LoadingPage from '../../LoadingPage';
 import getAllFromDB from '../../../hooks/getAllFromDB'; 
-import SupplierBar from '../SupplierBar/SupplierBar';
+import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 import LocalImpact from './SupplierOrderReport/LocalImpact';
 
 let tableLocationData = {}
@@ -107,7 +107,7 @@ function SupplierPage() {
         <NavbarSupplier></NavbarSupplier>
         <div className='app__SupplierPage main__container'>   
           <SubHeading title="Home"/>
-          <SupplierBar></SupplierBar>
+          <SupplierBar active1='active'></SupplierBar>
           <div className='app__SupplierPage_boxes'>
             <div className='app__SupplierPage_boxesEsquerda'>
               <div className='app__SupplierPage_boxesEsquerda1'>

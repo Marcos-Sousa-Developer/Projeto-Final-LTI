@@ -13,7 +13,7 @@ import Features from './Features';
 import SubFeatures from './SubFeatures';
 import "./styles/CriarAnuncio.css";
 import "../../../components/InputField/InputField.css";
-import SupplierBar from '../SupplierBar/SupplierBar';
+import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 
 function CriarAnuncio() {
       

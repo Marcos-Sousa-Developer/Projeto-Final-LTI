@@ -9,7 +9,7 @@ import {NavbarSupplier, Footer, SubHeading, SnackBar, Modal} from '../../../comp
 import './SupplierProfile.css';
 import LoadingPage from '../../LoadingPage';
 import logOut from '../../../hooks/logOut';
-import SupplierBar from '../SupplierBar/SupplierBar';
+import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 import axios from 'axios';
 
 const SnackbarType = {

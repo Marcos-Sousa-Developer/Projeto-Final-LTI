@@ -9,6 +9,7 @@ import {Navbar, Footer, SubHeading, SnackBar, Modal} from '../../../components/i
 import './ConsumerProfile.css';
 import LoadingPage from '../../LoadingPage';
 import logOut from '../../../hooks/logOut';
+import ConsumerBar from '../../../components/ConsumerBar/ConsumerBar';
 
 const SnackbarType = {
   success: "success",
@@ -231,12 +232,7 @@ function ConsumerProfile() {
       />
       <div className='app__ConsumerProfile main__container'>   {/*este div tem de ser um form secalhar*/}
         <SubHeading title="Conta"/>
-        <div className='app__ConsumerProfile_options'>
-          <ul>
-            <li><span></span><a className='option active app__text_effect' href="profile">Dados Pessoais</a></li>
-            <li><a className='app__text_effect' href="ordersHistory">Encomendas</a></li>
-          </ul>
-        </div>
+        <ConsumerBar active1='active'></ConsumerBar>
         <div className='app__ConsumerProfile_border'>
           <p>Dados da Minha Conta</p>
           <div className='app__ConsumerProfile_box'>

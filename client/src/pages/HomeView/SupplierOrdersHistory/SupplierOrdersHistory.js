@@ -3,7 +3,7 @@ import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import { NavbarSupplier, Footer, SubHeading } from '../../../components/index';
 import './SupplierOrdersHistory.css';
-import SupplierBar from '../SupplierBar/SupplierBar';
+import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 
 const SupplierOrdersHistory = () => {
     const [ordersHistory, setSupplierOrder] = useState([]);
@@ -46,7 +46,7 @@ const SupplierOrdersHistory = () => {
       <div className='app__prod-unit main__container'>
         <SubHeading title="Histórico de encomendas"/>
         <br></br>
-        <SupplierBar></SupplierBar>
+        <SupplierBar active5='active'></SupplierBar>
           {ordersHistory.length > 0 && (
             <>
               <table className='app__prod-unit_existing-units'>

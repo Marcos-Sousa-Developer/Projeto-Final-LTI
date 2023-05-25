@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import {NavbarSupplier, Footer, SubHeading, Searchbar} from '../../../components/index';
 import './styles/Anunciar.css';
-import SupplierBar from '../SupplierBar/SupplierBar';
+import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 
 const Anunciar = () => {
 

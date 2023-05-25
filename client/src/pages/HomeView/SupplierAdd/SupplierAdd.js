@@ -5,7 +5,7 @@ import { PriceDisplay } from '../../../utilities/formatCurrency';
 
 import {NavbarSupplier, Footer, SubHeading} from '../../../components/index';
 import './SupplierAdd.css';
-import SupplierBar from '../SupplierBar/SupplierBar';
+import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 
 function SupplierAdd() {
 
@@ -65,7 +65,7 @@ function SupplierAdd() {
         <div className='app__SupplierAdd'>   
             <SubHeading title="Home"/>
             <br></br>
-            <SupplierBar></SupplierBar>
+            <SupplierBar active2='active'></SupplierBar>
             <div className='app__SupplierAdd_Box'>
               <table>
                 <thead>

@@ -3,6 +3,7 @@ import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import { Navbar, Footer, SubHeading } from '../../../components/index';
 import './ConsumerOrdersHistory.css';
+import ConsumerBar from '../../../components/ConsumerBar/ConsumerBar';
 
 const ConsumerOrdersHistory = () => {
     const [ordersHistory, setConsumerOrder] = useState([]);
@@ -24,6 +25,41 @@ const ConsumerOrdersHistory = () => {
       }
       setConsumerOrder(lista)
     }
+
+    const exportJson = () => {
+      const fileName = "encomendas";
+      let data = []
+      for(let i=0; i < ordersHistory.length; i++) {
+        let toExport = {
+          numero_encomenda: ordersHistory[i].order.order_id,
+          estado_encomenda: ordersHistory[i].order.order_status,
+          localizacao_consumidor: ordersHistory[i].order.buyer_location,
+          data_encomenda: ordersHistory[i].order.created_at,
+          categoria_produto:ordersHistory[i].order.product_category,
+          subcategoria_produto:ordersHistory[i].order.product_subcategory,
+          subsubcategoria_produto:ordersHistory[i].order.product_subsubcategory,
+          preco:ordersHistory[i].order.price,
+          nome_produto:ordersHistory[i].ad_name,
+          localizacao_produto: ordersHistory[i].order.product_location
+        }
+        data.push(toExport)
+      }
+      const json = JSON.stringify(data);
+      const blob = new Blob([json], { type: "application/json" });
+      const href = URL.createObjectURL(blob);
+
+      // create "a" HTLM element with href to file
+      const link = document.createElement("a");
+      link.href = href;
+      link.download = fileName + ".json";
+      document.body.appendChild(link);
+      link.click();
+
+      // clean up "a" element & remove ObjectURL
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+
+    }
     
     //Aparecer no loading da página
     useEffect(()=>{
@@ -44,6 +80,9 @@ const ConsumerOrdersHistory = () => {
       <Navbar></Navbar>
       <div className='app__prod-unit main__container'>
         <SubHeading title="Histórico de encomendas"/>
+        <ConsumerBar active2='active'></ConsumerBar>
+        <br></br>
+        <button className='active app__text_effect' style={{color: "green"}} onClick={() => exportJson()}>Exportar dados de Encomenda</button>
         <div className='app__ConsumerHistory_Orders'>
           {ordersHistory.length > 0 && (
             <>
