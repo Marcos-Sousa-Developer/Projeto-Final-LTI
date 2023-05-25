@@ -20,8 +20,15 @@ const encryptID = (id) => {
  * @returns decrypt uid
  */
 const decryptID = (hashedUid) => {
+
+    try {
+        return CryptoJS.AES.decrypt(hashedUid, process.env.CLIENT_ID_TO_UID).toString(CryptoJS.enc.Utf8);
+    }
+    catch {
+        return null
+    }
     
-    return CryptoJS.AES.decrypt(hashedUid, process.env.CLIENT_ID_TO_UID).toString(CryptoJS.enc.Utf8);
+    
 }
 
 /**

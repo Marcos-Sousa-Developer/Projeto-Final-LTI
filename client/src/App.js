@@ -36,7 +36,7 @@ function App() {
 
     let response = await getClientType()   
 
-    if(response) {
+    if(response != false) {
 
       let type = response[0]
       let name = response[1]

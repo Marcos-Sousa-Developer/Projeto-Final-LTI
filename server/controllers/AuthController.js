@@ -175,6 +175,10 @@ const registerUser = async (req,res) => {
 const getUserType = async (req, res) => { 
 
   try {
+    
+    if (req.cookies.orderCreated) {
+      res.clearCookie('orderCreated', {httpOnly: true,path: '/' });
+    }
     const uid_encrypt = req.cookies.userSession;
 
     let uid_decrypt = jwt.decryptID(uid_encrypt) 
@@ -184,11 +188,17 @@ const getUserType = async (req, res) => {
     let result = await dbConnection(statement) 
 
     const user_type = result[0].user_type
+
     const name = result[0].name.split(" ")[0]
 
     return res.send([user_type,name]);
   }
   catch(error) {
+    res.clearCookie('refreshToken', { httpOnly: true, path: '/' });
+    res.clearCookie('identification', { httpOnly: true, path: '/' });
+    res.clearCookie('idToken', { httpOnly: true, path: '/' });
+    res.clearCookie('userSession', { httpOnly: true, path: '/' });
+    res.clearCookie('accessToken', { httpOnly: true, path: '/' });
     return res.send(false);
 }
 
