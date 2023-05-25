@@ -114,10 +114,10 @@ const deleteProductionUnitByID = async function (req, res) {
  */
 const insertProductionUnit = async function (req, res) {
 
-    const data = [req.query.name, req.query.location, req.query.capacity, 
+    const data = [req.query.name, req.query.city, req.query.location, req.query.postal_code, req.query.capacity, 
                 jwt.decryptID(req.cookies.userSession)];
 
-    const statement = "INSERT INTO productionUnits (name, location, capacity, " +
+    const statement = "INSERT INTO productionUnits (name, city, location, postal_code, capacity, " +
                     "uid_supplier) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
@@ -159,8 +159,6 @@ const updateProductionUnitByID = async function (req, res) {
     }
 
     statement += ` WHERE id='${parseInt(req.params.id)}';`;
-
-    console.log(statement)
 
     let result = await dbConnection(statement);
 
