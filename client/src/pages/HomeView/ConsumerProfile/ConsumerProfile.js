@@ -10,6 +10,7 @@ import './ConsumerProfile.css';
 import LoadingPage from '../../LoadingPage';
 import logOut from '../../../hooks/logOut';
 import ConsumerBar from '../../../components/ConsumerBar/ConsumerBar';
+import axios from 'axios';
 
 const SnackbarType = {
   success: "success",
@@ -17,21 +18,27 @@ const SnackbarType = {
 };
 
 function ConsumerProfile() {
-  //---------------------Modal---------------
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); //modal
+  const snackbarRef = useRef(null); //SnackBar
+  const [snackbarType, setSnackbarType] = useState(SnackbarType.success); //SnackBar
 
-  //-------------------SnackBar--------------
-  const snackbarRef = useRef(null);
-  const [snackbarType, setSnackbarType] = useState(SnackbarType.success);
+  //erros
+  const [CPerror, setCPError] = useState(false); 
+  const [Nameerror, setNameError] = useState(false); 
+  const [Emailerror, setEmailError] = useState(false); 
+  const [Niferror, setNifError] = useState(false); 
+  const [Numbererror, setNumberError] = useState(false); 
+  const [overallError, setOverallError] = useState(false);
 
-  //-----------------------------------------
-
-  const [id, setID] = useState(null)        
+  //info
+  const [id, setID] = useState(null)       
   const [name, setName] = useState(null)
   const [email, setEmail] = useState(null)
   const [nif, setNif] = useState(null)
   const [mobile_number, setMobileNumber] = useState(null)
+  const [city, setCity] = useState(null)
   const [address, setAddress] = useState(null)
+  const [postalCode, setPostalCode] = useState(null)
 
   const [didMount, setDidMount] = useState(false)
 
@@ -44,7 +51,9 @@ function ConsumerProfile() {
     setEmail(consumer[0].email)
     setNif(consumer[0].nif)
     setMobileNumber(consumer[0].mobile_number)
+    setCity(consumer[0].city)
     setAddress(consumer[0].address)
+    setPostalCode(consumer[0].postal_code)
     setDidMount(true)
   }
 
@@ -53,23 +62,57 @@ function ConsumerProfile() {
   }, [])
 
   const handleSetName = (event) => {
-    setName(event.target.value)
+      setName(event.target.value)
   }
 
   const handleSetEmail = (event) => {
-      setEmail(event.target.value)
+      let email = event.target.value;
+      setEmail(email);
+      verifyEmail(email);
   }
 
   const handleSetNif = (event) => {
-      setNif(event.target.value)
+      let nif = event.target.value;
+      setNif(nif);
+      verifyNif(nif);
   }
 
   const handleSetMobileNumber = (event) => {
-      setMobileNumber(event.target.value)
+      let number = event.target.value;
+      setMobileNumber(number);
+      verifyMobileNumber(number);
   }
 
-  const handleSetAddress = (event) => {
-      setAddress(event.target.value)
+  const handleSetCity = (value) => {
+      setCity(value);
+  }
+
+  const handleSetAddress = (value) => {
+      setAddress(value);
+  }
+
+  const handleSetPostalCode = async (event) => { 
+    setPostalCode(event.target.value)
+    console.log(event.target.value)
+    await axios.get('https://json.geoapi.pt/cp/'+event.target.value) 
+    .then((response) => { 
+      console.log(response)
+      setCPError(false)
+      let distrito = response.data.Distrito
+      let concelho = response.data.Concelho
+      let localidade = response.data.Localidade
+      let morada = response.data.partes[0]["Artéria"]
+      console.log(morada)
+      handleSetCity(concelho)
+      handleSetAddress(morada)
+      setPostalCode(event.target.value)
+    })
+    .catch((CPerror) => {
+      console.log(CPerror)
+      console.log("ok")
+      setCPError(true)
+    })
+    
   }
 
   function verifyName(name){
@@ -84,45 +127,70 @@ function ConsumerProfile() {
       //tem de ter um @
       
       if(email != null && email != ""){
-        if(!email.includes("@")){
+        let i = email.indexOf("@")
+        if(i == -1 || i == 0){
+          setEmailError(true);
           return "Deve de inserir um email válido";
         }
+        if(email[i+1] == undefined){
+          setEmailError(true);
+          return "Deve de inserir um email válido";
+        }
+        setEmailError(false);
       }
       return "OK"
   }
 
   function verifyNif(nif){
-      //Retorna OK se estiver tudo bem, se não, retorna o erro 
-      //podem ser null
-      //9 algarismos
-      if(nif != null && nif != ""){
-          if(nif.length != 9){
-              // O NIF deve ter 9 dígitos
-              return "O NIF deve ter 9 dígitos";
-          }
-          for (var i = 0; i < nif.length; i++) {
-              var digit = parseInt(nif[i], 10);
-              if (isNaN(digit)) {
-                // O NIF deve conter apenas dígitos numéricos
-                return "O NIF deve conter apenas dígitos numéricos";
-              }
-          }
-      }
-      return "OK"
+    //Retorna OK se estiver tudo bem, se não, retorna o erro 
+    //podem ser null
+    //9 algarismos
+    if(nif != null && nif != ""){
+        if(nif.length != 9){
+            // O NIF deve ter 9 dígitos
+            setNifError(true);
+            return "O NIF deve ter 9 dígitos";
+        }
+        for (var i = 0; i < nif.length; i++) {
+            var digit = parseInt(nif[i], 10);
+            if (isNaN(digit)) {
+              // O NIF deve conter apenas dígitos numéricos
+              setNifError(true);
+              return "O NIF deve conter apenas dígitos numéricos";
+            }
+        }
+        setNifError(false);
+    }
+    return "OK"
   }
 
   function verifyMobileNumber(mobile_number){
-      //Retorna OK se estiver tudo bem, se não, retorna o erro 
-      //podem ser null
-      //9 algarismos ?? depende do código do pais
-      return "OK"
-  }
+    //Retorna OK se estiver tudo bem, se não, retorna o erro 
+    //podem ser null
+    //9 algarismos ?? depende do código do pais
 
-  function verifyAddress(address){
-      //Retorna OK se estiver tudo bem, se não, retorna o erro 
-      //podem ser null
-      return "OK"
-  }
+    if(mobile_number != null && mobile_number != ""){
+      if(mobile_number.length != 9){
+        setNumberError(true);
+        return "O número de telemóvel deve ter 9 dígitos";
+      }
+      for (var i = 0; i < mobile_number.length; i++) {
+        var digit = parseInt(mobile_number[i], 10);
+        if (isNaN(digit)) {
+          // O número de telemóvel deve conter apenas dígitos numéricos
+          setNumberError(true);
+          return "O número de telemóvel deve conter apenas dígitos numéricos";
+        }
+      }
+      if(mobile_number[0] != "9"){
+        //O número de telemóvel deve de começar pelo dígito 9
+        setNumberError(true);
+        return "O número de telemóvel deve de começar pelo dígito 9";
+      }
+      setNumberError(false);
+    }
+    return "OK"
+}
 
   const submit = async () => {
 
@@ -130,58 +198,31 @@ function ConsumerProfile() {
     let validEmail = verifyEmail(email);
     let validNif = verifyNif(nif);
     let validMobileNumber = verifyMobileNumber(mobile_number);
-    let validAddress = verifyAddress(address);
-
     let consumerUpdated;
 
     if(!((name == null || name == "") && (email == null || email == "") && (nif == null || nif == "") && (mobile_number == null || mobile_number == "") && (address == null || address == ""))){
-      if(validName == "OK" && validEmail == "OK" && validNif == "OK" && validMobileNumber == "OK" && validAddress == "OK" ){
+      if(!Nameerror && !Emailerror && !Niferror && !Numbererror && !CPerror){
         consumerUpdated = await putToDB("/consumers/" + id,{
           name: name,
           email: email,
           nif: nif,
           mobile_number: mobile_number,
+          city: city,
           address: address,
+          postal_code: postalCode,
         })
-      } 
+      }    
 
-      //let text = "Não foi possivel alterar os dados\n";
       if(consumerUpdated == true){
-          /*text = "Dados alterados"
-          location.reload();
-          alert(text)*/
-
-
-          //console.log("sucesso");
           setSnackbarType(SnackbarType.success);
           snackbarRef.current.show();
-          //location.reload();
-      } else if(validName != "OK" || validEmail != "OK" || validNif != "OK" || validMobileNumber != "OK" || validAddress != "OK"){
-          /*if(validName != "OK" ){
-            text += validName + "\n"
-          }
-          if(validEmail != "OK" ){
-            text += validEmail + "\n"
-          }
-          if (validNif != "OK"){
-            text += validNif + "\n"
-          }
-          if(validMobileNumber != "OK" ){
-            text += validMobileNumber + "\n"
-          }
-          if(validAddress != "OK" ){
-              text += validAddress + "\n"
-          }
-          alert(text) */
-
-
-          //console.log("insucesso");
+      } else{
           setSnackbarType(SnackbarType.fail);
           snackbarRef.current.show();
-          //location.reload();
       } 
     }
   }
+
   //-------------------Password Checker------------------------
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -239,55 +280,71 @@ function ConsumerProfile() {
             <div className='app__ConsumerProfile_box_div'>
               <div className='app__ConsumerProfile_box_div_row'>
                 Nome
-                <div className='app__ConsumerProfile_box_div_row_input'>
+                <div className={!Nameerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
                   <FiUser></FiUser>
                   <input type="text" placeholder="Nome" value = {name ?? ""} name="name" onChange={handleSetName}></input>
                 </div>
               </div>
               <div className='app__ConsumerProfile_box_div_row'>
                 Telemóvel
-                <div className='app__ConsumerProfile_box_div_row_input'>
+                <div className={!Numbererror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
                   <FiSmartphone></FiSmartphone>
                   <input type="tel" placeholder="Número de telemóvel" value = {mobile_number ?? ""} name="mobile_number" onChange={handleSetMobileNumber}></input>
                 </div>
+                {
+                  Numbererror &&
+                    <div className='error_msg'>Número com formato errado.</div>
+                }
               </div>
               <div className='app__ConsumerProfile_box_div_row'>
                 NIF
-                <div className='app__ConsumerProfile_box_div_row_input'>
+                <div className={!Niferror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
                   <BiIdCard></BiIdCard>
                   <input type="text" placeholder="NIF" value = {nif ?? ""} name="nif" onChange={handleSetNif}></input>
                 </div>
+                {
+                  Niferror &&
+                    <div className='error_msg'>NIF com formato errado.</div>
+                }
               </div>
             </div>
             <div className='app__ConsumerProfile_box_div'>
               <div className='app__ConsumerProfile_box_div_row'>
                 Email
-                <div className='app__ConsumerProfile_box_div_row_input'>
+                <div className={!Emailerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
                   <FiMail></FiMail>
                   <input type="email" placeholder="Email" value = {email ?? ""} name="email" onChange={handleSetEmail}></input>
                 </div>
+                {
+                  Emailerror &&
+                    <div className='error_msg'>Email com formato errado.</div>
+                }
               </div>
               <div className='app__ConsumerProfile_box_div_row'>
                 Morada
                 <div className='app__ConsumerProfile_box_div_row_input'>
-                  <FiMapPin></FiMapPin>
-                  <input type="text" placeholder="Morada" value = {address ?? ""} name="address" onChange={handleSetAddress}></input>
+                  <FiMapPin style={{opacity: "0.4"}}></FiMapPin>
+                  <input style={{opacity: "0.4"}} type="text" placeholder="Morada" value = {address ?? ""} name="address" disabled></input>
                 </div>
               </div>
               <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}} className='app__SupplierProfile_box_div_row'>
                 <div>
                   Cidade
                   <div className='app__SupplierProfile_box_div_row_input'>
-                    <FiMapPin></FiMapPin>
-                    <input type="text" placeholder="Cidade"></input>
+                    <FiMapPin style={{opacity: "0.4"}}></FiMapPin>
+                    <input style={{opacity: "0.4"}} type="text" placeholder="Cidade" value = {city ?? ""} name="city" disabled></input>
                   </div>
                 </div>
                 <div>
                   Cód. Postal
-                  <div className='app__SupplierProfile_box_div_row_input'>
+                  <div className={!CPerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
                     <FiMapPin></FiMapPin>
-                    <input type="text" placeholder="Cód. Postal"></input>
+                    <input type="text" placeholder="Cód. Postal" value = {postalCode ?? ""} name="postalCode" onChange={handleSetPostalCode}></input>
                   </div>
+                  {
+                    CPerror &&
+                      <div className='error_msg'>Código postal não encontrado.</div>
+                  }
                 </div>
               </div>
             </div>
@@ -386,7 +443,8 @@ function ConsumerProfile() {
           <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
           <Modal open={isOpen} onClose={() => setIsOpen(false)}>
               <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os seus dados?</p>
-              <div className='inputField' style={{marginTop:'2rem', textAlign:'center'}}>
+              <div className='inputField' style={{marginTop:'1.5rem'}}>
+                <p style={{marginTop: '0'}}>Password</p>
                 <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password'></input>
               </div> 
               <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>

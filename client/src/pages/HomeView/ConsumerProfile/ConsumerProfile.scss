@@ -2,7 +2,7 @@
 
 .app__ConsumerProfile {
     margin: 1rem auto 2rem;
-
+    
     &_options{
 
         ul {
@@ -38,7 +38,7 @@
             color: rgba($color: $orange, $alpha: .8);
         }
     }
-
+    
     &_box{
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -58,10 +58,29 @@
             margin: .5rem 1.5rem .5rem;
 
             &_row {
-                margin: 1rem 0rem;
+                padding: 0 0 18px 0;
+                position: relative;
+
+                .error_msg{
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    font-size: $small_font;
+                    font-weight: 500;
+                    color: red;
+                }
     
                 &_input {
                     border: 3px solid $light_gray;
+                    border-radius: 10px;
+                    padding: 0.25rem 0.5rem;
+                    font-size: large;
+                    display: flex;
+                    align-items: center;
+                }
+
+                &_error_input{
+                    border: 3px solid red;
                     border-radius: 10px;
                     padding: 0.25rem 0.5rem;
                     font-size: large;

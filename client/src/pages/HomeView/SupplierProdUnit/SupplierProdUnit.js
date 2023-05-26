@@ -476,8 +476,8 @@ const SupplierProdUnit = () => {
                                                                                 className='main__negative_action_btn' 
                                                                                 onClick={() => handleEliminarProduto(productionUnit.id, product.id)}>Apagar</button>
                                                                             <SnackBar
-                                                                                ref={snackbarRef2}
-                                                                                message="Unidade Produção eliminada!"
+                                                                                ref={snackbarRef4}
+                                                                                message="Produto eliminado!"
                                                                                 type={SnackbarType.success}
                                                                             />
                                                                         </div>

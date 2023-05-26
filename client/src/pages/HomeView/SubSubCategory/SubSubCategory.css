@@ -187,6 +187,37 @@ img, picture {
 .app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content li a {
   font-size: 14px;
 }
+.app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content_title {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #EEEEEE;
+  margin: 0.5rem 0;
+}
+.app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content_title_up, .app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content_title_right {
+  transform: rotate(0deg);
+  transition: all 350ms ease;
+}
+.app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content_title:hover .app__SubSubCategory_filter_content_title_up {
+  transform: rotate(180deg);
+}
+.app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content_title:hover .app__SubSubCategory_filter_content_title_right {
+  transform: rotate(90deg);
+}
+.app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content_title:hover .app__SubSubCategory_filter_content_title_right > *, .app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content_title:hover .app__SubSubCategory_filter_content_title_up > *, .app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content_title:hover p {
+  color: #EB5C1F;
+}
+.app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content .hideFilter {
+  display: none;
+  transition: all 250ms ease-in-out;
+}
+.app__SubSubCategory_Grid_Esquerda .app__SubSubCategory_filter_content .showFilter {
+  display: contents;
+  transition: all 250ms ease-in-out;
+}
+.app__SubSubCategory_Grid_Direita .app__SubSubCategory_mobile_filter_content {
+  display: none;
+}
 .app__SubSubCategory_Grid_Direita .app__SubSubCategory_pagination {
   text-align: center;
 }
@@ -200,4 +231,18 @@ img, picture {
 }
 .app__SubSubCategory_Grid_Direita .app__SubSubCategory_pagination_pages:hover {
   color: rgba(235, 92, 31, 0.8);
+}
+
+@media screen and (max-width: 1050px) {
+  .app__SubSubCategory_Grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .app__SubSubCategory .app__SubSubCategory_mobile_filter_content {
+    display: block;
+  }
+  .app__SubSubCategory_Grid_Esquerda {
+    display: none;
+  }
 }/*# sourceMappingURL=SubSubCategory.css.map */

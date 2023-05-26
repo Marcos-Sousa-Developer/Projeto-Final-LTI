@@ -9,7 +9,6 @@ import {NavbarSupplier, Footer, SubHeading, SnackBar, Modal} from '../../../comp
 import './SupplierProfile.css';
 import LoadingPage from '../../LoadingPage';
 import logOut from '../../../hooks/logOut';
-import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 import axios from 'axios';
 
 const SnackbarType = {
@@ -435,7 +434,8 @@ function SupplierProfile() {
           <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>             
             <Modal open={isOpen} onClose={() => setIsOpen(false)}>
               <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os seus dados?</p>
-              <div className='inputField' style={{marginTop:'2rem', textAlign:'center'}}>
+              <div className='inputField' style={{marginTop:'1.5rem'}}>
+                <p style={{marginTop: '0'}}>Password</p>
                 <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password'></input>
               </div> 
               <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>

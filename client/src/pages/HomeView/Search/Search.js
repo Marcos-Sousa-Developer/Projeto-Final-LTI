@@ -31,6 +31,7 @@ const Search = () => {
     startIndex = (page - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, ads.length);
     currentItems = ads.slice(startIndex, endIndex);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   //Categories get and set

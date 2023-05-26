@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FiChevronRight, FiChevronLeft, FiChevronUp} from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft, FiChevronUp } from 'react-icons/fi';
 
 import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
@@ -57,6 +57,7 @@ const Category = () => {
     startIndex = (page - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, ads.length);
     currentItems = ads.slice(startIndex, endIndex);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   function sendToSubcategories(subcategoryName) {
@@ -210,15 +211,12 @@ const Category = () => {
                   <p style={{margin: '0'}}>Preço</p>
                   <span>{filterPrice ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
-                <ul className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
-                {Object.keys(subcategories).map((subcategory_name) => { 
-                    return ( 
-                      <li>
-                        <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <div className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
+                  Min.
+                  <input></input>
+                  Máx.
+                  <input></input>
+                </div>
               </div>
             </div> 
           </div> 

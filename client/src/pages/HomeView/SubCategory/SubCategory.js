@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft, FiChevronUp } from 'react-icons/fi';
 
 import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
@@ -17,6 +17,8 @@ let endIndex = 0;
 const SubCategory = () => {
 
   const [isOpen, setIsOpen] = useState(false);  //modal
+  const [filterCategory, setFilterCategory] = useState(false);
+  const [filterPrice, setFilterPrice] = useState(false);
   const [ads, setAds] = useState([])
   const [searchName, setSearchName] = useState(null)
   const [categoryName, setCategoryName] = useState("")
@@ -48,11 +50,13 @@ const SubCategory = () => {
     currentItems = adsDB.slice(startIndex, endIndex);
   }
 
+  //Paginação
   const goToPage = (page) => {
     setCurrentPage(page);
     startIndex = (page - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, ads.length);
     currentItems = ads.slice(startIndex, endIndex);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   function sendToSubSubcategories(subsubCategoryName) {
@@ -64,18 +68,21 @@ const SubCategory = () => {
     
   }
 
-  //Comparador
+  //Comparador de Produtos
+
   const addToSelectedProducts = (product) => {
     if (selectedProducts.length >= 4) {
       return;
     }
     setSelectedProducts([...selectedProducts, product]);
   };
+  
   const removeFromSelectedProducts = (product) => {
     setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
   };
 
-  //Paginação
+  //Formatação da Paginação
+
   const totalPages = Math.ceil(ads.length / itemsPerPage);
   const MAX_PAGES = 5;
   
@@ -121,6 +128,17 @@ const SubCategory = () => {
     }
   }
 
+  //Filter accordions
+
+  const toggleFilterCategory = () =>{
+    return setFilterCategory(!filterCategory);
+  }
+
+  const toggleFilterPrice = () =>{
+    return setFilterPrice(!filterPrice);
+  }
+
+  //UseEffect
 
   useEffect(()=>{ 
     setDidMount(false)
@@ -175,17 +193,33 @@ const SubCategory = () => {
           <div className='app__SubCategory_Grid_Esquerda'>
             <p>FILTROS</p>
             <div className='app__SubCategory_filter_content'>
-              <p>SubCategoria</p>
-              <hr></hr>
-              <ul>
-                {Object.keys(subsubcategories).map((subsubcategory_name) => { 
+              <div className='app__SubCategory_filter_unit'>
+                <div className='app__pointer app__SubCategory_filter_content_title' onClick={toggleFilterCategory}>
+                  <p style={{margin: '0'}}>Categoria</p>
+                  <span>{filterCategory ? <FiChevronUp className='app__SubCategory_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__SubCategory_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <ul className={filterCategory ? "hideFilter showFilter" : "hideFilter"}>
+                  {Object.keys(subsubcategories).map((subsubcategory_name) => { 
                     return ( 
                       <li>
-                        <a key={subsubcategory_name} onClick={() => sendToSubSubcategories(subsubcategory_name) }> {subsubcategory_name} ({subsubcategories[subsubcategory_name]})</a>
+                        <a className='app__pointer app__text_effect' key={subsubcategory_name} onClick={() => sendToSubSubcategories(subsubcategory_name) }> {subsubcategory_name} ({subsubcategories[subsubcategory_name]})</a>
                       </li>
                     );
                   })}
-              </ul>
+                </ul>
+              </div>
+              <div className='app__SubCategory_filter_unit'>
+                <div className='app__pointer app__SubCategory_filter_content_title' onClick={toggleFilterPrice}>
+                  <p style={{margin: '0'}}>Preço</p>
+                  <span>{filterPrice ? <FiChevronUp className='app__SubCategory_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__SubCategory_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <div className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
+                  Min.
+                  <input></input>
+                  Máx.
+                  <input></input>
+                </div>
+              </div>
             </div>
           </div> 
           <div className='app__SubCategory_Grid_Direita'>

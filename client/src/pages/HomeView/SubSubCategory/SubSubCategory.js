@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft, FiChevronUp} from 'react-icons/fi';
 
-import { Navbar, Footer, Product, SubHeading, ComparePopUp } from '../../../components/index';
+import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import './SubSubCategory.css';
@@ -15,6 +15,8 @@ let endIndex = 0;
 
 const SubSubCategory = () => {
 
+  const [isOpen, setIsOpen] = useState(false);  //modal
+  const [filterPrice, setFilterPrice] = useState(false);
   const [ads, setAds] = useState([])
   const [searchName, setSearchName] = useState(null)
   const [subsubCategoryName, setSubSubCategoryName] = useState("")
@@ -23,12 +25,13 @@ const SubSubCategory = () => {
   const [didMount, setDidMount] = useState(false)
   const [selectedProducts, setSelectedProducts] = useState([]);
 
-
+  //Paginação
   const goToPage = (page) => {
     setCurrentPage(page);
     startIndex = (page - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, ads.length);
     currentItems = ads.slice(startIndex, endIndex);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const getProductsbySearchName = async (subsubCategoryName, searchName) => {
@@ -58,7 +61,8 @@ const SubSubCategory = () => {
     setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
   };
 
-  //Paginação
+  //Formatação da Paginação
+
   const totalPages = Math.ceil(ads.length / itemsPerPage);
   const MAX_PAGES = 5;
   
@@ -103,6 +107,15 @@ const SubSubCategory = () => {
       ];
     }
   }
+
+    //Filter accordions
+  
+    const toggleFilterPrice = () =>{
+      return setFilterPrice(!filterPrice);
+    }
+  
+
+  //UseEffect
 
   useEffect(()=>{ 
     setDidMount(false)
@@ -153,7 +166,21 @@ const SubSubCategory = () => {
         </div>
         <div className='app__SubSubCategory_Grid'>
           <div className='app__SubSubCategory_Grid_Esquerda'>
-            <p>Filtros especificos</p>
+            <p>FILTROS</p>
+            <div className='app__SubSubCategory_filter_content'>
+              <div className='app__SubSubCategory_filter_unit'>
+                <div className='app__pointer app__SubSubCategory_filter_content_title' onClick={toggleFilterPrice}>
+                  <p style={{margin: '0'}}>Preço</p>
+                  <span>{filterPrice ? <FiChevronUp className='app__SubSubCategory_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__SubSubCategory_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <div className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
+                  Min.
+                  <input></input>
+                  Máx.
+                  <input></input>
+                </div>
+              </div>
+            </div>
           </div>
           <div className='app__SubSubCategory_Grid_Direita'>
             <div>

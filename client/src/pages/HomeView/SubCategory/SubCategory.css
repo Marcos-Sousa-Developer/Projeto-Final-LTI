@@ -187,6 +187,34 @@ img, picture {
 .app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content li a {
   font-size: 14px;
 }
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content_title {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #EEEEEE;
+  margin: 0.5rem 0;
+}
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content_title_up, .app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content_title_right {
+  transform: rotate(0deg);
+  transition: all 350ms ease;
+}
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content_title:hover .app__SubCategory_filter_content_title_up {
+  transform: rotate(180deg);
+}
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content_title:hover .app__SubCategory_filter_content_title_right {
+  transform: rotate(90deg);
+}
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content_title:hover .app__SubCategory_filter_content_title_right > *, .app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content_title:hover .app__SubCategory_filter_content_title_up > *, .app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content_title:hover p {
+  color: #EB5C1F;
+}
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content .hideFilter {
+  display: none;
+  transition: all 250ms ease-in-out;
+}
+.app__SubCategory_Grid_Esquerda .app__SubCategory_filter_content .showFilter {
+  display: contents;
+  transition: all 250ms ease-in-out;
+}
 .app__SubCategory_Grid_Direita .app__SubCategory_mobile_filter_content {
   display: none;
 }
@@ -206,15 +234,15 @@ img, picture {
 }
 
 @media screen and (max-width: 1050px) {
-  .app__SubCategory_Grid {
+  .app__Category_Grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-top: 1rem;
   }
-  .app__SubCategory .app__SubCategory_mobile_filter_content {
+  .app__Category .app__Category_mobile_filter_content {
     display: block;
   }
-  .app__SubCategory_Grid_Esquerda {
+  .app__Category_Grid_Esquerda {
     display: none;
   }
 }/*# sourceMappingURL=SubCategory.css.map */
