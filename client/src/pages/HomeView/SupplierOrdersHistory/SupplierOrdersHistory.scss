@@ -1,0 +1,104 @@
+@import "../../../index.scss";
+
+.app__SupplierHistory {
+    max-width: 1650px;
+    width: 95%;
+    margin: 1rem auto 2rem;
+
+    &_options{
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        li {
+            float: left;
+            padding-right: 10px;
+            padding-bottom: 10px;
+        }
+        
+        li:last-child {
+            border-right: none;
+        }
+        
+        li a {
+            display: block;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        li a:hover{
+            color: rgb(0, 0, 0);
+        }
+    }
+
+    &_Orders{
+      
+        border: $border;
+        //padding: 1rem 1rem 1rem 1rem;
+        min-height: 400px;
+        display:grid;
+        grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr 1fr;
+
+        table{
+            text-align: center;
+
+            thead {
+                margin-top: 0.5rem;
+                
+            }
+
+            tbody tr td{
+                //padding-bottom: 0.1rem;
+            }
+        }
+    }
+
+    &_button {
+        //display: flex;
+        justify-content: start;
+    }
+
+    &_password-checks{
+        margin: 0;
+        padding: 0;
+        font-size: $smaller_font;
+        margin-top: 1rem;
+
+        &_symbol-success>*>*{
+            color: rgb(107, 209, 34);
+        }
+
+        &_symbol-fail>*>*{
+            color: rgb(226, 14, 14);
+        }
+    }
+}
+
+.active {
+    font-weight: 500;
+}
+
+@media screen and (max-width: 800px) {
+
+    .app__ConsumerProfile {
+
+        &_box{
+
+            grid-template-columns: 1fr;
+            gap: 0;
+
+            &_div{
+                    margin: 0rem 1rem 0rem 1rem;
+            }
+        }
+
+        &_password-checks{
+            font-size: $small_font;
+        }
+    }
+}

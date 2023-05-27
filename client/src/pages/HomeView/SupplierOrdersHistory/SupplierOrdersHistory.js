@@ -54,7 +54,7 @@ const SupplierOrdersHistory = () => {
             <>
               <table className='app__prod-unit_existing-units'>
                 <thead>
-                  <tr>
+                  <tr style={{ marginTop: '20px' }}>
                     <th>Número da encomenda</th>&nbsp;&nbsp;
                     <th>Nome do produto</th>&nbsp;&nbsp;
                     <th>Localização do comprador</th>&nbsp;&nbsp;
