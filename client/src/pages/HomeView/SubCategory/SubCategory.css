@@ -234,15 +234,15 @@ img, picture {
 }
 
 @media screen and (max-width: 1050px) {
-  .app__Category_Grid {
+  .app__SubCategory_Grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-top: 1rem;
   }
-  .app__Category .app__Category_mobile_filter_content {
+  .app__SubCategory .app__SubCategory_mobile_filter_content {
     display: block;
   }
-  .app__Category_Grid_Esquerda {
+  .app__SubCategory_Grid_Esquerda {
     display: none;
   }
 }/*# sourceMappingURL=SubCategory.css.map */

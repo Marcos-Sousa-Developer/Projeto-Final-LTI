@@ -2,6 +2,8 @@
   margin: 1rem auto 2rem;
 }
 .app__market_place_content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+}
+.app__market_place_content_supplier_info {
+  margin-left: 1rem;
 }/*# sourceMappingURL=MarketPlace.css.map */

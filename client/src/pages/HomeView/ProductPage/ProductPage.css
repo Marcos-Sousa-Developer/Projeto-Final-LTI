@@ -206,6 +206,9 @@ img, picture {
   color: #EB5C1F;
   font-weight: bold;
 }
+.app__product_page_content_info_main .app__product_page_content_supplier {
+  margin: 1rem 0;
+}
 .app__product_page_content_info_main .app__product_page_content_description {
   border: 3px solid #EEEEEE;
   min-height: 5rem;
@@ -223,7 +226,7 @@ img, picture {
   width: 100%;
   margin-bottom: 1rem;
 }
-.app__product_page_content_info .app__product_page_content_supplier, .app__product_page_content_info .app__product_page_content_description {
+.app__product_page_content_info .app__product_page_content_description {
   padding: 1rem;
 }
 .app__product_page_content_info .app__product_page_content_actions {

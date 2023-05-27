@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { FiShoppingCart, FiMinus, FiPlus} from 'react-icons/fi';
+import { FiShoppingCart, FiMinus, FiPlus, FiUser, FiMapPin} from 'react-icons/fi';
 
 import product1 from "../../../assets/testproducts/Iphone.png";
 import product2 from "../../../assets/testproducts/cannon.png";
@@ -138,9 +138,13 @@ const ProductPage = () => {
                   <p className='app__product_page_content_title'>{adData.title}</p>
                   <PriceDisplay className='product_price' price={adData.price} />
                   <div className='app__product_page_content_supplier'>
-                    <p>Vendido por: {supplierProd.name}</p>
-                    <p>Morada: {supplierProd.address}, {supplierProd.city}</p>
-                    <Link to={`/market-place?${new URLSearchParams({id: idProduct}).toString()}`}>+ {suppliers.length -1 } anúncios deste produto </Link>
+                    <p style={{marginBottom: '.5rem'}}>Vendido por: <span style={{fontWeight: '500'}}>{supplierProd.name}</span></p>
+                    <div>
+                      <FiMapPin></FiMapPin> <span style={{fontWeight: '500'}}>{supplierProd.address}</span>, <span style={{fontSize: '14px'}}>{supplierProd.city}</span>  
+                    </div>
+                    {(suppliers.length - 1) > 0 &&
+                      <Link className='app__text_effect' to={`/market-place?${new URLSearchParams({id: idProduct}).toString()}`}>+ {suppliers.length -1 } anúncios deste produto </Link>
+                    }
                   </div>
                   <div className='app__product_page_content_description'>
                     {adData.description}
@@ -148,7 +152,7 @@ const ProductPage = () => {
                   <div className='app__product_page_content_actions'>
                     <div className='app__product_page_content_actions_1'>
                       <button><FiMinus></FiMinus></button>
-                      <input />
+                      <input></input>
                       <button><FiPlus></FiPlus></button>
                     </div>
                     <button 
