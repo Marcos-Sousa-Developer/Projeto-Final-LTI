@@ -183,8 +183,15 @@ const SubSubCategory = () => {
             </div>
           </div>
           <div className='app__SubSubCategory_Grid_Direita'>
-            <div>
-              <p>Filtros</p>
+            <div className='app__SubSubCategory_mobile_filter_content'>
+              <button className='main__action_btn' onClick={() => setIsOpen(true)}>FILTROS</button>
+              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                <p>Filtros</p>
+                <div>
+
+                </div>
+                <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()     }>Aplicar</button>
+              </Modal>
             </div>
             <div className='products'>  
             {currentItems.map((ad) => (

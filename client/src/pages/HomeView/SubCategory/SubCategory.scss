@@ -98,14 +98,14 @@
 
 
 @media screen and (max-width: 1050px){
-    .app__Category{
+    .app__SubCategory{
         &_Grid{
             grid-template-columns: 1fr;
             gap: 1.5rem;
             margin-top: 1rem;
         }
 
-        .app__Category_mobile_filter_content{
+        .app__SubCategory_mobile_filter_content{
             display: block;
         }
 

@@ -215,13 +215,11 @@ const Cart = () => {
                           {
                             postalCode === "" || morada === "" || cidade === "" || email === "" ? 
                             <>
-                            <button className='main__negative_action_btn'>Pagamento</button>
-                            <small style={{color:'red'}}>Insira os dados para encomenda</small>
+                              <button className='main__negative_action_btn'>Pagamento</button>
+                              <small style={{color:'red'}}>Insira os dados para encomenda</small>
                             </>
                             :
                             <button className='main__negative_action_btn' onClick={() => goToCheckout()}>Pagamento</button>
-
-                            
                           }
                           
                         </div>

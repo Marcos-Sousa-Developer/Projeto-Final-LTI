@@ -49,6 +49,10 @@
                     font-weight: bold;
                 }
 
+                .app__product_page_content_supplier{
+                    margin: 1rem 0;
+                }
+
                 .app__product_page_content_description{
                     border: $border;
                     min-height: 5rem;
@@ -72,7 +76,7 @@
                 }
             }
 
-            .app__product_page_content_supplier, .app__product_page_content_description{
+            .app__product_page_content_description{
                 padding: 1rem;
             }
             

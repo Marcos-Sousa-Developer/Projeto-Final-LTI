@@ -1,14 +1,21 @@
 import React, {useState, useEffect } from 'react';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiMapPin } from 'react-icons/fi';
 
 import { Navbar, Footer, SnackBar } from '../../../components/index';
+import { PriceDisplay } from '../../../utilities/formatCurrency';
 import './MarketPlace.css'
 
 import getAllFromDB from '../../../hooks/getAllFromDB';
+import { useNavigate } from 'react-router-dom';
 
 const MarketPlace = () => {
     const [suppliers, setSuppliers] = useState([])
     const [ads, setAds] = useState([])
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1);
+    }
 
     async function getAds(productId){
 
@@ -37,23 +44,30 @@ const MarketPlace = () => {
     <>
         <Navbar></Navbar>
         <div className='app__market_place main__container'>
-            <div>
-                <FiArrowLeft></FiArrowLeft> Voltar ao produto
+            <div onClick={goBack}>
+                <FiArrowLeft></FiArrowLeft> <a className='app__text_effect app__pointer'>Voltar ao produto</a>
             </div>
             <div className='app__market_place_content'>
-                <div>
-                    Info do produto (imagem, nome)
-                </div>
-                <div>
+                <div className='app__market_place_content_produt'>
                     {ads.map((key) => {
-                        return<p key={key}>{key.title} {key.price}</p>;
+                        return (
+                            <>
+                                <p>Imagem principal aqui</p>
+                                <p key={key}>{key.title}</p>
+                                <PriceDisplay className='product_price' price={key.price} />
+                            </>
+                        );
                     })}
-
+                </div>
+                <div className='app__market_place_content_supplier_info'>
                     {suppliers.map((element, index) => (
-                        <p key={element + index}>{element.name}</p>
+                        <div key={element + index}>
+                            <p style={{marginBottom: '.5rem'}}>Vendido por: <span style={{fontWeight: '500'}}>{element.name}</span></p>
+                            <div>
+                                <FiMapPin></FiMapPin> <span style={{fontWeight: '500'}}>{element.address}</span>, <span style={{fontSize: '14px'}}>{element.city}</span>  
+                            </div>
+                        </div>
                     ))}
-                    
-                    Um map aqui que cria um elemento dentro de uma lista para cada fornecedor com info do mesmo.
                 </div>
             </div>
         </div>
