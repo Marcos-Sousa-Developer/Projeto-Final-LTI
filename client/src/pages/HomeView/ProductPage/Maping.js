@@ -23,7 +23,7 @@ function Maping() {
   return (
     <div className="App">
       <Map
-        mapboxAccessToken="pk.eyJ1IjoiZ3J1cG8wMXB0aXB0ciIsImEiOiJjbGk5Yzh1MGoyMHQyM2ZvOTVpemg5ZXVuIn0.fVYJdVp_FeFoDoVKGFgvfQ"
+        mapboxAccessToken={process.env.REACT_APP_MAPBOX_KEY}
         style={{
           width: "600px",
           height: "600px",
