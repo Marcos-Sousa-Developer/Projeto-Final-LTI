@@ -1,3 +1,5 @@
+
+
 import React, {useState, useEffect} from 'react';
 import {FiChevronRight, FiChevronLeft, FiX, FiChevronDown, FiPlus, FiTrash2 } from 'react-icons/fi';
 
@@ -9,6 +11,7 @@ import putToDB from '../../../hooks/putToDB';
 import {teste} from '../../../utilities/teste';
 
 import {NavbarSupplier, Footer, SubHeading} from '../../../components/index';
+import LoadingPage from '../../LoadingPage';
 import Features from './Features';
 import SubFeatures from './SubFeatures';
 import "./styles/CriarAnuncio.css";
@@ -19,6 +22,18 @@ function CriarAnuncio() {
       
     const [productionUnits, setProductionUnit] = useState([]);
 
+    //Errors
+    const [titleError, setTitleError] = useState(false);
+    const [priceError, setPriceError] = useState(false);
+    const [descriptionError, setDescriptionError] = useState(false);
+    const [categoryError, setCategoryError] = useState(false);
+    const [numberError, setNumberError] = useState(false);
+    const [eanError, setEanError] = useState(false);
+    const [productionDateError, setProductionDateError] = useState(false);
+    const [verifyProdUnitsError, setVerifyProdUnitsError] = useState(false);
+    const [overallError, setOverallError] = useState(false);
+
+    //Anuncio Form
     const [formData, setFormData] = useState({
         EAN: "",
         titulo: "",
@@ -38,6 +53,8 @@ function CriarAnuncio() {
     });
 
     const [didMount, setDidMount] = useState(false)
+
+    //GETS
 
     async function getSupplierProdUnit(){
    
@@ -63,7 +80,6 @@ function CriarAnuncio() {
         email: supplier[0].email,
         telemovel: supplier[0].mobile_number })
     }
-
     async function getProduct(ean){
 
         let paramsProd = {
@@ -122,6 +138,7 @@ function CriarAnuncio() {
         });
     }
 
+    //useEffect
     useEffect(()=>{
         let url = new URL(window.location)
         let ean = url.searchParams.get("EAN")
@@ -132,14 +149,22 @@ function CriarAnuncio() {
         setDidMount(true)
     }, [])
 
+    //Verify info
     async function verifyTitle(title){
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //não pode ser null
-        if(title == "" || title == null) {
+        if(title == "" || title == null || title.length < 1) {
             // O título não pode ser nulo
-            return "Deve de inserir um título válido";
+            setTitleError(true);
+            return titleError;
         }
-        return "OK"
+        setTitleError(false);
+        return titleError;
+    }
+
+    function handleTitle(e){
+      setFormData({ ...formData, titulo: e.target.value });
+      verifyTitle(e.target.value);
     }
 
     async function verifyPrice(price){
@@ -147,14 +172,25 @@ function CriarAnuncio() {
         //não pode ser null
         if(price == "" || price == null) {
             // O preço não pode ser nulo
-            return "Deve de inserir um preço válido";
+            setPriceError(true);
+            //return "Deve de inserir um preço válido";
+            return priceError;
         } else {
-        if(isNaN(price)){
-          // O preço tem de ser um numero
-          return "Deve de inserir um preço válido";
-        }
-        return "OK"
+          if(isNaN(price)){
+            // O preço tem de ser um numero
+            setPriceError(true);
+            //return "Deve de inserir um preço válido";
+            return priceError;
+          }
+          setPriceError(false);
+          //return "OK"
+          return priceError;
         } 
+    }
+
+    function handlePrice(e){
+      setFormData({ ...formData, preco: e.target.value });
+      verifyPrice(e.target.value);
     }
 
     async function verifyDescription(description){
@@ -162,9 +198,13 @@ function CriarAnuncio() {
         //não pode ser null
         if(description == "" || description == null) {
             // A descrição não pode ser nula
-            return "Deve de inserir uma descrição válida";
+            setDescriptionError(true);
+            //return "Deve de inserir uma descrição válida";
+            return descriptionError;
         }
-        return "OK"
+        setDescriptionError(false);
+        //return "OK"
+        return descriptionError;
     }
 
     async function verifyCategory(category){
@@ -172,27 +212,13 @@ function CriarAnuncio() {
         //não pode ser null
         if(category == "" || category == null) {
             // A categoria não pode ser nula
-            return "Deve de inserir uma categoria válida";
+            setCategoryError(true);
+            //return "Deve de inserir uma categoria válida";
+            return categoryError;
         }
-        return "OK"
-    }
-
-    async function verifyEmail(email){
-      //Retorna OK se estiver tudo bem, se não, retorna o erro 
-      //não pode ser null
-      if(email == "" || email == null) {
-          // A categoria não pode ser nulo
-          return "Deve de inserir um email válido";
-      }else {
-        let i = email.indexOf("@")
-        if(i == -1 || i == 0){
-          return "Deve de inserir um email válido";
-        }
-        if(email[i+1] == undefined){
-          return "Deve de inserir um email válido";
-        }
-        return "OK"
-      }
+        setCategoryError(false);
+        //return "OK"
+        return categoryError;
     }
 
     async function verifyMobilePhone(mobile_number){
@@ -201,24 +227,39 @@ function CriarAnuncio() {
       //tem de ter 9 lagarismos e o primeiro tem de ser 9
       if(mobile_number == "" || mobile_number == null) {
           // O número de telemóvel não pode ser nulo
-          return "Deve de inserir um número de telemóvel válido";
+          setNumberError(true);
+          //return "Deve de inserir um número de telemóvel válido";
+          return numberError;
       }else {
         if(mobile_number.length != 9){
-          return "O número de telemóvel deve ter 9 dígitos";
+          setNumberError(true);
+          //return "O número de telemóvel deve ter 9 dígitos";
+          return numberError;
         }
         for (var i = 0; i < mobile_number.length; i++) {
           var digit = parseInt(mobile_number[i], 10);
           if (isNaN(digit)) {
             // O número de telemóvel deve conter apenas dígitos numéricos
-            return "O número de telemóvel deve conter apenas dígitos numéricos";
+            setNumberError(true);
+            //return "O número de telemóvel deve conter apenas dígitos numéricos";
+            return numberError;
           }
         }
         if(mobile_number[0] != "9"){
           //O número de telemóvel deve de começar pelo dígito 9
-          return "O número de telemóvel deve de começar pelo dígito 9";
+          setNumberError(true);
+          //return "O número de telemóvel deve de começar pelo dígito 9";
+          return numberError;
         }
-      return "OK"
+      setNumberError(false);
+      //return "OK"
+      return numberError;
       }
+    }
+
+    function handleNumber(e){
+      setFormData({ ...formData, telemovel: e.target.value });
+      verifyMobilePhone(e.target.value);
     }
 
     async function verifyProductionDate(dateString){
@@ -228,22 +269,34 @@ function CriarAnuncio() {
 
       if(dateString == "" || dateString == null) {
         // A data de produção não pode ser nula
-        return "Deve de inserir uma data de produção válida";
+        setProductionDateError(true);
+        //return "Deve de inserir uma data de produção válida";
+        return productionDateError;
       }
 
       var date = new Date(dateString);
       if (isNaN(date.getTime())) {
         // A data de produção tem de ser válida
-        return "Deve de inserir uma data de produção válida";
+        setProductionDateError(true);
+        //return "Deve de inserir uma data de produção válida";
+        return productionDateError;
       }
 
       var today = new Date();
       if((date < today) == false){
         //"A data de produção deve de ser anterior à data de hoje"
-        return "A data de produção deve de ser anterior ou igual à data de hoje";
+        setProductionDateError(true);
+        //return "A data de produção deve de ser anterior ou igual à data de hoje";
+        return productionDateError;
       } else {
-        return "OK";
+        //return "OK";
+        return productionDateError;
       }
+    }
+
+    function handleProductionDate(e){
+      setFormData({ ...formData, data_producao: e.target.value });
+      verifyProductionDate(e.target.value);
     }
 
     async function verifyEAN(EAN){
@@ -255,30 +308,44 @@ function CriarAnuncio() {
       let product = await getFromDB("/products/" + EAN);
       
       if(product.length == 1){
-        return "O produto com o EAN inserido já se encontra criado";
+        setEanError(true);
+        //return "O produto com o EAN inserido já se encontra criado";
+        return eanError;
       }
 
       if (EAN.length !== 8 && EAN.length !== 13) {
         // O EAN deve ter 8 ou 13 dígitos
-        return "O EAN deve ter 8 ou 13 dígitos";
+        setEanError(true);
+        //return "O EAN deve ter 8 ou 13 dígitos";
+        return eanError;
       }
 
       for (var i = 0; i < EAN.length - 1; i++) {
         var digit = parseInt(EAN[i], 10);
         if (isNaN(digit)) {
           // O EAN deve conter apenas dígitos numéricos
-          return "O EAN deve conter apenas dígitos numéricos";
+          setEanError(true);
+          //return "O EAN deve conter apenas dígitos numéricos";
+          return eanError;
         }
       }
       
       var lastDigit = parseInt(EAN[EAN.length - 1], 10);
       if (isNaN(lastDigit)) {
         // O EAN deve conter apenas dígitos numéricos
-        return "O EAN deve conter apenas dígitos numéricos";
+        setEanError(true);
+        //return "O EAN deve conter apenas dígitos numéricos";
+        return eanError;
       } else {
-        return "OK";
+        setEanError(false);
+        //return "OK";
+        return eanError;
       }
-      
+    }
+
+    function handleEAN(e){
+      setFormData({ ...formData, EAN: e.target.value });
+      verifyEAN(e.target.value);
     }
 
     async function verifyFeatures(features){
@@ -287,7 +354,7 @@ function CriarAnuncio() {
       if(features != undefined){
         for (let feature in features) {
             if(typeof features[feature] != "string"){
-              return "Deve de escolher uma opção no campo (" + feature + ") das características do produto";
+              return "NOK"
             }
         }
       }
@@ -300,13 +367,13 @@ function CriarAnuncio() {
       if(subFeatures != undefined){
         for (let feature in subFeatures) {
             if(typeof subFeatures[feature] != "string"){
-              return "Deve de escolher uma opção no campo (" + feature + ") das características do produto";
+              return "NOK";
             }
         }
       }
       return "OK"
     }
-
+    
     async function verifyProdUnits(prodUnits){
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
 
@@ -315,17 +382,23 @@ function CriarAnuncio() {
         for (let prodUnit in prodUnits) {
           if(prodUnits[prodUnit] != ''){
             if(prodUnits[prodUnit] <= 0){
-              return "Deve de inserir uma quantidade válida"
+              setVerifyProdUnitsError(true);
+              //return "Deve de inserir uma quantidade válida"
+              return verifyProdUnitsError;
             }
           } else {
             i++;
           }
         }
         if(i == Object.keys(prodUnits).length){
-          return "Deve de inserir o produto em pelo menos uma unidade de produção"
+          setVerifyProdUnitsError(true);
+          //return "Deve de inserir o produto em pelo menos uma unidade de produção"
+          return verifyProdUnitsError;
         }
       }
-      return "OK"
+      setVerifyProdUnitsError(false);
+      //return "OK"
+      return verifyProdUnitsError;
     }
     
     async function getIdSubSubCategory(nameSubSubCategory){
@@ -338,7 +411,6 @@ function CriarAnuncio() {
       return subSubCategory[0].id;
     }
 
-
     const submit = async () => {
 
       let supplier = await getAllFromDB("/suppliers", {uid: true})
@@ -348,13 +420,7 @@ function CriarAnuncio() {
         if(formData.EAN != "" && formData.EAN != null) {
           validEAN = await verifyEAN(formData.EAN);
         }
-        let validTitle = await verifyTitle(formData.titulo);
-        let validPrice = await verifyPrice(formData.preco);
-        let validDescription = await verifyDescription(formData.descricao);
-        let validCategory = await verifyCategory(formData.categoria);
-        let validEmail = await verifyEmail(formData.email);
-        let validMobilePhone = await verifyMobilePhone(formData.telemovel);
-        let validProductionDate = await verifyProductionDate(formData.data_producao);
+
         let validFeature = await verifyFeatures(formData.features[0]);
         let validSubFeature = "OK";
         if(formData.sub_features != undefined){
@@ -365,9 +431,8 @@ function CriarAnuncio() {
         let product;
         let ad;
 
-        let text = "Não foi possível criar o produto\n";
-        if(validTitle == "OK" && validPrice == "OK" && validDescription == "OK" && validCategory == "OK" && validEmail == "OK" && validMobilePhone == "OK" && validProductionDate == "OK" && validFeature == "OK" && validSubFeature == "OK" && validProdUnit =="OK" && validEAN == "OK"){
-
+        if(!titleError && !priceError && !descriptionError && !categoryError && !numberError && !productionDateError && !eanError && !validProdUnit){ //meter sub_features e features
+            console.log("anuncio criado!")
             let featuresDBproduct = {}; 
             let featuresDBad = {};
 
@@ -521,43 +586,10 @@ function CriarAnuncio() {
             //SE CONSEGUIR ADICIONAR TODOS ADICIONA
             //SE NÃO, DÁ UM ALERT
 
-            text = "Anuncio concluído"
-        } else if(validTitle != "OK" || validPrice != "OK" || validDescription != "OK" || validCategory != "OK" || validEmail != "OK" || validMobilePhone != "OK" || validFeature != "OK" || validSubFeature != "OK" || validProductionDate != "OK" || validProdUnit != "OK" || validEAN != "OK"){
-            if(validEAN != "OK"){
-              text += validEAN + "\n"
-            }  
-            if(validTitle != "OK" ){
-              text += validTitle + "\n"
-            }
-            if(validPrice != "OK" ){
-              text += validPrice + "\n"
-            }
-            if(validFeature != "OK" ){
-              text += validFeature + "\n"
-            }
-            if(validSubFeature != "OK" ){
-              text += validSubFeature + "\n"
-            }
-            if (validDescription != "OK" ){
-              text += validDescription + "\n"
-            }
-            if(validCategory != "OK" ){
-              text += validCategory + "\n"
-            }
-            if(validEmail != "OK" ){
-              text += validEmail + "\n"
-            }
-            if(validMobilePhone != "OK" ){
-              text += validMobilePhone + "\n"
-            }
-            if(validProductionDate != "OK" ){
-              text += validProductionDate + "\n"
-            }
-            if(validProdUnit != "OK"){
-              text += validProdUnit + "\n"
-            }
+            setOverallError(false);
+        } else if(titleError || priceError || descriptionError || categoryError || numberError || productionDateError || eanError || validProdUnit){
+            setOverallError(true);
         }
-        alert(text)
     }
   
     //-----------------------------------------------------------------------------  
@@ -807,7 +839,7 @@ function CriarAnuncio() {
     {
       didMount == false ? (
         <>
-          Loading
+          <LoadingPage></LoadingPage>
         </>
       )
       :
@@ -816,8 +848,6 @@ function CriarAnuncio() {
         <NavbarSupplier></NavbarSupplier>
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
-            <br></br>
-            <SupplierBar></SupplierBar>
             <form onSubmit={() => {console.log(formData)}}>
               <div className='app__anuncio_produto'>
                 <p className='title'>Produto</p>
@@ -825,7 +855,11 @@ function CriarAnuncio() {
                   <div className='produto_info'>
                     <div className='inputField'>
                       <p>EAN</p>
-                      <input type='text' value={formData.EAN} onChange={(e) => {setFormData({ ...formData, EAN: e.target.value });}}/>
+                      <input type='text' value={formData.EAN} onChange={handleEAN}/>
+                      {
+                        eanError && 
+                         <p>EAN com formate incorreto!</p>
+                      }
                     </div>
                     <div className='app__anuncio_produto_content_categoria'>
                       <p>Categoria *</p>
@@ -842,6 +876,10 @@ function CriarAnuncio() {
                           <Modal className={ activeModal ? 'activeModal' : null}/>
                         </>
                       } 
+                      {
+                        categoryError &&
+                        <p>Escolha uma categoria!</p>
+                      }
                     </div>
                   </div>
                   <Features formData={formData} setFormData={setFormData}></Features>
@@ -853,16 +891,24 @@ function CriarAnuncio() {
                 <div className='app__anuncio_anuncio_content'>
                   <div className='inputField'>
                     <p>Título *</p>
-                    <input type='text' value={formData.titulo} placeholder='Título do anúncio' required onChange={(e) => {setFormData({ ...formData, titulo: e.target.value });}}/>
+                    <input type='text' value={formData.titulo} placeholder='Título do anúncio' required onChange={handleTitle}/>
+                    {
+                      titleError && 
+                        <p>Título com formato incorreto!</p>
+                    }
                   </div>
                   <div className='' style={{display: 'flex'}}>
                     <div className='inputField'>
                       <p>Preço (€) *</p>
-                      <input type='number' value={formData.preco} step="0.01" min="0" required onChange={(e) => {setFormData({ ...formData, preco: e.target.value });}}/>
+                      <input type='number' value={formData.preco} step="0.01" min="0" required onChange={handlePrice}/>
+                      {
+                        priceError &&
+                         <p>Preço com formate incorreto!</p>
+                      }
                     </div>
                     <div className='inputField' style={{marginLeft:'2rem'}}>
                       <p>Data de Produção</p>
-                      <input type='date' value={formData.data_producao || ""} onChange={(e) => {setFormData({ ...formData, data_producao: e.target.value });}}/>
+                      <input type='date' value={formData.data_producao || ""} onChange={handleProductionDate}/>
                     </div>
                   </div>
                   <div className='app__anuncio_description_section'>
@@ -878,6 +924,10 @@ function CriarAnuncio() {
                           }}>
                       </textarea>
                       <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
+                      {
+                        descriptionError &&
+                         <p>Descrição com formato incorreto!</p>
+                      }
                   </div>
                   <div className='app__anuncio_image_section'>
                       <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span> *</p>
@@ -920,11 +970,15 @@ function CriarAnuncio() {
                   <div className='app__anuncio_supplier_content'>
                     <div className='inputField'>
                         <p>Telemóvel *</p>
-                        <input type='tel' required value = {formData.telemovel} onChange={(e) => {setFormData({ ...formData, telemovel: e.target.value });}}/>
+                        <input type='tel' required value = {formData.telemovel} onChange={handleNumber}/>
+                        {
+                          numberError &&
+                            <div className='error_msg'>Número com formato errado.</div>
+                        }
                     </div>
                     <div className='inputField'>
-                        <p>Email *</p>
-                        <input type='email' required value = {formData.email} onChange={(e) => {setFormData({ ...formData, email: e.target.value });}}/>
+                        <p>Email</p>
+                        <input style={{opacity: "0.4"}} type='email' required value = {formData.email} disabled/>
                     </div> 
                   </div>
                 </div>    
@@ -943,14 +997,18 @@ function CriarAnuncio() {
                       {productionUnits.map((productionUnit) => { 
                         return ( 
                           <tr>
-                          <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: e.target.value }})}}></input></div></td>
-                          <td>{productionUnit.name}</td>
-                          <td>{productionUnit.location}</td>
-                        </tr>
+                            <td><div className='inputField'><input type="number" min={0} onChange={(e) => {setFormData({ ...formData, prodUnit: {...formData.prodUnit, [productionUnit.name]: e.target.value }})}}></input></div></td>
+                            <td>{productionUnit.name}</td>
+                            <td>{productionUnit.location}</td>
+                          </tr>
                         );
                       })}
                        </tbody> 
                     </table>
+                    {
+                      verifyProdUnitsError && 
+                      <p>Houve um erro na unidade de produção</p>
+                    }
                   </div>
                 </div>
               </div>

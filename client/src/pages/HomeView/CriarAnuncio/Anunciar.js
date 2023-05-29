@@ -13,8 +13,6 @@ const Anunciar = () => {
         <NavbarSupplier></NavbarSupplier>
         <div className='app__anunciar main__container'>
             <SubHeading title="Anunciar"></SubHeading>
-            <br></br>
-            <SupplierBar></SupplierBar>
             <div className='app__anunciar_content'>
                 <div className='app__anunciar_content_search'>
                     <p>Pesquise um produto existente no nosso catálogo pelo EAN</p>

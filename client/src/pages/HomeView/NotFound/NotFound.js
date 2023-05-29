@@ -4,6 +4,8 @@ import {Navbar, NavbarSupplier, Footer} from '../../../components/index';
 import images from '../../../assets/images';
 import './NotFound.css';
 import getClientType from "../../../hooks/getClientType";
+import LoadingPage from '../../LoadingPage';
+
 import { useNavigate } from 'react-router-dom';
 
 const NotFound = () => {
@@ -24,13 +26,20 @@ const NotFound = () => {
     setDidMount(true)
   },[])
 
+  function redirectToSupplier() {
+    window.location.href = '/supplier';
+  }
+
+  function redirectToConsumer() {
+    window.location.href = '/';
+  }
 
   return (
     <>
     {
       didMount == false ? (
         <>
-          Loading
+          <LoadingPage></LoadingPage>
         </>
       )
       :
@@ -44,7 +53,7 @@ const NotFound = () => {
             <img className='app__notfound_img' src={images.notfound}></img>
             <div className='app__notfound_bottom'>
               <p>Oops! Parece que a página que procuras não existe...</p>
-              <button className='main__action_btn'><a href = "/supplier">Home</a></button>
+              <button className='main__action_btn' onClick={redirectToSupplier}>Home</button>
             </div>
           </div>
         </div>
@@ -57,7 +66,7 @@ const NotFound = () => {
             <img className='app__notfound_img' src={images.notfound}></img>
             <div className='app__notfound_bottom'>
               <p>Oops! Parece que a página que procuras não existe...</p>
-              <button className='main__action_btn'><a href = "/">Home</a></button>
+              <button className='main__action_btn' onClick={redirectToConsumer}>Home</button>
             </div>
           </div>
         </div>

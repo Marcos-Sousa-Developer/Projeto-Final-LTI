@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin, FiCheck, FiX} from 'react-icons/fi';
+import {FiUser, FiMail, FiLock, FiSmartphone, FiMapPin, FiCheck, FiX, FiTrash2} from 'react-icons/fi';
 import { BiIdCard } from 'react-icons/bi';
 
 import getFromDB from '../../../hooks/getFromDB';
@@ -122,7 +122,7 @@ function SupplierProfile() {
     //podem ser null
     return "OK"
   }
-
+/*
   function verifyEmail(email){
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
       //podem ser null
@@ -142,7 +142,7 @@ function SupplierProfile() {
       }
       return "OK"
   }
-
+*/
   function verifyNif(nif){
       //Retorna OK se estiver tudo bem, se não, retorna o erro 
       //podem ser null
@@ -196,12 +196,6 @@ function SupplierProfile() {
 
   const submit = async () => {
 
-    setSent(true)
-
-    let validName = verifyName(name);
-    let validEmail = verifyEmail(email);
-    let validNif = verifyNif(nif);
-    let validMobileNumber = verifyMobileNumber(mobile_number);
     let supplierUpdated;
 
     if(!((name == null || name == "") && (email == null || email == "") && (nif == null || nif == "") && (mobile_number == null || mobile_number == "") && (address == null || address == ""))){
@@ -315,8 +309,8 @@ function SupplierProfile() {
                 <div className='app__SupplierProfile_box_div_row'>
                   Email
                   <div className={!Emailerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
-                    <FiMail></FiMail>
-                    <input type="email" placeholder="Email" value = {email ?? ""} name="email" onChange={handleSetEmail}></input>
+                    <FiMail style={{opacity: "0.4"}}></FiMail>
+                    <input style={{opacity: "0.4"}} type="email" placeholder="Email" value = {email ?? ""} name="email" disabled></input>
                   </div>
                   {
                     Emailerror &&
@@ -444,6 +438,7 @@ function SupplierProfile() {
               </div>
             </Modal>
             <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
+            <button type='button' className=''><FiTrash2></FiTrash2></button>
           </div>
         </div>
         <Footer></Footer>
