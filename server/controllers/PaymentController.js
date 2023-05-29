@@ -51,7 +51,7 @@ const createOrder = async function(items,details,uid) {
     for (const id in products){ 
 
       let ad = await dbConnection("SELECT * FROM ads WHERE id='"+id+"';")
-      let supplier = await dbConnection("SELECT * FROM suppliers WHERE id='"+ad[0].product_id+"';")
+      let supplier = await dbConnection("SELECT * FROM suppliers WHERE email='"+ad[0].email+"';")
       let product_category = ad[0].category_name 
       let product_subcategory = ad[0].subcategory_name  
       let product_subsubcategory = ad[0].subsubcategory_name  
