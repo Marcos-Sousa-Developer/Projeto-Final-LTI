@@ -176,9 +176,6 @@ const getUserType = async (req, res) => {
 
   try {
     
-    if (req.cookies.orderCreated) {
-      res.clearCookie('orderCreated', {httpOnly: true,path: '/' });
-    }
     const uid_encrypt = req.cookies.userSession;
 
     let uid_decrypt = jwt.decryptID(uid_encrypt) 

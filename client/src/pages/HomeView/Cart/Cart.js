@@ -1,9 +1,9 @@
 import React, { useEffect} from 'react';
 import { useCookies } from 'react-cookie';
 import { FiArrowLeft, FiTrash2 } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
-import { Navbar, Footer, SubHeading, Modal } from '../../../components/index';
+import { Navbar, Footer, SubHeading, Modal, SignInC } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import { CartItem } from './CartItem';
 import images from '../../../assets/images.js';
@@ -12,6 +12,7 @@ import './Cart.css';
 import { useState } from 'react';
 import axios from 'axios';
 import getAllFromDB from '../../../hooks/getAllFromDB';
+import getClientType from '../../../hooks/getClientType';
 
 const Cart = () => {
   //---------------------Modal---------------------
@@ -19,6 +20,7 @@ const Cart = () => {
   const [isOpen2, setIsOpen2] = useState(false);
   //------------------------------------------------
 
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false)
   const [cookies, setCookie] = useCookies(['cart']);
   const [totalItems, setTotalItems] = useState(0)
@@ -32,13 +34,20 @@ const Cart = () => {
   const [distrito, setDistrito] = useState("")
   const [localidade, setLocalidade] = useState("")
 
+  const [isLogedIn, setIsLogedIn] = useState(true)
+
   const deleteAllCartItem = () => {
     const prevValue =  {};
     setCookie('cart', prevValue, { path: '/' });
   }
 
   const goToCheckout = async () => {
-    const params = {}
+
+    let userType = await getClientType(); 
+
+    if(userType=='consumer') {
+
+      const params = {}
     for (const item in cookies.cart) {
       const quantity = cookies.cart[item][0]
       const price = cookies.cart[item][1]
@@ -58,7 +67,16 @@ const Cart = () => {
     
     const response = await axios.post('/create-checkout-session', null, {params});
     window.location = response.data
-    
+
+    }
+
+    else if(userType=='supplier'){
+      window.location = "/supplier"
+    }
+
+    else {
+      setIsLogedIn(false)
+    }
   }
 
 
@@ -117,7 +135,7 @@ const Cart = () => {
       <Navbar></Navbar>
       <div className='main__container app__cart'>
         <SubHeading title="Carrinho"></SubHeading>
-
+{ isLogedIn ? <> 
         {totalAmount > 0 ? (
           <>
             <div className='app__cart_before_content'>
@@ -237,7 +255,11 @@ const Cart = () => {
             <h5>O carrinho está vazio.</h5>
           </>
         )}
+</> 
 
+:
+
+<SignInC checkout={true}></SignInC>}
       </div>
       <Footer></Footer>
     </>

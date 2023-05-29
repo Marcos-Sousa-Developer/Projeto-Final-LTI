@@ -15,7 +15,7 @@ const SnackbarType = {
     fail: "fail",
 };
 
-const SignInC = () => {
+const SignInC = ({checkout=null}) => {
     //-------------------SnackBar--------------
     const snackbarRef = useRef(null);
     //-----------------------------------------
@@ -55,7 +55,12 @@ const SignInC = () => {
             if(userType == 'supplier'){
                 window.location.href = "/supplier";
             } else {
-                window.location.href = "/";
+                if(checkout == true) {
+                    window.location.href = "/cart";
+                }
+                else {
+                    window.location.href = "/";
+                }
             }
         }
         else if(isActive === null) {

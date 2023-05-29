@@ -95,10 +95,7 @@ const payOrder = async function(req, res) {
 
     let path = ""
 
-    if (!req.cookies.orderCreated) {
-      res.cookie('orderCreated', true, {httpOnly: true, path: '/' });
-      createOrder(items,details,value)
-    }
+    createOrder(items,details,value)
 
     for (const item in items){
       if(item != 'details') {
