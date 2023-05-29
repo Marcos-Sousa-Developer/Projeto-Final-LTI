@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import getAllFromDB from '../../../hooks/getAllFromDB';
+import putToDB from '../../../hooks/putToDB';
 
 import { NavbarSupplier, Footer, SubHeading } from '../../../components/index';
 import './SupplierOrdersHistory.css';
@@ -25,6 +26,12 @@ const SupplierOrdersHistory = () => {
         lista = [...lista, { order: orderHistory, ad_name: adGet[0].title }];
       }
       setSupplierOrder(lista)
+    }
+
+    async function handleEditStatusOrder(index, status) {
+      let productProdUnitPut = await putToDB("/orderedProducts/" + index,{
+        order_status: status
+      })
     }
 
     //Aparecer no loading da página
@@ -60,6 +67,8 @@ const SupplierOrdersHistory = () => {
                     <th>Localização do comprador</th>&nbsp;&nbsp;
                     <th>Total €</th>&nbsp;&nbsp;
                     <th>Estado</th>&nbsp;&nbsp;
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -71,6 +80,8 @@ const SupplierOrdersHistory = () => {
                         <td>{orderHistory.order.buyer_location}</td>&nbsp;&nbsp;
                         <td>{orderHistory.order.price}</td>  &nbsp; &nbsp;                   
                         <td>{orderHistory.order.order_status}</td>&nbsp;&nbsp;
+                        <td><button disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button></td>
+                        <td><button disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Enviado"); location.reload();}}>Enviar</button></td>
                       </tr>
                     </React.Fragment>
                   ))}
