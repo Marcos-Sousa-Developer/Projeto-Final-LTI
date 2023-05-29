@@ -17,6 +17,7 @@ import LoadingPage from '../../LoadingPage.js'
 
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import getFromDB from '../../../hooks/getFromDB';
+import Maping from './Maping';
 
 const SnackbarType = {
   success: "success",
@@ -109,6 +110,7 @@ const ProductPage = () => {
       if(idAd != null){
        await getAndSetProduct(idAd)
       }
+     
       setDidMount(true)
     }
     run()
@@ -169,6 +171,7 @@ const ProductPage = () => {
                     />
                   </div>
                 </div>
+                
               </div>
               <div className='app__product_page_content_info_characteristics'>
                 <p  className='app__product_page_content_characteristics_title'>Informações Técnicas</p>
@@ -190,9 +193,12 @@ const ProductPage = () => {
                   </tbody>
                 </table>
               </div>
+             
             </div>
           </div>
+          <Maping></Maping>
         </div>
+        
         <Footer></Footer>
         </>
       )
