@@ -109,7 +109,7 @@ const getOrderedProductByID = async function (req, res) {
 }
 
 /**
- * Async function to insert consumer and await from database response
+ * Async function to insert ordered product and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
  * @returns result data
@@ -136,4 +136,46 @@ const insertOrderedProduct = async function (req, res) {
     return res.send("Ordered product has been created");
 }
 
-module.exports = {getAllorSomeOrderedProducts, getOrderedProductByID, insertOrderedProduct}
+/**
+ * Async function to update ordered product by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const updateOrderedProductByID = async function (req, res) { 
+
+    let statement = `UPDATE orderedProducts SET `;
+
+    for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+        
+        let key = Object.keys(req.query)[i];
+        let value = Object.values(req.query)[i]
+        let nextKey = Object.keys(req.query)[i+1];
+        let nextValue = Object.values(req.query)[i+1]
+        
+        if(value != ""){
+            statement += key;
+            statement += `='`;
+            statement += value; 
+            statement += `'` ;
+        }
+
+        if(nextKey != undefined && nextValue != ""){
+            statement += `, ` ;
+        }
+    }
+
+    statement += ` WHERE id='${parseInt(req.params.id)}';`;
+
+    let result = await dbConnection(statement);
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to update this ordered product");
+    } else if (result.affectedRows == 0) {
+        return res.send("Ordered product with id " + req.params.id + " does not exist in the database");
+    }
+
+    return res.send("Ordered product has been updated");
+}
+
+module.exports = {getAllorSomeOrderedProducts, getOrderedProductByID, insertOrderedProduct, updateOrderedProductByID}

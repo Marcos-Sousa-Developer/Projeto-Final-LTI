@@ -66,29 +66,29 @@ const SupplierProdUnit = () => {
     }
 
     async function handleEditProductionUnit(index, updatedProductionUnit) {
-      // Create a new array with the production unit at the given index replaced with the updated production unit
-      const updatedProductionUnits = productionUnits.map((productionUnit, i) =>
+        // Create a new array with the production unit at the given index replaced with the updated production unit
+        const updatedProductionUnits = productionUnits.map((productionUnit, i) =>
         i === index ? updatedProductionUnit : productionUnit
-      );
-      // Update the state with the new array
-      setProductionUnits(updatedProductionUnits);
-      
-      let prodUnitPut = await putToDB("/productionUnits/" + updatedProductionUnits[index].id,{
+        );
+        // Update the state with the new array
+        setProductionUnits(updatedProductionUnits);
+        
+        let prodUnitPut = await putToDB("/productionUnits/" + updatedProductionUnits[index].id,{
         name: updatedProductionUnits[index].name,
         location: updatedProductionUnits[index].location,
         city: updatedProductionUnits[index].city,
         postal_code: updatedProductionUnits[index].postal_code,
         capacity: updatedProductionUnits[index].capacity
-    })
+        })
     }
 
     async function handleEditProductProductionUnit(index, quantityProd) {
         if(quantity != null){
-        let productProdUnitPut = await putToDB("/productProductionUnits/" + index,{
+            let productProdUnitPut = await putToDB("/productProductionUnits/" + index,{
                 quantity: quantityProd
             })
         }
-      }
+    }
 
     const submitInsert = async () => {
         //CRIA O PRODUCTION UNIT
