@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import getAllFromDB from '../../../hooks/getAllFromDB';
+import putToDB from '../../../hooks/putToDB';
 
 import { Navbar, Footer, SubHeading } from '../../../components/index';
 import './ConsumerOrdersHistory.css';
@@ -8,7 +9,7 @@ import ConsumerBar from '../../../components/ConsumerBar/ConsumerBar';
 const ConsumerOrdersHistory = () => {
     const [ordersHistory, setConsumerOrder] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    
     async function getConsumerOrder(){
       let consumerOrdersGet = await getAllFromDB("/orderedProducts", {product_buyer_uid: true})
       if(typeof consumerOrdersGet != "string") {
@@ -58,7 +59,12 @@ const ConsumerOrdersHistory = () => {
       // clean up "a" element & remove ObjectURL
       document.body.removeChild(link);
       URL.revokeObjectURL(href);
+    }
 
+    async function handleEditStatusOrder(index, status) {
+      let productProdUnitPut = await putToDB("/orderedProducts/" + index,{
+        order_status: status
+      })
     }
     
     //Aparecer no loading da página
@@ -78,7 +84,7 @@ const ConsumerOrdersHistory = () => {
       loading ? "loading":
       <>
       <Navbar></Navbar>
-dd      <div className='app__prod-unit main__container'>
+      <div className='app__prod-unit main__container'>
         <SubHeading title="Histórico de encomendas"/>
         <ConsumerBar active2='active'></ConsumerBar>
         <br></br>
@@ -93,7 +99,8 @@ dd      <div className='app__prod-unit main__container'>
                     <th>Nome do produto</th>
                     <th>Localização do comprador</th>
                     <th>Preço €</th>
-                    <th>Estado</th>               
+                    <th>Estado</th>
+                    <th></th>              
                   </tr>
                 </thead>
                 <tbody>
@@ -105,6 +112,7 @@ dd      <div className='app__prod-unit main__container'>
                         <td>{orderHistory.order.buyer_location}</td>
                         <td>{orderHistory.order.price}</td>
                         <td>{orderHistory.order.order_status}</td>
+                        <td><button disabled={orderHistory.order.order_status == "Em preparação" || orderHistory.order.order_status == "A confirmar"? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button></td>
                       </tr>
                     </React.Fragment>
                   ))}

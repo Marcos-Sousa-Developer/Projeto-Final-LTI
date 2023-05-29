@@ -10,7 +10,6 @@ import LoadingPage from '../../LoadingPage';
 
 let categories = {}
 const itemsPerPage = 20; // Number of items per page
-let currentItems = [];
 let startIndex = 0;
 let endIndex = 0;
 
@@ -24,13 +23,21 @@ const Search = () => {
   const [didMount, setDidMount] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [currentItems, setCurrentItems] = useState([]);
+
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
+
+  const [minCurrentPrice, setCurrentMinPrice] = useState(0);
+  const [maxCurrentPrice, setCurrentMaxPrice] = useState(null);
+
   //Paginação
 
   const goToPage = (page) => {
     setCurrentPage(page);
     startIndex = (page - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, ads.length);
-    currentItems = ads.slice(startIndex, endIndex);
+    setCurrentItems(ads.slice(startIndex, endIndex))
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -40,12 +47,16 @@ const Search = () => {
     setAds(adsDB);
     startIndex = (currentPage - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
-    currentItems = adsDB.slice(startIndex, endIndex);
+    setCurrentItems(adsDB.slice(startIndex, endIndex))
+    let max = 0;
     adsDB.map( (ad) => {  
       
       categories[ad.category_name] != undefined ? categories[ad.category_name] +=1 : categories[ad.category_name]=0
+      ad.price > max ? max = ad.price: max = max
 
     })
+    setMaxPrice(max)
+    setCurrentMaxPrice(max)
   }   
 
   function sendToCategories(categoryName) {
@@ -125,6 +136,22 @@ const Search = () => {
     return setFilterPrice(!filterPrice);
   }
 
+  const setByPrice = () =>{
+    let newProducts = []
+    let max = maxCurrentPrice
+    if(maxCurrentPrice === ''){
+      max = maxPrice
+    }
+    if(minCurrentPrice <= max){
+      for(const item in ads){
+        if(ads[item].price >= minCurrentPrice && ads[item].price <= max){
+          newProducts.push(ads[item])
+        }
+      }
+      setCurrentItems(newProducts)
+    }
+  }
+
   //useEffect
 
   useEffect(()=>{ 
@@ -173,6 +200,19 @@ const Search = () => {
                     );
                   })}
                 </ul>
+              </div>
+              <div className='app__Category_filter_unit'>
+                <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterPrice}>
+                  <p style={{margin: '0'}}>Preço</p>
+                  <span>{filterPrice ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <div className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
+                  Min. {minPrice}
+                  <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
+                  Máx. {maxPrice}
+                  <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
+                  <button className='main__action_btn' onClick={() => setByPrice()}>OK</button>
+                </div>
               </div>
             </div> 
           </div> 
