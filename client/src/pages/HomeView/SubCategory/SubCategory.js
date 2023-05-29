@@ -10,7 +10,6 @@ import LoadingPage from '../../LoadingPage';
 
 let subsubcategories = {}
 const itemsPerPage = 20; // Number of items per page
-let currentItems = [];
 let startIndex = 0;
 let endIndex = 0;
 
@@ -28,26 +27,42 @@ const SubCategory = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [didMount, setDidMount] = useState(false)
 
+  const [currentItems, setCurrentItems] = useState([]);
+
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
+
+  const [minCurrentPrice, setCurrentMinPrice] = useState(0);
+  const [maxCurrentPrice, setCurrentMaxPrice] = useState(null);
+
   async function getSubSubCategoriesbySearchName(subCategoryName, searchName){
     let adsDB = await getAllFromDB("/ads", {title: searchName, subcategory_name: subCategoryName})
     setAds(adsDB)
+    let max = 0;
     adsDB.map( (ad) => {  
         subsubcategories[ad.subsubcategory_name] != undefined ? subsubcategories[ad.subsubcategory_name] +=1 : subsubcategories[ad.subsubcategory_name]=0
+        ad.price > max ? max = ad.price: max = max
     })
+    setMaxPrice(max)
+    setCurrentMaxPrice(max)
     startIndex = (currentPage - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
-    currentItems = adsDB.slice(startIndex, endIndex);
+    setCurrentItems(adsDB.slice(startIndex, endIndex))
   }
 
   async function getSubSubCategories(subCategoryName){
     let adsDB = await getAllFromDB("/ads", {subcategory_name: subCategoryName})
     setAds(adsDB)
+    let max = 0;
     adsDB.map( (ad) => {  
         subsubcategories[ad.subsubcategory_name] != undefined ? subsubcategories[ad.subsubcategory_name] +=1 : subsubcategories[ad.subsubcategory_name]=0
+        ad.price > max ? max = ad.price: max = max
     })
+    setMaxPrice(max)
+    setCurrentMaxPrice(max)
     startIndex = (currentPage - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
-    currentItems = adsDB.slice(startIndex, endIndex);
+    setCurrentItems(adsDB.slice(startIndex, endIndex))
   }
 
   //Paginação
@@ -55,7 +70,7 @@ const SubCategory = () => {
     setCurrentPage(page);
     startIndex = (page - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, ads.length);
-    currentItems = ads.slice(startIndex, endIndex);
+    setCurrentItems(ads.slice(startIndex, endIndex))
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -138,6 +153,22 @@ const SubCategory = () => {
     return setFilterPrice(!filterPrice);
   }
 
+  const setByPrice = () =>{
+    let newProducts = []
+    let max = maxCurrentPrice
+    if(maxCurrentPrice === ''){
+      max = maxPrice
+    }
+    if(minCurrentPrice <= max){
+      for(const item in ads){
+        if(ads[item].price >= minCurrentPrice && ads[item].price <= max){
+          newProducts.push(ads[item])
+        }
+      }
+      setCurrentItems(newProducts)
+    }
+  }
+
   //UseEffect
 
   useEffect(()=>{ 
@@ -214,10 +245,11 @@ const SubCategory = () => {
                   <span>{filterPrice ? <FiChevronUp className='app__SubCategory_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__SubCategory_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
                 <div className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
-                  Min.
-                  <input></input>
-                  Máx.
-                  <input></input>
+                  Min. {minPrice}
+                  <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
+                  Máx. {maxPrice}
+                  <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
+                  <button className='main__action_btn' onClick={() => setByPrice()}>OK</button>
                 </div>
               </div>
             </div>
