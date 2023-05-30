@@ -87,7 +87,6 @@ const ProductPage = () => {
     let supplier = await getAllFromDB("/suppliers", {id: ad[0].supplier_id})
     setSupplierProd(supplier[0])
     let currentConsumer = await getAllFromDB("/consumers", {uid: true})
-    console.log(currentConsumer)
     setMap(currentConsumer[0].postal_code, supplier[0].postal_code)
   }
 
@@ -181,11 +180,6 @@ const ProductPage = () => {
                     {adData.description}
                   </div>
                   <div className='app__product_page_content_actions'>
-                    <div className='app__product_page_content_actions_1'>
-                      <button><FiMinus></FiMinus></button>
-                      <input></input>
-                      <button><FiPlus></FiPlus></button>
-                    </div>
                     <button 
                       className='main__action_btn app__product_page_content_actions_2'         
                       onClick={() => {

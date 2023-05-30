@@ -44,8 +44,8 @@ const Cart = () => {
   const goToCheckout = async () => {
 
     let userType = await getClientType(); 
-
-    if(userType=='consumer') {
+    console.log(userType)
+    if(userType[0]=='consumer') {
 
       const params = {}
     for (const item in cookies.cart) {
@@ -70,7 +70,7 @@ const Cart = () => {
 
     }
 
-    else if(userType=='supplier'){
+    else if(userType[0]=='supplier'){
       window.location = "/supplier"
     }
 
@@ -97,7 +97,6 @@ const Cart = () => {
       setDistrito(distrito)
     })
     .catch((error) => {
-      console.log(error)
     })
 
   }

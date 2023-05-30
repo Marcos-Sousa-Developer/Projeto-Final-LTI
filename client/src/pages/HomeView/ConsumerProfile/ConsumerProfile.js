@@ -93,23 +93,18 @@ function ConsumerProfile() {
 
   const handleSetPostalCode = async (event) => { 
     setPostalCode(event.target.value)
-    console.log(event.target.value)
     await axios.get('https://json.geoapi.pt/cp/'+event.target.value) 
     .then((response) => { 
-      console.log(response)
       setCPError(false)
       let distrito = response.data.Distrito
       let concelho = response.data.Concelho
       let localidade = response.data.Localidade
       let morada = response.data.partes[0]["Artéria"]
-      console.log(morada)
       handleSetCity(concelho)
       handleSetAddress(morada)
       setPostalCode(event.target.value)
     })
     .catch((CPerror) => {
-      console.log(CPerror)
-      console.log("ok")
       setCPError(true)
     })
     

@@ -27,6 +27,8 @@ const Category = () => {
 
   const [currentItems, setCurrentItems] = useState([]);
 
+  const [adsPrev, setAdsPrev] = useState([]);
+
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
 
@@ -37,6 +39,7 @@ const Category = () => {
     setPath('Home > ' + categoryName + " > pesquisa: '" + searchName + "'");
     let adsDB = await getAllFromDB("/ads", {title: searchName, category_name: categoryName})
     setAds(adsDB)
+    setAdsPrev(adsDB)
     let max = 0;
     adsDB.map( (ad) => {  
       subcategories[ad.subcategory_name] != undefined ? subcategories[ad.subcategory_name] +=1 : subcategories[ad.subcategory_name]=0
@@ -53,6 +56,7 @@ const Category = () => {
     setPath('Home > ' + categoryName );
     let adsDB = await getAllFromDB("/ads", {category_name: categoryName})
     setAds(adsDB)
+    setAdsPrev(adsDB)
     let max = 0;
     adsDB.map( (ad) => {  
       subcategories[ad.subcategory_name] != undefined ? subcategories[ad.subcategory_name] +=1 : subcategories[ad.subcategory_name]=0
@@ -70,8 +74,8 @@ const Category = () => {
   const goToPage = (page) => {
     setCurrentPage(page);
     startIndex = (page - 1) * 20;
-    endIndex = Math.min(startIndex + itemsPerPage, ads.length);
-    setCurrentItems(ads.slice(startIndex, endIndex))
+    endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
+    setCurrentItems(adsPrev.slice(startIndex, endIndex))
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -101,7 +105,7 @@ const Category = () => {
 
   //Formatação da Paginação
 
-  const totalPages = Math.ceil(ads.length / itemsPerPage);
+  const totalPages = Math.ceil(adsPrev.length / itemsPerPage);
   const MAX_PAGES = 5;
     
   let pagination;
@@ -167,7 +171,7 @@ const Category = () => {
           newProducts.push(ads[item])
         }
       }
-      setCurrentItems(newProducts)
+      setAdsPrev(newProducts)
     }
   }
 
@@ -198,6 +202,13 @@ const Category = () => {
     }
     run();
   }, [])
+
+  useEffect(()=>{ 
+    console.log(adsPrev)
+    startIndex = 0;
+    endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
+    setCurrentItems(adsPrev.slice(startIndex, endIndex))
+  }, [adsPrev])
 
   return (
     <>
@@ -266,7 +277,7 @@ const Category = () => {
                 <div  className='app__Category_filter_unit'>
                   <p className="mobile-title">Categoria</p>
                   <ul>
-                    {Object.keys(subcategories).map((subcategory_name) => { 
+                    {Object.keys(subcategories).map((subcategory_name) => { setByPrice
                       return ( 
                       <li>
                         <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
