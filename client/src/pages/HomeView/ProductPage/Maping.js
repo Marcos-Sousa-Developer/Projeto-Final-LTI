@@ -41,10 +41,9 @@ function Maping({lat, lng, destLat, destLng}) {
       <Map
         mapboxAccessToken={process.env.REACT_APP_MAPBOX_KEY}
         style={{
-          width: "600px",
-          height: "600px",
+          width: "250px",
+          height: "250px",
           borderRadius: "15px",
-          border: "2px solid red",
         }}
         latitude={lat}
         longitude={lng}

@@ -1,3 +1,5 @@
+@import '../../index.scss';
+
 .app__modal_overlay{
     position: fixed;
     top: 0;
@@ -21,6 +23,40 @@
         right: 0;
         top: 0;
         margin: .5rem;
+    }
+    //filter da category
+    .app__Category_filter_unit{
+        margin-top: 1.25rem;
+
+        .mobile-title{
+            border-bottom: 2px solid $light_gray;
+            margin: 0;
+        }
+    }
+    .filterPrice{
+        display: flex;
+        align-items: center;
+        margin-left: .5rem;
+        font-size: $smaller_font;
+        button{
+            background-color: $orange;
+            color: white;
+            padding: 4px 20px;
+            border-radius: 15px;
+            opacity: 0.8;
+            transition: all 200ms ease-in-out;
+            margin-left: .5rem;
+          
+            &:hover {
+                opacity: 1; 
+            }
+        }
+        input{
+            width: 3rem;
+            border: 3px solid $light_gray;
+            outline: none;
+            margin: 0 .5rem;
+        }
     }
 }
 

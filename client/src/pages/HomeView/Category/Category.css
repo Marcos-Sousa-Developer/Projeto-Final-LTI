@@ -210,6 +210,30 @@ img, picture {
 .app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit {
   margin-top: 1.25rem;
 }
+.app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit .filterPrice {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  font-size: 14px;
+}
+.app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit .filterPrice button {
+  background-color: #EB5C1F;
+  color: white;
+  padding: 4px 20px;
+  border-radius: 15px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+  margin-left: 0.5rem;
+}
+.app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit .filterPrice button:hover {
+  opacity: 1;
+}
+.app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit .filterPrice input {
+  width: 3.5rem;
+  border: 3px solid #EEEEEE;
+  outline: none;
+  margin: 0 0.5rem;
+}
 .app__Category_Grid_Esquerda .app__Category_filter_content .hideFilter {
   display: none;
   transition: all 250ms ease-in-out;
@@ -236,6 +260,26 @@ img, picture {
   color: rgba(235, 92, 31, 0.8);
 }
 
+@media screen and (max-width: 1600px) {
+  .app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit .filterPrice div {
+    display: flex;
+    flex-direction: column;
+  }
+  .app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit .filterPrice div span {
+    margin: 0 0.5rem;
+  }
+  .app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit .filterPrice button {
+    align-self: flex-end;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit .filterPrice {
+    display: block;
+  }
+  .app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit .filterPrice button {
+    margin: 0.5rem 0 0 0.5rem;
+  }
+}
 @media screen and (max-width: 1050px) {
   .app__Category_Grid {
     grid-template-columns: 1fr;

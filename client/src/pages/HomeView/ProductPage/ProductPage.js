@@ -164,13 +164,18 @@ const ProductPage = () => {
                   <p className='app__product_page_content_title'>{adData.title}</p>
                   <PriceDisplay className='product_price' price={adData.price} />
                   <div className='app__product_page_content_supplier'>
-                    <p style={{marginBottom: '.5rem'}}>Vendido por: <span style={{fontWeight: '500'}}>{supplierProd.name}</span></p>
                     <div>
-                      <FiMapPin></FiMapPin> <span style={{fontWeight: '500'}}>{supplierProd.address}</span>, <span style={{fontSize: '14px'}}>{supplierProd.city}</span>  
+                      <p style={{marginBottom: '.5rem'}}>Vendido por: <span style={{fontWeight: '500'}}>{supplierProd.name}</span></p>
+                      <div>
+                        <FiMapPin></FiMapPin> <span style={{fontWeight: '500'}}>{supplierProd.address}</span>, <span style={{fontSize: '14px'}}>{supplierProd.city}</span>  
+                      </div>
+                      {(suppliers.length - 1) > 0 &&
+                        <Link className='app__text_effect' to={`/market-place?${new URLSearchParams({id: idProduct}).toString()}`}>+ {suppliers.length -1 } anúncios deste produto </Link>
+                      }
                     </div>
-                    {(suppliers.length - 1) > 0 &&
-                      <Link className='app__text_effect' to={`/market-place?${new URLSearchParams({id: idProduct}).toString()}`}>+ {suppliers.length -1 } anúncios deste produto </Link>
-                    }
+                    <div>
+                      <Maping lat={myLatitude} lng={myLongigtude} destLat={supplierLatitude} destLng={supplierLongigtude}></Maping>
+                    </div>
                   </div>
                   <div className='app__product_page_content_description'>
                     {adData.description}
@@ -220,9 +225,7 @@ const ProductPage = () => {
              
             </div>
           </div>
-          <Maping lat={myLatitude} lng={myLongigtude} destLat={supplierLatitude} destLng={supplierLongigtude}></Maping>
         </div>
-        
         <Footer></Footer>
         </>
       )
