@@ -1,55 +1,35 @@
-import React, {useState, useEffect}  from 'react'
+import React, {useState, useEffect, useRef}  from 'react';
 import { FiEdit3, FiTrash2, FiX, FiCheck, FiChevronDown } from 'react-icons/fi';
 
-
+import putToDB from '../../../hooks/putToDB';
+import deleteToDB from '../../../hooks/deleteToDB';
 import getAllFromDB from '../../../hooks/getAllFromDB';
+
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 
 import LoadingPage from '../../LoadingPage';
-import {NavbarSupplier, Footer, SubHeading} from '../../../components/index';
+import {NavbarSupplier, Footer, SubHeading, Modal, SnackBar} from '../../../components/index';
 import './SupplierAdd.css';
 import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
+
 function SupplierAdd() {
 
-  const SupplierProdUnit = () => {
-
+  const snackbarRef = useRef(null);
+  const snackbarRef2 = useRef(null);
+  const snackbarRef3 = useRef(null);
+  const snackbarRef4 = useRef(null);
   const [modalOpen, setModalOpen] = useState([]); //modal1
   const [modalOpen2, setModalOpen2] = useState([]); //modal2
   const [ads, setAds] = useState([]);
   const [didMount, setDidMount] = useState(false)
-  const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', city: '', postal_code: '', capacity: '' });
-
-
-  async function handleEditProductionUnit(index, updatedProductionUnit) {
-    // Create a new array with the production unit at the given index replaced with the updated production unit
-    const updatedProductionUnits = productionUnits.map((productionUnit, i) =>
-      i === index ? updatedProductionUnit : productionUnit
-    );
-    // Update the state with the new array
-    setProductionUnits(updatedProductionUnits);
-    
-    let prodUnitPut = await putToDB("/productionUnits/" + updatedProductionUnits[index].id,{
-      name: updatedProductionUnits[index].name,
-      location: updatedProductionUnits[index].location,
-      city: updatedProductionUnits[index].city,
-      postal_code: updatedProductionUnits[index].postal_code,
-      capacity: updatedProductionUnits[index].capacity
-  })
-  }
-
-  const submitDeleteProdUnit = async (index) => {
-    //APAGA O PRODUCTION UNIT
-    await deleteToDB("/productionUnits/" + index)
-    location.reload()
-}
-
-async function handleEliminarUnidade(index){
-  submitDeleteProdUnit(index);
-  snackbarRef2.current.show();
-}
+  const [newAd, setNewAd] = useState({ title: '', price: '', mobile_number: '', email: ''});
   
-}
+
   async function changeDateFormat(date){
     const parts = date.split(/-|T/);
     return `${parts[2]}-${parts[1]}-${parts[0]}`
@@ -71,20 +51,54 @@ async function handleEliminarUnidade(index){
     let ads = await getAllFromDB("/ads", {supplier_id: idUser}) 
     try {
       ads.map(async (ad) => (
-        ad.created_at = await changeDateFormat(ad.created_at),
-        ad.price = await formatPrice(ad.price)
+        ad.created_at = await changeDateFormat(ad.created_at)
+        //ad.price = await formatPrice(ad.price)
       )) 
-     setAds(ads );
+     setAds(ads);
     }
     catch(error) {
       setAds([] );
     }
   } 
 
+  const submitDeleteAd = async (index) => {
+    //APAGA O PRODUCTION UNIT
+    await deleteToDB("/ads/" + index)
+    location.reload()
+  }
+
+  async function handleEliminarAd(index){
+    submitDeleteAd(index);
+    snackbarRef2.current.show();
+  }
+
+  async function handleEditAd(index, updatedAd) {
+    // Create a new array with the ad at the given index replaced with the updated ad
+    const updatedupdatedAds = ads.map((ad, i) =>
+      i === index ? updatedAd : ad
+    );
+    // Update the state with the new array
+    setAds(updatedupdatedAds);
+    
+    let prodAd = await putToDB("/ads/" + updatedupdatedAds[index].id,{
+      title: updatedupdatedAds[index].title,
+      price: updatedupdatedAds[index].price,
+      email: updatedupdatedAds[index].email,
+      mobile_number: updatedupdatedAds[index].mobile_number,
+      capacity: updatedupdatedAds[index].capacity
+    })
+  }
+
+  function handleNewAdChange(event) {
+    const { name, value } = event.target;
+    setNewAd(prevState => ({ ...prevState, [name]: value }));
+  }
+
   useEffect(()=>{
     getProducts()
     setDidMount(true)
 }, [])
+
 
   return (
     <>
@@ -111,8 +125,8 @@ async function handleEliminarUnidade(index){
                   </tr>
                 </thead>
                 <tbody>
-                    {ads.map((ad) => (
-                    <tr key={ad.title}>
+                    {ads.map((ad, index) => (
+                    <tr key={index}>
                       {/*<td><div className='app__SupplierAdd_Box_Image'>
                       <img src={product.src} alt={product.title}/>
                       {ad.title}
@@ -121,7 +135,7 @@ async function handleEliminarUnidade(index){
                       <td>{ad.price}</td>            
                       <td>{ad.units}</td>
                       <td>{ad.created_at}</td>
-                      <td className='actions' style={{paddingRight:'0'}}>
+                      <td className='actions' style={{paddingRight:'0'}}>  
                                         <div style={{display:'flex'}}>
                                             <button onClick={() => setModalOpen2(prevState => {
                                                 const newState = [...prevState];
@@ -133,17 +147,16 @@ async function handleEliminarUnidade(index){
                                                 newState[index] = false;
                                                 return newState;
                                             })}>
-                                                <p style={{fontSize:'18px'}}>Editar Unidade</p>
+                                                <p style={{fontSize:'18px'}}>Editar Anúncio</p>
                                                 <form 
                                                     onSubmit={(event) => {
                                                         event.preventDefault();
-                                                        handleEditProductionUnit(index, {
-                                                            id: productionUnit.id,
-                                                            name: event.target.name.value,
-                                                            location: event.target.location.value,
-                                                            city: event.target.city.value,
-                                                            postal_code: event.target.postal_code.value,
-                                                            capacity: event.target.capacity.value,
+                                                        handleEditAd(index, {
+                                                            id: ad.id,
+                                                            title: event.target.title.value,
+                                                            price: event.target.price.value,
+                                                            mobile_number: event.target.mobile_number.value,
+                                                            email: event.target.email.value,
                                                         });
                                                         setModalOpen2(prevState => {
                                                             const newState = [...prevState];
@@ -154,56 +167,49 @@ async function handleEliminarUnidade(index){
                                                     }}>
                                                     <SnackBar
                                                         ref={snackbarRef3}
-                                                        message="Unidade Produção alterada!"
+                                                        message="Anúncio alterada!"
                                                         type={SnackbarType.success}
                                                     />
                                                     <div className='inputField'>
-                                                        <p>Nome:</p>
+                                                        <p>Titulo:</p>
                                                         <input                         
                                                             type="text"
-                                                            placeholder="Nome"
-                                                            name="name"
-                                                            defaultValue={productionUnits[index].name}
+                                                            placeholder="Título"
+                                                            name="title"
+                                                            defaultValue={ads[index].title}
                                                         />
                                                     </div> 
                                                     <div className='inputField'>
-                                                        <p>Localidade:</p>
+                                                        <p>Preço:</p>
                                                         <input                         
                                                             type="text"
-                                                            placeholder="Localidade"
-                                                            name="location"
-                                                            defaultValue={productionUnits[index].location}
+                                                            placeholder="Preço"
+                                                            name="price"
+                                                            defaultValue={ads[index].price}
                                                         />
                                                     </div> 
-                                                    <div style={{display:'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
-                                                        <div className='inputField'>
-                                                            <p>Cidade:</p>
-                                                            <input                         
-                                                                type="text"
-                                                                placeholder="Cidade"
-                                                                name="city"
-                                                                defaultValue={productionUnits[index].city}
-                                                            />
-                                                        </div> 
-                                                        <div className='inputField'>
-                                                            <p>Cód. Postal:</p>
-                                                            <input                         
-                                                                type="text"
-                                                                placeholder="Cód. Postal"
-                                                                name="postal_code"
-                                                                defaultValue={productionUnits[index].postal_code}
-                                                            />
-                                                        </div> 
-                                                    </div>
+
+                                                    <p style={{fontSize:'16px', textAlign:'center', marginTop:'18px'}}>Dados do Anunciante</p>
+
                                                     <div className='inputField'>
-                                                        <p>Capacidade:</p>
+                                                        <p>Telemóvel:</p>
                                                         <input                         
-                                                            type="number"
-                                                            placeholder="Capacidade"
-                                                            name="capacity"
-                                                            defaultValue={productionUnits[index].capacity}
+                                                            type="text"
+                                                            placeholder="Telemóvel"
+                                                            name="mobile_number"
+                                                            defaultValue={ads[index].mobile_number}
                                                         />
                                                     </div> 
+                                                    <div className='inputField'>
+                                                        <p>Email:</p>
+                                                        <input                         
+                                                            type="text"
+                                                            placeholder="Email"
+                                                            name="email"
+                                                            defaultValue={ads[index].email}
+                                                        />
+                                                    </div> 
+
                                                     <div style={{display:'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop:'2rem'}}>
                                                         <button 
                                                             className='main__action_btn' 
@@ -241,7 +247,7 @@ async function handleEliminarUnidade(index){
                                                             })}>Cancelar</button>
                                                     <button 
                                                         className='main__negative_action_btn' 
-                                                        onClick={() => handleEliminarUnidade(productionUnit.id)}>Apagar</button>
+                                                        onClick={() => handleEliminarAd(ad.id)}>Apagar</button>
                                                     <SnackBar
                                                         ref={snackbarRef2}
                                                         message="Unidade Produção eliminada!"
