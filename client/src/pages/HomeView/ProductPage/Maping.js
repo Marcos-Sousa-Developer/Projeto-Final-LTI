@@ -9,16 +9,32 @@ import Map, {
   Source,
   Layer,
 } from "react-map-gl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Maping() {
+function Maping({lat, lng, destLat, destLng}) {
 
-  const [lng, setLng] = useState(54.37585762735543);
-  const [lat, setLat] = useState(24.45677614934833);
-  const [destLng, setDestLng] = useState(54.372123);
-  const [destLat, setDestLat] = useState(24.453234);// Destination latitude
+  function distance() {
+    const R = 6371; // Raio médio da Terra em quilômetros
+    const dLat = (destLat - lat) * (Math.PI / 180); // Diferença de latitude em radianos
+    const dLon = (destLng - lng) * (Math.PI / 180); // Diferença de longitude em radianos
+  
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat * (Math.PI / 180)) *
+        Math.cos(destLat * (Math.PI / 180)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+  
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distancia = R * c;
+  
+    return distancia;
+  }
 
+  useEffect(()=> {
 
+    console.log(lat)
+  })
 
   return (
     <div className="App">
@@ -73,12 +89,12 @@ function Maping() {
         </Source>
 
         <Popup
-          longitude={destLng}
-          latitude={destLat}
+          longitude={lng}
+          latitude={lat}
           closeButton={false}
           anchor="top"
         >
-          Distance: {10} km
+          Distância: {distance().toFixed(0)} km
         </Popup>
 
       </Map>

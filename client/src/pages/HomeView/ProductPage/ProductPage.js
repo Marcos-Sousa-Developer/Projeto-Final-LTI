@@ -8,16 +8,14 @@ import product2 from "../../../assets/testproducts/cannon.png";
 import product3 from "../../../assets/testproducts/macbookpro.png";
 import product4 from "../../../assets/testproducts/jacket.png";
 import product5 from "../../../assets/testproducts/LEDS.png";
-
 import { Navbar, Footer, SnackBar } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import { ProductSwiper } from './ProductSwiper';
 import './ProductPage.css';
 import LoadingPage from '../../LoadingPage.js'
-
 import getAllFromDB from '../../../hooks/getAllFromDB';
-import getFromDB from '../../../hooks/getFromDB';
 import Maping from './Maping';
+import axios from 'axios';
 
 const SnackbarType = {
   success: "success",
@@ -25,6 +23,12 @@ const SnackbarType = {
 };
 
 const ProductPage = () => {
+
+  const [myLongigtude, setMyLongitude] = useState(0);
+  const [myLatitude, setMyLatitude] = useState(0);
+  const [supplierLongigtude, setSupplierLongitude] = useState(0);
+  const [supplierLatitude, setSupplierLatitude] = useState(0);// Destination latitude
+
   const snackbarRef = useRef(null);
   const [cookies, setCookie] = useCookies(['cart']);
   const [path, setPath] = useState(null)
@@ -82,6 +86,37 @@ const ProductPage = () => {
 
     let supplier = await getAllFromDB("/suppliers", {id: ad[0].supplier_id})
     setSupplierProd(supplier[0])
+    let currentConsumer = await getAllFromDB("/consumers", {uid: true})
+    console.log(currentConsumer)
+    setMap(currentConsumer[0].postal_code, supplier[0].postal_code)
+  }
+
+  const setMap = async (Cpostal_code, Spostal_code) => { 
+
+        await axios.get('https://json.geoapi.pt/cp/'+Cpostal_code) 
+        .then((response) => { 
+          let latitude = response.data.centro[0]
+          let longitude = response.data.centro[1]
+          setMyLatitude(latitude)
+          setMyLongitude(longitude)
+        })
+        .catch((error) => {
+          setMyLatitude(39.557191)
+          setMyLongitude(-7.8536599)
+        })
+
+      await axios.get('https://json.geoapi.pt/cp/'+Spostal_code) 
+      .then((response) => { 
+        let latitude = response.data.centro[0]
+        let longitude = response.data.centro[1]
+        setSupplierLatitude(latitude)
+        setSupplierLongitude(longitude)
+      })
+      .catch((error) => {
+        setSupplierLatitude(39.557191)
+        setSupplierLongitude(-7.8536599)
+      })
+    
   }
   
   const addToCart = () => {
@@ -90,17 +125,6 @@ const ProductPage = () => {
     prevValue[id] = [(prevValue[id]?.[0] ?? 0) + 1, adData.price, adData.title, adData.dataComplete];
     setCookie('cart', prevValue, { path: '/' });
   };
-
-  const updateCartItemCount = (value) => {
-    let id = adData.dataComplete.id
-    const prevValue = cookies.cart || {};
-
-    let parsedValue = parseInt(value)
-    if (!isNaN(parsedValue)) {
-        prevValue[id] = [parsedValue, adData.price, adData.title, adData.dataComplete];
-        setCookie('cart', prevValue, { path: '/' });
-    }
-  }
 
   useEffect(()=>{ 
     setDidMount(false) 
@@ -196,7 +220,7 @@ const ProductPage = () => {
              
             </div>
           </div>
-          <Maping></Maping>
+          <Maping lat={myLatitude} lng={myLongigtude} destLat={supplierLatitude} destLng={supplierLongigtude}></Maping>
         </div>
         
         <Footer></Footer>
