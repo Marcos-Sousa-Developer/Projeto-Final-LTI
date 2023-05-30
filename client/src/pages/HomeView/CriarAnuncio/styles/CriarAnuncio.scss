@@ -6,6 +6,16 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
 .app__anuncio{
     margin: 1rem auto 2rem;
 
+    .error_msg{
+        //position: absolute;
+        //bottom: 0;
+        //right: 0;
+        text-align: right;
+        font-size: $small_font;
+        font-weight: 500;
+        color: red;
+    }
+
     .title{
         font-weight: 500;
         font-size: $bigger_font;

@@ -167,6 +167,12 @@ img, picture {
 .app__anuncio {
   margin: 1rem auto 2rem;
 }
+.app__anuncio .error_msg {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 500;
+  color: red;
+}
 .app__anuncio .title {
   font-weight: 500;
   font-size: 18px;

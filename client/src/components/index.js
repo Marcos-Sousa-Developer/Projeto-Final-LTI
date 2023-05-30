@@ -7,7 +7,6 @@ import SignInC from './SignInC/SignInC';
 import SignUpC from './SignUpC/SignUpC';
 import Product from './Product/Product';
 import SubHeading from './SubHeading/SubHeading';
-import InputField from './InputField/InputField';
 import ComparePopUp from './ComparePopUp/ComparePopUp';
 import SnackBar from './SnackBarNotification/SnackBar';
 
@@ -21,7 +20,6 @@ export {
   SignUpC,
   Product,
   SubHeading,
-  InputField,
   ComparePopUp,
   SnackBar,
 };

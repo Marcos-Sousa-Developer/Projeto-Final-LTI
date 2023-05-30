@@ -1,6 +1,7 @@
 
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {FiChevronRight, FiChevronLeft, FiX, FiChevronDown, FiPlus, FiTrash2 } from 'react-icons/fi';
 
 import postToDB from '../../../hooks/postToDB';
@@ -10,17 +11,24 @@ import putToDB from '../../../hooks/putToDB';
 
 import {teste} from '../../../utilities/teste';
 
-import {NavbarSupplier, Footer, SubHeading} from '../../../components/index';
+import {NavbarSupplier, Footer, SubHeading, SnackBar} from '../../../components/index';
 import LoadingPage from '../../LoadingPage';
 import Features from './Features';
 import SubFeatures from './SubFeatures';
 import "./styles/CriarAnuncio.css";
-import "../../../components/InputField/InputField.css";
-import SupplierBar from '../../../components/SupplierBar/SupplierBar';
+
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
 
 function CriarAnuncio() {
-      
+
+    const navigate = useNavigate();
     const [productionUnits, setProductionUnit] = useState([]);
+
+    const snackbarRef = useRef(null); //SnackBar
+    const [snackbarType, setSnackbarType] = useState(SnackbarType.fail); //SnackBar
 
     //Errors
     const [titleError, setTitleError] = useState(false);
@@ -31,13 +39,12 @@ function CriarAnuncio() {
     const [eanError, setEanError] = useState(false);
     const [productionDateError, setProductionDateError] = useState(false);
     const [verifyProdUnitsError, setVerifyProdUnitsError] = useState(false);
-    const [overallError, setOverallError] = useState(false);
 
     //Anuncio Form
     const [formData, setFormData] = useState({
         EAN: "",
         titulo: "",
-        preco: 0.00,
+        preco: undefined,
         descricao: "",
         data_producao: new Date().toISOString().split('T')[0],
         categoria: "",
@@ -170,7 +177,7 @@ function CriarAnuncio() {
     async function verifyPrice(price){
         //Retorna OK se estiver tudo bem, se não, retorna o erro 
         //não pode ser null
-        if(price == "" || price == null) {
+        if(price == "" || price == null || price < 0.01 || price == undefined) {
             // O preço não pode ser nulo
             setPriceError(true);
             //return "Deve de inserir um preço válido";
@@ -427,12 +434,13 @@ function CriarAnuncio() {
           validSubFeature = await verifySubFeatures(formData.sub_features[0]);
         }
         let validProdUnit = await verifyProdUnits(formData.prodUnit);
+        let validDescription = await verifyDescription(formData.descricao);
+        let validCategory = await verifyCategory(formData.categoria);
 
         let product;
         let ad;
 
-        if(!titleError && !priceError && !descriptionError && !categoryError && !numberError && !productionDateError && !eanError && !validProdUnit){ //meter sub_features e features
-            console.log("anuncio criado!")
+        if(!titleError && !priceError && !numberError && !productionDateError && !eanError && !validDescription && !validProdUnit){ //meter sub_features e features
             let featuresDBproduct = {}; 
             let featuresDBad = {};
 
@@ -562,10 +570,11 @@ function CriarAnuncio() {
                 subsubcategory_name: formData.subsubcategoria,
               })
             }
+
+            setSnackbarType(SnackbarType.success);
+            snackbarRef.current.show();
           
             let idAd = ad.insertId
-
-            console.log(productionUnits)
 
             for (let i = 0; i < Object.entries(formData.prodUnit).length; i++) {
               const [key, value] = Object.entries(formData.prodUnit)[i];
@@ -586,9 +595,13 @@ function CriarAnuncio() {
             //SE CONSEGUIR ADICIONAR TODOS ADICIONA
             //SE NÃO, DÁ UM ALERT
 
-            setOverallError(false);
-        } else if(titleError || priceError || descriptionError || categoryError || numberError || productionDateError || eanError || validProdUnit){
-            setOverallError(true);
+
+            setTimeout(() => {
+              navigate('/supplier', { replace: true });
+            }, 3000); // 3 seconds delay
+        } else if(titleError || priceError || numberError || productionDateError || eanError || validDescription || validProdUnit){
+            setSnackbarType(SnackbarType.fail);
+            snackbarRef.current.show();
         }
     }
   
@@ -846,6 +859,15 @@ function CriarAnuncio() {
       (
       <>
         <NavbarSupplier></NavbarSupplier>
+        <SnackBar
+          ref={snackbarRef}
+          message={
+            snackbarType === SnackbarType.success
+              ? "Anúncio criado com sucesso!"
+              : "Não foi possível criar anúncio!"
+          }
+          type={snackbarType}
+        />
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
             <form onSubmit={() => {console.log(formData)}}>
@@ -858,7 +880,7 @@ function CriarAnuncio() {
                       <input type='text' value={formData.EAN} onChange={handleEAN}/>
                       {
                         eanError && 
-                         <p>EAN com formate incorreto!</p>
+                         <div className='error_msg'>EAN com formato incorreto!</div>
                       }
                     </div>
                     <div className='app__anuncio_produto_content_categoria'>
@@ -878,7 +900,7 @@ function CriarAnuncio() {
                       } 
                       {
                         categoryError &&
-                        <p>Escolha uma categoria!</p>
+                          <div style={{textAlign: 'left'}} className='error_msg'>Escolha uma categoria!</div>
                       }
                     </div>
                   </div>
@@ -889,21 +911,21 @@ function CriarAnuncio() {
               <div className='app__anuncio_anuncio'>
                 <p className='title'>Anúncio</p>
                 <div className='app__anuncio_anuncio_content'>
-                  <div className='inputField'>
+                  <div className={!titleError ? "inputField" : "inputField_error"}>
                     <p>Título *</p>
                     <input type='text' value={formData.titulo} placeholder='Título do anúncio' required onChange={handleTitle}/>
                     {
                       titleError && 
-                        <p>Título com formato incorreto!</p>
+                        <div className='error_msg'>Título com formato incorreto!</div>
                     }
                   </div>
                   <div className='' style={{display: 'flex'}}>
-                    <div className='inputField'>
+                    <div className={!priceError ? "inputField" : "inputField_error"}>
                       <p>Preço (€) *</p>
                       <input type='number' value={formData.preco} step="0.01" min="0" required onChange={handlePrice}/>
                       {
                         priceError &&
-                         <p>Preço com formate incorreto!</p>
+                         <div className='error_msg'>Preço com formato incorreto!</div>
                       }
                     </div>
                     <div className='inputField' style={{marginLeft:'2rem'}}>
@@ -914,7 +936,15 @@ function CriarAnuncio() {
                   <div className='app__anuncio_description_section'>
                       <p style={{marginTop:'1rem'}}>Descrição *</p>
                       <textarea 
-                          style={{width:'100%', maxHeight: '170px', minHeight:'120px', resize:'vertical', outline:'none', border: '3px solid #EEEEEE', borderRadius:'10px', padding:'0.25rem 0.5rem'}} 
+                          style={{
+                            width:'100%', 
+                            maxHeight: '170px', 
+                            minHeight:'120px', 
+                            resize:'vertical', 
+                            outline:'none', 
+                            border: !descriptionError ? '3px solid #EEEEEE' : '3px solid red', 
+                            borderRadius:'10px', 
+                            padding:'0.25rem 0.5rem'}} 
                           form='anuncio_form' 
                           maxLength="600" 
                           placeholder='Indique alguns detalhes sobre o seu produto'
@@ -926,7 +956,7 @@ function CriarAnuncio() {
                       <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
                       {
                         descriptionError &&
-                         <p>Descrição com formato incorreto!</p>
+                         <div className='error_msg'>A descrição deve ter conteúdo!</div>
                       }
                   </div>
                   <div className='app__anuncio_image_section'>
@@ -968,7 +998,7 @@ function CriarAnuncio() {
                 <div className='app__anuncio_supplier'>
                   <p className='title'>Anunciante</p>
                   <div className='app__anuncio_supplier_content'>
-                    <div className='inputField'>
+                    <div className={!numberError ? "inputField" : "inputField_error"}>
                         <p>Telemóvel *</p>
                         <input type='tel' required value = {formData.telemovel} onChange={handleNumber}/>
                         {
@@ -1007,7 +1037,7 @@ function CriarAnuncio() {
                     </table>
                     {
                       verifyProdUnitsError && 
-                      <p>Houve um erro na unidade de produção</p>
+                        <div className='error_msg'>Deve escolher pelo menos uma unidade produção!</div>
                     }
                   </div>
                 </div>

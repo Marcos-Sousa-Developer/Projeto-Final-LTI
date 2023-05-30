@@ -199,6 +199,47 @@ img, picture{
   }
 }
 
+.inputField{
+
+  p{
+      margin: 1rem 0 .5rem;
+  }
+
+  input{
+      outline: none;
+      border: 3px solid $light_gray;
+      border-radius: 10px;
+      padding: 0.25rem 0.5rem;
+      width: 100%;
+      font-size: $smaller_font;
+      transition: all 100ms ease-in;
+
+      &:focus{
+          border: 3px solid rgba($color: $orange, $alpha: .8);
+      }
+  }
+}
+
+.inputField_error{
+  p{
+      margin: 1rem 0 .5rem;
+  }
+  
+  input{
+      outline: none;
+      border: 3px solid red;
+      border-radius: 10px;
+      padding: 0.25rem 0.5rem;
+      width: 100%;
+      font-size: $smaller_font;
+      transition: all 100ms ease-in;
+
+      &:focus{
+          border: 3px solid rgba($color: $orange, $alpha: .8);
+      }
+  }
+}
+
 // animations
 
 

@@ -170,7 +170,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 }
             {/*Especificações do Software*/}
                 {subsubcategoria === "Software"  &&
-                    <SubFeatureInput typeInput="text" featureName="SoftwareType" featureTitle="SoftwareType" formData={formData} setFormData={setFormData}></SubFeatureInput>
+                    <SubFeatureInput typeInput="text" featureName="SoftwareType" featureTitle="Tipo de Software" formData={formData} setFormData={setFormData}></SubFeatureInput>
                 }
             {/*Especificações do Armazenamento, Discos Externos, Internos, Servidores e Computadores*/}
                 {subsubcategoria === "Armazenamento" || subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos" || subsubcategoria === "Servidores" || subsubcategoria === "Computadores" ?
@@ -276,7 +276,7 @@ const SubFeatures = ({formData, setFormData}) => {
             }
             {/*Especificações do Calçado*/}
             {subcategoria === "Calçado"  &&
-                <SubFeatureInput typeInput="number" featureName="ShoeSize" featureTitle="ShoeSize" formData={formData} setFormData={setFormData}></SubFeatureInput>
+                <SubFeatureInput typeInput="number" featureName="ShoeSize" featureTitle="Número" formData={formData} setFormData={setFormData}></SubFeatureInput>
             }
         </div>
     )
