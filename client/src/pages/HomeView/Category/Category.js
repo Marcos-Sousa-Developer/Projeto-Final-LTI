@@ -230,7 +230,7 @@ const Category = () => {
                 <ul className={filterCategory ? "hideFilter showFilter" : "hideFilter"}>
                 {Object.keys(subcategories).map((subcategory_name) => { 
                     return ( 
-                      <li>
+                      <li style={{marginLeft: '1rem'}}>
                         <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>
                       </li>
                     );

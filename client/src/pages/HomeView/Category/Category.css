@@ -207,6 +207,9 @@ img, picture {
 .app__Category_Grid_Esquerda .app__Category_filter_content_title:hover .app__Category_filter_content_title_right > *, .app__Category_Grid_Esquerda .app__Category_filter_content_title:hover .app__Category_filter_content_title_up > *, .app__Category_Grid_Esquerda .app__Category_filter_content_title:hover p {
   color: #EB5C1F;
 }
+.app__Category_Grid_Esquerda .app__Category_filter_content .app__Category_filter_unit {
+  margin-top: 1.25rem;
+}
 .app__Category_Grid_Esquerda .app__Category_filter_content .hideFilter {
   display: none;
   transition: all 250ms ease-in-out;
