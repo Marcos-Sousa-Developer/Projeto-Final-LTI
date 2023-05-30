@@ -188,12 +188,10 @@ img, picture {
   top: 0;
   margin: 0.5rem;
 }
-.app__modal_content .app__Category_filter_unit {
-  margin-top: 1.25rem;
-}
 .app__modal_content .app__Category_filter_unit .mobile-title {
   border-bottom: 2px solid #EEEEEE;
-  margin: 0;
+  margin: 0.5rem 0;
+  padding: 0.5rem 0;
 }
 .app__modal_content .filterPrice {
   display: flex;

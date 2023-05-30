@@ -26,11 +26,10 @@
     }
     //filter da category
     .app__Category_filter_unit{
-        margin-top: 1.25rem;
-
         .mobile-title{
             border-bottom: 2px solid $light_gray;
-            margin: 0;
+            margin: .5rem 0;
+            padding: .5rem 0;
         }
     }
     .filterPrice{
