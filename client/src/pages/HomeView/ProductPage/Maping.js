@@ -31,11 +31,6 @@ function Maping({lat, lng, destLat, destLng}) {
     return distancia;
   }
 
-  useEffect(()=> {
-
-    console.log(lat)
-  })
-
   return (
     <div className="App">
       <Map
