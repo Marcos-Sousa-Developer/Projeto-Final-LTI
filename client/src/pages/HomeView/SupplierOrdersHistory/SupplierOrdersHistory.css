@@ -164,45 +164,60 @@ img, picture {
     font-size: 14px;
   }
 }
+.inputField p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField input {
+  outline: none;
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.inputField_error p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField_error input {
+  outline: none;
+  border: 3px solid red;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField_error input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
 .app__SupplierHistory {
-  max-width: 1650px;
-  width: 95%;
   margin: 1rem auto 2rem;
-}
-.app__SupplierHistory_options ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-.app__SupplierHistory_options li {
-  float: left;
-  padding-right: 10px;
-  padding-bottom: 10px;
-}
-.app__SupplierHistory_options li:last-child {
-  border-right: none;
-}
-.app__SupplierHistory_options li a {
-  display: block;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  text-decoration: none;
-}
-.app__SupplierHistory_options li a:hover {
-  color: rgb(0, 0, 0);
 }
 .app__SupplierHistory_Orders {
   border: 3px solid #EEEEEE;
-  min-height: 400px;
-  display: grid;
-  grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr 1fr;
 }
 .app__SupplierHistory_Orders table {
-  text-align: center;
+  width: 100%;
 }
-.app__SupplierHistory_Orders table thead {
-  margin-top: 0.5rem;
+.app__SupplierHistory_Orders table thead tr th {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #EEEEEE;
+  padding: 0.5rem 3rem 0.5rem 0.5rem;
+}
+.app__SupplierHistory_Orders table tbody tr td {
+  padding: 0.75rem 0.5rem 0.75rem 0.5rem;
+}
+.app__SupplierHistory_Orders table .priceShow > * {
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
 }
 .app__SupplierHistory_button {
   justify-content: start;
@@ -219,9 +234,12 @@ img, picture {
 .app__SupplierHistory_password-checks_symbol-fail > * > * {
   color: rgb(226, 14, 14);
 }
-
-.active {
-  font-weight: 500;
+.app__SupplierHistory a.option {
+  margin-right: 1rem;
+}
+.app__SupplierHistory .active {
+  font-weight: bold;
+  color: rgba(235, 92, 31, 0.8);
 }
 
 @media screen and (max-width: 800px) {

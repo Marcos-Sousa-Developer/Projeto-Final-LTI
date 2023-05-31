@@ -119,7 +119,7 @@ function SupplierAdd() {
                   <tr>
                     <th>Produto</th>
                     <th>Preço</th>
-                    <th>Unidades</th>
+                    {/*<th>Unidades</th>*/}
                     <th>Data de criação</th>
                     <th></th>
                   </tr>
@@ -133,7 +133,7 @@ function SupplierAdd() {
                       </div></td>*/}
                       <td data-cell='Título: '>{ad.title}</td>
                       <td data-cell='Preço: ' className='priceShow'><PriceDisplay price={ad.price}></PriceDisplay></td>            
-                      <td data-cell='Unidades: '>{ad.units}</td>
+                      {/*<td data-cell='Unidades: '>{ad.units}</td>*/}
                       <td data-cell='Data de criação: '>{ad.created_at}</td>
                       <td className='actions' style={{paddingRight:'0'}}>  
                                         <div style={{display:'flex'}}>

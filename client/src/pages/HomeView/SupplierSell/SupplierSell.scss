@@ -1,57 +1,23 @@
 @import "../../../index.scss";
 
 .app__SupplierSell {
-    max-width: 1650px;
-    width: 95%;
-    margin: 0 auto;
-    margin-bottom: 4rem;
-    padding-top: 1%;
-
-    &_options{
-        
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        
-        li {
-            float: left;
-            padding-right: 10px;
-            padding-bottom: 10px;
-        }
-        
-        li:last-child {
-            border-right: none;
-        }
-        
-        li a {
-            display: block;
-            color: rgb(0, 0, 0);
-            text-align: center;
-            text-decoration: none;
-        }
-        
-        li a:hover{
-            color: rgb(0, 0, 0);
-        }
-    }
+    margin: 1rem auto 2rem;
 
     &_Box{
         border: $border;
-        padding: 2rem 6rem 3rem 6rem;
-        min-height: 400px;
-        display:grid;
-        grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr;
 
         table{
-            text-align: center;
+            width: 100%;
             thead tr th{
-                padding-bottom: 1.5rem;
+                font-size: 16px;
+                font-weight: 500;
+                background-color: $light_gray;
+                padding: .5rem 3rem .5rem .5rem;
             }
             tbody tr td{
-                padding-bottom: 1.5rem;
+                padding: .75rem .5rem .75rem .5rem;
+                //align-self: flex-start;
+                vertical-align: top
             }
         }
 
@@ -59,7 +25,7 @@
             display:flex;
                  
             img{
-                max-width: 200px;
+                max-width: 150px;
                 max-height: auto;
                 margin-right: 1.5rem;
             }

@@ -3,6 +3,7 @@ import getAllFromDB from '../../../hooks/getAllFromDB';
 import putToDB from '../../../hooks/putToDB';
 
 import { NavbarSupplier, Footer, SubHeading } from '../../../components/index';
+import { PriceDisplay } from '../../../utilities/formatCurrency';
 import './SupplierOrdersHistory.css';
 import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 import LoadingPage from '../../LoadingPage';
@@ -53,7 +54,7 @@ const SupplierOrdersHistory = () => {
       :
       <>
       <NavbarSupplier></NavbarSupplier>
-      <div className='app__prod-unit main__container'>
+      <div className='app__SupplierHistory main__container'>
         <SubHeading title="Histórico de encomendas"/>
         <SupplierBar active5='active'></SupplierBar>
         <div className='app__SupplierHistory_Orders'>
@@ -61,12 +62,12 @@ const SupplierOrdersHistory = () => {
             <>
               <table className='app__prod-unit_existing-units'>
                 <thead>
-                  <tr style={{ marginTop: '20px' }}>
-                    <th>Número da encomenda</th>&nbsp;&nbsp;
-                    <th>Nome do produto</th>&nbsp;&nbsp;
-                    <th>Localização do comprador</th>&nbsp;&nbsp;
-                    <th>Total €</th>&nbsp;&nbsp;
-                    <th>Estado</th>&nbsp;&nbsp;
+                  <tr>
+                    <th>Número da encomenda</th>
+                    <th>Nome do produto</th>
+                    <th>Localização do comprador</th>
+                    <th>Total €</th>
+                    <th>Estado</th>
                     <th></th>
                     <th></th>
                   </tr>
@@ -75,13 +76,13 @@ const SupplierOrdersHistory = () => {
                   {ordersHistory.map((orderHistory) => (
                     <React.Fragment key={orderHistory.id}>
                       <tr>
-                        <td>{orderHistory.order.order_id}</td> &nbsp;
-                        <td>{orderHistory.ad_name}</td>&nbsp;&nbsp;
-                        <td>{orderHistory.order.buyer_location}</td>&nbsp;&nbsp;
-                        <td>{orderHistory.order.price}</td>  &nbsp; &nbsp;                   
-                        <td>{orderHistory.order.order_status}</td>&nbsp;&nbsp;
-                        <td><button disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button></td>
-                        <td><button disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Enviado"); location.reload();}}>Enviar</button></td>
+                        <td data-cell='Número da encomenda: '>#{orderHistory.order.order_id}</td> 
+                        <td data-cell='Título: '>{orderHistory.ad_name}</td>
+                        <td data-cell='Localização do comprador: '>{orderHistory.order.buyer_location}</td>
+                        <td data-cell='Total €: ' className='priceShow'><PriceDisplay price={orderHistory.order.price}></PriceDisplay></td>                      
+                        <td data-cell='Estado: '>{orderHistory.order.order_status}</td>
+                        <td><button className='main__action_btn' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button></td>
+                        <td><button className='main__negative_action_btn' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Enviado"); location.reload();}}>Enviar</button></td>
                       </tr>
                     </React.Fragment>
                   ))}

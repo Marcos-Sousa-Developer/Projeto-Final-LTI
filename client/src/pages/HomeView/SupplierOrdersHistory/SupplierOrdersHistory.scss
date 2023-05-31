@@ -1,59 +1,27 @@
 @import "../../../index.scss";
 
 .app__SupplierHistory {
-    max-width: 1650px;
-    width: 95%;
     margin: 1rem auto 2rem;
 
-    &_options{
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        
-        li {
-            float: left;
-            padding-right: 10px;
-            padding-bottom: 10px;
-        }
-        
-        li:last-child {
-            border-right: none;
-        }
-        
-        li a {
-            display: block;
-            color: rgb(0, 0, 0);
-            text-align: center;
-            text-decoration: none;
-        }
-        
-        li a:hover{
-            color: rgb(0, 0, 0);
-        }
-    }
-
     &_Orders{
-      
         border: $border;
-        //padding: 1rem 1rem 1rem 1rem;
-        min-height: 400px;
-        display:grid;
-        grid-template-columns: 2.5fr 1fr 1fr 1 fr 1fr 1fr;
 
         table{
-            text-align: center;
+            width: 100%;
 
-            thead {
-                margin-top: 0.5rem;
-                
+            thead tr th{
+                font-size: 16px;
+                font-weight: 500;
+                background-color: $light_gray;
+                padding: .5rem 3rem .5rem .5rem;
             }
-
             tbody tr td{
-                //padding-bottom: 0.1rem;
+                padding: .75rem .5rem .75rem .5rem;
+            }
+            .priceShow>*{
+                font-size: 16px;
+                font-weight: 400;
+                color: black;
             }
         }
     }
@@ -77,10 +45,15 @@
             color: rgb(226, 14, 14);
         }
     }
-}
 
-.active {
-    font-weight: 500;
+    a.option{
+        margin-right: 1rem;
+    }
+        
+    .active {
+        font-weight: bold;
+        color: rgba($color: $orange, $alpha: .8);
+    }
 }
 
 @media screen and (max-width: 800px) {

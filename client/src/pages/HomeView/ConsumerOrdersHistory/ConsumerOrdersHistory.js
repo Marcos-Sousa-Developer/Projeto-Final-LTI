@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import putToDB from '../../../hooks/putToDB';
 
+import LoadingPage from '../../LoadingPage';
 import { Navbar, Footer, SubHeading } from '../../../components/index';
+import { PriceDisplay } from '../../../utilities/formatCurrency';
 import './ConsumerOrdersHistory.css';
 import ConsumerBar from '../../../components/ConsumerBar/ConsumerBar';
 
@@ -81,50 +83,51 @@ const ConsumerOrdersHistory = () => {
     return (
     <>
     {
-      loading ? "loading":
-      <>
-      <Navbar></Navbar>
-      <div className='app__prod-unit main__container'>
-        <SubHeading title="Histórico de encomendas"/>
-        <ConsumerBar active2='active'></ConsumerBar>
-        <br></br>
-        <button className='active app__text_effect' style={{color: "green"}} onClick={() => exportJson()}>Exportar dados de Encomenda</button>
-        <div className='app__ConsumerHistory_Orders'>
-          {ordersHistory.length > 0 && (
-            <>
-              <table className='app__prod-unit_existing-units'>
-                <thead>
-                  <tr>
-                    <th>Número da encomenda</th>
-                    <th>Nome do produto</th>
-                    <th>Localização do comprador</th>
-                    <th>Preço €</th>
-                    <th>Estado</th>
-                    <th></th>              
-                  </tr>
-                </thead>
-                <tbody>
-                  {ordersHistory.map((orderHistory) => (
-                    <React.Fragment key={orderHistory.id}>
+      loading ? 
+        <LoadingPage></LoadingPage> 
+        :
+        <>
+          <Navbar></Navbar>
+          <div className='app__ConsumerHistory main__container'>
+            <SubHeading title="Histórico de encomendas"/>
+            <ConsumerBar active2='active'></ConsumerBar>
+            <div className='app__ConsumerHistory_Orders'>
+              {ordersHistory.length > 0 && (
+                <>
+                  <table>
+                    <thead>
                       <tr>
-                        <td>{orderHistory.order.order_id}</td>
-                        <td>{orderHistory.ad_name}</td>
-                        <td>{orderHistory.order.buyer_location}</td>
-                        <td>{orderHistory.order.price}</td>
-                        <td>{orderHistory.order.order_status}</td>
-                        <td><button disabled={orderHistory.order.order_status == "Em preparação" || orderHistory.order.order_status == "A confirmar"? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button></td>
+                        <th>Número da encomenda</th>
+                        <th>Nome do produto</th>
+                        <th>Localização do comprador</th>
+                        <th>Preço</th>
+                        <th>Estado</th>
+                        <th></th>              
                       </tr>
-                    </React.Fragment>
-                  ))}
-                </tbody>
-              </table>
-            </>
-          )}
+                    </thead>
+                    <tbody>
+                      {ordersHistory.map((orderHistory) => (
+                        <React.Fragment key={orderHistory.id}>
+                          <tr>
+                            <td data-cell='Número da encomenda: '>#{orderHistory.order.order_id}</td>
+                            <td data-cell='Nome do produto: '>{orderHistory.ad_name}</td>
+                            <td data-cell='Localização do comprador: '>{orderHistory.order.buyer_location}</td>
+                            <td data-cell='Preço: ' className='priceShow'><PriceDisplay price={orderHistory.order.price}></PriceDisplay></td>
+                            <td data-cell='Estado: '>{orderHistory.order.order_status}</td>
+                            <td><button disabled={orderHistory.order.order_status == "Em preparação" || orderHistory.order.order_status == "A confirmar"? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button></td>
+                          </tr>
+                        </React.Fragment>
+                      ))}
+                    </tbody>
+                  </table>
+                </>
+              )}
+            </div>
+            <button className='active main__action_btn' onClick={() => exportJson()}>Exportar dados</button>
           </div>
-        </div>
-      <Footer></Footer>
-      </>
-    }
+          <Footer></Footer>
+        </>
+      }
     </>
   )
 }

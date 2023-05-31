@@ -39,44 +39,39 @@ function SupplierSell() {
   return (
     <>
     <NavbarSupplier></NavbarSupplier>
-    <div className='app__SupplierSell'>   
+    <div className='app__SupplierSell main__container'>   
         <SubHeading title="Encomendas"/>
         <SupplierBar active3='active'></SupplierBar>
-
         <div className='app__SupplierSell_Box'>
-        <table>
-            <thead>
-            <tr>
-            <th>Produto</th>
-            <th>Preço</th>
-            <th>Unidades</th>
-            <th>Data de compra</th>
-            <th>Comprador</th>
+          <table>
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Preço</th>
+                  <th>Unidades</th>
+                  <th>Data de compra</th>
+                  <th>Comprador</th>
                 </tr>
-            </thead>
-            <tbody>
-                {products.map((product) => (
-                <tr key={product.title}>
-                    <td>
-                    <div className='app__SupplierSell_Box_Image'>
-                    <img src={product.src} alt={product.title}/>
-                    {product.title}
-                    </div></td>
-                    <td>{product.price}</td>            
-                    <td>{product.units}</td>
-                    <td>{product.creation}</td>
-                    <td>{product.buyer}</td>
-
-            </tr>
-        ))}
-        </tbody>
-    </table>
-        
-        </div>
-
-
+              </thead>
+              <tbody>
+                  {products.map((product) => (
+                  <tr key={product.title}>
+                      <td data-cell='Produto: '>
+                        <div className='app__SupplierSell_Box_Image'>
+                          <img src={product.src} alt={product.title}/>
+                          {product.title}
+                        </div>
+                      </td>
+                      <td data-cell='Preço: '>{product.price}</td>            
+                      <td data-cell='Unidades: '>{product.units}</td>
+                      <td data-cell='Data de compra: '>{product.creation}</td>
+                      <td data-cell='Comprador: '>{product.buyer}</td>
+                  </tr>
+                ))}
+              </tbody>
+          </table>
+      </div>
     </div>
-    
     <Footer></Footer>
     </>
   );
