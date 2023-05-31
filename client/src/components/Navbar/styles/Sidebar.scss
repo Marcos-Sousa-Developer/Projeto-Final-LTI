@@ -57,6 +57,19 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
   flex-direction: column;
   justify-content: space-between;
 
+  .comparador{
+    &>*>*{
+      color: black;
+      transition: all .125s ease-in-out;
+    }
+
+    &:hover{
+      &>*>*{
+        color: $orange;
+      }
+    }
+  }
+
   &.active{
     transform: translateX(0%);
     margin: 0;
@@ -119,6 +132,7 @@ $overlay-bg:        hsla(0, 0%, 9%, 0.863);
 
         li{
           line-height: 2rem;
+          font-weight: 400;
 
           a{
             font-size: $smaller_font;

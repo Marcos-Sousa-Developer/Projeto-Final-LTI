@@ -33,12 +33,12 @@ const Navbar = () => {
           <div style={{marginBottom:'.75rem'}}>
             <div className='app__pointer' onClick={onClick}  style={{fontSize:'12px'}}>
                 <FiChevronLeft></FiChevronLeft>    
-                Voltar atrás
+                <a style={{fontWeight: '400'}}>Voltar atrás</a>
             </div>
-            <a className='app__pointer app__sidebar_navs_subcategory-title' onClick={() => window.location.href = `/subcategoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name}).toString()}`}>{subcategory.name} <span>(ver tudo)</span></a>
+            <a className='app__pointer app__sidebar_navs_subcategory-title' onClick={() => window.location.href = `/subcategoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name}).toString()}`}>{subcategory.name} (ver tudo)</a>
             <div style={{marginLeft:'.75rem'}}>
                 {subcategory.subsubcategories.map((subsubcategory, i) => {
-                    return <li style={{lineHeight:'2rem'}}><a key={i} className='app__text_effect app__pointer' style={{fontSize:'14px'}} onClick={() => window.location.href = `/subsubcategoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name, subsubCategory: subsubcategory}).toString()}`}>{subsubcategory}</a></li>
+                    return <li style={{lineHeight:'2rem', fontWeight: '400'}}><a key={i} className='app__text_effect app__pointer' style={{fontSize:'14px'}} onClick={() => window.location.href = `/subsubcategoria?${new URLSearchParams({category: selectedCategory.name, subCategory: selectedSubCategory.name, subsubCategory: subsubcategory}).toString()}`}>{subsubcategory}</a></li>
                 })}
             </div>
           </div>
@@ -89,7 +89,7 @@ const Navbar = () => {
             </div>
             <div>
                 <hr></hr>
-                <a href='/comparador'>Comparador <FiRepeat></FiRepeat></a>
+                <a className='app__pointer app__text_effect comparador' href='/comparador'>Comparador <FiRepeat></FiRepeat></a>
             </div>
           </div>
         )

@@ -164,6 +164,38 @@ img, picture {
     font-size: 14px;
   }
 }
+.inputField p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField input {
+  outline: none;
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.inputField_error p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField_error input {
+  outline: none;
+  border: 3px solid red;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField_error input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
 .app__navbar__searchBar div {
   border: 3px solid #EEEEEE;
   border-radius: 20rem;

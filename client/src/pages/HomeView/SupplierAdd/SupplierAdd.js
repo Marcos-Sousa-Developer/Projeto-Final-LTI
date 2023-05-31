@@ -110,7 +110,7 @@ function SupplierAdd() {
       (
       <>
         <NavbarSupplier></NavbarSupplier>
-        <div className='app__SupplierAdd'>   
+        <div className='app__SupplierAdd main__container'>   
             <SubHeading title="Anúncios"/>
             <SupplierBar active2='active'></SupplierBar>
             <div className='app__SupplierAdd_Box'>
@@ -131,13 +131,13 @@ function SupplierAdd() {
                       <img src={product.src} alt={product.title}/>
                       {ad.title}
                       </div></td>*/}
-                      <td>{ad.title}</td>
-                      <td>{ad.price}</td>            
-                      <td>{ad.units}</td>
-                      <td>{ad.created_at}</td>
+                      <td data-cell='Título: '>{ad.title}</td>
+                      <td data-cell='Preço: ' className='priceShow'><PriceDisplay price={ad.price}></PriceDisplay></td>            
+                      <td data-cell='Unidades: '>{ad.units}</td>
+                      <td data-cell='Data de criação: '>{ad.created_at}</td>
                       <td className='actions' style={{paddingRight:'0'}}>  
                                         <div style={{display:'flex'}}>
-                                            <button onClick={() => setModalOpen2(prevState => {
+                                            <button style={{margin:'0 0.5rem'}} onClick={() => setModalOpen2(prevState => {
                                                 const newState = [...prevState];
                                                 newState[index] = true;
                                                 return newState;
@@ -212,7 +212,7 @@ function SupplierAdd() {
 
                                                     <div style={{display:'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop:'2rem'}}>
                                                         <button 
-                                                            className='main__action_btn' 
+                                                            className='main__action_btn'
                                                             onClick={() => 
                                                                 setModalOpen2(prevState => {
                                                                     const newState = [...prevState];
@@ -225,7 +225,7 @@ function SupplierAdd() {
                                                     </div>
                                                 </form>
                                             </Modal>
-                                            <button onClick={() => setModalOpen(prevState => {
+                                            <button style={{margin:'0 0.5rem'}} onClick={() => setModalOpen(prevState => {
                                                 const newState = [...prevState];
                                                 newState[index] = true;
                                                 return newState;

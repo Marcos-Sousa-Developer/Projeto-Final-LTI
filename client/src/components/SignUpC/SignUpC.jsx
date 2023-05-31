@@ -136,6 +136,7 @@ const SignUpC = () => {
                                                 onChange={handlePasswordChange}
                                             />
                                         </div>
+                                        <p className='termsOfService'>Ao registar-se concorda com os termos e condições</p>
                                     </div>
                                     { password && (
                                         <ul className='app__ConsumerProfile_password-checks'>

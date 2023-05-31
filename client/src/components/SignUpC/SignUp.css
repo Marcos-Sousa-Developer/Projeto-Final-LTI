@@ -164,6 +164,38 @@ img, picture {
     font-size: 14px;
   }
 }
+.inputField p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField input {
+  outline: none;
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.inputField_error p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField_error input {
+  outline: none;
+  border: 3px solid red;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField_error input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
 .app__SignUp {
   margin: 1rem auto;
   min-height: calc(100vh - 220px);
@@ -285,6 +317,11 @@ img, picture {
 }
 .app__SignUp_box3 .singUpOptions path {
   color: white;
+}
+.app__SignUp_box .termsOfService {
+  margin: 0;
+  text-align: right;
+  font-size: 12px;
 }
 .app__SignUp_box11 {
   border: 3px solid #EEEEEE;
