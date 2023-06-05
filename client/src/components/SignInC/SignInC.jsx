@@ -54,7 +54,11 @@ const SignInC = ({checkout=null}) => {
             let userType = await getUserType();
             if(userType == 'supplier'){
                 window.location.href = "/supplier";
-            } else {
+            } 
+            else if(userType == 'admin'){
+                window.location.href = "/admin/perfil";
+            }
+            else {
                 if(checkout == true) {
                     window.location.href = "/cart";
                 }

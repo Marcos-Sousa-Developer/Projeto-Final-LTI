@@ -42,14 +42,6 @@ function Aside() {
     <aside id="sidebar" className="sidebar">
       
       <ul className="sidebar-nav" id="sidebar-nav">
-        <li className="nav-item">
-          <span className="nav-link">
-            <Link reloadDocument  to="/admin">
-              <i className="bi bi-grid"/>
-              <span>Painel de Controlo</span>
-              </Link>
-          </span>
-        </li>
         
         <li className="nav-heading">Editar Perfil</li>
 
@@ -162,36 +154,6 @@ function Aside() {
             </li>
 
           </ul>
-        </li>
-
-        <li className="nav-heading">Ferramentas</li>
-
-        {/*<li className="nav-item">
-          <Link reloadDocument to="/admin" className="nav-link collapsed">
-            <i className="bi bi-envelope"/>
-            <span>Enviar Email</span>
-          </Link>
-        </li>*/}
-
-        <li className="nav-item">
-          <Link reloadDocument to="/admin" className="nav-link collapsed">
-            <i className="bi bi-chat-left-dots"/>
-            <span>Mensagens</span>
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link reloadDocument to="/admin" className="nav-link collapsed" >
-            <i className="bi bi-question-circle" />
-            <span>Suporte</span>
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link reloadDocument  to="/admin/settings" className="nav-link collapsed">
-            <i className="bi bi-gear"/>
-            <span>Definições</span>
-          </Link>
         </li>
 
       </ul>

@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation} from "react-router-dom";
 import RequireAuth from "./components/RequireAuth"
-import Dashboard from "./pages/Admin/Dashboard";
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 import Gerir_Consumidores from "./pages/Admin/Gerir_Consumidores";
 import Gerir_Fornecedores from "./pages/Admin/Gerir_Fornecedores";
@@ -63,7 +62,6 @@ function App() {
           {userType == "admin" &&
             (
               <Route path="admin">
-                <Route index element={ <RequireAuth><Dashboard /></RequireAuth> }/>
                 <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
                 <Route exact path="gerir/adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
                 <Route exact path="gerir/consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
@@ -104,7 +102,7 @@ function App() {
             )
           }   
 
-          {userType != "supplier" && 
+          { (userType != "supplier"  && userType != "admin") &&
             (     
               <>           
                 <Route path="/" element={<Home/>} />
