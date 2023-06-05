@@ -102,6 +102,7 @@ const ConsumerOrdersHistory = () => {
                         <th>Localização do comprador</th>
                         <th>Preço</th>
                         <th>Estado</th>
+                        <th>Transportadora</th>
                         <th></th>              
                       </tr>
                     </thead>
@@ -113,8 +114,18 @@ const ConsumerOrdersHistory = () => {
                             <td data-cell='Nome do produto: '>{orderHistory.ad_name}</td>
                             <td data-cell='Localização do comprador: '>{orderHistory.order.buyer_location}</td>
                             <td data-cell='Preço: ' className='priceShow'><PriceDisplay price={orderHistory.order.price}></PriceDisplay></td>
-                            <td data-cell='Estado: '>{orderHistory.order.order_status}</td>
-                            <td><button disabled={orderHistory.order.order_status == "Em preparação" || orderHistory.order.order_status == "A confirmar"? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button></td>
+                            <td data-cell='Estado: '>{orderHistory.order.order_status}</td>                            
+                            <td data-cell='Transportadora: '>{orderHistory.order.vehicle ?? "N/A"}</td>
+                            <td>
+                              {
+                                orderHistory.order.order_status == "Em preparação" || orderHistory.order.order_status == "A confirmar" ? (
+                                  <button className='main__action_btn' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                                )
+                                : (
+                                  <button className='main__action_btn' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                                )
+                              }
+                            </td>
                           </tr>
                         </React.Fragment>
                       ))}
