@@ -7,6 +7,8 @@ import { PRODUCTS } from '../../../assets/products';
 import images from '../../../assets/images';
 import './Home.css';
 import getClientType from "../../../hooks/getClientType";
+import getAllFromDB from '../../../hooks/getAllFromDB';
+import { CookieStorage } from 'amazon-cognito-identity-js';
 
 function Home() {
 
@@ -15,6 +17,7 @@ function Home() {
     targetDiv.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const [ads, setAds] = useState([])
   const [userType, setUserType] = useState(false)
   const [didMount, setDidMount] = useState(false)
 
@@ -23,16 +26,19 @@ function Home() {
     let response = await getClientType()   
 
     if(response) {
-
       let type = response[0]
-
       setUserType(type)
-
     }
+  }
+
+  async function getAds(){
+    let adsDB = await getAllFromDB("/ads")
+    setAds(adsDB.slice(adsDB.length - 8, adsDB.length))
   }
 
   useEffect(() => {
     getUserType()
+    getAds()
     setDidMount(true)
   },[])
 
@@ -74,6 +80,21 @@ function Home() {
 
         </div>
       </div>
+      {console.log(ads)}
+      {ads.map((ad) => (
+                <p>{ad.title}</p>
+      ))}
+      {/*ads.map((ad) => (
+                <Product 
+                  key={ad.id} 
+                  data={ad} 
+                  //selectedProducts={selectedProducts}
+                  //onAddToCompare={addToSelectedProducts}
+                  //onRemoveFromCompare={removeFromSelectedProducts}
+                  onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
+                />
+            ))*/}
+
       <Footer></Footer>
       </>
       )
