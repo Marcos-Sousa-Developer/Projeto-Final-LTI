@@ -7,9 +7,9 @@ import { FiShoppingCart, FiAlignLeft, FiUser, FiX, FiChevronUp, FiChevronRight, 
 import images from '../../assets/images.js';
 import { teste } from '../../utilities/teste.js'
 import Searchbar from './Searchbar/Searchbar';
+import { PriceDisplay } from '../../utilities/formatCurrency.js';
 import './styles/Sidebar.css';
 import './styles/Navbar.css';
-//import { PriceDisplay } from '../../utilities/formatCurrency';
 
 const Navbar = () => {
 
@@ -185,7 +185,7 @@ const Navbar = () => {
                     </div>
                     <div className='app__navbar_profile_cart' style={{margin: '0 .75rem'}}>
                         <span className="profile_link">Carrinho</span>
-                        <p style={{fontSize: '12px', opacity: '80%'}}>0.00€</p>
+                        <p style={{opacity: '80%'}} className='priceShow'><PriceDisplay className='product_price' price="0" /></p>
                     </div>
                 </Link>
                 

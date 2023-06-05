@@ -17,20 +17,25 @@
             }
             tbody tr td{
                 padding: .75rem .5rem .75rem .5rem;
+                font-size: $smaller_font;
             }
             tbody tr:nth-child(even) td{
-                background-color: rgba($color: $light_gray, $alpha: .3);
+                background-color: rgba($color: $light_gray, $alpha: .4);
             }
             .priceShow>*{
                 font-size: 16px;
                 font-weight: 400;
                 color: black;
             }
+            .orderHitory_actions{
+                display: flex;
+                gap: 1rem;
+                background-color: transparent;
+            }
         }
     }
 
     &_button {
-        //display: flex;
         justify-content: start;
     }
 
@@ -59,7 +64,7 @@
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
     .app__SupplierHistory{
 
         &_Orders{
@@ -71,6 +76,10 @@
                 tr{
                     position: relative;
                 }
+
+                tbody tr td{
+                    padding: .25rem .5rem .25rem .25rem;
+                }
         
                 td{
                     display: block;
@@ -79,22 +88,39 @@
                         content: attr(data-cell);
                         font-weight: 500;
                     }
+
+                    &:nth-child(1){
+                        padding-top: 1rem;
+                    }
         
-                    &:nth-child(4){
+                    &:nth-child(5){
                         padding-bottom: 1rem;
                     }
                 }
 
-                th, td{
-                    padding: .125rem 1rem .125rem .25rem;
+                .orderHitory_actions{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    margin-top: .5rem;
+                    margin-right: .5rem;
                 }
             }
         }
+    }
+}
 
-        .actions{
-            position: absolute;
-            right: 4px;
-            top: 0;
+@media (max-width: 800px) {
+    .app__SupplierHistory{
+
+        &_Orders{
+            table{
+                .orderHitory_actions{
+                    position: initial;
+                    margin-top: 0;
+                    margin-right: 0;
+                }
+            }
         }
     }
 }

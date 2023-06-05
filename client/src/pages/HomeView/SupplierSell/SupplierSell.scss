@@ -21,12 +21,13 @@
             }
 
             tbody tr:nth-child(even) td{
-                background-color: rgba($color: $light_gray, $alpha: .3);
+                background-color: rgba($color: $light_gray, $alpha: .4);
             }
         }
 
         &_Image{
             display:flex;
+            background-color: transparent;
                  
             img{
                 max-width: 150px;
@@ -46,7 +47,7 @@
     }  
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 950px) {
     .app__SupplierSell{
 
         &_Box{
@@ -58,6 +59,10 @@
                 tr{
                     position: relative;
                 }
+
+                tbody tr td{
+                    padding: .125rem .5rem .125rem .5rem;
+                }
         
                 td{
                     display: block;
@@ -66,14 +71,14 @@
                         content: attr(data-cell);
                         font-weight: 500;
                     }
+
+                    &:nth-child(1){
+                        padding-top: 1rem;
+                    }
         
-                    &:nth-child(4){
+                    &:nth-child(5){
                         padding-bottom: 1rem;
                     }
-                }
-
-                th, td{
-                    padding: .125rem 1rem .125rem .25rem;
                 }
             }
         }

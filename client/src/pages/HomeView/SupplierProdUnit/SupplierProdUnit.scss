@@ -120,6 +120,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
             gap: 0 2rem;
+            margin-bottom: 1rem;
 
             .app__prod-unit_add_new-unit_actions {
                 justify-self: stretch;

@@ -202,11 +202,11 @@ img, picture {
   margin: 0 auto;
   padding: 1.5rem 0 1.5rem 0;
   border-bottom: 3px solid #EEEEEE;
-  /*
-  & > * > *{
-      margin: 0 1rem;
-  } 
-  */
+}
+.app__navbar .priceShow > * {
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
 }
 .app__navbar > :first-child > :first-child {
   margin: 0 1rem auto 0;

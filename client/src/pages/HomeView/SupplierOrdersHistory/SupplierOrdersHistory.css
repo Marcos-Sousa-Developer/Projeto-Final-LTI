@@ -213,14 +213,20 @@ img, picture {
 }
 .app__SupplierHistory_Orders table tbody tr td {
   padding: 0.75rem 0.5rem 0.75rem 0.5rem;
+  font-size: 14px;
 }
 .app__SupplierHistory_Orders table tbody tr:nth-child(even) td {
-  background-color: rgba(238, 238, 238, 0.3);
+  background-color: rgba(238, 238, 238, 0.4);
 }
 .app__SupplierHistory_Orders table .priceShow > * {
   font-size: 16px;
   font-weight: 400;
   color: black;
+}
+.app__SupplierHistory_Orders table .orderHitory_actions {
+  display: flex;
+  gap: 1rem;
+  background-color: transparent;
 }
 .app__SupplierHistory_button {
   justify-content: start;
@@ -245,12 +251,15 @@ img, picture {
   color: rgba(235, 92, 31, 0.8);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
   .app__SupplierHistory_Orders table thead tr th {
     display: none;
   }
   .app__SupplierHistory_Orders table tr {
     position: relative;
+  }
+  .app__SupplierHistory_Orders table tbody tr td {
+    padding: 0.25rem 0.5rem 0.25rem 0.25rem;
   }
   .app__SupplierHistory_Orders table td {
     display: block;
@@ -259,15 +268,24 @@ img, picture {
     content: attr(data-cell);
     font-weight: 500;
   }
-  .app__SupplierHistory_Orders table td:nth-child(4) {
+  .app__SupplierHistory_Orders table td:nth-child(1) {
+    padding-top: 1rem;
+  }
+  .app__SupplierHistory_Orders table td:nth-child(5) {
     padding-bottom: 1rem;
   }
-  .app__SupplierHistory_Orders table th, .app__SupplierHistory_Orders table td {
-    padding: 0.125rem 1rem 0.125rem 0.25rem;
-  }
-  .app__SupplierHistory .actions {
+  .app__SupplierHistory_Orders table .orderHitory_actions {
     position: absolute;
-    right: 4px;
     top: 0;
+    right: 0;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+@media (max-width: 800px) {
+  .app__SupplierHistory_Orders table .orderHitory_actions {
+    position: initial;
+    margin-top: 0;
+    margin-right: 0;
   }
 }/*# sourceMappingURL=SupplierOrdersHistory.css.map */

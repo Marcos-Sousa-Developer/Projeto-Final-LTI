@@ -215,7 +215,7 @@ img, picture {
   padding: 0.75rem 0.5rem 0.75rem 0.5rem;
 }
 .app__SupplierAdd_Box table tbody tr:nth-child(even) td {
-  background-color: rgba(238, 238, 238, 0.3);
+  background-color: rgba(238, 238, 238, 0.4);
 }
 .app__SupplierAdd_Box table .priceShow > * {
   font-size: 16px;
@@ -223,7 +223,7 @@ img, picture {
   color: black;
 }
 .app__SupplierAdd_Box table .actions div button > *, .app__SupplierAdd_Box table .actions div button > * > * {
-  background-color: rgba(238, 238, 238, 0.3);
+  background-color: rgba(238, 238, 238, 0.4);
 }
 .app__SupplierAdd_Box_Image {
   display: flex;

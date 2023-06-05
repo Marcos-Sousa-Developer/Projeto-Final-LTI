@@ -111,36 +111,26 @@ function SupplierPage() {
           <div className='app__SupplierPage_boxes'>
             <div className='app__SupplierPage_boxesEsquerda'>
               <div className='app__SupplierPage_boxesEsquerda1'>
-                <p><strong>Impacto Local</strong></p>
                 <div className='app__SupplierPage_boxesEsquerda1Est'>
+                <p>Impacto Local</p>
                   { tableLocationData === {} ? <div>loading</div> : <LocalImpact datas={tableLocationData}></LocalImpact>}
                 </div>
-                <br></br>
-
-              </div>
-              <div className='app__SupplierPage_boxesEsquerda2'>
-                <p>Últimas ordens</p>
-                <div className='app__SupplierPage_boxesEsquerda1Ult'>
-                  
-                </div>
-
               </div>
             </div>
 
             <div className='app__SupplierPage_boxesDireita'>
-              <div className='app__SupplierPage_boxesDireita1'>
                 <div className='app__SupplierPage_boxesDireita1Nmr'>
                   <div className='app__SupplierPage_boxesDireita1Nmr1'>
-                    <p>Hoje</p>
-                    <p><span className='numeroLaranja'>{saleToday}</span> vendas</p>
+                    <p style={{fontWeight:'500'}}>Hoje</p>
+                    <p><span className='numeroLaranja'>{saleToday}</span> Vendas</p>
                   </div>
                   <div className='app__SupplierPage_boxesDireita1Nmr2'>
-                    <p>Este mês</p>
-                    <p><span className='numeroLaranja'>{saleMonth}</span> vendas</p>
+                    <p style={{fontWeight:'500'}}>Este mês</p>
+                    <p><span className='numeroLaranja'>{saleMonth}</span> Vendas</p>
                   </div>
                 </div>
-                <p>5 Vendas Recentes</p>
                 <div className='app__SupplierPage_boxesDireita1Vend'>
+                  <p style={{fontWeight:'500'}}>5 Vendas Recentes</p>
                   {
                     fiveSells.map((sells) => {
 
@@ -149,9 +139,6 @@ function SupplierPage() {
                     })
                   }
                 </div>
-
-              </div>
-            
             </div>
           </div>
         </div>
@@ -160,7 +147,6 @@ function SupplierPage() {
       }
     </>
   );
-
 }
 
 export default SupplierPage;

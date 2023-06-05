@@ -216,10 +216,11 @@ img, picture {
   vertical-align: top;
 }
 .app__SupplierSell_Box table tbody tr:nth-child(even) td {
-  background-color: rgba(238, 238, 238, 0.3);
+  background-color: rgba(238, 238, 238, 0.4);
 }
 .app__SupplierSell_Box_Image {
   display: flex;
+  background-color: transparent;
 }
 .app__SupplierSell_Box_Image img {
   max-width: 150px;
@@ -234,12 +235,15 @@ img, picture {
   color: rgba(235, 92, 31, 0.8);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 950px) {
   .app__SupplierSell_Box table thead tr th {
     display: none;
   }
   .app__SupplierSell_Box table tr {
     position: relative;
+  }
+  .app__SupplierSell_Box table tbody tr td {
+    padding: 0.125rem 0.5rem 0.125rem 0.5rem;
   }
   .app__SupplierSell_Box table td {
     display: block;
@@ -248,11 +252,11 @@ img, picture {
     content: attr(data-cell);
     font-weight: 500;
   }
-  .app__SupplierSell_Box table td:nth-child(4) {
-    padding-bottom: 1rem;
+  .app__SupplierSell_Box table td:nth-child(1) {
+    padding-top: 1rem;
   }
-  .app__SupplierSell_Box table th, .app__SupplierSell_Box table td {
-    padding: 0.125rem 1rem 0.125rem 0.25rem;
+  .app__SupplierSell_Box table td:nth-child(5) {
+    padding-bottom: 1rem;
   }
   .app__SupplierSell .actions {
     position: absolute;

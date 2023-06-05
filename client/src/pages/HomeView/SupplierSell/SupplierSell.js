@@ -56,7 +56,7 @@ function SupplierSell() {
               <tbody>
                   {products.map((product) => (
                   <tr key={product.title}>
-                      <td data-cell='Produto: '>
+                      <td>
                         <div className='app__SupplierSell_Box_Image'>
                           <img src={product.src} alt={product.title}/>
                           {product.title}

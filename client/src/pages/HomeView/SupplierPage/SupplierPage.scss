@@ -1,11 +1,7 @@
 @import "../../../index.scss";
 
 .app__SupplierPage {
-    max-width: 1650px;
-    width: 95%;
-    margin: 0 auto;
-    margin-bottom: 4rem;
-    padding-top: 1%;
+    margin: 1rem auto 2rem;
 
     &_options{
         
@@ -38,24 +34,17 @@
     }
 
     &_boxes{
-        //padding: 3rem 1.5rem;
-        width: 100%;
-        margin: auto;
         display: grid;
-        grid-template-columns: 3fr 1.5fr;
+        grid-template-columns: 3fr 1fr;
     }
 
     &_boxesEsquerda2{
         margin-top: 1.75rem;
-        
     }
 
     &_boxesEsquerda1Est{
-        padding: 6rem 0.5rem;
-        box-sizing: border-box;
-        margin-left: 0.25rem;
-        background: #FFFFFF;
         border: $border;
+        padding: 1rem;
     }
 
     &_boxesEsquerda1Ult{
@@ -67,47 +56,35 @@
     }
 
     &_boxesDireita{
-        margin-left: 1.75rem;
-        //margin-bottom: 2.5rem;
+        margin-left: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
     &_boxesDireita1Vend{
-        padding: 9rem 0.5rem;
-        box-sizing: border-box;
-        margin-left: 0.25rem;
-        background: #FFFFFF;
+        height: 100%;
+    }
+
+    &_boxesDireita1Vend, &_boxesDireita1Nmr{
         border: $border;
+        padding: 1rem;
     }
 
     &_boxesDireita1Nmr{
-        margin: 1rem;
-        padding: 2rem 2rem;
         text-align: center;
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
     }
 
-    &_boxesDireita1Nmr1{
-        display: inline-block;
-        padding: 0rem 1rem;
-        vertical-align: middle;
+    &_boxesDireita1Nmr1, &_boxesDireita1Nmr2{
 
         .numeroLaranja{
             color:$orange;
             font-size: 27px;
 
         }
-    }
-
-    &_boxesDireita1Nmr2{
-        display: inline-block;
-        padding:  0rem 1rem;
-        vertical-align: middle;
-
-        .numeroLaranja{
-            color:$orange;
-            font-size: 27px;
-        }
-
-      
     }
 
     a.option{
@@ -120,14 +97,32 @@
     }
 }
 
-@media screen and (max-width: 800px) {
-
+@media screen and (max-width: 1500px) {
     .app__SupplierPage_boxes{
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 2fr 1fr;
     }
+}
 
-    .app__SupplierPage_boxesDireita {
-        margin-left: 0rem;
+@media screen and (max-width: 1050px) {
+    .app__SupplierPage{
+        &_boxes{
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    
+        &_boxesDireita{
+            margin-left: 0;
+            flex-direction: row;
+        }
+
+        &_boxesDireita1Nmr{
+            flex-direction: column;
+            min-width: 150px;
+            gap: 0;
+        }
+
+        &_boxesDireita1Vend{
+            width: 100%;
+        }
     }
 }

@@ -69,7 +69,6 @@ const SupplierOrdersHistory = () => {
                     <th>Total €</th>
                     <th>Estado</th>
                     <th></th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -81,8 +80,12 @@ const SupplierOrdersHistory = () => {
                         <td data-cell='Localização do comprador: '>{orderHistory.order.buyer_location}</td>
                         <td data-cell='Total €: ' className='priceShow'><PriceDisplay price={orderHistory.order.price}></PriceDisplay></td>                      
                         <td data-cell='Estado: '>{orderHistory.order.order_status}</td>
-                        <td><button className='main__action_btn' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button></td>
-                        <td><button className='main__negative_action_btn' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Enviado"); location.reload();}}>Enviar</button></td>
+                        <td>
+                          <div className='orderHitory_actions'>
+                            <button className='main__action_btn app__pointer' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                            <button className='main__negative_action_btn app__pointer' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Enviado"); location.reload();}}>Enviar</button>
+                          </div>
+                        </td>
                       </tr>
                     </React.Fragment>
                   ))}

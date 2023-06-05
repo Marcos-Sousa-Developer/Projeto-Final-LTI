@@ -19,7 +19,7 @@
             }
 
             tbody tr:nth-child(even) td{
-                background-color: rgba($color: $light_gray, $alpha: .3);
+                background-color: rgba($color: $light_gray, $alpha: .4);
             }
 
             .priceShow>*{
@@ -29,7 +29,7 @@
             }
 
             .actions div button>*, .actions div button>*>*{
-                background-color: rgba($color: $light_gray, $alpha: .3);
+                background-color: rgba($color: $light_gray, $alpha: .4);
             }
         }
 
