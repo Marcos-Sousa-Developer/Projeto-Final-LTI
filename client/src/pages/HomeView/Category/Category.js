@@ -160,6 +160,7 @@ const Category = () => {
   }
 
   const setByPrice = () =>{
+    setCurrentPage(1)
     let newProducts = []
     let max = maxCurrentPrice
     if(maxCurrentPrice === ''){
@@ -204,7 +205,6 @@ const Category = () => {
   }, [])
 
   useEffect(()=>{ 
-    console.log(adsPrev)
     startIndex = 0;
     endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
     setCurrentItems(adsPrev.slice(startIndex, endIndex))
@@ -277,7 +277,7 @@ const Category = () => {
                 <div  className='app__Category_filter_unit'>
                   <p className="mobile-title">Categoria</p>
                   <ul>
-                    {Object.keys(subcategories).map((subcategory_name) => { setByPrice
+                    {Object.keys(subcategories).map((subcategory_name) => {
                       return ( 
                       <li>
                         <a className='app__pointer app__text_effect' key={subcategory_name} onClick={() => sendToSubcategories(subcategory_name) }> {subcategory_name} ({subcategories[subcategory_name]})</a>

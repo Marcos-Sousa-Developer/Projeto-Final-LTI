@@ -25,6 +25,8 @@ const Search = () => {
 
   const [currentItems, setCurrentItems] = useState([]);
 
+  const [adsPrev, setAdsPrev] = useState([]);
+
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
 
@@ -36,8 +38,8 @@ const Search = () => {
   const goToPage = (page) => {
     setCurrentPage(page);
     startIndex = (page - 1) * 20;
-    endIndex = Math.min(startIndex + itemsPerPage, ads.length);
-    setCurrentItems(ads.slice(startIndex, endIndex))
+    endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
+    setCurrentItems(adsPrev.slice(startIndex, endIndex))
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -45,6 +47,7 @@ const Search = () => {
   async function getAndSetProducts(title){
     let adsDB = await getAllFromDB("/ads", {title: title})
     setAds(adsDB);
+    setAdsPrev(adsDB)
     startIndex = (currentPage - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
     setCurrentItems(adsDB.slice(startIndex, endIndex))
@@ -82,7 +85,7 @@ const Search = () => {
 
   //Formatação da Paginação
 
-  const totalPages = Math.ceil(ads.length / itemsPerPage);
+  const totalPages = Math.ceil(adsPrev.length / itemsPerPage);
   const MAX_PAGES = 5;
   
   let pagination;
@@ -137,6 +140,7 @@ const Search = () => {
   }
 
   const setByPrice = () =>{
+    setCurrentPage(1)
     let newProducts = []
     let max = maxCurrentPrice
     if(maxCurrentPrice === ''){
@@ -148,7 +152,7 @@ const Search = () => {
           newProducts.push(ads[item])
         }
       }
-      setCurrentItems(newProducts)
+      setAdsPrev(newProducts)
     }
   }
 
@@ -167,6 +171,12 @@ const Search = () => {
     execute()
         
   }, [])
+
+  useEffect(()=>{ 
+    startIndex = 0;
+    endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
+    setCurrentItems(adsPrev.slice(startIndex, endIndex))
+  }, [adsPrev])
 
   return (
     <>
@@ -192,7 +202,7 @@ const Search = () => {
                   <span>{filterCategory ? <FiChevronUp className='app__Search_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Search_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
                 <ul className={filterCategory ? "hideFilter showFilter" : "hideFilter"}>
-                  {Object.keys(categories).map((category_name) => { 
+                  {Object.keys(categories).map((category_name) => {
                     return ( 
                       <li>
                         <a className='app__pointer app__text_effect' key={category_name} onClick={() => sendToCategories(category_name) }> {category_name} ({categories[category_name]})</a>
