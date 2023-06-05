@@ -29,6 +29,8 @@ const SubCategory = () => {
 
   const [currentItems, setCurrentItems] = useState([]);
 
+  const [adsPrev, setAdsPrev] = useState([]);
+
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
 
@@ -38,6 +40,7 @@ const SubCategory = () => {
   async function getSubSubCategoriesbySearchName(subCategoryName, searchName){
     let adsDB = await getAllFromDB("/ads", {title: searchName, subcategory_name: subCategoryName})
     setAds(adsDB)
+    setAdsPrev(adsDB)
     let max = 0;
     adsDB.map( (ad) => {  
         subsubcategories[ad.subsubcategory_name] != undefined ? subsubcategories[ad.subsubcategory_name] +=1 : subsubcategories[ad.subsubcategory_name]=0
@@ -53,6 +56,7 @@ const SubCategory = () => {
   async function getSubSubCategories(subCategoryName){
     let adsDB = await getAllFromDB("/ads", {subcategory_name: subCategoryName})
     setAds(adsDB)
+    setAdsPrev(adsDB)
     let max = 0;
     adsDB.map( (ad) => {  
         subsubcategories[ad.subsubcategory_name] != undefined ? subsubcategories[ad.subsubcategory_name] +=1 : subsubcategories[ad.subsubcategory_name]=0
@@ -69,8 +73,8 @@ const SubCategory = () => {
   const goToPage = (page) => {
     setCurrentPage(page);
     startIndex = (page - 1) * 20;
-    endIndex = Math.min(startIndex + itemsPerPage, ads.length);
-    setCurrentItems(ads.slice(startIndex, endIndex))
+    endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
+    setCurrentItems(adsPrev.slice(startIndex, endIndex))
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -98,7 +102,7 @@ const SubCategory = () => {
 
   //Formatação da Paginação
 
-  const totalPages = Math.ceil(ads.length / itemsPerPage);
+  const totalPages = Math.ceil(adsPrev.length / itemsPerPage);
   const MAX_PAGES = 5;
   
   let pagination;
@@ -154,6 +158,7 @@ const SubCategory = () => {
   }
 
   const setByPrice = () =>{
+    setCurrentPage(1)
     let newProducts = []
     let max = maxCurrentPrice
     if(maxCurrentPrice === ''){
@@ -165,7 +170,7 @@ const SubCategory = () => {
           newProducts.push(ads[item])
         }
       }
-      setCurrentItems(newProducts)
+      setAdsPrev(newProducts)
     }
   }
 
@@ -200,6 +205,12 @@ const SubCategory = () => {
     }
     run();
   }, [])
+
+  useEffect(()=>{ 
+    startIndex = 0;
+    endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
+    setCurrentItems(adsPrev.slice(startIndex, endIndex))
+  }, [adsPrev])
 
   return (
     <>

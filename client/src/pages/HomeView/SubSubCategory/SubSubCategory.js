@@ -26,6 +26,8 @@ const SubSubCategory = () => {
 
   const [currentItems, setCurrentItems] = useState([]);
 
+  const [adsPrev, setAdsPrev] = useState([]);
+
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
 
@@ -36,14 +38,15 @@ const SubSubCategory = () => {
   const goToPage = (page) => {
     setCurrentPage(page);
     startIndex = (page - 1) * 20;
-    endIndex = Math.min(startIndex + itemsPerPage, ads.length);
-    setCurrentItems(ads.slice(startIndex, endIndex))
+    endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
+    setCurrentItems(adsPrev.slice(startIndex, endIndex))
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const getProductsbySearchName = async (subsubCategoryName, searchName) => {
     let adsDB = await getAllFromDB("/ads", {title: searchName, subsubcategory_name: subsubCategoryName})
     setAds(adsDB)
+    setAdsPrev(adsDB)
     let max = 0;
     adsDB.map( (ad) => {  
       ad.price > max ? max = ad.price: max = max
@@ -58,6 +61,7 @@ const SubSubCategory = () => {
   const getProducts = async (subsubCategoryName) => {
     let adsDB = await getAllFromDB("/ads", {title: searchName, subsubcategory_name: subsubCategoryName})
     setAds(adsDB)
+    setAdsPrev(adsDB)
     let max = 0;
     adsDB.map( (ad) => {  
       ad.price > max ? max = ad.price: max = max
@@ -82,7 +86,7 @@ const SubSubCategory = () => {
 
   //Formatação da Paginação
 
-  const totalPages = Math.ceil(ads.length / itemsPerPage);
+  const totalPages = Math.ceil(adsPrev.length / itemsPerPage);
   const MAX_PAGES = 5;
   
   let pagination;
@@ -134,6 +138,7 @@ const SubSubCategory = () => {
   }
   
   const setByPrice = () =>{
+    setCurrentPage(1)
     let newProducts = []
     let max = maxCurrentPrice
     if(maxCurrentPrice === ''){
@@ -145,7 +150,7 @@ const SubSubCategory = () => {
           newProducts.push(ads[item])
         }
       }
-      setCurrentItems(newProducts)
+      setAdsPrev(newProducts)
     }
   }
 
@@ -178,6 +183,12 @@ const SubSubCategory = () => {
     }
     run();
   }, [])
+
+  useEffect(()=>{ 
+    startIndex = 0;
+    endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
+    setCurrentItems(adsPrev.slice(startIndex, endIndex))
+  }, [adsPrev])
 
   return (
     <>
