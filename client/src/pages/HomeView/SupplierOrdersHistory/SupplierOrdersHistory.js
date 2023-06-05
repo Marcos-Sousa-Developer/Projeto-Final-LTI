@@ -60,7 +60,7 @@ const SupplierOrdersHistory = () => {
         <div className='app__SupplierHistory_Orders'>
           {ordersHistory.length > 0 && (
             <>
-              <table className='app__prod-unit_existing-units'>
+              <table>
                 <thead>
                   <tr>
                     <th>Número da encomenda</th>

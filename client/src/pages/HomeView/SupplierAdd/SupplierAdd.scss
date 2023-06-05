@@ -17,10 +17,19 @@
             tbody tr td{
                 padding: .75rem .5rem .75rem .5rem;
             }
+
+            tbody tr:nth-child(even) td{
+                background-color: rgba($color: $light_gray, $alpha: .3);
+            }
+
             .priceShow>*{
                 font-size: 16px;
                 font-weight: 400;
                 color: black;
+            }
+
+            .actions div button>*, .actions div button>*>*{
+                background-color: rgba($color: $light_gray, $alpha: .3);
             }
         }
 
@@ -46,17 +55,42 @@
     
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 650px) {
+    .app__SupplierAdd{
 
-    .app__SupplierPage {
+        &_Box{
+            table{
+                thead tr th{
+                    display: none;
+                }
 
-        &_box{
-            grid-template-columns: 1fr;
-            gap: 0;
+                tr{
+                    position: relative;
+                }
+        
+                td{
+                    display: block;
+        
+                    &::before{
+                        content: attr(data-cell);
+                        font-weight: 500;
+                    }
+        
+                    &:nth-child(4){
+                        padding-bottom: 1rem;
+                    }
+                }
 
-            &_div{
-                margin: 0rem 1rem 0rem 1rem;
+                th, td{
+                    padding: .125rem 1rem .125rem .25rem;
+                }
             }
+        }
+
+        .actions{
+            position: absolute;
+            right: 4px;
+            top: 0;
         }
     }
 }

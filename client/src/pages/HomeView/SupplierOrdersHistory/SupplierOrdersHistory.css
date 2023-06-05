@@ -214,6 +214,9 @@ img, picture {
 .app__SupplierHistory_Orders table tbody tr td {
   padding: 0.75rem 0.5rem 0.75rem 0.5rem;
 }
+.app__SupplierHistory_Orders table tbody tr:nth-child(even) td {
+  background-color: rgba(238, 238, 238, 0.3);
+}
 .app__SupplierHistory_Orders table .priceShow > * {
   font-size: 16px;
   font-weight: 400;
@@ -242,15 +245,29 @@ img, picture {
   color: rgba(235, 92, 31, 0.8);
 }
 
-@media screen and (max-width: 800px) {
-  .app__ConsumerProfile_box {
-    grid-template-columns: 1fr;
-    gap: 0;
+@media (max-width: 1000px) {
+  .app__SupplierHistory_Orders table thead tr th {
+    display: none;
   }
-  .app__ConsumerProfile_box_div {
-    margin: 0rem 1rem 0rem 1rem;
+  .app__SupplierHistory_Orders table tr {
+    position: relative;
   }
-  .app__ConsumerProfile_password-checks {
-    font-size: 12px;
+  .app__SupplierHistory_Orders table td {
+    display: block;
+  }
+  .app__SupplierHistory_Orders table td::before {
+    content: attr(data-cell);
+    font-weight: 500;
+  }
+  .app__SupplierHistory_Orders table td:nth-child(4) {
+    padding-bottom: 1rem;
+  }
+  .app__SupplierHistory_Orders table th, .app__SupplierHistory_Orders table td {
+    padding: 0.125rem 1rem 0.125rem 0.25rem;
+  }
+  .app__SupplierHistory .actions {
+    position: absolute;
+    right: 4px;
+    top: 0;
   }
 }/*# sourceMappingURL=SupplierOrdersHistory.css.map */
