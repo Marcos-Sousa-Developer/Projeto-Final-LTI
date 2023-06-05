@@ -215,6 +215,9 @@ img, picture {
   padding: 0.75rem 0.5rem 0.75rem 0.5rem;
   vertical-align: top;
 }
+.app__SupplierSell_Box table tbody tr:nth-child(even) td {
+  background-color: rgba(238, 238, 238, 0.3);
+}
 .app__SupplierSell_Box_Image {
   display: flex;
 }
@@ -231,20 +234,29 @@ img, picture {
   color: rgba(235, 92, 31, 0.8);
 }
 
-@media screen and (max-width: 800px) {
-  .app__SupplierPage tbody td {
-    display: block;
-    text-align: left;
+@media (max-width: 1000px) {
+  .app__SupplierSell_Box table thead tr th {
+    display: none;
   }
-  .app__SupplierPage tbody td:before {
-    content: attr(data-th);
-    display: block;
-    text-align: left;
-    font-weight: bold;
-    margin-bottom: 0.5em;
+  .app__SupplierSell_Box table tr {
+    position: relative;
   }
-  .app__SupplierPage tbody tr {
+  .app__SupplierSell_Box table td {
     display: block;
-    margin-bottom: 1.5em;
+  }
+  .app__SupplierSell_Box table td::before {
+    content: attr(data-cell);
+    font-weight: 500;
+  }
+  .app__SupplierSell_Box table td:nth-child(4) {
+    padding-bottom: 1rem;
+  }
+  .app__SupplierSell_Box table th, .app__SupplierSell_Box table td {
+    padding: 0.125rem 1rem 0.125rem 0.25rem;
+  }
+  .app__SupplierSell .actions {
+    position: absolute;
+    right: 4px;
+    top: 0;
   }
 }/*# sourceMappingURL=SupplierSell.css.map */

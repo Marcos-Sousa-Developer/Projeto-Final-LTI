@@ -14,5 +14,5 @@ export function PriceDisplay(props) {
   
     const formattedPrice = formatPrice(price);
   
-    return <span className='product_price'>{formattedPrice}</span>;
+    return <span className='product_price' style={{backgroundColor: 'transparent'}}>{formattedPrice}</span>;
 }

@@ -136,7 +136,7 @@ function SupplierAdd() {
                       {/*<td data-cell='Unidades: '>{ad.units}</td>*/}
                       <td data-cell='Data de criação: '>{ad.created_at}</td>
                       <td className='actions' style={{paddingRight:'0'}}>  
-                                        <div style={{display:'flex'}}>
+                        <div style={{display:'flex', backgroundColor: 'transparent'}}>
                                             <button style={{margin:'0 0.5rem'}} onClick={() => setModalOpen2(prevState => {
                                                 const newState = [...prevState];
                                                 newState[index] = true;
@@ -255,11 +255,11 @@ function SupplierAdd() {
                                                     />
                                                 </div>
                                             </Modal>
-                                        </div>
-                                    </td>
+                        </div>
+                      </td>
                     </tr>
                     ))}
-                    </tbody>
+                </tbody>
               </table>
             </div>
         </div>

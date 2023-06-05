@@ -19,6 +19,10 @@
                 //align-self: flex-start;
                 vertical-align: top
             }
+
+            tbody tr:nth-child(even) td{
+                background-color: rgba($color: $light_gray, $alpha: .3);
+            }
         }
 
         &_Image{
@@ -42,27 +46,42 @@
     }  
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 1000px) {
+    .app__SupplierSell{
 
-    .app__SupplierPage {
+        &_Box{
+            table{
+                thead tr th{
+                    display: none;
+                }
 
-       
-            tbody td {
-                display: block;
-                text-align: left;
-            }
+                tr{
+                    position: relative;
+                }
         
-            tbody td:before {
-                content: attr(data-th);
-                display: block;
-                text-align: left;
-                font-weight: bold;
-                margin-bottom: 0.5em;
-            }
+                td{
+                    display: block;
         
-            tbody tr {
-                display: block;
-                margin-bottom: 1.5em;
+                    &::before{
+                        content: attr(data-cell);
+                        font-weight: 500;
+                    }
+        
+                    &:nth-child(4){
+                        padding-bottom: 1rem;
+                    }
+                }
+
+                th, td{
+                    padding: .125rem 1rem .125rem .25rem;
+                }
             }
         }
+
+        .actions{
+            position: absolute;
+            right: 4px;
+            top: 0;
+        }
+    }
 }
