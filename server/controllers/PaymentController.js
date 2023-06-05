@@ -4,7 +4,7 @@ require("dotenv").config({ path: path.resolve(__dirname, '..', '.env') });
 const jwt = require('../config/jwtConfig')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const YOUR_DOMAIN = 'http://localhost:3000';
+const YOUR_DOMAIN = 'http://localhost:3000/consumer';
 
 const getThisDay = () => {
   const today = new Date();
@@ -46,7 +46,9 @@ const createOrder = async function(items,details,uid) {
       address, size, id_supplier_product,uid_consumer,  id_vehicle]) 
       
     let result = await dbConnection(statementcreateOrder,values)
-    let id_order = result.insertId
+    let id_order = result.insertId 
+
+    let getOrderedsProducts = []
 
     for (const id in products){ 
 
@@ -56,9 +58,9 @@ const createOrder = async function(items,details,uid) {
       let product_subcategory = ad[0].subcategory_name  
       let product_subsubcategory = ad[0].subsubcategory_name  
       let order_status = "A CONFIRMAR" 
-      let product_owner_uid = supplier[0].uid  
+      let product_owner_uid = supplier[0].uid
       let product_buyer_uid = uid  
-      let product_location = supplier[0].country 
+      let product_location = supplier[0].country
       let buyer_location = details.morada 
       let orderDistance_km = 0
       let sameLocation = supplier[0].town === details.localidade ? 'freguesia' :
@@ -75,9 +77,10 @@ const createOrder = async function(items,details,uid) {
       values.push([id_order, id, product_category, product_subcategory,product_subsubcategory, order_status, 
         product_owner_uid, product_buyer_uid, product_location, buyer_location, orderDistance_km,
         sameLocation, price]) 
-      await dbConnection(statement,values)
-
+      let response = await dbConnection(statement,values)
+      getOrderedsProducts.push(response.insertId)
     }
+    return [id_order, getOrderedsProducts]
 }
 
 
@@ -93,13 +96,14 @@ const payOrder = async function(req, res) {
     const items = req.query
     const details = req.query.details  
 
-    let path = ""
+    let ordersToGet = await createOrder(items,details,value)
 
-    createOrder(items,details,value)
+
+    res.cookie("ordersToCheck", {ordersToGet}, {
+    })
 
     for (const item in items){
       if(item != 'details') {
-        path += "&item"+item+"="+item
         const data = {
           price_data: 
           {
@@ -134,8 +138,8 @@ const payOrder = async function(req, res) {
       line_items: content,
       customer_email: emailUser,
       mode: 'payment',
-      success_url: `${YOUR_DOMAIN}?success=true`+path,
-      cancel_url: `${YOUR_DOMAIN}?canceled=true`+path,
+      success_url: `${YOUR_DOMAIN}/success`,
+      cancel_url: `${YOUR_DOMAIN}/canceled`,
       locale: 'pt',
     }); 
 

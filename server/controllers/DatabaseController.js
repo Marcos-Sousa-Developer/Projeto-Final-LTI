@@ -15,7 +15,6 @@ const dbConnection = async (query, array = []) => {
         pool.query(query, [array], function(error, result) { 
 
             if (error){ 
-                console.log(error)
                 resolve("error")
             }
             else { 

@@ -44,9 +44,7 @@ const Cart = () => {
   const goToCheckout = async () => {
 
     let userType = await getClientType(); 
-    console.log(userType)
     if(userType[0]=='consumer') {
-
       const params = {}
     for (const item in cookies.cart) {
       const quantity = cookies.cart[item][0]

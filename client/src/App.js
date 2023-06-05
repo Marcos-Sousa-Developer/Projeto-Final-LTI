@@ -8,7 +8,6 @@ import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
-import Settings from "./pages/Admin/Settings";
 import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory, Search, SupplierOrdersHistory, MarketPlace} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
@@ -20,6 +19,7 @@ import Checkout from "./pages/HomeView/Checkout/Checkout";
 import { useCookies } from "react-cookie";
 import SubCategory from "./pages/HomeView/SubCategory/SubCategory";
 import SubSubCategory from "./pages/HomeView/SubSubCategory/SubSubCategory";
+import SuccessOrNot from "./pages/HomeView/SuccessOrNot/SuccessOrNot";
 
 
 function App() {
@@ -73,7 +73,6 @@ function App() {
                 <Route exact path="relatorios/consumidores" element={<RequireAuth><Relatorios_Consumidores /></RequireAuth>} />
                 <Route exact path="relatorios/fornecedores" element={<RequireAuth><Relatorios_Fornecedores /></RequireAuth>} />
                 <Route exact path="relatorios/encomendas" element={<RequireAuth><Relatorios_Encomendas /></RequireAuth>} />
-                <Route exact path="settings" element={<RequireAuth><Settings /></RequireAuth>} ></Route>
               </Route>
             )
           }
@@ -95,7 +94,10 @@ function App() {
 
           {userType == "consumer" && 
             (
-              <Route path="consumer">                
+              <Route path="consumer" >
+                <Route index element={ <RequireAuth><Home/></RequireAuth>}/>
+                <Route path="success" element={<SuccessOrNot success={true}/>} />          
+                <Route path="canceled" element={<SuccessOrNot success={false}/>} />                
                 <Route exact path="encomendas" element={<RequireAuth><ConsumerOrdersHistory/></RequireAuth>} />                
                 <Route exact path="profile" element={<RequireAuth><ConsumerProfile/></RequireAuth>} />
               </Route>

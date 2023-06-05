@@ -178,4 +178,27 @@ const updateOrderedProductByID = async function (req, res) {
     return res.send("Ordered product has been updated");
 }
 
-module.exports = {getAllorSomeOrderedProducts, getOrderedProductByID, insertOrderedProduct, updateOrderedProductByID}
+/**
+ * Async function to delete order product by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const deleteOrderProductByID = async function (req, res) {
+
+    const statement = "DELETE FROM orderedProducts WHERE id = " + req.params.id
+
+    let result = await dbConnection(statement)
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to delete the ordered product with id " + req.params.id);
+    } else if (result.affectedRows == 0) {
+        return res.send("Ordered product with id " + req.params.id + " does not exist in the database");
+    }
+
+    return res.send("Order with id " + req.params.id + " has been deleted");
+}
+
+
+
+module.exports = {getAllorSomeOrderedProducts, getOrderedProductByID, insertOrderedProduct, updateOrderedProductByID, deleteOrderProductByID}

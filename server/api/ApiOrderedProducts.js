@@ -14,4 +14,7 @@ router.post('/', orderedProductController.insertOrderedProduct)
 //Update ordered product by id
 router.put('/:id', orderedProductController.updateOrderedProductByID) 
 
+//Delete order product by id
+router.delete('/:id', orderedProductController.deleteOrderProductByID)
+
 module.exports = router
