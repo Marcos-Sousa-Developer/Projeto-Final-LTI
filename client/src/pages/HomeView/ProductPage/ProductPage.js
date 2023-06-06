@@ -168,7 +168,9 @@ const ProductPage = () => {
                       <div style={{marginBottom: '1rem'}}>
                         <FiMapPin></FiMapPin> <span style={{fontWeight: '500'}}>{supplierProd.address}</span>, <span style={{fontSize: '14px'}}>{supplierProd.city}</span>  
                       </div>
+                      {(suppliers.length - 1) > 0 &&
                         <Link className='app__text_effect' to={`/market-place?${new URLSearchParams({id: idProduct}).toString()}`}>+ {suppliers.length -1 } anúncios deste produto </Link>
+                      }
                     </div>
                     <div>
                       <Maping lat={myLatitude} lng={myLongigtude} destLat={supplierLatitude} destLng={supplierLongigtude}></Maping>

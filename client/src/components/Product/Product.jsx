@@ -31,9 +31,9 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts, 
             </div>
             <div className='product_action_section'>
               {selectedProducts.some((p) => p.id === id) ? (
-                <button onClick={handleRemoveFromCompare}><FiRepeat></FiRepeat><span>Remover</span></button>
+                <button onClick={() => handleRemoveFromCompare()}><FiRepeat></FiRepeat><span>Remover</span></button>
               ) : (
-                <button onClick={handleAddToCompare}><FiRepeat></FiRepeat><span>Comparar</span></button>
+                <button onClick={() => handleAddToCompare()}><FiRepeat></FiRepeat><span>Comparar</span></button>
               )}
             </div>
           </div>
