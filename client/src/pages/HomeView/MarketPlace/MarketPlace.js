@@ -1,9 +1,12 @@
 import React, {useState, useEffect } from 'react';
-import { FiArrowLeft, FiMapPin } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { FiArrowLeft, FiMapPin, FiArrowRight } from 'react-icons/fi';
 
-import { Navbar, Footer, SnackBar } from '../../../components/index';
+import { Navbar, Footer, SubHeading } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import './MarketPlace.css'
+
+import exampleImage from '../../../assets/testproducts/boxedwater2.jpg';
 
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import { useNavigate } from 'react-router-dom';
@@ -44,30 +47,36 @@ const MarketPlace = () => {
     <>
         <Navbar></Navbar>
         <div className='app__market_place main__container'>
-            <div onClick={goBack}>
-                <FiArrowLeft></FiArrowLeft> <a className='app__text_effect app__pointer'>Voltar ao produto</a>
+            <SubHeading title='Anúncios do mesmo Produto'></SubHeading>
+            <div onClick={goBack} style={{margin: '1rem 0'}}>
+                <a className='app__text_effect app__pointer anuncio'><FiArrowLeft></FiArrowLeft>  Voltar ao produto</a>
             </div>
-            <div className='app__market_place_content'>
-                <div className='app__market_place_content_produt'>
-                    {ads.map((key) => {
-                        return (
-                            <>
-                                <p>Imagem principal aqui</p>
-                                <p key={key}>{key.title}</p>
-                                <PriceDisplay className='product_price' price={key.price} />
-                            </>
-                        );
-                    })}
-                </div>
-                <div className='app__market_place_content_supplier_info'>
-                    {suppliers.map((element, index) => (
-                        <div key={element + index}>
-                            <p style={{marginBottom: '.5rem'}}>Vendido por: <span style={{fontWeight: '500'}}>{element.name}</span></p>
-                            <div>
-                                <FiMapPin></FiMapPin> <span style={{fontWeight: '500'}}>{element.address}</span>, <span style={{fontSize: '14px'}}>{element.city}</span>  
+            <div className='app__market_place_info'>
+                <div className='app__market_place_content'>
+                    <div className='app__market_place_content_produt'>
+                        {ads.map((key) => {
+                            return (
+                                <>
+                                    <img className='app__market_place_content_product_img' src={exampleImage} />
+                                    <p key={key} style={{margin: '1rem 0 0 0'}}>{key.title}</p>
+                                    <PriceDisplay className='product_price' price={key.price} />
+                                </>
+                            );
+                        })}
+                    </div>
+                    <div className='app__market_place_content_supplier_info'>
+                        {suppliers.map((element, index) => (
+                            <div key={element + index}>
+                                <p style={{marginBottom: '.5rem'}}>Vendido por: <span style={{fontWeight: '500'}}>{element.name}</span></p>
+                                <div style={{marginBottom: '.5rem'}}>
+                                    <FiMapPin></FiMapPin> <span style={{fontWeight: '500'}}>{element.address}</span>, <span style={{fontSize: '14px'}}>{element.city}</span>  
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                </div>
+                <div className='app__market_place_content_goTo'>
+                    <Link className='app__text_effect anuncio'>Ir para anúncio <FiArrowRight></FiArrowRight></Link>
                 </div>
             </div>
         </div>

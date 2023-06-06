@@ -36,7 +36,7 @@ function Maping({lat, lng, destLat, destLng}) {
       <Map
         mapboxAccessToken={process.env.REACT_APP_MAPBOX_KEY}
         style={{
-          width: "250px",
+          width: "300px",
           height: "250px",
           borderRadius: "15px",
         }}
