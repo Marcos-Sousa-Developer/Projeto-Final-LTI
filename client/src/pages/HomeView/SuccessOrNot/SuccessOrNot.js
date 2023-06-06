@@ -11,6 +11,9 @@ const SuccessOrNot = ({success}) => {
 
   const [cookies, setCookie, removeCookie] = useCookies();
 
+
+
+
   useEffect(() => {
     async function run() {
 
@@ -19,7 +22,6 @@ const SuccessOrNot = ({success}) => {
       }
       else {
         let ordersCheck = cookies.ordersToCheck.ordersToGet
-
         if(!success) {
           await deleteToDB('/orders/'+ordersCheck[0])
           
@@ -33,6 +35,11 @@ const SuccessOrNot = ({success}) => {
           for(let i=0; i < ordersCheck[1].length; i++){
             await putToDB('/orderedProducts/'+ordersCheck[1][i],{order_status: "Em preparação"})
           }
+
+
+          console.log(ordersCheck)
+
+
           removeCookie('ordersToCheck', { path: '/'});
           removeCookie('cart', { path: '/'});
         }
@@ -41,8 +48,6 @@ const SuccessOrNot = ({success}) => {
 
     }
     run()
-
-
   },[])
 
   return (
@@ -59,8 +64,6 @@ const SuccessOrNot = ({success}) => {
                   <p>Pagamento Cancelado</p>
                 )
               }
-              
-
             </div>
           </div>
         </div>
