@@ -165,7 +165,7 @@ const ProductPage = () => {
                   <div className='app__product_page_content_supplier'>
                     <div>
                       <p style={{marginBottom: '.5rem'}}>Vendido por: <span style={{fontWeight: '500'}}>{supplierProd.name}</span></p>
-                      <div>
+                      <div style={{marginBottom: '1rem'}}>
                         <FiMapPin></FiMapPin> <span style={{fontWeight: '500'}}>{supplierProd.address}</span>, <span style={{fontSize: '14px'}}>{supplierProd.city}</span>  
                       </div>
                       {(suppliers.length - 1) > 0 &&

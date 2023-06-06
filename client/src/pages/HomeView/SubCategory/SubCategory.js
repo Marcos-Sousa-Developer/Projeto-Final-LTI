@@ -243,7 +243,7 @@ const SubCategory = () => {
                 <ul className={filterCategory ? "hideFilter showFilter" : "hideFilter"}>
                   {Object.keys(subsubcategories).map((subsubcategory_name) => { 
                     return ( 
-                      <li>
+                      <li style={{marginLeft: '1rem'}}>
                         <a className='app__pointer app__text_effect' key={subsubcategory_name} onClick={() => sendToSubSubcategories(subsubcategory_name) }> {subsubcategory_name} ({subsubcategories[subsubcategory_name]})</a>
                       </li>
                     );
@@ -255,11 +255,17 @@ const SubCategory = () => {
                   <p style={{margin: '0'}}>Preço</p>
                   <span>{filterPrice ? <FiChevronUp className='app__SubCategory_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__SubCategory_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
-                <div className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
-                  Min. {minPrice}
-                  <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
-                  Máx. {maxPrice}
-                  <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
+                <div className={filterPrice ? "filterPrice showFilter" : "hideFilter"}>
+                  <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div>
+                      <span>Min. € {/*minPrice*/}</span>
+                      <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
+                    </div>
+                    <div>
+                      <span>Máx. €{/*maxPrice*/}</span>
+                      <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
+                    </div>
+                  </div>
                   <button className='main__action_btn' onClick={() => setByPrice()}>OK</button>
                 </div>
               </div>
@@ -269,7 +275,7 @@ const SubCategory = () => {
             <div className='app__SubCategory_mobile_filter_content'>
               <button className='main__action_btn' onClick={() => setIsOpen(true)}>Filtros</button>
               <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                <p>Filtros</p>
+                <p>FILTROS</p>
                 <div>
                   <p>SubCategoria</p>
                   <ul>
@@ -282,7 +288,22 @@ const SubCategory = () => {
                       })}
                   </ul>
                 </div>
-                <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()}>Aplicar</button>
+                <div className='app__SubCategory_filter_unit'>
+                  <p className="mobile-title">Preço</p>
+                  <div className='filterPrice'>
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                      <div>
+                        <span>Min. €{/*minPrice*/}</span>
+                        <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
+                      </div>
+                      <div>
+                        <span>Máx. €{/*maxPrice*/}</span>
+                        <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
+                      </div>
+                    </div>
+                    <button className='' onClick={() => setByPrice()}>OK</button>
+                  </div>
+                </div>
               </Modal>
             </div>
             <div className='products'>  

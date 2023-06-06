@@ -204,23 +204,29 @@ const Search = () => {
                 <ul className={filterCategory ? "hideFilter showFilter" : "hideFilter"}>
                   {Object.keys(categories).map((category_name) => {
                     return ( 
-                      <li>
+                      <li style={{marginLeft: '1rem'}}>
                         <a className='app__pointer app__text_effect' key={category_name} onClick={() => sendToCategories(category_name) }> {category_name} ({categories[category_name]})</a>
                       </li>
                     );
                   })}
                 </ul>
               </div>
-              <div className='app__Category_filter_unit'>
-                <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterPrice}>
+              <div className='app__Search_filter_unit'>
+                <div className='app__pointer app__Search_filter_content_title' onClick={toggleFilterPrice}>
                   <p style={{margin: '0'}}>Preço</p>
-                  <span>{filterPrice ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                  <span>{filterPrice ? <FiChevronUp className='app__Search_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Search_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
-                <div className={filterPrice ? "hideFilter showFilter" : "hideFilter"}>
-                  Min. {minPrice}
-                  <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
-                  Máx. {maxPrice}
-                  <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
+                <div className={filterPrice ? "filterPrice showFilter" : "hideFilter"}>
+                  <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div>
+                      <span>Min. € {/*minPrice*/}</span>
+                      <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
+                    </div>
+                    <div>
+                      <span>Máx. €{/*maxPrice*/}</span>
+                      <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
+                    </div>
+                  </div>
                   <button className='main__action_btn' onClick={() => setByPrice()}>OK</button>
                 </div>
               </div>
@@ -230,9 +236,9 @@ const Search = () => {
            <div className='app__Search_mobile_filter_content'>
               <button className='main__action_btn' onClick={() => setIsOpen(true)}>FILTROS</button>
               <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                <p>Filtros</p>
+                <p>FILTROS</p>
                 <div>
-                  <p>SubCategoria</p>
+                  <p>Categoria</p>
                   <ul>
                     {Object.keys(categories).map((category_name) => { 
                       return ( 
@@ -243,10 +249,22 @@ const Search = () => {
                     })}
                   </ul>
                 </div>
-                <div>
-
+                <div className='app__Search_filter_unit'>
+                  <p className="mobile-title">Preço</p>
+                  <div className='filterPrice'>
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                      <div>
+                        <span>Min. €{/*minPrice*/}</span>
+                        <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
+                      </div>
+                      <div>
+                        <span>Máx. €{/*maxPrice*/}</span>
+                        <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
+                      </div>
+                    </div>
+                    <button className='' onClick={() => setByPrice()}>OK</button>
+                  </div>
                 </div>
-                <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()     }>Aplicar</button>
               </Modal>
             </div>
             <div className='products'> 

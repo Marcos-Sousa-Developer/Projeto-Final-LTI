@@ -1,31 +1,6 @@
 
 @import '../../../index.scss';
 
-.mapboxgl-ctrl-bottom-left{
-    display: none;
-}
-
-.mapboxgl-ctrl-top-right .mapboxgl-ctrl{
-    margin: 0;
-}
-
-.mapboxgl-ctrl-attrib.mapboxgl-compact{
-    margin: 0;
-}
-
-.mapboxgl-popup-content{
-    padding: 5px 5px 10px;
-}
-
-.mapboxgl-ctrl button .mapboxgl-ctrl-icon{
-    background-color: transparent;
-}
-
-.mapboxgl-marker *{
-    background-color: transparent;
-}
-
-
 .app__product_page_content_title_mobile{
     display: none;
 }

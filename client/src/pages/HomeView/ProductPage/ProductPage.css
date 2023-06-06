@@ -164,28 +164,36 @@ img, picture {
     font-size: 14px;
   }
 }
-.mapboxgl-ctrl-bottom-left {
-  display: none;
+.inputField p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField input {
+  outline: none;
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
 }
 
-.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
-  margin: 0;
+.inputField_error p {
+  margin: 1rem 0 0.5rem;
 }
-
-.mapboxgl-ctrl-attrib.mapboxgl-compact {
-  margin: 0;
+.inputField_error input {
+  outline: none;
+  border: 3px solid red;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
 }
-
-.mapboxgl-popup-content {
-  padding: 5px 5px 10px;
-}
-
-.mapboxgl-ctrl button .mapboxgl-ctrl-icon {
-  background-color: transparent;
-}
-
-.mapboxgl-marker * {
-  background-color: transparent;
+.inputField_error input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
 }
 
 .app__product_page_content_title_mobile {
