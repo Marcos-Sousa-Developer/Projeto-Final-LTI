@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "amazon-cognito-identity-js": "^6.1.2",
     "cognito-express": "^3.0.2",
     "cookie-parser": "^1.4.6",
