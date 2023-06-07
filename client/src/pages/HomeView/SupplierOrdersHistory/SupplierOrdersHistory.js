@@ -118,44 +118,44 @@ const SupplierOrdersHistory = () => {
                         <td data-cell='Total €: ' className='priceShow'><PriceDisplay price={orderHistory.order.price}></PriceDisplay></td>                      
                         <td data-cell='Estado: '>{orderHistory.order.order_status}</td>
                         <td data-cell='Transportadora: '>{orderHistory.order.vehicle ?? "N/A" }</td>
-                        <td>
-                          {
-                            orderHistory.order.order_status == "Em preparação" ? (
-                              <button className='main__action_btn app__pointer' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
-                            )
-                            : (
-                              <button className='main__action_btn app__pointer' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
-                            )
-                          }
-                        </td>
-                        <td>
-                          <button className='main__negative_action_btn' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => modalToOpen(orderHistory.order.id)}>ENVIAR</button>
-                          <Modal open={modalOpen[orderHistory.order.id]} onClose={() => modalToClose(orderHistory.id)}>
-                            <div className='app__ConsumerHistory_Orders'>
-                              {vehiclesHistory.length > 0 && (
-                                <>
-                                  <table>
-                                    <thead>
-                                      <tr>
-                                        <th>Transportadora</th>
-                                        <th></th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {vehiclesHistory.map((vehicleHistory) => (
-                                        <React.Fragment key={vehicleHistory.id}>
-                                          <tr>
-                                            <td>{vehicleHistory.name}</td>
-                                            <td><button className='main__action_btn' onClick={() => {handleEditVehicle(vehicleHistory.name); handleEditStatusOrder("Enviado"); location.reload();}}>Confirmar</button></td>
-                                          </tr>
-                                        </React.Fragment>
-                                      ))}
-                                    </tbody>
-                                  </table>
-                                </>
-                              )}
-                            </div>   
-                          </Modal>
+                        <td className='actions'>
+                          <div>
+                            {
+                              orderHistory.order.order_status == "Em preparação" ? (
+                                <button className='secondary__negative_action_btn app__pointer' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                              )
+                              : (
+                                <button className='secondary__negative_action_btn app__pointer' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                              )
+                            }
+                            <button className='secondary__action_btn' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => modalToOpen(orderHistory.order.id)}>Enviar</button>
+                            <Modal open={modalOpen[orderHistory.order.id]} onClose={() => modalToClose(orderHistory.id)}>
+                              <div className='app__ConsumerHistory_Orders'>
+                                {vehiclesHistory.length > 0 && (
+                                  <>
+                                    <table>
+                                      <thead>
+                                        <tr>
+                                          <th>Transportadora</th>
+                                          <th></th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {vehiclesHistory.map((vehicleHistory) => (
+                                          <React.Fragment key={vehicleHistory.id}>
+                                            <tr>
+                                              <td>{vehicleHistory.name}</td>
+                                              <td><button className='secondary__action_btn' onClick={() => {handleEditVehicle(vehicleHistory.name); handleEditStatusOrder("Enviado"); location.reload();}}>Confirmar</button></td>
+                                            </tr>
+                                          </React.Fragment>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </>
+                                )}
+                              </div>   
+                            </Modal>
+                          </div>
                         </td>
                       </tr>
                     </React.Fragment>

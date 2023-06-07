@@ -165,6 +165,20 @@ img, picture {
   opacity: 1;
 }
 
+.secondary__negative_action_btn {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 6px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__negative_action_btn:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 700px) {
   .main__action_btn {
     padding: 6px 40px;

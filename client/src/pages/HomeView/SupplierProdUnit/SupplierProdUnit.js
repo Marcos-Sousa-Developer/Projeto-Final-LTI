@@ -21,6 +21,7 @@ const SupplierProdUnit = () => {
     const [modalOpen, setModalOpen] = useState([]); //modal1
     const [modalOpen2, setModalOpen2] = useState([]); //modal2
     const [modalOpen3, setModalOpen3] = useState([]); //modal3
+    const [modalOpen4, setModalOpen4] = useState([]); //modal3
     const snackbarRef = useRef(null);
     const snackbarRef2 = useRef(null);
     const snackbarRef3 = useRef(null);
@@ -76,7 +77,7 @@ const SupplierProdUnit = () => {
         city: updatedProductionUnits[index].city,
         postal_code: updatedProductionUnits[index].postal_code,
         capacity: updatedProductionUnits[index].capacity
-        })
+        });
     }
 
     async function handleEditProductProductionUnit(index, quantityProd) {
@@ -131,7 +132,6 @@ const SupplierProdUnit = () => {
 
     const handleSetQuantity = (event) => {
         setQuantity(event.target.value);
-        //snackbarRef3.current.show();
     }
 
     async function handleEliminarProduto(prodUnitID, productID){
@@ -269,6 +269,7 @@ const SupplierProdUnit = () => {
                                                             capacity: event.target.capacity.value,
                                                         });
                                                         setModalOpen2(prevState => {
+                                                            
                                                             const newState = [...prevState];
                                                             newState[index] = false;
                                                             return newState;
@@ -438,28 +439,29 @@ const SupplierProdUnit = () => {
                                                                                     })}>Cancelar</button>
                                                                             <button className='main__negative_action_btn' type="submit"
                                                                                 onClick={(event) => {
-                                                                                event.preventDefault();
-                                                                                handleEditProductProductionUnit(product.id, quantity)
-                                                                                setModalOpen3(prevState => {
-                                                                                        const newState = [...prevState];
-                                                                                        newState[idx] = false;
-                                                                                        return newState;
-                                                                                })
-                                                                                product.quantity=quantity}
+                                                                                    event.preventDefault();
+                                                                                    handleEditProductProductionUnit(product.id, quantity)
+                                                                                    setModalOpen3(prevState => {
+                                                                                            const newState = [...prevState];
+                                                                                            newState[idx] = false;
+                                                                                            return newState;
+                                                                                    })
+                                                                                    product.quantity=quantity
+                                                                                    snackbarRef5.current.show();}
                                                                                 }>Guardar</button>
                                                                             <SnackBar
-                                                                                ref={snackbarRef4}
-                                                                                message="Unidade Produção eliminada!"
+                                                                                ref={snackbarRef5}
+                                                                                message="Quantidade de produto alterada!"
                                                                                 type={SnackbarType.success}
                                                                             />
                                                                         </div>
                                                                     </Modal>
-                                                                    <button onClick={() => setModalOpen(prevState => {
+                                                                    <button onClick={() => setModalOpen4(prevState => {
                                                                         const newState = [...prevState];
                                                                         newState[index] = true;
                                                                         return newState;
                                                                     })}><FiTrash2></FiTrash2></button>
-                                                                    <Modal open={modalOpen[index]} onClose={() => setModalOpen(prevState => {
+                                                                    <Modal open={modalOpen4[index]} onClose={() => setModalOpen4(prevState => {
                                                                         const newState = [...prevState];
                                                                         newState[index] = false;
                                                                         return newState;
@@ -469,7 +471,7 @@ const SupplierProdUnit = () => {
                                                                             <button 
                                                                                 className='main__action_btn' 
                                                                                 onClick={() => 
-                                                                                    setModalOpen(prevState => {
+                                                                                    setModalOpen4(prevState => {
                                                                                         const newState = [...prevState];
                                                                                         newState[index] = false;
                                                                                         return newState;

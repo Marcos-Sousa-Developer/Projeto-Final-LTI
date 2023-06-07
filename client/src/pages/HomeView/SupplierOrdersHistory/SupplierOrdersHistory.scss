@@ -32,6 +32,11 @@
                 gap: 1rem;
                 background-color: transparent;
             }
+            .actions{
+                &>*{
+                    background-color: transparent;
+                }
+            }
         }
     }
 
@@ -64,7 +69,7 @@
     }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1200px) {
     .app__SupplierHistory{
 
         &_Orders{
@@ -97,6 +102,8 @@
                         padding-bottom: 1rem;
                     }
                 }
+
+
 
                 .orderHitory_actions{
                     position: absolute;
