@@ -272,7 +272,7 @@ const Category = () => {
           <div className='app__Category_Grid_Direita'>
             <div className='app__Category_mobile_filter_content'>
               <button onClick={() => setIsOpen(true)}>FILTROS</button>
-              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+              <Modal open={isOpen} onClose={() => setIsOpen(false)} filter={true}>
                 <p style={{margin: '0'}}>FILTROS</p>
                 <div  className='app__Category_filter_unit'>
                   <p className="mobile-title">Categoria</p>

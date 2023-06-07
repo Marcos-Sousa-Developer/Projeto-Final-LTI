@@ -72,11 +72,12 @@ function Home() {
             Comprar
           </button>
         </div>
-        
         <img className='rectangle1' src={images.Rectangle1}></img>
         <img className='rectangle2' src={images.Rectangle2}></img>
         <img src={images.shopping_app}></img>
-        <div>
+
+      </div>
+      <div className='app__destaques main__container'>
           <SubHeading title="Destaques"></SubHeading>
         {console.log(ads)}
           {ads.map((ad) => (
@@ -93,7 +94,6 @@ function Home() {
                     />
                 ))*/}
         </div>
-      </div>
       <Footer></Footer>
       </>
       )

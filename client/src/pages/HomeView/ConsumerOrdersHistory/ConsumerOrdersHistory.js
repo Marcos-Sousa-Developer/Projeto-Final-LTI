@@ -119,10 +119,10 @@ const ConsumerOrdersHistory = () => {
                             <td>
                               {
                                 orderHistory.order.order_status == "Em preparação" || orderHistory.order.order_status == "A confirmar" ? (
-                                  <button className='main__action_btn' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                                  <button className='secondary__action_btn' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
                                 )
                                 : (
-                                  <button className='main__action_btn' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                                  <button className='secondary__action_btn' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
                                 )
                               }
                             </td>
@@ -134,7 +134,7 @@ const ConsumerOrdersHistory = () => {
                 </>
               )}
             </div>
-            <button className='active main__action_btn' onClick={() => exportJson()}>Exportar dados</button>
+            <button className='active main__action_btn' style={{marginTop: '1rem'}} onClick={() => exportJson()}>Exportar dados</button>
           </div>
           <Footer></Footer>
         </>

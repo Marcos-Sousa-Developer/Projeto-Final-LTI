@@ -149,7 +149,7 @@ const Cart = () => {
                   <p>Tem a certeza que deseja apagar os items do carrinho?</p>
                   <div style={{display:'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop:'2rem'}}>
                     <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
-                    <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()}>Apagar tudo</button>
+                    <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()}>Apagar</button>
                   </div>
                 </Modal>
               </div>

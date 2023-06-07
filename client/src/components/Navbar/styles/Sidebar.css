@@ -196,6 +196,30 @@ img, picture {
   border: 3px solid rgba(235, 92, 31, 0.8);
 }
 
+.mapboxgl-ctrl-bottom-left {
+  display: none;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 0;
+}
+
+.mapboxgl-ctrl-attrib.mapboxgl-compact {
+  margin: 0;
+}
+
+.mapboxgl-popup-content {
+  padding: 5px 5px 10px;
+}
+
+.mapboxgl-ctrl button .mapboxgl-ctrl-icon {
+  background-color: transparent;
+}
+
+.mapboxgl-marker * {
+  background-color: transparent;
+}
+
 #sidebar-toggler {
   display: inline-block;
   cursor: pointer;

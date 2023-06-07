@@ -25,6 +25,7 @@ const SupplierProdUnit = () => {
     const snackbarRef2 = useRef(null);
     const snackbarRef3 = useRef(null);
     const snackbarRef4 = useRef(null);
+    const snackbarRef5 = useRef(null);
     const [productionUnits, setProductionUnits] = useState([]);
     const [newProductionUnit, setNewProductionUnit] = useState({ name: '', location: '', city: '', postal_code: '', capacity: '' });
     const [watchProductsIndex, setWatchProductsIndex] = useState([false, '']);
@@ -33,10 +34,6 @@ const SupplierProdUnit = () => {
     const [didMount, setDidMount] = useState(false)
 
     const [quantity, setQuantity] = useState(0);
-
-    const handleSetQuantity = (event) => {
-        setQuantity(event.target.value)
-      }
 
     async function getProductionUnit(){
         let prodsUnitGet = await getAllFromDB("/productionUnits", {uid_supplier: true})
@@ -129,12 +126,17 @@ const SupplierProdUnit = () => {
 
     async function handleEliminarUnidade(index){
         submitDeleteProdUnit(index);
-        snackbarRef2.current.show();
+        snackbarRef3.current.show();
+    }
+
+    const handleSetQuantity = (event) => {
+        setQuantity(event.target.value);
+        //snackbarRef3.current.show();
     }
 
     async function handleEliminarProduto(prodUnitID, productID){
         submitDeleteProduct(prodUnitID, productID);
-        snackbarRef2.current.show();
+        snackbarRef4.current.show();
     }
 
     //Aparecer no loading da página
@@ -271,10 +273,10 @@ const SupplierProdUnit = () => {
                                                             newState[index] = false;
                                                             return newState;
                                                         });
-                                                        snackbarRef3.current.show();
+                                                        snackbarRef2.current.show();
                                                     }}>
                                                     <SnackBar
-                                                        ref={snackbarRef3}
+                                                        ref={snackbarRef2}
                                                         message="Unidade Produção alterada!"
                                                         type={SnackbarType.success}
                                                     />
@@ -364,7 +366,7 @@ const SupplierProdUnit = () => {
                                                         className='main__negative_action_btn' 
                                                         onClick={() => handleEliminarUnidade(productionUnit.id)}>Apagar</button>
                                                     <SnackBar
-                                                        ref={snackbarRef2}
+                                                        ref={snackbarRef3}
                                                         message="Unidade Produção eliminada!"
                                                         type={SnackbarType.success}
                                                     />
@@ -446,7 +448,7 @@ const SupplierProdUnit = () => {
                                                                                 product.quantity=quantity}
                                                                                 }>Guardar</button>
                                                                             <SnackBar
-                                                                                ref={snackbarRef3}
+                                                                                ref={snackbarRef4}
                                                                                 message="Unidade Produção eliminada!"
                                                                                 type={SnackbarType.success}
                                                                             />
@@ -477,7 +479,7 @@ const SupplierProdUnit = () => {
                                                                                 onClick={() => handleEliminarProduto(productionUnit.id, product.id)}>Apagar</button>
                                                                             <SnackBar
                                                                                 ref={snackbarRef4}
-                                                                                message="Produto eliminado!"
+                                                                                message="Produto eliminado com sucesso!"
                                                                                 type={SnackbarType.success}
                                                                             />
                                                                         </div>

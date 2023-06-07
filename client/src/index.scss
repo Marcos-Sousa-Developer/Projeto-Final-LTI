@@ -185,6 +185,20 @@ img, picture{
   }
 }
 
+.secondary__action_btn{
+  background-color: $orange;
+  color: white;
+  padding: 8px 30px;
+  border-radius: 15px;
+  font-size: $smaller_font;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+      opacity: 1; 
+  }
+}
+
 @media screen and (max-width: 700px) {
   .main__action_btn{
     padding: 6px 40px;
@@ -244,6 +258,10 @@ img, picture{
   display: none;
 }
 
+.mapboxgl-marker {
+  background-color: transparent;
+}
+
 .mapboxgl-ctrl-top-right .mapboxgl-ctrl{
   margin: 0;
 }
@@ -253,7 +271,7 @@ img, picture{
 }
 
 .mapboxgl-popup-content{
-  padding: 5px 5px 10px;
+  padding: 0 2px 4px;
 }
 
 .mapboxgl-ctrl button .mapboxgl-ctrl-icon{

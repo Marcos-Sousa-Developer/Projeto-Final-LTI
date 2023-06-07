@@ -164,6 +164,66 @@ img, picture {
     font-size: 14px;
   }
 }
+.inputField p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField input {
+  outline: none;
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.inputField_error p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField_error input {
+  outline: none;
+  border: 3px solid red;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField_error input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.mapboxgl-ctrl-bottom-left {
+  display: none;
+}
+
+.mapboxgl-marker {
+  background-color: transparent;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 0;
+}
+
+.mapboxgl-ctrl-attrib.mapboxgl-compact {
+  margin: 0;
+}
+
+.mapboxgl-popup-content {
+  padding: 0 2px 4px;
+}
+
+.mapboxgl-ctrl button .mapboxgl-ctrl-icon {
+  background-color: transparent;
+}
+
+.mapboxgl-marker * {
+  background-color: transparent;
+}
+
 .app__modal_overlay {
   position: fixed;
   top: 0;
@@ -222,9 +282,26 @@ img, picture {
   .app__modal_content {
     padding: 2rem;
   }
+  .filter {
+    width: 50%;
+    padding: 2rem 1rem;
+  }
+}
+@media (max-width: 750px) {
+  .filter {
+    width: 70%;
+  }
+}
+@media (max-width: 500px) {
+  .filter {
+    width: 80%;
+  }
 }
 @media (max-width: 400px) {
   .app__modal_content {
     padding: 1.5rem 1rem;
+  }
+  .filter {
+    width: 90%;
   }
 }/*# sourceMappingURL=Modal.css.map */

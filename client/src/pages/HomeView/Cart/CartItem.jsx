@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import { FiX, FiPlus, FiMinus } from 'react-icons/fi';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
+import { SnackBar } from '../../../components/index';
 import './Cart.css';
 
+const SnackbarType = {
+    success: "success",
+    fail: "fail",
+};
+
 export const CartItem = (props) => { 
+    const snackbarRef = useRef(null);
     
     const {id, title, price, productImage} = props.data; 
 
@@ -34,6 +41,7 @@ export const CartItem = (props) => {
     }
 
     const deleteCartItem = () => {
+        snackbarRef.current.show();
         const prevValue = cookies.cart || {};
         delete prevValue[id]
         setCookie('cart', prevValue, { path: '/' });
@@ -55,6 +63,11 @@ export const CartItem = (props) => {
             </div>
             <p className='app__cartItem_actions_2'><PriceDisplay price={price} /></p>
             <button className='app__cartItem_actions_3' onClick={() => deleteCartItem()}><FiX fontSize={24}></FiX></button>
+            <SnackBar
+                ref={snackbarRef}
+                message="Produto eliminado com sucesso!"
+                type={SnackbarType.success}
+            />
         </div>
     )
 }

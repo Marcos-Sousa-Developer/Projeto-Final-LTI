@@ -152,6 +152,19 @@ img, picture {
   border: 2px solid #EB5C1F;
 }
 
+.secondary__action_btn {
+  background-color: #EB5C1F;
+  color: white;
+  padding: 8px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__action_btn:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 700px) {
   .main__action_btn {
     padding: 6px 40px;
@@ -194,6 +207,34 @@ img, picture {
 }
 .inputField_error input:focus {
   border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.mapboxgl-ctrl-bottom-left {
+  display: none;
+}
+
+.mapboxgl-marker {
+  background-color: transparent;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 0;
+}
+
+.mapboxgl-ctrl-attrib.mapboxgl-compact {
+  margin: 0;
+}
+
+.mapboxgl-popup-content {
+  padding: 0 2px 4px;
+}
+
+.mapboxgl-ctrl button .mapboxgl-ctrl-icon {
+  background-color: transparent;
+}
+
+.mapboxgl-marker * {
+  background-color: transparent;
 }
 
 .app__ConsumerHistory {
@@ -239,15 +280,41 @@ img, picture {
   font-weight: 500;
 }
 
-@media screen and (max-width: 800px) {
-  .app__ConsumerProfile_box {
-    grid-template-columns: 1fr;
-    gap: 0;
+@media (max-width: 1050px) {
+  .app__ConsumerHistory_Orders table thead tr th {
+    display: none;
   }
-  .app__ConsumerProfile_box_div {
-    margin: 0rem 1rem 0rem 1rem;
+  .app__ConsumerHistory_Orders table tr {
+    position: relative;
   }
-  .app__ConsumerProfile_password-checks {
-    font-size: 12px;
+  .app__ConsumerHistory_Orders table tbody tr td {
+    padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+  }
+  .app__ConsumerHistory_Orders table td {
+    display: block;
+  }
+  .app__ConsumerHistory_Orders table td::before {
+    content: attr(data-cell);
+    font-weight: 500;
+  }
+  .app__ConsumerHistory_Orders table td:nth-child(1) {
+    padding-top: 1rem;
+  }
+  .app__ConsumerHistory_Orders table td:nth-child(5) {
+    padding-bottom: 1rem;
+  }
+  .app__ConsumerHistory_Orders table .orderHitory_actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+@media (max-width: 800px) {
+  .app__ConsumerHistory_Orders table .orderHitory_actions {
+    position: initial;
+    margin-top: 0;
+    margin-right: 0;
   }
 }/*# sourceMappingURL=ConsumerOrdersHistory.css.map */

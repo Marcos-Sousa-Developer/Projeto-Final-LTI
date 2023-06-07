@@ -274,7 +274,7 @@ const SubCategory = () => {
           <div className='app__SubCategory_Grid_Direita'>
             <div className='app__SubCategory_mobile_filter_content'>
               <button className='main__action_btn' onClick={() => setIsOpen(true)}>Filtros</button>
-              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+              <Modal open={isOpen} onClose={() => setIsOpen(false)} filter={true}>
                 <p>FILTROS</p>
                 <div>
                   <p>SubCategoria</p>

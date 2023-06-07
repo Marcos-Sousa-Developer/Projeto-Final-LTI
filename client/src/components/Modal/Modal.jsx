@@ -5,13 +5,13 @@ import { FiX } from 'react-icons/fi';
 
 import "./Modal.css";
 
-function Modal({ open, children, onClose }) {
+function Modal({ open, children, onClose, filter }) {
     if (!open) return null
 
     return ReactDom.createPortal(
         <>
             <div className='app__modal_overlay'></div>
-            <div className='app__modal_content'>
+            <div className={filter ? 'app__modal_content filter' : 'app__modal_content'}>
                 <button className='app__modal_content_closeBtn' onClick={onClose}><FiX></FiX></button>
                 {children}
             </div>
