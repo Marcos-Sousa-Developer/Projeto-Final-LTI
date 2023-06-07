@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import putToDB from '../../../hooks/putToDB';
 
 import LoadingPage from '../../LoadingPage';
-import { Navbar, Footer, SubHeading } from '../../../components/index';
+import { Navbar, Footer, SubHeading, SnackBar } from '../../../components/index';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import './ConsumerOrdersHistory.css';
 import ConsumerBar from '../../../components/ConsumerBar/ConsumerBar';
 
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
+
 const ConsumerOrdersHistory = () => {
+    const snackbarRef = useRef(null);
     const [ordersHistory, setConsumerOrder] = useState([]);
     const [loading, setLoading] = useState(false);
     
@@ -116,13 +122,21 @@ const ConsumerOrdersHistory = () => {
                             <td data-cell='Preço: ' className='priceShow'><PriceDisplay price={orderHistory.order.price}></PriceDisplay></td>
                             <td data-cell='Estado: '>{orderHistory.order.order_status}</td>                            
                             <td data-cell='Transportadora: '>{orderHistory.order.vehicle ?? "N/A"}</td>
-                            <td>
+                            <td className='actions'>
                               {
                                 orderHistory.order.order_status == "Em preparação" || orderHistory.order.order_status == "A confirmar" ? (
-                                  <button className='secondary__action_btn' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                                  <>
+                                      <button className='secondary__action_btn' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); snackbarRef.current.show(); setTimeout(() => {window.location.reload();}, 2000);}}>Cancelar</button>
+                                      <SnackBar
+                                        ref={snackbarRef}
+                                        message="A encomenda foi cancelada!"
+                                        type={SnackbarType.success}
+                                      />
+                                  </>
                                 )
-                                : (
-                                  <button className='secondary__action_btn' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                                : 
+                                (
+                                  <button className='secondary__action_btn' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); }}>Cancelada</button>
                                 )
                               }
                             </td>
