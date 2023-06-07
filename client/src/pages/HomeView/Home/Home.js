@@ -42,6 +42,21 @@ function Home() {
     setDidMount(true)
   },[])
 
+    //Comparador de Produtos
+
+    const [selectedProducts, setSelectedProducts] = useState([]);
+
+    const addToSelectedProducts = (product) => {
+      if (selectedProducts.length >= 4) {
+        return;
+      }
+      setSelectedProducts([...selectedProducts, product]);
+    };
+    
+    const removeFromSelectedProducts = (product) => {
+      setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
+    };
+
   //-----------------------------------------------------------
 
   return (
@@ -79,22 +94,23 @@ function Home() {
       </div>
       <div className='app__destaques main__container'>
           <SubHeading title="Destaques"></SubHeading>
-        {console.log(ads)}
           {ads.map((ad) => (
-                    <p>{ad.title}</p>
-          ))}
-          {/*ads.map((ad) => (
                     <Product 
                       key={ad.id} 
                       data={ad} 
-                      //selectedProducts={selectedProducts}
-                      //onAddToCompare={addToSelectedProducts}
-                      //onRemoveFromCompare={removeFromSelectedProducts}
+                      selectedProducts={selectedProducts}
+                      onAddToCompare={addToSelectedProducts}
+                      onRemoveFromCompare={removeFromSelectedProducts}
                       onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
                     />
-                ))*/}
+                ))}
         </div>
       <Footer></Footer>
+      <ComparePopUp
+        selectedProducts={selectedProducts}
+        onCloseComparePopUp={() => setSelectedProducts([])}
+        removeFromSelectedProducts={removeFromSelectedProducts}
+      />
       </>
       )
     }

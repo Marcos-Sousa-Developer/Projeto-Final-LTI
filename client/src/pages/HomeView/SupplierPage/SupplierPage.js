@@ -25,6 +25,15 @@ function SupplierPage() {
     return `${year}-${month}-${day}`;
   }
 
+  async function getSupplierAddress(){
+    let supplier = await getAllFromDB('/suppliers', {uid:true})
+    if(supplier[0].postal_code != null){
+        return true
+    } else{
+      return false
+    }
+  }
+
   
   const createData = (datas) => { 
 
@@ -42,7 +51,7 @@ function SupplierPage() {
 
     for (const data of datas) {
 
-      if( data.sameLocation.toLowerCase() === 'freguesia') {
+      if(data.sameLocation.toLowerCase() === 'freguesia') {
         tableLocationData['freguesia'] +=1
       }
       else if(data.sameLocation.toLowerCase() === 'município') {
@@ -72,7 +81,7 @@ function SupplierPage() {
       if (today == isoDateString.substring(0, 10)) {
         setSaleToday((prev) => prev + 1)
       }
-
+      
     }
   }
 
@@ -82,11 +91,19 @@ function SupplierPage() {
     const response = await getAllFromDB('/orderedProducts',{
       product_owner_uid: true
     })
-     
-    setFiveSells(response.slice(0, 5) );
-    
-    createData(response)
 
+    let supplierAddress = await getSupplierAddress()
+    if(supplierAddress != false){
+      let sells = response.slice(response.length - 5, response.length)
+
+      for (const sell of sells) {
+        const ad = await getAllFromDB('/ads/' + sell.ad_id)
+        sell['title'] = ad[0].title
+      }
+
+      setFiveSells(sells);
+      createData(response)
+    }
   }
 
   useEffect( () => {
@@ -131,11 +148,9 @@ function SupplierPage() {
                 </div>
                 <div className='app__SupplierPage_boxesDireita1Vend'>
                   <p style={{fontWeight:'500'}}>5 Vendas Recentes</p>
-                  {
-                    fiveSells.map((sells) => {
-
-                      return <div> {sells.id + " " + sells.price} </div>
-
+                  {console.log(fiveSells)}
+                  {fiveSells.map((sell) => {
+                      return <div> {sell.title + " " + sell.price} </div>
                     })
                   }
                 </div>

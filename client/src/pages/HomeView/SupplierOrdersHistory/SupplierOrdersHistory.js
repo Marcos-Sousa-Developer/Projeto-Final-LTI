@@ -91,7 +91,7 @@ const SupplierOrdersHistory = () => {
       <>
       <NavbarSupplier></NavbarSupplier>
       <div className='app__SupplierHistory main__container'>
-        <SubHeading title="Histórico de encomendas"/>
+        <SubHeading title="Encomendas"/>
         <SupplierBar active5='active'></SupplierBar>
         <div className='app__SupplierHistory_Orders'>
           {ordersHistory.length > 0 && (
