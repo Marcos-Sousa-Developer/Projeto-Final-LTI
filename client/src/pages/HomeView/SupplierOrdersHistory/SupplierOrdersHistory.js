@@ -8,6 +8,7 @@ import { PriceDisplay } from '../../../utilities/formatCurrency';
 import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 import LoadingPage from '../../LoadingPage';
 import './SupplierOrdersHistory.css';
+import emailjs from '@emailjs/browser';
 
 const SupplierOrdersHistory = () => {
     const [modalOpen, setModalOpen] = useState([]); //modal1    
@@ -39,6 +40,33 @@ const SupplierOrdersHistory = () => {
         setVehicle(prevState => [...vehicleGet])
       }
   }
+
+  const sendEmail = async () => {
+
+    let orderedPorduct = await getAllFromDB("/orderedProducts/" + currentOrder)
+
+    let consumer = await getAllFromDB("/consumers", {uid: orderedPorduct[0].product_buyer_uid})
+
+    let consumerEmail = consumer[0].email;
+    let consumerName = consumer[0].name; 
+    let orderNumber = orderedPorduct[0].order_id;
+
+    const params = {
+      consumer_email: "rafael.ribeiro.rr11@gmail.com",
+      consumer_name: consumerName,
+      order_number: orderNumber,
+    }
+
+    emailjs.send('service_z2i61vc', 'template_j3rgk2d', params, process.env.REACT_APP_EMAILJS_KEY)
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+      setTimeout(function() {
+        location.reload();
+      }, 1000);
+  };
 
     async function handleEditStatusOrder(status) {
       await putToDB("/orderedProducts/" + currentOrder, {
@@ -145,7 +173,7 @@ const SupplierOrdersHistory = () => {
                                           <React.Fragment key={vehicleHistory.id}>
                                             <tr>
                                               <td>{vehicleHistory.name}</td>
-                                              <td><button className='secondary__action_btn' onClick={() => {handleEditVehicle(vehicleHistory.name); handleEditStatusOrder("Enviado"); location.reload();}}>Confirmar</button></td>
+                                              <td><button className='secondary__action_btn' onClick={async () => {handleEditVehicle(vehicleHistory.name); handleEditStatusOrder("Enviado"); await sendEmail();}}>Confirmar</button></td>
                                             </tr>
                                           </React.Fragment>
                                         ))}

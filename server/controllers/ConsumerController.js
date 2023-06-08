@@ -40,7 +40,7 @@ const getAllorSomeConsumers = async function (req, res) {
             let value = Object.values(params)[i]
             let nextKey = Object.keys(params)[i+1];
 
-            if(key == "uid"){
+            if(key == "uid" && value === 'true'){
                 const uid_encrypt = req.cookies.userSession;
                 value = jwt.decryptID(uid_encrypt);
             }

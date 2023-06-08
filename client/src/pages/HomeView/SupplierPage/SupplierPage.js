@@ -148,7 +148,6 @@ function SupplierPage() {
                 </div>
                 <div className='app__SupplierPage_boxesDireita1Vend'>
                   <p style={{fontWeight:'500'}}>5 Vendas Recentes</p>
-                  {console.log(fiveSells)}
                   {fiveSells.map((sell) => {
                       return <div> {sell.title + " " + sell.price} </div>
                     })

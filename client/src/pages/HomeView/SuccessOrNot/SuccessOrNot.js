@@ -16,7 +16,7 @@ const SuccessOrNot = ({success}) => {
 
   const sendEmail = async (supplierEmail, supplierName, productName) => {
     const params = {
-      supplier_email: supplierEmail,
+      supplier_email: "rafael.ribeiro.rr11@gmail.com",
       supplier_name: supplierName,
       product_name: productName
     }
@@ -53,7 +53,7 @@ const SuccessOrNot = ({success}) => {
             let ad = await getAllFromDB('/ads/' + order[0].ad_id)
             let supplier = await getAllFromDB('/suppliers/' + ad[0].supplier_id)
 
-            await sendEmail("rafael.ribeiro.rr11@gmail.com", supplier[0].name, ad[0].title)
+            await sendEmail(supplier[0].email, supplier[0].name, ad[0].title)
           }
           removeCookie('ordersToCheck', { path: '/'});
           removeCookie('cart', { path: '/'});
