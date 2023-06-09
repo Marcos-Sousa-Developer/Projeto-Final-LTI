@@ -10,8 +10,14 @@ import LoadingPage from '../../LoadingPage';
 import './SupplierOrdersHistory.css';
 import emailjs from '@emailjs/browser';
 
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
+
 const SupplierOrdersHistory = () => {
-    const [modalOpen, setModalOpen] = useState([]); //modal1    
+    const [modalOpen, setModalOpen] = useState([]); //modal
+    const snackbarRef = useRef(null); //snackbar
     const [currentOrder, setCurrentOrder] = useState(0);  
     const [ordersHistory, setSupplierOrder] = useState([]);
     const [vehiclesHistory, setVehicle] = useState([]);
@@ -153,10 +159,10 @@ const SupplierOrdersHistory = () => {
                                 <button className='secondary__negative_action_btn app__pointer' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
                               )
                               : (
-                                <button className='secondary__negative_action_btn app__pointer' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                                <button className='secondary__negative_action_btn' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
                               )
                             }
-                            <button className='secondary__action_btn' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => modalToOpen(orderHistory.order.id)}>Enviar</button>
+                            <button className='secondary__action_btn app__pointer' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => modalToOpen(orderHistory.order.id)}>Enviar</button>
                             <Modal open={modalOpen[orderHistory.order.id]} onClose={() => modalToClose(orderHistory.id)}>
                               <div className='app__ConsumerHistory_Orders'>
                                 {vehiclesHistory.length > 0 && (
@@ -173,7 +179,7 @@ const SupplierOrdersHistory = () => {
                                           <React.Fragment key={vehicleHistory.id}>
                                             <tr>
                                               <td>{vehicleHistory.name}</td>
-                                              <td><button className='secondary__action_btn' onClick={async () => {handleEditVehicle(vehicleHistory.name); handleEditStatusOrder("Enviado"); await sendEmail();}}>Confirmar</button></td>
+                                              <td><button className='secondary__action_btn app__pointer' onClick={async () => {handleEditVehicle(vehicleHistory.name); handleEditStatusOrder("Enviado"); await sendEmail();}}>Confirmar</button></td>
                                             </tr>
                                           </React.Fragment>
                                         ))}

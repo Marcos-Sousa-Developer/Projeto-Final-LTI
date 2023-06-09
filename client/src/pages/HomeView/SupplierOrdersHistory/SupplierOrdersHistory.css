@@ -283,6 +283,11 @@ img, picture {
   gap: 1rem;
   background-color: transparent;
 }
+.app__SupplierHistory_Orders table .actions div {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
 .app__SupplierHistory_Orders table .actions > * {
   background-color: transparent;
 }
@@ -310,6 +315,15 @@ img, picture {
 }
 
 @media (max-width: 1200px) {
+  .app__SupplierHistory_Orders table .actions div {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .app__SupplierHistory_Orders table .actions > * {
+    background-color: transparent;
+  }
+}
+@media (max-width: 1050px) {
   .app__SupplierHistory_Orders table thead tr th {
     display: none;
   }
@@ -329,8 +343,18 @@ img, picture {
   .app__SupplierHistory_Orders table td:nth-child(1) {
     padding-top: 1rem;
   }
-  .app__SupplierHistory_Orders table td:nth-child(5) {
+  .app__SupplierHistory_Orders table td:nth-child(6) {
     padding-bottom: 1rem;
+  }
+  .app__SupplierHistory_Orders table .actions {
+    padding-bottom: 1rem;
+  }
+  .app__SupplierHistory_Orders table .actions div {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .app__SupplierHistory_Orders table .actions > * {
+    background-color: transparent;
   }
   .app__SupplierHistory_Orders table .orderHitory_actions {
     position: absolute;

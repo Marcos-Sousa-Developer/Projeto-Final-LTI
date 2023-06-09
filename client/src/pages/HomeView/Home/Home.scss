@@ -41,7 +41,27 @@
 .app__destaques{
     margin: 0 auto 1rem;
 
-    
+    &_content{
+        margin-top: 2rem;
+
+        .swiper{
+            padding-bottom: 2rem;
+        }
+
+        .swiper-wrapper{
+            cursor: grab;
+            align-items: stretch;
+        }
+
+        .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal{
+            bottom: -7px;
+            background-color: transparent;
+        }
+
+        .swiper-pagination-bullet-active{
+            background-color: $orange;
+        }
+    }
 }
 
 @media screen and (max-width: 1200px) {
@@ -90,6 +110,10 @@
     .products{
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: .75rem;
+    }
+
+    .app__destaques_content{
+        margin-top: 1rem;
     }
 }
 

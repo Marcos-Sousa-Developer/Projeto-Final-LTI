@@ -10,7 +10,14 @@ import getAllFromDB from '../../../hooks/getAllFromDB';
 import LoadingPage from '../../LoadingPage';
 import { CookieStorage } from 'amazon-cognito-identity-js';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { FreeMode, Pagination } from "swiper";
+
 function Home() {
+  const [slidesPerView, setSlidesPerView] = useState(5);
+  const [spaceBetween, setSpaceBetween] = useState(30);
 
   const handleClick = () => {
     const targetDiv = document.getElementById('comprar_div');
@@ -33,13 +40,35 @@ function Home() {
 
   async function getAds(){
     let adsDB = await getAllFromDB("/ads")
-    setAds(adsDB.slice(adsDB.length - 8, adsDB.length))
+    setAds(adsDB.slice(adsDB.length - 10, adsDB.length))
   }
 
   useEffect(() => {
     getUserType()
     getAds()
     setDidMount(true)
+    const handleResize = () => {
+      if (window.innerWidth < 650) {
+        setSlidesPerView(2);
+        setSpaceBetween(10);
+      } else if (window.innerWidth < 1024) {
+        setSlidesPerView(3);
+        setSpaceBetween(20);
+      } else if (window.innerWidth < 1200){
+        setSlidesPerView(4);
+        setSpaceBetween(30);
+      } else{
+        setSlidesPerView(5);
+        setSpaceBetween(30);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Call the function once on initial render
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   },[])
 
     //Comparador de Produtos
@@ -94,16 +123,29 @@ function Home() {
       </div>
       <div className='app__destaques main__container'>
           <SubHeading title="Destaques"></SubHeading>
-          {ads.map((ad) => (
-                    <Product 
-                      key={ad.id} 
-                      data={ad} 
-                      selectedProducts={selectedProducts}
-                      onAddToCompare={addToSelectedProducts}
-                      onRemoveFromCompare={removeFromSelectedProducts}
-                      onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
-                    />
-                ))}
+          <div className="app__destaques_content">
+            <Swiper         
+              slidesPerView={slidesPerView}
+              spaceBetween={spaceBetween}
+              freeMode={true}
+              pagination={{
+                clickable: true,
+              }}
+              modules={[FreeMode, Pagination]}
+              className="mySwiper">
+              {ads.map((ad) => (
+                <SwiperSlide key={ad.id}>
+                  <Product
+                    data={ad}
+                    selectedProducts={selectedProducts}
+                    onAddToCompare={addToSelectedProducts}
+                    onRemoveFromCompare={removeFromSelectedProducts}
+                    onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: ad.id }).toString()}`)}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       <Footer></Footer>
       <ComparePopUp

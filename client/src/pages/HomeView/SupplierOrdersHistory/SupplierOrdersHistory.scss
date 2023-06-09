@@ -33,6 +33,11 @@
                 background-color: transparent;
             }
             .actions{
+                div{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 1rem;
+                }
                 &>*{
                     background-color: transparent;
                 }
@@ -69,7 +74,26 @@
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px){
+    .app__SupplierHistory{
+
+        &_Orders{
+            table{
+                .actions{
+                    div{
+                        flex-direction: column;
+                        gap: .5rem;
+                    }
+                    &>*{
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1050px) {
     .app__SupplierHistory{
 
         &_Orders{
@@ -98,12 +122,21 @@
                         padding-top: 1rem;
                     }
         
-                    &:nth-child(5){
+                    &:nth-child(6){
                         padding-bottom: 1rem;
                     }
                 }
 
-
+                .actions{
+                    padding-bottom: 1rem;
+                    div{
+                        flex-direction: row;
+                        gap: 1rem;
+                    }
+                    &>*{
+                        background-color: transparent;
+                    }
+                }
 
                 .orderHitory_actions{
                     position: absolute;

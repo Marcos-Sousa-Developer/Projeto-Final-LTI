@@ -5,6 +5,7 @@ import LoadingPage from '../../LoadingPage';
 import getAllFromDB from '../../../hooks/getAllFromDB'; 
 import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 import LocalImpact from './SupplierOrderReport/LocalImpact';
+import { PriceDisplay } from '../../../utilities/formatCurrency';
 
 let tableLocationData = {}
 
@@ -149,7 +150,12 @@ function SupplierPage() {
                 <div className='app__SupplierPage_boxesDireita1Vend'>
                   <p style={{fontWeight:'500'}}>5 Vendas Recentes</p>
                   {fiveSells.map((sell) => {
-                      return <div> {sell.title + " " + sell.price} </div>
+                      return (
+                          <div style={{display: 'flex', justifyContent: 'space-between', gap: '1rem'}}> 
+                            <p>{sell.title}</p>
+                            <p><PriceDisplay price={sell.price}></PriceDisplay></p>
+                          </div>
+                        )
                     })
                   }
                 </div>
