@@ -595,7 +595,8 @@ function CriarAnuncio() {
             //SE CONSEGUIR ADICIONAR TODOS ADICIONA
             //SE NÃO, DÁ UM ALERT
 
-
+            console.log(formData.features)
+            console.log(formData.sub_features)
             setTimeout(() => {
               navigate('/supplier', { replace: true });
             }, 3000); // 3 seconds delay
@@ -682,51 +683,51 @@ function CriarAnuncio() {
                                                 let sub_features = {};
 
                                                 if (subsubcategoria === "Alimentação") {
-                                                    sub_features = { Validade: ''};
+                                                    sub_features = { "Validade": ''};
                                                 }
 
                                                 if (subcategoria === "Calçado" || subcategoria === "Roupinhas"){
-                                                    sub_features = { Gender: ''};
+                                                    sub_features = { "Gender": ''};
                                                 }
 
                                                 if (subsubcategoria === "Móveis") {
-                                                    sub_features = { Largura: '', Comprimento: ''};
+                                                    sub_features = { "Largura": '', "Comprimento": ''};
                                                 }
 
                                                 if (subsubcategoria === "Computadores") {
-                                                    sub_features = { Processador: '', MemoryRAM: '', OperatingSystem: '', StorageAmount: '', StorageType: '' };
+                                                    sub_features = { "Processador": '', "Memória Ram": '', "Sistema Operativo": '', "Cap. Armazenamento": '', "Tipo de armazenamento": '' };
                                                 }
 
                                                 if (subsubcategoria === "Tv" || subsubcategoria === "Projectores" || subsubcategoria === "Monitores" ){
-                                                    sub_features = {Resolution: '', ScreenSize: ''}
+                                                    sub_features = {"Resolução": '', "Tamanho de ecrã": ''}
                                                 }
 
                                                 if (subsubcategoria === "Portáteis"){
-                                                    sub_features = {Processador: '', MemoryRAM: '', OperatingSystem: '', StorageAmount: '', StorageType: '', Resolution: '', ScreenSize: '' }
+                                                    sub_features = {"Processador": '', "Memória Ram": '', "Sistema Operativo": '', "Cap. Armazenamento": '', "Tipo de armazenamento": '', "Resolução": '', "Tamnaho de ecrã": '' }
                                                 }
 
                                                 if (subsubcategoria === "Software"){
-                                                    sub_features = {SoftwareType: ''}
+                                                    sub_features = {"Tipo de Software": ''}
                                                 }
 
                                                 if (subsubcategoria === "Armazenamento" || subsubcategoria === "Servidores"){
-                                                    sub_features = {StorageAmount: ''}
+                                                    sub_features = {"Cap. Armazenamento": ''}
                                                 }
 
                                                 if (subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos"){
-                                                    sub_features = {StorageType: '', StorageAmount: ''}
+                                                    sub_features = {"Tipo de armazenamento": '', "Cap. Armazenamento": ''}
                                                 }
 
                                                 if (subsubcategoria === "Telemóveis" || subsubcategoria === "Tablets" ){
-                                                    sub_features = {OperatingSystem: ''}
+                                                    sub_features = {"Sistema Operativo": ''}
                                                 }
 
                                                 if (subcategoria === "Roupa"){
-                                                    sub_features = {ClothingSize: ''}
+                                                    sub_features = {"Tamanho": ''}
                                                 }
 
                                                 if (subcategoria === "Calçado"){
-                                                    sub_features = {ShoeSize: ''}
+                                                    sub_features = {"Número": ''}
                                                 }
 
                                                 let params = {
@@ -886,11 +887,10 @@ function CriarAnuncio() {
                     <div className='app__anuncio_produto_content_categoria'>
                       <p>Categoria *</p>
                       {formData.categoria != "" && formData.subcategoria != "" && formData.subsubcategoria != "" && formData.search ? 
-                        <>
-                          <p>{formData.categoria}</p>
-                          <p>{formData.subcategoria}</p>
-                          <p>{formData.subsubcategoria}</p>
-                        </>
+                        <div>
+                          <p style={{fontWeight: '600', margin: '.5rem 0 0 0'}}>{formData.categoria}</p>
+                          <p style={{fontSize: '14px', margin:'0'}}>{formData.subcategoria} | <span style={{fontSize: '12px'}}>{formData.subsubcategoria}</span></p>
+                        </div>
                       :
                         <>
                           <ButtonToggleModal onClick={toggleActiveModal}/>

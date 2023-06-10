@@ -286,7 +286,11 @@ img, picture{
 }
 
 .mapboxgl-popup-content{
-  padding: 0 2px 4px;
+  padding: 0;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip{
+  display: none;
 }
 
 .mapboxgl-ctrl button .mapboxgl-ctrl-icon{

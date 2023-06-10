@@ -262,7 +262,8 @@ export const teste = [
             {
               "Marca": "",
               "Estado": ["Novo","Usado"],
-              "Garantia": ""
+              "Garantia": "",
+              "Classe Energética": ["A", "B", "C", "D", "E", "F", "G"],
             }
           ]
       },
@@ -325,11 +326,6 @@ export const teste = [
               "Saúde",
               "Viagens",
               "Outros não listados"
-            ],
-            features: [
-              {
-                "Auto": ""
-              }
             ]
           },
           { 
@@ -456,9 +452,6 @@ export const teste = [
           }
         ]
       },
-    
-    
-    
       {
         name: "Móveis, Casa e Jardim",
         subcategories: [
@@ -514,12 +507,11 @@ export const teste = [
         features: [
           {
             "Marca": "",
-            "Estado": ["Novo","Usado"]
+            "Estado": ["Novo","Usado"],
+            "Garantia": ""
           }
         ]
       },
-    
-    
       {
         name: "Tecnologia",
         subcategories: [
@@ -583,7 +575,8 @@ export const teste = [
         features: [
           {
             "Marca": "",
-            "Estado": ["Novo","Usado"]
+            "Estado": ["Novo","Usado"],
+            "Garantia": ""
           }
         ]
       },

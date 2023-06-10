@@ -55,6 +55,7 @@ const ProductPage = () => {
   async function getAndSetProduct(idAd){
 
     let ad = await getAllFromDB("/ads", {id: idAd})
+    console.log(JSON.parse(ad[0].extraCharacteristic));
     setIdProduct(ad[0].product_id)
     setPath("Home - " + ad[0].category_name + " - " + ad[0].subcategory_name + " - " + ad[0].subsubcategory_name)
     let car = []

@@ -152,6 +152,33 @@ img, picture {
   border: 2px solid #EB5C1F;
 }
 
+.secondary__action_btn {
+  background-color: #EB5C1F;
+  color: white;
+  padding: 8px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__action_btn:hover {
+  opacity: 1;
+}
+
+.secondary__negative_action_btn {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 6px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__negative_action_btn:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 700px) {
   .main__action_btn {
     padding: 6px 40px;
@@ -164,6 +191,66 @@ img, picture {
     font-size: 14px;
   }
 }
+.inputField p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField input {
+  outline: none;
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.inputField_error p {
+  margin: 1rem 0 0.5rem;
+}
+.inputField_error input {
+  outline: none;
+  border: 3px solid red;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+}
+.inputField_error input:focus {
+  border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.mapboxgl-ctrl-bottom-left {
+  display: none;
+}
+
+.mapboxgl-marker {
+  background-color: transparent;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 0;
+}
+
+.mapboxgl-ctrl-attrib.mapboxgl-compact {
+  margin: 0;
+}
+
+.mapboxgl-popup-content {
+  padding: 0 2px 4px;
+}
+
+.mapboxgl-ctrl button .mapboxgl-ctrl-icon {
+  background-color: transparent;
+}
+
+.mapboxgl-marker * {
+  background-color: transparent;
+}
+
 .app__anuncio {
   margin: 1rem auto 2rem;
 }

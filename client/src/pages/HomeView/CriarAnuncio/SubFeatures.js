@@ -13,28 +13,6 @@ const SubFeatures = ({formData, setFormData}) => {
                 {subsubcategoria === "Alimentação" &&
                     <SubFeatureInput typeInput="date" featureName="Validade" featureTitle="Validade" formData={formData} setFormData={setFormData}></SubFeatureInput>
                 }
-            {/*Género do calçado e roupas dos bébés*/}
-                {subcategoria === "Calçado" || subcategoria === "Roupinhas" ?
-                    <>
-                        <div className='inputField'>
-                            <p>Género:</p>
-                            <select  
-                                onChange={(e) => {
-                                    const updatedFeature = { ...formData.sub_features };
-                                    updatedFeature.Gender = e.target.value;
-                                    setFormData({ ...formData, sub_features: updatedFeature });
-                                }}
-                                value={formData.sub_features?.Gender || ""}
-                            >
-                                <option value="">Escolher</option>
-                                <option value="Menino">Menino</option>
-                                <option value="Menina">Menina</option>
-                            </select>
-                        </div>
-                    </>
-                : 
-                    null
-                }
             {/*Medidas dos móveis*/}
                 {subcategoria === "Móveis" &&
                     <>
@@ -51,11 +29,11 @@ const SubFeatures = ({formData, setFormData}) => {
                             <select
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features }
-                                    updatedFeature.MemoryRAM = e.target.value;
+                                    updatedFeature[0]["Memória Ram"] = e.target.value;
                                     setFormData({ ...formData, sub_features: updatedFeature });
                                 }
                                 }
-                                value={formData.sub_features?.MemoryRAM || ""}
+                                value={formData.sub_features[0]["Memória Ram"] ? formData.sub_features[0]["Memória Ram"] : ''}
                             >
                                 <option value="">Escolher</option>
                                 <option value="1GB">1GB</option>
@@ -72,10 +50,10 @@ const SubFeatures = ({formData, setFormData}) => {
                             <select  
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
-                                    updatedFeature.OperatingSystem = e.target.value;
+                                    updatedFeature[0]["Sistema Operativo"] = e.target.value;
                                     setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
-                                value={formData.sub_features?.OperatingSystem || ""}
+                                value={formData.sub_features[0]["Sistema Operativo"] ? formData.sub_features[0]["Sistema Operativo"] : ''}
                             >
                                 <option value="">Escolher</option>
                                 <option value="Microsoft Windows">Microsoft Windows</option>
@@ -93,10 +71,10 @@ const SubFeatures = ({formData, setFormData}) => {
                             <select  
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
-                                    updatedFeature.Resolution = e.target.value;
+                                    updatedFeature[0]["Resolução"] = e.target.value;
                                     setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
-                                value={formData.sub_features?.Resolution || ""}
+                                value={formData.sub_features[0]["Resolução"] ? formData.sub_features[0]["Resolução"] : ''}
                             >
                                 <option value="">Escolher</option>
                                 <option value="1920x1080 (Full HD)">1920x1080 (Full HD)</option>
@@ -119,10 +97,10 @@ const SubFeatures = ({formData, setFormData}) => {
                             <select  
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
-                                    updatedFeature.ScreenSize = e.target.value;
+                                    updatedFeature[0]["Tamanho de ecrã"] = e.target.value;
                                     setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
-                                value={formData.sub_features?.ScreenSize || ""}
+                                value={formData.sub_features[0]["Tamanho de ecrã"] ? formData.sub_features[0]["Tamanho de ecrã"] : ''}
                             >
                                 <option value="">Escolher</option>
                                 <option value="-21''">-21''</option>
@@ -147,10 +125,10 @@ const SubFeatures = ({formData, setFormData}) => {
                             <select  
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
-                                    updatedFeature.ScreenSize = e.target.value;
+                                    updatedFeature[0]["Tamanho de ecrã"] = e.target.value;
                                     setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
-                                value={formData.sub_features?.ScreenSize || ""}
+                                value={formData.sub_features[0]["Tamanho de ecrã"] ? formData.sub_features[0]["Tamanho de ecrã"] : ''}
                             >
                                 <option value="">Escolher</option>
                                 <option value="-27''">-27''</option>
@@ -170,7 +148,7 @@ const SubFeatures = ({formData, setFormData}) => {
                 }
             {/*Especificações do Software*/}
                 {subsubcategoria === "Software"  &&
-                    <SubFeatureInput typeInput="text" featureName="SoftwareType" featureTitle="Tipo de Software" formData={formData} setFormData={setFormData}></SubFeatureInput>
+                    <SubFeatureInput typeInput="text" featureName="Tipo de Software" featureTitle="Tipo de Software" formData={formData} setFormData={setFormData}></SubFeatureInput>
                 }
             {/*Especificações do Armazenamento, Discos Externos, Internos, Servidores e Computadores*/}
                 {subsubcategoria === "Armazenamento" || subsubcategoria === "Discos Externos"  || subsubcategoria === "Discos Internos" || subsubcategoria === "Servidores" || subsubcategoria === "Computadores" ?
@@ -180,10 +158,10 @@ const SubFeatures = ({formData, setFormData}) => {
                             <select  
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
-                                    updatedFeature.StorageAmount = e.target.value;
+                                    updatedFeature[0]["Cap. Armazenamento"] = e.target.value;
                                     setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
-                                value={formData.sub_features?.StorageAmount || ""}
+                                value={formData.sub_features[0]["Cap. Armazenamento"] ? formData.sub_features[0]["Cap. Armazenamento"] : ''}
                             >
                                 <option value="">Escolher</option>
                                 <option value="120GB">120GB</option>
@@ -211,10 +189,10 @@ const SubFeatures = ({formData, setFormData}) => {
                             <select  
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
-                                    updatedFeature.StorageType = e.target.value;
+                                    updatedFeature[0]["Tipo de armazenamento"] = e.target.value;
                                     setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
-                                value={formData.sub_features?.StorageType || ""}
+                                value={formData.sub_features[0]["Tipo de armazenamento"] ? formData.sub_features[0]["Tipo de armazenamento"] : ''}
                             >
                                 <option value="">Escolher</option>
                                 <option value="SSD">SSD</option>
@@ -233,10 +211,10 @@ const SubFeatures = ({formData, setFormData}) => {
                             <select 
                                 onChange={(e) => {
                                     const updatedFeature = { ...formData.sub_features };
-                                    updatedFeature.OperatingSystem = e.target.value;
+                                    updatedFeature[0]["Sistema Operativo"]= e.target.value;
                                     setFormData({ ...formData, sub_features: updatedFeature });
                                 }}
-                                value={formData.sub_features?.OperatingSystem || ""}
+                                value={formData.sub_features[0]["Sistema Operativo"] ? formData.sub_features[0]["Sistema Operativo"] : ''}
                             >
                                 <option value="">Escolher</option>
                                 <option value="Android">Android</option>
@@ -259,10 +237,10 @@ const SubFeatures = ({formData, setFormData}) => {
                         <select 
                             onChange={(e) => {
                                 const updatedFeature = { ...formData.sub_features };
-                                updatedFeature.ClothingSize = e.target.value;
+                                updatedFeature[0]["Tamanho"] = e.target.value;
                                 setFormData({ ...formData, sub_features: updatedFeature });
                             }}
-                            value={formData.sub_features?.ClothingSize || ""}
+                            value={formData.sub_features[0]["Tamanho"] ? formData.sub_features[0]["Tamanho"] : ''}
                         >
                             <option value="">Escolher</option>
                             <option value="S">S</option>
@@ -276,7 +254,7 @@ const SubFeatures = ({formData, setFormData}) => {
             }
             {/*Especificações do Calçado*/}
             {subcategoria === "Calçado"  &&
-                <SubFeatureInput typeInput="number" featureName="ShoeSize" featureTitle="Número" formData={formData} setFormData={setFormData}></SubFeatureInput>
+                <SubFeatureInput typeInput="number" featureName="Número de calçado" featureTitle="Número" formData={formData} setFormData={setFormData}></SubFeatureInput>
             }
         </div>
     )

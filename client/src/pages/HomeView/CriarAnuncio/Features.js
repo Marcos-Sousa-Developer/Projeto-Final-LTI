@@ -6,10 +6,10 @@ const Features = ({formData, setFormData}) => {
 
     const isMarcaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Marca'));
     const isValidadeFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Validade'));
-    const isLocaldeProducaoFeatureExist = formData.features.some(feature => feature.hasOwnProperty('LocaldeProducao'));
+    const isLocaldeProducaoFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Local de Produção'));
     const isEstadoFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Estado'));
     const isGarantiaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Garantia'));
-    const isClasseEnergeticaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('ClasseEnergetica'));
+    const isClasseEnergeticaFeatureExist = formData.features.some(feature => feature.hasOwnProperty('Classe Energética'));
 
     return (
         <div className='app__anuncio_features'>
