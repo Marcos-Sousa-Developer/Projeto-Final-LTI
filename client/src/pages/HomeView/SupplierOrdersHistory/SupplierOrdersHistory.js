@@ -101,7 +101,7 @@ const SupplierOrdersHistory = () => {
         newState[orderID] = false;
         return newState;
       })
-      setCurrentOrder(0)
+      setCurrentOrder(orderID)
     }
 
     //Aparecer no loading da página
@@ -163,7 +163,7 @@ const SupplierOrdersHistory = () => {
                               )
                             }
                             <button className='secondary__action_btn app__pointer' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => modalToOpen(orderHistory.order.id)}>Enviar</button>
-                            <Modal open={modalOpen[orderHistory.order.id]} onClose={() => modalToClose(orderHistory.id)}>
+                            <Modal open={modalOpen[orderHistory.order.id]} onClose={() => modalToClose(orderHistory.order.id)}>
                               <div className='app__ConsumerHistory_Orders'>
                                 {vehiclesHistory.length > 0 && (
                                   <>
