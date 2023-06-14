@@ -152,6 +152,33 @@ img, picture {
   border: 2px solid #EB5C1F;
 }
 
+.secondary__action_btn {
+  background-color: #EB5C1F;
+  color: white;
+  padding: 8px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__action_btn:hover {
+  opacity: 1;
+}
+
+.secondary__negative_action_btn {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 6px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__negative_action_btn:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 700px) {
   .main__action_btn {
     padding: 6px 40px;
@@ -194,6 +221,38 @@ img, picture {
 }
 .inputField_error input:focus {
   border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.mapboxgl-ctrl-bottom-left {
+  display: none;
+}
+
+.mapboxgl-marker {
+  background-color: transparent;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 0;
+}
+
+.mapboxgl-ctrl-attrib.mapboxgl-compact {
+  margin: 0;
+}
+
+.mapboxgl-popup-content {
+  padding: 0;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  display: none;
+}
+
+.mapboxgl-ctrl button .mapboxgl-ctrl-icon {
+  background-color: transparent;
+}
+
+.mapboxgl-marker * {
+  background-color: transparent;
 }
 
 .app__product_page_content_title_mobile {
@@ -251,15 +310,21 @@ img, picture {
 .app__product_page_content_info_main .app__product_page_content_header {
   border-bottom: 3px solid #EEEEEE;
 }
-.app__product_page_content_info_characteristics {
-  border-bottom: 3px solid #EEEEEE;
-}
 .app__product_page_content_info_characteristics .app__product_page_content_characteristics_title {
   font-size: 18px;
 }
 .app__product_page_content_info_characteristics table {
   width: 100%;
-  margin-bottom: 1rem;
+  border: 3px solid #EEEEEE;
+}
+.app__product_page_content_info_characteristics table thead tr th {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #EEEEEE;
+  padding: 0.5rem 3rem 0.5rem 0.5rem;
+}
+.app__product_page_content_info_characteristics table tbody tr td {
+  padding: 0.75rem 0.5rem 0.75rem 0.5rem;
 }
 .app__product_page_content_info .app__product_page_content_description {
   padding: 1rem;
@@ -311,6 +376,25 @@ img, picture {
   padding: 1rem;
 }
 
+@media screen and (max-width: 1450px) {
+  .app__product_page_content_info_characteristics table thead tr th {
+    display: none;
+  }
+  .app__product_page_content_info_characteristics table td {
+    display: block;
+    position: relative;
+    text-align: right;
+  }
+  .app__product_page_content_info_characteristics table td:nth-child(odd) {
+    background-color: rgba(238, 238, 238, 0.4);
+  }
+  .app__product_page_content_info_characteristics table td::before {
+    content: attr(data-cell);
+    font-weight: 500;
+    position: absolute;
+    left: 8px;
+  }
+}
 @media screen and (max-width: 1250px) {
   .app__product_page_content {
     width: 100%;
@@ -326,6 +410,31 @@ img, picture {
 @media screen and (max-width: 800px) {
   .app__product_page_content_info {
     width: 90%;
+    /*
+    &_characteristics table{
+        thead{
+            display: none;
+        }
+
+        tbody, tr, td{
+            display: block;
+            width: 100%;
+        }
+
+        td::before{
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            font-weight: 500;
+        }
+
+        tbody tr td {
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+        }
+    }
+    */
   }
   .app__product_page_content_info_main {
     grid-template-columns: 1fr;
@@ -334,24 +443,6 @@ img, picture {
   .app__product_page_content_info_main_img {
     width: 450px;
     height: 100%;
-  }
-  .app__product_page_content_info_characteristics table thead {
-    display: none;
-  }
-  .app__product_page_content_info_characteristics table tbody, .app__product_page_content_info_characteristics table tr, .app__product_page_content_info_characteristics table td {
-    display: block;
-    width: 100%;
-  }
-  .app__product_page_content_info_characteristics table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 0;
-    font-weight: 500;
-  }
-  .app__product_page_content_info_characteristics table tbody tr td {
-    text-align: right;
-    padding-left: 50%;
-    position: relative;
   }
   .app__product_page_content_images {
     display: none;

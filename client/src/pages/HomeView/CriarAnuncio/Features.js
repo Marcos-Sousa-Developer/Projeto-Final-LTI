@@ -24,7 +24,7 @@ const Features = ({formData, setFormData}) => {
                 ""
             }
             {isLocaldeProducaoFeatureExist ? 
-                <FeatureInput typeInput="text" featureName="LocaldeProducao" featureTitle="Local de Produção" formData={formData} setFormData={setFormData}/>
+                <FeatureInput typeInput="text" featureName="Local de Produção" featureTitle="Local de Produção" formData={formData} setFormData={setFormData}/>
             : 
                 ""
             }
@@ -61,10 +61,10 @@ const Features = ({formData, setFormData}) => {
                     <div className='inputField'>
                         <p>Classe Energética:</p>
                         <select 
-                            value={formData.features[0].ClasseEnergetica || ''} 
+                            value={formData.features[0]["Classe Energética"] || ''} 
                             onChange={(e) => {
                                 const updatedFeature = {...formData.features[0]};
-                                updatedFeature.ClasseEnergetica = e.target.value;
+                                updatedFeature[0]["Classe Energética"] = e.target.value;
                                 const updatedFeatures = [...formData.features];
                                 updatedFeatures[0] = updatedFeature;
                                 setFormData({ ...formData, features: updatedFeatures });

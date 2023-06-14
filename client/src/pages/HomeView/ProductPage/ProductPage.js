@@ -198,7 +198,7 @@ const ProductPage = () => {
                 
               </div>
               <div className='app__product_page_content_info_characteristics'>
-                <p  className='app__product_page_content_characteristics_title'>Informações Técnicas</p>
+                <p className='app__product_page_content_characteristics_title'>Informações Técnicas</p>
                 <table>
                   <thead>
                     <tr>
@@ -211,7 +211,7 @@ const ProductPage = () => {
                     <tr>
                     {Object.keys(adData.caracteristics).map((key) => {
                       const value = adData.caracteristics[key];
-                        return key !== "0" && <td data-label={key}>{value}</td>;
+                        return key !== "0" && <td data-label={key} data-cell={key + ": "}> {value}</td>;
                       })}
                     </tr>
                   </tbody>

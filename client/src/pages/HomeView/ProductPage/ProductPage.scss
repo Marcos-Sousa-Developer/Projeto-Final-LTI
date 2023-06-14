@@ -67,7 +67,7 @@
             }
 
             &_characteristics{
-                border-bottom: $border;
+                //border-bottom: $border;
 
                 .app__product_page_content_characteristics_title{
                     font-size: $bigger_font;
@@ -75,7 +75,17 @@
 
                 table{
                     width: 100%;
-                    margin-bottom: 1rem;
+                    border: $border;
+
+                    thead tr th{
+                        font-size: 16px;
+                        font-weight: 500;
+                        background-color: $light_gray;
+                        padding: .5rem 3rem .5rem .5rem;
+                    }
+                    tbody tr td{
+                        padding: .75rem .5rem .75rem .5rem;
+                    }
                 }
             }
 
@@ -143,6 +153,35 @@
     }
 }
 
+@media screen and (max-width: 1450px) {
+    .app__product_page_content_info{
+        &_characteristics{
+            table{
+                thead tr th{
+                    display: none;
+                }
+        
+                td{
+                    display: block;
+                    position: relative;
+                    text-align: right;
+
+                    &:nth-child(odd){
+                        background-color: rgba($color: $light_gray, $alpha: .4);
+                    }
+
+                    &::before{
+                        content: attr(data-cell);
+                        font-weight: 500;
+                        position: absolute;
+                        left: 8px;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media screen and (max-width: 1250px) {
     .app__product_page_content{
         width: 100%;
@@ -171,7 +210,7 @@
                 height: 100%;
             }
         }
-
+        /*
         &_characteristics table{
             thead{
                 display: none;
@@ -195,6 +234,7 @@
                 position: relative;
             }
         }
+        */
     }
 
     .app__product_page_content_images{
