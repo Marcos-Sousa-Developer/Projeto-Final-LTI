@@ -6,6 +6,7 @@ import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import './SubCategory.css';
 import LoadingPage from '../../LoadingPage';
+import { Link } from 'react-router-dom';
 
 
 let subsubcategories = {}
@@ -22,7 +23,6 @@ const SubCategory = () => {
   const [searchName, setSearchName] = useState(null)
   const [categoryName, setCategoryName] = useState("")
   const [subCategoryName, setSubCategoryName] = useState("")
-  const [path, setPath] = useState(null)
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [didMount, setDidMount] = useState(false)
@@ -190,7 +190,7 @@ const SubCategory = () => {
         setSubCategoryName(subCategoryName)
         setSearchName(searchName);
         await getSubSubCategoriesbySearchName(subCategoryName,searchName);
-        setPath('Home > ' + categoryName + ' > ' + subCategoryName + " > pesquisa: '" + searchName + "'");
+
         setDidMount(true)
       }
       //Procurar todos os produtos de uma subcategoria a partir da categoria
@@ -198,7 +198,6 @@ const SubCategory = () => {
         setCategoryName(categoryName)
         setSubCategoryName(subCategoryName)
         await getSubSubCategories(subCategoryName)
-        setPath('Home > ' + categoryName + ' > ' + subCategoryName );
         setDidMount(true)
       }
       
@@ -224,7 +223,23 @@ const SubCategory = () => {
       <Navbar></Navbar>
       <div className='app__SubCategory main__container'>
         <div className='app__SubCategory_Caminho'>
-          <p> {path} </p>
+        {
+            searchName !== null ?  (
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
+                  <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName + "&searchName="+searchName}> {categoryName} </Link> >
+                  <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName + "&searchName="+searchName}> {subCategoryName} </Link> >
+                   pesquisa:  {searchName} 
+              </p>
+            )
+            : 
+            (
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
+              <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName}> {categoryName} </Link> > 
+              <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName}> {subCategoryName} </Link> 
+              </p>
+            )
+
+          }
           {searchName != null ? (
             <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
             ) : (

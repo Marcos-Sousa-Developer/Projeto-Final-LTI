@@ -28,10 +28,8 @@ const ProductPage = () => {
   const [myLatitude, setMyLatitude] = useState(0);
   const [supplierLongigtude, setSupplierLongitude] = useState(0);
   const [supplierLatitude, setSupplierLatitude] = useState(0);// Destination latitude
-
   const snackbarRef = useRef(null);
   const [cookies, setCookie] = useCookies(['cart']);
-  const [path, setPath] = useState(null)
   const [suppliers, setSuppliers] = useState([]) //id dos anuncios com o product_id igual ao id do produto
   const [supplierProd, setSupplierProd] = useState(null) 
   const [idProduct, setIdProduct] = useState(null) 
@@ -52,12 +50,17 @@ const ProductPage = () => {
 
   const [didMount, setDidMount] = useState(false)
 
+  const [categoryName, setCategoryName] = useState("")
+  const [subCategoryName, setSubCategoryName] = useState("")
+  const [subsubCategoryName, setSubSubCategoryName] = useState("")
+
   async function getAndSetProduct(idAd){
 
     let ad = await getAllFromDB("/ads", {id: idAd})
-    console.log(JSON.parse(ad[0].extraCharacteristic));
     setIdProduct(ad[0].product_id)
-    setPath("Home - " + ad[0].category_name + " - " + ad[0].subcategory_name + " - " + ad[0].subsubcategory_name)
+    setCategoryName(ad[0].category_name)
+    setSubCategoryName(ad[0].subcategory_name)
+    setSubSubCategoryName(ad[0].subsubcategory_name)
     let car = []
     try {
       car = JSON.parse(ad[0].extraCharacteristic) 
@@ -154,7 +157,13 @@ const ProductPage = () => {
       <>
         <Navbar></Navbar>
         <div className='app__product_page main__container'>
-          <p className='app__product_page_path'>{path}</p>
+
+          <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
+          <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName}> {categoryName} </Link> > 
+          <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName}> {subCategoryName} </Link> >
+          <Link className='app__pointer app__text_effect' to={'/subsubcategoria?category='+categoryName + "&subCategory=" + subCategoryName +  "&subsubCategory=" + subsubCategoryName}> {subsubCategoryName} </Link> 
+          </p>
+
           <p className='app__product_page_content_title_mobile'>{adData.title}</p>
           <div className='app__product_page_content'>
             <div className='app__product_page_content_info'>

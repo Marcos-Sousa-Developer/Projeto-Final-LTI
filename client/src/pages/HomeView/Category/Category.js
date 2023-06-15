@@ -6,6 +6,7 @@ import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import './Category.css';
 import LoadingPage from '../../LoadingPage';
+import { Link } from 'react-router-dom';
 
 
 let subcategories = {}
@@ -21,7 +22,6 @@ const Category = () => {
   const [ads, setAds] = useState([]);
   const [searchName, setSearchName] = useState(null);
   const [categoryName, setCategoryName] = useState("");
-  const [path, setPath] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [didMount, setDidMount] = useState(false);
 
@@ -36,7 +36,6 @@ const Category = () => {
   const [maxCurrentPrice, setCurrentMaxPrice] = useState(null);
 
   async function getSubCategoriesbySearchName(categoryName, searchName){
-    setPath('Home > ' + categoryName + " > pesquisa: '" + searchName + "'");
     let adsDB = await getAllFromDB("/ads", {title: searchName, category_name: categoryName})
     setAds(adsDB)
     setAdsPrev(adsDB)
@@ -53,7 +52,6 @@ const Category = () => {
   }
 
   async function getSubCategories(categoryName){
-    setPath('Home > ' + categoryName );
     let adsDB = await getAllFromDB("/ads", {category_name: categoryName})
     setAds(adsDB)
     setAdsPrev(adsDB)
@@ -222,7 +220,21 @@ const Category = () => {
       <Navbar></Navbar>
       <div className='app__Category main__container'>
         <div className='app__Category_Caminho'>
-          <p> {path} </p>
+          {
+            searchName !== null ?  (
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
+                  <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName + "&searchName="+searchName}> {categoryName} </Link> >
+                   pesquisa:  {searchName} 
+              </p>
+            )
+            : 
+            (
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
+              <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName}> {categoryName} </Link>
+              </p>
+            )
+
+          }
           {searchName != null ? (
             <SubHeading title = {'Pesquisa por "' + searchName + '"'}></SubHeading>
             ) : (

@@ -17,6 +17,7 @@ const Navbar = () => {
 
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+    const [currentTotalPrice, setCurrentTotalPrice] = useState(0)
 
     function setCategories(category, subCategory){
         if(category != null && subCategory == null){
@@ -127,10 +128,13 @@ const Navbar = () => {
     const [cookies] = useCookies(['cart']);
     
     useEffect(() => {
+        let currentPrice = 0
         let total = 0;
         for (const item in cookies.cart) {
             total += cookies.cart[item][0];
+            currentPrice += (cookies.cart[item][0] * cookies.cart[item][1])
         }
+        setCurrentTotalPrice(currentPrice)
         setTotalCartItems(total)
 
     },[cookies.cart])
@@ -185,7 +189,7 @@ const Navbar = () => {
                     </div>
                     <div className='app__navbar_profile_cart' style={{margin: '0 .75rem'}}>
                         <span className="profile_link">Carrinho</span>
-                        <p style={{fontSize: '12px', opacity: '80%'}} className='priceShow'><PriceDisplay className='product_price' price="0" /></p>
+                        <p style={{fontSize: '12px', opacity: '80%'}} className='priceShow'><PriceDisplay className='product_price' price={currentTotalPrice} /></p>
                     </div>
                 </Link>
                 
