@@ -12,10 +12,10 @@ const statement = "CREATE TABLE orderedProducts ( " +
                   "product_buyer_uid varchar(100) NOT NULL, " +
                   "product_location varchar(255) NOT NULL, " +
                   "buyer_location varchar(255) NOT NULL, " +
-                  "orderDistance_km varchar(255) NOT NULL, " +
                   "sameLocation varchar(255) NOT NULL, " +
                   "price float NOT NULL, " +
                   "vehicle varchar(255), " +
+                  "quantity int NOT NULL, " +
                   "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "PRIMARY KEY (id))";
 

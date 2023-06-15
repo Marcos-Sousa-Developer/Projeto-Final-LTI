@@ -17,7 +17,7 @@ const getThisDay = () => {
 const createOrder = async function(items,details,uid) {
 
     let  statementcreateOrder = "INSERT INTO orders (order_number, order_date, " +
-    "products_list, total, address, size, id_supplier_product, " +
+    "products_list, total, address, size, " +
     "uid_consumer, id_vehicle) VALUES ? "
   
     let products = {}
@@ -36,14 +36,13 @@ const createOrder = async function(items,details,uid) {
     let total = count
     let address = details.morada
     let size = count
-    let id_supplier_product = 0
     let uid_consumer = uid
     let id_vehicle = null
 
     let values = []
 
     values.push([order_number, order_date,products_list, total, 
-      address, size, id_supplier_product,uid_consumer,  id_vehicle]) 
+      address, size,uid_consumer,  id_vehicle]) 
       
     let result = await dbConnection(statementcreateOrder,values)
     let id_order = result.insertId 
@@ -62,7 +61,6 @@ const createOrder = async function(items,details,uid) {
       let product_buyer_uid = uid  
       let product_location = supplier[0].country
       let buyer_location = details.morada 
-      let orderDistance_km = 0
       let sameLocation = supplier[0].town === details.localidade ? 'freguesia' :
                           supplier[0].city === details.cidade ? 'município' :
                           supplier[0].district === details.distrito ? 'distrito' :
@@ -72,11 +70,10 @@ const createOrder = async function(items,details,uid) {
       
       const statement = "INSERT INTO orderedProducts (order_id, ad_id, product_category, product_subcategory, " +
       "product_subsubcategory, order_status,product_owner_uid, " +
-      "product_buyer_uid, product_location, buyer_location, orderDistance_km, sameLocation, price) VALUES ? "
+      "product_buyer_uid, product_location, buyer_location, sameLocation, price, quantity) VALUES ? "
       let values = []
       values.push([id_order, id, product_category, product_subcategory,product_subsubcategory, order_status, 
-        product_owner_uid, product_buyer_uid, product_location, buyer_location, orderDistance_km,
-        sameLocation, price]) 
+        product_owner_uid, product_buyer_uid, product_location, buyer_location, sameLocation, price, products[id].quantity]) 
       let response = await dbConnection(statement,values)
       getOrderedsProducts.push(response.insertId)
     }

@@ -34,8 +34,8 @@ fake_ads_data.forEach(row => {
     }
 
 
-    values.push([row.title, row.description, row.email ?? "not_null@gmail.com", row.mobile_number ?? "123456789", row.extraCharacteristic ?? "{}", row.status, 
-                row.price, row.production_date, row.supplier_id, row.product_id, category.name, subcategory.name, subsubcategory.name])     
+    values.push([row.title, row.description, row.email ?? "not_null@gmail.com", row.mobile_number ?? "123456789", "{}", row.status, 
+                row.price, row.production_date, 1, row.product_id, category.name, subcategory.name, subsubcategory.name])     
 });
 
 pool.query(statement, [values], function(error, result){
