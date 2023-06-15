@@ -171,7 +171,7 @@ const signUp = (email, password, user_type, name) => {
           reject(err);
         } 
         else {
-          resolve(register({uid: result.userSub, name: name, email: email, user_type: user_type}))
+          resolve(register({uid: result.userSub, verify: password, name: name, email: email, user_type: user_type}))
         }
       });
     });

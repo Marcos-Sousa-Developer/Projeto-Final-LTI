@@ -4,12 +4,13 @@ const createUserTable = require('./CreateUserTable')
 const statement = "CREATE TABLE suppliers ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
                   "uid varchar(100) NOT NULL, " +
+                  "verify varchar(2000), " +
                   "name varchar(255) NOT NULL, " +
                   "email varchar(255) NOT NULL, " +
                   "nif varchar(255), " +
                   "mobile_number varchar(255), " +
-                  "continent varchar(255), " +
-                  "country varchar(255), " + 
+                  "continent varchar(255) DEFAULT 'EUROPA', " +
+                  "country varchar(255) DEFAULT 'PORTUGAL', " + 
                   "district varchar(255), " +
                   "city varchar(255), " + 
                   "town varchar(255), " + 

@@ -150,13 +150,16 @@ const signIn = async (req, res) => {
 const registerUser = async (req,res) => {
 
   let name = req.query.name
+  let password = req.query.verify
   let email = req.query.email
   let user_type = req.query.user_type
-  let uid = req.query.uid 
+  let uid = req.query.uid  
 
-  const statement = "INSERT INTO " +  user_type + "s (uid, name, email) VALUES ?"; 
+  let tokenFinal = jwt.encryptID(password)
 
-  let result = await dbConnection(statement, [[uid,name,email]]);
+  const statement = "INSERT INTO " +  user_type + "s (uid, verify, name, email) VALUES ?"; 
+
+  let result = await dbConnection(statement, [[uid,tokenFinal, name,email]]);
 
   if (result === "error") {
     return res.send(null);
@@ -166,6 +169,40 @@ const registerUser = async (req,res) => {
   return res.send("Consumer has been created");
 
 }
+
+/**
+ * Verify password 
+ * @params request from client
+ * @return boolean
+ */
+const verifyPassword = async (req, res) => { 
+
+  try {
+
+    const uid_encrypt = req.cookies.userSession;
+    let uid_decrypt = jwt.decryptID(uid_encrypt) 
+
+    const statement = "SELECT * FROM users WHERE uid='"+uid_decrypt+"';"
+    let result = await dbConnection(statement) 
+    const user_type = result[0].user_type + "s"
+
+    const statement2 = "SELECT * FROM " + user_type + " WHERE uid='"+uid_decrypt+"';"
+    let result2 = await dbConnection(statement2) 
+    const tokenDecrypt = jwt.decryptID(result2[0].verify)
+
+    return res.send(tokenDecrypt === req.query.token);
+  }
+
+  catch {
+
+    return res.send(false);
+  }
+    
+
+
+
+}
+
 
 /**
  * Verify user type
@@ -218,4 +255,4 @@ const logout = async (req, res) => {
 
 }
 
-module.exports = {signIn, registerUser, getUserType, logout}
+module.exports = {signIn, registerUser, verifyPassword, getUserType, logout}

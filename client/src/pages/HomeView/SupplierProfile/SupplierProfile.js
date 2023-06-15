@@ -17,6 +17,10 @@ const SnackbarType = {
 };
 
 function SupplierProfile() {
+
+  const [notSubmit, setNotSubmit] = useState(false)
+  const [passwordToVerify, setPasswordToVerify] = useState("")
+
   //pop-ups
   const [isOpen, setIsOpen] = useState(false);  //modal
   const snackbarRef = useRef(null); //SnackBar
@@ -95,23 +99,18 @@ function SupplierProfile() {
 
   const handleSetPostalCode = async (event) => { 
     setPostalCode(event.target.value)
-    console.log(event.target.value)
     await axios.get('https://json.geoapi.pt/cp/'+event.target.value) 
     .then((response) => { 
-      console.log(response)
       setCPError(false)
       let distrito = response.data.Distrito
       let concelho = response.data.Concelho
       let localidade = response.data.Localidade
       let morada = response.data.partes[0]["Artéria"]
-      console.log(morada)
       handleSetCity(concelho)
       handleSetAddress(morada)
       setPostalCode(event.target.value)
     })
     .catch((CPerror) => {
-      console.log(CPerror)
-      console.log("ok")
       setCPError(true)
     })
     
@@ -211,7 +210,7 @@ function SupplierProfile() {
         })
       }    
 
-      if(supplierUpdated == true){
+      if(supplierUpdated === "Supplier has been updated"){
           setSnackbarType(SnackbarType.success);
           snackbarRef.current.show();
       } else{
@@ -247,6 +246,27 @@ function SupplierProfile() {
   
     const passwordMatch = password === confirmPassword;
   //-------------------------------------------------------------------------
+
+  const verifyPassword = async () => { 
+
+    let params = {"token": passwordToVerify}
+
+    const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
+
+    setNotSubmit(false)
+
+    if(result.data) {
+      setNotSubmit(false)
+      submit()
+      setPassword("")
+      setIsOpen(false)
+    }
+    else {
+      setNotSubmit(true)
+      setPassword("")
+    }
+ 
+  }
 
   return (
     <>
@@ -425,17 +445,45 @@ function SupplierProfile() {
             </div>
           </div>
           <div className="app__SupplierProfile_button">
-          <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>             
+          
+          {
+                  CPerror ? (
+                    <button style={{opacity:"0.4"}} className='main__action_btn' disabled>Guardar</button>
+                  )
+                  : 
+                  (
+                    <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
+                  )
+          }           
             <Modal open={isOpen} onClose={() => setIsOpen(false)}>
               <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os seus dados?</p>
+
               <div className='inputField' style={{marginTop:'1.5rem'}}>
                 <p style={{marginTop: '0'}}>Password</p>
-                <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password'></input>
-              </div> 
+                <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password' onChange={(e) => setPasswordToVerify(e.target.value)}></input>
+              </div>
+              {
+                notSubmit === true ? (
+                  <small style={{color: "red"}}>Password Incorreta </small> 
+                )
+                :
+                (
+                  <small style={{color: "red"}}></small> 
+                )
+              }
               <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
                 <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
-                <button className='main__negative_action_btn' onClick={() => { submit(); setIsOpen(false)}}>Guardar</button>
+                {
+                  passwordToVerify === "" ? (
+                    <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
+                  )
+                  :
+                  (
+                    <button className='main__negative_action_btn' onClick={() => { verifyPassword()}}>Guardar</button>
+                  )
+                }
               </div>
+              
             </Modal>
             <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
             <button type='button' className=''><FiTrash2></FiTrash2></button>

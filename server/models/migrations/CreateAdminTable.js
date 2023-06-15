@@ -4,12 +4,13 @@ const createUserTable = require('./CreateUserTable')
 const statement = "CREATE TABLE admins ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +
                   "uid varchar(100) NOT NULL, " +
+                  "verify varchar(2000), " +
                   "name varchar(255) NOT NULL, " +
                   "email varchar(255) NOT NULL, " +
                   "mobile_number varchar(255) NOT NULL, " +
                   "address varchar(255) NOT NULL, " +
-                  "continent varchar(255) NOT NULL, " +
-                  "country varchar(255) NOT NULL, " +
+                  "continent varchar(255) DEFAULT 'Europa', " +
+                  "country varchar(255) DEFAULT 'Portugal', " + 
                   "district varchar(255) NOT NULL, " +
                   "city varchar(255) NOT NULL, " +
                   "town varchar(255) NOT NULL, " +

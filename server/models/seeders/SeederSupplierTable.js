@@ -2,7 +2,7 @@ let pool = require('../config/getLocaldbConfig')
 
 const fake_supplier_data = require('../factories/FAKE_SUPPLIER_DATA.json')
 
-const statement = "INSERT INTO suppliers (uid, name, email, nif, mobile_number, " +
+const statement = "INSERT INTO suppliers (uid, verify, name, email, nif, mobile_number, " +
                 "continent, country, district, city, town, address, postal_code, " +
                 "status, products_list, orders) VALUES ? "
 
@@ -10,7 +10,7 @@ let values = []
 
 fake_supplier_data.forEach(row => {
 
-    values.push([row.uid, row.name, row.email, row.nif, 
+    values.push([row.uid, "U2FsdGVkX1+kYEa98xyqA3WrfTGx00QjRvc/pZtIGyY=", row.name, row.email, row.nif, 
                 row.mobile_number, row.continent,
                 row.country,row.district,
                 row.city, row.town, row.address,

@@ -18,6 +18,10 @@ const SnackbarType = {
 };
 
 function ConsumerProfile() {
+
+  const [notSubmit, setNotSubmit] = useState(false)
+  const [passwordToVerify, setPasswordToVerify] = useState("")
+
   const [isOpen, setIsOpen] = useState(false); //modal
   const snackbarRef = useRef(null); //SnackBar
   const [snackbarType, setSnackbarType] = useState(SnackbarType.success); //SnackBar
@@ -204,7 +208,9 @@ function ConsumerProfile() {
         })
       }    
 
-      if(consumerUpdated == true){
+      console.log(consumerUpdated)
+
+      if(consumerUpdated === "Consumer has been updated"){
           setSnackbarType(SnackbarType.success);
           snackbarRef.current.show();
       } else{
@@ -239,6 +245,27 @@ function ConsumerProfile() {
   };
 
   const passwordMatch = password === confirmPassword;
+
+  const verifyPassword = async () => { 
+
+    let params = {"token": passwordToVerify}
+
+    const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
+
+    setNotSubmit(false)
+
+    if(result.data) {
+      setNotSubmit(false)
+      submit()
+      setPassword("")
+      setIsOpen(false)
+    }
+    else {
+      setNotSubmit(true)
+      setPassword("")
+    }
+ 
+  }
 
   //-------------------------------------------------------------------------
   return (
@@ -431,22 +458,50 @@ function ConsumerProfile() {
           </div>
         </div>
         <div className="app__ConsumerProfile_button">
-          <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
-          <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                    
+          {
+                  CPerror ? (
+                    <button style={{opacity:"0.4"}} className='main__action_btn' disabled>Guardar</button>
+                  )
+                  : 
+                  (
+                    <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
+                  )
+          }  
+            <Modal open={isOpen} onClose={() => setIsOpen(false)}>
               <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os seus dados?</p>
+
               <div className='inputField' style={{marginTop:'1.5rem'}}>
                 <p style={{marginTop: '0'}}>Password</p>
-                <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password'></input>
-              </div> 
+                <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password' onChange={(e) => setPasswordToVerify(e.target.value)}></input>
+              </div>
+              {
+                notSubmit === true ? (
+                  <small style={{color: "red"}}>Password Incorreta </small> 
+                )
+                :
+                (
+                  <small style={{color: "red"}}></small> 
+                )
+              }
               <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
                 <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
-                <button className='main__negative_action_btn' onClick={() => { submit(); setIsOpen(false)}}>Guardar</button>
+                {
+                  passwordToVerify === "" ? (
+                    <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
+                  )
+                  :
+                  (
+                    <button className='main__negative_action_btn' onClick={() => { verifyPassword()}}>Guardar</button>
+                  )
+                }
               </div>
+              
             </Modal>
-          <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
-          <button type='button' className=''><FiTrash2></FiTrash2></button>
+            <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
+            <button type='button' className=''><FiTrash2></FiTrash2></button>
+          </div>
         </div>
-      </div>
       <Footer></Footer>
       </>
       )
