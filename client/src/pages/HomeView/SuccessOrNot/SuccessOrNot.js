@@ -16,7 +16,7 @@ const SuccessOrNot = ({success}) => {
 
   const sendEmail = async (supplierEmail, supplierName, productName) => {
     const params = {
-      supplier_email: "rafael.ribeiro.rr11@gmail.com",
+      supplier_email: "dibutia12@gmail.com",
       supplier_name: supplierName,
       product_name: productName
     }
@@ -38,8 +38,7 @@ const SuccessOrNot = ({success}) => {
       else {
         let ordersCheck = cookies.ordersToCheck.ordersToGet
         if(!success) {
-          await deleteToDB('/orders/'+ordersCheck[0])
-          
+          await deleteToDB('/orders/'+ordersCheck[0])          
           for(let i=0; i < ordersCheck[1].length; i++){
             await deleteToDB('/orderedProducts/'+ordersCheck[1][i])
           }
@@ -48,6 +47,7 @@ const SuccessOrNot = ({success}) => {
         }
        else {
           for(let i=0; i < ordersCheck[1].length; i++){
+            console.log(ordersCheck[1])
             await putToDB('/orderedProducts/'+ordersCheck[1][i],{order_status: "Em preparação"})
             let order = await getAllFromDB('/orderedProducts/' + ordersCheck[1][i])
             let ad = await getAllFromDB('/ads/' + order[0].ad_id)

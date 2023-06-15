@@ -18,7 +18,7 @@ const createOrder = async function(items,details,uid) {
 
     let  statementcreateOrder = "INSERT INTO orders (order_number, order_date, " +
     "products_list, total, address, size, " +
-    "uid_consumer, id_vehicle) VALUES ? "
+    "uid_consumer) VALUES ? "
   
     let products = {}
     let count = 0
@@ -37,12 +37,11 @@ const createOrder = async function(items,details,uid) {
     let address = details.morada
     let size = count
     let uid_consumer = uid
-    let id_vehicle = null
 
     let values = []
 
     values.push([order_number, order_date,products_list, total, 
-      address, size,uid_consumer,  id_vehicle]) 
+      address, size,uid_consumer]) 
       
     let result = await dbConnection(statementcreateOrder,values)
     let id_order = result.insertId 
@@ -52,7 +51,7 @@ const createOrder = async function(items,details,uid) {
     for (const id in products){ 
 
       let ad = await dbConnection("SELECT * FROM ads WHERE id='"+id+"';")
-      let supplier = await dbConnection("SELECT * FROM suppliers WHERE email='"+ad[0].email+"';")
+      let supplier = await dbConnection("SELECT * FROM suppliers WHERE id='"+ad[0].supplier_id+"';")
       let product_category = ad[0].category_name 
       let product_subcategory = ad[0].subcategory_name  
       let product_subsubcategory = ad[0].subsubcategory_name  
@@ -73,7 +72,7 @@ const createOrder = async function(items,details,uid) {
       "product_buyer_uid, product_location, buyer_location, sameLocation, price, quantity) VALUES ? "
       let values = []
       values.push([id_order, id, product_category, product_subcategory,product_subsubcategory, order_status, 
-        product_owner_uid, product_buyer_uid, product_location, buyer_location, sameLocation, price, products[id].quantity]) 
+        product_owner_uid, product_buyer_uid, product_location, buyer_location, sameLocation, price, parseInt(products[id].quantity)]) 
       let response = await dbConnection(statement,values)
       getOrderedsProducts.push(response.insertId)
     }
@@ -95,6 +94,7 @@ const payOrder = async function(req, res) {
 
     let ordersToGet = await createOrder(items,details,value)
 
+    console.log(ordersToGet)
 
     res.cookie("ordersToCheck", {ordersToGet}, {
     })
