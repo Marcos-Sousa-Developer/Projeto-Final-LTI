@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation} from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate} from "react-router-dom";
 import RequireAuth from "./components/RequireAuth"
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 import Gerir_Consumidores from "./pages/Admin/Gerir_Consumidores";
@@ -20,6 +20,8 @@ import { useCookies } from "react-cookie";
 import SubCategory from "./pages/HomeView/SubCategory/SubCategory";
 import SubSubCategory from "./pages/HomeView/SubSubCategory/SubSubCategory";
 import SuccessOrNot from "./pages/HomeView/SuccessOrNot/SuccessOrNot";
+import axios from "axios";
+import Locked from "./pages/HomeView/Locked/Locked";
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
   const [loading, setLoading] = useState(false)
   const location = useLocation(); 
   const [cookies,setCookies] = useCookies()
+  const navigate = useNavigate()
 
   const getUserType = async () => {
 
@@ -43,13 +46,24 @@ function App() {
       setUserType(type)
       setCookies('identification',name,{ path: '/' })
 
+      if(location.pathname !== "/locked") {
+        let isLocked = await axios.get('/checkUserDeactivated', null, {withCredentials:true}) 
+        if(isLocked.data) {
+          navigate("/locked")
+        } 
+      }
+
     }
     
     setLoading(false)
   }
 
   useEffect(() => {
-    getUserType()
+    async function run () { 
+
+      await getUserType()
+    }
+    run()
   },[location, cookies.identification])
 
   return (
@@ -120,6 +134,8 @@ function App() {
               </>
             )
           }
+
+          <Route path="/locked" element={<Locked></Locked>}></Route>
           
 
           {/*---------for not logged in users--------*/}

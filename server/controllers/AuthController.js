@@ -436,7 +436,7 @@ const getUserType = async (req, res) => {
 const checkEmail = async (req, res) => { 
 
   try {
-    const statement = "SELECT * FROM users WHERE uid='"+req.query.email+"';" 
+    const statement = "SELECT * FROM users WHERE email='"+req.query.email+"';" 
     let result = await dbConnection(statement)  
 
     if(result.length > 0) {
@@ -450,6 +450,37 @@ const checkEmail = async (req, res) => {
   }
 
 }
+
+const checkUserDeactivated = async (req, res) => { 
+
+  try {
+
+    const uid_encrypt = req.cookies.userSession;
+
+    let uid_decrypt = jwt.decryptID(uid_encrypt) 
+
+    const statement = "SELECT * FROM users WHERE uid='"+uid_decrypt+"';"
+
+    let result = await dbConnection(statement) 
+
+    const user_type = result[0].user_type + "s"
+
+    const statement2 = "SELECT * FROM " + user_type + " WHERE uid='"+uid_decrypt+"';"
+
+    let result2 = await dbConnection(statement2)  
+
+    if(result2[0].status === 0) {
+      return res.send(true)
+    }
+    return res.send(false)
+  }
+  catch (error) {
+    return res.send(true)
+  }
+
+}
+
+
 
 
 const logout = async (req, res) => { 
@@ -468,4 +499,4 @@ const logout = async (req, res) => {
 
 }
 
-module.exports = {signIn, registerUser, verifyPassword, changePassword, deleteAccount, getUserType, checkEmail, logout}
+module.exports = {signIn, registerUser, verifyPassword, changePassword, deleteAccount, getUserType, checkEmail, checkUserDeactivated, logout}

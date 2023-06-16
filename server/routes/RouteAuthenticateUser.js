@@ -26,4 +26,7 @@ router.get('/userType', authenticate.getUserType)
 //Check email exist
 router.get('/checkEmail', authenticate.checkEmail) 
 
+//Check deactivated 
+router.get('/checkUserDeactivated', authenticate.checkUserDeactivated) 
+
 module.exports = router

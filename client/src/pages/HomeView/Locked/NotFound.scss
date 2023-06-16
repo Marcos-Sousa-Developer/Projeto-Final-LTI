@@ -1,0 +1,63 @@
+@import '../../../index.scss';
+
+.app__notfound{
+    margin: auto;
+    width: 50%;
+
+    .app__notfound_content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem;
+
+        .app__notfound_bottom{
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            & p, button{
+                margin: 1rem;
+            }
+
+            p{
+                font-weight: 600;
+            }
+        }
+    }
+
+    &_img{
+        width: 800px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1350px){
+    .app__notfound{
+        width: 75%;
+
+        &_img{
+            width: 600px;
+            height: auto;
+        }
+    }
+}
+
+@media screen and (max-width: 875px){
+    .app__notfound{
+        width: 100%;
+
+        &_bottom{
+            margin-top: 1rem;
+            font-size: .75rem;
+            flex-direction: column;
+        }
+    }
+}
+
+@media screen and (max-width: 400px){
+    .app__notfound_bottom{
+        font-size: 10px;
+    }
+}
