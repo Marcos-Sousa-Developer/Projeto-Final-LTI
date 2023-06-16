@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
-import {Navbar, NavbarSupplier, Footer} from '../../../components/index';
-import images from '../../../assets/images';
+import {Footer} from '../../../components/index';
 import './NotFound.css';
-import getClientType from "../../../hooks/getClientType";
 import LoadingPage from '../../LoadingPage';
 
 import { useNavigate } from 'react-router-dom';
@@ -38,7 +36,6 @@ const Locked = () => {
       :
       (
       <>
-        <Navbar></Navbar>
         <div className='app__notfound main__container flex'>
           <div className='app__notfound_content'>
             <img className='app__notfound_img' src="https://images.theconversation.com/files/83455/original/image-20150531-15214-5avvg8.png?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip"></img>
