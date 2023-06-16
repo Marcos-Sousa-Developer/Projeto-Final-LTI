@@ -210,6 +210,8 @@ const deactivateConsumerByID = async function (req, res) {
 
     let result = await dbConnection(statement);
 
+    console.log(statement)
+
     if (result === "error") {
         return res.status(500).json("Not possible to deactivate this consumer");
     }

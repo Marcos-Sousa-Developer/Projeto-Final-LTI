@@ -3,8 +3,6 @@ import RequireAuth from "./components/RequireAuth"
 import Admin_Perfil from "./pages/Admin/Admin_Perfil";
 import Gerir_Consumidores from "./pages/Admin/Gerir_Consumidores";
 import Gerir_Fornecedores from "./pages/Admin/Gerir_Fornecedores";
-import Gerir_Adminstradores from "./pages/Admin/Gerir_Adminstradores";
-import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
@@ -77,10 +75,8 @@ function App() {
             (
               <Route path="admin">
                 <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
-                <Route exact path="gerir/adminstradores" element={<RequireAuth><Gerir_Adminstradores /></RequireAuth>} />
                 <Route exact path="gerir/consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
                 <Route exact path="gerir/fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
-                <Route exact path="gerir/produtos" element={<RequireAuth><Gerir_Produtos /></RequireAuth>} />
                 <Route exact path="gerir/anuncio" element={<RequireAuth><Gerir_Anuncio /></RequireAuth>} />
                 <Route exact path="gerir/encomendas" element={<RequireAuth><Gerir_Encomendas /></RequireAuth>} />
                 <Route exact path="gerir/transportes" element={<RequireAuth><Gerir_Transportes /></RequireAuth>} />

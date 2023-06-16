@@ -9,6 +9,9 @@ let datas = null
 
 function FilterSearchOrder() {
 
+    const [consumerUID,setConsumerUID] = useState("")
+    const [supplierUID,setSupplierUID] = useState("")
+
     const [orderNumber,setOrderNumber] = useState("")
     const [totalProducts,setTotalProducts] = useState("")
     const [addressDelivery,setAddressDelivery] = useState("")
@@ -44,22 +47,18 @@ function FilterSearchOrder() {
    */
   const getResponses = async () => {
 
-    console.log(totalProducts)
-
     const params = {
         order_number: orderNumber,
-        total_products: totalProducts,
-        address: addressDelivery,
+        quantity: totalProducts,
+        buyer_location: addressDelivery,
         order_status: orderStatus,
-        total_price: totalPrice,
+        price: totalPrice,
         created_at_init: dateInit.includes("/") ? dateInit.substring(6,10) + '-' + dateInit.substring(3,5) + '-' + dateInit.substring(0,2) : dateInit,
         created_at_final: dateFinal.includes("/") ? dateFinal.substring(6,10) + '-' + dateFinal.substring(3,5) + '-' + dateFinal.substring(0,2) : dateFinal
     }
 
-    console.log(params)
-
     setLoading(true)
-    let resp = await getAllFromDB('/orders',params) 
+    let resp = await getAllFromDB('/orderedProducts',params) 
     try {
       setRow(resp)
       setError(false)
@@ -92,12 +91,16 @@ function FilterSearchOrder() {
       
       resp.map((r) => { 
       table.row.add(
-        [ r.order_number,
-          r.total_products,
-          r.address,
-          r.order_status, 
-          r.order_date,
-          r.total_price
+        [ r.id,
+          r.order_id,
+          r.ad_id,
+          r.product_buyer_uid,
+          r.product_owner_uid,
+          r.buyer_location,
+          r.quantity,
+          r.price,
+          r.created_at,
+          r.order_status,
         ]).draw();    
       })
   }
@@ -183,8 +186,13 @@ function FilterSearchOrder() {
 
           <div className="form-group col-xxl-3 mb-3">
             <label>Estado da Encomenda</label>
-            <input type="text" className="form-control" onChange={(e) => setOrderStatus(e.target.value)}></input>
-            {/* //TODO  Escolher o tipo de estado da encomenda */}
+            <select className="form-select" aria-label="Default select example" onChange={(e) => setOrderStatus(e.target.value)}>
+              <option defaultValue value={""}> Selecionar todos</option>
+              <option value="Cancelado">Cancelado</option>
+              <option value="Em preparação">Em preparação</option>
+              <option value="Enviados">Enviados</option>
+              <option value="Recebidos">Recebidos</option>
+            </select>
           </div>
 
           <div className="form-group col-xxl-1 mb-1">
@@ -203,9 +211,8 @@ function FilterSearchOrder() {
             <label htmlFor="created_at">Periodo final</label>
             <input type="date" className="form-control" id="created_at" onChange={(event) => setDateFinal(event.target.value)}></input>
           </div>
-          
-          <div className="form-group col-xl-3"></div>
 
+          <div className="form-group col-xl-3"></div>
 
           {
             error && (<small className="d-flex justify-content-center" style={{color: "red"}}>Nenhum dado encontrado</small>)
@@ -234,12 +241,16 @@ function FilterSearchOrder() {
           <table id="app_table" className="table table-striped border">
             <thead className="thead-dark">
               <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Encomenda ID</th>
-                <th scope="col">Total de Artigos</th>
+                <th scope="col">Anúncio ID</th>
+                <th scope="col">Consumidor UID</th>
+                <th scope="col">Vendedor UID</th>
                 <th scope="col">Endereço de Entrega</th>
-                <th scope="col">Estado da Encomenda</th>
-                <th scope="col">Data da Encomenda</th>
+                <th scope="col">Total de Artigos</th> 
                 <th scope="col">Preço total da Encomenda</th>
+                <th scope="col">Data da Encomenda</th>
+                <th scope="col">Estado da Encomenda</th>
               </tr>
             </thead>
             <tbody></tbody>

@@ -11,7 +11,7 @@ let datas = null
 function FilterSearchAds() {
 
     const [title,setTitle] = useState("")
-    const [supplierUID,setSupplierUID] = useState("")
+    const [supplierID,setsupplierID] = useState("")
     const [category,setCategory] = useState("")
     const [subcateogry,setSubCategory] = useState("")
     const [subsubcategory,setSubSubCateogry] = useState("")
@@ -52,7 +52,7 @@ function FilterSearchAds() {
 
     const params = {
         title: title,
-        supplier_uid: supplierUID,
+        supplier_id: supplierID,
         category_name: category,
         subcategory_name: subcateogry,
         subsubcategory_name: subsubcategory,
@@ -63,7 +63,7 @@ function FilterSearchAds() {
     }
 
     setLoading(true)
-    let resp = await getAllFromDB('/productsForSell',params) 
+    let resp = await getAllFromDB('/ads', params) 
     try {
       setRow(resp)
       setError(false)
@@ -98,11 +98,11 @@ function FilterSearchAds() {
       table.row.add(
         [ r.id,
           r.title,
-          r.supplier_uid,
+          r.supplier_id,
           r.category_name, 
           r.subcategory_name,
           r.subsubcategory_name,
-          r.price,
+          r.price + "€",
           r.status == 1 ? "Ativado" : "Desativado",
           r.created_at
         ]).draw();    
@@ -179,8 +179,8 @@ function FilterSearchAds() {
           </div>
 
           <div className="form-group col-xxl-4 mb-4">
-            <label>Uid do Fornecedor</label>
-            <input type="text" className="form-control" onChange={(e) => setSupplierUID(e.target.value)}></input>
+            <label>ID do Fornecedor</label>
+            <input type="text" className="form-control" onChange={(e) => setsupplierID(e.target.value)}></input>
           </div>
 
           <div className="form-group col-xxl-4 mb-4">

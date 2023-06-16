@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import activateOrDeactivateUser from "../../../../hooks/activateOrDeactivateUser";
 
 function AppearUserModal({url, element, isShowingModal, element_type }) { 
@@ -11,8 +11,8 @@ function AppearUserModal({url, element, isShowingModal, element_type }) {
     vehicle: "Trasporte"
   })
   
-  const handleelement = () => {
-    const newStateAccount = element.status == 0 ? 1 : 0;
+  const handleElement = () => {
+    const newStateAccount = element.status == 0 ? 1 : 0;  
 
     if (element.status == 0) {
       activateOrDeactivateUser(url + "/activate/" + element.id, newStateAccount);
@@ -20,6 +20,10 @@ function AppearUserModal({url, element, isShowingModal, element_type }) {
       activateOrDeactivateUser(url + "/deactivate/" + element.id, newStateAccount);
     }
   };
+
+  useEffect(() => {
+    console.log(element.status)
+  },[])
 
   return (
     <>
@@ -40,13 +44,8 @@ function AppearUserModal({url, element, isShowingModal, element_type }) {
                   {state[element_type]} { element.uid ?? element.EAN ?? element.licence_plate ?? element.id} está {element.status == 0 ? "desativado." : "ativado."}
                 </div>
               </div>
-            
 
-            <div className="modal-footer text-start" style={{border: "none", justifyContent:"center"}}>
-              <a href="#" className="btn btn-primary">Ver Detalhes</a>
-            </div>
-
-            <button type="button" className="btn btn-warning">
+            <button type="button" className="btn btn-warning" onClick={() => handleElement()}>
               {element.status == 0 ? "Ativar" : "Desativar"}
             </button>
 

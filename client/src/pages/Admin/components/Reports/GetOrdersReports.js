@@ -1,9 +1,6 @@
 import React,{useEffect, useState} from 'react'
-import BarOrderReports_km from '../BarReports/BarOrderReports_km'
 import BarOrderReports_location from '../BarReports/BarOrderReports_location'
 import getAllFromDB from '../../../../hooks/getAllFromDB'
-
-let tableKmData = {}
 
 let tableLocationData = {}
 
@@ -31,15 +28,6 @@ function GetOrdersReports() {
 
             setShowBarResult(false)
 
-            tableKmData = {
-                '0-10 km':0, 
-                '10-50 km':0, 
-                '50-100 km':0, 
-                '100-500 km':0, 
-                '500-1000 km':0, 
-                'more than 1000 km':0
-            }
-
             tableLocationData = {
                 'freguesia':0, 
                 'município':0, 
@@ -61,7 +49,6 @@ function GetOrdersReports() {
             let response = ""
             try {
                 response = await getAllFromDB('/orderedProducts',params) 
-                mapKmData(response)  
                 mapLocationData(response)  
                 setError(false)
                 console.log(response)
@@ -81,37 +68,6 @@ function GetOrdersReports() {
     }
 
     /**
-     * @param datas //response from fetch results
-     * @description set into tableKmData values
-     */
-    function mapKmData(datas) {  
-
-        datas.map((data) => { 
-
-            if(data.orderDistance_km < 10){
-                tableKmData['0-10 km'] +=1
-            }
-            else if(data.orderDistance_km >= 10 && data.orderDistance_km < 50){
-                tableKmData['10-50 km'] +=1
-            }
-            else if(data.orderDistance_km >= 50 && data.orderDistance_km < 100){
-                tableKmData['50-100 km'] +=1
-            }
-            else if(data.orderDistance_km >= 100 && data.orderDistance_km < 500){
-                tableKmData['100-500 km'] +=1  
-            }
-            else if(data.orderDistance_km >= 500 && data.orderDistance_km < 1000){
-                tableKmData['500-1000 km'] +=1       
-            }
-            else if(data.orderDistance_km >= 1000){
-                tableKmData['more than 1000 km'] +=1
-            }
-        })
-
-        console.log(tableKmData)
-    }
-
-        /**
      * @param datas //response from fetch results
      * @description set into tableLocationData values
      */
@@ -151,11 +107,7 @@ function GetOrdersReports() {
             showBarResult ? (
                 <div className='col-xl-12'>
                     <div className='row'>
-                        <div className='col-xl-6'>
-                            <BarOrderReports_km datas={tableKmData ?? {}}></BarOrderReports_km>
-                        </div>
-
-                        <div className='col-xl-6'>
+                        <div className='col-xl-12'>
                             <BarOrderReports_location datas={tableLocationData ?? {}}></BarOrderReports_location>
                         </div>
                     </div>

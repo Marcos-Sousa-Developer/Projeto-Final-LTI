@@ -25,6 +25,13 @@ const getAllorSomeAds = async function (req, res) {
 
         }
 
+        if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+            if(Object.keys(params).length > 0){
+                statement += " AND ";
+            }
+        }
+
         for(let i = 0 ; i < Object.keys(params).length; i++) { 
 
             let key = Object.keys(params)[i];
@@ -44,15 +51,12 @@ const getAllorSomeAds = async function (req, res) {
                 statement += ` LIKE '%`;
                 statement += value; 
                 statement += `%'` ;
-
             }
             else{
-
                 statement += key;
                 statement += `='`;
                 statement += value; 
                 statement += `'` ;
-
             }
 
             if(nextKey != undefined){
@@ -62,6 +66,9 @@ const getAllorSomeAds = async function (req, res) {
     }
 
     let result = await dbConnection(statement)  
+
+    console.log(statement)
+
 
     if (result === "error") {
         return res.status(500).json("Not possible to get all ads");

@@ -62,13 +62,6 @@ function Aside() {
           </button>
 
           <ul id="gerir-users" className={showU} data-bs-parent="#sidebar-nav">
-            
-            <li>
-              <Link reloadDocument  to="/admin/gerir/adminstradores">
-                <i className="bi bi-circle"/>
-                <span>Gerir Administradores</span>
-              </Link>
-            </li>
 
             <li>
               <Link reloadDocument  to="/admin/gerir/consumidores">
@@ -84,15 +77,6 @@ function Aside() {
               </Link> 
             </li>
           </ul>
-        </li>
-
-        <li className="nav-heading">Gestão de Produtos</li>
-
-        <li className="nav-item">
-          <Link reloadDocument  to="/admin/gerir/produtos" className="nav-link collapsed">
-            <i className="bi bi-cart"/>
-            <span>Gerir Produtos</span>
-          </Link>
         </li>
 
         <li className="nav-heading">Gestão de Vendas Anúnciadas</li>
