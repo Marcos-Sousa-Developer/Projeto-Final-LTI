@@ -1,9 +1,6 @@
 import '../../index.css';
 import Home from './Home/Home'
 import Cart from './Cart/Cart';
-import ProductTest from './ProductTest';
-import ConsumerTest from './ConsumerTest';
-import SupplierTest from './SupplierTest';
 import SupplierPage from './SupplierPage/SupplierPage';
 import SupplierProfile from './SupplierProfile/SupplierProfile';
 import ConsumerProfile from './ConsumerProfile/ConsumerProfile';
@@ -27,8 +24,6 @@ import MarketPlace from './MarketPlace/MarketPlace';
 export {
     Home,
     Cart,
-    ConsumerTest,
-    SupplierTest,
     SupplierPage,
     SupplierProfile,
     ConsumerProfile,
@@ -38,7 +33,6 @@ export {
     FAQ,
     CriarAnuncio,
     Anunciar,
-    ProductTest,
     Category,
     ProductPage,
     SupplierAdd,

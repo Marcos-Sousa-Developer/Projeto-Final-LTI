@@ -273,8 +273,6 @@ const changePassword = async (req, res) => {
 
       let result = await dbConnection(statement);
 
-      console.log(result)
-
       if (result === "error") {
         return res.send(false);
       }
@@ -289,7 +287,113 @@ const changePassword = async (req, res) => {
     return res.send(false)
     
   }
+}
 
+const setDelete = async (authenticationData,userData) => {
+
+  // that represents the authentication details of a user who is attempting to authenticate with Amazon Cognito
+  const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+
+  //that represents a user in an Amazon Cognito user pool
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);  
+
+  return new Promise((resolve, reject) => { 
+
+  cognitoUser.authenticateUser(authenticationDetails, {
+
+  onSuccess: function(result) {
+
+    cognitoUser.deleteUser(function(error, result) {
+      if(error) {
+        console.log(error)
+        reject(false)
+      }
+      resolve(true)
+    })
+  },
+
+  onFailure: function(error) {
+    console.log(error)
+    reject(false)
+  }
+
+  })
+
+});
+}
+
+/**
+ * Chnage password 
+ * @params request from client
+ * @return boolean
+ */
+const deleteAccount = async (req, res) => { 
+
+  try {
+
+    const uid_encrypt = req.cookies.userSession;
+    let uid_decrypt = jwt.decryptID(uid_encrypt) 
+
+    const statement = "SELECT * FROM users WHERE uid='"+uid_decrypt+"';"
+    let result = await dbConnection(statement) 
+    const user_type = result[0].user_type + "s"  
+
+    let statement3 = ""
+    let statement4 = "" 
+
+    if(user_type === "suppliers") {
+      statement3 = "SELECT * FROM orderedProducts WHERE product_owner_uid='"+uid_decrypt+"' AND (order_status='A confirmar' OR order_status='Enviado' OR order_status='Em preparação');"
+
+    }
+    else {
+      statement3 = "SELECT * FROM orderedProducts WHERE product_buyer_uid='"+uid_decrypt+"' AND (order_status='A confirmar' OR order_status='Enviado' OR order_status='Em preparação');"
+    }
+
+    let result3 = await dbConnection(statement3) 
+
+    if(result3.length > 0) {
+      return res.send(false)
+    }
+
+    if(user_type === "suppliers") {
+      statement4 = "SELECT * FROM ads WHERE supplier_id='"+result[0].id_user_type+"' AND status=1;"
+      let result4 = await dbConnection(statement4)  
+      if(result4.length > 0) {
+        return res.send(false)
+      }
+    }
+
+    const statement2 = "SELECT * FROM " + user_type + " WHERE uid='"+uid_decrypt+"';"
+    let result2 = await dbConnection(statement2) 
+    const tokenDecrypt = jwt.decryptID(result2[0].verify)
+
+    const authenticationData = {
+      Username: result2[0].email,
+      Password: tokenDecrypt
+    };
+
+    const userData = {
+      Username: result2[0].email,
+      Pool: userPool
+    };
+
+    let boolean = await setDelete(authenticationData,userData) 
+
+    if(boolean) {
+      const deactivate = `UPDATE ` + user_type + ` SET status='0' WHERE uid='${uid_decrypt}'`;
+      await dbConnection(deactivate);
+      res.clearCookie('refreshToken', { httpOnly: true, path: '/' });
+      res.clearCookie('identification', { httpOnly: true, path: '/' });
+      res.clearCookie('idToken', { httpOnly: true, path: '/' });
+      res.clearCookie('userSession', { httpOnly: true, path: '/' });
+      res.clearCookie('accessToken', { httpOnly: true, path: '/' });
+    }
+    return res.send(boolean)
+
+  }
+    catch {
+      return res.send(false)
+    }
 
 }
 
@@ -328,6 +432,26 @@ const getUserType = async (req, res) => {
 
 }
 
+
+const checkEmail = async (req, res) => { 
+
+  try {
+    const statement = "SELECT * FROM users WHERE uid='"+req.query.email+"';" 
+    let result = await dbConnection(statement)  
+
+    if(result.length > 0) {
+      return res.send(false)
+    }
+    return res.send(true)
+
+  }
+  catch (error) {
+    return res.send(false)
+  }
+
+}
+
+
 const logout = async (req, res) => { 
 
   try {
@@ -342,7 +466,6 @@ const logout = async (req, res) => {
     res.status(500);
   }
 
-
 }
 
-module.exports = {signIn, registerUser, verifyPassword, changePassword, getUserType, logout}
+module.exports = {signIn, registerUser, verifyPassword, changePassword, deleteAccount, getUserType, checkEmail, logout}

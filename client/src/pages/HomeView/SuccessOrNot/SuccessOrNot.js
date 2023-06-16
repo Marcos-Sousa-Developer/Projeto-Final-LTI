@@ -16,48 +16,47 @@ const SuccessOrNot = ({success}) => {
 
   const sendEmail = async (supplierEmail, supplierName, productName) => {
     const params = {
-      supplier_email: "dibutia12@gmail.com",
+      supplier_email: supplierEmail,
       supplier_name: supplierName,
       product_name: productName
     }
 
     emailjs.send('service_z2i61vc', 'template_rbywj43', params, process.env.REACT_APP_EMAILJS_KEY)
-      .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
   };
 
   useEffect(() => {
     async function run() {
 
-      if(!cookies.ordersToCheck) {
-        window.location = "/consumer"
-      }
-      else {
-        let ordersCheck = cookies.ordersToCheck.ordersToGet
-        if(!success) {
-          await deleteToDB('/orders/'+ordersCheck[0])          
-          for(let i=0; i < ordersCheck[1].length; i++){
-            await deleteToDB('/orderedProducts/'+ordersCheck[1][i])
-          }
-          removeCookie('ordersToCheck', { path: '/'});
-          
-        }
-       else {
-          for(let i=0; i < ordersCheck[1].length; i++){
-            console.log(ordersCheck[1])
-            await putToDB('/orderedProducts/'+ordersCheck[1][i],{order_status: "Em preparação"})
-            let order = await getAllFromDB('/orderedProducts/' + ordersCheck[1][i])
-            let ad = await getAllFromDB('/ads/' + order[0].ad_id)
-            let supplier = await getAllFromDB('/suppliers/' + ad[0].supplier_id)
+      try {
 
-            await sendEmail(supplier[0].email, supplier[0].name, ad[0].title)
-          }
-          removeCookie('ordersToCheck', { path: '/'});
-          removeCookie('cart', { path: '/'});
+        if(!cookies.ordersToCheck) {
+          window.location = "/consumer"
         }
+        else {
+          let ordersCheck = cookies.ordersToCheck.ordersToGet
+          if(!success) {
+            await deleteToDB('/orders/'+ordersCheck[0])          
+            for(let i=0; i < ordersCheck[1].length; i++){
+              await deleteToDB('/orderedProducts/'+ordersCheck[1][i])
+            }
+            removeCookie('ordersToCheck', { path: '/'});
+            
+          }
+         else {
+            for(let i=0; i < ordersCheck[1].length; i++){
+              await putToDB('/orderedProducts/'+ordersCheck[1][i],{order_status: "Em preparação"})
+              let order = await getAllFromDB('/orderedProducts/' + ordersCheck[1][i])
+              let ad = await getAllFromDB('/ads/' + order[0].ad_id)
+              let supplier = await getAllFromDB('/suppliers/' + ad[0].supplier_id)
+  
+              await sendEmail(supplier[0].email, supplier[0].name, ad[0].title)
+            }
+            removeCookie('ordersToCheck', { path: '/'});
+            removeCookie('cart', { path: '/'});
+          }
+        }
+      }
+      catch {
       }
     }
     run()

@@ -89,22 +89,30 @@ function SupplierPage() {
 
   const getMySells = async () => {
 
-    const response = await getAllFromDB('/orderedProducts',{
-      product_owner_uid: true
-    })
-
-    let supplierAddress = await getSupplierAddress()
-    if(supplierAddress != false){
-      let sells = response.slice(response.length - 5, response.length)
-
-      for (const sell of sells) {
-        const ad = await getAllFromDB('/ads/' + sell.ad_id)
-        sell['title'] = ad[0].title
+    try {
+      const response = await getAllFromDB('/orderedProducts',{
+        product_owner_uid: true
+      })
+  
+      let supplierAddress = await getSupplierAddress()
+      if(supplierAddress != false){
+        let sells = response.slice(response.length - 5, response.length)
+  
+        for (const sell of sells) {
+          const ad = await getAllFromDB('/ads/' + sell.ad_id)
+          sell['title'] = ad[0].title
+        }
+  
+        setFiveSells(sells);
+        createData(response)
       }
 
-      setFiveSells(sells);
-      createData(response)
     }
+    catch {
+      setFiveSells([]);
+      createData([])
+    }
+
   }
 
   useEffect( () => {

@@ -8,7 +8,7 @@ import Gerir_Produtos from "./pages/Admin/Gerir_Produtos";
 import Gerir_Encomendas from "./pages/Admin/Gerir_Encomendas";
 import Gerir_Transportes from "./pages/Admin/Gerir_Transportes";
 import Gerir_Anuncio from "./pages/Admin/Gerir_Anuncio";
-import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductTest, ConsumerTest, SupplierTest, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory, Search, SupplierOrdersHistory, MarketPlace} from './pages/HomeView/index';
+import {Home, Cart, SignIn, SignUp, SupplierPage, SupplierProfile, ConsumerProfile, NotFound, FAQ, CriarAnuncio, Anunciar, Category, ProductPage, SupplierAdd, SupplierProdUnit, CompareProduct, SupplierSell, ConsumerOrdersHistory, Search, SupplierOrdersHistory, MarketPlace} from './pages/HomeView/index';
 import getClientType from "./hooks/getClientType";
 import { useEffect, useState } from "react";
 import Relatorios_Consumidores from "./pages/Admin/Relatorios_Consumidores";
@@ -121,11 +121,6 @@ function App() {
             )
           }
           
-          {/*----- Only for testing ----- */}
-            <Route path="/productTest" element={<ProductTest />} />
-            <Route path="/consumerTest" element={<ConsumerTest />} />
-            <Route path="/supplierTest" element={<SupplierTest />} />
-          {/* ---------------------------- */}
 
           {/*---------for not logged in users--------*/}
           <Route path="/signin" element={<SignIn/>} />

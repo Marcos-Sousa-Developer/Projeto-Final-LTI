@@ -11,6 +11,7 @@ import LoadingPage from '../../LoadingPage';
 import logOut from '../../../hooks/logOut';
 import ConsumerBar from '../../../components/ConsumerBar/ConsumerBar';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SnackbarType = {
   success: "success",
@@ -21,8 +22,12 @@ function ConsumerProfile() {
 
   const [notSubmit, setNotSubmit] = useState(false)
   const [passwordToVerify, setPasswordToVerify] = useState("")
+  const [inProcess, setInProcess] = useState(false)
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+  const navigate = useNavigate()
 
   const [isOpen, setIsOpen] = useState(false); //modal
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);  //modal
   const snackbarRef = useRef(null); //SnackBar
   const [snackbarType, setSnackbarType] = useState(SnackbarType.success); //SnackBar
 
@@ -208,8 +213,6 @@ function ConsumerProfile() {
         })
       }    
 
-      console.log(consumerUpdated)
-
       if(consumerUpdated === "Consumer has been updated"){
           setSnackbarType(SnackbarType.success);
           snackbarRef.current.show();
@@ -247,25 +250,149 @@ function ConsumerProfile() {
   const passwordMatch = password === confirmPassword;
 
   const verifyPassword = async () => { 
+    try {
 
-    let params = {"token": passwordToVerify}
+      setInProcess(true)
 
-    const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
-
-    setNotSubmit(false)
-
-    if(result.data) {
+      let params = {"token": passwordToVerify}
+  
+      const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
+  
       setNotSubmit(false)
-      submit()
-      setPassword("")
-      setIsOpen(false)
+  
+      if(result.data) {
+        setNotSubmit(false)
+        await submit()
+        setIsOpen(false)
+        setInProcess(false)
+      }
+      else {
+        setNotSubmit(true)
+        setInProcess(false)
+      }
+
     }
-    else {
-      setNotSubmit(true)
-      setPassword("")
-    }
- 
+
+  catch {
+    setNotSubmit(true)
+    setInProcess(false)
   }
+  }
+
+  const changePassword = async () => {
+    try{
+
+      let params = {"newToken": password}
+
+      const result = await axios.post('/changePassword', null, {params, withCredentials:true})
+  
+      if(result.data) {
+        setSnackbarType(SnackbarType.success);
+        snackbarRef.current.show();
+      }
+      else {
+        setSnackbarType(SnackbarType.fail);
+        snackbarRef.current.show();
+      }
+
+    }    
+    catch{ 
+      setSnackbarType(SnackbarType.fail);
+      snackbarRef.current.show();
+    }
+  }
+
+  const verifyChangePassword = async () => {
+
+    try {
+
+      setInProcess(true)
+
+      let params = {"token": passwordToVerify}
+      const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
+  
+      setNotSubmit(false)
+  
+      if(result.data) {
+        setNotSubmit(false)
+        await changePassword()
+        setIsChangePasswordOpen(false)
+        setInProcess(false)
+        setConfirmPassword("")
+        setPassword("")
+      }
+      else {
+        setNotSubmit(true)
+        setInProcess(false)
+      }
+
+    }
+
+    catch {
+      setNotSubmit(true)
+      setInProcess(false)
+    }
+
+  }
+
+  const deleteAccount = async () => {
+
+    try{
+
+      let params = {"newToken": passwordToVerify}
+
+      const result = await axios.post('/deleteAccount', null, {params, withCredentials:true})
+  
+      if(result.data) {
+        navigate("/");
+        setSnackbarType(SnackbarType.success);
+        snackbarRef.current.show();
+      }
+      else {
+        setSnackbarType(SnackbarType.fail);
+        snackbarRef.current.show();
+      }
+
+    }    
+    catch{ 
+      setSnackbarType(SnackbarType.fail);
+      snackbarRef.current.show();
+    }
+
+  }
+
+  const verifyDeleteAccount = async () => {
+
+    try {
+
+      setInProcess(true)
+
+      let params = {"token": passwordToVerify}
+      const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
+
+      setNotSubmit(false)
+
+      if(result.data) {
+        setNotSubmit(false)
+        await deleteAccount()
+        setIsDeleteOpen(false)
+        setInProcess(false)
+        setConfirmPassword("")
+        setPassword("")
+      }
+      else {
+        setNotSubmit(true)
+        setInProcess(false)
+      }
+
+    }
+    catch {
+
+    }
+
+  }
+
+
 
   //-------------------------------------------------------------------------
   return (
@@ -431,6 +558,44 @@ function ConsumerProfile() {
                   </ul>
                 )}
               </div>
+              <Modal open={isChangePasswordOpen} onClose={() => setIsChangePasswordOpen(false)}>
+                    <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar a palavra passe?</p>
+
+                    <div className='inputField' style={{marginTop:'1.5rem'}}>
+                      <p style={{marginTop: '0'}}>Password Antiga</p>
+                      <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password' onChange={(e) => setPasswordToVerify(e.target.value)}></input>
+                    </div>
+                    {
+                      notSubmit === true ? (
+                        <small style={{color: "red"}}>Password Incorreta </small> 
+                      )
+                      :
+                      (
+                        <small style={{color: "red"}}></small> 
+                      )
+                    }
+                    <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                      <button className='main__action_btn' onClick={() => setIsChangePasswordOpen(false)}>Cancelar</button>
+                      {
+                        (passwordToVerify === "" || inProcess==true) ? (
+                          <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
+                        )
+                        :
+                        (
+                          <button className='main__negative_action_btn' onClick={() => { verifyChangePassword()}}>Guardar</button>
+                        )
+                      }
+                    </div>
+                </Modal>
+                {
+                  (!isEightCharLong || !hasNumber || !hasLowerCase || !hasUpperCase || !hasSpecialChar || password === "" || !passwordMatch) ? (
+                    <button className='main__action_btn' style={{opacity: "0.4"}} disabled>Alterar Password</button>
+                  )
+                  :
+                  (
+                    <button type="submit" onClick={() => setIsChangePasswordOpen(true)} className='main__action_btn'>Alterar Password</button>
+                  )
+                }
             </div>
             <div className='app__ConsumerProfile_box_div'>
               <div className='app__ConsumerProfile_box_div_row'>
@@ -487,7 +652,7 @@ function ConsumerProfile() {
               <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
                 <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
                 {
-                  passwordToVerify === "" ? (
+                  (passwordToVerify === "" || inProcess==true)  ? (
                     <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
                   )
                   :
@@ -499,7 +664,44 @@ function ConsumerProfile() {
               
             </Modal>
             <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
-            <button type='button' className=''><FiTrash2></FiTrash2></button>
+            <button type='button' onClick={() => setIsDeleteOpen(true)} ><FiTrash2></FiTrash2></button>
+
+            <Modal open={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
+              <p style={{fontSize:'18px'}}>Tem a certeza que deseja apagar a conta?</p>
+              <small>Condições para apagar a conta:</small>
+              <ol>
+                <li style={{color: "red"}}>Sem nenhuma encomenda pendente!</li>
+              </ol>
+
+              <div className='inputField' style={{marginTop:'1.5rem'}}>
+                <p style={{marginTop: '0'}}>Password</p>
+                <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password' onChange={(e) => setPasswordToVerify(e.target.value)}></input> <br></br>
+                <small style={{color: "red"}}>Esta ação não tem retorno!</small>
+              </div>
+              <br></br>
+              {
+                notSubmit === true ? (
+                  <small style={{color: "red"}}>Password Incorreta </small> 
+                )
+                :
+                (
+                  <small style={{color: "red"}}></small> 
+                )
+              }
+              <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                <button className='main__action_btn' onClick={() => setIsDeleteOpen(false)}>Cancelar</button>
+                {
+                  (passwordToVerify === "" || inProcess==true)  ? (
+                    <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Apagar</button>
+                  )
+                  :
+                  (
+                    <button className='main__negative_action_btn' onClick={() => { verifyDeleteAccount()}}>Apagar</button>
+                  )
+                }
+              </div>
+              
+            </Modal>
           </div>
         </div>
       <Footer></Footer>

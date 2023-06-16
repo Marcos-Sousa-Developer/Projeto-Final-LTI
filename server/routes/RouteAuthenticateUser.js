@@ -14,13 +14,16 @@ router.post('/verifyPassword', authenticate.verifyPassword)
 //changePassword
 router.post('/changePassword', authenticate.changePassword) 
 
+//delete Account
+router.post('/deleteAccount', authenticate.deleteAccount) 
 
 // Log Out 
 router.post('/logout', authenticate.logout) 
 
-
-
 //Verify user type
 router.get('/userType', authenticate.getUserType) 
+
+//Check email exist
+router.get('/checkEmail', authenticate.checkEmail) 
 
 module.exports = router

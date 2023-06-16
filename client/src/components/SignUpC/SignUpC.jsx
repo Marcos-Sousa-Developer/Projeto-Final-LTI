@@ -188,7 +188,9 @@ const SignUpC = () => {
                                         </ul>
                                     )}
                                     {
-                                        error && ( <small style={{color:"red"}}>Falha ao registar, tente novo</small>)
+                                        error && ( <small style={{color:"red"}}>Falha ao registar, tente novo! </small> 
+                                        
+                                        )
                                     }
                                     {
                                         loading ? 
@@ -198,10 +200,18 @@ const SignUpC = () => {
                                             </div>       
                                         )
                                         :
+                                        (!hasSpecialChar || !hasUpperCase || !hasLowerCase || !hasNumber || !isEightCharLong) ?
+                                        (
+                                            <div className='app__SignUp_box13'>
+                                                <button className='main__action_btn' type='submit'  style={{opacity: "0.4"}} disabled>Registar</button>
+                                            </div>    
+                                    
+                                        )
+                                        :
                                         (
                                             <div className='app__SignUp_box13'>
                                                 <button className='main__action_btn' type='submit' onClick={handleSubmit}>Registar</button>
-                                            </div>                                        
+                                            </div>    
                                         )
                                     }
                                 </form>

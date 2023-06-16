@@ -150,7 +150,7 @@ const register = async (params) => {
 * @param password 
 * @returns: boolean (is user created)
 * */
-const signUp = (email, password, user_type, name) => { 
+const signUp = async (email, password, user_type, name) => { 
   
     const attributeList = [];
   
@@ -158,13 +158,21 @@ const signUp = (email, password, user_type, name) => {
       Name: 'email',
       Value: email
     };
+
+    const params = {email: email}
+
+    let isValidEmail = await axios.get('/checkEmail', null, {params})   
+
+    if(!isValidEmail.data) {
+      return false
+    }
     
     //AmazonCognitoIdentity.CognitoUserAttribute
     const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
   
     attributeList.push(attributeEmail);
     
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       //register a new user in an Amazon Cognito user pool.
       userPool.signUp(email, password, attributeList, null, (err, result) => {
         if (err) {
