@@ -55,15 +55,16 @@ const ProductPage = () => {
   const [subsubCategoryName, setSubSubCategoryName] = useState("")
 
   async function getAndSetProduct(idAd){
-
     let ad = await getAllFromDB("/ads", {id: idAd})
     setIdProduct(ad[0].product_id)
     setCategoryName(ad[0].category_name)
     setSubCategoryName(ad[0].subcategory_name)
     setSubSubCategoryName(ad[0].subsubcategory_name)
     let car = []
+
     try {
       car = JSON.parse(ad[0].extraCharacteristic) 
+
     } catch (error) {
  
     }
@@ -78,7 +79,7 @@ const ProductPage = () => {
         product5,
       ],
       description: ad[0].description,
-      caracteristics:  car,
+      caracteristics: car,
       price: ad[0].price,
     });
     let ads = await getAllFromDB("/ads", {product_id: ad[0].product_id})
@@ -214,12 +215,19 @@ const ProductPage = () => {
                     {Object.keys(adData.caracteristics).map((key) => {
                       return key !== "0" && <th key={key}>{key}</th>;
                     })}
+                    {Object.keys(adData.caracteristics[0]).map((key) => {
+                      return key !== "0" && <th key={key}>{key}</th>;
+                    })}
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                     {Object.keys(adData.caracteristics).map((key) => {
                       const value = adData.caracteristics[key];
+                        return key !== "0" && <td data-label={key} data-cell={key + ": "}> {value}</td>;
+                      })}
+                      {Object.keys(adData.caracteristics[0]).map((key) => {
+                      const value = adData.caracteristics[0][key];
                         return key !== "0" && <td data-label={key} data-cell={key + ": "}> {value}</td>;
                       })}
                     </tr>
