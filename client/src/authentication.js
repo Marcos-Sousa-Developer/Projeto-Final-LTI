@@ -198,7 +198,7 @@ const verifyEmail = async (email, code) => {
         reject(false);
       } else {
         localStorage.clear();
-        resolve(true);
+        resolve(true)
       }
     });
   });

@@ -201,7 +201,7 @@ const verifyPassword = async (req, res) => {
 }
 
 
-const test = async (authenticationData,userData,oldPassword,newPassword) => {
+const setChange = async (authenticationData,userData,oldPassword,newPassword) => {
 
     // that represents the authentication details of a user who is attempting to authenticate with Amazon Cognito
     const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
@@ -241,6 +241,8 @@ const test = async (authenticationData,userData,oldPassword,newPassword) => {
  */
 const changePassword = async (req, res) => { 
 
+  try {
+
     const uid_encrypt = req.cookies.userSession;
     let uid_decrypt = jwt.decryptID(uid_encrypt) 
 
@@ -262,10 +264,33 @@ const changePassword = async (req, res) => {
       Pool: userPool
     };
 
-    res.send( await test(authenticationData,userData, tokenDecrypt, req.query.newToken))
+    let boolean = await setChange(authenticationData,userData, tokenDecrypt, req.query.newToken) 
 
-  
+    if(boolean) {
+
+      const statement = "UPDATE " +  user_type + " SET verify=" + "'" + jwt.encryptID(req.query.newToken) + "' "
+                        +  "WHERE uid=" + "'" + uid_decrypt + "'"
+
+      let result = await dbConnection(statement);
+
+      console.log(result)
+
+      if (result === "error") {
+        return res.send(false);
+      }
+    }
+
+    return res.send(boolean)
+
+  }
+
+  catch {
+
+    return res.send(false)
     
+  }
+
+
 }
 
 

@@ -82,12 +82,9 @@ const SignInC = ({checkout=null}) => {
 
         let isActive = await auth.verifyEmail(email,code);
 
-        if(isActive) {
-            location.reload()
-        }
-        else(
+        if(!isActive) {
             setNotValidade(true)
-        )
+        }
         
     } 
 
@@ -157,7 +154,7 @@ const SignInC = ({checkout=null}) => {
                                 notValidate && ( 
                                     
                                     <>
-                                    <small style={{color:"red"}}> Tens de confirmar o teu email</small>
+                                    <small style={{color:"red"}}> Com o código que recebeste por email, verifica o teu email!</small>
                                     <div className='app__SignIn_box11'>
                                         <input type="text" placeholder='verificar code' onChange={(e) => setCode(e.target.value)}></input>
                                     </div>
@@ -166,7 +163,7 @@ const SignInC = ({checkout=null}) => {
                                     )
                             }
                             {
-                                loading ? 
+                                loading || notValidate? 
                                 (
                                     <button className='main__action_btn'>Loading</button>
                                 )

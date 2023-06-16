@@ -250,33 +250,41 @@ function SupplierProfile() {
   //-------------------------------------------------------------------------
 
   const verifyPassword = async () => { 
-    setInProcess(true)
+    try {
 
-    let params = {"token": passwordToVerify}
+      setInProcess(true)
 
-    const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
-
-    setNotSubmit(false)
-
-    if(result.data) {
+      let params = {"token": passwordToVerify}
+  
+      const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
+  
       setNotSubmit(false)
-      await submit()
-      setPassword("")
-      setIsOpen(false)
-      setInProcess(false)
+  
+      if(result.data) {
+        setNotSubmit(false)
+        await submit()
+        setIsOpen(false)
+        setInProcess(false)
+      }
+      else {
+        setNotSubmit(true)
+        setInProcess(false)
+      }
+
     }
-    else {
-      setNotSubmit(true)
-      setPassword("")
-      setInProcess(false)
-    }
+
+  catch {
+    setNotSubmit(true)
+    setInProcess(false)
+  }
+
  
   }
 
   const changePassword = async () => {
     try{
 
-      let params = {"newToken": passwordToVerify}
+      let params = {"newToken": password}
 
       const result = await axios.post('/changePassword', null, {params, withCredentials:true})
   
@@ -289,31 +297,44 @@ function SupplierProfile() {
         snackbarRef.current.show();
       }
 
-    }
+    }    
     catch{ 
+      setSnackbarType(SnackbarType.fail);
+      snackbarRef.current.show();
     }
   }
 
   const verifyChangePassword = async () => {
-    setInProcess(true)
 
-    let params = {"token": passwordToVerify}
-    const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
+    try {
 
-    setNotSubmit(false)
+      setInProcess(true)
 
-    if(result.data) {
+      let params = {"token": passwordToVerify}
+      const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
+  
       setNotSubmit(false)
-      await changePassword()
-      setPassword("")
-      setIsChangePasswordOpen(false)
-      setInProcess(false)
+  
+      if(result.data) {
+        setNotSubmit(false)
+        await changePassword()
+        setIsChangePasswordOpen(false)
+        setInProcess(false)
+        setConfirmPassword("")
+        setPassword("")
+      }
+      else {
+        setNotSubmit(true)
+        setInProcess(false)
+      }
+
     }
-    else {
+
+    catch {
       setNotSubmit(true)
-      setPassword("")
       setInProcess(false)
     }
+
   }
 
 
@@ -486,7 +507,7 @@ function SupplierProfile() {
                       )
                     }
                     <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
-                      <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
+                      <button className='main__action_btn' onClick={() => setIsChangePasswordOpen(false)}>Cancelar</button>
                       {
                         (passwordToVerify === "" || inProcess==true) ? (
                           <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
@@ -498,7 +519,15 @@ function SupplierProfile() {
                       }
                     </div>
                 </Modal>
-                <button type="submit" onClick={() => setIsChangePasswordOpen(true)} className='main__action_btn'>Alterar Palavra passe</button>
+                {
+                  (!isEightCharLong || !hasNumber || !hasLowerCase || !hasUpperCase || !hasSpecialChar || password === "" || !passwordMatch) ? (
+                    <button className='main__action_btn' style={{opacity: "0.4"}} disabled>Alterar Password</button>
+                  )
+                  :
+                  (
+                    <button type="submit" onClick={() => setIsChangePasswordOpen(true)} className='main__action_btn'>Alterar Password</button>
+                  )
+                }
 
               </div>
               <div className='app__SupplierProfile_box_div'>

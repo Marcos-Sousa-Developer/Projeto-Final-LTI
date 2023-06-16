@@ -148,7 +148,16 @@ const ConsumerOrdersHistory = () => {
                 </>
               )}
             </div>
-            <button className='active main__action_btn' style={{marginTop: '1rem'}} onClick={() => exportJson()}>Exportar dados</button>
+            {
+              ordersHistory === [] ? 
+              (
+                ""
+              )
+              : 
+              (
+                <button className='active main__action_btn' style={{marginTop: '1rem'}} onClick={() => exportJson()}>Exportar dados</button>
+              )
+            }
           </div>
           <Footer></Footer>
         </>

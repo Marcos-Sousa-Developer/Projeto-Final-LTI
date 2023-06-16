@@ -41,9 +41,15 @@ const SupplierProdUnit = () => {
         if(typeof prodsUnitGet != "string") {
             setProductionUnits(prevState => [...prodsUnitGet])
         }
-        prodsUnitGet.map((productionUnit, index) => (
-            getProduct(productionUnit.id, index)
-        ))
+        try {
+            prodsUnitGet.map((productionUnit, index) => (
+                getProduct(productionUnit.id, index)
+            ))
+        }
+        catch {
+            prodsUnitGet = []
+        }
+
     }
 
     async function getProduct(productionUnit_id, index){

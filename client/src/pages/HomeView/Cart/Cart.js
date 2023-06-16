@@ -101,13 +101,13 @@ const Cart = () => {
 
   const consumerData = async () => {
     let data = await getAllFromDB('/consumers',{uid:true})
-    setEmail(data[0].email)
-    setNif(data[0].nif)
-    setMorada(data[0].address)
-    setPostalCode(data[0].postal_code)
-    setCidade(data[0].city)
-    setDistrito(data[0].district)
-    setLocalidade(data[0].town)
+    setEmail(data[0].email ?? "")
+    setNif(data[0].nif ?? "")
+    setMorada(data[0].address ?? "")
+    setPostalCode(data[0].postal_code ?? "")
+    setCidade(data[0].city ?? "")
+    setDistrito(data[0].district ?? "")
+    setLocalidade(data[0].town ?? "")
   }
   
   useEffect(() => {
@@ -185,6 +185,7 @@ const Cart = () => {
                                 placeholder="Email"
                                 name="email"
                                 value={email}
+                                onChange={(e)=> setEmail(e.target.value)}
                             />
                           </div>
                           <div className='inputField'>
@@ -194,6 +195,8 @@ const Cart = () => {
                                 placeholder="NIF"
                                 name="NIF"
                                 value={nif}
+                                onChange={(e)=> setNif(e.target.value)}
+
                             />
                           </div>
                           <div className='inputField'>
@@ -203,6 +206,8 @@ const Cart = () => {
                                 placeholder="Morada"
                                 name="morada"
                                 value={morada}
+                                onChange={(e)=> setMorada(e.target.value)}
+
                             />
                           </div> 
                           <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
@@ -213,6 +218,8 @@ const Cart = () => {
                                   placeholder="Cidade"
                                   name="cidade"
                                   value={cidade}
+                                  onChange={(e)=> setCidade(e.target.value)}
+
                               />
                             </div> 
                             <div className='inputField'>
@@ -232,7 +239,7 @@ const Cart = () => {
                           {
                             postalCode === "" || morada === "" || cidade === "" || email === "" ? 
                             <>
-                              <button className='main__negative_action_btn'>Pagamento</button>
+                              <button className='main__negative_action_btn' style={{opacity: "0.4"}} disabled>Pagamento</button>
                               <small style={{color:'red'}}>Insira os dados para encomenda</small>
                             </>
                             :

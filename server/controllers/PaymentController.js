@@ -94,8 +94,6 @@ const payOrder = async function(req, res) {
 
     let ordersToGet = await createOrder(items,details,value)
 
-    console.log(ordersToGet)
-
     res.cookie("ordersToCheck", {ordersToGet}, {
     })
 
