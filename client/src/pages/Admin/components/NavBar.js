@@ -14,11 +14,11 @@ function NavBar() {
             <li className="nav-item dropdown pe-3">
 
                 {/* Profile Image Icon */}
-                <a className="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown" id="dropdownMenuLink">
-                    <span className="d-none d-md-block ps-2">{cookies.identification}</span>
+                <a className="nav-link nav-profile d-flex align-items-center justify-content-center" data-bs-toggle="dropdown" id="dropdownMenuLink">
+                    <span className="d-none d-md-block ps-2">Olá {cookies.identification}</span>
                 </a>
                 <a className="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown" id="dropdownMenuLink">
-                <button onClick={async () => await logOut()}>Sign Out</button>
+                <button className="btn btn-primary" style={{fontSize: "12px"}} onClick={async () => await logOut()}>Encerrar Sessão</button>
                 </a>
                 {/* End Profile Imge Icon */}
     

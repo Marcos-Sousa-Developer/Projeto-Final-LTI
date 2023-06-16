@@ -19,8 +19,6 @@ const CompareProduct = () => {
     }
   }, []);
 
-  console.log(produtos);
-
   const removeProduct = (productId) => {
     const updatedProducts = produtos.filter(product => product.id !== productId);
     setProdutos(updatedProducts);
@@ -33,7 +31,6 @@ const CompareProduct = () => {
         <SubHeading title='Comparador'></SubHeading>
         <div className='app__compare-product_content'>
           {produtos.map(product => {
-            console.log(product);
             return (
               <table key={product.id}>
                 <tbody>

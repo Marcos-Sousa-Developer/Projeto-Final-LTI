@@ -186,7 +186,7 @@ function FilterSearchAds() {
           <div className="form-group col-xxl-4 mb-4">
             <label>Estado</label>
             <select className="form-select" aria-label="Default select example" onChange={(e) => setStatus(e.target.value)}>
-              <option defaultValue value="none"> Selecionar todos</option>
+              <option defaultValue value=""> Selecionar todos</option>
               <option value="1">Apenas ativados</option>
               <option value="0">Apenas desativados</option>
             </select>
@@ -274,7 +274,7 @@ function FilterSearchAds() {
       {
         (show) && 
         (
-        <AppearUserModal url={'/products'} element={elementToShow} isShowingModal={isShowingModal} element_type={"product"}></AppearUserModal>
+        <AppearUserModal url={'/ads'} element={elementToShow} isShowingModal={isShowingModal} element_type={"ad"}></AppearUserModal>
         )
       }
       

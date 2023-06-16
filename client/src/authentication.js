@@ -109,7 +109,6 @@ const signIn = async (email, password) => {
     if(error.name === "UserNotConfirmedException") {
       return null
     }
-    console.log(error)
     return false
   }
   

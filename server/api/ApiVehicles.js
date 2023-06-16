@@ -6,15 +6,15 @@ const vehicleController = require('../controllers/VehicleController');
 router.get('/', vehicleController.getAllorSomeVehicles)
 
 //Get vehicle by license_plate
-router.get('/:license_plate', vehicleController.getVehicleByID)
+router.get('/:id', vehicleController.getVehicleByID)
 
 //Delete vehicle by license_plate
-router.delete('/:license_plate', vehicleController.deleteVehicleByLicensePlate)
+router.delete('/:id', vehicleController.deleteVehicleByID)
 
 //Add vehicle
 router.post('/', vehicleController.insertVehicle)
 
 //Update vehicle by license_plate
-router.put('/:license_plate', vehicleController.updateVehicleByLicensePlate) 
+router.put('/:id', vehicleController.updateVehicleByID) 
 
 module.exports = router

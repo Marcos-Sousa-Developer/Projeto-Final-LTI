@@ -17,4 +17,7 @@ router.post('/', adsController.insertAd)
 //Update ad by id
 router.put('/:id', adsController.updateAdByID) 
 
+//Deactivate consumer by id 
+router.put('/deactivate/:id', adsController.deactivateAdByID)
+
 module.exports = router

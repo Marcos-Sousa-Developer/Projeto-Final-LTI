@@ -88,7 +88,6 @@ const handlerSignIn = (authenticationData, userData,res) => {
 
       //if user fail to authenticate
       onFailure: (err) => {
-        console.log(err)
         reject(false);
       },
 
@@ -101,7 +100,6 @@ const handlerSignIn = (authenticationData, userData,res) => {
             resolve(true);
           },
           onFailure: (err) => {
-            console.log(err)
             reject(false);
           },
         });
@@ -217,7 +215,6 @@ const setChange = async (authenticationData,userData,oldPassword,newPassword) =>
 
       cognitoUser.changePassword(oldPassword, newPassword, function(error, result) {
         if(error) {
-          console.log(error)
           reject(false)
         }
         resolve(true)
@@ -225,7 +222,6 @@ const setChange = async (authenticationData,userData,oldPassword,newPassword) =>
     },
 
     onFailure: function(error) {
-      console.log(error)
       reject(false)
     }
 
@@ -305,7 +301,6 @@ const setDelete = async (authenticationData,userData) => {
 
     cognitoUser.deleteUser(function(error, result) {
       if(error) {
-        console.log(error)
         reject(false)
       }
       resolve(true)
@@ -313,7 +308,6 @@ const setDelete = async (authenticationData,userData) => {
   },
 
   onFailure: function(error) {
-    console.log(error)
     reject(false)
   }
 

@@ -44,7 +44,7 @@ const ProductPage = () => {
       product5,
     ],
     description: "",
-    caracteristics: [],
+    caracteristics: {Info: "Sem informação disponivel"},
     price: "",
   });
 
@@ -55,12 +55,13 @@ const ProductPage = () => {
   const [subsubCategoryName, setSubSubCategoryName] = useState("")
 
   async function getAndSetProduct(idAd){
+
     let ad = await getAllFromDB("/ads", {id: idAd})
     setIdProduct(ad[0].product_id)
     setCategoryName(ad[0].category_name)
     setSubCategoryName(ad[0].subcategory_name)
     setSubSubCategoryName(ad[0].subsubcategory_name)
-    let car = []
+    let car = {Info: "Sem informação disponivel"}
 
     try {
       car = JSON.parse(ad[0].extraCharacteristic) 
@@ -97,29 +98,37 @@ const ProductPage = () => {
 
   const setMap = async (Cpostal_code, Spostal_code) => { 
 
-        await axios.get('https://json.geoapi.pt/cp/'+Cpostal_code) 
-        .then((response) => { 
-          let latitude = response.data.centro[0]
-          let longitude = response.data.centro[1]
-          setMyLatitude(latitude)
-          setMyLongitude(longitude)
-        })
-        .catch((error) => {
-          setMyLatitude(39.557191)
-          setMyLongitude(-7.8536599)
-        })
+    try {
 
-      await axios.get('https://json.geoapi.pt/cp/'+Spostal_code) 
+      await axios.get('https://json.geoapi.pt/cp/'+Cpostal_code) 
       .then((response) => { 
         let latitude = response.data.centro[0]
         let longitude = response.data.centro[1]
-        setSupplierLatitude(latitude)
-        setSupplierLongitude(longitude)
+        setMyLatitude(latitude)
+        setMyLongitude(longitude)
       })
       .catch((error) => {
-        setSupplierLatitude(39.557191)
-        setSupplierLongitude(-7.8536599)
+        setMyLatitude(39.557191)
+        setMyLongitude(-7.8536599)
       })
+
+    await axios.get('https://json.geoapi.pt/cp/'+Spostal_code) 
+    .then((response) => { 
+      let latitude = response.data.centro[0]
+      let longitude = response.data.centro[1]
+      setSupplierLatitude(latitude)
+      setSupplierLongitude(longitude)
+    })
+    .catch((error) => {
+      setSupplierLatitude(39.557191)
+      setSupplierLongitude(-7.8536599)
+    })
+
+    }
+    catch {
+
+    }
+
     
   }
   
@@ -131,6 +140,7 @@ const ProductPage = () => {
   };
 
   useEffect(()=>{ 
+
     setDidMount(false) 
     async function run() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -210,28 +220,50 @@ const ProductPage = () => {
               <div className='app__product_page_content_info_characteristics'>
                 <p className='app__product_page_content_characteristics_title'>Informações Técnicas</p>
                 <table>
+                  
                   <thead>
-                    <tr>
-                    {Object.keys(adData.caracteristics).map((key) => {
-                      return key !== "0" && <th key={key}>{key}</th>;
-                    })}
-                    {Object.keys(adData.caracteristics[0]).map((key) => {
-                      return key !== "0" && <th key={key}>{key}</th>;
-                    })}
-                    </tr>
+                    {
+                      Object.keys(adData.caracteristics).length > 0 ? 
+                      (
+                        <tr>
+                          {Object.keys(adData.caracteristics).map((key) => {
+                            return key !== "0" && <th key={key}>{key}</th>;
+                          })}
+                          {Object.keys(adData.caracteristics).map((key) => {
+                            return key !== "0" && <th key={key}>{key}</th>;
+                          })}
+                        </tr>
+                      )
+                      :
+                      (
+                        <tr></tr>
+                      )
+                    }
                   </thead>
+
                   <tbody>
-                    <tr>
-                    {Object.keys(adData.caracteristics).map((key) => {
-                      const value = adData.caracteristics[key];
-                        return key !== "0" && <td data-label={key} data-cell={key + ": "}> {value}</td>;
-                      })}
-                      {Object.keys(adData.caracteristics[0]).map((key) => {
-                      const value = adData.caracteristics[0][key];
-                        return key !== "0" && <td data-label={key} data-cell={key + ": "}> {value}</td>;
-                      })}
-                    </tr>
+                  {
+                      Object.keys(adData.caracteristics).length > 0 ? 
+                      (
+                        <tr>
+                        {Object.keys(adData.caracteristics).map((key) => {
+                          const value = adData.caracteristics[key];
+                            return key !== "0" && <td data-label={key} data-cell={key + ": "}> {value}</td>;
+                          })}
+                          {Object.keys(adData.caracteristics[0]).map((key) => {
+                          const value = adData.caracteristics[0][key];
+                            return key !== "0" && <td data-label={key} data-cell={key + ": "}> {value}</td>;
+                          })}
+                        </tr>
+                      )
+                      :
+                      (
+                        <tr></tr>
+                      )
+                    }
+
                   </tbody>
+
                 </table>
               </div>
              

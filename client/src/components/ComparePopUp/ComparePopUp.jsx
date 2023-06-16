@@ -20,9 +20,7 @@ const ComparePopUp = ({ selectedProducts, onCloseComparePopUp, removeFromSelecte
       navigate('/comparador', { state: { selectedProducts } });
     }
 
-    console.log(selectedProducts);
     /*useEffect(() => {
-      console.log(comparePage);
     }, [comparePage])
     */
     return ReactDOM.createPortal(

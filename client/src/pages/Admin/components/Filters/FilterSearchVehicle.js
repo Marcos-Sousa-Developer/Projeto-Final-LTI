@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import getAllFromDB from '../../../../hooks/getAllFromDB';
+import postToDB from '../../../../hooks/postToDB';
 import AppearUserModal from '../Modals/AppearUserModal'
 import LoadingModal from '../Modals/LoadingModal';
-import { FiTrash2 } from 'react-icons/fi';
 
 const $ = require('jquery')
 $.DataTable = require('datatables.net')
@@ -13,6 +13,10 @@ function FilterSearchVehicle() {
 
   //show or not show modal
   const [show, setShow] = useState(false) 
+
+  const [error, setError] = useState(false) 
+
+  const [name, setName] = useState(false) 
 
   //Loading content
   const [isloading, setLoading] = useState(false) 
@@ -118,6 +122,20 @@ function FilterSearchVehicle() {
  
   },[])
 
+  const addNewVehicle = async () => {
+    setLoading(true)
+    setError(false)
+    let params = {name: name}
+    try {
+      let resp = await postToDB('/vehicles', params)   
+      location.reload()
+    }
+    catch {
+      setError(true)
+    }
+    setLoading(false)
+  }
+
   return (
     <>
       <h6>Transportes disponiveis</h6>
@@ -133,9 +151,34 @@ function FilterSearchVehicle() {
             <input type="text" className="form-control" onChange={(e) => setName(e.target.value)}></input>
           </div>
           <div className="form-group col-xxl-12">
-            <button type="submit" className="btn btn-primary mb-2">
+            {
+              isloading ?
+              (
+                <LoadingModal></LoadingModal>
+              )
+              :
+              name == "" ? 
+              (
+                <button type="submit" className="btn btn-primary mb-2" style={{opacity:"0.4"}} disabled>
                   Adicionar Veiculo
-            </button>
+                </button>
+              )
+              :
+              (
+                <button type="submit" className="btn btn-primary mb-2" onClick={() => addNewVehicle()}>
+                  Adicionar Veiculo
+                </button>
+              )
+            }
+            
+            {
+              error ? 
+              (
+                <small style={{color:"red"}}>Não foi possivel inserir novo veiculo</small>
+              )
+              :
+              ""
+            }
           </div>
           
         </div>

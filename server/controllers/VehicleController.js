@@ -72,38 +72,38 @@ const getAllorSomeVehicles = async function (req, res) {
  */
 const getVehicleByID = async function (req, res) { 
 
-    const statement = "SELECT * FROM vehicles WHERE license_plate = " + req.params.license_plate
+    const statement = "SELECT * FROM vehicles WHERE id = " + req.params.id
 
     let result = await dbConnection(statement)  
 
     if (result === "error") {
-        return res.status(500).json("Not possible to get vehicle with license plate " + req.params.license_plate);
+        return res.status(500).json("Not possible to get vehicle with id " + req.params.id);
     } else if (result.length < 1) {
-        return res.send("Vehicle with license plate " + req.params.license_plate + " does not exist in the database");
+        return res.send("Vehicle with id " + req.params.id + " does not exist in the database");
     }
     
     return res.send(result)
 }
 
 /**
- * Async function to delete vehicle by license_plate and await from database response
+ * Async function to delete vehicle by id and await from database response
  * @param {*} req //request from client
  * @param {*} res //response from server
  * @returns result data
  */
-const deleteVehicleByLicensePlate = async function (req, res) {
+const deleteVehicleByID = async function (req, res) {
 
-    const statement = "DELETE FROM vehicles WHERE license_plate = " + req.params.license_plate
+    const statement = "DELETE FROM vehicles WHERE id = " + req.params.id
 
     let result = await dbConnection(statement)
 
     if (result === "error") {
-        return res.status(500).json("Not possible to delete the vehicle with license plate " + req.params.license_plate);
+        return res.status(500).json("Not possible to delete the vehicle with license plate " + req.params.id);
     } else if (result.affectedRows == 0) {
-        return res.send("Vehicle with license plate " + req.params.license_plate + " does not exist in the database");
+        return res.send("Vehicle with license plate " + req.params.id + " does not exist in the database");
     }
 
-    return res.send("Vehicle with license plate " + req.params.license_plate + " has been deleted");
+    return res.send("Vehicle with license plate " + req.params.id + " has been deleted");
 }
 
 /**
@@ -114,13 +114,9 @@ const deleteVehicleByLicensePlate = async function (req, res) {
  */
 const insertVehicle = async function (req, res) {
 
-    const data = [req.query.license_plate, req.query.name, req.query.production_unit, 
-                req.query.status, req.query.capacity, req.query.orders_list,
-                req.query.id_production_unit, req.query.created_at];
+    const data = [req.query.name];
 
-    const statement = "INSERT INTO vehicles (license_plate, name, production_unit, " +
-                    "status, capacity, orders_list, id_production_unit, created_at) " +
-                    "VALUES ?";
+    const statement = "INSERT INTO vehicles (name) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
@@ -137,7 +133,7 @@ const insertVehicle = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const updateVehicleByLicensePlate = async function (req, res) { 
+const updateVehicleByID = async function (req, res) { 
 
     let statement = `UPDATE vehicles SET `;
 
@@ -160,17 +156,17 @@ const updateVehicleByLicensePlate = async function (req, res) {
         }
     }
 
-    statement += ` WHERE license_plate='${parseInt(req.params.license_plate)}';`;
+    statement += ` WHERE id='${parseInt(req.params.id)}';`;
 
     let result = await dbConnection(statement);
 
     if (result === "error") {
         return res.status(500).json("Not possible to update this vehicle");
     } else if (result.affectedRows == 0) {
-        return res.send("Vehicle with license plate " + req.params.license_plate + " does not exist in the database");
+        return res.send("Vehicle with license plate " + req.params.id + " does not exist in the database");
     }
 
     return res.send("Vehicle has been updated");
 }
 
-module.exports = {getAllorSomeVehicles, getVehicleByID, deleteVehicleByLicensePlate, insertVehicle, updateVehicleByLicensePlate}
+module.exports = {getAllorSomeVehicles, getVehicleByID, deleteVehicleByID, insertVehicle, updateVehicleByID}

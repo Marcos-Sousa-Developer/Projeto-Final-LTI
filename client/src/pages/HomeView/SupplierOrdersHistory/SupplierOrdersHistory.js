@@ -65,9 +65,7 @@ const SupplierOrdersHistory = () => {
 
     emailjs.send('service_z2i61vc', 'template_j3rgk2d', params, process.env.REACT_APP_EMAILJS_KEY)
       .then((result) => {
-          console.log(result.text);
       }, (error) => {
-          console.log(error.text);
       });
       setTimeout(function() {
         location.reload();

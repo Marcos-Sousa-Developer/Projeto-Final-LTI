@@ -9,9 +9,6 @@ let datas = null
 
 function FilterSearchOrder() {
 
-    const [consumerUID,setConsumerUID] = useState("")
-    const [supplierUID,setSupplierUID] = useState("")
-
     const [orderNumber,setOrderNumber] = useState("")
     const [totalProducts,setTotalProducts] = useState("")
     const [addressDelivery,setAddressDelivery] = useState("")
@@ -21,26 +18,8 @@ function FilterSearchOrder() {
     const [dateFinal,setDateFinal] = useState(new Date().toLocaleDateString())
     const [error,setError] = useState(false)
 
-  //show or not show modal
-  const [show, setShow] = useState(false) 
-
   //Loading content
   const [isloading, setLoading] = useState(false) 
-
-  /**
-   * @param key get object by key intended
-   * @param value get object compared by value intended
-   * @description get object intended
-   */
-  const getObject = (key,value) => {
-   
-    datas.map((data) => {  
-      if(data[key] === value) {
-        setElementToShow(data)
-        isShowingModal()
-      }
-    })
-  }
 
   /**
    * @description fetch data from server
@@ -69,13 +48,6 @@ function FilterSearchOrder() {
     
     setLoading(false)
     
-  }
-
-  /**
-   * @describe Show Modal of element selected
-   */
-  const isShowingModal = () => {
-      show == true ? setShow(false) : setShow(true)
   }
 
   /**
@@ -130,12 +102,7 @@ function FilterSearchOrder() {
           "sShow": "Mostrar"
         },
       },
-      "rowCallback": function(row, data) {
-        $(row).off('click').on('click', function() {
-            getObject("id",data[0])
-        });
 
-      },
       initComplete: function(){
         
         $("#top").css('padding-bottom','8px');

@@ -51,7 +51,6 @@ function GetOrdersReports() {
                 response = await getAllFromDB('/orderedProducts',params) 
                 mapLocationData(response)  
                 setError(false)
-                console.log(response)
             }
             catch(e) {
                 setError(true)
@@ -95,7 +94,6 @@ function GetOrdersReports() {
             }
         })
 
-        console.log(tableLocationData)
     }
 
   return (

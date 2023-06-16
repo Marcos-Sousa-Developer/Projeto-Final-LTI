@@ -6,12 +6,19 @@ let dbConnection = require('./DatabaseController')
  * @param {*} res //response from server
  * @returns result data
  */
-const getAllorSomeAds = async function (req, res) { 
+const getAllorSomeAds = async function (req, res) {  
 
-    let statement = "SELECT * FROM ads";
+    let statement = "SELECT * FROM ads WHERE status !=0";
 
     if(Object.keys(req.query).length !== 0) { 
-        statement += " WHERE "
+        if(req.query.status === "" || req.query.status === "0") {
+            statement = "SELECT * FROM ads";
+            statement += " WHERE "
+        }
+        else {
+            statement += " AND "
+        }
+        
 
         let params = {} 
 
@@ -67,9 +74,6 @@ const getAllorSomeAds = async function (req, res) {
 
     let result = await dbConnection(statement)  
 
-    console.log(statement)
-
-
     if (result === "error") {
         return res.status(500).json("Not possible to get all ads");
     } else if (result.length < 1) {
@@ -108,14 +112,12 @@ const getAdByID = async function (req, res) {
  */
 const deleteAdByID = async function (req, res) {
 
-    const statement = "DELETE FROM ads WHERE id = " + req.params.id
+    const statement = `UPDATE ads SET status='0' WHERE id='${parseInt(req.params.id)}'`;
 
-    let result = await dbConnection(statement)
+    let result = await dbConnection(statement);
 
     if (result === "error") {
-        return res.status(500).json("Not possible to delete the ad with id " + req.params.id);
-    } else if (result.affectedRows == 0) {
-        return res.send("Ad with id " + req.params.id + " does not exist in the database");
+        return res.status(500).json("Not possible to delete this ad");
     }
 
     return res.send("Ad with id " + req.params.id + " has been deleted");
@@ -189,4 +191,23 @@ const updateAdByID = async function (req, res) {
     return res.send("Ad has been updated");
 }
 
-module.exports = {getAllorSomeAds, getAdByID, deleteAdByID, insertAd, updateAdByID}
+/**
+ * Async function to deactivate ad by id and await from database response
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const deactivateAdByID = async function (req, res) { 
+
+    const statement = `UPDATE ads SET status='0' WHERE id='${parseInt(req.params.id)}'`;
+
+    let result = await dbConnection(statement);
+
+    if (result === "error") {
+        return res.status(500).json("Not possible to deactivate this ad");
+    }
+
+    return res.send("Ad has been deactivated");
+}
+
+module.exports = {getAllorSomeAds, getAdByID, deleteAdByID, insertAd, updateAdByID, deactivateAdByID}
