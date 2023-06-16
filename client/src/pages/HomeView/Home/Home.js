@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { FiChevronRight, FiChevronLeft} from 'react-icons/fi';
 import ReactPaginate from "react-paginate";
 
-import {Navbar, NavbarSupplier, Footer, Product, ComparePopUp, SubHeading} from '../../../components/index';
+import {Navbar, NavbarSupplier, Footer, Product, ComparePopUp, SubHeading, SnackBar} from '../../../components/index';
 import images from '../../../assets/images';
 import './Home.css';
 import getClientType from "../../../hooks/getClientType";
@@ -15,9 +15,16 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { FreeMode, Pagination } from "swiper";
 
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
+
 function Home() {
   const [slidesPerView, setSlidesPerView] = useState(5);
   const [spaceBetween, setSpaceBetween] = useState(30);
+
+  const snackbarRef = useRef(null);
 
   const handleClick = () => {
     const targetDiv = document.getElementById('comprar_div');
@@ -40,7 +47,7 @@ function Home() {
 
   async function getAds(){
     let adsDB = await getAllFromDB("/ads")
-    setAds(adsDB.slice(adsDB.length - 10, adsDB.length))
+    setAds(adsDB.slice(adsDB.length - 10, adsDB.length).reverse())
   }
 
   useEffect(() => {
@@ -79,7 +86,15 @@ function Home() {
       if (selectedProducts.length >= 4) {
         return;
       }
-      setSelectedProducts([...selectedProducts, product]);
+      if(selectedProducts.length > 0){
+        if(selectedProducts[0].subsubcategory_name == product.subsubcategory_name){
+          setSelectedProducts([...selectedProducts, product]);
+        } else {
+          snackbarRef.current.show();
+        }
+      } else {
+        setSelectedProducts([...selectedProducts, product]);
+      } 
     };
     
     const removeFromSelectedProducts = (product) => {
@@ -147,6 +162,11 @@ function Home() {
             </Swiper>
           </div>
         </div>
+        <SnackBar
+            ref={snackbarRef}
+            message="Não é possível comparar produtos de categorias diferentes"
+            type={SnackbarType.fail}
+        />
       <Footer></Footer>
       <ComparePopUp
         selectedProducts={selectedProducts}

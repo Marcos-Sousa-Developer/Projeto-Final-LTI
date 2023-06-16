@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FiChevronRight, FiChevronLeft, FiChevronUp } from 'react-icons/fi';
 
-import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
+import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal, SnackBar } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 
 import './SubCategory.css';
 import LoadingPage from '../../LoadingPage';
 import { Link } from 'react-router-dom';
 
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
 
 let subsubcategories = {}
 const itemsPerPage = 20; // Number of items per page
@@ -27,8 +31,10 @@ const SubCategory = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [didMount, setDidMount] = useState(false)
 
-  const [currentItems, setCurrentItems] = useState([]);
+  const snackbarRef = useRef(null);
 
+  const [currentItems, setCurrentItems] = useState([]);
+  
   const [adsPrev, setAdsPrev] = useState([]);
 
   const [minPrice, setMinPrice] = useState(0);
@@ -93,7 +99,15 @@ const SubCategory = () => {
     if (selectedProducts.length >= 4) {
       return;
     }
-    setSelectedProducts([...selectedProducts, product]);
+    if(selectedProducts.length > 0){
+      if(selectedProducts[0].subsubcategory_name == product.subsubcategory_name){
+        setSelectedProducts([...selectedProducts, product]);
+      } else {
+        snackbarRef.current.show();
+      }
+    } else {
+      setSelectedProducts([...selectedProducts, product]);
+    } 
   };
   
   const removeFromSelectedProducts = (product) => {
@@ -333,6 +347,11 @@ const SubCategory = () => {
                 />
             ))}
             </div>
+            <SnackBar
+                ref={snackbarRef}
+                message="Não é possível comparar produtos de categorias diferentes"
+                type={SnackbarType.fail}
+            />
             <div className="app__SubCategory_pagination">
                 <button
                   onClick={() => goToPage(currentPage - 1)}

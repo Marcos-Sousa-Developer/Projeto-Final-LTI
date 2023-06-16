@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FiChevronRight, FiChevronLeft, FiChevronUp} from 'react-icons/fi';
 
-import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal } from '../../../components/index';
+import { Navbar, Footer, Product, SubHeading, ComparePopUp, Modal, SnackBar } from '../../../components/index';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import getFromDB from '../../../hooks/getFromDB';
 
 import './Search.css';
 import LoadingPage from '../../LoadingPage';
+
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
 
 let categories = {}
 const itemsPerPage = 20; // Number of items per page
@@ -22,6 +27,8 @@ const Search = () => {
   const [ads, setAds] = useState([])
   const [didMount, setDidMount] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
+
+  const snackbarRef = useRef(null);
 
   const [currentItems, setCurrentItems] = useState([]);
 
@@ -76,7 +83,15 @@ const Search = () => {
     if (selectedProducts.length >= 4) {
       return;
     }
-    setSelectedProducts([...selectedProducts, product]);
+    if(selectedProducts.length > 0){
+      if(selectedProducts[0].subsubcategory_name == product.subsubcategory_name){
+        setSelectedProducts([...selectedProducts, product]);
+      } else {
+        snackbarRef.current.show();
+      }
+    } else {
+      setSelectedProducts([...selectedProducts, product]);
+    } 
   };
   
   const removeFromSelectedProducts = (product) => {
@@ -279,6 +294,11 @@ const Search = () => {
                 /> 
               ))}
             </div>
+            <SnackBar
+                ref={snackbarRef}
+                message="Não é possível comparar produtos de categorias diferentes"
+                type={SnackbarType.fail}
+            />
             <div className="app__Search_pagination">
               <button
                 onClick={() => goToPage(currentPage - 1)}
