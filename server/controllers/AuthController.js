@@ -197,10 +197,75 @@ const verifyPassword = async (req, res) => {
 
     return res.send(false);
   }
+  
+}
+
+
+const test = async (authenticationData,userData,oldPassword,newPassword) => {
+
+    // that represents the authentication details of a user who is attempting to authenticate with Amazon Cognito
+    const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+
+    //that represents a user in an Amazon Cognito user pool
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);  
+
+    return new Promise((resolve, reject) => { 
+  
+    cognitoUser.authenticateUser(authenticationDetails, {
+
+    onSuccess: function(result) {
+
+      cognitoUser.changePassword(oldPassword, newPassword, function(error, result) {
+        if(error) {
+          console.log(error)
+          reject(false)
+        }
+        resolve(true)
+      })
+    },
+
+    onFailure: function(error) {
+      console.log(error)
+      reject(false)
+    }
+
+    })
+
+  });
+}
+
+/**
+ * Chnage password 
+ * @params request from client
+ * @return boolean
+ */
+const changePassword = async (req, res) => { 
+
+    const uid_encrypt = req.cookies.userSession;
+    let uid_decrypt = jwt.decryptID(uid_encrypt) 
+
+    const statement = "SELECT * FROM users WHERE uid='"+uid_decrypt+"';"
+    let result = await dbConnection(statement) 
+    const user_type = result[0].user_type + "s"
+
+    const statement2 = "SELECT * FROM " + user_type + " WHERE uid='"+uid_decrypt+"';"
+    let result2 = await dbConnection(statement2) 
+    const tokenDecrypt = jwt.decryptID(result2[0].verify)
+
+    const authenticationData = {
+      Username: result2[0].email,
+      Password: tokenDecrypt
+    };
+
+    const userData = {
+      Username: result2[0].email,
+      Pool: userPool
+    };
+
+    res.send( await test(authenticationData,userData, tokenDecrypt, req.query.newToken))
+
+  
     
-
-
-
 }
 
 
@@ -255,4 +320,4 @@ const logout = async (req, res) => {
 
 }
 
-module.exports = {signIn, registerUser, verifyPassword, getUserType, logout}
+module.exports = {signIn, registerUser, verifyPassword, changePassword, getUserType, logout}

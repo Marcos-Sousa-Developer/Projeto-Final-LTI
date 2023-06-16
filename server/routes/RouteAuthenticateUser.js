@@ -11,6 +11,10 @@ router.post('/registerUser', authenticate.registerUser)
 //register user
 router.post('/verifyPassword', authenticate.verifyPassword) 
 
+//changePassword
+router.post('/changePassword', authenticate.changePassword) 
+
+
 // Log Out 
 router.post('/logout', authenticate.logout) 
 

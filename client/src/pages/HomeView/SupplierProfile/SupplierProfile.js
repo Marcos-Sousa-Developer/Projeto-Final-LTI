@@ -20,9 +20,11 @@ function SupplierProfile() {
 
   const [notSubmit, setNotSubmit] = useState(false)
   const [passwordToVerify, setPasswordToVerify] = useState("")
+  const [inProcess, setInProcess] = useState(false)
 
   //pop-ups
-  const [isOpen, setIsOpen] = useState(false);  //modal
+  const [isOpen, setIsOpen] = useState(false);
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);  //modal
   const snackbarRef = useRef(null); //SnackBar
   const [snackbarType, setSnackbarType] = useState(SnackbarType.success); // SnackBar
 
@@ -248,6 +250,7 @@ function SupplierProfile() {
   //-------------------------------------------------------------------------
 
   const verifyPassword = async () => { 
+    setInProcess(true)
 
     let params = {"token": passwordToVerify}
 
@@ -257,16 +260,62 @@ function SupplierProfile() {
 
     if(result.data) {
       setNotSubmit(false)
-      submit()
+      await submit()
       setPassword("")
       setIsOpen(false)
+      setInProcess(false)
     }
     else {
       setNotSubmit(true)
       setPassword("")
+      setInProcess(false)
     }
  
   }
+
+  const changePassword = async () => {
+    try{
+
+      let params = {"newToken": passwordToVerify}
+
+      const result = await axios.post('/changePassword', null, {params, withCredentials:true})
+  
+      if(result.data) {
+        setSnackbarType(SnackbarType.success);
+        snackbarRef.current.show();
+      }
+      else {
+        setSnackbarType(SnackbarType.fail);
+        snackbarRef.current.show();
+      }
+
+    }
+    catch{ 
+    }
+  }
+
+  const verifyChangePassword = async () => {
+    setInProcess(true)
+
+    let params = {"token": passwordToVerify}
+    const result = await axios.post('/verifyPassword', null, {params, withCredentials:true})
+
+    setNotSubmit(false)
+
+    if(result.data) {
+      setNotSubmit(false)
+      await changePassword()
+      setPassword("")
+      setIsChangePasswordOpen(false)
+      setInProcess(false)
+    }
+    else {
+      setNotSubmit(true)
+      setPassword("")
+      setInProcess(false)
+    }
+  }
+
 
   return (
     <>
@@ -420,6 +469,37 @@ function SupplierProfile() {
                       </ul>
                   )}
                 </div>
+                <Modal open={isChangePasswordOpen} onClose={() => setIsChangePasswordOpen(false)}>
+                    <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar a palavra passe?</p>
+
+                    <div className='inputField' style={{marginTop:'1.5rem'}}>
+                      <p style={{marginTop: '0'}}>Password Antiga</p>
+                      <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password' onChange={(e) => setPasswordToVerify(e.target.value)}></input>
+                    </div>
+                    {
+                      notSubmit === true ? (
+                        <small style={{color: "red"}}>Password Incorreta </small> 
+                      )
+                      :
+                      (
+                        <small style={{color: "red"}}></small> 
+                      )
+                    }
+                    <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                      <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
+                      {
+                        (passwordToVerify === "" || inProcess==true) ? (
+                          <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
+                        )
+                        :
+                        (
+                          <button className='main__negative_action_btn' onClick={() => { verifyChangePassword()}}>Guardar</button>
+                        )
+                      }
+                    </div>
+                </Modal>
+                <button type="submit" onClick={() => setIsChangePasswordOpen(true)} className='main__action_btn'>Alterar Palavra passe</button>
+
               </div>
               <div className='app__SupplierProfile_box_div'>
                 <div className='app__SupplierProfile_box_div_row'>
@@ -441,7 +521,7 @@ function SupplierProfile() {
                       </div>
                     ))}
                 </div>
-              </div>  
+              </div>
             </div>
           </div>
           <div className="app__SupplierProfile_button">
@@ -474,7 +554,7 @@ function SupplierProfile() {
               <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
                 <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
                 {
-                  passwordToVerify === "" ? (
+                  (passwordToVerify === "" || inProcess==true)  ? (
                     <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
                   )
                   :
