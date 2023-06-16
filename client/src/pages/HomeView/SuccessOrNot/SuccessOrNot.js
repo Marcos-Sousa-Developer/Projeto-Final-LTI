@@ -16,7 +16,7 @@ const SuccessOrNot = ({success}) => {
 
   const sendEmail = async (supplierEmail, supplierName, productName) => {
     const params = {
-      supplier_email: "dibutia12@gmail.com",
+      supplier_email: supplierEmail,
       supplier_name: supplierName,
       product_name: productName
     }

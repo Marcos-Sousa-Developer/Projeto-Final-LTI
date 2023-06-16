@@ -58,7 +58,7 @@ const SupplierOrdersHistory = () => {
     let orderNumber = orderedPorduct[0].order_id;
 
     const params = {
-      consumer_email: "rafael.ribeiro.rr11@gmail.com",
+      consumer_email: consumerEmail,
       consumer_name: consumerName,
       order_number: orderNumber,
     }
