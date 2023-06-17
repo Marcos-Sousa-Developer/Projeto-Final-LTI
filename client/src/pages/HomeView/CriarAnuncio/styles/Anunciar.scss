@@ -2,6 +2,7 @@
 
 .app__anunciar{
     margin: 1rem auto 2rem;
+    min-height: 400px;
 
     &_content{
         margin-top: 5%;
@@ -41,6 +42,20 @@
             max-width: 30rem;
             p{
                 font-size: $big_font;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .app__anunciar_content{
+        flex-direction: column;
+        align-items: center;
+
+        &_search{
+            margin-bottom: 3rem;
+            p{
+                font-size: 20px;
             }
         }
     }

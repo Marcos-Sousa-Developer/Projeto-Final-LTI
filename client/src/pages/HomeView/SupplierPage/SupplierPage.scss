@@ -62,9 +62,9 @@
         gap: 1.5rem;
     }
 
-    &_boxesDireita1Vend{
+    /*&_boxesDireita1Vend{
         height: 100%;
-    }
+    }*/
 
     &_boxesDireita1Vend, &_boxesDireita1Nmr{
         border: $border;
@@ -123,6 +123,14 @@
 
         &_boxesDireita1Vend{
             width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .app__SupplierPage{
+        &_boxesDireita1Nmr{
+            display: none;
         }
     }
 }

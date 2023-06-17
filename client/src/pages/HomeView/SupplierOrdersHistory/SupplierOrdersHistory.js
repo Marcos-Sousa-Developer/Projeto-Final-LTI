@@ -160,7 +160,7 @@ const SupplierOrdersHistory = () => {
                                 <button className='secondary__negative_action_btn' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
                               )
                             }
-                            <button className='secondary__action_btn app__pointer' disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => modalToOpen(orderHistory.order.id)}>Enviar</button>
+                            <button className={orderHistory.order.order_status == "Em preparação" ? "secondary__action_btn app__pointer" : "secondary__action_btn"} style={{opacity: orderHistory.order.order_status == "Em preparação" ? '' : '0.4'}} disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => modalToOpen(orderHistory.order.id)}>Enviar</button>
                             <Modal open={modalOpen[orderHistory.order.id]} onClose={() => modalToClose(orderHistory.order.id)}>
                               <div className='app__ConsumerHistory_Orders'>
                                 {vehiclesHistory.length > 0 && (

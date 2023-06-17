@@ -165,7 +165,7 @@ const SignInC = ({checkout=null}) => {
                             {
                                 loading || notValidate? 
                                 (
-                                    <button className='main__action_btn'>Loading</button>
+                                    <button className='main__action_btn'>Loading...</button>
                                 )
                                 :
                                 (
@@ -178,7 +178,7 @@ const SignInC = ({checkout=null}) => {
                                     <span><Link to="/signup" > aqui.</Link></span>
                                 </div>
                                 <div className='register'>Transportadora? 
-                                    <span><Link to="/transportadora" > Clique aqui.</Link></span>
+                                    <span><Link to="/transportadora" > aqui.</Link></span>
                                 </div>
                             </div>
                         </form>

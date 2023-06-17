@@ -39,6 +39,8 @@ function Maping({lat, lng, destLat, destLng}) {
           width: "200px",
           height: "150px",
           borderRadius: "15px",
+          marginRight: window.innerWidth < 500 ? 'auto' : '0',
+          marginLeft: window.innerWidth < 500 ? '0' : 'auto'
         }}
         latitude={lat}
         longitude={lng}

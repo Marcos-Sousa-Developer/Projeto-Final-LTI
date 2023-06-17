@@ -197,7 +197,7 @@
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
     .app__product_page_content_info{
         width: 90%;
 
@@ -254,6 +254,10 @@
 }
 
 @media screen and (max-width: 500px) {
+    .app__product_page_content_info_main .app__product_page_content_supplier{
+        grid-template-columns: 1fr;
+    }
+
     .app__product_page_content_info{
         width: 100%;
 

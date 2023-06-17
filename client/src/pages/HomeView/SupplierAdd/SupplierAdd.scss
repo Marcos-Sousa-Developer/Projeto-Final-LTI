@@ -22,14 +22,14 @@
                 background-color: rgba($color: $light_gray, $alpha: .4);
             }
 
+            tbody tr:nth-child(even) .actions div button, .actions div button>*, .actions div button>*>*{
+                background-color: transparent;
+            }
+
             .priceShow>*{
                 font-size: 16px;
                 font-weight: 400;
                 color: black;
-            }
-
-            .actions div button>*, .actions div button>*>*{
-                background-color: rgba($color: $light_gray, $alpha: .4);
             }
         }
 

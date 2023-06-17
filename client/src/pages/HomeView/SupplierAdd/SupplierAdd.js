@@ -127,17 +127,12 @@ function SupplierAdd() {
                 <tbody>
                     {ads.map((ad, index) => (
                     <tr key={index}>
-                      {/*<td><div className='app__SupplierAdd_Box_Image'>
-                      <img src={product.src} alt={product.title}/>
-                      {ad.title}
-                      </div></td>*/}
                       <td data-cell='Título: '>{ad.title}</td>
                       <td data-cell='Preço: ' className='priceShow'><PriceDisplay price={ad.price}></PriceDisplay></td>            
-                      {/*<td data-cell='Unidades: '>{ad.units}</td>*/}
                       <td data-cell='Data de criação: '>{ad.created_at}</td>
-                      <td className='actions' style={{paddingRight:'0'}}>  
+                      <td className='actions' style={{paddingRight:'0', backgroundColor: window.innerWidth < 650 ? 'transparent' : ''}}>  
                         <div style={{display:'flex', backgroundColor: 'transparent'}}>
-                                            <button style={{margin:'0 0.5rem'}} onClick={() => setModalOpen2(prevState => {
+                                            <button className='teste' style={{margin:'0 0.5rem'}} onClick={() => setModalOpen2(prevState => {
                                                 const newState = [...prevState];
                                                 newState[index] = true;
                                                 return newState;
@@ -189,7 +184,7 @@ function SupplierAdd() {
                                                         />
                                                     </div> 
 
-                                                    <p style={{fontSize:'16px', textAlign:'center', marginTop:'18px'}}>Dados do Anunciante</p>
+                                                    <p style={{fontSize:'18px', marginTop:'18px'}}>Dados do Anunciante</p>
 
                                                     <div className='inputField'>
                                                         <p>Telemóvel:</p>

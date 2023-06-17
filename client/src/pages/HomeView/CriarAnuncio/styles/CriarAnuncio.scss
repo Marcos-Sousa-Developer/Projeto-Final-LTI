@@ -587,6 +587,21 @@ $overlay-bg:        hsla(0, 0%, 10%, 0.85);
         gap: 0;
     }
 
+    .app__anuncio_supplier-prodUnit .app__anuncio_supplier_content{
+        grid-template-columns: 1fr;
+    }
+
+    .app__anuncio_supplier-prodUnit .app__anuncio_prodUnit_content{
+        table{
+            tbody tr td{
+                font-size: 14px;
+            }
+            td, th{
+                padding: .25rem 1rem .25rem 0;
+            }
+        }
+    }
+
     .app__anuncio_features, .app__anuncio_sub_features{
         grid-template-columns: repeat(auto-fit, 135px);
     }

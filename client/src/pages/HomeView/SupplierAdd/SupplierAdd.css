@@ -152,6 +152,33 @@ img, picture {
   border: 2px solid #EB5C1F;
 }
 
+.secondary__action_btn {
+  background-color: #EB5C1F;
+  color: white;
+  padding: 8px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__action_btn:hover {
+  opacity: 1;
+}
+
+.secondary__negative_action_btn {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 6px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__negative_action_btn:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 700px) {
   .main__action_btn {
     padding: 6px 40px;
@@ -196,6 +223,38 @@ img, picture {
   border: 3px solid rgba(235, 92, 31, 0.8);
 }
 
+.mapboxgl-ctrl-bottom-left {
+  display: none;
+}
+
+.mapboxgl-marker {
+  background-color: transparent;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 0;
+}
+
+.mapboxgl-ctrl-attrib.mapboxgl-compact {
+  margin: 0;
+}
+
+.mapboxgl-popup-content {
+  padding: 0;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  display: none;
+}
+
+.mapboxgl-ctrl button .mapboxgl-ctrl-icon {
+  background-color: transparent;
+}
+
+.mapboxgl-marker * {
+  background-color: transparent;
+}
+
 .app__SupplierAdd {
   margin: 1rem auto 2rem;
 }
@@ -217,13 +276,13 @@ img, picture {
 .app__SupplierAdd_Box table tbody tr:nth-child(even) td {
   background-color: rgba(238, 238, 238, 0.4);
 }
+.app__SupplierAdd_Box table tbody tr:nth-child(even) .actions div button, .app__SupplierAdd_Box table .actions div button > *, .app__SupplierAdd_Box table .actions div button > * > * {
+  background-color: transparent;
+}
 .app__SupplierAdd_Box table .priceShow > * {
   font-size: 16px;
   font-weight: 400;
   color: black;
-}
-.app__SupplierAdd_Box table .actions div button > *, .app__SupplierAdd_Box table .actions div button > * > * {
-  background-color: rgba(238, 238, 238, 0.4);
 }
 .app__SupplierAdd_Box_Image {
   display: flex;
