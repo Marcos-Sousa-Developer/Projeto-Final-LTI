@@ -20,6 +20,7 @@ import SubSubCategory from "./pages/HomeView/SubSubCategory/SubSubCategory";
 import SuccessOrNot from "./pages/HomeView/SuccessOrNot/SuccessOrNot";
 import axios from "axios";
 import Locked from "./pages/HomeView/Locked/Locked";
+import TransportadoraIndex from "./pages/Admin/TransportadoraIndex";
 
 
 function App() {
@@ -138,7 +139,7 @@ function App() {
           <Route path="/signin" element={<SignIn/>} />
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/FAQ" element={<FAQ />} />
-          <Route path="/transportadora" element={<SignIn/>} />
+          <Route path="/transportadora" element={<TransportadoraIndex/>} />
           <Route path="*" element={<NotFound />} />
           {/* ------------------------------------- */}
         </Routes>

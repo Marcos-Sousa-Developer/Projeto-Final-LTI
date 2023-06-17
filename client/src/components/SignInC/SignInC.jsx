@@ -178,7 +178,7 @@ const SignInC = ({checkout=null}) => {
                                     <span><Link to="/signup" > aqui.</Link></span>
                                 </div>
                                 <div className='register'>Transportadora? 
-                                    <span><Link to="/signup" > Clique aqui.</Link></span>
+                                    <span><Link to="/transportadora" > Clique aqui.</Link></span>
                                 </div>
                             </div>
                         </form>
