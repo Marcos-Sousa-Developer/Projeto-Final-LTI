@@ -31,7 +31,6 @@ const getAllorSomeCategories = async function (req, res) {
             }
         }
     }
-
     let result = await dbConnection(statement)  
 
     if (result === "error") {

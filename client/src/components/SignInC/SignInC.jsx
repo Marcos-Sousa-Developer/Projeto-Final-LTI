@@ -169,10 +169,17 @@ const SignInC = ({checkout=null}) => {
                                 )
                                 :
                                 (
-                                    <button className='main__action_btn' type='submit'>Login</button>
+                                    <>
+                                        <button className='main__action_btn' type='submit'>Login</button>
+                                    </>
                                 )
                             }
-                            <div className='register'>Não tem conta? Registe-se <span><Link to="/signup" >aqui</Link></span>.</div>
+                                <div className='register'>Não tem conta? Registe-se 
+                                    <span><Link to="/signup" > aqui.</Link></span>
+                                </div>
+                                <div className='register'>Transportadora? 
+                                    <span><Link to="/signup" > Clique aqui.</Link></span>
+                                </div>
                             </div>
                         </form>
                     </div>

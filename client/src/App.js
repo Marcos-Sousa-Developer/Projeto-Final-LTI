@@ -138,6 +138,7 @@ function App() {
           <Route path="/signin" element={<SignIn/>} />
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/FAQ" element={<FAQ />} />
+          <Route path="/transportadora" element={<SignIn/>} />
           <Route path="*" element={<NotFound />} />
           {/* ------------------------------------- */}
         </Routes>
