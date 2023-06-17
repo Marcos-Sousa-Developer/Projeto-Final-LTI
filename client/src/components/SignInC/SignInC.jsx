@@ -134,7 +134,6 @@ const SignInC = ({checkout=null}) => {
                                         required
                                     />
                                 </div>
-                                <div className='forgot_password'>Esqueceu-se da password?</div>
                             </div>
                             <div className='app__SignIn_box13'>
                             {
