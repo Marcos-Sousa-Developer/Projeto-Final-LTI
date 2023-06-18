@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 function ConsumerBar({active1="", active2=""}) {
   return (
     <div className='app__ConsumerProfile_options'>
-        <ul>
-        <Link to='/consumer/profile'><li><span className={'option ' + active1 + ' app__text_effect'}>Dados Pessoais</span></li></Link>
-        <Link to='/consumer/encomendas'><li><span className={'option ' + active2 + ' app__text_effect'}>Histórico de Encomendas</span></li></Link>
+        <ul style={{fontSize: window.innerWidth < 650 ? '15px' : '18px'}}>
+          <Link to='/consumer/profile'><li><span className={'option ' + active1 + ' app__text_effect'}>Dados Pessoais</span></li></Link>
+          <Link to='/consumer/encomendas'><li><span className={'option ' + active2 + ' app__text_effect'}>Histórico de Encomendas</span></li></Link>
         </ul>
     </div>
   )

@@ -234,16 +234,16 @@ const Cart = () => {
                             </div>
                           </div>
                         </div>
-                        <div style={{display:'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop:'2rem'}}>
+                        {
+                          postalCode === "" || morada === "" || cidade === "" || email === "" ? <p style={{color:'red', margin:'.5rem 0 0 0'}}>Insira os dados para encomenda.</p> : ''
+                        }
+                        <div style={{display:'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop:'1rem'}}>
                           <button className='main__action_btn' onClick={() => setIsOpen2(false)}>Cancelar</button>
                           {
                             postalCode === "" || morada === "" || cidade === "" || email === "" ? 
-                            <>
                               <button className='main__negative_action_btn' style={{opacity: "0.4"}} disabled>Pagamento</button>
-                              <small style={{color:'red'}}>Insira os dados para encomenda</small>
-                            </>
                             :
-                            <button className='main__negative_action_btn' onClick={() => goToCheckout()}>Pagamento</button>
+                              <button className='main__negative_action_btn' onClick={() => goToCheckout()}>Pagamento</button>
                           }
                           
                         </div>

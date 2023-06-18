@@ -2,17 +2,20 @@ import React, {useState, useEffect} from 'react';
 
 import {Navbar, NavbarSupplier, Footer} from '../../../components/index';
 import images from '../../../assets/images';
-import './NotFound.css';
 import { useCookies } from 'react-cookie';
 import deleteToDB from '../../../hooks/deleteToDB';
 import putToDB from '../../../hooks/putToDB';
 import emailjs from '@emailjs/browser';
 import getAllFromDB from '../../../hooks/getAllFromDB';
+import './SucessOrNot.css';
 
 const SuccessOrNot = ({success}) => {
 
   const [cookies, setCookie, removeCookie] = useCookies();
 
+  function redirectToConsumer() {
+    window.location.href = '/';
+  }
 
   const sendEmail = async (supplierEmail, supplierName, productName) => {
     const params = {
@@ -64,24 +67,30 @@ const SuccessOrNot = ({success}) => {
 
   return (
     <>
-
         <Navbar></Navbar>
-        <div className='app__notfound main__container flex'>
-          <div className='app__notfound_content'>
-            <img className='app__notfound_img' src={images}></img>
-            <div className='app__notfound_bottom'>
-              {
-                success ? <p>Pagamento feito com sucesso</p> :
-                (
-                  <p>Pagamento Cancelado</p>
-                )
-              }
+        {
+          success ?
+            <div className='app__notfound main__container flex'>
+              <div className='app__notfound_content'>
+                <img  className='app__notfound_img' src={images.payment_success}></img>
+                <div className='app__notfound_bottom'>
+                  <p>Compra feita com sucesso!</p>
+                  <button className='main__action_btn' onClick={redirectToConsumer}>Home</button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
+          :
+            <div className='app__notfound main__container flex'>
+              <div className='app__notfound_content'>
+                <img className='app__notfound_img' src={images.payment_nosuccess}></img>
+                <div className='app__notfound_bottom'>
+                  <p>Ups! Houve algum erro no pagamento...</p>
+                  <button className='main__action_btn' onClick={redirectToConsumer}>Home</button>
+                </div>
+              </div>
+            </div>
+        }
       <Footer></Footer>
-      
     </>
   );
 }
