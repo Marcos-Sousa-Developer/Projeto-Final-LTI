@@ -20,6 +20,7 @@ import ConsumerOrdersHistory from './ConsumerOrdersHistory/ConsumerOrdersHistory
 import Search from './Search/Search';
 import SupplierOrdersHistory from './SupplierOrdersHistory/SupplierOrdersHistory';
 import MarketPlace from './MarketPlace/MarketPlace';
+import TransportadoraIndex from './TransportadoraIndex/TransportadoraIndex';
 
 export {
     Home,
@@ -43,4 +44,5 @@ export {
     Search,
     SupplierOrdersHistory,
     MarketPlace,
+    TransportadoraIndex,
 };
