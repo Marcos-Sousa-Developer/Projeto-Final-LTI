@@ -19,6 +19,7 @@ const Footer = () => {
         <div className='app__support'>
           <h5><strong>Sobre nós</strong></h5>
           <div className='app__support2'>
+              <Link to='/api/v1/login'>API</Link>
               <Link to='/'>Equipa</Link>
               <Link to='/'>Conceito</Link>
             </div>

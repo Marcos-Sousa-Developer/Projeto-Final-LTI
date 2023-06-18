@@ -31,8 +31,7 @@ function AppearUserModal({url, element, isShowingModal, element_type }) {
     setError(false)
 
     try {
-      let resp = await deleteToDB('/vehicles/'+element.id)   
-      console.log(resp)
+      await deleteToDB('/vehicles/'+element.id)   
       location.reload()
     }
     catch {
@@ -40,9 +39,6 @@ function AppearUserModal({url, element, isShowingModal, element_type }) {
     }
   };
 
-  useEffect(() => {
-    console.log(element)
-  },[])
 
   return (
     <>

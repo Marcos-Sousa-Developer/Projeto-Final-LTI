@@ -7,6 +7,7 @@ import './CompareProduct.css';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 
 import exampleImage from '../../../assets/testproducts/boxedwater2.jpg';
+import LoadingPage from '../../LoadingPage';
 
 const CompareProduct = () => {
   const location = useLocation();
@@ -47,13 +48,42 @@ const CompareProduct = () => {
                   </tr>
                   <tr>
                     <td className='deleteFromCompare'>
-                      <button onClick={() => removeProduct(product.id)}>remover</button>
+                      <button onClick={() => removeProduct(product.id)}>Remover produto</button>
                     </td>
                   </tr>
                 </tbody>
               </table>
             );
           })}
+        </div>
+        <div className='app__compare-product_content'>
+        {produtos.map(product => {
+          return (
+            <table key={product.id}>
+              <tbody>
+                {Object.keys(JSON.parse(product.extraCharacteristic)).map((key) => {
+                  if (key === "0") {
+                    return Object.keys(JSON.parse(product.extraCharacteristic)[key]).map((key2) => {
+                      return (
+                        <tr key={key2}>
+                          <td>{key2}</td>
+                          <td>{JSON.parse(product.extraCharacteristic)[key][key2]}</td>
+                        </tr>
+                      )
+                    });
+                  } else {
+                    return (
+                      <tr key={key}>
+                        <td>{key}</td>
+                        <td>{JSON.parse(product.extraCharacteristic)[key]}</td>
+                      </tr>
+                    );
+                  }
+                })}
+              </tbody>
+            </table>
+          );
+        })}
         </div>
       </div>
       <Footer></Footer>

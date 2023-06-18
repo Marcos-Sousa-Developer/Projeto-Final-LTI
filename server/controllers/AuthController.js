@@ -451,7 +451,7 @@ const checkUserDeactivated = async (req, res) => {
 
     const uid_encrypt = req.cookies.userSession;
 
-    let uid_decrypt = jwt.decryptID(uid_encrypt) 
+    let uid_decrypt = jwt.decryptID(uid_encrypt)  
 
     const statement = "SELECT * FROM users WHERE uid='"+uid_decrypt+"';"
 
@@ -478,7 +478,6 @@ const checkUserDeactivated = async (req, res) => {
 
 
 const logout = async (req, res) => { 
-
   try {
     res.clearCookie('refreshToken', { httpOnly: true, path: '/' });
     res.clearCookie('identification', { httpOnly: true, path: '/' });
@@ -490,7 +489,6 @@ const logout = async (req, res) => {
   catch (error) {
     res.status(500);
   }
-
 }
 
 module.exports = {signIn, registerUser, verifyPassword, changePassword, deleteAccount, getUserType, checkEmail, checkUserDeactivated, logout}

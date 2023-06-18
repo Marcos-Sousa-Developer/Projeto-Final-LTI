@@ -1,5 +1,5 @@
 require("dotenv").config();
-const authenticateUser = require('./auth')
+const {authenticateUser,clientAuthenticate} = require('./auth')
 const express = require('express');
 const app = express(); 
 const cookieParser = require('cookie-parser');
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 const apiRouter = express.Router();
 
 //midleware for secure all api connections
-//apiRouter.use(authenticateUser)
+apiRouter.use(authenticateUser)
 
 apiRouter.use('/admins' , require('./api/ApiAdmins'))
 apiRouter.use('/ads' , require('./api/ApiAds'))
@@ -43,6 +43,9 @@ apiRouter.get('/', (req, res) => {
 * client configuration, only for client connections
 */
 const clientRouter = express.Router(); 
+
+//midleware for secure all client connections
+clientRouter.use(clientAuthenticate)
 
 clientRouter.use('/',require('./routes/RouteAuthenticateUser'))
 clientRouter.use('/',require('./routes/RoutePaymentOrder'))
