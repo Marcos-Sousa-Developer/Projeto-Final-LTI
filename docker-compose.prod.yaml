@@ -10,6 +10,7 @@ services:
       dockerfile: Dockerfile.prod
     #container name of server
     container_name: GreaterGoods_server
+    restart: always
     #ports
     ports:
       - '5000:5000'
@@ -21,6 +22,7 @@ services:
       dockerfile: Dockerfile.prod
     #container name of client
     container_name: GreaterGoods_client
+    restart: always
     #ports
     ports:
       - '3000:3000'
