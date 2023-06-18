@@ -120,7 +120,7 @@ const SignInC = ({checkout=null}) => {
                                 <div className='app__SignIn_box11'>
                                     <div><FiMail fontSize={22} color='black'  aria-hidden="true"/></div>
                                     <input
-                                        type="text"
+                                        type="email"
                                         onChange={(e)=>setEmail(e.target.value)}
                                         required
                                     />
@@ -175,7 +175,16 @@ const SignInC = ({checkout=null}) => {
                                             <input type="text" placeholder='verificar code' onChange={(e) => setCode(e.target.value)}></input>
                                         </div>
                                         <small style={{color:"red"}}>Verifica o teu email com o código que recebeste!</small>
-                                        <button className='main__action_btn' onClick={() => sendCode()}>Verificar código</button>
+                                        {
+                                            (code === undefined || code === "" || code === null) ? 
+                                            (
+                                                <button className='main__action_btn' style={{opacity:"0.4"}} disabled>Verificar código</button>
+                                            )
+                                            :
+                                            (
+                                                <button className='main__action_btn' onClick={() => sendCode()}>Verificar código</button>
+                                            )
+                                        }
                                     </>
                                     )
                             }
