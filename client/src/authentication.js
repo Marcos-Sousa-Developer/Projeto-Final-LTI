@@ -209,7 +209,74 @@ const verifyEmail = async (email, code) => {
       }
     });
   });
-
 }
 
-export const authentication = {signIn, signUp, verifyEmail}
+/**
+* Get API Credentials
+* @param email //request from client
+* @param password //response from server
+* @returns: a user data and token
+* */
+const getAPICredentials = async (email, password) => { 
+
+  try {
+
+    const authenticationData = {
+      Username: email,
+      Password: password
+    };
+    
+    // that represents the authentication details of a user who is attempting to authenticate with Amazon Cognito
+    const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+  
+    const userData = {
+      Username: email,
+      Pool: userPool
+    };
+      
+    //that represents a user in an Amazon Cognito user pool
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    
+    return await new Promise((resolve, reject) => {
+        
+        //that is used to authenticate a user with their password  
+        cognitoUser.authenticateUser(authenticationDetails, {
+  
+        //if user is succeful authenticated
+        onSuccess: (result) => {
+          resolve(result)
+        },
+  
+          //if user fail to authenticate
+        onFailure: (err) => {
+          reject(err);
+        },
+  
+          // This callback is invoked when a user's password is expired or requires a reset
+          // Here, you can prompt the user to provide a new password and then call cognitoUser.completeNewPasswordChallenge()
+        newPasswordRequired: (userAttributes, requiredAttributes) => {
+          cognitoUser.completeNewPasswordChallenge(password, [], {
+            onSuccess: (result) => {
+            resolve(result)
+          },
+            onFailure: (err) => {
+                reject(err);
+            },
+          });
+        }
+      });
+    }); 
+  }
+
+  catch (error) {
+    if(error.name === "UserNotConfirmedException") {
+      return null
+    }
+    return false
+  }
+
+};
+
+
+
+export const authentication = {signIn, signUp, verifyEmail, getAPICredentials}

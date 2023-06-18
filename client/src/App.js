@@ -21,6 +21,7 @@ import SuccessOrNot from "./pages/HomeView/SuccessOrNot/SuccessOrNot";
 import axios from "axios";
 import Locked from "./pages/HomeView/Locked/Locked";
 import TransportadoraIndex from "./pages/Admin/TransportadoraIndex";
+import APILogin from "./pages/Admin/APILogin";
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
           {userType == "admin" &&
             (
               <Route path="admin">
+                <Route exact index element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
                 <Route exact path="perfil" element={<RequireAuth><Admin_Perfil /></RequireAuth>} />
                 <Route exact path="gerir/consumidores" element={<RequireAuth><Gerir_Consumidores /></RequireAuth>} />
                 <Route exact path="gerir/fornecedores" element={<RequireAuth><Gerir_Fornecedores /></RequireAuth>} />
@@ -133,6 +135,8 @@ function App() {
           }
 
           <Route path="/locked" element={<Locked></Locked>}></Route>
+
+          <Route path="/api/v1/login" element={<APILogin></APILogin>}></Route>
           
 
           {/*---------for not logged in users--------*/}

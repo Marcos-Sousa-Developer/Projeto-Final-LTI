@@ -595,8 +595,6 @@ function CriarAnuncio() {
             //SE CONSEGUIR ADICIONAR TODOS ADICIONA
             //SE NÃO, DÁ UM ALERT
 
-            console.log(formData.features)
-            console.log(formData.sub_features)
             setTimeout(() => {
               navigate('/supplier', { replace: true });
             }, 3000); // 3 seconds delay
