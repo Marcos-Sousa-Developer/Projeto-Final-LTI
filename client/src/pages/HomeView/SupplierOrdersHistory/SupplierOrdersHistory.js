@@ -72,8 +72,8 @@ const SupplierOrdersHistory = () => {
       }, 1000);
   };
 
-    async function handleEditStatusOrder(status) {
-      await putToDB("/orderedProducts/" + currentOrder, {
+    async function handleEditStatusOrder(order_id, status) {
+      await putToDB("/orderedProducts/" + order_id, {
         order_status: status
       })
     }
@@ -177,7 +177,7 @@ const SupplierOrdersHistory = () => {
                                           <React.Fragment key={vehicleHistory.id}>
                                             <tr>
                                               <td>{vehicleHistory.name}</td>
-                                              <td><button className='secondary__action_btn app__pointer' onClick={async () => {handleEditVehicle(vehicleHistory.name); handleEditStatusOrder("Enviado"); await sendEmail();}}>Confirmar</button></td>
+                                              <td><button className='secondary__action_btn app__pointer' onClick={async () => {handleEditVehicle(vehicleHistory.name); handleEditStatusOrder(currentOrder, "Enviado"); await sendEmail();}}>Confirmar</button></td>
                                             </tr>
                                           </React.Fragment>
                                         ))}

@@ -8,6 +8,7 @@ import images from '../../assets/images.js';
 import { teste } from '../../utilities/teste.js'
 import Searchbar from './Searchbar/Searchbar';
 import { PriceDisplay } from '../../utilities/formatCurrency.js';
+import Notification from '../Notification/Notification.jsx';
 import './styles/Sidebar.css';
 import './styles/Navbar.css';
 
@@ -154,6 +155,8 @@ const Navbar = () => {
             <Searchbar></Searchbar>
 
             <div className='app__navbar_profile'>
+
+                <Notification></Notification>
 
                 {
                     [undefined,null].includes(cookies.identification) ? (

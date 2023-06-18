@@ -1,13 +1,20 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FiMail, FiLock, FiArrowLeft, FiUser, FiHome, FiX } from 'react-icons/fi';
 import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import getClientType from '../../hooks/getClientType';
 import { authentication as auth}  from '../../authentication'
 import images from '../../assets/images';
+import SnackBar from '../SnackBarNotification/SnackBar';
 import './SignUp.css';
 
+const SnackbarType = {
+    success: "success",
+    fail: "fail",
+};
+
 const SignUpC = () => {
+    const snackbarRef = useRef(null);
 
     const [name, setName] = useState(null) 
     const [email, setEmail] = useState(null) 
@@ -29,13 +36,15 @@ const SignUpC = () => {
         let isActive = await auth.signUp(email,password,selectedOption,name)
         if(isActive) {
             setError(false)
-            navigate('/signin')
-            
+            setTimeout(() => {
+                navigate('/signin');
+            }, 1000);
         }
         else{
             setError(true)
         }
         setLoading(false)
+        snackbarRef.current.show()
     };
 
     const getUserType = async () => {
@@ -136,7 +145,7 @@ const SignUpC = () => {
                                                 onChange={handlePasswordChange}
                                             />
                                         </div>
-                                        <p className='termsOfService'>Ao registar-se concorda com os termos e condições</p>
+                                        {/*<p className='termsOfService'>Ao registar-se concorda com os termos e condições</p>*/}
                                     </div>
                                     { password && (
                                         <ul className='app__ConsumerProfile_password-checks'>
@@ -228,6 +237,11 @@ const SignUpC = () => {
                         <div>
                             <Link to="/signin" className='app__SignUp_content_signIn' style={{fontSize: '14px'}}>Iniciar sessão</Link>
                         </div>
+                        <SnackBar
+                            ref={snackbarRef}
+                            message={error ? 'Algo correu mal!' : 'Conta criada com sucesso!'}
+                            type={error ? SnackbarType.fail : SnackbarType.success}
+                        />
                     </div> 
                 </div>
             </div>
