@@ -18,6 +18,7 @@ const SnackbarType = {
 const SignInC = ({checkout=null}) => {
     //-------------------SnackBar--------------
     const snackbarRef = useRef(null);
+    const snackbarRef2 = useRef(null);
     //-----------------------------------------
 
     const [email, setEmail] = useState(null) 
@@ -71,9 +72,10 @@ const SignInC = ({checkout=null}) => {
             setNotValidade(true)
         }
         else{
-            setError(true)
+            setError(true);
         }
         setLoading(false)
+        snackbarRef.current.show();
     }
 
     const sendCode = async () => {
@@ -85,7 +87,7 @@ const SignInC = ({checkout=null}) => {
         if(!isActive) {
             setNotValidade(true)
         }
-        
+        snackbarRef2.current.show();
     } 
 
     const getUserTypeInitial = async () => {
@@ -124,7 +126,7 @@ const SignInC = ({checkout=null}) => {
                                     />
                                 </div>
                             </div>
-                            <div>
+                            <div style={{marginBottom: '1rem'}}>
                                 <p>Password</p>
                                 <div className='app__SignIn_box11'>
                                     <div><FiLock fontSize={22} color='black'  aria-hidden="true"/></div>
@@ -136,35 +138,51 @@ const SignInC = ({checkout=null}) => {
                                 </div>
                             </div>
                             <div className='app__SignIn_box13'>
-                            {
+                            {/*
                                 error && ( 
                                 <>
-                                    {/*snackbarRef.current.show()*/}
                                     <small style={{color:"red"}}>Email ou Password incorretos.</small>
-                                    <SnackBar
-                                        ref={snackbarRef}
-                                        message="Email ou Password incorretos."
-                                        type={SnackbarType.success}
-                                    />
                                 </>
                                 )
-                            }
+                                */}
+                                <SnackBar
+                                    ref={snackbarRef}
+                                    message={
+                                        error && !notValidate
+                                        ? 'Email ou password incorretos!'
+                                        : notValidate
+                                        ? 'Verifique o seu email!'
+                                        : 'Bem-vindo caro utilizador!'
+                                    }
+                                    type={
+                                        error && !notValidate
+                                        ? SnackbarType.fail
+                                        : notValidate
+                                        ? SnackbarType.fail
+                                        : SnackbarType.success
+                                    }
+                                />
+                                <SnackBar
+                                    ref={snackbarRef2}
+                                    message={notValidate ? "O código está inválido" : "O código está valido"}
+                                    type={notValidate ? SnackbarType.fail : SnackbarType.success}
+                                />
                             {
                                 notValidate && ( 
                                     
                                     <>
-                                    <small style={{color:"red"}}> Com o código que recebeste por email, verifica o teu email!</small>
-                                    <div className='app__SignIn_box11'>
-                                        <input type="text" placeholder='verificar code' onChange={(e) => setCode(e.target.value)}></input>
-                                    </div>
-                                    <button onClick={() => sendCode()}>Verificar code</button>
+                                        <div className='app__SignIn_box11' style={{marginTop: '1.5rem'}}>
+                                            <input type="text" placeholder='verificar code' onChange={(e) => setCode(e.target.value)}></input>
+                                        </div>
+                                        <small style={{color:"red"}}>Verifica o teu email com o código que recebeste!</small>
+                                        <button className='main__action_btn' onClick={() => sendCode()}>Verificar código</button>
                                     </>
                                     )
                             }
                             {
                                 loading || notValidate? 
                                 (
-                                    <button className='main__action_btn'>Loading...</button>
+                                    <button className='main__action_btn'>Login</button>
                                 )
                                 :
                                 (

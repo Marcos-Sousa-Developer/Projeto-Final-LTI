@@ -1,0 +1,17 @@
+@import "../../index.scss";
+
+.app__notification{
+    margin-right: .5rem;
+
+    .app__notification_bell{
+        & >*{
+            color: black;
+            transition: color .125s ease-in-out;
+        }
+    }
+    
+    &:hover .app__notification_bell >*{
+        color: $orange;
+    }
+
+}

@@ -255,36 +255,13 @@ img, picture {
   background-color: transparent;
 }
 
-.app__navbar__searchBar div {
-  border: 3px solid #EEEEEE;
-  border-radius: 20rem;
-  padding: 0.5rem 0.75rem;
-  margin: 0;
+.app__notification {
+  margin-right: 0.5rem;
 }
-.app__navbar__searchBar input {
-  outline: none;
-  border: none;
-  margin-left: 0.75rem;
-  width: 30rem;
+.app__notification .app__notification_bell > * {
+  color: black;
+  transition: color 0.125s ease-in-out;
 }
-
-@media screen and (max-width: 1300px) {
-  .app__navbar__searchBar input {
-    width: 22.5rem;
-  }
-}
-@media screen and (max-width: 1150px) {
-  .app__navbar__searchBar input {
-    width: 20rem;
-  }
-}
-@media screen and (max-width: 1050px) {
-  .app__navbar__searchBar input {
-    width: 22.5rem;
-  }
-}
-@media screen and (max-width: 450px) {
-  .app__navbar__searchBar div {
-    padding: 0.3rem 0.6rem;
-  }
-}/*# sourceMappingURL=Searchbar.css.map */
+.app__notification:hover .app__notification_bell > * {
+  color: #EB5C1F;
+}/*# sourceMappingURL=Notification.css.map */

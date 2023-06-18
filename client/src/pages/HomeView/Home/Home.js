@@ -136,7 +136,7 @@ function Home() {
         <img src={images.shopping_app}></img>
 
       </div>
-      <div className='app__destaques main__container'>
+      <div className='app__destaques main__container' id="comprar_div">
           <SubHeading title="Destaques"></SubHeading>
           <div className="app__destaques_content">
             <Swiper         

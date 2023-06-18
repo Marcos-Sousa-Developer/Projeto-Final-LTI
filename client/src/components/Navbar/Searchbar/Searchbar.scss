@@ -16,13 +16,30 @@
     }
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1300px) {
     .app__navbar__searchBar{
         input{
             width: 22.5rem;
         }
     }
 }
+
+@media screen and (max-width: 1150px) {
+    .app__navbar__searchBar{
+        input{
+            width: 20rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .app__navbar__searchBar{
+        input{
+            width: 22.5rem;
+        }
+    }
+}
+
 @media screen and (max-width: 450px) {
     .app__navbar__searchBar{
         div{
