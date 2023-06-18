@@ -79,7 +79,7 @@ const SignInC = ({checkout=null}) => {
     }
 
     const sendCode = async () => {
-
+        
         setNotValidade(false)
 
         let isActive = await auth.verifyEmail(email,code);
@@ -88,6 +88,7 @@ const SignInC = ({checkout=null}) => {
             setNotValidade(true)
         }
         snackbarRef2.current.show();
+        setLoading(false)
     } 
 
     const getUserTypeInitial = async () => {
@@ -191,7 +192,7 @@ const SignInC = ({checkout=null}) => {
                             {
                                 loading || notValidate? 
                                 (
-                                    <button className='main__action_btn'>Login</button>
+                                    <button className='main__action_btn'>Loading</button>
                                 )
                                 :
                                 (

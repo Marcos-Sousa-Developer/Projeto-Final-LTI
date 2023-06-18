@@ -101,7 +101,7 @@ const verifyUserAutentecity = async (client_token,client_id) => {
     });
 
     //when complete true is active return all the complete info
-    const decodedAccessToken = jwt.decode(client_token, { complete: true });
+    const decodedAccessToken = jwt.decode(client_token, { complete: true }); 
     
     // "kid" field is used to indicate which key was used to sign the token
     const kid = decodedAccessToken.header.kid;  
