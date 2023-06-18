@@ -492,7 +492,7 @@ function CriarAnuncio() {
                   email: formData.email,
                   mobile_number: formData.telemovel,
                   extraCharacteristics: JSON.stringify(featuresDBad),
-                  status: "ativo",
+                  status: 1,
                   production_date: formData.data_producao,
                   price: formData.preco,
                   supplier_id: idUser,
@@ -595,8 +595,6 @@ function CriarAnuncio() {
             //SE CONSEGUIR ADICIONAR TODOS ADICIONA
             //SE NÃO, DÁ UM ALERT
 
-            console.log(formData.features)
-            console.log(formData.sub_features)
             setTimeout(() => {
               navigate('/supplier', { replace: true });
             }, 3000); // 3 seconds delay

@@ -229,7 +229,7 @@ const ProductPage = () => {
                           {Object.keys(adData.caracteristics).map((key) => {
                             return key !== "0" && <th key={key}>{key}</th>;
                           })}
-                          {Object.keys(adData.caracteristics).map((key) => {
+                          {Object.keys(adData.caracteristics[0]).map((key) => {
                             return key !== "0" && <th key={key}>{key}</th>;
                           })}
                         </tr>
