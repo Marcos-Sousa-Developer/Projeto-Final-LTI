@@ -7,6 +7,7 @@ import './CompareProduct.css';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 
 import exampleImage from '../../../assets/testproducts/boxedwater2.jpg';
+import LoadingPage from '../../LoadingPage';
 
 const CompareProduct = () => {
   const location = useLocation();
@@ -35,7 +36,12 @@ const CompareProduct = () => {
               <table key={product.id}>
                 <tbody>
                   <tr>
-                    <td style={{paddingTop:'.75rem'}}>
+                    <td className='deleteFromCompare' style={{textAlign: 'end'}}>
+                      <button onClick={() => removeProduct(product.id)}><FiX></FiX></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
                       <img className='app__pointer' src={exampleImage} alt={product.title} onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: product.id }).toString()}`)}/>
                     </td>
                   </tr>
@@ -46,8 +52,26 @@ const CompareProduct = () => {
                     <td><PriceDisplay price={product.price}></PriceDisplay></td>
                   </tr>
                   <tr>
-                    <td className='deleteFromCompare'>
-                      <button onClick={() => removeProduct(product.id)}>remover</button>
+                    <td>
+                      {Object.keys(JSON.parse(product.extraCharacteristic)).map((key) => {
+                      if (key === "0") {
+                        return Object.keys(JSON.parse(product.extraCharacteristic)[key]).map((key2) => {
+                          return (
+                            <div key={key2} style={{display: 'flex', justifyContent: 'space-between', borderTop: '2px solid #EEEEEE'}}>
+                              <p style={{fontWeight: '500'}}>{key2}</p>
+                              <p style={{textAlign: 'end'}}>{JSON.parse(product.extraCharacteristic)[key][key2].length > 0 ? JSON.parse(product.extraCharacteristic)[key][key2] : "N/A"}</p>
+                            </div>
+                          )
+                        });
+                      } else {
+                        return (
+                          <div key={key} style={{display: 'flex', justifyContent: 'space-between', borderTop: '2px solid #EEEEEE'}}>
+                            <p style={{fontWeight: '500'}}>{key}</p>
+                            <p style={{textAlign: 'end'}}>{JSON.parse(product.extraCharacteristic)[key].length > 0 ? JSON.parse(product.extraCharacteristic)[key] : "N/A"}</p>
+                          </div>
+                        );
+                      }
+                    })}
                     </td>
                   </tr>
                 </tbody>
@@ -55,6 +79,35 @@ const CompareProduct = () => {
             );
           })}
         </div>
+        {/*<div className='app__compare-product_content'>
+        {produtos.map(product => {
+          return (
+            <table key={product.id} className='app__compare-product_content_characteristics'>
+              <tbody>
+                {Object.keys(JSON.parse(product.extraCharacteristic)).map((key) => {
+                  if (key === "0") {
+                    return Object.keys(JSON.parse(product.extraCharacteristic)[key]).map((key2) => {
+                      return (
+                        <tr key={key2}>
+                          <td style={{fontWeight: '500'}}>{key2}</td>
+                          <td style={{textAlign: 'end'}}>{JSON.parse(product.extraCharacteristic)[key][key2].length > 0 ? JSON.parse(product.extraCharacteristic)[key][key2] : "N/A"}</td>
+                        </tr>
+                      )
+                    });
+                  } else {
+                    return (
+                      <tr key={key}>
+                        <td style={{fontWeight: '500'}}>{key}</td>
+                        <td style={{textAlign: 'end'}}>{JSON.parse(product.extraCharacteristic)[key].length > 0 ? JSON.parse(product.extraCharacteristic)[key] : "N/A"}</td>
+                      </tr>
+                    );
+                  }
+                })}
+              </tbody>
+            </table>
+          );
+        })}
+      </div>*/}
       </div>
       <Footer></Footer>
     </>

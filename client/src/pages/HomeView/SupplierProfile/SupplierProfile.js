@@ -424,138 +424,95 @@ function SupplierProfile() {
           <SubHeading title="Conta"/>
           <div className='app__SupplierProfile_content'>
             <p>Dados da Minha Conta</p>
-            <div className='app__SupplierProfile_box'>
-              <div className='app__SupplierProfile_box_div'>
-                <div className='app__SupplierProfile_box_div_row'>
-                  Nome
-                  <div className={!Nameerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
-                    <FiUser></FiUser>
-                    <input type="text" placeholder="Nome" value = {name ?? ""} name="name" onChange={handleSetName}></input>
-                  </div>
-                </div>
-                <div className='app__SupplierProfile_box_div_row'>
-                  Telemóvel
-                  <div className={!Numbererror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
-                    <FiSmartphone></FiSmartphone>
-                    <input type="tel" placeholder="Número de telemóvel" value = {mobile_number ?? ""} name="mobile_number" onChange={handleSetMobileNumber}></input>
-                  </div>
-                  {
-                    Numbererror &&
-                      <div className='error_msg'>Número com formato errado.</div>
-                  }
-                </div>
-                <div className='app__SupplierProfile_box_div_row'>
-                  NIF
-                  <div className={!Niferror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
-                    <BiIdCard></BiIdCard>
-                    <input type="text" placeholder="NIF" value = {nif ?? ""} name="nif" onChange={handleSetNif}></input>
-                  </div>
-                  {
-                    Niferror &&
-                      <div className='error_msg'>NIF com formato errado.</div>
-                  }
-                </div>
-              </div>
-              <div className='app__SupplierProfile_box_div'>
-                <div className='app__SupplierProfile_box_div_row'>
-                  Email
-                  <div className={!Emailerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
-                    <FiMail style={{opacity: "0.4"}}></FiMail>
-                    <input style={{opacity: "0.4"}} type="email" placeholder="Email" value = {email ?? ""} name="email" disabled></input>
-                  </div>
-                  {
-                    Emailerror &&
-                      <div className='error_msg'>Email com formato errado.</div>
-                  }
-                </div>
-                <div className='app__SupplierProfile_box_div_row'>
-                  Morada
-                  <div className='app__SupplierProfile_box_div_row_input'>
-                    <FiMapPin style={{opacity: "0.4"}}></FiMapPin>
-                    <input style={{opacity: "0.4"}} type="text" placeholder="Morada" value = {address ?? ""} name="address" disabled></input>
-                  </div>
-                </div>
-                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}} className='app__SupplierProfile_box_div_row'>
-                  <div>
-                    Cidade
-                    <div className='app__SupplierProfile_box_div_row_input'>
-                      <FiMapPin style={{opacity: "0.4"}}></FiMapPin>
-                      <input style={{opacity: "0.4"}} type="text" placeholder="Cidade" value = {city ?? ""} name="city" disabled></input>
+            <div className='app__SupplierProfile_outside'>
+              <div className='app__SupplierProfile_box'>
+                <div className='app__SupplierProfile_box_div'>
+                  <div className='app__SupplierProfile_box_div_row'>
+                    Nome
+                    <div className={!Nameerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
+                      <FiUser></FiUser>
+                      <input type="text" placeholder="Nome" value = {name ?? ""} name="name" onChange={handleSetName}></input>
                     </div>
                   </div>
-                  <div>
-                    Cód. Postal
-                    <div className={!CPerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
-                      <FiMapPin></FiMapPin>
-                      <input type="text" placeholder="Cód. Postal" value = {postalCode ?? ""} name="postalCode" onChange={handleSetPostalCode}></input>
+                  <div className='app__SupplierProfile_box_div_row'>
+                    Telemóvel
+                    <div className={!Numbererror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
+                      <FiSmartphone></FiSmartphone>
+                      <input type="tel" placeholder="Número de telemóvel" value = {mobile_number ?? ""} name="mobile_number" onChange={handleSetMobileNumber}></input>
                     </div>
                     {
-                      CPerror &&
-                        <div className='error_msg'>Código postal não encontrado.</div>
+                      Numbererror &&
+                        <div className='error_msg'>Número com formato errado.</div>
+                    }
+                  </div>
+                  <div className='app__SupplierProfile_box_div_row'>
+                    NIF
+                    <div className={!Niferror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
+                      <BiIdCard></BiIdCard>
+                      <input type="text" placeholder="NIF" value = {nif ?? ""} name="nif" onChange={handleSetNif}></input>
+                    </div>
+                    {
+                      Niferror &&
+                        <div className='error_msg'>NIF com formato errado.</div>
                     }
                   </div>
                 </div>
-              </div>
-            </div>
-            <p>Alterar Password</p>
-            <div className='app__SupplierProfile_box'>
-              <div className='app__SupplierProfile_box_div'>
-                <div className='app__SupplierProfile_box_div_row'>
-                  Nova Password
-                  <div className='app__SupplierProfile_box_div_row_input'>
-                    <FiLock></FiLock>
-                    <input
-                      id="password-input"
-                      type="password"
-                      value={password}
-                      onChange={handlePasswordChange}
-                    />
+                <div className='app__SupplierProfile_box_div'>
+                  <div className='app__SupplierProfile_box_div_row'>
+                    Email
+                    <div className={!Emailerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
+                      <FiMail style={{opacity: "0.4"}}></FiMail>
+                      <input style={{opacity: "0.4"}} type="email" placeholder="Email" value = {email ?? ""} name="email" disabled></input>
+                    </div>
+                    {
+                      Emailerror &&
+                        <div className='error_msg'>Email com formato errado.</div>
+                    }
                   </div>
-                  { password && (
-                      <ul className='app__SupplierProfile_password-checks'>
-                        <li>
-                          {isEightCharLong ? 
-                              ''
-                            : 
-                              <div>Mínimo de 8 caracteres de comprimento: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                          }
-                        </li>
-                        <li>
-                          {hasNumber ? 
-                              ''
-                            : 
-                              <div>Contém pelo menos 1 número: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                          }
-                        </li>
-                        <li>
-                          {hasLowerCase ? 
-                              ''
-                            : 
-                              <div>Contém pelo menos 1 letra minúscula: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                          }
-                        </li>
-                        <li>
-                          {hasUpperCase ? 
-                            ''
-                          : 
-                            <div>Contém pelo menos 1 letra maiúscula: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                          }
-                        </li>
-                        <li>
-                          {hasSpecialChar ? 
-                            ''
-                          : 
-                            <div>Contém pelo menos 1 caractere especial: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
-                          }
-                        </li>
-                      </ul>
-                  )}
+                  <div className='app__SupplierProfile_box_div_row'>
+                    Morada
+                    <div className='app__SupplierProfile_box_div_row_input'>
+                      <FiMapPin style={{opacity: "0.4"}}></FiMapPin>
+                      <input style={{opacity: "0.4"}} type="text" placeholder="Morada" value = {address ?? ""} name="address" disabled></input>
+                    </div>
+                  </div>
+                  <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}} className='app__SupplierProfile_box_div_row'>
+                    <div>
+                      Cidade
+                      <div className='app__SupplierProfile_box_div_row_input'>
+                        <FiMapPin style={{opacity: "0.4"}}></FiMapPin>
+                        <input style={{opacity: "0.4"}} type="text" placeholder="Cidade" value = {city ?? ""} name="city" disabled></input>
+                      </div>
+                    </div>
+                    <div>
+                      Cód. Postal
+                      <div className={!CPerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
+                        <FiMapPin></FiMapPin>
+                        <input type="text" placeholder="Cód. Postal" value = {postalCode ?? ""} name="postalCode" onChange={handleSetPostalCode}></input>
+                      </div>
+                      {
+                        CPerror &&
+                          <div className='error_msg'>Código postal não encontrado.</div>
+                      }
+                    </div>
+                  </div>
                 </div>
-                <Modal open={isChangePasswordOpen} onClose={() => setIsChangePasswordOpen(false)}>
-                    <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar a palavra passe?</p>
+              </div>
+              <div>
+                {
+                  CPerror ? (
+                    <button style={{opacity:"0.4", margin: '0 0 1rem 1.5rem'}} className='main__action_btn' disabled>Guardar</button>
+                  )
+                  : 
+                  (
+                    <button type="submit" style={{margin: '0 0 1rem 1.5rem'}} onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
+                  )
+                }           
+                  <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                    <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os seus dados?</p>
 
                     <div className='inputField' style={{marginTop:'1.5rem'}}>
-                      <p style={{marginTop: '0'}}>Password Antiga</p>
+                      <p style={{marginTop: '0'}}>Password</p>
                       <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password' onChange={(e) => setPasswordToVerify(e.target.value)}></input>
                     </div>
                     {
@@ -568,93 +525,141 @@ function SupplierProfile() {
                       )
                     }
                     <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
-                      <button className='main__action_btn' onClick={() => setIsChangePasswordOpen(false)}>Cancelar</button>
+                      <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
                       {
-                        (passwordToVerify === "" || inProcess==true) ? (
+                        (passwordToVerify === "" || inProcess==true)  ? (
                           <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
                         )
                         :
                         (
-                          <button className='main__negative_action_btn' onClick={() => { verifyChangePassword()}}>Guardar</button>
+                          <button className='main__negative_action_btn' onClick={() => { verifyPassword()}}>Guardar</button>
                         )
                       }
                     </div>
-                </Modal>
-                {
-                  (!isEightCharLong || !hasNumber || !hasLowerCase || !hasUpperCase || !hasSpecialChar || password === "" || !passwordMatch) ? (
-                    <button className='main__action_btn' style={{opacity: "0.4"}} disabled>Alterar Password</button>
-                  )
-                  :
-                  (
-                    <button type="submit" onClick={() => setIsChangePasswordOpen(true)} className='main__action_btn'>Alterar Password</button>
-                  )
-                }
-
+                  </Modal>
               </div>
-              <div className='app__SupplierProfile_box_div'>
-                <div className='app__SupplierProfile_box_div_row'>
-                    Confirmar Nova Password
+            </div>
+            <p>Alterar Password</p>
+            <div className='app__SupplierProfile_outside'>
+              <div className='app__SupplierProfile_box'>
+                <div className='app__SupplierProfile_box_div'>
+                  <div className='app__SupplierProfile_box_div_row'>
+                    Nova Password
                     <div className='app__SupplierProfile_box_div_row_input'>
                       <FiLock></FiLock>
                       <input
-                        id="confirm-password-input"
+                        id="password-input"
                         type="password"
-                        value={confirmPassword}
-                        onChange={handleConfirmPasswordChange}
+                        value={password}
+                        onChange={handlePasswordChange}
                       />
                     </div>
-                    {(password !== "" || confirmPassword !== "") && (passwordMatch ? (
-                      ""
-                    ) : (
-                      <div className='app__SupplierProfile_password-checks'>
-                        <span className='app__SupplierProfile_password-checks_symbol-fail'>Passwords não correspondem: <FiX fontSize={20}></FiX></span>
+                    { password && (
+                        <ul className='app__SupplierProfile_password-checks'>
+                          <li>
+                            {isEightCharLong ? 
+                                ''
+                              : 
+                                <div>Mínimo de 8 caracteres de comprimento: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                            }
+                          </li>
+                          <li>
+                            {hasNumber ? 
+                                ''
+                              : 
+                                <div>Contém pelo menos 1 número: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                            }
+                          </li>
+                          <li>
+                            {hasLowerCase ? 
+                                ''
+                              : 
+                                <div>Contém pelo menos 1 letra minúscula: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                            }
+                          </li>
+                          <li>
+                            {hasUpperCase ? 
+                              ''
+                            : 
+                              <div>Contém pelo menos 1 letra maiúscula: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                            }
+                          </li>
+                          <li>
+                            {hasSpecialChar ? 
+                              ''
+                            : 
+                              <div>Contém pelo menos 1 caractere especial: <span className='app__SupplierProfile_password-checks_symbol-fail'><FiX fontSize={20}></FiX></span></div>
+                            }
+                          </li>
+                        </ul>
+                    )}
+                  </div>
+                  <Modal open={isChangePasswordOpen} onClose={() => setIsChangePasswordOpen(false)}>
+                      <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar a palavra passe?</p>
+
+                      <div className='inputField' style={{marginTop:'1.5rem'}}>
+                        <p style={{marginTop: '0'}}>Password Antiga</p>
+                        <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password' onChange={(e) => setPasswordToVerify(e.target.value)}></input>
                       </div>
-                    ))}
+                      {
+                        notSubmit === true ? (
+                          <small style={{color: "red"}}>Password Incorreta </small> 
+                        )
+                        :
+                        (
+                          <small style={{color: "red"}}></small> 
+                        )
+                      }
+                      <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+                        <button className='main__action_btn' onClick={() => setIsChangePasswordOpen(false)}>Cancelar</button>
+                        {
+                          (passwordToVerify === "" || inProcess==true) ? (
+                            <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
+                          )
+                          :
+                          (
+                            <button className='main__negative_action_btn' onClick={() => { verifyChangePassword()}}>Guardar</button>
+                          )
+                        }
+                      </div>
+                  </Modal>
                 </div>
+                <div className='app__SupplierProfile_box_div'>
+                  <div className='app__SupplierProfile_box_div_row'>
+                      Confirmar Nova Password
+                      <div className='app__SupplierProfile_box_div_row_input'>
+                        <FiLock></FiLock>
+                        <input
+                          id="confirm-password-input"
+                          type="password"
+                          value={confirmPassword}
+                          onChange={handleConfirmPasswordChange}
+                        />
+                      </div>
+                      {(password !== "" || confirmPassword !== "") && (passwordMatch ? (
+                        ""
+                      ) : (
+                        <div className='app__SupplierProfile_password-checks'>
+                          <span className='app__SupplierProfile_password-checks_symbol-fail'>Passwords não correspondem: <FiX fontSize={20}></FiX></span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+              <div>
+               {
+                (!isEightCharLong || !hasNumber || !hasLowerCase || !hasUpperCase || !hasSpecialChar || password === "" || !passwordMatch) ? (
+                  <button className='main__action_btn' style={{opacity: "0.4", margin: '0 0 1rem 1.5rem'}} disabled>Alterar Password</button>
+                )
+                :
+                (
+                  <button type="submit" style={{margin: '0 0 1rem 1.5rem'}} onClick={() => setIsChangePasswordOpen(true)} className='main__action_btn'>Alterar Password</button>
+                )
+              }
               </div>
             </div>
           </div>
           <div className="app__SupplierProfile_button">
-          
-          {
-                  CPerror ? (
-                    <button style={{opacity:"0.4"}} className='main__action_btn' disabled>Guardar</button>
-                  )
-                  : 
-                  (
-                    <button type="submit" onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
-                  )
-          }           
-            <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-              <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os seus dados?</p>
-
-              <div className='inputField' style={{marginTop:'1.5rem'}}>
-                <p style={{marginTop: '0'}}>Password</p>
-                <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password' onChange={(e) => setPasswordToVerify(e.target.value)}></input>
-              </div>
-              {
-                notSubmit === true ? (
-                  <small style={{color: "red"}}>Password Incorreta </small> 
-                )
-                :
-                (
-                  <small style={{color: "red"}}></small> 
-                )
-              }
-              <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
-                <button className='main__action_btn' onClick={() => setIsOpen(false)}>Cancelar</button>
-                {
-                  (passwordToVerify === "" || inProcess==true)  ? (
-                    <button className='main__negative_action_btn' style={{opacity:"0.2"}} disabled>Guardar</button>
-                  )
-                  :
-                  (
-                    <button className='main__negative_action_btn' onClick={() => { verifyPassword()}}>Guardar</button>
-                  )
-                }
-              </div>
-              
-            </Modal>
             <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
             <button type='button' onClick={() => setIsDeleteOpen(true)} ><FiTrash2></FiTrash2></button>
 

@@ -21,12 +21,15 @@ const SubSubCategory = () => {
 
   const [isOpen, setIsOpen] = useState(false);  //modal
   const [filterPrice, setFilterPrice] = useState(false);
+  const [filterSort, setFilterSort] = useState(false);
+  const [filterCharacteristics, setFilterCharacteristics] = useState(null);
   const [ads, setAds] = useState([])
   const [searchName, setSearchName] = useState(null)
   const [categoryName, setCategoryName] = useState("")
   const [subCategoryName, setSubCategoryName] = useState("")
   const [subsubCategoryName, setSubSubCategoryName] = useState("")
   const [currentPage, setCurrentPage] = useState(1);
+  const [isSorted, setIsSorted] = useState(0);
   const [didMount, setDidMount] = useState(false)
   const [selectedProducts, setSelectedProducts] = useState([]);
 
@@ -55,6 +58,7 @@ const SubSubCategory = () => {
     let adsDB = await getAllFromDB("/ads", {title: searchName, subsubcategory_name: subsubCategoryName})
     setAds(adsDB)
     setAdsPrev(adsDB)
+    getCharacteristics(adsDB)
     let max = 0;
     adsDB.map( (ad) => {  
       ad.price > max ? max = ad.price: max = max
@@ -70,6 +74,7 @@ const SubSubCategory = () => {
     let adsDB = await getAllFromDB("/ads", {title: searchName, subsubcategory_name: subsubCategoryName})
     setAds(adsDB)
     setAdsPrev(adsDB)
+    getCharacteristics(adsDB)
     let max = 0;
     adsDB.map( (ad) => {  
       ad.price > max ? max = ad.price: max = max
@@ -79,6 +84,41 @@ const SubSubCategory = () => {
     startIndex = (currentPage - 1) * 20;
     endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
     setCurrentItems(adsDB.slice(startIndex, endIndex))
+  }
+
+  const getCharacteristics = async (ads) => {
+
+    const characteristics = []
+
+    ads.map((ad) => {  
+      characteristics.push(JSON.parse(ad.extraCharacteristic))
+    })
+
+    const characteristicsDict = {};
+    characteristics.forEach(obj => {
+      Object.entries(obj).forEach(([key, value]) => {
+        if (typeof value === 'object') {
+          Object.entries(value).forEach(([nestedKey, nestedValue]) => {
+            if (characteristicsDict[nestedKey]) {
+              if (!characteristicsDict[nestedKey].includes(nestedValue)) {
+                characteristicsDict[nestedKey].push(nestedValue);
+              }
+            } else {
+              characteristicsDict[nestedKey] = [nestedValue];
+            }
+          });
+        } else {
+          if (characteristicsDict[key]) {
+            if (!characteristicsDict[key].includes(value)) {
+              characteristicsDict[key].push(value);
+            }
+          } else {
+            characteristicsDict[key] = [value];
+          }
+        }
+      });
+    });
+    setFilterCharacteristics(characteristicsDict)
   }
 
   //Comparador
@@ -153,6 +193,10 @@ const SubSubCategory = () => {
   const toggleFilterPrice = () =>{
     return setFilterPrice(!filterPrice);
   }
+
+  const toggleFilterSort = () =>{
+    return setFilterSort(!filterSort);
+  }
   
   const setByPrice = () =>{
     setCurrentPage(1)
@@ -169,6 +213,27 @@ const SubSubCategory = () => {
       }
       setAdsPrev(newProducts)
     }
+  }
+
+  const sortPriceLow = () =>{
+    setCurrentPage(1)
+    let adsSorted = adsPrev.sort((a, b) => a.price - b.price);
+    setAdsPrev(adsSorted)
+    setIsSorted(isSorted+1)
+  }
+
+  const sortPriceHigh = () =>{
+    setCurrentPage(1)
+    let adsSorted = adsPrev.sort((a, b) => b.price - a.price);
+    setAdsPrev(adsSorted)
+    setIsSorted(isSorted+1)
+  }
+
+  const sortMostRecent = () =>{
+    setCurrentPage(1)
+    let adsSorted = adsPrev.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    setAdsPrev(adsSorted)
+    setIsSorted(isSorted+1)
   }
 
   //UseEffect
@@ -202,10 +267,11 @@ const SubSubCategory = () => {
   }, [])
 
   useEffect(()=>{ 
+    getCharacteristics(adsPrev)
     startIndex = 0;
     endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
     setCurrentItems(adsPrev.slice(startIndex, endIndex))
-  }, [adsPrev])
+  }, [adsPrev, isSorted])
 
   return (
     <>
@@ -267,6 +333,50 @@ const SubSubCategory = () => {
                   <button className='main__action_btn' onClick={() => setByPrice()}>OK</button>
                 </div>
               </div>
+              <div className='app__Category_filter_unit'>
+                <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
+                  <p style={{margin: '0'}}>Ordenar por:</p>
+                  <span>{filterSort ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
+                  <li style={{marginLeft: '1rem'}}>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }>Preço - mais baixo</a>
+                  </li>
+                  <li style={{marginLeft: '1rem'}}>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }>Preço - mais alto</a>
+                  </li> 
+                  <li style={{marginLeft: '1rem'}}>
+                    <a className='app__pointer app__text_effect' onClick={() => sortMostRecent() }>Os mais recentes</a>
+                  </li> 
+                </ul>
+              </div>
+
+              {/*-----------Filtros das caracteristicas-----------*/}
+              <div className='app__Category_filter_unit'>
+              {Object.entries(filterCharacteristics).map(([key]) => (
+                <div key={key}>
+                  <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
+                    <p style={{ margin: '0' }}>{key}</p>
+                    <span>
+                      {filterSort ? (
+                        <FiChevronUp className='app__Category_filter_content_title_up' />
+                      ) : (
+                        <FiChevronRight className='app__Category_filter_content_title_right' />
+                      )}
+                    </span>
+                  </div>
+                  <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
+                    {filterCharacteristics[key].map((value) => {
+                      return (
+                        <li style={{ marginLeft: '1rem' }}>
+                          <a className='app__pointer app__text_effect' onClick={() => sortPriceLow()}>{value}</a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ))}
+              </div>
             </div>
           </div>
           <div className='app__SubSubCategory_Grid_Direita'>
@@ -290,7 +400,24 @@ const SubSubCategory = () => {
                     <button className='' onClick={() => setByPrice()}>OK</button>
                   </div>
                 </div>
-                <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()     }>Aplicar</button>
+                <div className='app__Category_filter_unit'>
+                  <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
+                    <p style={{margin: '0'}}>Ordenar por:</p>
+                    <span>{filterSort ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                  </div>
+                  <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
+                    <li style={{marginLeft: '1rem'}}>
+                      <a className='app__pointer app__text_effect' onClick={() => sortPriceLow()}> Preço - mais baixo</a>
+                    </li>
+                    <li style={{marginLeft: '1rem'}}>
+                      <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh()}> Preço - mais alto</a>
+                    </li> 
+                    <li style={{marginLeft: '1rem'}}>
+                      <a className='app__pointer app__text_effect' onClick={() => sortMostRecent()}> Os mais recentes</a>
+                    </li> 
+                  </ul>
+                </div>
+                <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()}>Aplicar</button>
               </Modal>
             </div>
             <div className='products'>  

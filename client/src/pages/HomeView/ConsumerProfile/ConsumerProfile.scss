@@ -38,13 +38,16 @@
             color: rgba($color: $orange, $alpha: .8);
         }
     }
+
+    &_outside{
+        border: 3.5px solid $light_gray;
+        margin-bottom: 1rem;
+    }
     
     &_box{
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
-        border: 3.5px solid $light_gray;
-        margin-bottom: 1rem;
 
         input{
             border: none;

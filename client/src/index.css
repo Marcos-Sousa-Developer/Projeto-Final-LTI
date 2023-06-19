@@ -223,6 +223,10 @@ img, picture {
   border: 3px solid rgba(235, 92, 31, 0.8);
 }
 
+.app__destaques_content .swiper, .app__destaques_content .swiper-container {
+  z-index: 0;
+}
+
 .mapboxgl-ctrl-bottom-left {
   display: none;
 }

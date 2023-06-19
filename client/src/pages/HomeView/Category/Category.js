@@ -23,10 +23,12 @@ const Category = () => {
   const [isOpen, setIsOpen] = useState(false);  //modal
   const [filterCategory, setFilterCategory] = useState(false);
   const [filterPrice, setFilterPrice] = useState(false);
+  const [filterSort, setFilterSort] = useState(false);
   const [ads, setAds] = useState([]);
   const [searchName, setSearchName] = useState(null);
   const [categoryName, setCategoryName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isSorted, setIsSorted] = useState(0);
   const [didMount, setDidMount] = useState(false);
 
   const snackbarRef = useRef(null);
@@ -170,6 +172,9 @@ const Category = () => {
   const toggleFilterPrice = () =>{
     return setFilterPrice(!filterPrice);
   }
+  const toggleFilterSort = () =>{
+    return setFilterSort(!filterSort);
+  }
 
   const setByPrice = () =>{
     setCurrentPage(1)
@@ -186,6 +191,27 @@ const Category = () => {
       }
       setAdsPrev(newProducts)
     }
+  }
+
+  const sortPriceLow = () =>{
+    setCurrentPage(1)
+    let adsSorted = adsPrev.sort((a, b) => a.price - b.price);
+    setAdsPrev(adsSorted)
+    setIsSorted(isSorted+1)
+  }
+
+  const sortPriceHigh = () =>{
+    setCurrentPage(1)
+    let adsSorted = adsPrev.sort((a, b) => b.price - a.price);
+    setAdsPrev(adsSorted)
+    setIsSorted(isSorted+1)
+  }
+
+  const sortMostRecent = () =>{
+    setCurrentPage(1)
+    let adsSorted = adsPrev.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    setAdsPrev(adsSorted)
+    setIsSorted(isSorted+1)
   }
 
   //UseEffect
@@ -220,7 +246,7 @@ const Category = () => {
     startIndex = 0;
     endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
     setCurrentItems(adsPrev.slice(startIndex, endIndex))
-  }, [adsPrev])
+  }, [adsPrev, isSorted])
 
   return (
     <>
@@ -293,6 +319,23 @@ const Category = () => {
                   <button className='main__action_btn' onClick={() => setByPrice()}>OK</button>
                 </div>
               </div>
+              <div className='app__Category_filter_unit'>
+                <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
+                  <p style={{margin: '0'}}>Ordenar por:</p>
+                  <span>{filterSort ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
+                  <li style={{marginLeft: '1rem'}}>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }>Preço - mais baixo</a>
+                  </li>
+                  <li style={{marginLeft: '1rem'}}>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }>Preço - mais alto</a>
+                  </li> 
+                  <li style={{marginLeft: '1rem'}}>
+                    <a className='app__pointer app__text_effect' onClick={() => sortMostRecent() }>Os mais recentes</a>
+                  </li> 
+                </ul>
+              </div>
             </div> 
           </div> 
           <div className='app__Category_Grid_Direita'>
@@ -328,9 +371,26 @@ const Category = () => {
                     <button className='' onClick={() => setByPrice()}>OK</button>
                   </div>
                 </div>
+                <div className='app__Category_filter_unit'>
+                <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
+                  <p style={{margin: '0'}}>Ordenar por:</p>
+                  <span>{filterSort ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                </div>
+                <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
+                  <li style={{marginLeft: '1rem'}}>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }>Preço - mais baixo</a>
+                  </li>
+                  <li style={{marginLeft: '1rem'}}>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }>Preço - mais alto</a>
+                  </li> 
+                  <li style={{marginLeft: '1rem'}}>
+                    <a className='app__pointer app__text_effect' onClick={() => sortMostRecent() }>Os mais recentes</a>
+                  </li>  
+                </ul>
+              </div>
               </Modal>
             </div>
-            <div className='products'>  
+            <div className='products'>
             {currentItems.map((ad) => (
                 <Product 
                   key={ad.id} 
