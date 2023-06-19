@@ -269,6 +269,12 @@ img, picture{
   }
 }
 
+.app__destaques_content{
+  .swiper, .swiper-container{
+    z-index: 0;
+  }
+}
+
 .mapboxgl-ctrl-bottom-left{
   display: none;
 }

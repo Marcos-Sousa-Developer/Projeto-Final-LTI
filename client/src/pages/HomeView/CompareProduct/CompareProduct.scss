@@ -8,6 +8,7 @@
         grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 1rem;
         margin-top: 1rem;
+        margin-bottom: 1rem;
 
         table{
             border: $border;
@@ -19,9 +20,41 @@
 
             tr td{
                 padding: .25rem .75rem;
+                font-size: $smaller_font;
+            }
+        }
+
+        &_characteristics{
+            width: 100%;
+            border: none;
+
+            tbody tr:nth-child(odd) td{
+                background-color: rgba($color: $light_gray, $alpha: .4);
             }
         }
     }
+}
 
+@media screen and (max-width: 1200px) {
+    .app__compare-product{
+        overflow-x: scroll;
+    }
+}
 
+@media screen and (max-width: 1200px) {
+    .app__compare-product_content{
+        grid-template-columns: 300px 300px 300px 300px;
+
+        table{
+            tr td{
+                font-size: $smaller_font;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .app__compare-product_content{
+
+    }
 }
