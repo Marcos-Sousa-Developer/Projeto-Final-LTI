@@ -392,9 +392,9 @@ const SubSubCategory = () => {
           </div>
           <div className='app__SubSubCategory_Grid_Direita'>
             <div className='app__SubSubCategory_mobile_filter_content'>
-              <button className='secondary__action_btn' onClick={() => setIsOpen(true)}>FILTROS</button>
+              <button className='secondary__action_btn' style={{marginBottom: '1rem'}} onClick={() => setIsOpen(true)}>FILTROS</button>
               <Modal open={isOpen} onClose={() => setIsOpen(false)} filter={true}>
-                <p>Filtros</p>
+                <p>FILTROS</p>
                 <div className='app__SubSubCategory_filter_unit'>
                   <p className="mobile-title">Preço</p>
                   <div className='filterPrice'>
@@ -413,7 +413,7 @@ const SubSubCategory = () => {
                 </div>
                 <div className='app__SubSubCategory_filter_unit'>
                   <div className='app__pointer app__SubSubCategory_filter_content_title' onClick={toggleFilterSort}>
-                    <p style={{margin: '0'}} className="mobile-title">Ordenar por</p>
+                    <p className="mobile-title">Ordenar por</p>
                   </div>
                   <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
                     <li>

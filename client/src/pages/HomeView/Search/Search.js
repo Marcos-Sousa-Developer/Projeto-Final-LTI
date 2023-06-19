@@ -292,10 +292,10 @@ const Search = () => {
           </div> 
           <div className='app__Search_Grid_Direita'>
            <div className='app__Search_mobile_filter_content'>
-              <button className='secondary__action_btn' onClick={() => setIsOpen(true)}>FILTROS</button>
+              <button className='secondary__action_btn' style={{marginBottom: '1rem'}} onClick={() => setIsOpen(true)}>FILTROS</button>
               <Modal open={isOpen} onClose={() => setIsOpen(false)} filter={true}>
                 <p>FILTROS</p>
-                <div>
+                <div className='app__Search_filter_unit'>
                   <p className="mobile-title">Categoria</p>
                   <ul>
                     {Object.keys(categories).map((category_name) => { 
@@ -325,7 +325,7 @@ const Search = () => {
                 </div>
                 <div className='app__Search_filter_unit'>
                 <div className='app__pointer app__Search_filter_content_title' onClick={toggleFilterSort}>
-                  <p style={{margin: '0'}} className="mobile-title">Ordenar por</p>
+                  <p className="mobile-title">Ordenar por</p>
                 </div>
                 <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
                   <li>
