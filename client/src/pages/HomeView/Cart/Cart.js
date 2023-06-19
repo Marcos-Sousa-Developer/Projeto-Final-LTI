@@ -50,8 +50,11 @@ const Cart = () => {
       const quantity = cookies.cart[item][0]
       const price = cookies.cart[item][1]
       const name = cookies.cart[item][2]
-
-      params[item] = {price: price, quantity: quantity, name:name}
+      let urlImage = null 
+      if(cookies.cart[item][3].urls !== null){
+        urlImage = JSON.parse(cookies.cart[item][3].urls)[0]
+      }
+      params[item] = {price: price, quantity: quantity, name:name, url: urlImage}
     }
     params['details'] = {
       email: email,

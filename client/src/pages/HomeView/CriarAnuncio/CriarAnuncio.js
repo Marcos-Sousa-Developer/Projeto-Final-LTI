@@ -16,6 +16,7 @@ import LoadingPage from '../../LoadingPage';
 import Features from './Features';
 import SubFeatures from './SubFeatures';
 import "./styles/CriarAnuncio.css";
+import axios from 'axios';
 
 const SnackbarType = {
   success: "success",
@@ -38,7 +39,8 @@ function CriarAnuncio() {
     const [numberError, setNumberError] = useState(false);
     const [eanError, setEanError] = useState(false);
     const [productionDateError, setProductionDateError] = useState(false);
-    const [verifyProdUnitsError, setVerifyProdUnitsError] = useState(false);
+    const [verifyProdUnitsError, setVerifyProdUnitsError] = useState(false); 
+    const [postImages, setPostImages] = useState([]); 
 
     //Anuncio Form
     const [formData, setFormData] = useState({
@@ -420,6 +422,7 @@ function CriarAnuncio() {
 
     const submit = async () => {
 
+      
       let supplier = await getAllFromDB("/suppliers", {uid: true})
       let idUser = supplier[0].id;
 
@@ -571,6 +574,8 @@ function CriarAnuncio() {
               })
             }
 
+            
+
             setSnackbarType(SnackbarType.success);
             snackbarRef.current.show();
           
@@ -590,6 +595,25 @@ function CriarAnuncio() {
               }
             }
 
+            if(postImages.length > 0) {
+              try {
+                const formImagesData = new FormData()
+                for (let i = 0; i < postImages.length; i++) {
+                  formImagesData.append('files', postImages[i]);
+                } 
+  
+                let params = {adID:ad.insertId}
+  
+                const resp = await axios.post('/saveProductImages', formImagesData, {params}) 
+  
+                console.log(resp)
+              } 
+              catch (error) {
+                console.log(error)
+              }
+            }
+
+
             //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
             //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
             //SE CONSEGUIR ADICIONAR TODOS ADICIONA
@@ -597,7 +621,11 @@ function CriarAnuncio() {
 
             setTimeout(() => {
               navigate('/supplier', { replace: true });
-            }, 3000); // 3 seconds delay
+            }, 2000); // 2 seconds delay 
+
+            console.log(ad)
+            console.log()
+            
         } else if(titleError || priceError || numberError || productionDateError || eanError || validDescription || validProdUnit){
             setSnackbarType(SnackbarType.fail);
             snackbarRef.current.show();
@@ -832,6 +860,7 @@ function CriarAnuncio() {
     const [selectedImages, setSelectedImages] = useState([]);
 
     const onSelectFile = (event) => {
+      setPostImages([...postImages, event.target.files[0]])
       const selectedFiles = event.target.files;
       const selectedFilesArray = Array.from(selectedFiles);
 
@@ -839,10 +868,11 @@ function CriarAnuncio() {
         return URL.createObjectURL(file);
       });
 
-      if (selectedImages.length + imagesArray.length <= 8) {
+      if (selectedImages.length + imagesArray.length <= 4) {
         setSelectedImages((previousImages) => previousImages.concat(imagesArray));
       }
       event.target.value = ""; // for bug in chrome
+
     }
     //-----------------------------------------------------------------------------
 
@@ -869,7 +899,7 @@ function CriarAnuncio() {
         />
         <div className='app__anuncio main__container'>
             <SubHeading title="Criar anúncio"></SubHeading>
-            <form onSubmit={() => {console.log(formData)}}>
+            <form>
               <div className='app__anuncio_produto'>
                 <p className='title'>Produto</p>
                 <div className='app__anuncio_produto_content'>
@@ -958,10 +988,10 @@ function CriarAnuncio() {
                       }
                   </div>
                   <div className='app__anuncio_image_section'>
-                      <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 8)</span> *</p>
+                      <p>Imagens <span style={{fontSize: '.75rem'}}>(máx. 4)</span> *</p>
                       <div className='app__anuncio_image_section-content'>
                           <div className='app__anuncio_images_selected'>
-                              {selectedImages.length < 8 &&
+                              {selectedImages.length < 4 &&
                                   <label className='app__anuncio_image_input app__pointer'>
                                       <div>
                                           <FiPlus style={{textAlign: 'center'}}></FiPlus>
@@ -974,7 +1004,7 @@ function CriarAnuncio() {
                                       return(
                                           <div key={image} className='app__anuncio_image_selected'>
                                               <img src={image} alt='' className='app__anuncio_image_selected_img'/>
-                                              <FiX className='app__anuncio_image_selected_deleteBtn app__pointer' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}></FiX>
+                                              <FiX className='app__anuncio_image_selected_deleteBtn app__pointer' onClick={() => (setSelectedImages(selectedImages.filter((e) => e !== image)),  setPostImages(postImages.splice(index, 1))  )}></FiX>
                                           </div>
                                       )
                                   })
@@ -982,9 +1012,9 @@ function CriarAnuncio() {
                           </div>
                           <div style={{display:'flex', marginTop:'1rem'}}>
                               {selectedImages.length > 0 &&
-                                  <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => setSelectedImages([])}>limpar tudo <FiTrash2></FiTrash2></span>
+                                  <span className='app__anuncio_image_sectionBtn app__text_effect app__pointer' onClick={() => (setSelectedImages([]), setPostImages([])) }>limpar tudo <FiTrash2></FiTrash2></span>
                               }
-                              {selectedImages.length === 8 &&
+                              {selectedImages.length === 4 &&
                                   <p style={{margin: '.25rem 0 0 0', color: '#EB5C1F', fontSize:'12px'}}>Atingiu o limite de imagens!</p>
                               }
                           </div>
@@ -992,6 +1022,7 @@ function CriarAnuncio() {
                   </div>     
                 </div>
               </div>
+              <button onClick={() => console.log(postImages)}>DAD</button>
               <div className='app__anuncio_supplier-prodUnit'>
                 <div className='app__anuncio_supplier'>
                   <p className='title'>Anunciante</p>

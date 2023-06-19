@@ -1,9 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { FiX, FiPlus, FiMinus } from 'react-icons/fi';
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import { SnackBar } from '../../../components/index';
 import './Cart.css';
+import exampleImage from '../../../assets/testproducts/boxedwater2.jpg'
+
 
 const SnackbarType = {
     success: "success",
@@ -49,7 +51,17 @@ export const CartItem = (props) => {
 
     return (
         <div className='app__cartItem'>
-            <img src={productImage} alt="" />
+        {
+            props.data.urls == null ? 
+            (
+                <img src={exampleImage} alt="" />
+
+            )
+            :
+            (
+                <img src={JSON.parse(props.data.urls)[0]} alt="" />
+            )
+        }
             <div className='app__cartItem_description'>
                 <p>{title}</p>
                 
