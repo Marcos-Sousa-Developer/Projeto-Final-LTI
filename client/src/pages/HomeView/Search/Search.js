@@ -330,13 +330,13 @@ const Search = () => {
                 </div>
                 <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
                   <li style={{marginLeft: '1rem'}}>
-                    <a className='app__pointer app__text_effect' onClick={() => console.log("preco baixo") }> Preço - mais baixo</a>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }> Preço - mais baixo</a>
                   </li>
                   <li style={{marginLeft: '1rem'}}>
-                    <a className='app__pointer app__text_effect' onClick={() => console.log("preco alto") }> Preço - mais alto</a>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }> Preço - mais alto</a>
                   </li> 
                   <li style={{marginLeft: '1rem'}}>
-                    <a className='app__pointer app__text_effect' onClick={() => console.log("recentes") }> Os mais recentes</a>
+                    <a className='app__pointer app__text_effect' onClick={() => sortMostRecent() }> Os mais recentes</a>
                   </li> 
                 </ul>
               </div>
