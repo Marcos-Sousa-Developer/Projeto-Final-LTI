@@ -10,7 +10,7 @@ let values = []
 
 fake_supplier_data.forEach(row => {
 
-    values.push([row.uid, "U2FsdGVkX1+kYEa98xyqA3WrfTGx00QjRvc/pZtIGyY=", row.name, row.email, row.nif, 
+    values.push([row.uid, "U2FsdGVkX19ggelgp/oxtsQ3Mdb+4r/CaGxKDbebxPM=", row.name, row.email, row.nif, 
                 row.mobile_number, row.continent,
                 row.country,row.district,
                 row.city, row.town, row.address,
