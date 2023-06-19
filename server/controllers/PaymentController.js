@@ -4,8 +4,6 @@ require("dotenv").config({ path: path.resolve(__dirname, '..', '.env') });
 const jwt = require('../config/jwtConfig')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const YOUR_DOMAIN = 'http://localhost:3000/consumer';
-
 const getThisDay = () => {
   const today = new Date();
   const year = today.getFullYear();
@@ -22,17 +20,19 @@ const createOrder = async function(items,details,uid) {
   
     let products = {}
     let count = 0
+    let products_ids = []
 
     for (const item in items){
       if(item != 'details') {
         products[item] = items[item]
+        products_ids.push(item)
         count +=  parseInt(items[item].quantity)
       }
-    }
+    } 
 
     let order_number = Date.now()
     let order_date = getThisDay()
-    let products_list = JSON.stringify(products)
+    let products_list = JSON.stringify(products_ids)
     let total = count
     let address = details.morada
     let size = count
@@ -63,7 +63,7 @@ const createOrder = async function(items,details,uid) {
       let sameLocation = supplier[0].town === details.localidade ? 'freguesia' :
                           supplier[0].city === details.cidade ? 'município' :
                           supplier[0].district === details.distrito ? 'distrito' :
-                          supplier[0].country === 'Porugal' ? 'país' :
+                          supplier[0].country === 'Portugal' ? 'país' :
                           supplier[0].continent === 'Europa' ? 'continente' : "mundo"
       let price = parseInt(products[id].price) * parseInt(products[id].quantity)
       
@@ -80,7 +80,11 @@ const createOrder = async function(items,details,uid) {
 }
 
 
-const payOrder = async function(req, res) { 
+const payOrder = async function(req, res) {  
+
+  const DOMAIN = req.rawHeaders[3] + "://" + req.rawHeaders[1] + "/consumer"
+  try {
+
     const uid_encrypt = req.cookies.userSession;
     let value = jwt.decryptID(uid_encrypt);
     let statement = "SELECT email FROM consumers WHERE uid="+ `'`+value+`'`;
@@ -106,7 +110,7 @@ const payOrder = async function(req, res) {
             product_data: 
             {
               name: items[item].name, 
-              images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfEScgieWk5dJs9z61Ddekt-j09bY54pO4K2TPzlIQGgNXJsvz5atfb9VpgWFtvMUuh0&usqp=CAU']
+              images: items[item].url != null ?  [items[item].url] : ['https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-model-unselect-gallery-2-202209_GEO_EMEA?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1660753617539']
             }, 
             unit_amount: items[item].price * 100
           },
@@ -133,12 +137,19 @@ const payOrder = async function(req, res) {
       line_items: content,
       customer_email: emailUser,
       mode: 'payment',
-      success_url: `${YOUR_DOMAIN}/success`,
-      cancel_url: `${YOUR_DOMAIN}/canceled`,
+      success_url: `${DOMAIN}/success`,
+      cancel_url: `${DOMAIN}/canceled`,
       locale: 'pt',
     }); 
 
     res.send(session.url)
+
+  }
+  catch (error) {
+    res.send(`${DOMAIN}/canceled`)
+  }
+  
+    
 
 }
 

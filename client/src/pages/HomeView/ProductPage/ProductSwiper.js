@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,7 +15,7 @@ import { FreeMode, Navigation, Pagination, Thumbs, Zoom } from "swiper";
 
 export const ProductSwiper = ({src}) => {
 
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [thumbsSwiper, setThumbsSwiper] = useState(null); 
     
     return (
         <div className='app__product_page_content_info_main_img'>

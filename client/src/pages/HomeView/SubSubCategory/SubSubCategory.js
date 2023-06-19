@@ -7,6 +7,7 @@ import getAllFromDB from '../../../hooks/getAllFromDB';
 import './SubSubCategory.css';
 import LoadingPage from '../../LoadingPage';
 import { Link } from 'react-router-dom';
+import { typeOf } from 'react-is';
 
 const SnackbarType = {
   success: "success",
@@ -73,18 +74,24 @@ const SubSubCategory = () => {
 
   const getProducts = async (subsubCategoryName) => {
     let adsDB = await getAllFromDB("/ads", {title: searchName, subsubcategory_name: subsubCategoryName})
-    setAds(adsDB)
-    setAdsPrev(adsDB)
-    getCharacteristics(adsDB)
-    let max = 0;
-    adsDB.map( (ad) => {  
-      ad.price > max ? max = ad.price: max = max
-    })
-    setMaxPrice(max)
-    setCurrentMaxPrice(max)
-    startIndex = (currentPage - 1) * 20;
-    endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
-    setCurrentItems(adsDB.slice(startIndex, endIndex))
+    if( typeof adsDB !== 'string'){
+      try{
+        setAds(adsDB)
+        setAdsPrev(adsDB)
+        getCharacteristics(adsDB)
+        let max = 0;
+        adsDB.map( (ad) => {  
+          ad.price > max ? max = ad.price: max = max
+        })
+        setMaxPrice(max)
+        setCurrentMaxPrice(max)
+        startIndex = (currentPage - 1) * 20;
+        endIndex = Math.min(startIndex + itemsPerPage, adsDB.length);
+        setCurrentItems(adsDB.slice(startIndex, endIndex))
+      }catch{
+  
+      }
+    }
   }
 
   const getCharacteristics = async (ads) => {
@@ -319,10 +326,14 @@ const SubSubCategory = () => {
   }, [])
 
   useEffect(()=>{ 
-    getCharacteristics(adsPrev)
-    startIndex = 0;
-    endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
-    setCurrentItems(adsPrev.slice(startIndex, endIndex))
+    try{
+      getCharacteristics(adsPrev)
+      startIndex = 0;
+      endIndex = Math.min(startIndex + itemsPerPage, adsPrev.length);
+      setCurrentItems(adsPrev.slice(startIndex, endIndex))
+    }catch{
+
+    }
   }, [adsPrev, isSorted])
 
   return (
@@ -368,34 +379,34 @@ const SubSubCategory = () => {
             <div className='app__SubSubCategory_filter_content'>
               <div className='app__SubSubCategory_filter_unit'>
                 <div className='app__pointer app__SubSubCategory_filter_content_title' onClick={toggleFilterPrice}>
-                  <p style={{margin: '0'}}>Preço</p>
+                  <p style={{margin: '0'}} className="mobile-title">Preço</p>
                   <span>{filterPrice ? <FiChevronUp className='app__SubSubCategory_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__SubSubCategory_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
                 <div className={filterPrice ? "filterPrice showFilter" : "hideFilter"}>
                   <div style={{display: 'flex', flexDirection: 'row'}}>
                     <div>
-                      <span>Min. € {/*minPrice*/}</span>
+                      <span>Min. €</span>
                       <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
                     </div>
                     <div>
-                      <span>Máx. €{/*maxPrice*/}</span>
+                      <span>Máx. €</span>
                       <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
                     </div>
                   </div>
                   <button className='main__action_btn' onClick={() => setByPrice()}>OK</button>
                 </div>
               </div>
-              <div className='app__Category_filter_unit'>
-                <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
-                  <p style={{margin: '0'}}>Ordenar por:</p>
-                  <span>{filterSort ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+              <div className='app__SubSubCategory_filter_unit'>
+                <div className='app__pointer app__SubSubCategory_filter_content_title' onClick={toggleFilterSort}>
+                  <p style={{margin: '0'}} className="mobile-title">Ordenar por</p>
+                  <span>{filterSort ? <FiChevronUp className='app__SubSubCategory_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__SubSubCategory_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
                 <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
                   <li style={{marginLeft: '1rem'}}>
-                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }>Preço - mais baixo</a>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }>Preço (mais baixo)</a>
                   </li>
                   <li style={{marginLeft: '1rem'}}>
-                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }>Preço - mais alto</a>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }>Preço (mais alto)</a>
                   </li> 
                   <li style={{marginLeft: '1rem'}}>
                     <a className='app__pointer app__text_effect' onClick={() => sortMostRecent() }>Os mais recentes</a>
@@ -429,7 +440,7 @@ const SubSubCategory = () => {
           </div>
           <div className='app__SubSubCategory_Grid_Direita'>
             <div className='app__SubSubCategory_mobile_filter_content'>
-              <button className='main__action_btn' onClick={() => setIsOpen(true)}>FILTROS</button>
+              <button className='secondary__action_btn' onClick={() => setIsOpen(true)}>FILTROS</button>
               <Modal open={isOpen} onClose={() => setIsOpen(false)} filter={true}>
                 <p>Filtros</p>
                 <div className='app__SubSubCategory_filter_unit'>
@@ -437,30 +448,29 @@ const SubSubCategory = () => {
                   <div className='filterPrice'>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
                       <div>
-                        <span>Min. €{/*minPrice*/}</span>
+                        <span>Min. €</span>
                         <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
                       </div>
                       <div>
-                        <span>Máx. €{/*maxPrice*/}</span>
+                        <span>Máx. €</span>
                         <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
                       </div>
                     </div>
                     <button className='' onClick={() => setByPrice()}>OK</button>
                   </div>
                 </div>
-                <div className='app__Category_filter_unit'>
-                  <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
-                    <p style={{margin: '0'}}>Ordenar por:</p>
-                    <span>{filterSort ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                <div className='app__SubSubCategory_filter_unit'>
+                  <div className='app__pointer app__SubSubCategory_filter_content_title' onClick={toggleFilterSort}>
+                    <p style={{margin: '0'}} className="mobile-title">Ordenar por</p>
                   </div>
                   <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
-                    <li style={{marginLeft: '1rem'}}>
-                      <a className='app__pointer app__text_effect' onClick={() => sortPriceLow()}> Preço - mais baixo</a>
+                    <li>
+                      <a className='app__pointer app__text_effect' onClick={() => sortPriceLow()}> Preço (mais baixo)</a>
                     </li>
-                    <li style={{marginLeft: '1rem'}}>
-                      <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh()}> Preço - mais alto</a>
+                    <li>
+                      <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh()}> Preço (mais alto)</a>
                     </li> 
-                    <li style={{marginLeft: '1rem'}}>
+                    <li>
                       <a className='app__pointer app__text_effect' onClick={() => sortMostRecent()}> Os mais recentes</a>
                     </li> 
                   </ul>
