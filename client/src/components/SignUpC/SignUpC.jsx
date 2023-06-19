@@ -31,20 +31,27 @@ const SignUpC = () => {
       setShowExtraInputs(true);
     };
   
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        let isActive = await auth.signUp(email,password,selectedOption,name)
-        if(isActive) {
-            setError(false)
-            setTimeout(() => {
-                navigate('/signin');
-            }, 1000);
+    const handleSubmit = async (event) => { 
+
+        try {
+            event.preventDefault();
+            let isActive = await auth.signUp(email,password,selectedOption,name)
+            if(isActive) {
+                setError(false)
+                setTimeout(() => {
+                    navigate('/signin');
+                }, 1000);
+            }
+            else{
+                setError(true)
+            }
         }
-        else{
+        catch {
             setError(true)
         }
         setLoading(false)
         snackbarRef.current.show()
+
     };
 
     const getUserType = async () => {
