@@ -1,7 +1,6 @@
 let dbConnection = require('./DatabaseController')
 const jwt = require('../config/jwtConfig')
 
-
 /**
  * Async function to get all or some consumers and await from database response
  * @param {*} req //request from client
@@ -186,8 +185,12 @@ const updateConsumerByID = async function (req, res) {
  * @returns result data
  */
 const activateConsumerByID = async function (req, res) { 
+    
+    let statement = `UPDATE consumers SET status='1' WHERE id='${parseInt(req.params.id)}'`;
 
-    const statement = `UPDATE consumers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    if (req.query.account_status != undefined) {
+        statement = `UPDATE consumers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    }
 
     let result = await dbConnection(statement); 
 
@@ -206,7 +209,11 @@ const activateConsumerByID = async function (req, res) {
  */
 const deactivateConsumerByID = async function (req, res) { 
 
-    const statement = `UPDATE consumers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    let statement = `UPDATE consumers SET status=0 WHERE id='${parseInt(req.params.id)}'`;
+
+    if (req.query.account_status != undefined) {
+        statement = `UPDATE consumers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    }
 
     let result = await dbConnection(statement);
 

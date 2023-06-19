@@ -185,8 +185,12 @@ const updateSupplierByID = async function (req, res) {
  */
 const activateSupplierByID = async function (req, res) { 
 
-    const statement = `UPDATE suppliers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    let statement = `UPDATE suppliers SET status=1 WHERE id='${parseInt(req.params.id)}'`;
 
+    if (req.query.account_status != undefined) {
+        statement = `UPDATE suppliers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    }
+    
     let result = await dbConnection(statement); 
 
     if (result === "error") {
@@ -204,7 +208,11 @@ const activateSupplierByID = async function (req, res) {
  */
 const deactivateSupplierByID = async function (req, res) { 
 
-    const statement = `UPDATE suppliers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    let statement = `UPDATE suppliers SET status=0 WHERE id='${parseInt(req.params.id)}'`;
+
+    if (req.query.account_status != undefined) {
+        statement = `UPDATE suppliers SET status='${req.query.account_status}' WHERE id='${parseInt(req.params.id)}'`;
+    }
 
     let result = await dbConnection(statement);
 

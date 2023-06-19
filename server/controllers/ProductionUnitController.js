@@ -115,7 +115,12 @@ const deleteProductionUnitByID = async function (req, res) {
 const insertProductionUnit = async function (req, res) {
 
     const data = [req.query.name, req.query.city, req.query.location, req.query.postal_code, req.query.capacity, 
-                jwt.decryptID(req.cookies.userSession)];
+                req.query.uid_supplier];
+
+    if (req.cookies.userSession != undefined) {
+        const data = [req.query.name, req.query.city, req.query.location, req.query.postal_code, req.query.capacity, 
+            jwt.decryptID(req.cookies.userSession)];
+    }
 
     const statement = "INSERT INTO productionUnits (name, city, location, postal_code, capacity, " +
                     "uid_supplier) VALUES ?";

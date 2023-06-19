@@ -98,12 +98,12 @@ const deleteVehicleByID = async function (req, res) {
     let result = await dbConnection(statement)
 
     if (result === "error") {
-        return res.status(500).json("Not possible to delete the vehicle with license plate " + req.params.id);
+        return res.status(500).json("Not possible to delete the vehicle with id " + req.params.id);
     } else if (result.affectedRows == 0) {
-        return res.send("Vehicle with license plate " + req.params.id + " does not exist in the database");
+        return res.send("Vehicle with id " + req.params.id + " does not exist in the database");
     }
 
-    return res.send("Vehicle with license plate " + req.params.id + " has been deleted");
+    return res.send("Vehicle with id " + req.params.id + " has been deleted");
 }
 
 /**
@@ -163,7 +163,7 @@ const updateVehicleByID = async function (req, res) {
     if (result === "error") {
         return res.status(500).json("Not possible to update this vehicle");
     } else if (result.affectedRows == 0) {
-        return res.send("Vehicle with license plate " + req.params.id + " does not exist in the database");
+        return res.send("Vehicle with id " + req.params.id + " does not exist in the database");
     }
 
     return res.send("Vehicle has been updated");

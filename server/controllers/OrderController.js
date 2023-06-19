@@ -116,12 +116,10 @@ const insertOrder = async function (req, res) {
 
     const data = [req.query.order_number, req.query.order_date, 
                 req.query.products_list, req.query.total, req.query.address, req.query.size, 
-                req.query.id_supplier_product, req.query.uid_consumer, req.query.id_vehicle,
-                req.query.created_at];
+                req.query.uid_consumer];
 
     const statement = "INSERT INTO orders (order_number, order_date, " +
-                    "products_list, total, address, size, id_supplier_product, " +
-                    "uid_consumer, id_vehicle, created_at) VALUES ?";
+                    "products_list, total, address, size, uid_consumer) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 
