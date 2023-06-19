@@ -204,11 +204,6 @@ const SignUpC = () => {
                                         </ul>
                                     )}
                                     {
-                                        error && ( <small style={{color:"red"}}>Falha ao registar, tente novo! </small> 
-                                        
-                                        )
-                                    }
-                                    {
                                         loading ? 
                                         (
                                             <div className='app__SignUp_box13'>
