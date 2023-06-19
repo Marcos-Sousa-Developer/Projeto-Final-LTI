@@ -13,7 +13,7 @@ fake_orderedProduct_data.forEach(row => {
 
     values.push([row.order_id, row.ad_id, row.product_category, row.product_subcategory,
                 row.product_subsubcategory, row.order_status, row.product_owner_uid, 
-                row.product_buyer_uid, row.product_location, row.buyer_location, row.sameLocation, row.price, 0 ])     
+                row.product_buyer_uid, row.product_location, row.buyer_location, row.sameLocation, row.price, 1 ])     
 });
 
 pool.query(statement, [values], function(error, result){

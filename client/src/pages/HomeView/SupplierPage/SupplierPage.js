@@ -105,6 +105,7 @@ function SupplierPage() {
           const ad = await getAllFromDB('/ads/' + sell.ad_id)
           sell['title'] = ad[0].title
         }
+        console.log(sells)
   
         setFiveSells(sells);
         createData(response)
@@ -162,10 +163,12 @@ function SupplierPage() {
                   <p style={{fontWeight:'500'}}>5 Vendas Recentes</p>
                   {fiveSells.map((sell) => {
                       return (
-                          <div style={{display: 'flex', justifyContent: 'space-between', gap: '1rem'}}> 
-                            <p>{sell.title}</p>
-                            <p><PriceDisplay price={sell.price}></PriceDisplay></p>
-                          </div>
+                          <>
+                            <div style={{display: 'flex', justifyContent: 'space-between', gap: '1rem'}}> 
+                              <p>{sell.title} {sell.quantity}Qt.</p>
+                              <p> <PriceDisplay price={sell.price}></PriceDisplay></p>
+                            </div>
+                          </>
                         )
                     })
                   }
