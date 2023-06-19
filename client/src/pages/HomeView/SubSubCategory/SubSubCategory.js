@@ -24,6 +24,7 @@ const SubSubCategory = () => {
   const [filterPrice, setFilterPrice] = useState(false);
   const [filterSort, setFilterSort] = useState(false);
   const [filterCharacteristics, setFilterCharacteristics] = useState(null);
+  const [filters, setFilters] = useState({});
   const [ads, setAds] = useState([])
   const [searchName, setSearchName] = useState(null)
   const [categoryName, setCategoryName] = useState("")
@@ -243,6 +244,57 @@ const SubSubCategory = () => {
     setIsSorted(isSorted+1)
   }
 
+  const handleCheckboxChange = (key, value) => {
+    const filtersUpdate = { ...filters };
+    if (!filtersUpdate.hasOwnProperty(key)) {
+      filtersUpdate[key] = [value];
+    } else {
+      const index = filtersUpdate[key].indexOf(value);
+      if (index !== -1) {
+        filtersUpdate[key].splice(index, 1);
+      } else {
+        filtersUpdate[key].push(value);
+      }
+      if (filtersUpdate[key].length === 0) {
+        delete filtersUpdate[key];
+      }
+    }
+    setFilters(filtersUpdate);
+  };
+
+  const filterByCharacteristics = () => {
+    const adsPrevUpdated = []
+    adsPrev.map((ad)=> {
+      let flag = false
+      const characteristicsDict = JSON.parse(ad.extraCharacteristic);
+      Object.keys(characteristicsDict).map((key) => {
+        if(key === '0'){
+          Object.keys(characteristicsDict[key]).map((key2) => {  
+            if(key2 in filters){
+              if(filters[key2].includes(characteristicsDict[key][key2])){
+                flag = true
+              }
+            }
+          })
+        } else {
+          if(key in filters){
+            if(filters[key].includes(characteristicsDict[key])){
+              flag = true
+            }
+          }
+        }
+      });
+      if(flag === true){
+        adsPrevUpdated.push(ad)
+      }
+    })
+    setAdsPrev(adsPrevUpdated);
+  };
+
+  const cleanFilterByCharacteristics = () => {
+    location.reload()
+  }
+
   //UseEffect
 
   useEffect(()=>{ 
@@ -253,7 +305,7 @@ const SubSubCategory = () => {
       const searchName = urlParams.get("searchName");
       const categoryName = urlParams.get("category");
       const subCategoryName = urlParams.get("subCategory");
-      const subsubCategoryName = urlParams.get("subsubCategory");
+      const subsubCategoryName = urlParams.get("subsubCategory");ads
       setSearchName(searchName);
       setCategoryName(categoryName)
       setSubCategoryName(subCategoryName)
@@ -368,19 +420,13 @@ const SubSubCategory = () => {
                 <div key={key}>
                   <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
                     <p style={{ margin: '0' }}>{key}</p>
-                    <span>
-                      {filterSort ? (
-                        <FiChevronUp className='app__Category_filter_content_title_up' />
-                      ) : (
-                        <FiChevronRight className='app__Category_filter_content_title_right' />
-                      )}
-                    </span>
                   </div>
-                  <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
+                  <ul>
                     {filterCharacteristics[key].map((value) => {
                       return (
                         <li style={{ marginLeft: '1rem' }}>
-                          <a className='app__pointer app__text_effect' onClick={() => sortPriceLow()}>{value}</a>
+                          <a className='app__pointer app__text_effect'>{value}</a>
+                          <input type="checkbox" onChange={() => handleCheckboxChange(key, value)} />
                         </li>
                       );
                     })}
@@ -389,6 +435,8 @@ const SubSubCategory = () => {
               ))}
               </div>
             </div>
+            <button onClick={() => filterByCharacteristics()}>Procurar</button>
+            <button onClick={() => cleanFilterByCharacteristics()}>Limpar</button>
           </div>
           <div className='app__SubSubCategory_Grid_Direita'>
             <div className='app__SubSubCategory_mobile_filter_content'>

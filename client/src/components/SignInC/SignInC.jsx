@@ -165,7 +165,7 @@ const SignInC = ({checkout=null}) => {
                                 />
                                 <SnackBar
                                     ref={snackbarRef2}
-                                    message={notValidate ? "O código está inválido" : "O código está valido"}
+                                    message={notValidate ? "O código está inválido" : "O código está válido"}
                                     type={notValidate ? SnackbarType.fail : SnackbarType.success}
                                 />
                             {
