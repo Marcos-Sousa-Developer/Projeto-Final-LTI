@@ -1,4 +1,6 @@
 let dbConnection = require('./DatabaseController')
+const { v4: uuidv4 } = require('uuid');
+
 
 /**
  * Async function to get all or some vehicles and await from database response
@@ -114,9 +116,9 @@ const deleteVehicleByID = async function (req, res) {
  */
 const insertVehicle = async function (req, res) {
 
-    const data = [req.query.name];
+    const data = [req.query.name, uuidv4(), uuidv4().substring(0, 6)];
 
-    const statement = "INSERT INTO vehicles (name) VALUES ?";
+    const statement = "INSERT INTO vehicles (name, credentialAccess, accessCode) VALUES ?";
 
     let result = await dbConnection(statement, [data]);
 

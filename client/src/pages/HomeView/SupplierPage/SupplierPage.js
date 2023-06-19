@@ -97,6 +97,9 @@ function SupplierPage() {
       let supplierAddress = await getSupplierAddress()
       if(supplierAddress != false){
         let sells = response.slice(response.length - 5, response.length)
+        if(response.length < 5) {
+          sells = response.slice(0, response.length)
+        }
   
         for (const sell of sells) {
           const ad = await getAllFromDB('/ads/' + sell.ad_id)

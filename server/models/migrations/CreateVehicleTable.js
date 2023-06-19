@@ -3,6 +3,8 @@ let pool = require('../config/getLocaldbConfig')
 const statement = "CREATE TABLE vehicles ( " +
                   "id int NOT NULL AUTO_INCREMENT, " +            
                   "name varchar(255) NOT NULL, " +
+                  "credentialAccess varchar(1000) NOT NULL, " +
+                  "accessCode varchar(1000) NOT NULL, " +
                   "PRIMARY KEY (id))";
 
 pool.query(statement, function(error, result) {

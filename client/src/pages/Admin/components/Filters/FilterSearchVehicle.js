@@ -60,7 +60,9 @@ function FilterSearchVehicle() {
       resp.map((r) => { 
       table.row.add(
         [ r.id,
-          r.name
+          r.name,
+          r.credentialAccess,
+          r.accessCode
         ]).draw();    
       })
   }
@@ -192,6 +194,8 @@ function FilterSearchVehicle() {
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
+                <th scope="col">Credencial de Acesso</th>
+                <th scope="col">Código de Acesso</th>
               </tr>
             </thead>
             <tbody></tbody>

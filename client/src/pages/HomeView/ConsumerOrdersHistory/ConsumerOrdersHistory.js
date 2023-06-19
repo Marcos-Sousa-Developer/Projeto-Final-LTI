@@ -109,6 +109,7 @@ const ConsumerOrdersHistory = () => {
                         <th>Preço</th>
                         <th>Estado</th>
                         <th>Transportadora</th>
+                        <th>Código de Entrega</th>
                         <th></th>              
                       </tr>
                     </thead>
@@ -122,6 +123,7 @@ const ConsumerOrdersHistory = () => {
                             <td data-cell='Preço: ' className='priceShow'><PriceDisplay price={orderHistory.order.price}></PriceDisplay></td>
                             <td data-cell='Estado: '>{orderHistory.order.order_status}</td>                            
                             <td data-cell='Transportadora: '>{orderHistory.order.vehicle ?? "N/A"}</td>
+                            <td data-cell='Codigo de Entrega: '>{orderHistory.order.code ?? "N/A"}</td>
                             <td className='actions'>
                               {
                                 orderHistory.order.order_status == "Em preparação" || orderHistory.order.order_status == "A confirmar" ? (

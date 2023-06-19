@@ -16,6 +16,7 @@ const statement = "CREATE TABLE orderedProducts ( " +
                   "price float NOT NULL, " +
                   "vehicle varchar(255), " +
                   "quantity int NOT NULL, " +
+                  "code varchar(255), " +
                   "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "PRIMARY KEY (id))";
 

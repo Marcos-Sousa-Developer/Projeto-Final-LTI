@@ -1,5 +1,7 @@
 let dbConnection = require('./DatabaseController')
 const jwt = require('../config/jwtConfig')
+const { v4: uuidv4 } = require('uuid');
+
 
 /**
  * Async function to get all or some ordered products and await from database response
@@ -158,6 +160,9 @@ const updateOrderedProductByID = async function (req, res) {
             statement += `='`;
             statement += value; 
             statement += `'` ;
+            if (key=="order_status" && value == "Enviado") {
+                statement += ", code='"+uuidv4().substring(0, 6)+"'"
+            }
         }
 
         if(nextKey != undefined && nextValue != ""){
@@ -199,6 +204,40 @@ const deleteOrderProductByID = async function (req, res) {
     return res.send("Order with id " + req.params.id + " has been deleted");
 }
 
+/**
+ * Async function to accept order product
+ * @param {*} req //request from client
+ * @param {*} res //response from server
+ * @returns result data
+ */
+const acceptOrder = async (req, res) => {
+
+    try {
+
+        const statement1 = `SELECT * FROM vehicles WHERE credentialAccess='${req.query.credentialAccess}' AND accessCode='${req.query.accessCode}'`
+        let result1 = await dbConnection(statement1);
+    
+        const statement2 = `SELECT * FROM orderedProducts WHERE id='${req.query.order_id}'`
+        let result2 = await dbConnection(statement2); 
+
+        let isAccessVehicle = result1[0].name === result2[0].vehicle 
+        let isAccessCode = req.query.code === result2[0].code  
+
+        if(isAccessVehicle && isAccessCode) {
+            let statement = `UPDATE orderedProducts SET order_status='Entregue' WHERE id='${req.query.order_id}'`;
+            await dbConnection(statement); 
+            res.send(true);
+        }
+        else {
+            res.send(false);
+        }
+
+    }
+    catch {
+        res.send(false);
+    }    
+}
 
 
-module.exports = {getAllorSomeOrderedProducts, getOrderedProductByID, insertOrderedProduct, updateOrderedProductByID, deleteOrderProductByID}
+
+module.exports = {getAllorSomeOrderedProducts, getOrderedProductByID, insertOrderedProduct, updateOrderedProductByID, deleteOrderProductByID, acceptOrder}

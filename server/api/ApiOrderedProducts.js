@@ -17,4 +17,6 @@ router.put('/:id', orderedProductController.updateOrderedProductByID)
 //Delete order product by id
 router.delete('/:id', orderedProductController.deleteOrderProductByID)
 
+router.post('/acceptOrder', orderedProductController.acceptOrder) 
+
 module.exports = router
