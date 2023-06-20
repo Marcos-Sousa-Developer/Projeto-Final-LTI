@@ -145,7 +145,7 @@ const SignInC = ({checkout=null}) => {
                             <div className='register'>Esqueceu-se da password?
                                 <span style={{ cursor: 'pointer', color: 'rgba(235, 92, 31, 0.8)' }} onClick={() => setIsOpen(true)}> aqui.</span>
                                 <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                                    <p>Envie e-mail para o suporte: grupo01.pti.ptr@outlook.com</p>
+                                    <p style={{margin: '0'}}>Envie e-mail para o suporte: grupo01.pti.ptr@outlook.com</p>
                                 </Modal>
                             </div>
                             <div className='app__SignIn_box13'>

@@ -179,8 +179,20 @@ img, picture {
   opacity: 1;
 }
 
+.deleteaccount__action_btn {
+  background-color: rgb(211, 25, 25);
+  color: white;
+  padding: 8px 50px;
+  border-radius: 15px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.deleteaccount__action_btn:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 700px) {
-  .main__action_btn {
+  .main__action_btn, .deleteaccount__action_btn {
     padding: 6px 40px;
     border-radius: 10px;
     font-size: 14px;
@@ -221,6 +233,10 @@ img, picture {
 }
 .inputField_error input:focus {
   border: 3px solid rgba(235, 92, 31, 0.8);
+}
+
+.app__destaques_content .swiper, .app__destaques_content .swiper-container {
+  z-index: 0;
 }
 
 .mapboxgl-ctrl-bottom-left {
@@ -381,9 +397,9 @@ img, picture {
     display: none;
   }
   .app__product_page_content_info_characteristics table td {
-    display: block;
-    position: relative;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .app__product_page_content_info_characteristics table td:nth-child(odd) {
     background-color: rgba(238, 238, 238, 0.4);
@@ -391,8 +407,6 @@ img, picture {
   .app__product_page_content_info_characteristics table td::before {
     content: attr(data-cell);
     font-weight: 500;
-    position: absolute;
-    left: 8px;
   }
 }
 @media screen and (max-width: 1250px) {
