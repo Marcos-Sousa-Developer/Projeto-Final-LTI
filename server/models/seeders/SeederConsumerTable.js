@@ -13,7 +13,7 @@ fake_consumer_data.forEach(row => {
                 row.mobile_number, row.continent,
                 row.country, row.district,
                 row.city, row.town, row.address,
-                row.postal_code, row.status, row.shopping_cart, 
+                row.postal_code, 1, row.shopping_cart, 
                 row.total_orders])     
 });
 

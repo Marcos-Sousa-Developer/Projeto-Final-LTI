@@ -50,6 +50,7 @@ clientRouter.use(clientAuthenticate)
 clientRouter.use('/',require('./routes/RouteAuthenticateUser'))
 clientRouter.use('/',require('./routes/RoutePaymentOrder'))
 clientRouter.use('/',require('./routes/RouteBucketImages'))
+clientRouter.use('/',require('./routes/RouteNotifications'))
 
 
 

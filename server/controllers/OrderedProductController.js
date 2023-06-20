@@ -224,17 +224,21 @@ const acceptOrder = async (req, res) => {
         let isAccessCode = req.query.code === result2[0].code  
 
         if(isAccessVehicle && isAccessCode) {
-            let statement = `UPDATE orderedProducts SET order_status='Entregue' WHERE id='${req.query.order_id}'`;
-            await dbConnection(statement); 
-            res.send(true);
+            let statement = `UPDATE orderedProducts SET order_status='Entregue' WHERE id='${req.query.order_id}' AND order_status!='Entregue'`;
+            let result = await dbConnection(statement); 
+            console.log(result)
+            if(result.affectedRows === 0) {
+                return res.send(false);
+            }
+            return res.send(true);
         }
         else {
-            res.send(false);
+            return res.send(false);
         }
 
     }
     catch {
-        res.send(false);
+        return res.send(false);
     }    
 }
 
