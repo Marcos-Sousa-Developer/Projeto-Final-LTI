@@ -42,6 +42,7 @@ function CriarAnuncio() {
     const [verifyProdUnitsError, setVerifyProdUnitsError] = useState(false); 
     const [postImages, setPostImages] = useState([]); 
     const [errorImages, setErrorImages] = useState(false);
+    const [sup, setSup] = useState([])
 
     //Anuncio Form
     const [formData, setFormData] = useState({
@@ -84,6 +85,7 @@ function CriarAnuncio() {
 
 
       let supplier = await getFromDB("/suppliers",  {uid: true});
+      setSup(supplier[0])
 
       setFormData({ ...formData, 
         prodUnit: newProdUnit,
@@ -135,7 +137,7 @@ function CriarAnuncio() {
 
         subFeaturesEmpty[0] = prodFeatures;
 
-        setFormData({
+        setFormData({...formData,
             EAN: ean,
             search: true,
             categoria: categoriaNome,
@@ -429,18 +431,27 @@ function CriarAnuncio() {
       setDescriptionError(false)
       setErrorImages(false)
 
-      console.log() 
-      let total = Object.keys(formData.prodUnit).length
+      let total = 0
       let vazios = 0
-      for(const unit in formData.prodUnit) {
-        if(formData.prodUnit[unit] === "") {
-          vazios += 1
+      try {
+        total = Object.keys(formData.prodUnit).length
+        
+        vazios = 0
+        for(const unit in formData.prodUnit) {
+          if(formData.prodUnit[unit] === "") {
+            vazios += 1
+          }
         }
       }
+      catch {
+        
+      } 
+
+      console.log(formData)
 
       if (total > vazios) { 
 
-      if(formData.categoria != "" || formData.subcategoria != ""  || formData.subsubcategoria != "") { 
+      if(formData.categoria != "" || formData.subcategoria != ""  || formData.subsubcategoria != "") {
 
         if(formData.titulo != "") {
 
@@ -647,9 +658,6 @@ function CriarAnuncio() {
                       setTimeout(() => {
                         navigate('/supplier', { replace: true });
                       }, 1500); // 1.5 seconds delay 
-
-                      console.log(ad)
-                      console.log()
                       
                   } else if(titleError || priceError || numberError || productionDateError || eanError || validDescription || validProdUnit){
                       setSnackbarType(SnackbarType.fail);
@@ -1088,7 +1096,7 @@ function CriarAnuncio() {
                   <div className='app__anuncio_supplier_content'>
                     <div className={!numberError ? "inputField" : "inputField_error"}>
                         <p>Telemóvel *</p>
-                        <input type='tel' required value = {formData.telemovel} onChange={handleNumber}/>
+                        <input type='tel' required value = {sup.mobile_number} onChange={handleNumber}/>
                         {
                           numberError &&
                             <div className='error_msg'>Número com formato errado.</div>
@@ -1096,7 +1104,7 @@ function CriarAnuncio() {
                     </div>
                     <div className='inputField'>
                         <p>Email</p>
-                        <input style={{opacity: "0.4"}} type='email' required value = {formData.email} disabled/>
+                        <input style={{opacity: "0.4"}} type='email' required value = {sup.email} disabled/>
                     </div> 
                   </div>
                 </div>    
