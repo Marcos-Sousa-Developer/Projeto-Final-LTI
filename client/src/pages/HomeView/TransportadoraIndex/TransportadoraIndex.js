@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import './TransportadoraIndex.css';
 //import { authentication as auth}  from '../../authentication'
 import './TransportadoraIndex.css';
 import {Footer} from '../../../components/index';
@@ -58,14 +57,10 @@ function TransportadoraIndex() {
     <div className='app__Transportadora main__container'>
     <Link to='/signin'><FiArrowLeft></FiArrowLeft></Link>
     <h3 className=''>Transportadora</h3>
-      
-
-
       <div className='app__Transportadora_box'>
             <div className='app__Transportadora_box1'>
             <p>Crendencial de Acesso</p>
                 <div className='app__Transportadora_box11'>
-                    
                     <input
                         required
                         type="text"
@@ -77,7 +72,6 @@ function TransportadoraIndex() {
             <div className='app__Transportadora_box1'>
             <p>Código de Acesso</p>
                 <div className='app__Transportadora_box11'>
-                    
                     <input
                         required
                         type="text" 
@@ -89,7 +83,6 @@ function TransportadoraIndex() {
             <div className='app__Transportadora_box1'>
             <p>Número de Encomenda</p>
                 <div className='app__Transportadora_box11'>
-                    
                     <input
                         required
                         type="text"
@@ -101,7 +94,6 @@ function TransportadoraIndex() {
             <div className='app__Transportadora_box1'>
             <p>Código de Validação</p>
                 <div className='app__Transportadora_box11'>
-                    
                     <input
                         required
                         type="text"
@@ -110,38 +102,38 @@ function TransportadoraIndex() {
                     />
                 </div>
             </div>
-        <div className='flex btn'>
-        {
-          loading ? 
-          (
-            <button className='main__action_btn'>Loading</button>
+            <div style={{textAlign: 'center', margin: '2rem 0 0 0'}}>
+              {
+                loading ? 
+                (
+                  <button className='main__action_btn'>Loading</button>
 
-          )
-          :
-          (
-            <button className='main__action_btn' onClick={() => validate()}>Validar Encomenda</button>
+                )
+                :
+                (
+                  <button className='main__action_btn' onClick={() => validate()}>Validar Encomenda</button>
 
-          )
-        }
+                )
+              }
+            </div>
+            <div>
+              {
+                error ? 
+                (
+                  <p>Não foi possivel validar esta a encomenda, verifique se já está validada ou se o acesso está correto!</p>
+                  
+                )
+                :
+                OK ?
+                (
+                  <p>Encomenda Validada</p>
+                )
+                :
+                ""
+              }
+            </div>
+          </div>
         </div>
-        <div>
-          {
-            error ? 
-            (
-              <p>Não foi possivel validar esta a encomenda, verifique se já está validada ou se o acesso está correto!</p>
-              
-            )
-            :
-            OK ?
-            (
-              <p>Encomenda Validada</p>
-            )
-            :
-            ""
-          }
-        </div>
-      </div>
-      </div>
         <Footer></Footer>
     </>
   );

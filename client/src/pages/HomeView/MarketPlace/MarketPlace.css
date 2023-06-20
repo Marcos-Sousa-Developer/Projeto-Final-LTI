@@ -152,8 +152,47 @@ img, picture {
   border: 2px solid #EB5C1F;
 }
 
+.secondary__action_btn {
+  background-color: #EB5C1F;
+  color: white;
+  padding: 8px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__action_btn:hover {
+  opacity: 1;
+}
+
+.secondary__negative_action_btn {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 6px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.secondary__negative_action_btn:hover {
+  opacity: 1;
+}
+
+.deleteaccount__action_btn {
+  background-color: rgb(211, 25, 25);
+  color: white;
+  padding: 8px 50px;
+  border-radius: 15px;
+  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+}
+.deleteaccount__action_btn:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 700px) {
-  .main__action_btn {
+  .main__action_btn, .deleteaccount__action_btn {
     padding: 6px 40px;
     border-radius: 10px;
     font-size: 14px;
@@ -196,8 +235,16 @@ img, picture {
   border: 3px solid rgba(235, 92, 31, 0.8);
 }
 
+.app__destaques_content .swiper, .app__destaques_content .swiper-container {
+  z-index: 0;
+}
+
 .mapboxgl-ctrl-bottom-left {
   display: none;
+}
+
+.mapboxgl-marker {
+  background-color: transparent;
 }
 
 .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
@@ -209,7 +256,11 @@ img, picture {
 }
 
 .mapboxgl-popup-content {
-  padding: 5px 5px 10px;
+  padding: 0;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  display: none;
 }
 
 .mapboxgl-ctrl button .mapboxgl-ctrl-icon {
@@ -232,9 +283,15 @@ img, picture {
 }
 .app__market_place_content {
   display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.app__market_place_content_product {
+  display: flex;
+  justify-content: space-between;
 }
 .app__market_place_content_product_img {
-  width: 200px;
+  width: 300px;
   height: auto;
 }
 .app__market_place_content_supplier_info {
@@ -251,12 +308,26 @@ img, picture {
   color: #EB5C1F;
 }
 
-@media screen and (max-width: 600px) {
-  .app__market_place_info {
+@media screen and (max-width: 800px) {
+  .app__market_place_content_product {
     flex-direction: column;
+    position: relative;
+  }
+  .app__market_place_content_supplier_info, .app__market_place_content_goTo {
+    margin: 0;
   }
   .app__market_place_content_goTo {
-    margin-left: 0;
-    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+@media screen and (max-width: 500px) {
+  .app__market_place_content_goTo {
+    position: initial;
+    align-self: flex-end;
+  }
+  .app__market_place_content_product {
+    align-items: center;
   }
 }/*# sourceMappingURL=MarketPlace.css.map */

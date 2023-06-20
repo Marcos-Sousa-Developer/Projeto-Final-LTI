@@ -671,7 +671,7 @@ function ConsumerProfile() {
         </div>
         <div className="app__ConsumerProfile_button">
             <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
-            <button type='button' className='main__negative_action_btn' onClick={() => setIsDeleteOpen(true)} >Apagar Conta</button>
+            <button type='button' className='deleteaccount__action_btn' onClick={() => setIsDeleteOpen(true)} >Apagar Conta</button>
             <Modal open={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
               <p style={{fontSize:'18px'}}>Tem a certeza que deseja apagar a conta?</p>
               <small>Condições para apagar a conta:</small>
