@@ -25,7 +25,7 @@
         margin: .5rem;
     }
     //filter da category
-    .app__Category_filter_unit{
+    .app__Category_filter_unit, .app__Search_filter_unit, .app__SubCategory_filter_unit, .app__SubSubCategory_filter_unit{
         .mobile-title{
             border-bottom: 2px solid $light_gray;
             margin: .5rem 0;

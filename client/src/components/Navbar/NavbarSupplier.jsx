@@ -19,18 +19,20 @@ const SnackbarType = {
 const NavbarSupplier = () => {
     const [cookies] = useCookies();
 
-    const [supplierAddress, setSupplierAddress] = useState(false)
+    const [supplierAddressProdUnit, setSupplierAddressProdUnit] = useState(false)
     const snackbarRef = useRef(null);
 
-    async function getSupplierAddress(){
-    let supplier = await getAllFromDB('/suppliers', {uid:true})
-    if(supplier[0].postal_code != null){
-        setSupplierAddress(true)
-    }
+    async function getSupplierAddressAndProdUnit(){
+        let supplier = await getAllFromDB('/suppliers', {uid:true})
+        let productionUnits = await getAllFromDB('/productionUnits', {uid_supplier:supplier[0].uid})
+
+        if(supplier[0].postal_code != null && productionUnits != "There is no production unit in the database"){
+            setSupplierAddressProdUnit(true)
+        }
     }
 
     useEffect(() => {
-    getSupplierAddress()
+        getSupplierAddressAndProdUnit()
     },[])
 
     function handleAnunciar(){
@@ -67,7 +69,7 @@ const NavbarSupplier = () => {
                         </Link>
                     )
                 }
-                {supplierAddress ? 
+                {supplierAddressProdUnit ? 
                     <Link to="/supplier/anunciar" className="flex app__pointer app__navbar_links app__navbarSupplier_btn"  style={{marginRight:'0'}}>
                         Anunciar
                     </Link>
@@ -76,7 +78,7 @@ const NavbarSupplier = () => {
                         <button onClick={handleAnunciar} className="flex app__pointer app__navbar_links app__navbarSupplier_btn" style={{ marginRight: '0' }}>Anunciar</button>
                         <SnackBar
                         ref={snackbarRef}
-                        message="Deve definir a morada primeiro!"
+                        message="Deve definir a morada e/ou criar uma unidade de produção primeiro!"
                         type={SnackbarType.fail} />
                     </>
                 }

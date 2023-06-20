@@ -308,11 +308,11 @@ const Category = () => {
                 <div className={filterPrice ? "filterPrice showFilter" : "hideFilter"}>
                   <div style={{display: 'flex', flexDirection: 'row'}}>
                     <div>
-                      <span>Min. € {/*minPrice*/}</span>
+                      <span>Min. €</span>
                       <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
                     </div>
                     <div>
-                      <span>Máx. €{/*maxPrice*/}</span>
+                      <span>Máx. €</span>
                       <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
                     </div>
                   </div>
@@ -321,15 +321,15 @@ const Category = () => {
               </div>
               <div className='app__Category_filter_unit'>
                 <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
-                  <p style={{margin: '0'}}>Ordenar por:</p>
+                  <p style={{margin: '0'}}>Ordenar por</p>
                   <span>{filterSort ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
                 <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
                   <li style={{marginLeft: '1rem'}}>
-                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }>Preço - mais baixo</a>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }>Preço (mais baixo)</a>
                   </li>
                   <li style={{marginLeft: '1rem'}}>
-                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }>Preço - mais alto</a>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }>Preço (mais alto)</a>
                   </li> 
                   <li style={{marginLeft: '1rem'}}>
                     <a className='app__pointer app__text_effect' onClick={() => sortMostRecent() }>Os mais recentes</a>
@@ -340,7 +340,7 @@ const Category = () => {
           </div> 
           <div className='app__Category_Grid_Direita'>
             <div className='app__Category_mobile_filter_content'>
-              <button onClick={() => setIsOpen(true)}>FILTROS</button>
+              <button className='secondary__action_btn' style={{marginBottom: '1rem'}} onClick={() => setIsOpen(true)}>FILTROS</button>
               <Modal open={isOpen} onClose={() => setIsOpen(false)} filter={true}>
                 <p style={{margin: '0'}}>FILTROS</p>
                 <div  className='app__Category_filter_unit'>
@@ -360,11 +360,11 @@ const Category = () => {
                   <div className='filterPrice'>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
                       <div>
-                        <span>Min. €{/*minPrice*/}</span>
+                        <span>Min. €</span>
                         <input type='number' value={minCurrentPrice} onChange={(e) => setCurrentMinPrice(e.target.value)}></input>
                       </div>
                       <div>
-                        <span>Máx. €{/*maxPrice*/}</span>
+                        <span>Máx. €</span>
                         <input type='number' value={maxCurrentPrice} onChange={(e) => setCurrentMaxPrice(e.target.value)}></input>
                       </div>
                     </div>
@@ -373,17 +373,16 @@ const Category = () => {
                 </div>
                 <div className='app__Category_filter_unit'>
                 <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
-                  <p style={{margin: '0'}}>Ordenar por:</p>
-                  <span>{filterSort ? <FiChevronUp className='app__Category_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__Category_filter_content_title_right'></FiChevronRight>}</span>
+                  <p className="mobile-title">Ordenar por</p>
                 </div>
                 <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
-                  <li style={{marginLeft: '1rem'}}>
-                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }>Preço - mais baixo</a>
+                  <li>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceLow() }>Preço (mais baixo)</a>
                   </li>
-                  <li style={{marginLeft: '1rem'}}>
-                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }>Preço - mais alto</a>
+                  <li>
+                    <a className='app__pointer app__text_effect' onClick={() => sortPriceHigh() }>Preço (mais alto)</a>
                   </li> 
-                  <li style={{marginLeft: '1rem'}}>
+                  <li>
                     <a className='app__pointer app__text_effect' onClick={() => sortMostRecent() }>Os mais recentes</a>
                   </li>  
                 </ul>

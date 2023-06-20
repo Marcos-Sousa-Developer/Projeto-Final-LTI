@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { FiMail, FiLock, FiHome } from 'react-icons/fi';
 import { BsTwitter, BsFacebook, BsGoogle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
+import Modal from '../Modal/Modal';
 
 import { authentication as auth}  from '../../authentication'
 
@@ -20,6 +21,9 @@ const SignInC = ({checkout=null}) => {
     const snackbarRef = useRef(null);
     const snackbarRef2 = useRef(null);
     //-----------------------------------------
+
+    const [isOpen, setIsOpen] = useState(false); //modal
+
 
     const [email, setEmail] = useState(null) 
 
@@ -138,6 +142,12 @@ const SignInC = ({checkout=null}) => {
                                     />
                                 </div>
                             </div>
+                            <div className='register'>Esqueceu-se da password?
+                                <span style={{ cursor: 'pointer', color: 'rgba(235, 92, 31, 0.8)' }} onClick={() => setIsOpen(true)}> aqui.</span>
+                                <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                                    <p>Envie e-mail para o suporte: grupo01.pti.ptr@outlook.com</p>
+                                </Modal>
+                            </div>
                             <div className='app__SignIn_box13'>
                             {/*
                                 error && ( 
@@ -165,7 +175,7 @@ const SignInC = ({checkout=null}) => {
                                 />
                                 <SnackBar
                                     ref={snackbarRef2}
-                                    message={notValidate ? "O código está inválido" : "O código está valido"}
+                                    message={notValidate ? "O código está inválido" : "O código está válido"}
                                     type={notValidate ? SnackbarType.fail : SnackbarType.success}
                                 />
                             {
@@ -214,9 +224,9 @@ const SignInC = ({checkout=null}) => {
                         <p>ou</p>    
                     </div>
                     <div className='app__SignIn_box3'>
-                        <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google</p></button>
-                        <button className='app__SignIn_box30 ButtonFacebook'><BsFacebook className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsFacebook><p>Facebook</p></button>
-                        <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter</p></button>
+                        <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google (brevemente)</p></button>
+                        <button className='app__SignIn_box30 ButtonFacebook'><BsFacebook className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsFacebook><p>Facebook (brevemente)</p></button>
+                        <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter (brevemente)</p></button>
                     </div>
                 </div>    
             </div>

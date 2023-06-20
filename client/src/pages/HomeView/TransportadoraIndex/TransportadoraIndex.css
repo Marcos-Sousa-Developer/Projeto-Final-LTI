@@ -223,10 +223,6 @@ img, picture {
   border: 3px solid rgba(235, 92, 31, 0.8);
 }
 
-.app__destaques_content .swiper, .app__destaques_content .swiper-container {
-  z-index: 0;
-}
-
 .mapboxgl-ctrl-bottom-left {
   display: none;
 }
@@ -259,84 +255,89 @@ img, picture {
   background-color: transparent;
 }
 
-.app__modal_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: hsla(0, 0%, 9%, 0.863);
-  z-index: 1000;
-}
-
-.app__modal_content {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 2rem 4rem;
-  z-index: 1000;
-}
-.app__modal_content_closeBtn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 0.5rem;
-}
-.app__modal_content .app__Category_filter_unit .mobile-title, .app__modal_content .app__Search_filter_unit .mobile-title, .app__modal_content .app__SubCategory_filter_unit .mobile-title, .app__modal_content .app__SubSubCategory_filter_unit .mobile-title {
-  border-bottom: 2px solid #EEEEEE;
-  margin: 0.5rem 0;
-  padding: 0.5rem 0;
-}
-.app__modal_content .filterPrice {
-  display: flex;
+.app__Transportadora {
+  width: 50%;
+  margin: 1rem auto;
   align-items: center;
-  margin-left: 0.5rem;
-  font-size: 14px;
 }
-.app__modal_content .filterPrice button {
-  background-color: #EB5C1F;
+.app__Transportadora button {
   color: white;
-  padding: 4px 20px;
-  border-radius: 15px;
-  opacity: 0.8;
-  transition: all 200ms ease-in-out;
-  margin-left: 0.5rem;
+  width: 35%;
+  background-color: #EB5C1F;
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
 }
-.app__modal_content .filterPrice button:hover {
-  opacity: 1;
+.app__Transportadora_box {
+  padding: 2rem 1rem 3rem;
+  width: 40%;
+  margin: 4rem auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
 }
-.app__modal_content .filterPrice input {
-  width: 3rem;
-  border: 3px solid #EEEEEE;
+.app__Transportadora_box > * {
+  align-self: center;
+  margin-bottom: 0.5rem;
+}
+.app__Transportadora_box_box1 {
+  width: 40%;
+  align-self: center;
+  margin-bottom: 0.5rem;
+}
+.app__Transportadora_box_box1 p {
+  text-align: center;
+}
+.app__Transportadora_box input {
   outline: none;
-  margin: 0 0.5rem;
+  border: none;
+  width: 100%;
+}
+.app__Transportadora_box form p {
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 0.05rem;
+}
+.app__Transportadora_box11 {
+  border: 3px solid #EEEEEE;
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  display: flex;
+}
+.app__Transportadora_box11 svg {
+  margin-right: 0.75rem;
 }
 
-@media (max-width: 1200px) {
-  .app__modal_content {
-    padding: 2rem;
-  }
-  .filter {
-    width: 50%;
-    padding: 2rem 1rem;
-  }
+.btn {
+  margin-top: 2rem;
 }
-@media (max-width: 750px) {
-  .filter {
-    width: 70%;
-  }
-}
-@media (max-width: 500px) {
-  .filter {
+
+@media screen and (min-width: 1450px) {
+  .app__SignIn_box {
     width: 80%;
   }
 }
-@media (max-width: 400px) {
-  .app__modal_content {
-    padding: 1.5rem 1rem;
+@media screen and (max-width: 1200px) {
+  .app__SignIn_box {
+    margin: 4rem auto 4rem;
+    width: 95%;
   }
-  .filter {
-    width: 90%;
+  .app__SignIn_box > * {
+    padding: 1rem;
   }
-}/*# sourceMappingURL=Modal.css.map */
+}
+@media screen and (max-width: 900px) {
+  .app__SignIn_box {
+    width: 75%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.5fr auto 1fr;
+  }
+}
+@media screen and (max-width: 550px) {
+  .app__SignIn_box {
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+    margin: 1rem auto 2rem;
+    box-shadow: 0px 0px 0px 0px #fff;
+  }
+}/*# sourceMappingURL=TransportadoraIndex.css.map */
