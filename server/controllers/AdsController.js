@@ -112,12 +112,13 @@ const getAdByID = async function (req, res) {
  */
 const deleteAdByID = async function (req, res) {
 
-    const statement = "DELETE FROM ads WHERE id = " + req.params.id
+    const statement = `UPDATE ads SET status='0' WHERE id='${parseInt(req.params.id)}'`;
 
-    let result = await dbConnection(statement)
+    let result = await dbConnection(statement);
+
 
     if (result === "error") {
-        return res.status(500).json("Not possible to delete the ad with id " + req.params.id);
+        return res.status(500).json("Not possible to delete this ad");
     } else if (result.affectedRows == 0) {
         return res.send("Ad with id " + req.params.id + " does not exist in the database");
     }
@@ -134,7 +135,7 @@ const deleteAdByID = async function (req, res) {
 const insertAd = async function (req, res) {
 
     const data = [req.query.title, req.query.description, req.query.email, 
-                req.query.mobile_number, req.query.extraCharacteristic, req.query.status,
+                req.query.mobile_number, req.query.extraCharacteristics, req.query.status,
                 req.query.price, req.query.production_date, req.query.supplier_id, req.query.product_id, 
                 req.query.category_name, req.query.subcategory_name, req.query.subsubcategory_name];
 

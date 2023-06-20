@@ -105,6 +105,8 @@ const SupplierProdUnit = () => {
             uid_supplier: true,
         })
 
+        console.log(prodUnitPost)
+
         // Add the new production unit to the list of production units stored in state
         setProductionUnits(prevState => [...prevState, newProductionUnit]);
         // Reset the form fields
@@ -116,14 +118,14 @@ const SupplierProdUnit = () => {
     const submitDeleteProdUnit = async (index) => {
         //APAGA O PRODUCTION UNIT
         await deleteToDB("/productionUnits/" + index)
-        location.reload()
+        //location.reload()
     }
 
     const submitDeleteProduct = async (prodUnitID, productID) => {
         //APAGA O PRODUTO DA PRODUCTION UNIT
         let productProdUnit = await getAllFromDB("/productProductionUnits", {productionUnit_id: prodUnitID, ad_id: productID})
         await deleteToDB("/productProductionUnits/" + productProdUnit[0].id)
-        location.reload()
+        //location.reload()
     }
 
     async function handleCriarUnidade() {

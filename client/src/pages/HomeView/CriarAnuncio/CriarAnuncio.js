@@ -1082,7 +1082,6 @@ function CriarAnuncio() {
                   </div>     
                 </div>
               </div>
-              <button onClick={() => console.log(postImages)}>DAD</button>
               <div className='app__anuncio_supplier-prodUnit'>
                 <div className='app__anuncio_supplier'>
                   <p className='title'>Anunciante</p>

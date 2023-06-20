@@ -112,13 +112,12 @@ const deleteProductionUnitByID = async function (req, res) {
  * @param {*} res //response from server
  * @returns result data
  */
-const insertProductionUnit = async function (req, res) {
-
-    const data = [req.query.name, req.query.city, req.query.location, req.query.postal_code, req.query.capacity, 
+const insertProductionUnit = async function (req, res) { 
+    let data = [req.query.name, req.query.city, req.query.location, req.query.postal_code, req.query.capacity, 
                 req.query.uid_supplier];
 
     if (req.cookies.userSession != undefined) {
-        const data = [req.query.name, req.query.city, req.query.location, req.query.postal_code, req.query.capacity, 
+        data = [req.query.name, req.query.city, req.query.location, req.query.postal_code, req.query.capacity, 
             jwt.decryptID(req.cookies.userSession)];
     }
 

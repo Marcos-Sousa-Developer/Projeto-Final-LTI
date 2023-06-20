@@ -1,4 +1,7 @@
-[{"name":"CTT"},
-{"name":"DPD"},
-{"name":"Nacex"},
-{"name":"GLS"},{"name":"UPS"},{"name":"Fedex"}]
+[
+        {"name":"CTT"},
+    {"name":"DPD"},
+    {"name":"Nacex"},
+    {"name":"GLS"},
+    {"name":"UPS"},{"name":"Fedex"}
+]
