@@ -13,7 +13,7 @@ admin_data.forEach(row => {
                 row.mobile_number, row.address, row.continent,
                 row.country, row.district,
                 row.city, row.town, 
-                row.postal_code, row.status])     
+                row.postal_code, 1])     
 });
 
 pool.query(statement, [values], function(error, result){

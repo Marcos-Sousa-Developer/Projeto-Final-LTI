@@ -48,6 +48,7 @@ function App() {
 
       if(location.pathname !== "/locked") {
         let isLocked = await axios.get('/checkUserDeactivated', null, {withCredentials:true}) 
+        console.log(isLocked)
         if(isLocked.data) {
           navigate("/locked")
         } 
