@@ -2,6 +2,7 @@
 
 .app__notification{
     margin-right: .5rem;
+    position: relative;
 
     .app__notification_bell{
         & >*{
@@ -14,4 +15,13 @@
         color: $orange;
     }
 
+    .app__notification_on{
+        position: absolute;
+        top: 7px;
+        right: 0;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: $orange;
+    }
 }

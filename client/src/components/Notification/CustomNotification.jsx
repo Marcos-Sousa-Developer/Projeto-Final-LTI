@@ -47,6 +47,12 @@ const CustomNotification = () => {
     return (
         <>
             <button className='flex app__pointer app__notification' onClick={() => setIsOpen(true)}>
+                {
+                  myNotifications.length != 0 ?
+                    <span className='app__notification_on'></span>
+                  : 
+                    ''
+                }
                 <FiBell fontSize={24} color="black" className='app__notification_bell'></FiBell>
             </button>
             <Modal open={isOpen} onClose={() => setIsOpen(false)}>
@@ -54,7 +60,7 @@ const CustomNotification = () => {
             {
                 myNotifications.length == 0 ?
                 (
-                    <p>Sem notificações</p>
+                    <p style={{margin:'0'}}>Sem notificações</p>
                 )
                 :
                 (
