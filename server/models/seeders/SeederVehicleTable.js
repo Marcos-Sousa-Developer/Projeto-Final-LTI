@@ -9,7 +9,7 @@ let values = []
 
 fake_vehicle_data.forEach(row => { 
 
-    values.push([row.name, uuidv4(), uuidv4().substring(0, 6)])     
+    values.push([row.name, row.credentialAccess, row.accessCode])     
 });
 
 pool.query(statement, [values], function(error, result){

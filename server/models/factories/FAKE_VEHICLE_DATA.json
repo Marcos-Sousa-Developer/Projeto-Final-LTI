@@ -1,7 +1,8 @@
 [
-        {"name":"CTT"},
-    {"name":"DPD"},
-    {"name":"Nacex"},
-    {"name":"GLS"},
-    {"name":"UPS"},{"name":"Fedex"}
+    {"name":"CTT", "credentialAccess": "26105e4e-a404-418e-9477-5133f5a2fbfb", "accessCode":"16a216" },
+    {"name":"DPD", "credentialAccess": "1740a892-daa1-48cb-9eec-e0911b30325c", "accessCode":"31f204" },
+    {"name":"Nacex", "credentialAccess": "59a63cc6-73b6-4b4a-bf8b-cf230624fee7", "accessCode":"098a01" },
+    {"name":"GLS", "credentialAccess": "52fc22c6-c8ee-43f8-ade0-d12b130dacf8", "accessCode":"c4dc61" },
+    {"name":"UPS", "credentialAccess": "3348cee0-3251-4b32-9446-7c27896369b8", "accessCode":"3e5760" },
+    {"name":"Fedex","credentialAccess": "2786fe82-c2fe-4d12-b1ff-8c4ab3482b3c", "accessCode":"2060c7" }
 ]
