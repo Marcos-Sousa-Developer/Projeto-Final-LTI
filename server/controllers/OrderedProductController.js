@@ -120,12 +120,12 @@ const insertOrderedProduct = async function (req, res) {
                 req.query.product_subcategory, req.query.product_subsubcategory, 
                 req.query.order_status, req.query.product_owner_uid, 
                 req.query.product_buyer_uid, req.query.product_location, req.query.buyer_location, 
-                req.query.orderDistance_km, req.query.sameLocation, req.query.price, req.query.created_at];
+                req.query.sameLocation, req.query.price, req.query.vehicle, req.query.quantity];
 
     const statement = "INSERT INTO orderedProducts (order_id, ad_id, product_category, " +    
                     "product_subcategory, product_subsubcategory, order_status, product_owner_uid, " +
-                    "product_buyer_uid, product_location, buyer_location, orderDistance_km, sameLocation, " +
-                    "price, created_at) VALUES ?";
+                    "product_buyer_uid, product_location, buyer_location, sameLocation, " +
+                    "price, vehicle, quantity) VALUES ?";
  
     let result = await dbConnection(statement, [data]);
 

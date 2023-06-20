@@ -15,6 +15,7 @@ const statement = "CREATE TABLE ads ( " +
                   "category_name varchar(255) NOT NULL, " +
                   "subcategory_name varchar(255) NOT NULL, " +
                   "subsubcategory_name varchar(255) NOT NULL, " +
+                  "urls varchar(5000), " +
                   "created_at DATE DEFAULT (CURRENT_DATE), " +
                   "PRIMARY KEY (id))";
 

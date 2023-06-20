@@ -517,11 +517,11 @@ function SupplierProfile() {
                     </div>
                     {
                       notSubmit === true ? (
-                        <small style={{color: "red"}}>Password Incorreta </small> 
+                        <small style={{color: "rgb(211, 25, 25)"}}>Password Incorreta </small> 
                       )
                       :
                       (
-                        <small style={{color: "red"}}></small> 
+                        <small style={{color: "rgb(211, 25, 25)"}}></small> 
                       )
                     }
                     <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
@@ -603,11 +603,11 @@ function SupplierProfile() {
                       </div>
                       {
                         notSubmit === true ? (
-                          <small style={{color: "red"}}>Password Incorreta </small> 
+                          <small style={{color: "rgb(211, 25, 25)"}}>Password Incorreta </small> 
                         )
                         :
                         (
-                          <small style={{color: "red"}}></small> 
+                          <small style={{color: "rgb(211, 25, 25)"}}></small> 
                         )
                       }
                       <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
@@ -661,32 +661,31 @@ function SupplierProfile() {
           </div>
           <div className="app__SupplierProfile_button">
             <button type="button" className='main__negative_action_btn' onClick={async () => await logOut()}>Log Out</button>
-            <button type='button' onClick={() => setIsDeleteOpen(true)} ><FiTrash2></FiTrash2></button>
-
+            <button type='button' className='deleteaccount__action_btn' onClick={() => setIsDeleteOpen(true)} >Apagar Conta</button>
             <Modal open={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
               <p style={{fontSize:'18px'}}>Tem a certeza que deseja apagar a conta?</p>
               <small>Condições para apagar a conta:</small>
               <ol>
-                <li style={{color: "red"}}>Sem nenhuma encomenda pendente!</li>
-                <li style={{color: "red"}}>Sem anúncios a venda!</li>
+                <li style={{color: "rgb(211, 25, 25)"}}>Sem nenhuma encomenda pendente!</li>
+                <li style={{color: "rgb(211, 25, 25)"}}>Sem anúncios a venda!</li>
               </ol>
 
               <div className='inputField' style={{marginTop:'1.5rem'}}>
                 <p style={{marginTop: '0'}}>Password</p>
                 <input style={{width:'80%'}} type="password" name="" placeholder='Introduza a sua password' onChange={(e) => setPasswordToVerify(e.target.value)}></input> <br></br>
-                <small style={{color: "red"}}>Esta ação não tem retorno!</small>
+                <small style={{color: "rgb(211, 25, 25)"}}>Esta ação não tem retorno!</small>
               </div>
               <br></br>
               {
                 notSubmit === true ? (
-                  <small style={{color: "red"}}>Password Incorreta </small> 
+                  <small style={{color: "rgb(211, 25, 25)"}}>Password Incorreta </small> 
                 )
                 :
                 (
-                  <small style={{color: "red"}}></small> 
+                  <small style={{color: "rgb(211, 25, 25)"}}></small> 
                 )
               }
-              <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
+              <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem'}}>
                 <button className='main__action_btn' onClick={() => setIsDeleteOpen(false)}>Cancelar</button>
                 {
                   (passwordToVerify === "" || inProcess==true)  ? (

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { FiRepeat} from 'react-icons/fi';
 import { useCookies } from 'react-cookie';
 
@@ -22,7 +22,18 @@ const Product = ({ data, onAddToCompare, onRemoveFromCompare, selectedProducts, 
       <>
         <div className='product'>
           <div className="app__pointer" onClick={onClick}>
-            <img className='product_img' src={exampleImage} />
+            {
+              data.urls == null ? 
+              (
+                <img className='product_img' src={exampleImage} />
+
+              )
+              :
+              (
+                <img className='product_img' src={JSON.parse(data.urls)[0]} />
+
+              )
+            }
           </div>
           <div className='product_description'>
             <div>

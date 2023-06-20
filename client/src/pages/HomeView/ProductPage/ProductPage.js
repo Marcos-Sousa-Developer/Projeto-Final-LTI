@@ -63,6 +63,21 @@ const ProductPage = () => {
     setSubSubCategoryName(ad[0].subsubcategory_name)
     let car = {Info: "Sem informação disponivel"}
 
+    let urls = null 
+
+    if(ad[0].urls == null) {
+      urls = [
+        product1,
+        product2,
+        product3,
+        product4,
+        product5,
+      ]
+    }
+    else {
+      urls = JSON.parse(ad[0].urls)
+    }
+
     try {
       car = JSON.parse(ad[0].extraCharacteristic) 
 
@@ -72,13 +87,7 @@ const ProductPage = () => {
     setAdData({
       dataComplete: ad[0],
       title: ad[0].title,
-      src: [
-        product1,
-        product2,
-        product3,
-        product4,
-        product5,
-      ],
+      src: urls,
       description: ad[0].description,
       caracteristics: car,
       price: ad[0].price,
