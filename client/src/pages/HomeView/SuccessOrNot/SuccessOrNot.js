@@ -8,6 +8,8 @@ import putToDB from '../../../hooks/putToDB';
 import emailjs from '@emailjs/browser';
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import './SucessOrNot.css';
+import postToDB from '../../../hooks/postToDB';
+import axios from 'axios';
 
 const SuccessOrNot = ({success}) => {
 
@@ -51,7 +53,18 @@ const SuccessOrNot = ({success}) => {
               let order = await getAllFromDB('/orderedProducts/' + ordersCheck[1][i])
               let ad = await getAllFromDB('/ads/' + order[0].ad_id)
               let supplier = await getAllFromDB('/suppliers/' + ad[0].supplier_id)
-  
+              try {
+                let params = {
+                  user_uid: supplier[0].uid,
+                  order_id: order[0].id,
+                  order_status: "Para preparar",
+                  status: "For read"}
+                await axios.post('/insertNotifications',null, {params, withCredentials:true}) 
+              }
+              catch (error) {
+                  console.log(error)
+              }
+
               await sendEmail(supplier[0].email, supplier[0].name, ad[0].title)
             }
             removeCookie('ordersToCheck', { path: '/'});

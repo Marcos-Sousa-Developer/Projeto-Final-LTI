@@ -9,6 +9,7 @@ import SupplierBar from '../../../components/SupplierBar/SupplierBar';
 import LoadingPage from '../../LoadingPage';
 import './SupplierOrdersHistory.css';
 import emailjs from '@emailjs/browser';
+import axios from 'axios';
 
 const SnackbarType = {
   success: "success",
@@ -73,9 +74,21 @@ const SupplierOrdersHistory = () => {
   };
 
     async function handleEditStatusOrder(order_id, status) {
+
       await putToDB("/orderedProducts/" + order_id, {
         order_status: status
       })
+
+      try {
+        let params = {
+          order_status: status,
+        }
+        await axios.post('/insertNotificationsByID/'+order_id, null, {params, withCredentials:true}) 
+      }
+      catch (error) {
+          console.log(error)
+      }
+      location.reload()
     }
 
     async function handleEditVehicle(vehicle) {
@@ -154,10 +167,10 @@ const SupplierOrdersHistory = () => {
                           <div>
                             {
                               orderHistory.order.order_status == "Em preparação" ? (
-                                <button className='secondary__negative_action_btn app__pointer' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                                <button className='secondary__negative_action_btn app__pointer' disabled={false} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado");}}>Cancelar</button>
                               )
                               : (
-                                <button className='secondary__negative_action_btn' style={{opacity:"0.4"}} disabled={true} onClick={() => {handleEditStatusOrder(orderHistory.order.id, "Cancelado"); location.reload();}}>Cancelar</button>
+                                <button className='secondary__negative_action_btn' style={{opacity:"0.4"}} disabled={true} >Cancelar</button>
                               )
                             }
                             <button className={orderHistory.order.order_status == "Em preparação" ? "secondary__action_btn app__pointer" : "secondary__action_btn"} style={{opacity: orderHistory.order.order_status == "Em preparação" ? '' : '0.4'}} disabled={orderHistory.order.order_status == "Em preparação" ? false : true} onClick={() => modalToOpen(orderHistory.order.id)}>Enviar</button>

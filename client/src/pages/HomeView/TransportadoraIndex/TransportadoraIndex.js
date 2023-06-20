@@ -6,6 +6,7 @@ import {Footer} from '../../../components/index';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link } from "react-router-dom";
 import postToDB from "../../../hooks/postToDB";
+import axios from "axios";
 
 function TransportadoraIndex() { 
 
@@ -31,7 +32,16 @@ function TransportadoraIndex() {
       code: code
     }) 
 
-    if(response === true) {
+    if(response === true) { 
+      try {
+        let params = {
+          order_status: "Entregue",
+        }
+        await axios.post('/insertNotificationsByID/'+orderedProductID, null, {params, withCredentials:true}) 
+      }
+      catch (error) {
+          console.log(error)
+      }
       setOK(true)
     }
     else {
@@ -118,7 +128,8 @@ function TransportadoraIndex() {
           {
             error ? 
             (
-              <p>Não foi possivel validar a encomenda, verifique o acesso</p>
+              <p>Não foi possivel validar esta a encomenda, verifique se já está validada ou se o acesso está correto!</p>
+              
             )
             :
             OK ?

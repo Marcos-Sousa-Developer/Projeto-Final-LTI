@@ -7,6 +7,7 @@ import { Navbar, Footer, SubHeading, SnackBar } from '../../../components/index'
 import { PriceDisplay } from '../../../utilities/formatCurrency';
 import './ConsumerOrdersHistory.css';
 import ConsumerBar from '../../../components/ConsumerBar/ConsumerBar';
+import axios from 'axios';
 
 const SnackbarType = {
   success: "success",
@@ -73,6 +74,15 @@ const ConsumerOrdersHistory = () => {
       let productProdUnitPut = await putToDB("/orderedProducts/" + index,{
         order_status: status
       })
+      try {
+        let params = {
+          order_status: "Cancelado",
+        }
+        await axios.post('/insertNotificationsByID/'+index, null, {params, withCredentials:true}) 
+      }
+      catch (error) {
+          console.log(error)
+      }
     }
     
     //Aparecer no loading da página

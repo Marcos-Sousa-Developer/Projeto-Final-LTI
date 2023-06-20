@@ -5,11 +5,11 @@ import { useCookies } from 'react-cookie';
 
 import getClientType from "../../hooks/getClientType";
 import getAllFromDB from '../../hooks/getAllFromDB';
-
 import SnackBar from '../SnackBarNotification/SnackBar';
 
 import images from '../../assets/images.js';
 import './styles/Navbar.css';
+import CustomNotification from '../Notification/CustomNotification';
 
 const SnackbarType = {
     success: "success",
@@ -45,6 +45,17 @@ const NavbarSupplier = () => {
             <Link to='/supplier'><img src={images.logo} alt="" className="app__logo"/></Link>
 
             <div className='app__navbarSupplier_profile'>
+
+            {
+                [undefined,null].includes(cookies.identification) ? 
+                (
+                    ""
+                )
+                :
+                (
+                    <CustomNotification></CustomNotification>
+                )
+            }
 
                 {
                     [undefined,null].includes(cookies.identification) ? (
