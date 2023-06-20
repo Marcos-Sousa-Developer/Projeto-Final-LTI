@@ -266,16 +266,16 @@ const SubCategory = () => {
         <div className='app__SubCategory_Caminho'>
         {
             searchName !== null ?  (
-              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
-                  <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName + "&searchName="+searchName}> {categoryName} </Link> >
-                  <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName + "&searchName="+searchName}> {subCategoryName} </Link> >
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> &gt; 
+                  <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName + "&searchName="+searchName}> {categoryName} </Link> &gt;
+                  <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName + "&searchName="+searchName}> {subCategoryName} </Link> &gt;
                    pesquisa:  {searchName} 
               </p>
             )
             : 
             (
-              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
-              <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName}> {categoryName} </Link> > 
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> &gt;
+              <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName}> {categoryName} </Link> &gt;
               <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName}> {subCategoryName} </Link> 
               </p>
             )
