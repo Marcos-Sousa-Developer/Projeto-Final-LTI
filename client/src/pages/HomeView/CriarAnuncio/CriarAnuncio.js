@@ -41,6 +41,7 @@ function CriarAnuncio() {
     const [productionDateError, setProductionDateError] = useState(false);
     const [verifyProdUnitsError, setVerifyProdUnitsError] = useState(false); 
     const [postImages, setPostImages] = useState([]); 
+    const [errorImages, setErrorImages] = useState(false);
 
     //Anuncio Form
     const [formData, setFormData] = useState({
@@ -420,216 +421,265 @@ function CriarAnuncio() {
       return subSubCategory[0].id;
     }
 
-    const submit = async () => {
+    const submit = async () => { 
 
-      
-      let supplier = await getAllFromDB("/suppliers", {uid: true})
-      let idUser = supplier[0].id;
+      setVerifyProdUnitsError(false)
+      setTitleError(false)
+      setPriceError(false)
+      setDescriptionError(false)
+      setErrorImages(false)
 
-        let validEAN = "OK";
-        if(formData.EAN != "" && formData.EAN != null) {
-          validEAN = await verifyEAN(formData.EAN);
+      console.log() 
+      let total = Object.keys(formData.prodUnit).length
+      let vazios = 0
+      for(const unit in formData.prodUnit) {
+        if(formData.prodUnit[unit] === "") {
+          vazios += 1
         }
+      }
 
-        let validFeature = await verifyFeatures(formData.features[0]);
-        let validSubFeature = "OK";
-        if(formData.sub_features != undefined){
-          validSubFeature = await verifySubFeatures(formData.sub_features[0]);
-        }
-        let validProdUnit = await verifyProdUnits(formData.prodUnit);
-        let validDescription = await verifyDescription(formData.descricao);
-        let validCategory = await verifyCategory(formData.categoria);
+      if (total > vazios) { 
 
-        let product;
-        let ad;
+      if(formData.categoria != "" || formData.subcategoria != ""  || formData.subsubcategoria != "") { 
 
-        if(!titleError && !priceError && !numberError && !productionDateError && !eanError && !validDescription && !validProdUnit){ //meter sub_features e features
-            let featuresDBproduct = {}; 
-            let featuresDBad = {};
+        if(formData.titulo != "") {
 
-            //adiciona as features
-            if(formData.features[0] != undefined){
-              for (let feature in formData.features[0]) {
-                featuresDBad[feature] = formData.features[0][feature];
-                if(feature != "Local de Produção" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
-                  featuresDBproduct[feature] = formData.features[0][feature];
-                }
-              }
-            }
-            //adiciona as sub
-            if(formData.sub_features != undefined){
-              for (let feature in formData.sub_features) {
-                featuresDBad[feature] = formData.sub_features[feature];
-                if(feature != "Género" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
-                  featuresDBproduct[feature] = formData.sub_features[feature];
-                }
-              }
-            }
+          if(formData.preco != undefined) {
 
-            let idSubSubCategory = await getIdSubSubCategory(formData.subsubcategoria);
+            if(formData.descricao != "") {
 
-            //Quando existe EAN
-            if(formData.EAN != null && formData.EAN != ""){
-              let params = {
-                EAN: formData.EAN,
-              };
+                if(postImages.length > 0) {
 
-              let EANexist = await getAllFromDB("/products/", params);
+                  let supplier = await getAllFromDB("/suppliers", {uid: true})
+                  let idUser = supplier[0].id;
 
-
-              if(EANexist == "There is no product in the database"){
-                //CRIA O PRODUTO
-                product = await postToDB("/products",{
-                  EAN: formData.EAN,
-                  id_subsubcategory: idSubSubCategory,
-                  status: 0,
-                  characteristics: JSON.stringify(featuresDBproduct),
-                })
-
-                //ir buscar o id do produto de cima
-                let idProduct = product.insertId
-                //CRIA O ANUNCIO
-                ad = await postToDB("/ads",{ 
-                  title: formData.titulo,
-                  description: formData.descricao,
-                  email: formData.email,
-                  mobile_number: formData.telemovel,
-                  extraCharacteristics: JSON.stringify(featuresDBad),
-                  status: 1,
-                  production_date: formData.data_producao,
-                  price: formData.preco,
-                  supplier_id: idUser,
-                  product_id: idProduct,
-                  created_at: new Date().toISOString().split('T')[0],
-                  category_name: formData.categoria,
-                  subcategory_name: formData.subcategoria,
-                  subsubcategory_name: formData.subsubcategoria,
-                })
-              }else{
-                product = EANexist[0]
-
-                let idProduct = product.id;
-
-                let prodCharacStart = JSON.parse(product.characteristics)
-                let prodCharacEnd = featuresDBproduct
-                let update = false;
-                for(let feature in prodCharacStart){
-                  if(prodCharacStart[feature] != prodCharacEnd[feature]){
-                    update = true;
+                  let validEAN = "OK";
+                  if(formData.EAN != "" && formData.EAN != null) {
+                    validEAN = await verifyEAN(formData.EAN);
                   }
-                }
-                if(update == true){
-                  product = await putToDB("/products/" + product.id,{
-                    EAN: formData.EAN,
-                    id_subsubcategory: idSubSubCategory,
-                    status: 0,
-                    characteristics: JSON.stringify(featuresDBproduct),
-                  })
-                }
 
-                ad = await postToDB("/ads",{ 
-                  title: formData.titulo,
-                  description: formData.descricao,
-                  email: formData.email,
-                  mobile_number: formData.telemovel,
-                  extraCharacteristics: JSON.stringify(featuresDBad),
-                  status: 1,
-                  production_date: formData.data_producao,
-                  price: formData.preco,
-                  supplier_id: idUser,
-                  product_id: idProduct,
-                  created_at: new Date().toISOString().split('T')[0],
-                  category_name: formData.categoria,
-                  subcategory_name: formData.subcategoria,
-                  subsubcategory_name: formData.subsubcategoria,
-                })
-              } 
-            } else {
-              //Quando não existe EAN
-              product = await postToDB("/products",{
-                id_subsubcategory: idSubSubCategory,
-                status: 0,
-                characteristics: JSON.stringify(featuresDBproduct),
-              })
-    
-              //ir buscar o id do produto de cima
-              let idProduct = product.insertId
-    
-              //CRIA O ANUNCIO
-              ad = await postToDB("/ads",{ 
-                title: formData.titulo,
-                description: formData.descricao,
-                email: formData.email,
-                mobile_number: formData.telemovel,
-                extraCharacteristics: JSON.stringify(featuresDBad),
-                status: 1,
-                production_date: formData.data_producao,
-                price: formData.preco,
-                supplier_id: idUser,
-                product_id: idProduct,
-                created_at: new Date().toISOString().split('T')[0],
-                category_name: formData.categoria,
-                subcategory_name: formData.subcategoria,
-                subsubcategory_name: formData.subsubcategoria,
-              })
-            }
+                  let validFeature = await verifyFeatures(formData.features[0]);
+                  let validSubFeature = "OK";
+                  if(formData.sub_features != undefined){
+                    validSubFeature = await verifySubFeatures(formData.sub_features[0]);
+                  }
+                  let validProdUnit = await verifyProdUnits(formData.prodUnit);
+                  let validDescription = await verifyDescription(formData.descricao);
+                  let validCategory = await verifyCategory(formData.categoria);
 
+                  let product;
+                  let ad;
+
+                  if(!titleError && !priceError && !numberError && !productionDateError && !eanError && !validDescription && !validProdUnit){ //meter sub_features e features
+                      let featuresDBproduct = {}; 
+                      let featuresDBad = {};
+
+                      //adiciona as features
+                      if(formData.features[0] != undefined){
+                        for (let feature in formData.features[0]) {
+                          featuresDBad[feature] = formData.features[0][feature];
+                          if(feature != "Local de Produção" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
+                            featuresDBproduct[feature] = formData.features[0][feature];
+                          }
+                        }
+                      }
+                      //adiciona as sub
+                      if(formData.sub_features != undefined){
+                        for (let feature in formData.sub_features) {
+                          featuresDBad[feature] = formData.sub_features[feature];
+                          if(feature != "Género" && feature != "Validade" && feature != "Estado" && feature != "Garantia"){
+                            featuresDBproduct[feature] = formData.sub_features[feature];
+                          }
+                        }
+                      }
+
+                      let idSubSubCategory = await getIdSubSubCategory(formData.subsubcategoria);
+
+                      //Quando existe EAN
+                      if(formData.EAN != null && formData.EAN != ""){
+                        let params = {
+                          EAN: formData.EAN,
+                        };
+
+                        let EANexist = await getAllFromDB("/products/", params);
+
+
+                        if(EANexist == "There is no product in the database"){
+                          //CRIA O PRODUTO
+                          product = await postToDB("/products",{
+                            EAN: formData.EAN,
+                            id_subsubcategory: idSubSubCategory,
+                            status: 0,
+                            characteristics: JSON.stringify(featuresDBproduct),
+                          })
+
+                          //ir buscar o id do produto de cima
+                          let idProduct = product.insertId
+                          //CRIA O ANUNCIO
+                          ad = await postToDB("/ads",{ 
+                            title: formData.titulo,
+                            description: formData.descricao,
+                            email: formData.email,
+                            mobile_number: formData.telemovel,
+                            extraCharacteristics: JSON.stringify(featuresDBad),
+                            status: 1,
+                            production_date: formData.data_producao,
+                            price: formData.preco,
+                            supplier_id: idUser,
+                            product_id: idProduct,
+                            created_at: new Date().toISOString().split('T')[0],
+                            category_name: formData.categoria,
+                            subcategory_name: formData.subcategoria,
+                            subsubcategory_name: formData.subsubcategoria,
+                          })
+                        }else{
+                          product = EANexist[0]
+
+                          let idProduct = product.id;
+
+                          let prodCharacStart = JSON.parse(product.characteristics)
+                          let prodCharacEnd = featuresDBproduct
+                          let update = false;
+                          for(let feature in prodCharacStart){
+                            if(prodCharacStart[feature] != prodCharacEnd[feature]){
+                              update = true;
+                            }
+                          }
+                          if(update == true){
+                            product = await putToDB("/products/" + product.id,{
+                              EAN: formData.EAN,
+                              id_subsubcategory: idSubSubCategory,
+                              status: 0,
+                              characteristics: JSON.stringify(featuresDBproduct),
+                            })
+                          }
+
+                          ad = await postToDB("/ads",{ 
+                            title: formData.titulo,
+                            description: formData.descricao,
+                            email: formData.email,
+                            mobile_number: formData.telemovel,
+                            extraCharacteristics: JSON.stringify(featuresDBad),
+                            status: 1,
+                            production_date: formData.data_producao,
+                            price: formData.preco,
+                            supplier_id: idUser,
+                            product_id: idProduct,
+                            created_at: new Date().toISOString().split('T')[0],
+                            category_name: formData.categoria,
+                            subcategory_name: formData.subcategoria,
+                            subsubcategory_name: formData.subsubcategoria,
+                          })
+                        } 
+                      } else {
+                        //Quando não existe EAN
+                        product = await postToDB("/products",{
+                          id_subsubcategory: idSubSubCategory,
+                          status: 0,
+                          characteristics: JSON.stringify(featuresDBproduct),
+                        })
+              
+                        //ir buscar o id do produto de cima
+                        let idProduct = product.insertId
+              
+                        //CRIA O ANUNCIO
+                        ad = await postToDB("/ads",{ 
+                          title: formData.titulo,
+                          description: formData.descricao,
+                          email: formData.email,
+                          mobile_number: formData.telemovel,
+                          extraCharacteristics: JSON.stringify(featuresDBad),
+                          status: 1,
+                          production_date: formData.data_producao,
+                          price: formData.preco,
+                          supplier_id: idUser,
+                          product_id: idProduct,
+                          created_at: new Date().toISOString().split('T')[0],
+                          category_name: formData.categoria,
+                          subcategory_name: formData.subcategoria,
+                          subsubcategory_name: formData.subsubcategoria,
+                        })
+                      }
+
+                      setSnackbarType(SnackbarType.success);
+                      snackbarRef.current.show();
+                    
+                      let idAd = ad.insertId
+
+                      for (let i = 0; i < Object.entries(formData.prodUnit).length; i++) {
+                        const [key, value] = Object.entries(formData.prodUnit)[i];
+                        if (value > 0) {
+                          let productProductionUnit = await postToDB("/productProductionUnits", {
+                            quantity: value,
+                            fee: 0,
+                            productionUnit_id: productionUnits[i].id,
+                            ad_id: idAd,
+                            title: formData.titulo,
+                            price: formData.preco,
+                          });
+                        }
+                      }
+
+                      if(postImages.length > 0) {
+                        try {
+                          const formImagesData = new FormData()
+                          for (let i = 0; i < postImages.length; i++) {
+                            formImagesData.append('files', postImages[i]);
+                          } 
             
-
-            setSnackbarType(SnackbarType.success);
-            snackbarRef.current.show();
-          
-            let idAd = ad.insertId
-
-            for (let i = 0; i < Object.entries(formData.prodUnit).length; i++) {
-              const [key, value] = Object.entries(formData.prodUnit)[i];
-              if (value > 0) {
-                let productProductionUnit = await postToDB("/productProductionUnits", {
-                  quantity: value,
-                  fee: 0,
-                  productionUnit_id: productionUnits[i].id,
-                  ad_id: idAd,
-                  title: formData.titulo,
-                  price: formData.preco,
-                });
-              }
-            }
-
-            if(postImages.length > 0) {
-              try {
-                const formImagesData = new FormData()
-                for (let i = 0; i < postImages.length; i++) {
-                  formImagesData.append('files', postImages[i]);
-                } 
-  
-                let params = {adID:ad.insertId}
-  
-                const resp = await axios.post('/saveProductImages', formImagesData, {params}) 
-  
-                console.log(resp)
-              } 
-              catch (error) {
-                console.log(error)
-              }
-            }
-
-
-            //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
-            //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
-            //SE CONSEGUIR ADICIONAR TODOS ADICIONA
-            //SE NÃO, DÁ UM ALERT
-
-            setTimeout(() => {
-              navigate('/supplier', { replace: true });
-            }, 2000); // 2 seconds delay 
-
-            console.log(ad)
-            console.log()
+                          let params = {adID:ad.insertId}
             
-        } else if(titleError || priceError || numberError || productionDateError || eanError || validDescription || validProdUnit){
-            setSnackbarType(SnackbarType.fail);
-            snackbarRef.current.show();
+                          const resp = await axios.post('/saveProductImages', formImagesData, {params}) 
+            
+                          console.log(resp)
+                        } 
+                        catch (error) {
+                          console.log(error)
+                        }
+                      }
+
+
+                      //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
+                      //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
+                      //SE CONSEGUIR ADICIONAR TODOS ADICIONA
+                      //SE NÃO, DÁ UM ALERT
+
+                      setTimeout(() => {
+                        navigate('/supplier', { replace: true });
+                      }, 1500); // 1.5 seconds delay 
+
+                      console.log(ad)
+                      console.log()
+                      
+                  } else if(titleError || priceError || numberError || productionDateError || eanError || validDescription || validProdUnit){
+                      setSnackbarType(SnackbarType.fail);
+                      snackbarRef.current.show();
+                  }
+
+                }
+                else {
+                  setErrorImages(true)
+                }
+            }
+            else {
+              setDescriptionError(true)
+            }
+          }
+          else {
+            setPriceError(true)
+          }
         }
+        else {
+          setTitleError(true)
+        }
+      }
+      else {
+        setCategoryError(true)
+      }
+    }
+    else {
+      setVerifyProdUnitsError(true)
+    }
     }
   
     //-----------------------------------------------------------------------------  
@@ -871,7 +921,7 @@ function CriarAnuncio() {
       if (selectedImages.length + imagesArray.length <= 4) {
         setSelectedImages((previousImages) => previousImages.concat(imagesArray));
       }
-      event.target.value = ""; // for bug in chrome
+      event.target.value = ""; // for bug in chrome 
 
     }
     //-----------------------------------------------------------------------------
@@ -1018,6 +1068,16 @@ function CriarAnuncio() {
                                   <p style={{margin: '.25rem 0 0 0', color: '#EB5C1F', fontSize:'12px'}}>Atingiu o limite de imagens!</p>
                               }
                           </div>
+                            {
+                              errorImages ? 
+                              (
+                                  <small style={{color:"red"}}>Deve selecionar pelo menos 1 imagem</small>
+                              )
+                              :
+                              (
+                                "" 
+                              )
+                            }
                       </div>
                   </div>     
                 </div>

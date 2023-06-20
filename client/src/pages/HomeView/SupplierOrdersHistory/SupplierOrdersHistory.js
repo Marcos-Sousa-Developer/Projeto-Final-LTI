@@ -69,7 +69,7 @@ const SupplierOrdersHistory = () => {
       });
       setTimeout(function() {
         location.reload();
-      }, 1000);
+      }, 2000);
   };
 
     async function handleEditStatusOrder(order_id, status) {
