@@ -1,8 +1,23 @@
-import axios from 'axios';
+import axios from 'axios'; 
 
-const axiosConfig = () => {
-  // Set the common headers
-  axios.defaults.headers.common['identification'] = process.env.REACT_APP_ID_KEY;
-};
+let axiosConfig = null;
+
+if(process.env.REACT_APP_ENV == 'local') {
+  axiosConfig = () => {
+    // Set the common headers
+    axios.defaults.headers.common['identification'] = process.env.REACT_APP_ID_KEY;
+    axios.defaults.baseURL = "http://localhost:5000/api";
+
+  };
+}
+else {
+  axiosConfig = () => {
+    // Set the common headers
+    axios.defaults.headers.common['identification'] = process.env.REACT_APP_ID_KEY;
+    axios.defaults.baseURL = "https://greatergoods.pt/api";
+  };
+}
+
+
 
 export default axiosConfig;

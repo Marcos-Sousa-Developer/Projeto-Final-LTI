@@ -8,7 +8,11 @@ const port = process.env.PORT || 5000;
 
 const cors = require("cors")
 
-app.use(cors())
+const corsConfig = {
+    credentials: true,
+    origin: true,
+};
+app.use(cors(corsConfig));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -56,7 +60,7 @@ clientRouter.use('/',require('./routes/RouteNotifications'))
 
 //connect app with routers 
 app.use('/api',apiRouter)
-app.use('/',clientRouter)
+app.use('/api',clientRouter)
 
 // This displays message that the server running and listening to specified port
 app.listen(port, () => console.log(`Listening on port ${port}`)); 

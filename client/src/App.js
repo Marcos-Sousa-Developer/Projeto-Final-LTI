@@ -50,7 +50,7 @@ function App() {
       setUserType(type)
       setCookies('identification',name,{ path: '/' })
 
-      /*
+      
       if(location.pathname !== "/locked") {
         let isLocked = await axios.get('/checkUserDeactivated', null, {withCredentials:true}) 
         console.log(isLocked)
@@ -58,7 +58,7 @@ function App() {
           navigate("/locked")
         } 
       }
-      */
+      
 
     }
     
