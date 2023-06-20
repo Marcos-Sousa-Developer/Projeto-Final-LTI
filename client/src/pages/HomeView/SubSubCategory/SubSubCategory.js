@@ -23,6 +23,7 @@ const SubSubCategory = () => {
   const [isOpen, setIsOpen] = useState(false);  //modal
   const [filterPrice, setFilterPrice] = useState(false);
   const [filterSort, setFilterSort] = useState(false);
+  const [filterCar, setFilterCar] = useState(false);
   const [filterCharacteristics, setFilterCharacteristics] = useState(null);
   const [filters, setFilters] = useState({});
   const [ads, setAds] = useState([])
@@ -204,6 +205,10 @@ const SubSubCategory = () => {
 
   const toggleFilterSort = () =>{
     return setFilterSort(!filterSort);
+  }
+
+  const toggleFilterCar = () =>{
+    return setFilterCar(!filterCar);
   }
   
   const setByPrice = () =>{
@@ -413,30 +418,35 @@ const SubSubCategory = () => {
                   </li> 
                 </ul>
               </div>
-
-              {/*-----------Filtros das caracteristicas-----------*/}
-              <div className='app__Category_filter_unit'>
-              {Object.entries(filterCharacteristics).map(([key]) => (
-                <div key={key}>
-                  <div className='app__pointer app__Category_filter_content_title' onClick={toggleFilterSort}>
-                    <p style={{ margin: '0' }}>{key}</p>
-                  </div>
-                  <ul>
-                    {filterCharacteristics[key].map((value) => {
-                      return (
-                        <li style={{ marginLeft: '1rem' }}>
-                          <a className='app__pointer app__text_effect'>{value}</a>
-                          <input type="checkbox" onChange={() => handleCheckboxChange(key, value)} />
-                        </li>
-                      );
-                    })}
-                  </ul>
+              <div className='app__SubSubCategory_filter_unit'>
+                <div className='app__pointer app__SubSubCategory_filter_content_title' onClick={toggleFilterCar}>
+                  <p style={{margin: '0'}} className="mobile-title">Especificações</p>
+                  <span>{filterCar ? <FiChevronUp className='app__SubSubCategory_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__SubSubCategory_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
-              ))}
+                <div className={filterCar ? "hideFilter showFilter" : "hideFilter"}>
+                  {console.log(filterCharacteristics)}
+                  {Object.entries(filterCharacteristics).map(([key]) => (
+                    <div key={key}>
+                      <p style={{ margin: '0 0 0 1rem', fontSize: '14px' }}>{key}</p>
+                      <ul>
+                        {filterCharacteristics[key].map((value) => {
+                          return (
+                            <li style={{ marginLeft: '1rem' }}>
+                              <input style={{marginRight: '1rem'}} type="checkbox" onChange={() => handleCheckboxChange(key, value)} />
+                              <a style={{fontSize: '14px'}}>{value}</a>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ))}
+                  <div style={{display:'flex', gap: '1rem', justifyContent: 'space-around'}}>
+                    <button className='secondary__action_btn' onClick={() => filterByCharacteristics()}>Procurar</button>
+                    <button className='secondary__negative_action_btn' onClick={() => cleanFilterByCharacteristics()}>Limpar</button>
+                  </div>
+                </div>
               </div>
             </div>
-            <button onClick={() => filterByCharacteristics()}>Procurar</button>
-            <button onClick={() => cleanFilterByCharacteristics()}>Limpar</button>
           </div>
           <div className='app__SubSubCategory_Grid_Direita'>
             <div className='app__SubSubCategory_mobile_filter_content'>
@@ -460,7 +470,7 @@ const SubSubCategory = () => {
                   </div>
                 </div>
                 <div className='app__SubSubCategory_filter_unit'>
-                  <div className='app__pointer app__SubSubCategory_filter_content_title' onClick={toggleFilterSort}>
+                  <div className='app__pointer app__SubSubCategory_filter_content_title'>
                     <p className="mobile-title">Ordenar por</p>
                   </div>
                   <ul className={filterSort ? "hideFilter showFilter" : "hideFilter"}>
@@ -475,7 +485,30 @@ const SubSubCategory = () => {
                     </li> 
                   </ul>
                 </div>
-                <button className='main__negative_action_btn' onClick={() => deleteAllCartItem()}>Aplicar</button>
+                <div className='app__SubSubCategory_filter_unit'>
+                <p className="mobile-title">Especificações</p>
+                {Object.entries(filterCharacteristics).map(([key]) => (
+                  <div key={key}>
+                    <div className='app__pointer app__SubSubCategory_filter_content_title' onClick={toggleFilterSort}>
+                      <p style={{ margin: '0 0 0 1rem', fontSize: '14px' }}>{key}</p>
+                    </div>
+                    <ul>
+                      {filterCharacteristics[key].map((value) => {
+                        return (
+                          <li style={{ marginLeft: '1rem' }}>
+                            <input style={{marginRight: '1rem'}} type="checkbox" onChange={() => handleCheckboxChange(key, value)} />
+                            <a style={{fontSize: '14px'}}>{value}</a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))}
+                <div style={{display:'flex', gap: '1rem'}}>
+                  <button className='secondary__action_btn' onClick={() => filterByCharacteristics()}>Procurar</button>
+                  <button className='secondary__negative_action_btn' onClick={() => cleanFilterByCharacteristics()}>Limpar</button>
+                </div>
+              </div>
               </Modal>
             </div>
             <div className='products'>  

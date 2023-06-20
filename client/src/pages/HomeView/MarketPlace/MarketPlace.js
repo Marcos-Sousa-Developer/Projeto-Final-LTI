@@ -38,8 +38,6 @@ const MarketPlace = () => {
         getAds(id_product)
     }, [])
 
-
-
     //Nome de cada supplier (mesmo que tenha o mesmo produto duas vezes)
     //Preço de cada produto
 
@@ -51,7 +49,36 @@ const MarketPlace = () => {
             <div onClick={goBack} style={{margin: '1rem 0'}}>
                 <a className='app__text_effect app__pointer anuncio'><FiArrowLeft></FiArrowLeft>  Voltar ao produto</a>
             </div>
-            <div className='app__market_place_info'>
+            <div className='app__market_place_content'>
+                {ads.map((ad, index) => (
+                    <div key={ad.id} style={{borderBottom: '3px solid #eeeeee', paddingBottom: '.5rem'}} className='app__market_place_content_product'>
+                        <div className='app__market_place_content_product'>
+                            <div>
+                                <img className='app__market_place_content_product_img' src={exampleImage} />
+                                <p style={{ margin: '1rem 0 0 0' }}>{ad.title}</p>
+                                <PriceDisplay className='product_price' price={ad.price} />
+                            </div>
+
+                            {suppliers && suppliers.length > index && (
+                                <div style={{alignSelf: 'baseline'}} className='app__market_place_content_supplier_info'>
+                                    <div key={`${ad.id}_${suppliers[index].name}`}>
+                                        <p style={{ marginBottom: '0rem' }}>Vendido por: <span style={{ fontWeight: '500' }}>{suppliers[index].name}</span></p>
+                                        <div style={{ marginBottom: '.5rem' }}>
+                                        <FiMapPin></FiMapPin> <span style={{ fontWeight: '500' }}>{suppliers[index].address}</span>, <span style={{ fontSize: '14px' }}>{suppliers[index].city}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className='app__market_place_content_goTo'>
+                            <Link className='app__text_effect anuncio'>Ir para anúncio <FiArrowRight></FiArrowRight></Link>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/*<div className='app__market_place_info'>
                 <div className='app__market_place_content'>
                     <div className='app__market_place_content_produt'>
                         {ads.map((key) => {
@@ -78,7 +105,7 @@ const MarketPlace = () => {
                 <div className='app__market_place_content_goTo'>
                     <Link className='app__text_effect anuncio'>Ir para anúncio <FiArrowRight></FiArrowRight></Link>
                 </div>
-            </div>
+            </div>*/}
         </div>
         <Footer></Footer>
     </>

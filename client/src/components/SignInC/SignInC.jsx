@@ -145,7 +145,7 @@ const SignInC = ({checkout=null}) => {
                             <div className='register'>Esqueceu-se da password?
                                 <span style={{ cursor: 'pointer', color: 'rgba(235, 92, 31, 0.8)' }} onClick={() => setIsOpen(true)}> aqui.</span>
                                 <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                                    <p>Envie e-mail para o suporte: grupo01.pti.ptr@outlook.com</p>
+                                    <p style={{margin: '0'}}>Envie e-mail para o suporte: grupo01.pti.ptr@outlook.com</p>
                                 </Modal>
                             </div>
                             <div className='app__SignIn_box13'>
@@ -224,9 +224,9 @@ const SignInC = ({checkout=null}) => {
                         <p>ou</p>    
                     </div>
                     <div className='app__SignIn_box3'>
-                        <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google (brevemente)</p></button>
-                        <button className='app__SignIn_box30 ButtonFacebook'><BsFacebook className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsFacebook><p>Facebook (brevemente)</p></button>
-                        <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter (brevemente)</p></button>
+                        <button className='app__SignIn_box30 ButtonGoogle'><BsGoogle className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsGoogle><p>Google (em breve)</p></button>
+                        <button className='app__SignIn_box30 ButtonFacebook'><BsFacebook className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsFacebook><p>Facebook (em breve)</p></button>
+                        <button className='app__SignIn_box30 ButtonTwitter'><BsTwitter className='signInOptions' style={{backgroundColor:'transparent', color: 'white'}}></BsTwitter><p>Twitter (em breve)</p></button>
                     </div>
                 </div>    
             </div>

@@ -162,9 +162,9 @@
                 }
         
                 td{
-                    display: block;
-                    position: relative;
-                    text-align: right;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
 
                     &:nth-child(odd){
                         background-color: rgba($color: $light_gray, $alpha: .4);
@@ -173,8 +173,6 @@
                     &::before{
                         content: attr(data-cell);
                         font-weight: 500;
-                        position: absolute;
-                        left: 8px;
                     }
                 }
             }

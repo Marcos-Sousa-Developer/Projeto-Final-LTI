@@ -13,10 +13,15 @@
 
     &_content{
         display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
 
         &_product{
+            display: flex;
+            justify-content: space-between;
+
             &_img{
-                width: 200px;
+                width: 300px;
                 height: auto;
             }
         }
@@ -44,15 +49,29 @@
     }
 }
 
-@media screen and (max-width: 600px) {
-    .app__market_place_info{
+@media screen and (max-width: 800px) {
+    .app__market_place_content_product{
         flex-direction: column;
+        position: relative;
     }
 
-    .app__market_place_content{
-        &_goTo{
-            margin-left: 0;
-            text-align: right;
-        }
+    .app__market_place_content_supplier_info, .app__market_place_content_goTo{
+        margin: 0;
+    }
+
+    .app__market_place_content_goTo{
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .app__market_place_content_goTo{
+        position: initial;
+        align-self: flex-end;
+    }
+    .app__market_place_content_product{
+        align-items: center;
     }
 }
