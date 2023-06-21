@@ -38,10 +38,6 @@ function App() {
 
     let response = await getClientType()    
 
-    console.log(response)
-
-    console.log("ok")
-
     if(response != false) {
 
       let type = response[0]
@@ -53,7 +49,6 @@ function App() {
       
       if(location.pathname !== "/locked") {
         let isLocked = await axios.get('/checkUserDeactivated', null, {withCredentials:true}) 
-        console.log(isLocked)
         if(isLocked.data) {
           navigate("/locked")
         } 
