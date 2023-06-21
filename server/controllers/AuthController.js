@@ -42,19 +42,31 @@ const setCookie = (result,res) => {
 
   res.cookie("accessToken", accessToken, {
     expires: dateExpire, 
-    httpOnly: true})
+    httpOnly: true,
+    sameSite: 'none', 
+    secure: true
+  })
 
   res.cookie("idToken", idToken, {
     expires: dateExpire, 
-    httpOnly: true})
+    httpOnly: true,
+    sameSite: 'none', 
+    secure: true,
+    path: '/' });
   
   res.cookie("refreshToken", refreshToken, {
     expires: dateExpire,
-    httpOnly: true})
+    httpOnly: true,
+    sameSite: 'none', 
+    secure: true,
+    path: '/' });
   
   res.cookie("userSession", uid, {
     expires: dateExpire,
-    httpOnly: true})
+    httpOnly: true,
+    sameSite: 'none', 
+    secure: true,
+    path: '/' });
 
 }
 

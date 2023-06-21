@@ -82,7 +82,12 @@ const createOrder = async function(items,details,uid) {
 
 const payOrder = async function(req, res) {  
 
-  const DOMAIN = req.rawHeaders[3] + "://" + req.rawHeaders[1] + "/consumer"
+  let DOMAIN ="https://greatergoods.pt/consumer"
+
+  if(process.env.APP_ENV === 'local') {
+    DOMAIN = "http://localhost:3000/consumer"
+  }
+
   try {
 
     const uid_encrypt = req.cookies.userSession;

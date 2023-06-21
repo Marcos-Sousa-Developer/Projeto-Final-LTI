@@ -262,14 +262,14 @@ const Category = () => {
         <div className='app__Category_Caminho'>
           {
             searchName !== null ?  (
-              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
-                  <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName + "&searchName="+searchName}> {categoryName} </Link> >
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> &gt;
+                  <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName + "&searchName="+searchName}> {categoryName} </Link> &gt;
                    pesquisa:  {searchName} 
               </p>
             )
             : 
             (
-              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> &gt;
               <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName}> {categoryName} </Link>
               </p>
             )

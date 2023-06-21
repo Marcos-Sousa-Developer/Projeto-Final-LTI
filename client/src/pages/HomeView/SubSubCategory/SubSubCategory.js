@@ -355,18 +355,18 @@ const SubSubCategory = () => {
         <div className='app__SubSubCategory_Caminho'>
         {
             searchName !== null ?  (
-              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
-                  <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName + "&searchName="+searchName}> {categoryName} </Link> >
-                  <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName + "&searchName="+searchName}> {subCategoryName} </Link> >
-                  <Link className='app__pointer app__text_effect' to={'/subsubcategoria?category='+categoryName + "&subCategory=" + subCategoryName +  "&subsubCategory=" + subsubCategoryName + "&searchName="+searchName}> {subsubCategoryName} </Link> >
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> &gt; 
+                  <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName + "&searchName="+searchName}> {categoryName} </Link> &gt;
+                  <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName + "&searchName="+searchName}> {subCategoryName} </Link> &gt;
+                  <Link className='app__pointer app__text_effect' to={'/subsubcategoria?category='+categoryName + "&subCategory=" + subCategoryName +  "&subsubCategory=" + subsubCategoryName + "&searchName="+searchName}> {subsubCategoryName} </Link> &gt;
                    pesquisa:  {searchName} 
               </p>
             )
             : 
             (
-              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> > 
-              <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName}> {categoryName} </Link> > 
-              <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName}> {subCategoryName} </Link> >
+              <p> <Link className='app__pointer app__text_effect' to={'/'}> Home </Link> &gt;
+              <Link className='app__pointer app__text_effect' to={'/categoria?category='+categoryName}> {categoryName} </Link> &gt;
+              <Link className='app__pointer app__text_effect' to={'/subcategoria?category='+categoryName + "&subCategory=" + subCategoryName}> {subCategoryName} </Link> &gt;
               <Link className='app__pointer app__text_effect' to={'/subsubcategoria?category='+categoryName + "&subCategory=" + subCategoryName +  "&subsubCategory=" + subsubCategoryName}> {subsubCategoryName} </Link> 
               </p>
             )

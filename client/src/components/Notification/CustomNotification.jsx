@@ -15,6 +15,7 @@ const CustomNotification = () => {
           const response = await axios.get('/getNotifications');
           setNotifications(response.data);
         } catch (error) {
+          setNotifications([]);
         }
       };
     
@@ -23,6 +24,7 @@ const CustomNotification = () => {
             await axios.delete('/deleteNotifications', null, {withCredentials:true});
             setNotifications([]);
           } catch (error) {
+            setNotifications([]);
           }
       }
       

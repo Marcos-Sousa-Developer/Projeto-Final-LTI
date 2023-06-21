@@ -1089,7 +1089,7 @@ function CriarAnuncio() {
                   <div className='app__anuncio_supplier_content'>
                     <div className={!numberError ? "inputField" : "inputField_error"}>
                         <p>Telemóvel *</p>
-                        <input type='tel' required value = {sup.mobile_number} onChange={handleNumber}/>
+                        <input style={{opacity: "0.4"}} type='tel' required value = {sup.mobile_number} onChange={handleNumber} disabled/>
                         {
                           numberError &&
                             <div className='error_msg'>Número com formato errado.</div>

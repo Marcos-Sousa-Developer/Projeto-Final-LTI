@@ -14,7 +14,7 @@ fake_supplier_data.forEach(row => {
                 row.mobile_number, row.continent,
                 row.country,row.district,
                 row.city, row.town, row.address,
-                row.postal_code, row.status, 
+                row.postal_code, 1, 
                 row.products_list, row.orders])     
 });
 
