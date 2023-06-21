@@ -5,25 +5,9 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 5000;  
-
 const cors = require("cors")
 
-if(process.env.APP_ENV === 'local') {
-    const corsConfig = {
-        credentials: true,
-        origin: true,
-    }; 
-    app.use(cors(corsConfig));
-}
-else {
-    app.use(cors());
-}
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-  });
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
