@@ -147,16 +147,16 @@ const signIn = async (req, res) => {
       Pool: userPool
     };
     
-    const isValidTokens = await verifyTokens(client_result) 
+    //const isValidTokens = await verifyTokens(client_result) 
 
-    if(isValidTokens) {
+   // ((if(isValidTokens) {
 
       let data = await handlerSignIn(authenticationData, userData, res)
       
       return res.send(data) 
-    }
+    //}
 
-    return res.send(false); 
+    //return res.send(false); 
 
   }
 

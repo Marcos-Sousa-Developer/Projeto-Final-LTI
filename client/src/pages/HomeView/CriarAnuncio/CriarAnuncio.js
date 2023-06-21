@@ -447,6 +447,8 @@ function CriarAnuncio() {
         
       } 
 
+      console.log(formData)
+
       if (total > vazios) { 
 
       if(formData.categoria != "" || formData.subcategoria != ""  || formData.subsubcategoria != "") {
