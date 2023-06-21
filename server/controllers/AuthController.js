@@ -78,7 +78,7 @@ const setCookie = (result,res) => {
  * @param response
  * @returns newPromise with succes or fail
  */
-const handlerSignIn = (authenticationData, userData,res) => {
+const handlerSignIn = (authenticationData, userData,res) => { 
 
   // that represents the authentication details of a user who is attempting to authenticate with Amazon Cognito
   const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
@@ -130,6 +130,9 @@ const handlerSignIn = (authenticationData, userData,res) => {
 * */
 const signIn = async (req, res) => { 
 
+  try {
+
+
   let email = req.query.email
   let password = req.query.password
   let client_result = req.query.result
@@ -154,29 +157,47 @@ const signIn = async (req, res) => {
     }
 
     return res.send(false); 
-};
-
-
-const registerUser = async (req,res) => {
-
-  let name = req.query.name
-  let password = req.query.verify
-  let email = req.query.email
-  let user_type = req.query.user_type
-  let uid = req.query.uid  
-
-  let tokenFinal = jwt.encryptID(password)
-
-  const statement = "INSERT INTO " +  user_type + "s (uid, verify, name, email) VALUES ?"; 
-
-  let result = await dbConnection(statement, [[uid,tokenFinal, name,email]]);
-
-  if (result === "error") {
-    return res.send(null);
 
   }
 
-  return res.send("Consumer has been created");
+  catch {
+    return res.send(false); 
+
+  }
+
+};
+
+
+const registerUser = async (req,res) => { 
+
+  try {
+
+    let name = req.query.name
+    let password = req.query.verify
+    let email = req.query.email
+    let user_type = req.query.user_type
+    let uid = req.query.uid  
+  
+    let tokenFinal = jwt.encryptID(password)
+  
+    const statement = "INSERT INTO " +  user_type + "s (uid, verify, name, email) VALUES ?"; 
+  
+    let result = await dbConnection(statement, [[uid,tokenFinal, name,email]]);
+  
+    if (result === "error") {
+      
+  
+    }
+  
+    return res.send("Consumer has been created");
+
+  }
+
+  catch {
+    return res.send(null);
+  }
+
+
 
 }
 

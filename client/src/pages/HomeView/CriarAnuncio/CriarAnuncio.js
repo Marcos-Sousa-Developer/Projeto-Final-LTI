@@ -458,9 +458,7 @@ function CriarAnuncio() {
             if(formData.descricao != "") {
 
                 if(postImages.length > 0) {
-                  console.log(postImages.length)
                   let supplier = await getAllFromDB("/suppliers", {uid: true})
-                  console.log(supplier)
                   let idUser = supplier[0].id;
                   
                   let validEAN = "OK";
@@ -520,18 +518,19 @@ function CriarAnuncio() {
                             EAN: formData.EAN,
                             id_subsubcategory: idSubSubCategory,
                             status: 0,
-                            characteristics: JSON.stringify(featuresDBproduct),
+                            characteristics: [null,undefined,""].includes(JSON.stringify(featuresDBproduct)) ? JSON.stringify({}) :  JSON.stringify(featuresDBproduct),
                           })
 
                           //ir buscar o id do produto de cima
                           let idProduct = product.insertId
                           //CRIA O ANUNCIO
+                          
                           ad = await postToDB("/ads",{ 
                             title: formData.titulo,
                             description: formData.descricao,
                             email: formData.email,
                             mobile_number: formData.telemovel,
-                            extraCharacteristics: JSON.stringify(featuresDBad),
+                            extraCharacteristics: [null,undefined,""].includes(JSON.stringify(featuresDBad)) ? JSON.stringify({}) :  JSON.stringify(featuresDBad),
                             status: 1,
                             production_date: formData.data_producao,
                             price: formData.preco,
@@ -560,16 +559,16 @@ function CriarAnuncio() {
                               EAN: formData.EAN,
                               id_subsubcategory: idSubSubCategory,
                               status: 0,
-                              characteristics: JSON.stringify(featuresDBproduct),
+                              characteristics: [null,undefined,""].includes(JSON.stringify(featuresDBproduct)) ? JSON.stringify({}) :  JSON.stringify(featuresDBproduct),
                             })
                           }
-
+                          [null,undefined,""].includes(JSON.stringify(featuresDBproduct)) ? JSON.stringify({}) :  JSON.stringify(featuresDBproduct),
                           ad = await postToDB("/ads",{ 
                             title: formData.titulo,
                             description: formData.descricao,
                             email: formData.email,
                             mobile_number: formData.telemovel,
-                            extraCharacteristics: JSON.stringify(featuresDBad),
+                            extraCharacteristics: [null,undefined,""].includes(JSON.stringify(featuresDBad)) ? JSON.stringify({}) :  JSON.stringify(featuresDBad), 
                             status: 1,
                             production_date: formData.data_producao,
                             price: formData.preco,
@@ -586,7 +585,7 @@ function CriarAnuncio() {
                         product = await postToDB("/products",{
                           id_subsubcategory: idSubSubCategory,
                           status: 0,
-                          characteristics: JSON.stringify(featuresDBproduct),
+                          characteristics:[null,undefined,""].includes(JSON.stringify(featuresDBproduct)) ? JSON.stringify({}) :  JSON.stringify(featuresDBproduct)
                         })
               
                         //ir buscar o id do produto de cima
@@ -598,7 +597,7 @@ function CriarAnuncio() {
                           description: formData.descricao,
                           email: formData.email,
                           mobile_number: formData.telemovel,
-                          extraCharacteristics: JSON.stringify(featuresDBad),
+                          extraCharacteristics: [null,undefined,""].includes(JSON.stringify(featuresDBad)) ? JSON.stringify({}) :  JSON.stringify(featuresDBad),
                           status: 1,
                           production_date: formData.data_producao,
                           price: formData.preco,

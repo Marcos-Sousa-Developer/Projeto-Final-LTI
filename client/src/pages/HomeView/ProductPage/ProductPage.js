@@ -82,7 +82,7 @@ const ProductPage = () => {
       car = JSON.parse(ad[0].extraCharacteristic) 
 
     } catch (error) {
- 
+      car = {Info: "Sem informação disponivel"}
     }
     setAdData({
       dataComplete: ad[0],
