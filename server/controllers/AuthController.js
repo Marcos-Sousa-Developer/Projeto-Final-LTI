@@ -41,24 +41,30 @@ const setCookie = async (result,res) => {
   let dateExpire = new Date(Date.now() + 7200000) //date now and more 30 minutes
 
   res.cookie("accessToken", accessToken, {
-    expires: dateExpire, 
-    secure: true
+    httpOnly: true, 
+    secure: true, 
+    sameSite: 'None',
+    expires: dateExpire
+    
   })
 
   res.cookie("idToken", idToken, {
-    expires: dateExpire, 
-    httpOnly: true,
-    path: '/' });
+    httpOnly: true, 
+    secure: true, 
+    expires: dateExpire,
+    sameSite: 'None' });
   
   res.cookie("refreshToken", refreshToken, {
+    httpOnly: true, 
+    secure: true, 
     expires: dateExpire,
-    httpOnly: true,
-    path: '/' });
+    sameSite: 'None'});
   
   res.cookie("userSession", uid, {
+    httpOnly: true, 
+    secure: true, 
     expires: dateExpire,
-    httpOnly: true,
-    path: '/' });
+    sameSite: 'None', });
 
 }
 
