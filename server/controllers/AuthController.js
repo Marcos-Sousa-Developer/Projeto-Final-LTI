@@ -42,30 +42,22 @@ const setCookie = async (result,res) => {
 
   res.cookie("accessToken", accessToken, {
     expires: dateExpire, 
-    httpOnly: true,
-    sameSite: 'none', 
     secure: true
   })
 
   res.cookie("idToken", idToken, {
     expires: dateExpire, 
     httpOnly: true,
-    sameSite: 'none', 
-    secure: true,
     path: '/' });
   
   res.cookie("refreshToken", refreshToken, {
     expires: dateExpire,
     httpOnly: true,
-    sameSite: 'none', 
-    secure: true,
     path: '/' });
   
   res.cookie("userSession", uid, {
     expires: dateExpire,
     httpOnly: true,
-    sameSite: 'none', 
-    secure: true,
     path: '/' });
 
 }
@@ -151,7 +143,7 @@ const signIn = async (req, res) => {
 
       let data = await handlerSignIn(authenticationData, userData, res)       
       
-      return res.send(false) 
+      return res.send(data) 
     //}
 
     //return res.send(false); 

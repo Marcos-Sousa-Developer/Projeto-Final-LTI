@@ -9,8 +9,8 @@ const cors = require("cors")
 
 app.use(cors());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 /**
  * Api configuration, only for server
