@@ -15,9 +15,7 @@ else {
   axiosConfig = () => {
     // Set the common headers
     axios.defaults.headers.common['identification'] = process.env.REACT_APP_ID_KEY;
-    axios.defaults.withCredentials = true,
     axios.defaults.baseURL = "https://greatergoods.pt/api";
-    axios.credentials = 'include'
   };
 }
 

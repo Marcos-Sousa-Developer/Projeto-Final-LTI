@@ -4,12 +4,9 @@ import Map, {
   NavigationControl,
   Popup,
   FullscreenControl,
-  GeolocateControl,
-  StaticMap,
   Source,
   Layer,
 } from "react-map-gl";
-import { useEffect, useState } from "react";
 
 function Maping({lat, lng, destLat, destLng}) {
 
