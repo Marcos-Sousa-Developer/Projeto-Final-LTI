@@ -22,7 +22,7 @@ const verifyTokens = async (client_result) => {
  * @description set cookie for user
  * @returns list with uid and expire date
  */
-const setCookie = (result,res) => {
+const setCookie = async (result,res) => {
 
   let act = {accessToken: result.getAccessToken().getJwtToken()}
 
@@ -78,7 +78,7 @@ const setCookie = (result,res) => {
  * @param response
  * @returns newPromise with succes or fail
  */
-const handlerSignIn = (authenticationData, userData,res) => { 
+const handlerSignIn = async (authenticationData, userData,res) => { 
 
   // that represents the authentication details of a user who is attempting to authenticate with Amazon Cognito
   const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
@@ -86,7 +86,7 @@ const handlerSignIn = (authenticationData, userData,res) => {
   //that represents a user in an Amazon Cognito user pool
   const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
 
-  return new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
       
     //that is used to authenticate a user with their password  
     cognitoUser.authenticateUser(authenticationDetails, {
@@ -131,11 +131,9 @@ const handlerSignIn = (authenticationData, userData,res) => {
 const signIn = async (req, res) => { 
 
   try {
+    let email = req.query.email
+    let password = req.query.password
 
-
-  let email = req.query.email
-  let password = req.query.password
-  let client_result = req.query.result
 
     const authenticationData = {
       Username: email,
@@ -151,16 +149,17 @@ const signIn = async (req, res) => {
 
    // ((if(isValidTokens) {
 
-      let data = await handlerSignIn(authenticationData, userData, res)
+      let data = await handlerSignIn(authenticationData, userData, res)       
       
-      return res.send(data) 
+      return res.send(false) 
     //}
 
     //return res.send(false); 
 
   }
 
-  catch {
+  catch (error){
+    console.log(error)
     return res.send(false); 
 
   }
