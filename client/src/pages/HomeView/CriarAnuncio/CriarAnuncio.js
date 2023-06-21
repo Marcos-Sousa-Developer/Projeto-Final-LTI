@@ -447,8 +447,6 @@ function CriarAnuncio() {
         
       } 
 
-      console.log(formData)
-
       if (total > vazios) { 
 
       if(formData.categoria != "" || formData.subcategoria != ""  || formData.subsubcategoria != "") {
@@ -460,10 +458,11 @@ function CriarAnuncio() {
             if(formData.descricao != "") {
 
                 if(postImages.length > 0) {
-
+                  console.log(postImages.length)
                   let supplier = await getAllFromDB("/suppliers", {uid: true})
+                  console.log(supplier)
                   let idUser = supplier[0].id;
-
+                  
                   let validEAN = "OK";
                   if(formData.EAN != "" && formData.EAN != null) {
                     validEAN = await verifyEAN(formData.EAN);
@@ -481,7 +480,7 @@ function CriarAnuncio() {
                   let product;
                   let ad;
 
-                  if(!titleError && !priceError && !numberError && !productionDateError && !eanError && !validDescription && !validProdUnit){ //meter sub_features e features
+                  if(!titleError && !priceError && !productionDateError && !eanError && !validDescription && !validProdUnit){ //meter sub_features e features
                       let featuresDBproduct = {}; 
                       let featuresDBad = {};
 
@@ -652,7 +651,7 @@ function CriarAnuncio() {
                         navigate('/supplier', { replace: true });
                       }, 1500); // 1.5 seconds delay 
                       
-                  } else if(titleError || priceError || numberError || productionDateError || eanError || validDescription || validProdUnit){
+                  } else if(titleError || priceError || productionDateError || eanError || validDescription || validProdUnit){
                       setSnackbarType(SnackbarType.fail);
                       snackbarRef.current.show();
                   }

@@ -42,7 +42,17 @@ const CompareProduct = () => {
                   </tr>
                   <tr>
                     <td>
-                      <img className='app__pointer' src={exampleImage} alt={product.title} onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: product.id }).toString()}`)}/>
+                    {
+                      product.urls == null ? 
+                      (
+                        <img className='app__pointer' src={exampleImage} alt={product.title} onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: product.id }).toString()}`)}/>
+
+                      )
+                      :
+                      (
+                        <img className='app__pointer' src={JSON.parse(product.urls)[0]} alt={product.title} onClick={() => (window.location.href = `/produto?${new URLSearchParams({ id: product.id }).toString()}`)}/>
+                      )
+                    }
                     </td>
                   </tr>
                   <tr>

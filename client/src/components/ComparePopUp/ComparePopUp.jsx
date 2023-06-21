@@ -20,9 +20,10 @@ const ComparePopUp = ({ selectedProducts, onCloseComparePopUp, removeFromSelecte
       navigate('/comparador', { state: { selectedProducts } });
     }
 
-    /*useEffect(() => {
-    }, [comparePage])
-    */
+    useEffect(() => {
+      console.log(selectedProducts)
+    }, [])
+    
     return ReactDOM.createPortal(
       <>
         {true ?
@@ -41,7 +42,18 @@ const ComparePopUp = ({ selectedProducts, onCloseComparePopUp, removeFromSelecte
                 <div key={index} className='app__compare_pop-up_product'>
                   {product ? (
                     <>
-                      <img height='50px' width='50px' src={exampleImage} />
+                    {
+                      product.urls == null ? 
+                      (
+                        <img height='50px' width='50px' src={exampleImage} />
+
+                      )
+                      :
+                      (
+                        <img height='50px' width='50px' src={JSON.parse(product.urls)[0]} />
+
+                      )
+                    }
                       <button onClick={() => removeFromSelectedProducts(product)}>
                         <FiX />
                       </button>

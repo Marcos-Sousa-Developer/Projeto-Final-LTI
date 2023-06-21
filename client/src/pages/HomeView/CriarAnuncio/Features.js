@@ -64,7 +64,7 @@ const Features = ({formData, setFormData}) => {
                             value={formData.features[0]["Classe Energética"] || ''} 
                             onChange={(e) => {
                                 const updatedFeature = {...formData.features[0]};
-                                updatedFeature[0]["Classe Energética"] = e.target.value;
+                                updatedFeature["Classe Energética"] = e.target.value;
                                 const updatedFeatures = [...formData.features];
                                 updatedFeatures[0] = updatedFeature;
                                 setFormData({ ...formData, features: updatedFeatures });

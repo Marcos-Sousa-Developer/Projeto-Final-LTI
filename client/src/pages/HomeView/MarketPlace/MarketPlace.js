@@ -54,7 +54,16 @@ const MarketPlace = () => {
                     <div key={ad.id} style={{borderBottom: '3px solid #eeeeee', paddingBottom: '.5rem'}} className='app__market_place_content_product'>
                         <div className='app__market_place_content_product'>
                             <div>
-                                <img className='app__market_place_content_product_img' src={exampleImage} />
+                                {
+                                ad.urls == null ? 
+                                (
+                                    <img className='app__market_place_content_product_img' src={exampleImage} />
+                                )
+                                :
+                                (
+                                    <img className='app__market_place_content_product_img'src={JSON.parse(ad.urls)[0]} />
+                                )
+                                }
                                 <p style={{ margin: '1rem 0 0 0' }}>{ad.title}</p>
                                 <PriceDisplay className='product_price' price={ad.price} />
                             </div>
