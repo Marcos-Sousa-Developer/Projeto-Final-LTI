@@ -151,8 +151,9 @@ const signIn = async (req, res) => {
   }
 
   catch (error){
-    console.log(error)
-    return res.send(false); 
+    
+    return res.status(500).json({ error: error, message: err.message });
+
 
   }
 
