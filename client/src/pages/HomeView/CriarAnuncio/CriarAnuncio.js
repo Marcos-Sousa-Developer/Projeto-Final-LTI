@@ -642,18 +642,11 @@ function CriarAnuncio() {
             
                           const resp = await axios.post('/saveProductImages', formImagesData, {params}) 
             
-                          console.log(resp)
                         } 
                         catch (error) {
                           console.log(error)
                         }
                       }
-
-
-                      //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
-                      //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
-                      //SE CONSEGUIR ADICIONAR TODOS ADICIONA
-                      //SE NÃO, DÁ UM ALERT
 
                       setTimeout(() => {
                         navigate('/supplier', { replace: true });
@@ -1096,7 +1089,7 @@ function CriarAnuncio() {
                   <div className='app__anuncio_supplier_content'>
                     <div className={!numberError ? "inputField" : "inputField_error"}>
                         <p>Telemóvel *</p>
-                        <input type='tel' required value = {sup.mobile_number} onChange={handleNumber}/>
+                        <input style={{opacity: "0.4"}} type='tel' required value = {sup.mobile_number} onChange={handleNumber} disabled/>
                         {
                           numberError &&
                             <div className='error_msg'>Número com formato errado.</div>

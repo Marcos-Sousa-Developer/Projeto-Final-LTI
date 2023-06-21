@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import getAllFromDB from '../../../hooks/getAllFromDB';
 import getFromDB from '../../../hooks/getFromDB';
 
+import { SnackBar } from '../../../components/index';
 import { FiSearch } from 'react-icons/fi';
 import "./Searchbar.css";
 import { Link } from 'react-router-dom';
 
+const SnackbarType = {
+  success: "success",
+  fail: "fail",
+};
+
 const Searchbar = () => {
 
     const [searchText, setSearchText] = useState("")
+    const snackbarRef1 = useRef(null);
+    const snackbarRef2 = useRef(null);
+    const snackbarRef3 = useRef(null);
+
 
     const handleSetSearchText = (event) => {
         setSearchText(event.target.value)
@@ -54,12 +64,6 @@ const Searchbar = () => {
         } else {
           return "OK";
         }
-  
-        //if(((10 - (checksum % 10)) === lastDigit) == true){
-        //  return "OK" ;
-        //} else{
-        //  return "EAN inválido";
-        //}
       }
 
 
@@ -82,16 +86,15 @@ const Searchbar = () => {
               };
   
               product = await getAllFromDB("/products/", params);
-
               if(product.length == 1){
                 const data = {EAN: product[0].EAN};
                 const queryString = new URLSearchParams(data).toString();
                 window.location.href = `/supplier/anuncio?${queryString}`;
               } else {
-                alert(product)
+                snackbarRef1.current.show();
               }
           }else {
-            alert(validEAN)
+            snackbarRef2.current.show();
           }
         } else {
           if(!searchTextClear.length == 0){
@@ -100,7 +103,7 @@ const Searchbar = () => {
             })
             if(products == "There is no ad in the database"){
                 //DAR MENSAGEM DE ERRO OU SUGERIR PROCURAR PELAS CATEGORIAS
-                alert(products)
+                snackbarRef3.current.show();
             } else {
                 //VAI PARA OUTRA PÁGINA ONDE MOSTRA OS PRODUTOS
                 const data = {searchName: searchTextClear};
@@ -108,8 +111,6 @@ const Searchbar = () => {
                 window.location.href = `/pesquisa?${queryString}`;
             }
         }}
-
-        
     }
 
     return (
@@ -127,6 +128,21 @@ const Searchbar = () => {
                     onKeyDown={handleKeyDown}
                 />
             </div>
+            <SnackBar
+              ref={snackbarRef1}
+              message= "Não existe nenhum produto com o EAN que procurou"
+              type={SnackbarType.fail}
+            />
+            <SnackBar
+              ref={snackbarRef2}
+              message= "O EAN fornecido não é válido"
+              type={SnackbarType.fail}
+            />
+            <SnackBar
+              ref={snackbarRef3}
+              message= "Não existe nenhum produto com o nome que procurou"
+              type={SnackbarType.fail}
+            />
         </form>
     )
 }

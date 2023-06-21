@@ -34,15 +34,12 @@ const Cart = () => {
   const [distrito, setDistrito] = useState("")
   const [localidade, setLocalidade] = useState("")
 
-  const [isLogedIn, setIsLogedIn] = useState(true)
-
   const deleteAllCartItem = () => {
     const prevValue =  {};
     setCookie('cart', prevValue, { path: '/' });
   }
 
   const goToCheckout = async () => {
-
     let userType = await getClientType(); 
     if(userType[0]=='consumer') {
       const params = {}
@@ -65,22 +62,16 @@ const Cart = () => {
       distrito: distrito,
       localidade: localidade,
     }
-    
     const response = await axios.post('/create-checkout-session', null, {params});
     window.location = response.data
-
     }
-
     else if(userType[0]=='supplier'){
       window.location = "/supplier"
     }
-
     else {
-      setIsLogedIn(false)
+      window.location = "/signin"
     }
   }
-
-
 
   const changePostalCode = async (event) => { 
 
@@ -135,7 +126,7 @@ const Cart = () => {
       <Navbar></Navbar>
       <div className='main__container app__cart'>
         <SubHeading title="Carrinho"></SubHeading>
-{ isLogedIn ? <> 
+
         {totalAmount > 0 ? (
           <>
             <div className='app__cart_before_content'>
@@ -264,11 +255,6 @@ const Cart = () => {
             <h5>O carrinho está vazio.</h5>
           </>
         )}
-</> 
-
-:
-
-<SignInC checkout={true}></SignInC>}
       </div>
       <Footer></Footer>
     </>

@@ -34,15 +34,19 @@ const SignUpC = () => {
     const handleSubmit = async (event) => { 
 
         try {
-            event.preventDefault();
-            let isActive = await auth.signUp(email,password,selectedOption,name)
-            if(isActive) {
-                setError(false)
-                setTimeout(() => {
-                    navigate('/signin');
-                }, 1000);
-            }
-            else{
+            if(name != null){
+                event.preventDefault();
+                let isActive = await auth.signUp(email,password,selectedOption,name)
+                if(isActive) {
+                    setError(false)
+                    setTimeout(() => {
+                        navigate('/signin');
+                    }, 1000);
+                }
+                else{
+                    setError(true)
+                }
+            } else {
                 setError(true)
             }
         }
@@ -211,7 +215,7 @@ const SignUpC = () => {
                                             </div>       
                                         )
                                         :
-                                        (!hasSpecialChar || !hasUpperCase || !hasLowerCase || !hasNumber || !isEightCharLong) ?
+                                        (!hasSpecialChar || !hasUpperCase || !hasLowerCase || !hasNumber || !isEightCharLong || name == null) ?
                                         (
                                             <div className='app__SignUp_box13'>
                                                 <button className='main__action_btn' type='submit'  style={{opacity: "0.4"}} disabled>Registar</button>
