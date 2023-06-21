@@ -458,9 +458,7 @@ function CriarAnuncio() {
             if(formData.descricao != "") {
 
                 if(postImages.length > 0) {
-                  console.log(postImages.length)
                   let supplier = await getAllFromDB("/suppliers", {uid: true})
-                  console.log(supplier)
                   let idUser = supplier[0].id;
                   
                   let validEAN = "OK";

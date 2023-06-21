@@ -13,19 +13,6 @@ subcategory_data.forEach(row => {
 });
 
 
-
-/*
-const statementSelect = ""
-
-let names = []
-
-subcategory_data.forEach(row => {
-
-    names.push([row.name_category])    
-});
-
-console.log(names)*/
-
 pool.query(statementInsert, [values], function(error, result){
 
     if (error) {

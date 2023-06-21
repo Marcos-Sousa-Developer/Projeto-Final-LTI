@@ -105,7 +105,6 @@ function SupplierPage() {
           const ad = await getAllFromDB('/ads/' + sell.ad_id)
           sell['title'] = ad[0].title
         }
-        console.log(sells)
   
         setFiveSells(sells);
         createData(response)

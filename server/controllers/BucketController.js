@@ -30,7 +30,6 @@ const saveProductImages = async (req, res) => {
             for (let i = 0; i < files.length; i++) {
               const file = files[i];              
               const destinationFilename = uuidv4() + req.query.adID;
-              console.log(destinationFilename);
               const fileOptions = {
                 destination: destinationFilename,
                 metadata: {
