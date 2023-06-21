@@ -642,18 +642,11 @@ function CriarAnuncio() {
             
                           const resp = await axios.post('/saveProductImages', formImagesData, {params}) 
             
-                          console.log(resp)
                         } 
                         catch (error) {
                           console.log(error)
                         }
                       }
-
-
-                      //VERIFICAR A CAPACIDADE DA UNIDADE DE PRODUCAO
-                      //IR BUSCAR TODOS OS PRODUTOS NAQUELA UNIDADE E SOMA AS QUANTIDADES
-                      //SE CONSEGUIR ADICIONAR TODOS ADICIONA
-                      //SE NÃO, DÁ UM ALERT
 
                       setTimeout(() => {
                         navigate('/supplier', { replace: true });

@@ -105,8 +105,6 @@ const SupplierProdUnit = () => {
             uid_supplier: true,
         })
 
-        console.log(prodUnitPost)
-
         // Add the new production unit to the list of production units stored in state
         setProductionUnits(prevState => [...prevState, newProductionUnit]);
         // Reset the form fields
@@ -136,6 +134,9 @@ const SupplierProdUnit = () => {
     async function handleEliminarUnidade(index){
         submitDeleteProdUnit(index);
         snackbarRef3.current.show();
+        setTimeout(function() {
+            location.reload()
+        }, 3000);
     }
 
     const handleSetQuantity = (event) => {
@@ -145,6 +146,9 @@ const SupplierProdUnit = () => {
     async function handleEliminarProduto(prodUnitID, productID){
         submitDeleteProduct(prodUnitID, productID);
         snackbarRef4.current.show();
+        setTimeout(function() {
+            location.reload()
+        }, 3000);
     }
 
     //Aparecer no loading da página
