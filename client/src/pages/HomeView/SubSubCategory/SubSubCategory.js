@@ -424,7 +424,6 @@ const SubSubCategory = () => {
                   <span>{filterCar ? <FiChevronUp className='app__SubSubCategory_filter_content_title_up'></FiChevronUp> : <FiChevronRight className='app__SubSubCategory_filter_content_title_right'></FiChevronRight>}</span>
                 </div>
                 <div className={filterCar ? "hideFilter showFilter" : "hideFilter"}>
-                  {console.log(filterCharacteristics)}
                   {Object.entries(filterCharacteristics).map(([key]) => (
                     <div key={key}>
                       <p style={{ margin: '0 0 0 1rem', fontSize: '14px' }}>{key}</p>

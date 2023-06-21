@@ -9,60 +9,66 @@ const jwt = require('../config/jwtConfig')
  */
 const getAllorSomeSuppliers = async function (req, res) { 
 
-    let statement = "SELECT * FROM suppliers";
     
-    if(Object.keys(req.query).length !== 0) { 
-        statement += " WHERE "
+    try {
+        let statement = "SELECT * FROM suppliers";
 
-        let params = {} 
-
-        for(let i = 0 ; i < Object.keys(req.query).length; i++) {
-            let key = Object.keys(req.query)[i];
-            let value = Object.values(req.query)[i]
-
-            if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
-                params[key] = value
+        if(Object.keys(req.query).length !== 0) { 
+            statement += " WHERE "
+    
+            let params = {} 
+    
+            for(let i = 0 ; i < Object.keys(req.query).length; i++) {
+                let key = Object.keys(req.query)[i];
+                let value = Object.values(req.query)[i]
+    
+                if(value != "" && (key != "created_at_init" && key != "created_at_final")){ 
+                    params[key] = value
+                }
+            }
+    
+            if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
+                statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
+                if(Object.keys(params).length > 0){
+                    statement += " AND ";
+                }
+            }
+    
+            for(let i = 0 ; i < Object.keys(params).length; i++) { 
+    
+                let key = Object.keys(params)[i];
+                let value = Object.values(params)[i]
+                let nextKey = Object.keys(params)[i+1];
+    
+                if(key == "uid"){
+                    const uid_encrypt = req.cookies.userSession;
+                    value = jwt.decryptID(uid_encrypt);
+                }
+    
+                statement += key;
+                statement += `='`;
+                statement += value; 
+                statement += `'` ;
+    
+                if(nextKey != undefined){
+                    statement += ` AND ` ;
+                }
             }
         }
 
-        if (req.query.created_at_init != undefined && req.query.created_at_final != undefined){
-            statement += "(created_at BETWEEN '" + req.query.created_at_init + "' AND '" + req.query.created_at_final + "')"
-            if(Object.keys(params).length > 0){
-                statement += " AND ";
-            }
+        let result = await dbConnection(statement)  
+    
+        if (result.includes("error")) {
+            return res.status(500).json("Not possible to get all suppliers");
+        } else if (result.length < 1) {
+            return res.send("There is no supplier in the database");
         }
-
-        for(let i = 0 ; i < Object.keys(params).length; i++) { 
-
-            let key = Object.keys(params)[i];
-            let value = Object.values(params)[i]
-            let nextKey = Object.keys(params)[i+1];
-
-            if(key == "uid"){
-                const uid_encrypt = req.cookies.userSession;
-                value = jwt.decryptID(uid_encrypt);
-            }
-
-            statement += key;
-            statement += `='`;
-            statement += value; 
-            statement += `'` ;
-
-            if(nextKey != undefined){
-                statement += ` AND ` ;
-            }
-        }
-    }
-
-    let result = await dbConnection(statement)  
-
-    if (result.includes("error")) {
+    
+        return res.send(result)
+    } catch (error) {
         return res.status(500).json("Not possible to get all suppliers");
-    } else if (result.length < 1) {
-        return res.send("There is no supplier in the database");
     }
-
-    return res.send(result)
+    
 }
 
 /**

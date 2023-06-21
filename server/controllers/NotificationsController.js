@@ -9,7 +9,8 @@ let dbConnection = require('./DatabaseController')
  */
 const getNotifications = async function (req, res) { 
 
-    const statement = "SELECT * FROM notifications WHERE user_uid='" + jwtAccess.decryptID(req.cookies.userSession) + "' ORDER BY `id` DESC"
+    try {
+        const statement = "SELECT * FROM notifications WHERE user_uid='" + jwtAccess.decryptID(req.cookies.userSession) + "' ORDER BY `id` DESC"
     let result = await dbConnection(statement)  
 
     if (result === "error") {
@@ -17,6 +18,10 @@ const getNotifications = async function (req, res) {
     }
     
     return res.send(result)
+    } catch (error) {
+        return res.status(500);
+    }
+    
 }
 
 /**
@@ -27,15 +32,20 @@ const getNotifications = async function (req, res) {
  */
 const deleteNotifications = async function (req, res) {
 
-    const statement = "DELETE FROM notifications WHERE user_uid='" + jwtAccess.decryptID(req.cookies.userSession) + "'"
+    try {
+        const statement = "DELETE FROM notifications WHERE user_uid='" + jwtAccess.decryptID(req.cookies.userSession) + "'"
 
-    let result = await dbConnection(statement)
-
-    if (result === "error") {
+        let result = await dbConnection(statement)
+    
+        if (result === "error") {
+            return res.status(500);
+        }
+    
+        return res.send("Notification with id " + req.params.id + " has been deleted"); 
+    } catch (error) {
         return res.status(500);
     }
 
-    return res.send("Notification with id " + req.params.id + " has been deleted");
 }
 
 /**
