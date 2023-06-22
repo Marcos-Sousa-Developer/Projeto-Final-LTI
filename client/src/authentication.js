@@ -12,12 +12,11 @@ const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
  * @param result (tokens)
  * @returns boolean user is authenticated
  */
-const serverVerifyLogin = async(email, password, result) => { 
+const serverVerifyLogin = async(email, password) => { 
     
     let params = {
         email : email,
         password: password,
-        result: result,
     }
             
     return await new Promise((resolve,reject) => {
@@ -26,10 +25,12 @@ const serverVerifyLogin = async(email, password, result) => {
     
         .then((response) => {
             localStorage.clear();
+            console.log(response)
             resolve(response.data)
         })
         
         .catch((error) => {
+            console.log(error)
             reject(error)
         })
     })
@@ -68,13 +69,8 @@ const signIn = async (email, password) => {
   
         //if user is succeful authenticated
         onSuccess: (result) => {
-          let params = {
-              accessToken: result.getAccessToken().getJwtToken(),
-              idToken: result.getIdToken().getJwtToken(), 
-              client_id: cognitoUser.pool.clientId
-          }
           localStorage.clear();
-          resolve( serverVerifyLogin(email, password, params))
+          resolve( serverVerifyLogin(email, password))
         },
   
           //if user fail to authenticate

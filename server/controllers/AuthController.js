@@ -22,7 +22,7 @@ const verifyTokens = async (client_result) => {
  * @description set cookie for user
  * @returns list with uid and expire date
  */
-const setCookie = (result,res) => {
+const setCookie = async (result,res) => {
 
   let act = {accessToken: result.getAccessToken().getJwtToken()}
 
@@ -41,32 +41,21 @@ const setCookie = (result,res) => {
   let dateExpire = new Date(Date.now() + 7200000) //date now and more 30 minutes
 
   res.cookie("accessToken", accessToken, {
-    expires: dateExpire, 
-    httpOnly: true,
-    sameSite: 'none', 
-    secure: true
+    httpOnly: true, 
+    expires: dateExpire
   })
 
   res.cookie("idToken", idToken, {
-    expires: dateExpire, 
-    httpOnly: true,
-    sameSite: 'none', 
-    secure: true,
-    path: '/' });
+    httpOnly: true, 
+    expires: dateExpire,});
   
   res.cookie("refreshToken", refreshToken, {
-    expires: dateExpire,
-    httpOnly: true,
-    sameSite: 'none', 
-    secure: true,
-    path: '/' });
+    httpOnly: true, 
+    expires: dateExpire,});
   
   res.cookie("userSession", uid, {
-    expires: dateExpire,
-    httpOnly: true,
-    sameSite: 'none', 
-    secure: true,
-    path: '/' });
+    httpOnly: true, 
+    expires: dateExpire,});
 
 }
 
@@ -78,7 +67,7 @@ const setCookie = (result,res) => {
  * @param response
  * @returns newPromise with succes or fail
  */
-const handlerSignIn = (authenticationData, userData,res) => {
+const handlerSignIn = async (authenticationData, userData,res) => { 
 
   // that represents the authentication details of a user who is attempting to authenticate with Amazon Cognito
   const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
@@ -86,7 +75,7 @@ const handlerSignIn = (authenticationData, userData,res) => {
   //that represents a user in an Amazon Cognito user pool
   const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
 
-  return new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
       
     //that is used to authenticate a user with their password  
     cognitoUser.authenticateUser(authenticationDetails, {
@@ -130,9 +119,10 @@ const handlerSignIn = (authenticationData, userData,res) => {
 * */
 const signIn = async (req, res) => { 
 
-  let email = req.query.email
-  let password = req.query.password
-  let client_result = req.query.result
+  try {
+    let email = req.query.email
+    let password = req.query.password
+
 
     const authenticationData = {
       Username: email,
@@ -144,39 +134,59 @@ const signIn = async (req, res) => {
       Pool: userPool
     };
     
-    const isValidTokens = await verifyTokens(client_result) 
+    //const isValidTokens = await verifyTokens(client_result) 
 
-    if(isValidTokens) {
+   // ((if(isValidTokens) {
 
-      let data = await handlerSignIn(authenticationData, userData, res)
+      let data = await handlerSignIn(authenticationData, userData, res)       
       
       return res.send(data) 
-    }
+    //}
 
-    return res.send(false); 
-};
-
-
-const registerUser = async (req,res) => {
-
-  let name = req.query.name
-  let password = req.query.verify
-  let email = req.query.email
-  let user_type = req.query.user_type
-  let uid = req.query.uid  
-
-  let tokenFinal = jwt.encryptID(password)
-
-  const statement = "INSERT INTO " +  user_type + "s (uid, verify, name, email) VALUES ?"; 
-
-  let result = await dbConnection(statement, [[uid,tokenFinal, name,email]]);
-
-  if (result === "error") {
-    return res.send(null);
+    //return res.send(false); 
 
   }
 
-  return res.send("Consumer has been created");
+  catch (error){
+    
+    return res.status(500).json({ error: error, message: err.message });
+
+
+  }
+
+};
+
+
+const registerUser = async (req,res) => { 
+
+  try {
+
+    let name = req.query.name
+    let password = req.query.verify
+    let email = req.query.email
+    let user_type = req.query.user_type
+    let uid = req.query.uid  
+  
+    let tokenFinal = jwt.encryptID(password)
+  
+    const statement = "INSERT INTO " +  user_type + "s (uid, verify, name, email) VALUES ?"; 
+  
+    let result = await dbConnection(statement, [[uid,tokenFinal, name,email]]);
+  
+    if (result === "error") {
+      
+  
+    }
+  
+    return res.send("Consumer has been created");
+
+  }
+
+  catch {
+    return res.send(null);
+  }
+
+
 
 }
 
@@ -388,11 +398,6 @@ const deleteAccount = async (req, res) => {
     if(boolean) {
       const deactivate = `UPDATE ` + user_type + ` SET status='0' WHERE uid='${uid_decrypt}'`;
       await dbConnection(deactivate);
-      res.clearCookie('refreshToken', { httpOnly: true, path: '/' });
-      res.clearCookie('identification', { httpOnly: true, path: '/' });
-      res.clearCookie('idToken', { httpOnly: true, path: '/' });
-      res.clearCookie('userSession', { httpOnly: true, path: '/' });
-      res.clearCookie('accessToken', { httpOnly: true, path: '/' });
     }
     return res.send(boolean)
 
@@ -428,11 +433,6 @@ const getUserType = async (req, res) => {
     return res.send([user_type,name]);
   }
   catch(error) {
-    res.clearCookie('refreshToken', { httpOnly: true, path: '/' });
-    res.clearCookie('identification', { httpOnly: true, path: '/' });
-    res.clearCookie('idToken', { httpOnly: true, path: '/' });
-    res.clearCookie('userSession', { httpOnly: true, path: '/' });
-    res.clearCookie('accessToken', { httpOnly: true, path: '/' });
     return res.send(false);
 }
 

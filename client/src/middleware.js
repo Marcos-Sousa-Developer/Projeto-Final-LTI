@@ -6,18 +6,15 @@ if(process.env.REACT_APP_ENV == 'local') {
   axiosConfig = () => {
     // Set the common headers
     axios.defaults.headers.common['identification'] = process.env.REACT_APP_ID_KEY;
-    axios.defaults.withCredentials = true,
-    axios.defaults.baseURL = "http://localhost:5000/api";
-    axios.credentials = 'include'
+    axios.defaults.withCredentials = true; // Enables sending cookies from the browser
   };
 }
 else {
   axiosConfig = () => {
     // Set the common headers
     axios.defaults.headers.common['identification'] = process.env.REACT_APP_ID_KEY;
-    axios.defaults.withCredentials = true,
-    axios.defaults.baseURL = "https://greatergoods.pt/api";
-    axios.credentials = 'include'
+    axios.defaults.withCredentials = true; // Enables sending cookies from the browser
+    axios.defaults.baseURL = window.location.origin + "/api";
   };
 }
 
