@@ -1025,7 +1025,7 @@ function CriarAnuncio() {
                             borderRadius:'10px', 
                             padding:'0.25rem 0.5rem'}} 
                           form='anuncio_form' 
-                          maxLength="600" 
+                          maxLength="225" 
                           placeholder='Indique alguns detalhes sobre o seu produto'
                           onInput={(e) => {
                               setText(e.target.value);
