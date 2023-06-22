@@ -433,6 +433,7 @@ const getUserType = async (req, res) => {
     return res.send([user_type,name]);
   }
   catch(error) {
+
     return res.send(false);
 }
 

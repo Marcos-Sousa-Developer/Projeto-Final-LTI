@@ -36,7 +36,9 @@ function App() {
 
     setLoading(true)
 
-    let response = await getClientType()    
+    let response = await getClientType() 
+    
+    console.log(response)
 
     if(response != false) {
 
