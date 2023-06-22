@@ -14,7 +14,7 @@ else {
     // Set the common headers
     axios.defaults.headers.common['identification'] = process.env.REACT_APP_ID_KEY;
     axios.defaults.withCredentials = true; // Enables sending cookies from the browser
-    axios.defaults.baseURL = window.location.origin;
+    axios.defaults.baseURL = window.location.origin + "/api";
   };
 }
 
