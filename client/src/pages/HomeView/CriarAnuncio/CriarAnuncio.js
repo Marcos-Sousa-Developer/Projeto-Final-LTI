@@ -1025,14 +1025,14 @@ function CriarAnuncio() {
                             borderRadius:'10px', 
                             padding:'0.25rem 0.5rem'}} 
                           form='anuncio_form' 
-                          maxLength="600" 
+                          maxLength="225" 
                           placeholder='Indique alguns detalhes sobre o seu produto'
                           onInput={(e) => {
                               setText(e.target.value);
                               setFormData({ ...formData, descricao: e.target.value })
                           }}>
                       </textarea>
-                      <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
+                      <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/225'}</p>
                       {
                         descriptionError &&
                          <div className='error_msg'>A descrição deve ter conteúdo!</div>

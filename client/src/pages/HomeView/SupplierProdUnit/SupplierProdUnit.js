@@ -468,36 +468,13 @@ const SupplierProdUnit = () => {
                                                                             />
                                                                         </div>
                                                                     </Modal>
-                                                                    <button onClick={() => setModalOpen4(prevState => {
-                                                                        const newState = [...prevState];
-                                                                        newState[index] = true;
-                                                                        return newState;
-                                                                    })}><FiTrash2></FiTrash2></button>
-                                                                    <Modal open={modalOpen4[index]} onClose={() => setModalOpen4(prevState => {
-                                                                        const newState = [...prevState];
-                                                                        newState[index] = false;
-                                                                        return newState;
-                                                                    })}>
-                                                                        <p style={{fontSize:'18px', textAlign: 'center'}}>Tem a certeza que quer apagar o produto desta unidade de produção?</p>
-                                                                        <div style={{display: 'flex', justifyContent:'space-evenly', gap:'1.5rem', marginTop: '2rem'}}>
-                                                                            <button 
-                                                                                className='main__action_btn' 
-                                                                                onClick={() => 
-                                                                                    setModalOpen4(prevState => {
-                                                                                        const newState = [...prevState];
-                                                                                        newState[index] = false;
-                                                                                        return newState;
-                                                                                    })}>Cancelar</button>
-                                                                            <button 
-                                                                                className='main__negative_action_btn' 
-                                                                                onClick={() => handleEliminarProduto(productionUnit.id, product.id)}>Apagar</button>
-                                                                            <SnackBar
-                                                                                ref={snackbarRef4}
-                                                                                message="Produto eliminado com sucesso!"
-                                                                                type={SnackbarType.success}
-                                                                            />
-                                                                        </div>
-                                                                    </Modal>
+                                                                    <button 
+                                                                        onClick={() => handleEliminarProduto(productionUnit.id, product.id)}><FiTrash2></FiTrash2></button>
+                                                                    <SnackBar
+                                                                        ref={snackbarRef4}
+                                                                        message="Produto eliminado com sucesso!"
+                                                                        type={SnackbarType.success}
+                                                                    />
                                                             </td>
                                                         </tr>
                                                     ))}
