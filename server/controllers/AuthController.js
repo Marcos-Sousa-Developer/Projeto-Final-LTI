@@ -398,11 +398,6 @@ const deleteAccount = async (req, res) => {
     if(boolean) {
       const deactivate = `UPDATE ` + user_type + ` SET status='0' WHERE uid='${uid_decrypt}'`;
       await dbConnection(deactivate);
-      res.clearCookie('refreshToken', { httpOnly: true, path: '/' });
-      res.clearCookie('identification', { httpOnly: true, path: '/' });
-      res.clearCookie('idToken', { httpOnly: true, path: '/' });
-      res.clearCookie('userSession', { httpOnly: true, path: '/' });
-      res.clearCookie('accessToken', { httpOnly: true, path: '/' });
     }
     return res.send(boolean)
 
@@ -438,11 +433,6 @@ const getUserType = async (req, res) => {
     return res.send([user_type,name]);
   }
   catch(error) {
-    res.clearCookie('refreshToken', { httpOnly: true, path: '/' });
-    res.clearCookie('identification', { httpOnly: true, path: '/' });
-    res.clearCookie('idToken', { httpOnly: true, path: '/' });
-    res.clearCookie('userSession', { httpOnly: true, path: '/' });
-    res.clearCookie('accessToken', { httpOnly: true, path: '/' });
     return res.send(false);
 }
 
