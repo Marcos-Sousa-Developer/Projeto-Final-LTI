@@ -76,7 +76,7 @@ const Cart = () => {
   const changePostalCode = async (event) => { 
 
     setPostalCode(event.target.value)
-    await axios.get('https://json.geoapi.pt/cp/'+event.target.value) 
+    await axios.get('/postal-code/'+event.target.value) 
     .then((response) => { 
       let distrito = response.data.Distrito
       let concelho = response.data.Concelho

@@ -86,7 +86,6 @@ const SupplierOrdersHistory = () => {
         await axios.post('/insertNotificationsByID/'+order_id, null, {params, withCredentials:true}) 
       }
       catch (error) {
-          console.log(error)
       }
       location.reload()
     }

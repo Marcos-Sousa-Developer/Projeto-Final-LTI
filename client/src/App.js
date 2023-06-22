@@ -38,8 +38,6 @@ function App() {
 
     let response = await getClientType() 
     
-    console.log(response)
-
     if(response != false) {
 
       let type = response[0]

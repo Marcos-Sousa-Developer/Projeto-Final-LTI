@@ -39,7 +39,6 @@ function TransportadoraIndex() {
         await axios.post('/insertNotificationsByID/'+orderedProductID, null, {params, withCredentials:true}) 
       }
       catch (error) {
-          console.log(error)
       }
       setOK(true)
     }

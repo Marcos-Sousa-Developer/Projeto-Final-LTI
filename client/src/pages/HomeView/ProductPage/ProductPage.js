@@ -109,7 +109,7 @@ const ProductPage = () => {
 
     try {
 
-      await axios.get('https://json.geoapi.pt/cp/'+Cpostal_code) 
+      await axios.get('/postal-code/'+Cpostal_code) 
       .then((response) => { 
         let latitude = response.data.centro[0]
         let longitude = response.data.centro[1]
@@ -121,7 +121,7 @@ const ProductPage = () => {
         setMyLongitude(-7.8536599)
       })
 
-    await axios.get('https://json.geoapi.pt/cp/'+Spostal_code) 
+    await axios.get('/postal-code/'+Spostal_code) 
     .then((response) => { 
       let latitude = response.data.centro[0]
       let longitude = response.data.centro[1]

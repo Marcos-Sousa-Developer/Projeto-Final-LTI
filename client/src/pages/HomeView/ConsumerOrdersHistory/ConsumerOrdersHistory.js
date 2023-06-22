@@ -81,7 +81,6 @@ const ConsumerOrdersHistory = () => {
         await axios.post('/insertNotificationsByID/'+index, null, {params, withCredentials:true}) 
       }
       catch (error) {
-          console.log(error)
       }
     }
     

@@ -62,7 +62,6 @@ const SuccessOrNot = ({success}) => {
                 await axios.post('/insertNotifications',null, {params, withCredentials:true}) 
               }
               catch (error) {
-                  console.log(error)
               }
 
               await sendEmail(supplier[0].email, supplier[0].name, ad[0].title)

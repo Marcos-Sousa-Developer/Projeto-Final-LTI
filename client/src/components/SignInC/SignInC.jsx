@@ -55,7 +55,6 @@ const SignInC = ({checkout=null}) => {
         setLoading(true)
         event.preventDefault(); 
         let isActive = await auth.signIn(email,password)
-        console.log(isActive)
         if(isActive === true) {
             let userType = await getUserType();
             if(userType == 'supplier'){
