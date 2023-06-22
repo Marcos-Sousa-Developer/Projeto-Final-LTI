@@ -1032,7 +1032,7 @@ function CriarAnuncio() {
                               setFormData({ ...formData, descricao: e.target.value })
                           }}>
                       </textarea>
-                      <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/600'}</p>
+                      <p style={{fontSize: '.75rem', textAlign:'right', margin: '0'}}>{text.length + '/225'}</p>
                       {
                         descriptionError &&
                          <div className='error_msg'>A descrição deve ter conteúdo!</div>

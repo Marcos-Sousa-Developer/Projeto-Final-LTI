@@ -132,12 +132,11 @@ const SupplierProdUnit = () => {
     }
 
     async function handleEliminarUnidade(index){
-        console.log(index)
-        /*submitDeleteProdUnit(index);
+        submitDeleteProdUnit(index);
         snackbarRef3.current.show();
         setTimeout(function() {
             location.reload()
-        }, 3000);*/
+        }, 3000);
     }
 
     const handleSetQuantity = (event) => {
@@ -145,12 +144,11 @@ const SupplierProdUnit = () => {
     }
 
     async function handleEliminarProduto(prodUnitID, productID){
-        console.log(productID)
-        /*submitDeleteProduct(prodUnitID, productID);
+        submitDeleteProduct(prodUnitID, productID);
         snackbarRef4.current.show();
         setTimeout(function() {
             location.reload()
-        }, 3000);*/
+        }, 3000);
     }
 
     //Aparecer no loading da página
