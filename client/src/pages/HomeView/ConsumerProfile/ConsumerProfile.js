@@ -32,7 +32,6 @@ function ConsumerProfile() {
   const [snackbarType, setSnackbarType] = useState(SnackbarType.success); //SnackBar
 
   //erros
-  const [CPerror, setCPError] = useState(false); 
   const [Nameerror, setNameError] = useState(false); 
   const [Emailerror, setEmailError] = useState(false); 
   const [Niferror, setNifError] = useState(false); 
@@ -41,13 +40,13 @@ function ConsumerProfile() {
 
   //info
   const [id, setID] = useState(null)       
-  const [name, setName] = useState(null)
-  const [email, setEmail] = useState(null)
-  const [nif, setNif] = useState(null)
-  const [mobile_number, setMobileNumber] = useState(null)
-  const [city, setCity] = useState(null)
-  const [address, setAddress] = useState(null)
-  const [postalCode, setPostalCode] = useState(null)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [nif, setNif] = useState("")
+  const [mobile_number, setMobileNumber] = useState("")
+  const [city, setCity] = useState("")
+  const [address, setAddress] = useState("")
+  const [postalCode, setPostalCode] = useState("")
 
   const [didMount, setDidMount] = useState(false)
 
@@ -104,7 +103,6 @@ function ConsumerProfile() {
     setPostalCode(event.target.value)
     await axios.get('https://json.geoapi.pt/cp/'+event.target.value) 
     .then((response) => { 
-      setCPError(false)
       let distrito = response.data.Distrito
       let concelho = response.data.Concelho
       let localidade = response.data.Localidade
@@ -114,7 +112,6 @@ function ConsumerProfile() {
       setPostalCode(event.target.value)
     })
     .catch((CPerror) => {
-      setCPError(true)
     })
     
   }
@@ -201,7 +198,7 @@ function ConsumerProfile() {
     let consumerUpdated;
 
     if(!((name == null || name == "") && (email == null || email == "") && (nif == null || nif == "") && (mobile_number == null || mobile_number == "") && (address == null || address == ""))){
-      if(!Nameerror && !Emailerror && !Niferror && !Numbererror && !CPerror){
+      if(!Nameerror && !Emailerror && !Niferror && !Numbererror){
         consumerUpdated = await putToDB("/consumers/" + id,{
           name: name,
           email: email,
@@ -469,42 +466,30 @@ function ConsumerProfile() {
                 <div className='app__ConsumerProfile_box_div_row'>
                   Morada
                   <div className='app__ConsumerProfile_box_div_row_input'>
-                    <FiMapPin style={{opacity: "0.4"}}></FiMapPin>
-                    <input style={{opacity: "0.4"}} type="text" placeholder="Morada" value = {address ?? ""} name="address" disabled></input>
+                    <FiMapPin></FiMapPin>
+                    <input type="text" placeholder="Morada" value = {address ?? ""} name="address" onChange={(e) => setAddress(e.target.value)}></input>
                   </div>
                 </div>
                 <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}} className='app__SupplierProfile_box_div_row'>
                   <div>
                     Cidade
                     <div className='app__SupplierProfile_box_div_row_input'>
-                      <FiMapPin style={{opacity: "0.4"}}></FiMapPin>
-                      <input style={{opacity: "0.4"}} type="text" placeholder="Cidade" value = {city ?? ""} name="city" disabled></input>
+                      <FiMapPin></FiMapPin>
+                      <input type="text" placeholder="Cidade" value = {city ?? ""} name="city" onChange={(e) => setCity(e.target.value)}></input>
                     </div>
                   </div>
                   <div>
                     Cód. Postal
-                    <div className={!CPerror ? "app__SupplierProfile_box_div_row_input" : "app__SupplierProfile_box_div_row_error_input"}>
+                    <div className={"app__SupplierProfile_box_div_row_input"}>
                       <FiMapPin></FiMapPin>
                       <input type="text" placeholder="Cód. Postal" value = {postalCode ?? ""} name="postalCode" onChange={handleSetPostalCode}></input>
                     </div>
-                    {
-                      CPerror &&
-                        <div className='error_msg'>Código postal não encontrado.</div>
-                    }
                   </div>
                 </div>
               </div>
             </div>
             <div>
-              {
-                CPerror ? (
-                  <button style={{opacity: "0.4", margin: '0 0 1rem 1.5rem'}} className='main__action_btn' disabled>Guardar</button>
-                )
-                : 
-                (
-                  <button type="submit" style={{margin: '0 0 1rem 1.5rem'}} onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
-                )
-              }  
+              <button type="submit" style={{margin: '0 0 1rem 1.5rem'}} onClick={() => setIsOpen(true)} className='main__action_btn'>Guardar</button>
               <Modal open={isOpen} onClose={() => setIsOpen(false)}>
                 <p style={{fontSize:'18px'}}>Tem a certeza que deseja alterar os seus dados?</p>
 
