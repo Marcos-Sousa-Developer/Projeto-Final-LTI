@@ -42,29 +42,20 @@ const setCookie = async (result,res) => {
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true, 
-    secure: true, 
-    sameSite: 'None',
     expires: dateExpire
-    
   })
 
   res.cookie("idToken", idToken, {
     httpOnly: true, 
-    secure: true, 
-    expires: dateExpire,
-    sameSite: 'None' });
+    expires: dateExpire,});
   
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true, 
-    secure: true, 
-    expires: dateExpire,
-    sameSite: 'None'});
+    expires: dateExpire,});
   
   res.cookie("userSession", uid, {
     httpOnly: true, 
-    secure: true, 
-    expires: dateExpire,
-    sameSite: 'None', });
+    expires: dateExpire,});
 
 }
 
