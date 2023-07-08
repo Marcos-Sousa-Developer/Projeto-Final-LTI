@@ -1,7 +1,0 @@
-Em geral, o sistema parece apresentar um bom desempenho com base nos dados fornecidos. As métricas indicam que o número de falhas é zero para todos os endpoints, o que é um bom sinal. Além disso, a mediana e os percentis 90% e 99% dos tempos de resposta estão dentro de faixas razoáveis, indicando um tempo de resposta consistente para a maioria das solicitações.
-A média de tempo de resposta é relativamente baixa, o que indica que o sistema responde de forma eficiente na maioria dos casos. O tamanho médio das respostas também parece ser razoável.
-Em relação à taxa de solicitações por segundo (RPS), o sistema está lidando com uma carga moderada, variando de 1,2 a 3 RPS para os diferentes endpoints. O número total de solicitações é de 3.231, o que indica um volume razoável de tráfego.
-A taxa de solicitações por segundo (RPS) atual é de 18, o que indica que o sistema está lidando com um volume moderado de tráfego
-
-maximo 100
-por segundo 10
